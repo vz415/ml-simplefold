@@ -13,7 +13,7 @@ set -euo pipefail
 cd "${SLURM_SUBMIT_DIR:?}"
 module load miniconda3/24.9.2
 source "$(conda info --base)/etc/profile.d/conda.sh"
-conda activate /data/homezvol2/ynkim4/.conda/envs/simplefold
+conda activate "${SIMPLEFOLD_ENV_PREFIX:-/data/homezvol2/ynkim4/.conda/envs/simplefold}"
 export CUDA_VISIBLE_DEVICES=''
 export TORCH_HOME="$PWD/artifacts/torch"
 export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-16}"
