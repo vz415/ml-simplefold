@@ -3,6 +3,12 @@
 The local `simplefold` conda environment is for editing, imports, and result
 analysis. Sampling runs only on HPC3y (`ynkim4`) through Slurm.
 
+The initial setup uses the home volume because BeeGFS `/pub/ynkim4` metadata
+writes stalled on 2026-10-05. The home volume had 41 GiB available before
+installation. Keep an eye on `df -h ~` before downloading additional models;
+the ESM2-3B checkpoint alone is approximately 11 GiB. Large experiment data
+should move to project storage once its performance has recovered.
+
 ## Install locally
 
 ```bash
@@ -20,7 +26,7 @@ installation does not download model weights or run inference.
 
 ```bash
 ssh hpc3y
-cd /pub/ynkim4
+cd /data/homezvol2/ynkim4
 git clone https://github.com/vz415/ml-simplefold.git
 cd ml-simplefold
 git switch experiments/hpc3y-setup
@@ -29,7 +35,7 @@ sbatch scripts/hpc_setup.slurm
 ```
 
 Setup runs on a CPU compute node in the `free` partition. It creates
-`/pub/ynkim4/conda/envs/simplefold`, installs CUDA 12.4 PyTorch wheels, checks
+`/data/homezvol2/ynkim4/.conda/envs/simplefold`, installs CUDA 12.4 PyTorch wheels, checks
 imports and dependencies, and downloads the 100M folding checkpoint, ESM2-3B
 weights, and CCD dictionary. Interrupted downloads resume from `.part` files.
 Caches live in `artifacts/checkpoints`, `artifacts/torch`, and `artifacts/ccd`.
@@ -40,7 +46,7 @@ Resolved package versions are saved in `artifacts/environment/pip-hpc.txt`.
 After setup has completed successfully:
 
 ```bash
-cd /pub/ynkim4/ml-simplefold
+cd /data/homezvol2/ynkim4/ml-simplefold
 sbatch scripts/hpc_sample.slurm examples/crambin.fasta 500 1
 squeue -u ynkim4
 sacct -j JOB_ID --format=JobID,State,ExitCode,Elapsed,MaxRSS,NodeList
@@ -79,7 +85,7 @@ Use the dedicated RCIC transfer host; keep Git/Slurm commands on the login host.
 
 ```bash
 scp -o HostName=access-hpc3.rcic.uci.edu \
-  hpc3y:/pub/ynkim4/ml-simplefold/artifacts/runs/JOB_ID/predictions_simplefold_100M/crambin_sampled_0.pdb \
+  hpc3y:/data/homezvol2/ynkim4/ml-simplefold/artifacts/runs/JOB_ID/predictions_simplefold_100M/crambin_sampled_0.pdb \
   artifacts/
 ```
 

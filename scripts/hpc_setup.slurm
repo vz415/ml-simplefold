@@ -12,5 +12,5 @@ set -euo pipefail
 cd "${SLURM_SUBMIT_DIR:?}"
 module load miniconda3/24.9.2
 bash scripts/setup_environment.sh hpc
-/pub/ynkim4/conda/envs/simplefold/bin/python scripts/download_weights.py
+/data/homezvol2/ynkim4/.conda/envs/simplefold/bin/python scripts/download_weights.py
 echo "Setup completed on $(hostname) at $(date -Is)"

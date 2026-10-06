@@ -4,8 +4,8 @@ repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 mode="${1:-local}"
 if [[ "$mode" == hpc ]]; then
     : "${SLURM_JOB_ID:?Run the HPC installation through Slurm}"
-    env_prefix="${SIMPLEFOLD_ENV_PREFIX:-/pub/ynkim4/conda/envs/simplefold}"
-    export CONDA_PKGS_DIRS="${CONDA_PKGS_DIRS:-/pub/ynkim4/conda/pkgs}"
+    env_prefix="${SIMPLEFOLD_ENV_PREFIX:-/data/homezvol2/ynkim4/.conda/envs/simplefold}"
+    export CONDA_PKGS_DIRS="${CONDA_PKGS_DIRS:-/data/homezvol2/ynkim4/.conda/pkgs}"
     export PIP_CACHE_DIR="$repo_dir/artifacts/pip-cache"
     if [[ ! -x "$env_prefix/bin/python" ]]; then
         conda create --prefix "$env_prefix" --override-channels -c conda-forge python=3.10 pip -y
