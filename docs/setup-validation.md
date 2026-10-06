@@ -73,3 +73,21 @@ in Git.
 Receipts and outcomes are saved in the Obsidian project
 `Computational Research/SimpleFold/experiments/`. Use [the setup runbook](hpc3y.md)
 for installation, sampling, and retrieval commands.
+
+## Storage update — 2026-10-06
+
+The current artifact root is `/pub/ynkim4/ml-simplefold/artifacts`. Migration
+job `57836989` completed on `hpc3-14-01` in 1m18s, exit `0:0`, using execution
+commit `d8a46e01714b43bd25010f9b492b3908a297a903`. It verified and moved
+`checkpoints/`, `torch/`, `ccd/`, and `runs/` (18 files, 6,410,825,895 bytes),
+reusing destination copies from the cancelled earlier attempt. The original
+GPU PDB SHA-256 above is unchanged. Component receipts are
+`COMPONENT/migration-57836989.json` under the artifact root.
+
+Pretrained SimpleFold weights remain in `checkpoints/simplefold_100M.ckpt`.
+Future trained checkpoints use `checkpoints/trained/ITERATION/`, synthetic
+datasets use `datasets/synthetic/ITERATION/`, and sampling results use
+`runs/JOB_ID/`. Launchers and the remote notebook use the `/pub` root by
+default. Installation caches, package locks, the checkout, and conda prefix
+remain in home storage. The superseded home paths above describe the
+original 2026-10-05 execution.

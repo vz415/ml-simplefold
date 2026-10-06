@@ -27,6 +27,9 @@ Within the `/pub` artifact root, use this layout for current and future work:
 
 The training and dataset paths establish storage conventions for future active
 sampling and retraining work; this setup currently runs inference only.
+Use iteration-specific subdirectories under `checkpoints/trained/` and
+`datasets/synthetic/`. The pretrained checkpoint remains at
+`checkpoints/simplefold_100M.ckpt`, so later training can always start from it.
 
 ## Install locally
 
