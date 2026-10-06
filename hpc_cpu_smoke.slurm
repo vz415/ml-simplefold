@@ -1,0 +1,1 @@
+scripts/hpc_cpu_smoke.slurm

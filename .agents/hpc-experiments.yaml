@@ -6,3 +6,4 @@ obsidian_dir: ~/Documents/Obsidian Vault/Computational Research/SimpleFold
 allowed_scripts:
   - hpc_setup.slurm
   - hpc_sample.slurm
+  - hpc_cpu_smoke.slurm

@@ -87,6 +87,15 @@ setup_id=$(sbatch --parsable scripts/hpc_setup.slurm)
 sbatch --dependency=afterok:$setup_id scripts/hpc_sample.slurm
 ```
 
+For a quick pipeline check while GPUs are queued, `scripts/hpc_cpu_smoke.slurm`
+runs 20 steps on a **remote Slurm CPU node**, with 16 cores and 48 GiB host
+memory. It forces CUDA off and uses the same cache and PDB validator. This is
+a diagnostic run; use the GPU launcher and 500 steps for the folding example.
+
+```bash
+sbatch scripts/hpc_cpu_smoke.slurm
+```
+
 ## Retrieve outputs
 
 Use the dedicated RCIC transfer host; keep Git/Slurm commands on the login host.
