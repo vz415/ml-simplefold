@@ -17,13 +17,13 @@ else:
     from compare_structures import digest, matched_indices, prediction_ca, reference_ca, write_csv, write_ensemble_viewer
 
 
-# Reserve blue for the experimental structure; shapes also identify each tau.
+# Preserve the original Matplotlib palette; shapes also identify each tau.
 TAU_STYLES = (
-    ("#E69F00", "o", "Orange", "●"),
-    ("#009E73", "s", "Green", "■"),
-    ("#D55E00", "^", "Vermilion", "▲"),
-    ("#7B3294", "D", "Purple", "◆"),
-    ("#CC79A7", "P", "Pink", "✚"),
+    ("#1f77b4", "o", "●"),
+    ("#ff7f0e", "s", "■"),
+    ("#2ca02c", "^", "▲"),
+    ("#d62728", "D", "◆"),
+    ("#9467bd", "P", "✚"),
 )
 
 
@@ -85,7 +85,7 @@ def summarize(manifest_path, output_dir):
         raise ValueError("Need at least one run and positive tau values for the logarithmic plot")
     if len(runs) > len(TAU_STYLES):
         raise ValueError("The tau palette supports at most five conditions")
-    for run, (color, marker, color_name, symbol) in zip(runs, TAU_STYLES):
+    for run, (color, marker, symbol) in zip(runs, TAU_STYLES):
         tau, job_id = float(run["tau"]), str(run["job_id"])
         analysis_dir = resolve_path(run["analysis_dir"], base)
         prediction_dir = resolve_path(run["prediction_dir"], base)
@@ -136,10 +136,10 @@ def summarize(manifest_path, output_dir):
         summaries.append(summary)
         groups.append({"tau": tau, "job_id": job_id, "rows": run_rows,
                        "diversity": diversity_values, "analysis_dir": analysis_dir,
-                       "color": color, "marker": marker, "color_name": color_name, "symbol": symbol})
+                       "color": color, "marker": marker, "symbol": symbol})
         backlink = Path(os.path.relpath(output_dir / "index.html", analysis_dir)).as_posix()
-        write_ensemble_viewer(analysis_dir, samples, color=color,
-                              label=f"τ = {tau:g} ({color_name.lower()})", backlink=quote(backlink, safe="/"))
+        write_ensemble_viewer(analysis_dir, samples,
+                              label=f"τ = {tau:g}", backlink=quote(backlink, safe="/"))
         provenance.append({"tau": tau, "job_id": job_id, "comparison_json_sha256": digest(comparison_path),
                            "comparison_versions": comparison["versions"]})
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -151,7 +151,7 @@ def summarize(manifest_path, output_dir):
         "reference_sha256": reference_hash, "reference_author_chain": reference.chain,
         "reference_full_length": len(reference.full_sequence), "reference_observed_ca": len(reference.coordinates),
         "reference_geometry": reference_geometry, "provenance": provenance, "summary": summaries,
-        "tau_styles": [{key: group[key] for key in ("tau", "color", "marker", "color_name")} for group in groups],
+        "tau_styles": [{key: group[key] for key in ("tau", "color", "marker")} for group in groups],
         "definitions": {
             "comparison_metrics": "TM-align normalizes to observed reference CA count. Sequence RMSD uses corresponding observed CAs; CA lDDT is pair-count weighted. See each run comparison.json for complete definitions.",
             "compactness": "CA radius of gyration and maximum pair span on the identical observed reference sequence mask for every sample; unobserved reference positions excluded.",
@@ -208,7 +208,7 @@ def plot_sweep(output_dir, groups, reference_geometry):
         ax.legend(fontsize=7)
     fig.suptitle("7WF9-A tau sweep: ten samples per tau; geometry and diversity", fontsize=14, y=0.995)
     handles = [Line2D([], [], linestyle="none", color=group["color"], marker=group["marker"],
-                      label=f"τ = {group['tau']:g} ({group['color_name'].lower()})", markersize=8) for group in groups]
+                      label=f"τ = {group['tau']:g}", markersize=8) for group in groups]
     fig.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, 0.97), ncol=len(groups), frameon=False)
     fig.tight_layout(rect=(0, 0, 1, 0.94))
     fig.savefig(output_dir / "tau_sweep.png", dpi=160)
@@ -233,12 +233,11 @@ def write_index(output_dir, manifest, summaries, groups, reference_geometry, obs
         body.append("<tr>" + "".join(f"<td>{value}</td>" for value in values) + "</tr>")
     title = html.escape(str(manifest.get("target", "Tau sweep")))
     legend = "".join(f'<span class="tau-badge"><i class="swatch" style="background:{group["color"]}"></i>'
-                     f'{group["symbol"]} τ = {group["tau"]:g} · {group["color_name"]}</span>' for group in groups)
+                     f'{group["symbol"]} τ = {group["tau"]:g}</span>' for group in groups)
     page = f'''<!doctype html><html><head><meta charset="utf-8"><title>{title} tau sweep</title>
 <style>body{{font:15px system-ui;margin:24px}}table{{border-collapse:collapse;font-size:13px}}td,th{{border:1px solid #ddd;padding:8px;text-align:left}}img{{max-width:100%}}.scroll{{overflow-x:auto}}.legend{{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}}.tau-badge{{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;padding:6px 9px;background:#f5f5f5;border-radius:5px}}.swatch{{display:inline-block;width:16px;height:16px;border:1px solid #333;border-radius:3px}}</style></head>
 <body><h1>{title} tau sweep</h1><div class="legend" aria-label="Tau color legend">{legend}</div>
-<p>Each tau keeps the same color in the plots, table, and structure viewer. Plot markers also identify tau.
-The experimental structure is blue; predictions remain solid.</p><p>Ten samples per tau. Entries show median [minimum, maximum].
+<p>Colors and markers identify tau in the plots and table. Each structure viewer labels its tau and shows solid predictions over the experimental reference.</p><p>Ten samples per tau. Entries show median [minimum, maximum].
 Structure viewers use sequence-correspondence CA superposition; TM-align optimizes its own structural alignment.</p>
 <p>Compactness uses the same {observed_count} observed reference CAs throughout.
 Experimental CA radius of gyration: {reference_geometry['ca_rg_matched_angstrom']:.2f} Å;

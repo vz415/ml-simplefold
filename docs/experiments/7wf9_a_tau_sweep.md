@@ -42,7 +42,7 @@ Local sweep root: `artifacts/sweeps/7wf9_a_tau/2026-10-06/`.
 
 Long-term sweep root: `/pub/ynkim4/ml-simplefold/artifacts/sweeps/7wf9_a_tau/2026-10-06/`.
 
-Both contain the reference CIF, manifest, downloaded predictions and provenance, per-run comparisons, all-sample CSVs, summary JSON/CSV, `tau_sweep.png`, and `index.html`. The index links all five ensembles, with a consistent tau palette across plots, table badges, and viewers: 0.01 orange, 0.05 green, 0.1 vermilion, 0.3 purple, and 0.8 pink. Each viewer labels its tau and shows all ten predictions solid over the blue experimental reference. Plot markers also distinguish conditions. Raw remote outputs also remain under `/pub/ynkim4/ml-simplefold/artifacts/runs/JOB_ID/`. Weights remain in the existing public checkpoint/Torch caches. The sweep bundle is about 22 MiB and contains no model weights.
+Both contain the reference CIF, manifest, downloaded predictions and provenance, per-run comparisons, all-sample CSVs, summary JSON/CSV, `tau_sweep.png`, and `index.html`. The index links all five ensembles. Plots and table badges retain the original Matplotlib palette with explicit tau legends and distinct markers; legend labels contain tau values only. Each viewer labels its tau and shows all ten predictions solid orange over the blue experimental reference. Raw remote outputs also remain under `/pub/ynkim4/ml-simplefold/artifacts/runs/JOB_ID/`. Weights remain in the existing public checkpoint/Torch caches. The sweep bundle is about 22 MiB and contains no model weights.
 
 Each successful run used the approved launcher:
 
