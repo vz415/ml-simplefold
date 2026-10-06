@@ -9,9 +9,6 @@ if [[ "$mode" == hpc ]]; then
     export CONDA_PKGS_DIRS="${CONDA_PKGS_DIRS:-/data/homezvol2/ynkim4/.conda/pkgs}"
     artifact_dir="${SIMPLEFOLD_ARTIFACT_DIR:-/pub/ynkim4/ml-simplefold/artifacts}"
     mkdir -p "$artifact_dir"
-    if [[ ! -e "$repo_dir/artifacts" && ! -L "$repo_dir/artifacts" ]]; then
-        ln -s "$artifact_dir" "$repo_dir/artifacts"
-    fi
     export PIP_CACHE_DIR="$artifact_dir/pip-cache"
     if [[ ! -x "$env_prefix/bin/python" ]]; then
         conda create --prefix "$env_prefix" --override-channels -c conda-forge python=3.10 pip -y

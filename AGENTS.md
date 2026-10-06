@@ -11,9 +11,9 @@
 - Store remote model caches, results, environment locks, and artifact logs
   long-term under `/pub/ynkim4/ml-simplefold/artifacts`. Launchers default
   `SIMPLEFOLD_ARTIFACT_DIR` to that path; set it explicitly to override storage.
-  The checkout and conda prefix stay in home storage. The checkout `artifacts`
-  path is a symlink to the `/pub` artifact root for compatibility. Check free
-  `/pub` space before downloading larger models or growing datasets.
+  The checkout and conda prefix stay in home storage. Use explicit `/pub` paths
+  or the environment override; do not create home-to-DFS artifact symlinks.
+  Check free `/pub` space before downloading larger models or growing datasets.
 - Keep local downloads under ignored `artifacts/` (including
   `artifacts/remote-runs/`) and logs under ignored `logs/`. Never commit model
   weights.

@@ -45,15 +45,14 @@ class StorageMigrationTests(unittest.TestCase):
         manifest = migration.migrate(self.source, self.destination, self.job_id)
 
         self.assertEqual(manifest["state"], "migrated")
-        self.assertTrue(self.source.is_symlink())
-        self.assertEqual(self.source.resolve(), self.destination.resolve())
+        self.assertFalse(self.source.exists())
+        self.assertFalse(self.source.is_symlink())
         self.assertFalse(self.backup.exists())
         self.assertTrue((self.destination / "empty" / "nested").is_dir())
         self.assertEqual(manifest["file_count"], len(self.payloads))
         self.assertEqual(manifest["total_bytes"], sum(map(len, self.payloads.values())))
         for relative, payload in self.payloads.items():
             self.assertEqual((self.destination / relative).read_bytes(), payload)
-            self.assertEqual((self.source / relative).read_bytes(), payload)
             self.assertEqual(manifest["files"][relative], {
                 "size": len(payload), "sha256": hashlib.sha256(payload).hexdigest(),
             })
@@ -99,30 +98,60 @@ class StorageMigrationTests(unittest.TestCase):
         self.assert_source_preserved()
         self.assertEqual(list(self.destination.rglob("*.part")), [])
 
-    def test_symlink_failure_restores_original_source_directory(self):
-        with patch.object(Path, "symlink_to", side_effect=OSError("simulated link failure")):
-            with self.assertRaisesRegex(OSError, "simulated link failure"):
+    def test_rename_failure_preserves_original_source_directory(self):
+        with patch.object(Path, "rename", side_effect=OSError("simulated rename failure")):
+            with self.assertRaisesRegex(OSError, "simulated rename failure"):
                 migration.migrate(self.source, self.destination, self.job_id)
 
         self.assert_source_preserved()
         for relative, payload in self.payloads.items():
             self.assertEqual((self.destination / relative).read_bytes(), payload)
 
-    def test_already_migrated_symlink_is_idempotent(self):
+    def test_already_migrated_receipt_is_idempotent_and_rechecks_hashes(self):
         migration.migrate(self.source, self.destination, self.job_id)
         report = self.destination / f"migration-{self.job_id}.json"
         original_report = report.read_bytes()
 
         with patch.object(migration.shutil, "copyfile", side_effect=AssertionError("must not copy")):
             with patch.object(migration, "inventory", side_effect=AssertionError("must not inventory")):
-                result = migration.migrate(self.source, self.destination, "retry_456")
+                with patch.object(migration, "sha256", wraps=migration.sha256) as rehash:
+                    result = migration.migrate(self.source, self.destination, "retry_456")
 
         self.assertEqual(result["state"], "already_migrated")
-        self.assertEqual(self.source.resolve(), self.destination.resolve())
+        self.assertFalse(self.source.exists())
+        self.assertFalse(self.source.is_symlink())
         self.assertEqual(report.read_bytes(), original_report)
         self.assertFalse((self.destination / "migration-retry_456.json").exists())
+        self.assertEqual(
+            {call.args[0] for call in rehash.call_args_list},
+            {self.destination / relative for relative in self.payloads},
+        )
         for relative, payload in self.payloads.items():
-            self.assertEqual((self.source / relative).read_bytes(), payload)
+            self.assertEqual((self.destination / relative).read_bytes(), payload)
+
+    def test_already_migrated_retry_refuses_corrupted_destination(self):
+        migration.migrate(self.source, self.destination, self.job_id)
+        target = self.destination / "checkpoints/toy.ckpt"
+        payload = target.read_bytes()
+        corrupted = bytes([payload[0] ^ 1]) + payload[1:]
+        target.write_bytes(corrupted)
+
+        with self.assertRaises(RuntimeError):
+            migration.migrate(self.source, self.destination, "retry_456")
+
+        self.assertFalse(self.source.exists())
+        self.assertEqual(target.read_bytes(), corrupted)
+
+    def test_source_symlink_is_rejected(self):
+        source_link = self.root / "source-link"
+        source_link.symlink_to(self.source, target_is_directory=True)
+
+        with self.assertRaisesRegex(RuntimeError, "symlink"):
+            migration.migrate(source_link, self.destination, self.job_id)
+
+        self.assert_source_preserved()
+        self.assertTrue(source_link.is_symlink())
+        self.assertFalse(self.destination.exists())
 
     def test_source_modified_during_copy_is_not_removed(self):
         real_copy = migration.shutil.copyfile

@@ -5,9 +5,10 @@ analysis. Sampling runs only on HPC3y (`ynkim4`) through Slurm.
 
 Remote artifacts live long-term under `/pub/ynkim4/ml-simplefold/artifacts`.
 The checkout remains at `/data/homezvol2/ynkim4/ml-simplefold`, and the conda
-prefix remains at `/data/homezvol2/ynkim4/.conda/envs/simplefold`. The checkout
-`artifacts` path is a symlink to the `/pub` artifact root for compatibility with
-existing relative paths. Launchers and the sampling notebook default
+prefix remains at `/data/homezvol2/ynkim4/.conda/envs/simplefold`. Remote jobs
+use explicit `/pub` paths, following the
+[RCIC home-storage guidance](https://rcic.uci.edu/storage/home.html#storing-files)
+to avoid home-to-DFS symbolic links. Launchers and the sampling notebook default
 `SIMPLEFOLD_ARTIFACT_DIR` to `/pub/ynkim4/ml-simplefold/artifacts`; export a
 different value before submission to override it. Check `df -h /pub/ynkim4`
 before downloading additional models or growing datasets; the cached ESM2-3B
@@ -16,10 +17,12 @@ under the laptop checkout's `artifacts/remote-runs/`.
 
 For an existing checkout with a real home `artifacts/` directory, stop project
 jobs before running `sbatch hpc_storage_migrate.slurm` from the checkout.
-The migration verifies every file with SHA-256, replaces the home directory
-with a symlink, and then removes the verified home copies. Its receipt is
-`/pub/ynkim4/ml-simplefold/artifacts/migration-JOB_ID.json`; rerunning after a
-successful migration leaves the symlink and artifacts intact.
+The migration copies artifacts to `/pub`, verifies every file with SHA-256,
+and creates `/pub/ynkim4/ml-simplefold/artifacts/migration-JOB_ID.json` before
+removing the verified original home copies. It creates no compatibility
+symlink. If the original directory has already been removed, a retry uses
+the migration receipt to verify the destination instead of requiring the
+home source.
 
 ## Install locally
 

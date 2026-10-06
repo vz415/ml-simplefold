@@ -46,12 +46,27 @@ def migrate(source, destination, job_id):
     destination = Path(destination).absolute()
     if not re.fullmatch(r"[A-Za-z0-9_-]+", job_id):
         raise ValueError("Invalid migration job ID")
+    print(f"Migrating {source} -> {destination}", flush=True)
     resolved_destination = destination.resolve()
     if source.is_symlink():
-        if source.resolve() != resolved_destination or not destination.is_dir():
-            raise RuntimeError(f"Unexpected artifact symlink: {source}")
-        return {"state": "already_migrated", "source": str(source),
-                "destination": str(destination)}
+        raise RuntimeError(f"Unexpected artifact symlink: {source}")
+    if not source.exists() and destination.is_dir():
+        for receipt in sorted(destination.glob("migration-*.json")):
+            previous = json.loads(receipt.read_text())
+            if (previous.get("state") != "migrated"
+                    or previous.get("source") != str(source)
+                    or previous.get("destination") != str(destination)):
+                continue
+            for relative, expected in previous["files"].items():
+                if Path(relative).is_absolute() or ".." in Path(relative).parts:
+                    raise RuntimeError(f"Invalid path in migration receipt: {relative}")
+                target = destination / relative
+                if (target.is_symlink() or not target.is_file()
+                        or target.stat().st_size != expected["size"]
+                        or sha256(target) != expected["sha256"]):
+                    raise RuntimeError(f"Destination verification failed: {target}")
+            return {"state": "already_migrated", "source": str(source),
+                    "destination": str(destination), "verified_receipt": str(receipt)}
     if not source.is_dir():
         raise RuntimeError(f"Artifact source is not a directory: {source}")
     resolved_source = source.resolve()
@@ -64,6 +79,7 @@ def migrate(source, destination, job_id):
         raise RuntimeError(f"Migration backup already exists: {backup}")
 
     files, directories = inventory(source)
+    print(f"Source verified: {len(files)} files, {sum(item['size'] for item in files.values())} bytes", flush=True)
     report = destination / f"migration-{job_id}.json"
     if report.name in files or report.exists() or report.is_symlink():
         raise RuntimeError(f"Migration report would conflict with existing data: {report}")
@@ -71,6 +87,7 @@ def migrate(source, destination, job_id):
         raise RuntimeError(f"Refusing a symlink destination: {destination}")
     destination.mkdir(parents=True, exist_ok=True)
     for relative in directories:
+        print(f"Preparing directory: {relative}", flush=True)
         target_directory = destination / relative
         if target_directory.is_symlink():
             raise RuntimeError(f"Refusing a symlink destination directory: {target_directory}")
@@ -115,12 +132,9 @@ def migrate(source, destination, job_id):
     }
     source.rename(backup)
     try:
-        source.symlink_to(destination, target_is_directory=True)
         with report.open("x") as handle:
             handle.write(json.dumps(manifest, indent=2) + "\n")
     except BaseException:
-        if source.is_symlink() and source.resolve() == resolved_destination:
-            source.unlink()
         backup.rename(source)
         raise
     try:
