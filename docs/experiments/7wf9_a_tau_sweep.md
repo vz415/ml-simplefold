@@ -1,31 +1,59 @@
 # 7WF9-A tau sweep
 
-## Status: waiting for model storage
+## Completed: 50 samples
 
-The user approved ten samples each at tau **0.01, 0.05, 0.1, 0.3, and 0.8** (50 total), with SimpleFold-100M, ESM2-3B, 500 logarithmic sampling steps, seed 42, and pLDDT off. Sampling has not yet succeeded for this sweep.
+Ten samples each at tau **0.01, 0.05, 0.1, 0.3, and 0.8** completed on HPC3y on 2026-10-06. Higher tau increased ensemble diversity about fourfold but did not correct the compact fold: whole observed-chain sequence RMSD stayed near 20 Å, and median TM-score and CA lDDT declined. The small RMSD decrease does not establish improved folding.
 
-The first attempt, job **57840798**, failed with exit **1:0** after **24 seconds** on `hpc3-gpu-16-00` on 2026-10-06 at approximately 11:45 PDT. The model-cache `stat` guard timed out and printed `Model storage is unavailable; stopping before inference.` No model was loaded and no protein samples were generated. The remaining four jobs were not submitted because the same public storage is required.
+All conditions used SimpleFold-100M, ESM2-3B, 500 logarithmic sampling steps, seed 42, pLDDT off, and source commit `85c58c0f551e6ed334570d7a390b445ac6ac38bb`. Each job generated ten draws from one RNG stream. All 50 PDBs passed exact 126-residue sequence, atom-count, and finite-coordinate checks. No sampling or model loading ran locally.
 
-Direct SSH, Git, and Slurm access work. A bounded login-node read of `/pub/ynkim4/ml-simplefold/artifacts/checkpoints/simplefold_100M.ckpt` timed out; a later bounded check at 11:47:54 PDT also returned no file metadata. An earlier SFTP viewer upload had stalled as well. This establishes a storage-access problem, not its cause. No public RCIC notice confirming an October 6 outage was found; [RCIC news](https://rcic.uci.edu/about/news.html) says maintenance announcements are distributed by email. `/pub` is [BeeGFS DFS storage](https://rcic.uci.edu/storage/dfs.html). Preserve existing models and results and avoid repeated metadata probes or GPU retries while storage remains unavailable.
+| Tau | Job | GPU | Sampling | Slurm elapsed | Result |
+| --- | --- | --- | --- | --- | --- |
+| 0.01 | 57841734 | V100 16 GB | 29 s | 91 s | COMPLETED 0:0 |
+| 0.05 | 57841774 | A30 | 26 s | 68 s | COMPLETED 0:0 |
+| 0.1 | 57841775 | A30 | 26 s | 66 s | COMPLETED 0:0 |
+| 0.3 | 57841777 | V100 16 GB | 29 s | 86 s | COMPLETED 0:0 |
+| 0.8 | 57841778 | A30 | 27 s | 70 s | COMPLETED 0:0 |
 
-## Ready configuration and commands
+Jobs ran between 12:01 and 12:04 PDT. Sampling time excludes startup/model loading; Slurm elapsed includes those costs. GPU families differ across conditions, so runtime is descriptive rather than a controlled performance comparison.
 
-Sampling launcher source commit: `63ec53b3d0949119c7cdde5a55c6fa70bff96e91`, pushed and synced to HPC3y. The existing approved `hpc_sample.slurm` now accepts arguments FASTA, steps, samples, tau, seed; its defaults remain unchanged. It checks model-storage access with a bounded timeout and records exact settings in per-run `experiment.json`.
+## Results
 
-After storage access recovers, submit the approved launcher through the experiment helper, one job per tau:
+Values below are medians across all ten predictions, except diversity, which is the median of all 45 full-target pairwise CA RMSDs. Full ranges and every sample are retained in `summary.csv` and `metrics.csv`.
+
+| Tau | TM-score | Sequence CA RMSD (Å) | CA lDDT | Resolved CA Rg (Å) | Long-range distance MAE (Å) | Diversity (Å) |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0.01 | 0.544 | 20.20 | 0.846 | 15.58 | 12.53 | 0.59 |
+| 0.05 | 0.542 | 20.16 | 0.844 | 15.55 | 12.52 | 1.06 |
+| 0.1 | 0.542 | 20.13 | 0.842 | 15.58 | 12.52 | 1.20 |
+| 0.3 | 0.536 | 20.06 | 0.833 | 15.55 | 12.54 | 1.56 |
+| 0.8 | 0.529 | 20.04 | 0.817 | 15.48 | 12.61 | 2.36 |
+
+The experimental chain has CA radius of gyration **22.86 Å** and span **77.18 Å** on the same resolved mask. Predictions remain around 15.5 Å and 50 Å respectively at every tau. Long-range CA distance errors remain approximately 12.5 Å. The highest tau therefore adds variation around the same overly compact geometry, rather than recovering experimental helix placement. Its best TM-score is 0.548, below the default condition's best 0.555; no condition is reported using only its best sample.
+
+Use all 123 resolved chain-A CAs at full polymer positions 4–126 for sequence-correspondent RMSD and compactness. TM-align is normalized to the observed reference and may align a different structural subset; its subset RMSD is not the full sequence RMSD. CA lDDT is pair-weighted. Long-range pair distance error uses polymer separation at least 20. Diversity fits all 126 predicted CAs.
+
+No prediction has a nonadjacent CA pair closer than 2.5 Å. At tau 0.8, three of 1,250 adjacent CA distances fall slightly below the coarse 3.6–4.1 Å interval (minimum 3.577 Å); tau 0.1 has one such distance. These are coarse backbone indicators, not all-atom chemical or steric validation.
+
+This is one protein and one seed with ten samples per condition. Fixed seed and batch size support paired comparisons by sample index, but not independent seed replication. Small GPU numerical differences are possible. The new default condition closely reproduces the [earlier baseline](7wf9_a.md). Neither this sweep nor the baseline establishes the cause of the folding failure or exactly reproduces the paper's unspecified checkpoint.
+
+## Artifacts and reproduction
+
+Local sweep root: `artifacts/sweeps/7wf9_a_tau/2026-10-06/`.
+
+Long-term sweep root: `/pub/ynkim4/ml-simplefold/artifacts/sweeps/7wf9_a_tau/2026-10-06/`.
+
+Both contain the reference CIF, manifest, downloaded predictions and provenance, per-run comparisons, all-sample CSVs, summary JSON/CSV, `tau_sweep.png`, and `index.html`. The index links all five ensembles: all ten predictions are solid orange over the blue experimental reference by default. Raw remote outputs also remain under `/pub/ynkim4/ml-simplefold/artifacts/runs/JOB_ID/`. Weights remain in the existing public checkpoint/Torch caches. The sweep bundle is about 22 MiB and contains no model weights.
+
+Each successful run used the approved launcher:
 
 ```bash
-for tau in 0.01 0.05 0.1 0.3 0.8; do
-  ~/.agents/skills/hpc-experiments/scripts/submit.sh \
-    hpc_sample.slurm examples/7wf9_a.fasta 500 10 "$tau" 42
-done
+~/.agents/skills/hpc-experiments/scripts/submit.sh \
+  hpc_sample.slurm examples/7wf9_a.fasta 500 10 TAU 42
 ```
 
-Each job writes to `/pub/ynkim4/ml-simplefold/artifacts/runs/JOB_ID/`. Keep sampling entirely on Slurm GPU nodes. Keep weights and long-term outputs under `/pub`; do not redownload large model caches or sample locally to work around the storage failure.
+Launcher arguments are FASTA, steps, sample count, tau, seed. Exact run settings are recorded in `experiment.json`; validation, source commit, and package versions accompany the PDBs. The manifest preserves the failed first attempt separately. Sampling is complete; these commands document reproduction, not outstanding submissions.
 
-Local sweep manifest and deliberately untracked downloaded/analysis outputs use `artifacts/sweeps/7wf9_a_tau/2026-10-06/`. The manifest preserves the failed attempt separately and currently has an empty successful `runs` list. For each completed job, add a run with `tau`, `job_id`, `analysis_dir` (`runs/JOB_ID/comparison`), and `prediction_dir` (`runs/JOB_ID/predictions_simplefold_100M`). Paths can be relative to the manifest directory. Transfer specific PDB/provenance files through `access-hpc3.rcic.uci.edu`.
-
-Run `scripts/compare_structures.py` on each downloaded ten-sample ensemble using `artifacts/references/7WF9/7WF9.cif`, author chain A, and `examples/7wf9_a.fasta`. Then aggregate:
+Coordinate analysis can run locally without loading a model. Per-run comparisons use `scripts/compare_structures.py`, chain A, the deposited FASTA, and the reference CIF. Aggregate existing comparisons with:
 
 ```bash
 python scripts/summarize_tau_sweep.py \
@@ -33,14 +61,14 @@ python scripts/summarize_tau_sweep.py \
   --output-dir artifacts/sweeps/7wf9_a_tau/2026-10-06
 ```
 
-The aggregator produces all-sample/summary CSVs, JSON provenance, a nine-panel distribution plot, and an HTML index linking each solid-orange ensemble over the blue experimental chain. Its verification against the previously completed baseline is a pipeline check, **not** a new tau-sweep result.
+QA checked all 50 predictions, the common 123-residue reference mask, all 45 pairwise comparisons per condition, relative viewer/data links, and the summary figure. Reference and prediction checksums are recorded in the analysis JSONs.
 
-## Comparison design
+## Public-storage incident
 
-Use the full 126-residue target sequence and compare the same 123 resolved chain-A CAs at polymer positions 4–126. Keep the sample count, input, model, software, and seed fixed across tau, which supports paired random-noise comparisons by sample index; this is one seed and one target, not independent biological replication.
+The first attempt, job **57840798**, failed with exit **1:0** after **24 seconds** around 11:45 PDT. The bounded model-cache `stat` guard timed out before inference; that attempt loaded no model and generated no samples. SSH, Git, and Slurm remained available while even small public-storage metadata reads and SFTP transfers stalled.
 
-Report medians and ranges across every sample for observed-reference TM-align, sequence-correspondent CA RMSD, pair-weighted CA lDDT, resolved-mask CA radius of gyration/span, and long-range CA-pair distance error (polymer separation at least 20). Report all 45 full-target pairwise RMSDs per tau for ensemble diversity. Higher tau may increase noise and geometric distortions; increased diversity alone is not improved folding. Include coarse adjacent CA distance/outlier and nonadjacent close-CA indicators, explicitly distinct from chemical/all-atom validation. Keep TM-align structural-subset RMSD distinct from whole observed-chain sequence RMSD.
+Access recovered at **12:00:44 PDT** without changing storage paths or downloading model weights. `/pub` resolves to `/dfs6b/pub`, on [RCIC BeeGFS storage](https://rcic.uci.edu/storage/dfs.html). The account's dfs6b quota was **606.99 GiB / 1 TiB**, with **166.51k / 8 million** inodes/chunks, below both limits. These are account totals, not this project's footprint.
 
-The previous ten-sample tau-0.01 run, job57838536, is documented separately in [7wf9_a.md](7wf9_a.md). It is available for pipeline verification; rerun the baseline after storage recovers to match sweep provenance.
+Login-node client logs show metadata requests toward node **6021** interrupted when bounded probes were terminated. This narrows the observed symptom to metadata RPC waits, but does not identify a server, network, or client root cause. All five sampling jobs succeeded after recovery. Retrieval of one tau-0.3 PDB subsequently stalled again and eventually completed without resampling, so the incident was intermittent rather than demonstrably fixed.
 
-If the storage failure persists, a [RCIC storage ticket](https://rcic.uci.edu/help/tickets.html#storage-problems) should include account `ynkim4`, exact `/pub` model path, the timestamped stat/SFTP failures, and affected node/job57840798. No support message has been sent.
+No public [RCIC news notice](https://rcic.uci.edu/about/news.html) confirming an October 6 outage was found; notices may be distributed by email. No support message was sent. If stalls recur, preserve cached models/results and use the [RCIC storage ticket guidance](https://rcic.uci.edu/help/tickets.html#storage-problems) with timestamped failures and affected paths/nodes. Do not work around storage stalls by repeatedly launching GPUs, redownloading model caches, or sampling locally.
