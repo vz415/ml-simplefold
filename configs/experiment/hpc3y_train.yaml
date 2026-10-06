@@ -1,0 +1,23 @@
+# @package _global_
+# Select data=<synthetic-config> after preparing it. The inherited data=pdb
+# still uses upstream paths; these profiles do not create a dataset.
+
+defaults:
+  - train
+  - override /paths: hpc3y
+  - _self_
+
+# Warm-start architecture weights; load_ckpt_path is reserved for a full
+# Lightning training checkpoint when resuming optimizer and loop state.
+pretrained_folding_ckpt_path: ${paths.artifact_root}/checkpoints/simplefold_100M.ckpt
+
+callbacks:
+  model_checkpoint:
+    dirpath: ${paths.checkpoint_dir}
+
+hydra:
+  run:
+    dir: ${paths.output_dir}
+  job:
+    env_set:
+      TORCH_HOME: ${paths.artifact_root}/torch

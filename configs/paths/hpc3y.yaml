@@ -1,0 +1,12 @@
+# Slurm-only paths: keep experiment data and generated artifacts on /pub.
+root_dir: "./"
+artifact_root: ${oc.env:SIMPLEFOLD_ARTIFACT_DIR,/pub/ynkim4/ml-simplefold/artifacts}
+run_id: ${oc.env:SLURM_JOB_ID}
+run_dir: ${.artifact_root}/runs/${.run_id}
+data_dir: ${.artifact_root}/datasets
+output_dir: ${.run_dir}
+log_dir: ${.run_dir}/logs
+tmp_dir: ${.run_dir}/tmp
+sample_dir: ${.run_dir}/samples
+checkpoint_dir: ${.artifact_root}/checkpoints/trained/${.run_id}
+work_dir: ${hydra:runtime.cwd}

@@ -91,3 +91,17 @@ datasets use `datasets/synthetic/ITERATION/`, and sampling results use
 default. Installation caches, package locks, the checkout, and conda prefix
 remain in home storage. The superseded home paths above describe the
 original 2026-10-05 execution.
+
+The post-migration GPU run `57837138` loaded both folding and ESM weights
+from `/pub` and completed 500-step crambin sampling on an NVIDIA A30
+(`hpc3-gpu-l54-02`) in 47s, exit `0:0`. It produced 46 residues / 326 atoms
+with matching sequence and finite coordinates. The PDB SHA-256 matches the
+original run above. Output is
+`/pub/ynkim4/ml-simplefold/artifacts/runs/57837138/predictions_simplefold_100M/crambin_sampled_0.pdb`.
+
+Training profile `experiment=hpc3y_train` configures `/pub` logs, samples,
+new checkpoint directories, and pretrained warm-start loading. The loader
+initializes both current and EMA architecture weights and uses a fresh
+optimizer rather than treating raw inference weights as a full Lightning
+resume checkpoint. Three tiny-layer loader tests and Hydra path composition
+checks pass. End-to-end training awaits a prepared synthetic dataset config.

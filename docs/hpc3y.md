@@ -31,6 +31,16 @@ Use iteration-specific subdirectories under `checkpoints/trained/` and
 `datasets/synthetic/`. The pretrained checkpoint remains at
 `checkpoints/simplefold_100M.ckpt`, so later training can always start from it.
 
+The training profile `experiment=hpc3y_train` loads those pretrained weights
+into the folding model and its EMA copy with fresh training state. It directs
+logs and samples to `runs/SLURM_JOB_ID/`, new checkpoints to
+`checkpoints/trained/SLURM_JOB_ID/`, and ESM loading to the `/pub` Torch cache.
+Select a prepared synthetic-data configuration with `data=YOUR_DATA_CONFIG`
+when launching training through Slurm; the inherited upstream PDB data paths
+are placeholders for this workflow. The profile requires `SLURM_JOB_ID`.
+Use `pretrained_folding_ckpt_path=null` and `+load_ckpt_path=CHECKPOINT` to
+resume a full Lightning training checkpoint instead of warm-starting.
+
 ## Install locally
 
 ```bash

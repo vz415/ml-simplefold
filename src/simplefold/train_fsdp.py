@@ -26,6 +26,7 @@ from utils.instantiators import (
 )
 from utils.logging_utils import log_hyperparameters
 from utils.pylogger import RankedLogger
+from utils.training_checkpoint import load_pretrained_folding_weights
 
 log = RankedLogger(__name__, rank_zero_only=True)
 torch.set_float32_matmul_precision("medium")
@@ -35,10 +36,16 @@ torch.set_float32_matmul_precision("medium")
 def train(cfg):
     seed = cfg.get("seed", 42)
     pl.seed_everything(seed, workers=True)
+    load_ckpt_path = cfg.get("load_ckpt_path", None)
+    pretrained_path = cfg.get("pretrained_folding_ckpt_path", None)
+    if load_ckpt_path is not None and pretrained_path is not None:
+        raise ValueError("Choose pretrained_folding_ckpt_path for warm-start or load_ckpt_path for resume.")
 
     log.info(f"Instantiating model <{cfg.model._target_}>")
     model: LightningModule = hydra.utils.instantiate(cfg.model)
-    load_ckpt_path = cfg.get("load_ckpt_path", None)
+    if pretrained_path is not None:
+        log.info(f"Loading pretrained folding weights <{pretrained_path}>...")
+        load_pretrained_folding_weights(model, pretrained_path)
 
     if load_ckpt_path is not None:
         # load existing ckpt

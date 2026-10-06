@@ -24,7 +24,6 @@ optimizer:
   _partial_: true
   lr: 1e-4
   weight_decay: 0.0
-  max_steps: ???
 
 scheduler:
   _target_: utils.lr_scheduler.LinearWarmup
