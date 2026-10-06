@@ -215,15 +215,10 @@ def plot_sweep(output_dir, groups, reference_geometry):
         ax.xaxis.set_minor_locator(NullLocator())
         if field in ("adjacent_ca_outside_3p6_4p1_fraction", "nonadjacent_ca_under_2p5_pairs"):
             ax.set_ylim(bottom=0)
-        ax.set(xlabel="Tau", title=title)
+        arrow = METRIC_DIRECTIONS[field][0]
+        ax.set(xlabel="Tau", title=f"{title}  {arrow}")
         ax.grid(alpha=0.2)
         ax.legend(fontsize=7)
-        arrow, caption, _ = METRIC_DIRECTIONS[field]
-        color = "#666666" if field == "ensemble_diversity" else "#237a45"
-        ax.text(1.02, 0.92, arrow, transform=ax.transAxes, fontsize=20, color=color,
-                ha="left", va="top")
-        ax.text(1.02, 0.81, caption, transform=ax.transAxes, fontsize=8, color=color,
-                ha="left", va="top")
     fig.suptitle("7WF9-A tau sweep: ten samples per tau; geometry and diversity", fontsize=14, y=0.995)
     handles = [Line2D([], [], linestyle="none", color=group["color"], marker=group["marker"],
                       label=f"τ = {group['tau']:g}", markersize=8) for group in groups]
