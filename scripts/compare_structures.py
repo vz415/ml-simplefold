@@ -380,7 +380,7 @@ def create_visuals(args, paths, metrics, residue_rows, best, pair_distance_error
 <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
 <style>body{font:15px system-ui;margin:20px}#viewer{width:100%;height:650px;position:relative}#metrics{margin:12px 0;line-height:1.7}select,button{font:inherit;padding:5px}</style></head>
 <body><h2>SimpleFold ensemble vs experimental reference</h2>
-<p>Experimental reference: blue. Sample ensemble: translucent orange. Drag to rotate; scroll to zoom.</p>
+<p>Experimental reference: blue. Sample ensemble: solid orange. Drag to rotate; scroll to zoom.</p>
 <label>Sample <select id="sample"><option value="all">All samples together</option></select></label> <button id="reset">Reset view</button>
 <div id="metrics"></div><div id="viewer"></div>
 <p>TM-align optimizes a structural alignment that can match a smaller subset with different residue correspondence.
@@ -402,7 +402,7 @@ function showSample() {
   viewer.removeAllModels(); viewer.addModel(data.reference,'pdb');
   for (const [index, prediction] of names.entries()) {
     viewer.addModel(data.predictions[prediction],'pdb');
-    viewer.setStyle({model:index+1},{cartoon:{color:'orange',opacity:name==='all' ? 0.35 : 1}});
+    viewer.setStyle({model:index+1},{cartoon:{color:'orange',opacity:1}});
   }
   viewer.setStyle({model:0},{cartoon:{color:'blue'}});
   viewer.zoomTo(); viewer.render();
