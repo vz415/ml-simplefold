@@ -26,6 +26,18 @@ TAU_STYLES = (
     ("#9467bd", "P", "✚"),
 )
 
+METRIC_DIRECTIONS = {
+    "tm_align_reference_observed": ("↑", "better", "Higher is better"),
+    "ca_rmsd_sequence_fit_angstrom": ("↓", "better", "Lower is better"),
+    "ca_lddt_pair_weighted": ("↑", "better", "Higher is better"),
+    "ca_rg_matched_angstrom": ("→", "reference", "Closer to the experimental reference is better"),
+    "ca_max_span_matched_angstrom": ("→", "reference", "Closer to the experimental reference is better"),
+    "ca_long_range_pair_distance_mae_angstrom": ("↓", "better", "Lower is better"),
+    "ensemble_diversity": ("↔", "diversity", "Diversity only; neither direction is inherently better"),
+    "adjacent_ca_outside_3p6_4p1_fraction": ("↓", "better", "Lower is better"),
+    "nonadjacent_ca_under_2p5_pairs": ("↓", "better", "Lower is better"),
+}
+
 
 SUMMARY_FIELDS = (
     "tm_align_reference_observed", "ca_rmsd_sequence_fit_angstrom",
@@ -206,6 +218,12 @@ def plot_sweep(output_dir, groups, reference_geometry):
         ax.set(xlabel="Tau", title=title)
         ax.grid(alpha=0.2)
         ax.legend(fontsize=7)
+        arrow, caption, _ = METRIC_DIRECTIONS[field]
+        color = "#666666" if field == "ensemble_diversity" else "#237a45"
+        ax.text(1.02, 0.92, arrow, transform=ax.transAxes, fontsize=20, color=color,
+                ha="left", va="top")
+        ax.text(1.02, 0.81, caption, transform=ax.transAxes, fontsize=8, color=color,
+                ha="left", va="top")
     fig.suptitle("7WF9-A tau sweep: ten samples per tau; geometry and diversity", fontsize=14, y=0.995)
     handles = [Line2D([], [], linestyle="none", color=group["color"], marker=group["marker"],
                       label=f"τ = {group['tau']:g}", markersize=8) for group in groups]
@@ -216,6 +234,11 @@ def plot_sweep(output_dir, groups, reference_geometry):
 
 
 def write_index(output_dir, manifest, summaries, groups, reference_geometry, observed_count):
+    def direction(field):
+        arrow, _, description = METRIC_DIRECTIONS[field]
+        neutral = " neutral" if field == "ensemble_diversity" else ""
+        return f'<span class="direction{neutral}" title="{description}" aria-label="{description}">{arrow}</span>'
+
     def interval(row, field, digits=3):
         return f"{row[field+'_median']:.{digits}f} [{row[field+'_min']:.{digits}f}, {row[field+'_max']:.{digits}f}]"
     body = []
@@ -235,7 +258,7 @@ def write_index(output_dir, manifest, summaries, groups, reference_geometry, obs
     legend = "".join(f'<span class="tau-badge"><i class="swatch" style="background:{group["color"]}"></i>'
                      f'{group["symbol"]} τ = {group["tau"]:g}</span>' for group in groups)
     page = f'''<!doctype html><html><head><meta charset="utf-8"><title>{title} tau sweep</title>
-<style>body{{font:15px system-ui;margin:24px}}table{{border-collapse:collapse;font-size:13px}}td,th{{border:1px solid #ddd;padding:8px;text-align:left}}img{{max-width:100%}}.scroll{{overflow-x:auto}}.legend{{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}}.tau-badge{{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;padding:6px 9px;background:#f5f5f5;border-radius:5px}}.swatch{{display:inline-block;width:16px;height:16px;border:1px solid #333;border-radius:3px}}</style></head>
+<style>body{{font:15px system-ui;margin:24px}}table{{border-collapse:collapse;font-size:13px}}td,th{{border:1px solid #ddd;padding:8px;text-align:left}}img{{max-width:100%}}.scroll{{overflow-x:auto}}.legend{{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}}.tau-badge{{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;padding:6px 9px;background:#f5f5f5;border-radius:5px}}.swatch{{display:inline-block;width:16px;height:16px;border:1px solid #333;border-radius:3px}}.direction{{display:inline-block;margin-left:6px;color:#237a45;font-size:20px;vertical-align:middle}}.direction.neutral{{color:#666}}</style></head>
 <body><h1>{title} tau sweep</h1><div class="legend" aria-label="Tau color legend">{legend}</div>
 <p>Colors and markers identify tau in the plots and table. Each structure viewer labels its tau and shows solid predictions over the experimental reference.</p><p>Ten samples per tau. Entries show median [minimum, maximum].
 Structure viewers use sequence-correspondence CA superposition; TM-align optimizes its own structural alignment.</p>
@@ -244,7 +267,8 @@ Experimental CA radius of gyration: {reference_geometry['ca_rg_matched_angstrom'
 maximum span: {reference_geometry['ca_max_span_matched_angstrom']:.2f} Å.
 Ensemble diversity uses the full target sequence; increased diversity alone does not imply improved quality.
 CA lDDT is pair weighted. Backbone indicators are coarse CA proxies, not chemical validation.</p>
-<div class="scroll"><table><thead><tr><th>Tau</th><th>Job</th><th>TM-align</th><th>Sequence RMSD Å</th><th>CA lDDT</th><th>CA Rg Å</th><th>Diversity RMSD Å</th><th>Adjacent outlier fraction</th><th>Close nonadjacent CA pairs</th><th>Viewer</th></tr></thead><tbody>{''.join(body)}</tbody></table></div>
+<p>↑ higher is better · ↓ lower is better · → match reference · ↔ diversity, not accuracy</p>
+<div class="scroll"><table><thead><tr><th>Tau</th><th>Job</th><th>TM-align {direction('tm_align_reference_observed')}</th><th>Sequence RMSD Å {direction('ca_rmsd_sequence_fit_angstrom')}</th><th>CA lDDT {direction('ca_lddt_pair_weighted')}</th><th>CA Rg Å {direction('ca_rg_matched_angstrom')}</th><th>Diversity RMSD Å {direction('ensemble_diversity')}</th><th>Adjacent outlier fraction {direction('adjacent_ca_outside_3p6_4p1_fraction')}</th><th>Close nonadjacent CA pairs {direction('nonadjacent_ca_under_2p5_pairs')}</th><th>Viewer</th></tr></thead><tbody>{''.join(body)}</tbody></table></div>
 <p><a href="summary.csv">Summary CSV</a> · <a href="metrics.csv">All sample metrics</a> · <a href="summary.json">Definitions and provenance</a></p>
 <img src="tau_sweep.png" alt="Tau sweep metric distributions on a logarithmic tau axis">
 </body></html>'''
