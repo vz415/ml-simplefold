@@ -1,0 +1,4 @@
+# Matched PyTorch/torchvision versions; CUDA 12.4 wheels are installed on HPC3.
+torch==2.6.0
+torchvision==0.21.0
+numpy==1.26.4

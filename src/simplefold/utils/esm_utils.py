@@ -9,7 +9,7 @@
 import torch
 import typing as T
 import numpy as np
-from functools import partial
+from esm import pretrained
 
 from utils import residue_constants
 
@@ -18,14 +18,13 @@ try:
 except:
     pass
 
-load_fn = torch.hub.load
 esm_registry = {
-    "esm2_8M": partial(load_fn, "facebookresearch/esm:main", "esm2_t6_8M_UR50D"),
-    "esm2_35M": partial(load_fn, "facebookresearch/esm:main", "esm2_t12_35M_UR50D"),
-    "esm2_150M": partial(load_fn, "facebookresearch/esm:main", "esm2_t30_150M_UR50D"),
-    "esm2_650M": partial(load_fn, "facebookresearch/esm:main", "esm2_t33_650M_UR50D"),
-    "esm2_3B": partial(load_fn, "facebookresearch/esm:main", "esm2_t36_3B_UR50D"),
-    "esm2_15B": partial(load_fn, "facebookresearch/esm:main", "esm2_t48_15B_UR50D"),
+    "esm2_8M": pretrained.esm2_t6_8M_UR50D,
+    "esm2_35M": pretrained.esm2_t12_35M_UR50D,
+    "esm2_150M": pretrained.esm2_t30_150M_UR50D,
+    "esm2_650M": pretrained.esm2_t33_650M_UR50D,
+    "esm2_3B": pretrained.esm2_t36_3B_UR50D,
+    "esm2_15B": pretrained.esm2_t48_15B_UR50D,
 }
 
 

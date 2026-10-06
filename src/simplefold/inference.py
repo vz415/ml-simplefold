@@ -283,7 +283,7 @@ def predict_structures_from_fastas(args):
     output_dir.mkdir(parents=True, exist_ok=True)
     prediction_dir = output_dir / f"predictions_{args.simplefold_model}"
     prediction_dir.mkdir(parents=True, exist_ok=True)
-    cache = output_dir / "cache"
+    cache = Path(args.cache_dir) if getattr(args, "cache_dir", None) else output_dir / "cache"
     cache.mkdir(parents=True, exist_ok=True)
 
     # set random seed for reproducibility

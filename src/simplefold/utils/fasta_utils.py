@@ -18,9 +18,6 @@ from boltz_data_pipeline.types import Manifest, Record
 
 
 CCD_URL = "https://huggingface.co/boltz-community/boltz-1/resolve/main/ccd.pkl"
-MODEL_URL = (
-    "https://huggingface.co/boltz-community/boltz-1/resolve/main/boltz1_conf.ckpt"
-)
 
 
 from collections.abc import Mapping
@@ -130,15 +127,6 @@ def download_fasta_utilities(cache: Path) -> None:
             "change the cache directory with the --cache flag."
         )
         urllib.request.urlretrieve(CCD_URL, str(ccd))
-
-    # Download model
-    model = cache / "boltz1_conf.ckpt"
-    if not model.exists():
-        click.echo(
-            f"Downloading the model weights to {model}. You may "
-            "change the cache directory with the --cache flag."
-        )
-        urllib.request.urlretrieve(MODEL_URL, str(model))
 
 
 def process_fastas(
