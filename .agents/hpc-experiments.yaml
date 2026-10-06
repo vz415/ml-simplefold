@@ -4,5 +4,5 @@ hpc_dir: /pub/ynkim4/ml-simplefold
 obsidian_dir: ~/Documents/Obsidian Vault/Computational Research/SimpleFold
 # Authorized by the user's request to set up HPC3y and debug toy sampling.
 allowed_scripts:
-  - scripts/hpc_setup.slurm
-  - scripts/hpc_sample.slurm
+  - hpc_setup.slurm
+  - hpc_sample.slurm
