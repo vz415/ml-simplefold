@@ -6,7 +6,7 @@ analysis. Sampling runs only on HPC3y (`ynkim4`) through Slurm.
 The initial setup uses the home volume because BeeGFS `/pub/ynkim4` metadata
 writes stalled on 2026-10-05. The home volume had 41 GiB available before
 installation. Keep an eye on `df -h ~` before downloading additional models;
-the ESM2-3B checkpoint alone is approximately 11 GiB. Large experiment data
+the cached ESM2-3B checkpoint alone is approximately 5.3 GiB. Large experiment data
 should move to project storage once its performance has recovered.
 
 ## Install locally
@@ -57,8 +57,8 @@ squeue -u ynkim4
 sacct -j JOB_ID --format=JobID,State,ExitCode,Elapsed,MaxRSS,NodeList
 ```
 
-The default job requests one A100, eight CPU cores, 64 GiB host memory, and
-45 minutes on `gpu`, charged to `eehui_lab_gpu`. Even the 100M folding model
+The default job requests one GPU, four CPU cores, 32 GiB host memory, and
+15 minutes on `gpu`, charged to `eehui_lab_gpu`. Even the 100M folding model
 uses an ESM2-3B encoder. CPU sampling is refused if CUDA is unavailable.
 The arguments are FASTA file/directory, step count, and samples per protein.
 Use one protein sequence per FASTA file. For multiple targets, pass a directory

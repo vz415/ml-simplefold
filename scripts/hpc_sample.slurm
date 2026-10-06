@@ -3,10 +3,10 @@
 #SBATCH --partition=gpu
 #SBATCH --account=eehui_lab_gpu
 #SBATCH --qos=normal
-#SBATCH --gres=gpu:A100:1
-#SBATCH --cpus-per-task=8
-#SBATCH --mem=64G
-#SBATCH --time=00:45:00
+#SBATCH --gres=gpu:1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=32G
+#SBATCH --time=00:15:00
 #SBATCH --output=logs/sample-%j.out
 #SBATCH --error=logs/sample-%j.err
 set -euo pipefail
@@ -15,7 +15,7 @@ module load miniconda3/24.9.2
 source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate "${SIMPLEFOLD_ENV_PREFIX:-/data/homezvol2/ynkim4/.conda/envs/simplefold}"
 export TORCH_HOME="$PWD/artifacts/torch"
-export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-8}"
+export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-4}"
 export PYTHONUNBUFFERED=1
 fasta_path="${1:-examples/crambin.fasta}"
 num_steps="${2:-500}"
