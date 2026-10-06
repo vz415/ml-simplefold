@@ -380,8 +380,8 @@ def create_visuals(args, paths, metrics, residue_rows, best, pair_distance_error
 <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
 <style>body{font:15px system-ui;margin:20px}#viewer{width:100%;height:650px;position:relative}#metrics{margin:12px 0;line-height:1.7}select,button{font:inherit;padding:5px}</style></head>
 <body><h2>SimpleFold ensemble vs experimental reference</h2>
-<p>Reference: blue. Prediction: orange. All predictions use the sequence-correspondence CA least-squares fit.</p>
-<label>Sample <select id="sample"></select></label> <button id="reset">Reset view</button>
+<p>Experimental reference: blue. Sample ensemble: translucent orange. Drag to rotate; scroll to zoom.</p>
+<label>Sample <select id="sample"><option value="all">All samples together</option></select></label> <button id="reset">Reset view</button>
 <div id="metrics"></div><div id="viewer"></div>
 <p>TM-align optimizes a structural alignment that can match a smaller subset with different residue correspondence.
 The viewer and sequence-fit RMSD use all sequence-corresponding observed reference CAs.
@@ -394,14 +394,24 @@ for (const name of Object.keys(data.predictions)) {
   const option = document.createElement('option'); option.value = name; option.textContent = name;
   select.appendChild(option);
 }
-select.value = data.best;
+select.value = 'all';
 const viewer = $3Dmol.createViewer('viewer', {backgroundColor:'white'});
 function showSample() {
-  const name=select.value, m=data.metrics[name];
-  viewer.removeAllModels(); viewer.addModel(data.reference,'pdb'); viewer.addModel(data.predictions[name],'pdb');
+  const name=select.value;
+  const names=name==='all' ? Object.keys(data.predictions) : [name];
+  viewer.removeAllModels(); viewer.addModel(data.reference,'pdb');
+  for (const [index, prediction] of names.entries()) {
+    viewer.addModel(data.predictions[prediction],'pdb');
+    viewer.setStyle({model:index+1},{cartoon:{color:'orange',opacity:name==='all' ? 0.35 : 1}});
+  }
   viewer.setStyle({model:0},{cartoon:{color:'blue'}});
-  viewer.setStyle({model:1},{cartoon:{color:'orange'}});
   viewer.zoomTo(); viewer.render();
+  if (name==='all') {
+    document.getElementById('metrics').textContent =
+      `${names.length} samples over the experimental reference. Each is aligned independently using all sequence-corresponding resolved Cα atoms.`;
+    return;
+  }
+  const m=data.metrics[name];
   document.getElementById('metrics').textContent =
     `TM-align (observed reference length ${m.reference_observed_ca}): ${m.tm_align_reference_observed.toFixed(4)}; `+
     `TM-align RMSD: ${m.tm_align_ca_rmsd_angstrom.toFixed(2)} Å on ${m.tm_align_aligned_pairs} structurally aligned pairs. `+
