@@ -369,18 +369,26 @@ def create_visuals(args, paths, metrics, residue_rows, best, pair_distance_error
     view.zoomTo()
     header = f"<p>Reference {args.chain}: blue. {best['prediction']}: orange. Sequence-correspondence CA least-squares superposition. Chosen by TM-align observed-reference score.</p>"
     (args.output_dir / "best_superposition.html").write_text(header + view.write_html())
+    write_ensemble_viewer(args.output_dir, metrics)
+
+
+def write_ensemble_viewer(output_dir, metrics, color="orange", label="Sample ensemble", backlink=None):
+    """Render existing aligned structures, with optional sweep color and label."""
+    best = max(metrics, key=lambda row: row["tm_align_reference_observed"])
     # Embed all aligned PDBs for interactive selection without structure downloads.
     payload = json.dumps({
-        "reference": reference_pdb.read_text(), "best": best["prediction"],
-        "predictions": {path.name: (args.output_dir / "aligned_predictions" / path.name).read_text() for path in paths},
+        "reference": (output_dir / "reference_chain.pdb").read_text(), "best": best["prediction"],
+        "predictions": {row["prediction"]: (output_dir / "aligned_predictions" / row["prediction"]).read_text() for row in metrics},
         "metrics": {row["prediction"]: row for row in metrics},
+        "color": color, "label": label, "backlink": backlink,
     }).replace("<", "\\u003c")
     ensemble_html = '''<!doctype html>
 <html><head><meta charset="utf-8"><title>SimpleFold ensemble vs experimental chain</title>
 <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
-<style>body{font:15px system-ui;margin:20px}#viewer{width:100%;height:650px;position:relative}#metrics{margin:12px 0;line-height:1.7}select,button{font:inherit;padding:5px}</style></head>
-<body><h2>SimpleFold ensemble vs experimental reference</h2>
-<p>Experimental reference: blue. Sample ensemble: solid orange. Drag to rotate; scroll to zoom.</p>
+<style>body{font:15px system-ui;margin:20px}#viewer{width:100%;height:650px;position:relative}#metrics{margin:12px 0;line-height:1.7}select,button{font:inherit;padding:5px}.legend{display:flex;gap:24px;flex-wrap:wrap;margin:16px 0}.swatch{display:inline-block;width:18px;height:18px;border:1px solid #333;border-radius:3px;vertical-align:middle;margin-right:7px}</style></head>
+<body><a id="back" hidden>← Tau sweep comparison</a><h2 id="title">SimpleFold ensemble vs experimental reference</h2>
+<div class="legend"><span><i class="swatch" style="background:blue"></i>Experimental reference</span><span><i id="ensemble-swatch" class="swatch"></i><strong id="ensemble-label"></strong> · <span id="ensemble-count"></span>, solid</span></div>
+<p>Drag to rotate; scroll to zoom.</p>
 <label>Sample <select id="sample"><option value="all">All samples together</option></select></label> <button id="reset">Reset view</button>
 <div id="metrics"></div><div id="viewer"></div>
 <p>TM-align optimizes a structural alignment that can match a smaller subset with different residue correspondence.
@@ -389,6 +397,16 @@ CA lDDT is pair-weighted and measures local distances without superposition.
 Unresolved reference residues have no coordinates. No confidence ranking is implied.</p>
 <script>
 const data = __PAYLOAD__;
+document.getElementById('ensemble-swatch').style.backgroundColor=data.color;
+document.getElementById('ensemble-label').textContent=data.label;
+document.getElementById('ensemble-count').textContent=Object.keys(data.predictions).length+' samples';
+if (data.label!=='Sample ensemble') {
+  document.getElementById('title').textContent=data.label+' vs experimental reference';
+  document.title=data.label+' — SimpleFold ensemble';
+}
+if (data.backlink) {
+  const back=document.getElementById('back'); back.href=data.backlink; back.hidden=false;
+}
 const select = document.getElementById('sample');
 for (const name of Object.keys(data.predictions)) {
   const option = document.createElement('option'); option.value = name; option.textContent = name;
@@ -402,7 +420,7 @@ function showSample() {
   viewer.removeAllModels(); viewer.addModel(data.reference,'pdb');
   for (const [index, prediction] of names.entries()) {
     viewer.addModel(data.predictions[prediction],'pdb');
-    viewer.setStyle({model:index+1},{cartoon:{color:'orange',opacity:1}});
+    viewer.setStyle({model:index+1},{cartoon:{color:data.color,opacity:1}});
   }
   viewer.setStyle({model:0},{cartoon:{color:'blue'}});
   viewer.zoomTo(); viewer.render();
@@ -423,7 +441,7 @@ select.addEventListener('change',showSample);
 document.getElementById('reset').addEventListener('click',()=>{viewer.zoomTo();viewer.render();});
 showSample();
 </script></body></html>'''.replace("__PAYLOAD__", payload)
-    (args.output_dir / "ensemble_superposition.html").write_text(ensemble_html)
+    (output_dir / "ensemble_superposition.html").write_text(ensemble_html)
 
 
 def main():
