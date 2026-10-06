@@ -98,7 +98,9 @@ sacct -j JOB_ID --format=JobID,State,ExitCode,Elapsed,MaxRSS,NodeList
 The default job requests one GPU, four CPU cores, 32 GiB host memory, and
 15 minutes on `gpu`, charged to `eehui_lab_gpu`. Even the 100M folding model
 uses an ESM2-3B encoder. CPU sampling is refused if CUDA is unavailable.
-The arguments are FASTA file/directory, step count, and samples per protein.
+The arguments are FASTA file/directory, step count, samples per protein, tau,
+and seed. Tau defaults to 0.01 and seed to 42. For example, ten samples at
+tau 0.3 use `sbatch scripts/hpc_sample.slurm examples/7wf9_a.fasta 500 10 0.3 42`.
 Use one protein sequence per FASTA file. For multiple targets, pass a directory
 containing separate single-record FASTA files; multichain input is not validated
 by this setup.
@@ -109,7 +111,8 @@ placeholders, not confidence scores.
 
 Results go to
 `/pub/ynkim4/ml-simplefold/artifacts/runs/JOB_ID/predictions_simplefold_100M/`.
-Each run records its Git commit, installed packages, and `validation.json`, which
+Each run records its Git commit, installed packages, sampling parameters in
+`experiment.json`, and `validation.json`, which
 checks output count, sequence, CA atoms, and finite coordinates. This verifies
 the inference pipeline; it is not a folding-accuracy benchmark.
 

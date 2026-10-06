@@ -22,17 +22,57 @@ export PYTHONUNBUFFERED=1
 fasta_path="${1:-examples/crambin.fasta}"
 num_steps="${2:-500}"
 num_samples="${3:-1}"
+tau="${4:-0.01}"
+seed="${5:-42}"
 output_dir="$artifact_dir/runs/${SLURM_JOB_ID}"
+if ! timeout -k 5s 20s stat -- \
+    "$cache_dir/checkpoints/simplefold_100M.ckpt" \
+    "$cache_dir/torch/hub/checkpoints/esm2_t36_3B_UR50D.pt" \
+    "$cache_dir/ccd/ccd.pkl" >/dev/null; then
+    echo "Model storage is unavailable; stopping before inference." >&2
+    exit 1
+fi
 mkdir -p "$output_dir"
 git rev-parse HEAD > "$output_dir/git-commit.txt"
 python -m pip freeze > "$output_dir/pip-freeze.txt"
 nvidia-smi
 python -c 'import torch; assert torch.cuda.is_available(), "CUDA is unavailable; refusing CPU sampling"; print(torch.__version__, torch.cuda.get_device_name(0))'
+python - "$fasta_path" "$output_dir" "$num_steps" "$num_samples" "$tau" "$seed" <<'PY'
+import hashlib
+import json
+import math
+import os
+import sys
+from pathlib import Path
+
+fasta, output, steps, samples, tau, seed = sys.argv[1:]
+assert int(steps) > 0 and int(samples) > 0
+assert math.isfinite(float(tau)) and float(tau) >= 0 and int(seed) >= 0
+settings = {
+    "job_id": os.environ["SLURM_JOB_ID"],
+    "model": "simplefold_100M",
+    "encoder": "ESM2-3B",
+    "backend": "torch",
+    "fasta_path": fasta,
+    "fasta_sha256": hashlib.sha256(Path(fasta).read_bytes()).hexdigest() if Path(fasta).is_file() else None,
+    "num_steps": int(steps),
+    "nsample_per_protein": int(samples),
+    "tau": float(tau),
+    "seed": int(seed),
+    "log_timesteps": True,
+    "compute_plddt": False,
+    "output_format": "pdb",
+    "output_dir": output,
+    "source_commit": (Path(output) / "git-commit.txt").read_text().strip(),
+}
+(Path(output) / "experiment.json").write_text(json.dumps(settings, indent=2) + "\n")
+print(json.dumps(settings, indent=2))
+PY
 simplefold --backend torch --simplefold_model simplefold_100M \
     --ckpt_dir "$cache_dir/checkpoints" --cache_dir "$cache_dir/ccd" \
     --fasta_path "$fasta_path" --output_dir "$output_dir" \
-    --num_steps "$num_steps" --tau 0.01 --nsample_per_protein "$num_samples" \
-    --seed 42 --output_format pdb
+    --num_steps "$num_steps" --tau "$tau" --nsample_per_protein "$num_samples" \
+    --seed "$seed" --output_format pdb
 python scripts/validate_predictions.py --fasta_path "$fasta_path" \
     --prediction_dir "$output_dir/predictions_simplefold_100M" --num_samples "$num_samples"
 echo "Sampling completed on $(hostname) at $(date -Is)"
