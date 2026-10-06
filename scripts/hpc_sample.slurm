@@ -14,20 +14,21 @@ cd "${SLURM_SUBMIT_DIR:?}"
 module load miniconda3/24.9.2
 source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate "${SIMPLEFOLD_ENV_PREFIX:-/data/homezvol2/ynkim4/.conda/envs/simplefold}"
-export TORCH_HOME="$PWD/artifacts/torch"
+artifact_dir="${SIMPLEFOLD_ARTIFACT_DIR:-/pub/ynkim4/ml-simplefold/artifacts}"
+export TORCH_HOME="$artifact_dir/torch"
 export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-4}"
 export PYTHONUNBUFFERED=1
 fasta_path="${1:-examples/crambin.fasta}"
 num_steps="${2:-500}"
 num_samples="${3:-1}"
-output_dir="$PWD/artifacts/runs/${SLURM_JOB_ID}"
+output_dir="$artifact_dir/runs/${SLURM_JOB_ID}"
 mkdir -p "$output_dir"
 git rev-parse HEAD > "$output_dir/git-commit.txt"
 python -m pip freeze > "$output_dir/pip-freeze.txt"
 nvidia-smi
 python -c 'import torch; assert torch.cuda.is_available(), "CUDA is unavailable; refusing CPU sampling"; print(torch.__version__, torch.cuda.get_device_name(0))'
 simplefold --backend torch --simplefold_model simplefold_100M \
-    --ckpt_dir "$PWD/artifacts/checkpoints" --cache_dir "$PWD/artifacts/ccd" \
+    --ckpt_dir "$artifact_dir/checkpoints" --cache_dir "$artifact_dir/ccd" \
     --fasta_path "$fasta_path" --output_dir "$output_dir" \
     --num_steps "$num_steps" --tau 0.01 --nsample_per_protein "$num_samples" \
     --seed 42 --output_format pdb

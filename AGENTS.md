@@ -8,10 +8,15 @@
   analysis of downloaded artifacts. Run remote installation, downloads, and
   inference through Slurm; login nodes are for Git, submission, and status.
 - See `docs/hpc3y.md` for launch commands and environment details.
-- Home storage is the current fallback for stalled BeeGFS metadata writes.
-  Check free home space before downloading larger models or growing datasets.
-- Keep model caches, results, environment locks, and logs under ignored
-  `artifacts/` and `logs/` directories. Never commit model weights.
+- Store remote model caches, results, environment locks, and artifact logs
+  long-term under `/pub/ynkim4/ml-simplefold/artifacts`. Launchers default
+  `SIMPLEFOLD_ARTIFACT_DIR` to that path; set it explicitly to override storage.
+  The checkout and conda prefix stay in home storage. The checkout `artifacts`
+  path is a symlink to the `/pub` artifact root for compatibility. Check free
+  `/pub` space before downloading larger models or growing datasets.
+- Keep local downloads under ignored `artifacts/` (including
+  `artifacts/remote-runs/`) and logs under ignored `logs/`. Never commit model
+  weights.
 - Push experiment changes to the `experiments` remote (the user's fork).
   `origin` is the Apple upstream repository.
 - The initial request authorizes environment setup and small toy sampling

@@ -2,11 +2,17 @@
 set -euo pipefail
 repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 mode="${1:-local}"
+artifact_dir="$repo_dir/artifacts"
 if [[ "$mode" == hpc ]]; then
     : "${SLURM_JOB_ID:?Run the HPC installation through Slurm}"
     env_prefix="${SIMPLEFOLD_ENV_PREFIX:-/data/homezvol2/ynkim4/.conda/envs/simplefold}"
     export CONDA_PKGS_DIRS="${CONDA_PKGS_DIRS:-/data/homezvol2/ynkim4/.conda/pkgs}"
-    export PIP_CACHE_DIR="$repo_dir/artifacts/pip-cache"
+    artifact_dir="${SIMPLEFOLD_ARTIFACT_DIR:-/pub/ynkim4/ml-simplefold/artifacts}"
+    mkdir -p "$artifact_dir"
+    if [[ ! -e "$repo_dir/artifacts" && ! -L "$repo_dir/artifacts" ]]; then
+        ln -s "$artifact_dir" "$repo_dir/artifacts"
+    fi
+    export PIP_CACHE_DIR="$artifact_dir/pip-cache"
     if [[ ! -x "$env_prefix/bin/python" ]]; then
         conda create --prefix "$env_prefix" --override-channels -c conda-forge python=3.10 pip -y
     fi
@@ -32,6 +38,6 @@ fi
 "$python_bin" -m pip install -c "$repo_dir/requirements/runtime.txt" -e "$repo_dir"
 "$python_bin" -m pip check
 "$(dirname "$python_bin")/simplefold" --help
-mkdir -p "$repo_dir/artifacts/environment"
-"$python_bin" -m pip freeze > "$repo_dir/artifacts/environment/pip-$mode.txt"
+mkdir -p "$artifact_dir/environment"
+"$python_bin" -m pip freeze > "$artifact_dir/environment/pip-$mode.txt"
 echo "Environment ready: $python_bin"

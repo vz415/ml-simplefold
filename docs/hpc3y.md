@@ -3,11 +3,23 @@
 The local `simplefold` conda environment is for editing, imports, and result
 analysis. Sampling runs only on HPC3y (`ynkim4`) through Slurm.
 
-The initial setup uses the home volume because BeeGFS `/pub/ynkim4` metadata
-writes stalled on 2026-10-05. The home volume had 41 GiB available before
-installation. Keep an eye on `df -h ~` before downloading additional models;
-the cached ESM2-3B checkpoint alone is approximately 5.3 GiB. Large experiment data
-should move to project storage once its performance has recovered.
+Remote artifacts live long-term under `/pub/ynkim4/ml-simplefold/artifacts`.
+The checkout remains at `/data/homezvol2/ynkim4/ml-simplefold`, and the conda
+prefix remains at `/data/homezvol2/ynkim4/.conda/envs/simplefold`. The checkout
+`artifacts` path is a symlink to the `/pub` artifact root for compatibility with
+existing relative paths. Launchers and the sampling notebook default
+`SIMPLEFOLD_ARTIFACT_DIR` to `/pub/ynkim4/ml-simplefold/artifacts`; export a
+different value before submission to override it. Check `df -h /pub/ynkim4`
+before downloading additional models or growing datasets; the cached ESM2-3B
+checkpoint alone is approximately 5.3 GiB. Local downloaded results still go
+under the laptop checkout's `artifacts/remote-runs/`.
+
+For an existing checkout with a real home `artifacts/` directory, stop project
+jobs before running `sbatch hpc_storage_migrate.slurm` from the checkout.
+The migration verifies every file with SHA-256, replaces the home directory
+with a symlink, and then removes the verified home copies. Its receipt is
+`/pub/ynkim4/ml-simplefold/artifacts/migration-JOB_ID.json`; rerunning after a
+successful migration leaves the symlink and artifacts intact.
 
 ## Install locally
 
@@ -43,8 +55,12 @@ Setup runs on a CPU compute node in the `free` partition. It creates
 `/data/homezvol2/ynkim4/.conda/envs/simplefold`, installs CUDA 12.4 PyTorch wheels, checks
 imports and dependencies, and downloads the 100M folding checkpoint, ESM2-3B
 weights, and CCD dictionary. Interrupted downloads resume from `.part` files.
-Caches live in `artifacts/checkpoints`, `artifacts/torch`, and `artifacts/ccd`.
-Resolved package versions are saved in `artifacts/environment/pip-hpc.txt`.
+Under `/pub/ynkim4/ml-simplefold/artifacts`, caches live in `checkpoints/`,
+`torch/`, and `ccd/`. Resolved package versions are saved in
+`/pub/ynkim4/ml-simplefold/artifacts/environment/pip-hpc.txt`. `TORCH_HOME`
+points to the artifact root's `torch/` directory. The remote-only sampling
+notebook uses the same checkpoint cache and writes under
+`/pub/ynkim4/ml-simplefold/artifacts/runs/SLURM_JOB_ID/notebook/`.
 
 ## Sample a toy protein
 
@@ -69,8 +85,9 @@ The supplied crambin sequence has 46 residues (PDB 1CRN). Default sampling is
 requires an additional 1.6B model; its absence means the PDB B-factors are
 placeholders, not confidence scores.
 
-Results go to `artifacts/runs/JOB_ID/predictions_simplefold_100M/`. Each run
-records its Git commit, installed packages, and `validation.json`, which
+Results go to
+`/pub/ynkim4/ml-simplefold/artifacts/runs/JOB_ID/predictions_simplefold_100M/`.
+Each run records its Git commit, installed packages, and `validation.json`, which
 checks output count, sequence, CA atoms, and finite coordinates. This verifies
 the inference pipeline; it is not a folding-accuracy benchmark.
 
@@ -103,10 +120,10 @@ Use the dedicated RCIC transfer host; keep Git/Slurm commands on the login host.
 ```bash
 mkdir -p artifacts/remote-runs/JOB_ID/predictions_simplefold_100M
 scp -o HostName=access-hpc3.rcic.uci.edu \
-  hpc3y:/data/homezvol2/ynkim4/ml-simplefold/artifacts/runs/JOB_ID/predictions_simplefold_100M/crambin_sampled_0.pdb \
+  hpc3y:/pub/ynkim4/ml-simplefold/artifacts/runs/JOB_ID/predictions_simplefold_100M/crambin_sampled_0.pdb \
   artifacts/remote-runs/JOB_ID/predictions_simplefold_100M/
 scp -o HostName=access-hpc3.rcic.uci.edu \
-  hpc3y:/data/homezvol2/ynkim4/ml-simplefold/artifacts/runs/JOB_ID/validation.json \
+  hpc3y:/pub/ynkim4/ml-simplefold/artifacts/runs/JOB_ID/validation.json \
   artifacts/remote-runs/JOB_ID/
 ```
 

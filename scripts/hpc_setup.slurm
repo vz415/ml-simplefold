@@ -14,5 +14,5 @@ module load miniconda3/24.9.2
 bash scripts/setup_environment.sh hpc
 source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate "${SIMPLEFOLD_ENV_PREFIX:-/data/homezvol2/ynkim4/.conda/envs/simplefold}"
-python scripts/download_weights.py
+python scripts/download_weights.py --artifact_dir "${SIMPLEFOLD_ARTIFACT_DIR:-/pub/ynkim4/ml-simplefold/artifacts}"
 echo "Setup completed on $(hostname) at $(date -Is)"
