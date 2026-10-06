@@ -24,6 +24,10 @@ We introduce SimpleFold, the first flow-matching based protein folding model tha
 
 ## Installation
 
+For this experiment checkout, see [local and HPC3y setup](docs/hpc3y.md) and
+[verified setup results](docs/setup-validation.md). Run inference through Slurm
+on HPC3y; use the local environment for imports and analysis of remote outputs.
+
 To install `simplefold` package from github repository, run
 ```
 git clone https://github.com/apple/ml-simplefold.git
