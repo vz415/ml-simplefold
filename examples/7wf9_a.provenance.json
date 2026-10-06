@@ -1,0 +1,10 @@
+{
+  "pdb_id": "7WF9",
+  "author_chain": "A",
+  "entity_id": "1",
+  "sequence_length": 126,
+  "sequence_source": "https://data.rcsb.org/rest/v1/core/polymer_entity/7WF9/1",
+  "structure_source": "https://files.rcsb.org/download/7WF9.cif",
+  "cif_sha256": "f831ab0d18ce1294854a7d581a32c262560f442d5e844f79dbb22952eb45ba9d",
+  "fasta_sha256": "35cf4b6e93ed4fff6352a10b05ee33756ab36c5332ebe0c21434093845d4e9ac"
+}
