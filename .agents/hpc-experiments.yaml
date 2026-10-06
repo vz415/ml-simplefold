@@ -3,7 +3,7 @@ hpc_host: hpc3y
 hpc_dir: /data/homezvol2/ynkim4/ml-simplefold
 hpc_artifact_dir: /pub/ynkim4/ml-simplefold/artifacts
 obsidian_dir: ~/Documents/Obsidian Vault/Computational Research/SimpleFold
-# Authorized by the user's setup/toy-sampling request and /pub storage move.
+# Authorized by the user's setup/toy-sampling request and model storage move.
 allowed_scripts:
   - hpc_setup.slurm
   - hpc_sample.slurm

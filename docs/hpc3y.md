@@ -3,26 +3,30 @@
 The local `simplefold` conda environment is for editing, imports, and result
 analysis. Sampling runs only on HPC3y (`ynkim4`) through Slurm.
 
-Remote artifacts live long-term under `/pub/ynkim4/ml-simplefold/artifacts`.
-The checkout remains at `/data/homezvol2/ynkim4/ml-simplefold`, and the conda
-prefix remains at `/data/homezvol2/ynkim4/.conda/envs/simplefold`. Remote jobs
-use explicit `/pub` paths, following the
-[RCIC home-storage guidance](https://rcic.uci.edu/storage/home.html#storing-files)
-to avoid home-to-DFS symbolic links. Launchers and the sampling notebook default
-`SIMPLEFOLD_ARTIFACT_DIR` to `/pub/ynkim4/ml-simplefold/artifacts`; export a
-different value before submission to override it. Check `df -h /pub/ynkim4`
-before downloading additional models or growing datasets; the cached ESM2-3B
-checkpoint alone is approximately 5.3 GiB. Local downloaded results still go
-under the laptop checkout's `artifacts/remote-runs/`.
+Remote model weights, trained checkpoints, synthetic datasets, and run outputs
+use `/pub/ynkim4/ml-simplefold/artifacts`, the default `SIMPLEFOLD_ARTIFACT_DIR`.
+`SIMPLEFOLD_CACHE_DIR` defaults to the same root for checkpoint, Torch, and CCD
+caches; set it explicitly to override those caches. Installation/pip caches and
+environment locks stay in the home checkout's `artifacts/pip-cache/` and
+`artifacts/environment/`. The checkout remains at
+`/data/homezvol2/ynkim4/ml-simplefold`, and the conda prefix remains at
+`/data/homezvol2/ynkim4/.conda/envs/simplefold`. Use explicit storage paths
+without home-to-DFS artifact symlinks. Local downloaded results still go under
+the laptop checkout's `artifacts/remote-runs/`.
 
-For an existing checkout with a real home `artifacts/` directory, stop project
-jobs before running `sbatch hpc_storage_migrate.slurm` from the checkout.
-The migration copies artifacts to `/pub`, verifies every file with SHA-256,
-and creates `/pub/ynkim4/ml-simplefold/artifacts/migration-JOB_ID.json` before
-removing the verified original home copies. It creates no compatibility
-symlink. If the original directory has already been removed, a retry uses
-the migration receipt to verify the destination instead of requiring the
-home source.
+Within the `/pub` artifact root, use this layout for current and future work:
+
+| Directory | Content |
+| --- | --- |
+| `checkpoints/` | Pretrained folding weights, including `simplefold_100M.ckpt` |
+| `checkpoints/trained/` | Future trained checkpoints |
+| `torch/` | Torch/ESM model cache (`TORCH_HOME`) |
+| `ccd/` | CCD dictionary cache |
+| `datasets/synthetic/` | Future synthetic datasets |
+| `runs/JOB_ID/` | PDBs, run outputs, validation, and package-version receipts |
+
+The training and dataset paths establish storage conventions for future active
+sampling and retraining work; this setup currently runs inference only.
 
 ## Install locally
 
@@ -58,11 +62,13 @@ Setup runs on a CPU compute node in the `free` partition. It creates
 `/data/homezvol2/ynkim4/.conda/envs/simplefold`, installs CUDA 12.4 PyTorch wheels, checks
 imports and dependencies, and downloads the 100M folding checkpoint, ESM2-3B
 weights, and CCD dictionary. Interrupted downloads resume from `.part` files.
-Under `/pub/ynkim4/ml-simplefold/artifacts`, caches live in `checkpoints/`,
-`torch/`, and `ccd/`. Resolved package versions are saved in
-`/pub/ynkim4/ml-simplefold/artifacts/environment/pip-hpc.txt`. `TORCH_HOME`
-points to the artifact root's `torch/` directory. The remote-only sampling
-notebook uses the same checkpoint cache and writes under
+Checkpoint, Torch, and CCD caches live under the `/pub` artifact root in
+`checkpoints/`, `torch/`, and `ccd/`. Installation/pip caches remain in the home
+checkout's `artifacts/pip-cache/`. Resolved package versions remain in
+`/data/homezvol2/ynkim4/ml-simplefold/artifacts/environment/pip-hpc.txt`, with
+package-version receipts also saved inside individual run directories.
+`TORCH_HOME` points to the cache root's `torch/` directory. The remote-only
+sampling notebook uses the same checkpoint cache and writes outputs under
 `/pub/ynkim4/ml-simplefold/artifacts/runs/SLURM_JOB_ID/notebook/`.
 
 ## Sample a toy protein
