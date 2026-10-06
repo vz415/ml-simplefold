@@ -22,6 +22,11 @@ dependencies are installed. ESM is installed as `fair-esm==2.0.0`; loading it
 does not require fetching executable source through GitHub Torch Hub. Local
 installation does not download model weights or run inference.
 
+Select the `Python (SimpleFold)` kernel for notebooks. Use
+[`notebooks/inspect_remote.ipynb`](../notebooks/inspect_remote.ipynb) locally to
+summarize and view downloaded PDBs. The upstream `sample.ipynb` now requires a
+Slurm GPU allocation before any model construction or downloads.
+
 ## Set up HPC3y
 
 ```bash
@@ -56,6 +61,9 @@ The default job requests one A100, eight CPU cores, 64 GiB host memory, and
 45 minutes on `gpu`, charged to `eehui_lab_gpu`. Even the 100M folding model
 uses an ESM2-3B encoder. CPU sampling is refused if CUDA is unavailable.
 The arguments are FASTA file/directory, step count, and samples per protein.
+Use one protein sequence per FASTA file. For multiple targets, pass a directory
+containing separate single-record FASTA files; multichain input is not validated
+by this setup.
 The supplied crambin sequence has 46 residues (PDB 1CRN). Default sampling is
 500 steps, tau 0.01, seed 42, and one PDB output. pLDDT is disabled because it
 requires an additional 1.6B model; its absence means the PDB B-factors are
@@ -84,11 +92,19 @@ sbatch --dependency=afterok:$setup_id scripts/hpc_sample.slurm
 Use the dedicated RCIC transfer host; keep Git/Slurm commands on the login host.
 
 ```bash
+mkdir -p artifacts/remote-runs/JOB_ID/predictions_simplefold_100M
 scp -o HostName=access-hpc3.rcic.uci.edu \
   hpc3y:/data/homezvol2/ynkim4/ml-simplefold/artifacts/runs/JOB_ID/predictions_simplefold_100M/crambin_sampled_0.pdb \
-  artifacts/
+  artifacts/remote-runs/JOB_ID/predictions_simplefold_100M/
+scp -o HostName=access-hpc3.rcic.uci.edu \
+  hpc3y:/data/homezvol2/ynkim4/ml-simplefold/artifacts/runs/JOB_ID/validation.json \
+  artifacts/remote-runs/JOB_ID/
 ```
 
 Inspect the result and accompanying validation report locally. Do not launch
 `simplefold` inference on the laptop. Git changes go to the `experiments`
 remote at `https://github.com/vz415/ml-simplefold`; `origin` remains upstream.
+
+The root `hpc_setup.slurm` and `hpc_sample.slurm` symlinks support the shared
+HPC submission helper, which expects launcher filenames at repository root.
+The commands above use `sbatch` directly with the files under `scripts/`.

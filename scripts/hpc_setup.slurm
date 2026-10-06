@@ -12,5 +12,7 @@ set -euo pipefail
 cd "${SLURM_SUBMIT_DIR:?}"
 module load miniconda3/24.9.2
 bash scripts/setup_environment.sh hpc
-/data/homezvol2/ynkim4/.conda/envs/simplefold/bin/python scripts/download_weights.py
+source "$(conda info --base)/etc/profile.d/conda.sh"
+conda activate "${SIMPLEFOLD_ENV_PREFIX:-/data/homezvol2/ynkim4/.conda/envs/simplefold}"
+python scripts/download_weights.py
 echo "Setup completed on $(hostname) at $(date -Is)"
