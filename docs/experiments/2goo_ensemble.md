@@ -44,7 +44,10 @@ sbatch --parsable --gres=gpu:A100:1 --mem=96G --time=01:00:00 --job-name=2goo-3B
 
 - 100M **57874796**: FAILED 1:0 after 2:09, model-storage preflight timed out
   before inference. No ten-sample batch exists from this job.
-- 3B **57874803**: PENDING (Resources), latest status check.
+- 3B **57874803**: FAILED 1:0 after 2:03. Started 2026-10-06 19:57:53
+  and ended 19:59:56 (cluster clock). Model-storage preflight timed out after
+  120 seconds: `Model storage is unavailable; stopping before inference.`
+  No 3B sampling occurred and no 3B predictions were produced.
 - Prior queued single-sample 3B job **57873967** was canceled and superseded.
 - Existing 100M pilot **57873825** remains usable after the chain-order validator
   correction. The current viewer contains that one pilot, not ten samples.
