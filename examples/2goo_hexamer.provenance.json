@@ -1,0 +1,17 @@
+{
+  "pdb_id": "2GOO",
+  "source": "PDB SEQRES records from the unmodified local raw endpoint",
+  "source_pdb_sha256": "ba7f2330a9d076179d1deb85218de21a6b8558c752d943b452905f732d0d3bbf",
+  "source_url": "https://www.rcsb.org/structure/2GOO",
+  "chains": {
+    "A": 114,
+    "B": 131,
+    "C": 102,
+    "D": 114,
+    "E": 131,
+    "F": 102
+  },
+  "total_residues": 694,
+  "input": "Full deposited protein construct sequences, including unresolved termini and BMPR1A GS cloning residues. No waters, glycans, template coordinates, or geometry repairs.",
+  "fasta_sha256": "201f421fa4a4ee5c7c8768cd5bbc0bbe93cc9274a19c417abba259436561cf86"
+}

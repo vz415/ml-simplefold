@@ -158,13 +158,13 @@ def collate(data: list[dict[str, Tensor]]) -> dict[str, Tensor]:
 def extract_sequence_from_tokens(tokenized):
     seq = []
     sequence = []
-    current_entity = 0
+    current_chain = None
     for i, t in enumerate(tokenized.tokens):
-        entity = t[7]
-        if entity != current_entity:
+        chain = t["asym_id"]
+        if current_chain is not None and chain != current_chain:
             sequence.append("".join(seq))
             seq = []
-            current_entity = entity
+        current_chain = chain
 
         res_type = t[4]
         res_name = restype_3to1[const.tokens[res_type]]
@@ -172,7 +172,6 @@ def extract_sequence_from_tokens(tokenized):
         if i == len(tokenized.tokens) - 1:
             sequence.append("".join(seq))
             seq = []
-            current_entity = entity
     return ":".join(sequence)
 
 

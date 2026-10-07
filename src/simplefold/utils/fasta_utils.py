@@ -60,12 +60,20 @@ def parse_fasta(path: Path, ccd: Mapping[str, Mol]) -> Target:  # noqa: C901
     with path.open("r") as f:
         records = list(SeqIO.parse(f, "fasta"))
 
+    if not records:
+        raise ValueError(f"Empty FASTA: {path}")
+    # Preserve the original single-chain convention. Multiple records describe
+    # one assembly and must have distinct chain IDs, rather than all becoming A.
+    chain_ids = [record.id.split("|")[0] for record in records] if len(records) > 1 else ["A"]
+    if len(set(chain_ids)) != len(chain_ids) or any(not chain_id for chain_id in chain_ids):
+        raise ValueError(f"FASTA chain IDs must be nonempty and unique: {path}")
+
     sequences = []
-    for seq_record in records:
+    for chain_id, seq_record in zip(chain_ids, records):
         seq = str(seq_record.seq)
         molecule = {
             "protein": {
-                "id": "A", # Set a default chain ID
+                "id": chain_id,
                 "sequence": seq,
                 "modifications": [],
                 "msa": None,

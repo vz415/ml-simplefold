@@ -21,6 +21,7 @@ def main():
         if fasta.suffix not in {".fa", ".fas", ".fasta"}:
             continue
         records = list(SeqIO.parse(fasta, "fasta"))
+        expected_chain_sequences = [str(record.seq) for record in records]
         expected_sequence = "".join(str(record.seq) for record in records)
         for sample in range(args.num_samples):
             path = args.prediction_dir / f"{fasta.stem}_sampled_{sample}.pdb"
@@ -28,6 +29,12 @@ def main():
             if not path.is_file():
                 raise RuntimeError(f"Missing prediction: {path}")
             structure = gemmi.read_structure(str(path))
+            if len(structure) != 1:
+                raise RuntimeError(f"Expected one model in {path}")
+            chain_sequences = ["".join(gemmi.find_tabulated_residue(residue.name).one_letter_code
+                                       for residue in chain) for chain in structure[0]]
+            if chain_sequences != expected_chain_sequences:
+                raise RuntimeError(f"Chain count/order/sequence mismatch in {path}: {chain_sequences}")
             residues = [residue for chain in structure[0] for residue in chain]
             sequence = "".join(gemmi.find_tabulated_residue(residue.name).one_letter_code for residue in residues)
             if sequence != expected_sequence:
@@ -39,6 +46,7 @@ def main():
             if not all(sum(atom.name == "CA" for atom in residue) == 1 for residue in residues):
                 raise RuntimeError(f"Missing or duplicate CA atoms in {path}")
             results.append({"path": str(path), "residues": len(residues), "atoms": len(coords),
+                            "chains": len(chain_sequences),
                             "finite_coordinates": True, "sequence_matches": True})
     if not results or set(args.prediction_dir.glob("*.pdb")) != expected_paths:
         raise RuntimeError("Unexpected prediction count")

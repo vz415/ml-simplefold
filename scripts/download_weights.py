@@ -26,10 +26,14 @@ def main():
         raise SystemExit("Download the large model weights inside a Slurm job.")
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--artifact_dir", type=Path, default=Path("artifacts"))
+    parser.add_argument("--simplefold_model", default="simplefold_100M", choices=[
+        "simplefold_100M", "simplefold_360M", "simplefold_700M",
+        "simplefold_1.1B", "simplefold_1.6B", "simplefold_3B",
+    ])
     args = parser.parse_args()
     artifacts = args.artifact_dir.resolve()
-    download("https://ml-site.cdn-apple.com/models/simplefold/simplefold_100M.ckpt",
-             artifacts / "checkpoints/simplefold_100M.ckpt")
+    download(f"https://ml-site.cdn-apple.com/models/simplefold/{args.simplefold_model}.ckpt",
+             artifacts / f"checkpoints/{args.simplefold_model}.ckpt")
     model = "esm2_t36_3B_UR50D"
     download(f"https://dl.fbaipublicfiles.com/fair-esm/models/{model}.pt",
              artifacts / f"torch/hub/checkpoints/{model}.pt")

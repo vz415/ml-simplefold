@@ -24,20 +24,26 @@ num_steps="${2:-500}"
 num_samples="${3:-1}"
 tau="${4:-0.01}"
 seed="${5:-42}"
+folding_model="${6:-simplefold_100M}"
+case "$folding_model" in
+    simplefold_100M|simplefold_360M|simplefold_700M|simplefold_1.1B|simplefold_1.6B|simplefold_3B) ;;
+    *) echo "Unknown folding model: $folding_model" >&2; exit 1 ;;
+esac
 output_dir="$artifact_dir/runs/${SLURM_JOB_ID}"
 if ! timeout -k 5s 20s stat -- \
-    "$cache_dir/checkpoints/simplefold_100M.ckpt" \
+    "$cache_dir/checkpoints" \
     "$cache_dir/torch/hub/checkpoints/esm2_t36_3B_UR50D.pt" \
     "$cache_dir/ccd/ccd.pkl" >/dev/null; then
     echo "Model storage is unavailable; stopping before inference." >&2
     exit 1
 fi
+python scripts/download_weights.py --artifact_dir "$cache_dir" --simplefold_model "$folding_model"
 mkdir -p "$output_dir"
 git rev-parse HEAD > "$output_dir/git-commit.txt"
 python -m pip freeze > "$output_dir/pip-freeze.txt"
 nvidia-smi
 python -c 'import torch; assert torch.cuda.is_available(), "CUDA is unavailable; refusing CPU sampling"; print(torch.__version__, torch.cuda.get_device_name(0))'
-python - "$fasta_path" "$output_dir" "$num_steps" "$num_samples" "$tau" "$seed" <<'PY'
+python - "$fasta_path" "$output_dir" "$num_steps" "$num_samples" "$tau" "$seed" "$folding_model" <<'PY'
 import hashlib
 import json
 import math
@@ -45,12 +51,12 @@ import os
 import sys
 from pathlib import Path
 
-fasta, output, steps, samples, tau, seed = sys.argv[1:]
+fasta, output, steps, samples, tau, seed, model = sys.argv[1:]
 assert int(steps) > 0 and int(samples) > 0
 assert math.isfinite(float(tau)) and float(tau) >= 0 and int(seed) >= 0
 settings = {
     "job_id": os.environ["SLURM_JOB_ID"],
-    "model": "simplefold_100M",
+    "model": model,
     "encoder": "ESM2-3B",
     "backend": "torch",
     "fasta_path": fasta,
@@ -68,11 +74,11 @@ settings = {
 (Path(output) / "experiment.json").write_text(json.dumps(settings, indent=2) + "\n")
 print(json.dumps(settings, indent=2))
 PY
-simplefold --backend torch --simplefold_model simplefold_100M \
+simplefold --backend torch --simplefold_model "$folding_model" \
     --ckpt_dir "$cache_dir/checkpoints" --cache_dir "$cache_dir/ccd" \
     --fasta_path "$fasta_path" --output_dir "$output_dir" \
     --num_steps "$num_steps" --tau "$tau" --nsample_per_protein "$num_samples" \
     --seed "$seed" --output_format pdb
 python scripts/validate_predictions.py --fasta_path "$fasta_path" \
-    --prediction_dir "$output_dir/predictions_simplefold_100M" --num_samples "$num_samples"
+    --prediction_dir "$output_dir/predictions_$folding_model" --num_samples "$num_samples"
 echo "Sampling completed on $(hostname) at $(date -Is)"
