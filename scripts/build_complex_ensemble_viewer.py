@@ -68,7 +68,7 @@ function renderCard(model,index){
    const atoms=structure.selectedAtoms({chain,atom:'CA'});
    if(!atoms.length)return;
    const atom=atoms.reduce((last,a)=>Number(a.resi)>=Number(last.resi)?a:last);
-   structure.addStyle({chain,resi:atom.resi,atom:'CA'},{sphere:{color:'#d7191c',radius:1.8}});
+   structure.setStyle({chain,resi:atom.resi,atom:'CA'},{sphere:{color:'#d7191c',radius:1.8}},true);
    if(withLabels)endLabels.push(viewer.addLabel(`${label} · ${chain}:${atom.resi} C-end`,{
     position:{x:atom.x,y:atom.y,z:atom.z},fontSize:11,fontColor:'#b51219',
     backgroundColor:'white',backgroundOpacity:0.85,showBackground:true,
