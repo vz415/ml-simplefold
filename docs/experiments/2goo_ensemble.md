@@ -123,3 +123,44 @@ settings from source `862f42a1bf9545f44791db93ed3aa1412fdff89c`:
 The launcher now reports each checked path, host/account and failing stat exit
 code. Login checks do not guarantee compute-node access; the job checks it again.
 3B folding weights download within its allocation when storage is accessible.
+
+### Completed 3B ensemble and A100 retry for 100M
+
+**3B 57882919 COMPLETED 0:0**, total job time 34:46, 500-step sampling time
+21:23. All ten six-chain, 694-residue predictions passed the launcher validator.
+Downloaded ten PDBs and run metadata to `artifacts/remote-runs/57882919/`;
+all ten SHA-256 hashes match the remote originals. Full coordinate analysis:
+`artifacts/analysis/2goo_3B/57882919/`. The existing combined viewer now shows
+the 100M pilot (one sample) and the 3B ensemble (ten samples), explicitly labelled.
+
+| 3B metric | Mean ± sample SD | Range |
+| --- | --- | --- |
+| Assembly Cα RMSD (Å) | 22.298 ± 4.588 | 10.727–26.515 |
+| Assembly Cα lDDT | 0.8200 ± 0.0400 | 0.7774–0.9076 |
+| Interchain contact recall | 0.4874 ± 0.1323 | 0.2893–0.7421 |
+| Heavy-atom clashes | 852.0 ± 933.0 | 166–2,345 |
+| Between-chain clashes | 720.1 ± 924.1 | 59–2,193 |
+| BMP2 Cys78 sulfur distance (Å) | 2.098 ± 0.101 | 1.965–2.269 |
+| Pairwise ensemble Cα RMSD (Å), 45 pairs | 19.250 ± 6.034 | 2.843–26.598 |
+
+Clash distribution is skewed: median total 381.5, median between-chain 227.
+3B has improved coordinate agreement relative to the single 100M pilot, but
+many samples retain severe assembly errors. One pilot is not a matched ten-sample
+small-model baseline. Native dimer-site sulfur distance is more plausible with 3B;
+this does not by itself prove the whole receptor assembly is correct.
+
+**100M 57882918 FAILED 1:0**, elapsed 0:48. Storage passed, then CUDA OOM
+inside ESM attention softmax during feature preparation. A30 capacity 23.60 GiB,
+only 69.44 MiB free when requesting another 104 MiB. The shared ESM2-3B encoder
+still has substantial memory requirements with the smallest folding checkpoint.
+No new 100M samples from this job. Retried on A100 with 96G host RAM:
+**57888889**, pending (Resources). Submission source
+`173dfdba7b009a59e46dd104caf758e852d0d582`, sampling code unchanged from862f42a.
+
+```bash
+sbatch --parsable --gres=gpu:A100:1 --mem=96G --time=00:15:00 --job-name=2goo-100M-10 scripts/hpc_sample.slurm examples/2goo_hexamer.fasta 500 10 0.01 42 simplefold_100M
+```
+
+Output target `/pub/ynkim4/ml-simplefold/artifacts/runs/57888889/`.
+Use A100 for subsequent ten-sample 2GOO batches for either model unless memory
+optimizations are separately implemented and verified. No local inference.
