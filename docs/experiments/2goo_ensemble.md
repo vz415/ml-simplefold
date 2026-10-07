@@ -113,3 +113,13 @@ fragments, not the membrane-spanning helices; these are endpoint markers,
 not an inferred membrane plane. Marker visibility follows model, sample and
 component controls, with a separate toggle. Labels appear on the reference
 or individual predictions to limit clutter in ensembles.
+
+### Resubmission after storage reads recovered
+
+Login-host metadata and one-byte reads of the 100M folding checkpoint, shared
+ESM encoder and CCD cache succeeded. Both batches were resubmitted at the same
+settings from source `862f42a1bf9545f44791db93ed3aa1412fdff89c`:
+**57882918** (100M, A30) and **57882919** (3B, A100), ten samples each.
+The launcher now reports each checked path, host/account and failing stat exit
+code. Login checks do not guarantee compute-node access; the job checks it again.
+3B folding weights download within its allocation when storage is accessible.
