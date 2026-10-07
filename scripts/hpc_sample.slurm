@@ -36,13 +36,20 @@ if [[ ! "$storage_timeout" =~ ^[1-9][0-9]*$ ]]; then
     exit 1
 fi
 echo "Checking model storage (timeout ${storage_timeout}s)."
-if ! timeout -k 5s "$storage_timeout" stat -- \
+echo "Storage host: $(hostname); account: $(id -un); cache: $cache_dir"
+for storage_path in \
     "$cache_dir/checkpoints" \
     "$cache_dir/torch/hub/checkpoints/esm2_t36_3B_UR50D.pt" \
-    "$cache_dir/ccd/ccd.pkl" >/dev/null; then
-    echo "Model storage is unavailable; stopping before inference." >&2
-    exit 1
-fi
+    "$cache_dir/ccd/ccd.pkl"; do
+    echo "Checking: $storage_path"
+    if timeout -k 5s "$storage_timeout" stat -- "$storage_path" >/dev/null; then
+        echo "Accessible: $storage_path"
+    else
+        storage_status=$?
+        echo "Storage check failed (exit $storage_status) for $storage_path on $(hostname); stopping before inference." >&2
+        exit 1
+    fi
+done
 python scripts/download_weights.py --artifact_dir "$cache_dir" --simplefold_model "$folding_model"
 mkdir -p "$output_dir"
 git rev-parse HEAD > "$output_dir/git-commit.txt"
