@@ -30,7 +30,13 @@ case "$folding_model" in
     *) echo "Unknown folding model: $folding_model" >&2; exit 1 ;;
 esac
 output_dir="$artifact_dir/runs/${SLURM_JOB_ID}"
-if ! timeout -k 5s 20s stat -- \
+storage_timeout="${SIMPLEFOLD_STORAGE_TIMEOUT_SECONDS:-120}"
+if [[ ! "$storage_timeout" =~ ^[1-9][0-9]*$ ]]; then
+    echo "SIMPLEFOLD_STORAGE_TIMEOUT_SECONDS must be a positive integer." >&2
+    exit 1
+fi
+echo "Checking model storage (timeout ${storage_timeout}s)."
+if ! timeout -k 5s "$storage_timeout" stat -- \
     "$cache_dir/checkpoints" \
     "$cache_dir/torch/hub/checkpoints/esm2_t36_3B_UR50D.pt" \
     "$cache_dir/ccd/ccd.pkl" >/dev/null; then
