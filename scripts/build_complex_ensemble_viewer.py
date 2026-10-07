@@ -49,7 +49,7 @@ function statsTable(rows, summary){return `<div class="scroll"><table class="sta
 function renderCard(model,index){
  const samples=model.samples||[], card=document.createElement('section');card.className='card';
  const legend=`<table class="legend" aria-label="Protein color key"><thead><tr><th>Protein · 2 copies</th><th>Experimental 2GOO</th><th>SimpleFold ${esc(model.name)}</th></tr></thead><tbody>${groups.map(g=>`<tr><th scope="row">${esc(g.label)}</th><td><i style="background:${g.blue}"></i>Chains ${g.ref.join(', ')}</td><td><i style="background:${g.orange}"></i>Chains ${g.pred.join(', ')}</td></tr>`).join('')}</tbody></table>`;
- card.innerHTML=`<h2>SimpleFold ${esc(model.name)}</h2><p class="subtle">${samples.length} available samples${samples.length?' · solid cartoons':''}${model.status?' · '+esc(model.status):''}</p>${legend}<div class="toolbar"><label>Mode <select class="mode"><option value="overlay">Overlay</option><option value="reference">Reference only</option><option value="predictions">Predictions only</option></select></label><label>Samples <select class="sample"><option value="all">All ${samples.length} samples</option>${samples.map((s,j)=>`<option value="${j}">Sample ${esc(s.id)}</option>`).join('')}</select></label><button class="reset" type="button">Reset view</button></div><div class="toolbar components" aria-label="Visible proteins">${groups.map((g,j)=>`<label><input type="checkbox" data-group="${j}" checked>${esc(g.label)}</label>`).join('')}</div><div class="view" id="viewer-${index}"></div><p class="selected"></p><h3>Assembly agreement</h3>${statsTable(assemblyMetrics,model.summary||{})}<h3>Steric clashes ↓</h3>${statsTable(clashMetrics,model.summary||{})}<p class="subtle">Nonbonded heavy-atom overlap &gt;0.4 Å, excluding covalent neighbors through three bonds, hydrogens and zero-occupancy atoms. Geometric counts; not MolProbity clashscore. Reference: ${payload.reference_clashes?.clash_count??'—'} total (${payload.reference_clashes?.intrachain_clash_count??'—'} within-chain, ${payload.reference_clashes?.interchain_clash_count??'—'} between-chain); ${fmt(payload.reference_clashes?.clashes_per_1000_heavy_atoms)} per 1,000 atoms. Reference has unresolved atoms, so raw totals have different coverage.</p><h3>BMP2 dimer geometry</h3>${statsTable([['BMP2_dimer_SG_distance_angstrom','Cys78–Cys78 sulfur distance','Å']],model.summary||{})}<p class="subtle">Reference sulfur distance: ${fmt(payload.reference_BMP2_dimer_SG_distance_angstrom,'Å')} Å. Shorter is not automatically better; this checks the native disulfide site without enforcing it.</p><h3>Individual folds · separate chain fits</h3>${statsTable(groups.map(g=>[g.key,g.label+' Cα RMSD ↓','Å']),model.summary||{})}<h3>Ensemble diversity ↔</h3>${statsTable([['pairwise','Pairwise Cα RMSD ↔','Å']],{pairwise:(model.diversity||{}).summary})}<p class="subtle">${(model.diversity||{}).pair_count||0} pairwise comparisons. Variation is measured after aligning each pair over the matched Cα residues.</p><details><summary>Sample metrics and structure files</summary><div class="scroll"><table class="stats"><thead><tr><th>Sample</th><th>Assembly RMSD ↓ (Å)</th><th>Cα lDDT ↑</th><th>Contact recall ↑</th><th>Clashes ↓</th><th>Between chains ↓</th><th>PDB files</th></tr></thead><tbody>${samples.map(s=>`<tr><th scope="row">${esc(s.id)}</th><td>${fmt((s.metrics||{}).global_CA_RMSD_angstrom,'Å')}</td><td>${fmt((s.metrics||{}).assembly_CA_lddt)}</td><td>${fmt((s.metrics||{}).CA_interchain_contact_recall)}</td><td>${(s.metrics||{}).clash_count??'—'}</td><td>${(s.metrics||{}).interchain_clash_count??'—'}</td><td><a href="${esc(s.aligned_pdb)}">Aligned</a>${s.raw_link?` · <a href="${esc(s.raw_link)}">Raw</a>`:''}</td></tr>`).join('')}</tbody></table></div></details>`;
+ card.innerHTML=`<h2>SimpleFold ${esc(model.name)}</h2><p class="subtle">${samples.length} available samples${samples.length?' · solid cartoons':''}${model.status?' · '+esc(model.status):''}</p>${legend}<div class="toolbar"><label>Mode <select class="mode"><option value="overlay">Overlay</option><option value="reference">Reference only</option><option value="predictions">Predictions only</option></select></label><label>Samples <select class="sample"><option value="all">All ${samples.length} samples</option>${samples.map((s,j)=>`<option value="${j}">Sample ${esc(s.id)}</option>`).join('')}</select></label><button class="reset" type="button">Reset view</button></div><div class="toolbar components" aria-label="Visible proteins">${groups.map((g,j)=>`<label><input type="checkbox" data-group="${j}" checked>${esc(g.label)}</label>`).join('')}<label><input type="checkbox" class="ends" checked>Receptor C-ends · red dots</label></div><p class="subtle">Red dots mark the last available Cα of each receptor chain. These are extracellular fragments; their membrane-spanning helices are absent. Unresolved reference tails are not shown.</p><div class="view" id="viewer-${index}"></div><p class="selected"></p><h3>Assembly agreement</h3>${statsTable(assemblyMetrics,model.summary||{})}<h3>Steric clashes ↓</h3>${statsTable(clashMetrics,model.summary||{})}<p class="subtle">Nonbonded heavy-atom overlap &gt;0.4 Å, excluding covalent neighbors through three bonds, hydrogens and zero-occupancy atoms. Geometric counts; not MolProbity clashscore. Reference: ${payload.reference_clashes?.clash_count??'—'} total (${payload.reference_clashes?.intrachain_clash_count??'—'} within-chain, ${payload.reference_clashes?.interchain_clash_count??'—'} between-chain); ${fmt(payload.reference_clashes?.clashes_per_1000_heavy_atoms)} per 1,000 atoms. Reference has unresolved atoms, so raw totals have different coverage.</p><h3>BMP2 dimer geometry</h3>${statsTable([['BMP2_dimer_SG_distance_angstrom','Cys78–Cys78 sulfur distance','Å']],model.summary||{})}<p class="subtle">Reference sulfur distance: ${fmt(payload.reference_BMP2_dimer_SG_distance_angstrom,'Å')} Å. Shorter is not automatically better; this checks the native disulfide site without enforcing it.</p><h3>Individual folds · separate chain fits</h3>${statsTable(groups.map(g=>[g.key,g.label+' Cα RMSD ↓','Å']),model.summary||{})}<h3>Ensemble diversity ↔</h3>${statsTable([['pairwise','Pairwise Cα RMSD ↔','Å']],{pairwise:(model.diversity||{}).summary})}<p class="subtle">${(model.diversity||{}).pair_count||0} pairwise comparisons. Variation is measured after aligning each pair over the matched Cα residues.</p><details><summary>Sample metrics and structure files</summary><div class="scroll"><table class="stats"><thead><tr><th>Sample</th><th>Assembly RMSD ↓ (Å)</th><th>Cα lDDT ↑</th><th>Contact recall ↑</th><th>Clashes ↓</th><th>Between chains ↓</th><th>PDB files</th></tr></thead><tbody>${samples.map(s=>`<tr><th scope="row">${esc(s.id)}</th><td>${fmt((s.metrics||{}).global_CA_RMSD_angstrom,'Å')}</td><td>${fmt((s.metrics||{}).assembly_CA_lddt)}</td><td>${fmt((s.metrics||{}).CA_interchain_contact_recall)}</td><td>${(s.metrics||{}).clash_count??'—'}</td><td>${(s.metrics||{}).interchain_clash_count??'—'}</td><td><a href="${esc(s.aligned_pdb)}">Aligned</a>${s.raw_link?` · <a href="${esc(s.raw_link)}">Raw</a>`:''}</td></tr>`).join('')}</tbody></table></div></details>`;
  document.getElementById('grid').appendChild(card);
  const selected=card.querySelector('.selected');
  const selector=card.querySelector('.sample');
@@ -61,15 +61,43 @@ function renderCard(model,index){
  const viewer=$3Dmol.createViewer(card.querySelector('.view'),{backgroundColor:'white'});
  const reference=viewer.addModel(payload.reference,'pdb');
  const predictions=samples.map(s=>viewer.addModel(s.pdb,'pdb'));
+ const ends=card.querySelector('.ends');
+ let endLabels=[];
+ function markReceptorEnds(structure,chains,label,withLabels){
+  chains.forEach(chain=>{
+   const atoms=structure.selectedAtoms({chain,atom:'CA'});
+   if(!atoms.length)return;
+   const atom=atoms.reduce((last,a)=>Number(a.resi)>=Number(last.resi)?a:last);
+   structure.addStyle({chain,resi:atom.resi,atom:'CA'},{sphere:{color:'#d7191c',radius:1.8}});
+   if(withLabels)endLabels.push(viewer.addLabel(`${label} · ${chain}:${atom.resi} C-end`,{
+    position:{x:atom.x,y:atom.y,z:atom.z},fontSize:11,fontColor:'#b51219',
+    backgroundColor:'white',backgroundOpacity:0.85,showBackground:true,
+    borderThickness:0,inFront:true}));
+  });
+ }
  function applyStyles(){
+  endLabels.forEach(label=>viewer.removeLabel(label));endLabels=[];
   reference.setStyle({},{});predictions.forEach(m=>m.setStyle({},{}));
   card.querySelectorAll('[data-group]').forEach(input=>{if(!input.checked)return;const g=groups[Number(input.dataset.group)];reference.setStyle({chain:g.ref},{cartoon:{color:g.blue}});predictions.forEach(m=>m.setStyle({chain:g.pred},{cartoon:{color:g.orange}}));});
   if(mode.value!=='predictions')reference.show();else reference.hide();
   selector.disabled=mode.value==='reference';
   predictions.forEach((m,j)=>{if(mode.value!=='reference'&&(selector.value==='all'||Number(selector.value)===j))m.show();else m.hide();});
+  if(ends.checked){
+   card.querySelectorAll('[data-group]').forEach(input=>{
+    const groupIndex=Number(input.dataset.group);
+    if(!input.checked||groupIndex===0)return; // BMP2 is a secreted ligand.
+    const g=groups[groupIndex],name=groupIndex===1?'BMPR1A':'ActRIIA';
+    if(mode.value!=='predictions')markReceptorEnds(reference,g.ref,name+' ref',true);
+    predictions.forEach((m,j)=>{
+     if(mode.value==='reference'||(selector.value!=='all'&&Number(selector.value)!==j))return;
+     const withLabels=mode.value==='predictions'&&(selector.value!=='all'||samples.length===1);
+     markReceptorEnds(m,g.pred,name+' sample '+samples[j].id,withLabels);
+    });
+   });
+  }
   viewer.render();showStats();
  }
- selector.onchange=applyStyles;mode.onchange=applyStyles;card.querySelectorAll('[data-group]').forEach(i=>{i.onchange=applyStyles;});card.querySelector('.reset').onclick=()=>{viewer.zoomTo();viewer.render();};
+ selector.onchange=applyStyles;mode.onchange=applyStyles;ends.onchange=applyStyles;card.querySelectorAll('[data-group]').forEach(i=>{i.onchange=applyStyles;});card.querySelector('.reset').onclick=()=>{viewer.zoomTo();viewer.render();};
  applyStyles();viewer.zoomTo();viewer.render();
 }
 (payload.models||[]).forEach(renderCard);

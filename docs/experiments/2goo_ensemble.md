@@ -99,3 +99,14 @@ is current. No models or sampling are run locally.
 
 Validation: 24 coordinate-only regression tests passed across clash counting,
 ensemble statistics and multichain input; generated viewer JavaScript syntax passed.
+
+### Receptor-end markers
+
+The viewer marks the last available Cα residue of each BMPR1A and ActRIIA
+chain with a red sphere. Reference ends are B/E:118 and C/F:99; predicted
+full-sequence ends are C/D:131 and E/F:102. Unresolved reference termini mean
+these are different sequence positions. The structures contain extracellular
+fragments, not the membrane-spanning helices; these are endpoint markers,
+not an inferred membrane plane. Marker visibility follows model, sample and
+component controls, with a separate toggle. Labels appear on the reference
+or individual predictions to limit clutter in ensembles.
