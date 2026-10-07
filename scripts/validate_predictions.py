@@ -21,8 +21,14 @@ def main():
         if fasta.suffix not in {".fa", ".fas", ".fasta"}:
             continue
         records = list(SeqIO.parse(fasta, "fasta"))
-        expected_chain_sequences = [str(record.seq) for record in records]
-        expected_sequence = "".join(str(record.seq) for record in records)
+        # The Boltz schema groups identical sequences in first-appearance order;
+        # its PDB writer then labels these chains A, B, ... in that order.
+        sequence_groups = {}
+        for record in records:
+            sequence_groups.setdefault(str(record.seq), []).append(record)
+        output_records = [record for group in sequence_groups.values() for record in group]
+        expected_chain_sequences = [str(record.seq) for record in output_records]
+        expected_sequence = "".join(expected_chain_sequences)
         for sample in range(args.num_samples):
             path = args.prediction_dir / f"{fasta.stem}_sampled_{sample}.pdb"
             expected_paths.add(path)
@@ -47,6 +53,9 @@ def main():
                 raise RuntimeError(f"Missing or duplicate CA atoms in {path}")
             results.append({"path": str(path), "residues": len(residues), "atoms": len(coords),
                             "chains": len(chain_sequences),
+                            "input_chain_ids_in_output_order": [record.id.split("|")[0] for record in output_records],
+                            "saved_chain_to_input_chain": {chain.name: record.id.split("|")[0]
+                                                           for chain, record in zip(structure[0], output_records)},
                             "finite_coordinates": True, "sequence_matches": True})
     if not results or set(args.prediction_dir.glob("*.pdb")) != expected_paths:
         raise RuntimeError("Unexpected prediction count")
