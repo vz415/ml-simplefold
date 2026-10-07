@@ -1,5 +1,11 @@
 # 2GOO extracellular complex: reference quality notes
 
+> **2026-10-06 correction:** the deposited six-chain asymmetric unit contains two
+> separate half-complexes. It must be reconstructed with crystal symmetry to
+> represent the native BMP2 homodimer. Earlier whole-assembly scores using
+> the asymmetric unit are superseded; original file audits remain historical
+> observations. See [ensemble and corrected-reference notes](2goo_ensemble.md).
+
 Date: 2026-10-06. Decision: document the issues; no structure repair requested or performed.
 
 2GOO is the experimental BMP2–BMPR1A/ALK3–ActRIIA extracellular hexamer, with two copies of each component. BMP2 and BMPR1A are human; ActRIIA/ACVR2A is mouse. This is not an ALK2 complex. The X-ray resolution is 2.20 Å. See the [RCSB entry](https://www.rcsb.org/structure/2GOO) and [official wwPDB validation report](https://files.rcsb.org/validation/view/2goo_full_validation.pdf) (report dated 2026-03-08).

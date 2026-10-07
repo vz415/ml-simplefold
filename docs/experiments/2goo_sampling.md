@@ -1,5 +1,11 @@
 # 2GOO complex sampling with SimpleFold
 
+> **2026-10-06 correction:** the deposited six-chain asymmetric unit contains two
+> separate half-complexes. It must be reconstructed with crystal symmetry to
+> represent the native BMP2 homodimer. Earlier whole-assembly scores using
+> the asymmetric unit are superseded; original file audits remain historical
+> observations. See [ensemble and corrected-reference notes](2goo_ensemble.md).
+
 The requested experiment compares the smallest (`simplefold_100M`) and largest
 (`simplefold_3B`) released folding checkpoints on the six-chain BMP2–BMPR1A–ActRIIA
 extracellular complex. Begin with one pilot sample per model at the CLI defaults:

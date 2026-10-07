@@ -18,6 +18,10 @@ try:
 except ImportError:
     from compare_structures import (ChainCA, amino_acid, altloc_priority, digest,
                                     kabsch, reference_ca, require_coordinates, transformed_pdb)
+try:
+    from .structure_clashes import analyze_clashes
+except ImportError:
+    from structure_clashes import analyze_clashes
 
 GROUPS = (("BMP2", ("A", "D"), ("A", "B")),
           ("BMPR1A", ("B", "E"), ("C", "D")),
@@ -140,12 +144,24 @@ def summary(values):
                 median=float(np.median(values)), min=float(values.min()), max=float(values.max()))
 
 
+def bmp2_disulfide_site_distance(path, chain_ids=("A", "B")):
+    structure = gemmi.read_structure(str(path))[0]
+    sulfurs = []
+    for chain in chain_ids:
+        atoms = [a for r in structure[chain] if r.seqid.num == 78 and r.name == "CYS"
+                 for a in r if a.name == "SG" and a.occ > 0]
+        if len(atoms) != 1:
+            return None
+        sulfurs.append(np.array([atoms[0].pos.x, atoms[0].pos.y, atoms[0].pos.z]))
+    return float(np.linalg.norm(sulfurs[0] - sulfurs[1]))
+
+
 def analyze(args):
     references = {c: reference_ca(args.reference, c) for c in REF_ORDER}
     fixed = np.concatenate([references[c].coordinates for c in REF_ORDER])
     full_length = sum(len(references[c].full_sequence) for c in REF_ORDER)
-    if full_length != 694 or len(fixed) != 565:
-        raise ValueError(f"Expected 2GOO 694 deposited/565 observed CAs; found {full_length}/{len(fixed)}")
+    if full_length != 694 or len(fixed) not in (560, 565, 570):
+        raise ValueError(f"Expected 2GOO 694 deposited and 560/565/570 observed CAs; found {full_length}/{len(fixed)}")
     if args.expected_samples < 1:
         raise ValueError("--expected-samples must be positive")
     diversity_refs = diversity_references(references)
@@ -200,6 +216,11 @@ def analyze(args):
                 shutil.copyfile(path, raw)
             transformed_pdb(path, aligned, rotation, translation)
             metrics = {"global_CA_RMSD_angstrom": rmsd, **distance_metrics(fixed, moving, labels)}
+            clashes = analyze_clashes(path)
+            for key in ("clash_count", "intrachain_clash_count", "interchain_clash_count",
+                        "clashes_per_1000_heavy_atoms", "max_overlap_angstrom", "CA_nonadjacent_clash_count"):
+                metrics[key] = clashes[key]
+            metrics["BMP2_dimer_SG_distance_angstrom"] = bmp2_disulfide_site_distance(path)
             per_chain = []
             for c in REF_ORDER:
                 pred = chains[mapping[c]].coordinates[references[c].full_positions]
@@ -212,7 +233,7 @@ def analyze(args):
             samples.append(dict(id=sample_id, source=str(path.resolve()), source_sha256=digest(path),
                                 raw_pdb=raw.relative_to(args.output_dir).as_posix(),
                                 aligned_pdb=aligned.relative_to(args.output_dir).as_posix(),
-                                mapping=mapping, metrics=metrics, per_chain=per_chain))
+                                mapping=mapping, metrics=metrics, per_chain=per_chain, clashes=clashes))
             parsed.append(chains)
             matched.append(matched_coordinates(chains, diversity_refs, mapping))
         pairs = []
@@ -224,16 +245,22 @@ def analyze(args):
         models.append(dict(name=name, samples=samples,
                            summary={key: summary([s["metrics"][key] for s in samples]) for key in samples[0]["metrics"]},
                            diversity=dict(pair_count=len(pairs), summary=summary([p["CA_RMSD_angstrom"] for p in pairs]), pairs=pairs)))
+    reference_clashes = analyze_clashes(args.reference_pdb, chain_components={
+        "A": "BMP2", "D": "BMP2", "B": "BMPR1A", "E": "BMPR1A", "C": "ActRIIA", "F": "ActRIIA"})
     report = dict(reference_pdb="reference.pdb", matched_reference_CA=len(fixed),
+                  reference_clashes=reference_clashes,
+                  reference_BMP2_dimer_SG_distance_angstrom=bmp2_disulfide_site_distance(args.reference_pdb, ("A", "D")),
                   matched_diversity_CA=diversity_count, prediction_CA=full_length,
                   reference_cif_sha256=digest(args.reference), reference_pdb_sha256=digest(args.reference_pdb),
                   methods={
-                      "correspondence": "Exact full polymer sequences; reference label_seq_id selects the 565 observed CAs. No unresolved terminal residue is scored.",
+                      "correspondence": f"Exact full polymer sequences; reference label_seq_id selects {len(fixed)} observed CAs. No unresolved terminal residue is scored.",
                       "alignment": "Minimum global proper-rotation Kabsch CA RMSD over eight identity-preserving copy permutations; saved prediction chain labels are preserved.",
                       "lddt": "CA pair-weighted lDDT: reference pairs <15 Å, strict error thresholds 0.5/1/2/4 Å, each unordered pair counted once; includes intra- and interchain pairs.",
                       "contacts": "Interchain CA proximity <8 Å on the observed-residue mask; recall and precision, not DockQ or all-atom contacts. Undefined ratios are null.",
                       "component_rmsd": "Each reference chain independently fitted; component metric is the unweighted average of its two copy RMSDs.",
-                      "diversity": "All n(n-1)/2 pairs. For each component both copies use the intersection of observed full-sequence positions (BMP2 103, BMPR1A 85, ActRIIA 92 per copy; 560 CAs total). Minimum proper-rotation Kabsch RMSD over eight copy permutations is invariant to sample order and renaming equivalent copies. Reference comparisons separately use all 565 observed CAs. Diversity has no preferred direction.",
+                      "diversity": f"All n(n-1)/2 pairs on {diversity_count} common observed CAs. Both copies use identical position masks within each component. Minimum proper-rotation Kabsch RMSD over eight copy permutations is invariant to sample order and renaming equivalent copies. Reference comparisons separately use all {len(fixed)} observed CAs. Diversity has no preferred direction.",
+                      "clashes": "Geometric heavy-atom van der Waals overlaps >0.4 Å; exclude covalent 1–2, 1–3 and 1–4 neighbors, zero-occupancy atoms and hydrogens. Explicit disulfides plus unambiguous plausible sulfur pairs define topology. Counts are not MolProbity clashscore. Raw predictions retain their original geometry.",
+                      "BMP2_dimer": "Distance between SG atoms of CYS78 on the two BMP2 prediction chains; reports the native interchain-disulfide site without adding a peptide linker or forcing a bond.",
                       "summary": "Mean, sample standard deviation (ddof=1), median, minimum, maximum; null values excluded and effective n retained; SD null for n<2.",
                       "limitations": "Experimental coordinates retained without repairs. Missing termini and density/occupancy/stereochemistry issues limit reference interpretation. Metrics measure coordinate agreement, not functional binding or physical validity."
                   }, models=models)
