@@ -343,3 +343,11 @@ Retry outputs use `runs/57999721/fk/predictions_simplefold_3B/`; logs use
 `logs/sample-57999721.{out,err}`. The longer timeout applies only to the bounded
 storage preflight. Reward, model weights, particle count and time grid are
 unchanged. The other four A100 jobs and baseline are untouched.
+
+Retry **57999721** subsequently passed preflight, loaded SimpleFold-3B and
+ESM-3B, prepared shared inputs, and logged **500 FK steps for ten particles**
+with model batches of two. GPU allocation before sampling was **11.24 GiB**.
+This confirms rollout startup, not final structure quality or completion.
+The sweep manifest has now been archived under the intended remote sweeps
+path; its SHA-256 matched locally and remotely:
+`02ad131710e2884da1480605c304eb36c0a74476f7125123c33cb14f082a3666`.
