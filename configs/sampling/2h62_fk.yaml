@@ -1,0 +1,26 @@
+# Hotspot steering of the partial experimental complex; no weight updates.
+mode: fk
+reward_kind: 2h62_partial
+run_baseline: false
+baseline_prediction_dir: ${paths.artifact_dir}/runs/57998266/predictions_simplefold_3B
+beta: 2.0
+ess_threshold: 0.8
+checkpoint_times: [0.60, 0.75, 0.90, 0.97]
+common_start: true
+brownian_seed: 43
+resampling_seed: 44
+model_batch_size: null
+reward:
+  positive_weights:
+    W60_packing: 2.0
+    Y42_engagement: 1.0
+    Q86_geometry: 2.0
+  penalties:
+    BMP2_dimer_CA_RMSD_angstrom: {weight: 0.5, scale: 2.0, cap: 4.0}
+    observed_receptor_placement_CA_RMSD_angstrom: {weight: 0.5, scale: 10.0, cap: 4.0}
+    clashes_per_1000_heavy_atoms: {weight: 0.5, scale: 50.0, cap: 4.0}
+    covalent_bond_strain: {weight: 0.5, scale: 1.0, cap: 4.0}
+  distance_tolerance_angstrom: 0.75
+  orientation_tolerance_degrees: 20.0
+  bond_tolerance_angstrom: 0.10
+  clash_overlap_threshold_angstrom: 0.4

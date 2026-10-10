@@ -86,7 +86,8 @@ def main(cfg: DictConfig):
         subprocess.run([sys.executable, '-m', 'pip', 'freeze'], stdout=receipt, check=True)
     metadata = {
         'job_id': os.environ['SLURM_JOB_ID'], 'name': cfg.name, 'model': cfg.model,
-        'sampling_mode': 'paired_frozen_weight_fk' if cfg.sampling.mode == 'fk' else 'standard',
+        'sampling_mode': ('paired_frozen_weight_fk' if cfg.sampling.get('run_baseline', True)
+                          else 'frozen_weight_fk') if cfg.sampling.mode == 'fk' else 'standard',
         'encoder': 'ESM2-3B', 'backend': 'torch', 'fasta_path': str(fasta),
         'fasta_sha256': hashlib.sha256(fasta.read_bytes()).hexdigest() if fasta.is_file() else None,
         'num_steps': cfg.num_steps, 'nsample_per_protein': cfg.samples,
@@ -112,8 +113,7 @@ def main(cfg: DictConfig):
             ckpt_dir=paths['checkpoint_dir'], cache_dir=paths['ccd_dir'],
             reference_cif=paths['reference_cif'], reference_pdb=paths['reference_pdb'],
             output_dir=output)
-        run_fk(args, OmegaConf.to_container(cfg.sampling, resolve=True))
-        conditions = [output / 'baseline', output / 'fk']
+        conditions = run_fk(args, OmegaConf.to_container(cfg.sampling, resolve=True))
     else:
         subprocess.run([
             'simplefold', '--backend', 'torch', '--simplefold_model', cfg.model,

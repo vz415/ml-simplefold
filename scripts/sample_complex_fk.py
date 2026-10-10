@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run a matched frozen-weight baseline/FK complex pilot on a Slurm GPU only."""
+"""Run frozen-weight complex FK sampling on a Slurm GPU only."""
 from __future__ import annotations
 
 import argparse
@@ -32,8 +32,38 @@ def expand_shared_batch(batch, particles):
             else value for key, value in batch.items()}
 
 
+def sampling_conditions(config):
+    """Keep legacy paired pilots; new FK-only runs reuse an existing baseline."""
+    fk = ('fk', float(config['beta']))
+    return [('baseline', 0.), fk] if config.get('run_baseline', True) else [fk]
+
+
+def make_reward(args, config):
+    if config.get('reward_kind', '2goo_reference') == '2h62_partial':
+        from fk_2h62_reward import PartialComplexReward
+        return PartialComplexReward(args.reference_cif, args.reference_pdb, config['reward'])
+    from fk_complex_reward import ComplexReward
+    return ComplexReward(args.reference_cif, args.reference_pdb, config['reward'])
+
+
+def score_existing_baseline(reward, prediction_dir, output_dir, expected_samples=None):
+    """Analyze available baseline PDBs without creating any new structures."""
+    paths = sorted(Path(prediction_dir).glob('*_sampled_*.pdb'),
+                   key=lambda p: int(p.stem.rsplit('_', 1)[1]))
+    status = 'scored' if paths else 'not_available_at_launch'
+    if paths and expected_samples is not None and (
+            len(paths) != expected_samples or
+            not (Path(prediction_dir).parent / 'validation.json').is_file()):
+        status = 'not_ready_at_launch'
+    receipt = {'prediction_dir': str(prediction_dir), 'status': status,
+               'available_prediction_count': len(paths), 'expected_samples': expected_samples,
+               'samples': [{'path': str(p), 'sha256': digest(p), **reward.score(p)}
+                           for p in paths] if status == 'scored' else []}
+    write_json(Path(output_dir) / 'existing-baseline-scores.json', receipt)
+
+
 def run_fk(args, config):
-    """Run the paired pilot using settings resolved by run_sampling.py."""
+    """Run the requested conditions using settings resolved by run_sampling.py."""
     if not os.environ.get('SLURM_JOB_ID'):
         raise RuntimeError('Protein inference is permitted only inside a Slurm GPU job')
     if args.particles < 2 or args.num_steps < 2:
@@ -48,7 +78,6 @@ def run_fk(args, config):
     from utils.fasta_utils import check_fasta_inputs, download_fasta_utilities, process_fastas
     from utils.boltz_utils import process_structure, save_structure, center_random_augmentation
     from boltz_data_pipeline.write.pdb import to_pdb
-    from fk_complex_reward import ComplexReward
 
     if not torch.cuda.is_available():
         raise RuntimeError('CUDA unavailable; refusing CPU inference')
@@ -56,8 +85,11 @@ def run_fk(args, config):
            (args.seed, config['brownian_seed'], config['resampling_seed'])):
         raise ValueError('RNG seeds must be nonnegative integers')
     # Fail on incompatible reference inputs before loading either large model.
-    reward = ComplexReward(args.reference_cif, args.reference_pdb, config['reward'])
+    reward = make_reward(args, config)
     args.output_dir.mkdir(parents=True, exist_ok=True)
+    if config.get('baseline_prediction_dir'):
+        score_existing_baseline(reward, config['baseline_prediction_dir'], args.output_dir,
+                                expected_samples=args.particles)
     pl.seed_everything(args.seed, workers=True)
     checkpoint_path = args.ckpt_dir / f'{args.model}.ckpt'
     if not checkpoint_path.is_file():
@@ -135,11 +167,17 @@ def run_fk(args, config):
         'source_commit': (args.output_dir / 'git-commit.txt').read_text().strip(),
         'initial_potential': 1.0,
         'terminal_outputs': 'Weighted particles; terminal resampling is not performed',
-        'initialization': 'New common Gaussian latent, not a replay of historical Sample 10',
+        'initialization': ('New common Gaussian latent' if config['common_start']
+                           else 'Independent Gaussian particle latents'),
+        'conditions': [label for label, _ in sampling_conditions(config)],
+        'existing_baseline_prediction_dir': config.get('baseline_prediction_dir'),
+        'baseline_comparison': ('Matched initial states and Brownian stream'
+                                if config.get('run_baseline', True) else
+                                'Historical baseline; no claim of paired initial states or noise'),
     }
     write_json(args.output_dir / 'fk-experiment.json', metadata)
     results = {}
-    for label, beta in (('baseline', 0.), ('fk', float(config['beta']))):
+    for label, beta in sampling_conditions(config):
         condition_dir = args.output_dir / label
         prediction_dir = condition_dir / f'predictions_{args.model}'
         state_dir = condition_dir / 'source-states'
@@ -226,6 +264,7 @@ def run_fk(args, config):
                           'elapsed_seconds': serialized['elapsed_seconds']}
     write_json(args.output_dir / 'fk-comparison.json', results)
     print(json.dumps(results, indent=2), flush=True)
+    return [args.output_dir / label for label in results]
 
 
 if __name__ == '__main__':
