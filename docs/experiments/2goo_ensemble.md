@@ -1,5 +1,9 @@
 # 2GOO ensemble sampling and steric quality
 
+Current collection (2026-10-09): the combined viewer contains **ten 100M
+samples from run 57888889 and ten 3B samples from run 57882919**. Earlier
+single-pilot and stalled-download statements below are historical receipts.
+
 Date: 2026-10-06. Requested: ten complete six-chain structures per model,
 100M and 3B. Input remains `examples/2goo_hexamer.fasta` (694 residues), two
 separate chains per protein. Sampling: 500 steps, tau 0.01, one RNG seed 42
@@ -323,3 +327,46 @@ orange, BMPR1A uses blue/bright orange, and ACVR2A uses cyan-blue/gold. The same
 group definitions drive the cartoons and existing protein legend. Structures
 remain opaque; protein visibility and reference-only/predictions-only modes
 can isolate overlapping interfaces.
+
+### 2026-10-09: recovered storage and collected the full 100M ensemble
+
+Downloaded all ten PDBs from completed run **57888889**, plus experiment,
+validation, source revision and environment metadata through the dedicated
+`access-hpc3.rcic.uci.edu` transfer endpoint. All ten prediction SHA-256 hashes
+and three provenance-file hashes match their remote originals. Local validation
+independently confirms six chains, 694 residues, 5,464 heavy atoms, exact input
+sequences and finite coordinates in every prediction. The local validator
+regenerated `validation.json`; `download-verification.json` records hashes.
+
+Raw predictions: `artifacts/remote-runs/57888889/predictions_simplefold_100M/`.
+The existing combined viewer now contains **10 samples per model**, replacing
+the old 100M pilot. Its reference, alignment, component/end-marker controls and
+all 20 sample identities were checked using real 3Dmol GLModel parsing and
+coordinate comparisons in both alignment frames. This is a control/coordinate
+check, not a browser WebGL rendering test.
+
+| Metric | 100M, 10 samples | 3B, 10 samples |
+| --- | --- | --- |
+| Assembly Cα RMSD, mean ± sample SD (Å) | 28.042 ± 3.268 | 22.298 ± 4.588 |
+| Best assembly RMSD (Å) | 21.140, Sample 7 | 10.727, Sample 10 |
+| Cα lDDT, mean | 0.6109 | 0.8200 |
+| Interchain Cα contact recall, mean | 0.1679 | 0.4874 |
+| Heavy-atom clashes, median | 4,031 | 381.5 |
+| Heavy-atom clashes, range | 1,085–11,740 | 166–2,345 |
+
+These are matched sampling settings, one seed/batch per model. They show worse
+assembly agreement and more clashes for this 100M batch, without establishing
+performance across targets or independent repeated batches. The Cα contact
+recall uses the 8 Å definition; receptor-specific native heavy-atom interface
+recovery in the viewer uses the distinct 4 Å definition.
+
+Rebuild the combined analysis with both prediction directories and
+`--expected-samples 10`:
+
+```bash
+python scripts/analyze_complex_ensemble.py --reference artifacts/analysis/2goo_assembly_audit/derived/A_half_symmetry/reference.cif --reference-pdb artifacts/analysis/2goo_assembly_audit/derived/A_half_symmetry/reference.pdb --prediction-dir 100M=artifacts/remote-runs/57888889/predictions_simplefold_100M --prediction-dir 3B=artifacts/remote-runs/57882919/predictions_simplefold_3B --expected-samples 10 --output-dir artifacts/analysis/2goo_models/2026-10-06
+python scripts/build_complex_ensemble_viewer.py --analysis-dir artifacts/analysis/2goo_models/2026-10-06
+```
+
+No new sampling was needed to collect these results. No model weights were
+transferred or loaded locally.
