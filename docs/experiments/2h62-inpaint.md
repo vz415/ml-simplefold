@@ -319,3 +319,27 @@ The local sweep manifest now maps tau 0.3 to 57999713 and preserves the cancelle
 original in `superseded_jobs`. Its remote archival directory creation exceeded
 a bounded 15-second check, so archival transfer remains pending. Batch chunking
 can change numerical trajectories; do not claim bitwise equivalence with A100.
+
+### Storage-check retry
+
+Initial A30 job **57999713** failed after **2m02s**, before model loading:
+the bounded **120-second** storage preflight expired. Checks for weights, CCD
+and `observed.cif` had succeeded; the complete preflight had not finished.
+No inference or predictions were produced by that attempt.
+
+Replacement **57999721** uses the same A30/chunk-two sampling settings plus
+`storage_timeout_seconds=600`. It was submitted from source **e4550d1** (another
+documentation-only update) after pulling. The failed attempt is preserved in
+the manifest's `superseded_jobs`; tau 0.3 now points to **57999721**.
+
+```bash
+sbatch --parsable --gres=gpu:A30:1 --mem=96G --time=01:15:00 \
+  --job-name=2h62-fk-tau0.3-A30 scripts/hpc_sample.slurm \
+  experiment=2h62-inpaint-fk tau=0.3 sampling.model_batch_size=2 \
+  storage_timeout_seconds=600
+```
+
+Retry outputs use `runs/57999721/fk/predictions_simplefold_3B/`; logs use
+`logs/sample-57999721.{out,err}`. The longer timeout applies only to the bounded
+storage preflight. Reward, model weights, particle count and time grid are
+unchanged. The other four A100 jobs and baseline are untouched.
