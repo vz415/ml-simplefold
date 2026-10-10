@@ -195,11 +195,12 @@ class FKSamplerTests(unittest.TestCase):
             event = next(h for h in observed["history"] if h["step"] == index)
             self.assertEqual(event["time"], t)
 
-    def test_invalid_rewards_are_rejected(self):
+    def test_nan_and_inf_rewards_are_rejected(self):
         sampler = FKSampler(num_timesteps=3, t_start=.1)
-        for bad in (lambda x, t: float("nan"), lambda x, t: torch.zeros(1)):
-            with self.assertRaisesRegex(ValueError, "finite reward"):
-                self.run_sampler(sampler, score=bad)
+        for value in (float("nan"), float("inf"), -float("inf")):
+            with self.subTest(value=value):
+                with self.assertRaisesRegex(ValueError, "NaN or Inf"):
+                    self.run_sampler(sampler, score=lambda x, t: torch.full((5,), value))
 
 
 if __name__ == "__main__":

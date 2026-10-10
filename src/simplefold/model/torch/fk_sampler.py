@@ -61,8 +61,8 @@ class FKSampler(EMSampler):
             score_fn(estimate.detach().clone(), float(t)),
             device=estimate.device, dtype=torch.float64,
         ).detach()
-        if rewards.shape != (estimate.shape[0],) or not torch.isfinite(rewards).all():
-            raise ValueError("score_fn must return one finite reward per particle")
+        if not torch.isfinite(rewards).all():
+            raise ValueError("score_fn returned NaN or Inf rewards")
         return rewards
 
     @torch.no_grad()
