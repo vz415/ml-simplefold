@@ -1,0 +1,22 @@
+# Fixed-weight, reference-guided pilot; no optimizer, adapter, or retraining.
+beta: 2.0
+ess_threshold: 0.8
+checkpoint_times: [0.60, 0.75, 0.90, 0.97]
+common_start: true
+initial_seed: 42
+brownian_seed: 43
+resampling_seed: 44
+# Late clean estimates are scored using the same definitions as final PDBs.
+# Each receptor feature is the minimum across its two equivalent copies.
+reward:
+  positive_weights:
+    ACVR2A_hotspot_contact_recall: 2.0
+    ACVR2A_native_contact_recall: 1.0
+    ACVR2A_native_contact_precision: 1.0
+    BMPR1A_hotspot_contact_recall: 1.0
+    BMPR1A_native_contact_recall: 1.0
+    BMPR1A_native_contact_precision: 0.5
+  penalties:
+    BMP2_dimer_CA_RMSD_angstrom: {weight: 0.25, scale: 2.0, cap: 4.0}
+    BMPR1A_worst_placement_CA_RMSD_angstrom: {weight: 0.25, scale: 5.0, cap: 4.0}
+    clashes_per_1000_heavy_atoms: {weight: 0.5, scale: 50.0, cap: 4.0}
