@@ -78,6 +78,8 @@ class SamplingLaunchTests(unittest.TestCase):
                     patch.object(run_sampling, 'run_python') as helper, \
                     patch('builtins.print'), \
                     patch.object(fake_fk, 'run_fk') as fk:
+                labels = ('baseline', 'fk') if cfg.sampling.get('run_baseline', True) else ('fk',)
+                fk.return_value = [output / label for label in labels]
                 run_sampling.main.__wrapped__(cfg)
                 metadata = json.loads((output / 'experiment.json').read_text())
                 resolved = OmegaConf.load(output / 'resolved-config.yaml')
@@ -93,9 +95,12 @@ class SamplingLaunchTests(unittest.TestCase):
                     self.assertEqual(args.output_dir, output)
                     self.assertEqual(args.seed, cfg.seed)
                     self.assertEqual(sampling['beta'], cfg.sampling.beta)
-                    self.assertEqual(len(validations), 2)
-                    for condition, call in zip(('baseline', 'fk'), validations):
+                    self.assertEqual(len(validations), len(labels))
+                    for condition, call in zip(labels, validations):
                         self.assertEqual(call[4], output / condition / f'predictions_{cfg.model}')
+                    expected_mode = ('paired_frozen_weight_fk' if len(labels) == 2
+                                     else 'frozen_weight_fk')
+                    self.assertEqual(metadata['sampling_mode'], expected_mode)
                 else:
                     fk.assert_not_called()
                     self.assertEqual(len(validations), 1)
@@ -108,6 +113,9 @@ class SamplingLaunchTests(unittest.TestCase):
 
     def test_fk_task_uses_hydra_runtime_output_in_sweep_subdirectory(self):
         self.exercise_task('2goo_fk', nested=True)
+
+    def test_partial_complex_fk_only_validates_fk_outputs(self):
+        self.exercise_task('2h62-inpaint-fk')
 
     def test_storage_preparation_preserves_existing_receipts(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -110,8 +110,8 @@ Local coordinate comparison is available through
 
 ## Hotspot clues and proposed FK reward
 
-These are experimental clues and a proposed objective, not an implemented
-2H62 reward or an FK submission.
+These experimental clues motivated the initial objective below. The
+implementation and its separate sampling profile are described afterward.
 
 | Feature | Evidence / local target |
 |---|---|
@@ -168,9 +168,123 @@ configurable and inspect the separate contributions before tuning beta.
   implementing the new reward and observed-region policy.
 
 **User instruction:** future FK submissions must run FK only and reuse this
-baseline; do not regenerate a baseline inside every job. The current
-`sample_complex_fk.py` always loops over baseline and FK, so a skip-baseline/FK-only
-execution path is required before submitting this experiment. No such change
-has been made yet. Reusing an ordinary baseline avoids extra inference, but
+baseline; do not regenerate a baseline inside every job. The wrapper
+`sample_complex_fk.py` previously always looped over baseline and FK. The new
+profile disables the baseline condition. Reusing an ordinary baseline avoids
+extra inference, but
 does not imply exact paired RNG/initial-latent matching; preserve that distinction
 in any comparison.
+
+## Partial-reference FK implementation and tau sweep
+
+The custom reward is in [fk_2h62_reward.py](../../scripts/fk_2h62_reward.py).
+[sample_complex_fk.py](../../scripts/sample_complex_fk.py) selects it through
+`make_reward`; its existing `score_fn` still converts clean-coordinate estimates
+to PDB and returns one scalar reward per particle. The FK sampler's transitions,
+potential differences, ESS trigger, resampling and Brownian branching are
+unchanged. Model and encoder weights remain frozen.
+
+The [experiment profile](../../configs/experiment/2h62-inpaint-fk.yaml) selects
+[2h62_fk](../../configs/sampling/2h62_fk.yaml), including all reward weights and
+geometry tolerances. Its positive terms are `2 W60_packing + Y42_engagement +
+2 Q86_geometry`, each using the worse of the two receptor copies under a
+consistent assignment to distinct sites. Maximum positive reward is **5**.
+Observed local geometry defines the hotspot targets; copied receptor coordinates
+in `symmetry_completion` are never used as native truth.
+
+Four bounded penalties use `-weight * min(feature / scale, cap)`:
+
+| Feature | Weight | Scale | Cap |
+|---|---:|---:|---:|
+| BMP2 dimer Cα RMSD | 0.5 | 2 Å | 4 |
+| Observed receptor placement Cα RMSD in BMP2 frame | 0.5 | 10 Å | 4 |
+| Nonbonded heavy-atom clashes per 1,000 atoms | 0.5 | 50 | 4 |
+| Covalent bond strain proxy | 0.5 | 1 | 4 |
+
+This is **soft reference steering**, not coordinate-frozen inpainting or an
+energy function. Covalent bond strain covers bond lengths and declared
+disulfides; it does not certify all bond angles, torsions or stereochemistry.
+Bond targets use observed 2H62 means for each residue/bond type, chemical
+fallback lengths for unobserved types, and a fixed 2.05 Å disulfide target.
+The strain feature is the RMS of the ten largest excess bond-length deviations
+outside a 0.10 Å deadband, divided by that tolerance. The graph contains **27
+declared disulfides**, including the BMP2 Cys78–Cys78 linkage, regardless of
+their sampled length; strained bonded pairs cannot disappear from the graph.
+The sites inferred by ligand-copy exchange and their hotspot geometry are
+modeling assumptions. Large reward is not evidence of binding affinity or
+experimental confidence in the missing chains.
+
+The requested sweep uses **tau 0.01, 0.05, 0.1, 0.3, 0.8**, one A100 job per
+tau, ten particles each: **50 final FK structures total**. Each uses SimpleFold
+3B, 500 steps, beta 2, ESS threshold 0.8 and reward checkpoints at nominal
+t=0.60/0.75/0.90/0.97, followed by terminal scoring. Initial seed 42, Brownian
+seed 43 and resampling seed 44 are shared across tau; a common initial Gaussian
+latent is retained from the earlier FK recipe. This is one seed setting per
+tau, so conclusions about diversity or optimal tau need independent replication.
+
+`run_baseline: false` prevents baseline sampling. The existing ordinary
+tau-0.01 baseline is job **57998266**; it is not a matched per-tau control.
+Available baseline PDBs are scored into `existing-baseline-scores.json` at
+launch only after all ten PDBs pass validation. If unavailable or still writing,
+that receipt says so and FK proceeds independently.
+An unavailable baseline should be scored later, without another inference run.
+
+```bash
+sbatch --parsable --gres=gpu:A100:1 --mem=96G --time=01:15:00 \
+  --job-name=2h62-fk-tauTAU scripts/hpc_sample.slurm \
+  experiment=2h62-inpaint-fk tau=TAU
+```
+
+Hydra resolved configuration and overrides, source commit, reference/input
+hashes, RNG settings, reward contributions, assignments, ESS and ancestry
+are recorded in each run directory. Final structures are under
+`runs/JOB_ID/fk/predictions_simplefold_3B/` beneath the remote artifact root.
+
+## Sweep submission: 2026-10-10
+
+Submitted at approximately **10:08 PDT** from committed, pushed and remotely
+pulled source `023028093a5868152a8b45a214a2157582ca8365`.
+All five jobs initially report **PENDING (Priority)**; no FK structure or
+steering improvement has been measured yet.
+
+| Tau | A100 job | Final FK particles |
+|---:|---:|---:|
+| 0.01 | 57998496 | 10 |
+| 0.05 | 57998497 | 10 |
+| 0.1 | 57998500 | 10 |
+| 0.3 | 57998501 | 10 |
+| 0.8 | 57998502 | 10 |
+
+Baseline job **57998266** remains **PENDING (Resources)**. Its earlier recorded
+`dc09462` is the submission-time checkout; the queued launcher reads the live
+checkout when it starts, which was advanced to `0230280` for this sweep. Its
+standard sampling configuration remains the same. Each run's `experiment.json`
+and `git-commit.txt` are the authority for its actual execution source.
+
+The exact commands and tau-to-job mapping are in ignored
+`artifacts/sweeps/2h62_fk_tau/2026-10-10/manifest.json`. The intended archive is
+the same `sweeps/2h62_fk_tau/2026-10-10/` path beneath remote artifacts; archival
+transfer is pending a successful connection after a transient SSH timeout.
+Remote logs are `logs/sample-JOB_ID.out` and `.err` in the home checkout.
+The user explicitly prioritized submission before comprehensive checks;
+reference instantiation, config inspection and existing wrapper/sampler
+regressions succeeded before submission. Additional reward-specific checks
+are recorded below as they finish. No local inference was performed.
+
+Reward-specific checks cover maximum positive reward 5, rigid-transform and
+identical-copy-label invariance, duplicate site occupancy, missing hotspot
+atoms without shrinking native-contact denominators, Q86 orientation, and
+fixed disulfide/bond-length behavior. Independent coordinate analysis also
+confirmed all eight assignments and all 27 declared disulfides.
+**64 relevant tests passed** after submission, including nine reward-specific
+tests and the existing sampler, launch, baseline, preparation and clash checks.
+
+Interpretation: W60/Y42 packing terms compare ring-to-pocket distances, not
+complete aromatic-plane orientation. Reward assignments maximize the declared
+objective; baseline viewer assignments minimize structural error, so chain
+labels and associated contact rows may differ on ambiguous structures. Use
+the assignment receipts when comparing those diagnostics.
+The generic viewer infers disulfides from sampled distances, while this reward
+uses declared fixed disulfides. Their clash counts can therefore differ for
+strained bonds; use this reward's coordinate-only CLI on both baseline and FK
+PDBs for a consistent objective comparison.
