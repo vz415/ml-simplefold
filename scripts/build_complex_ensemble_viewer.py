@@ -24,9 +24,9 @@ HTML = r'''<!doctype html>
 'use strict';
 const payload = __PAYLOAD__;
 const groups = [
- {label:'BMP2', ref:['A','D'], pred:['A','B'], blue:'#08519c', orange:'#a63603', key:'BMP2_chain_CA_RMSD_angstrom'},
- {epitope:'wrist epitope',label:'BMPR1A', ref:['B','E'], pred:['C','D'], blue:'#3182bd', orange:'#f16913', key:'BMPR1A_chain_CA_RMSD_angstrom'},
- {epitope:'knuckle epitope',label:'ACVR2A', ref:['C','F'], pred:['E','F'], blue:'#6baed6', orange:'#fdae6b', key:'ActRIIA_chain_CA_RMSD_angstrom'}
+ {label:'BMP2', ref:['A','D'], pred:['A','B'], blue:'#081d58', orange:'#7f2704', key:'BMP2_chain_CA_RMSD_angstrom'},
+ {epitope:'wrist epitope',label:'BMPR1A', ref:['B','E'], pred:['C','D'], blue:'#225ea8', orange:'#f16913', key:'BMPR1A_chain_CA_RMSD_angstrom'},
+ {epitope:'knuckle epitope',label:'ACVR2A', ref:['C','F'], pred:['E','F'], blue:'#41b6c4', orange:'#fec44f', key:'ActRIIA_chain_CA_RMSD_angstrom'}
 ];
 const assemblyMetrics = [
  ['global_CA_RMSD_angstrom','Assembly Cα RMSD ↓','Å'],

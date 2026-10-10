@@ -316,3 +316,10 @@ Programmatic checks of the actual GLModel hidden flags and all displayed Cα
 coordinates passed for every sample in both ligand and global alignments,
 including the combined viewer's one-sample 100M card. Table RMSD, selected
 status, and highlighted row agree with each chosen structure.
+
+The viewer palette now separates protein types more strongly while retaining
+blue reference and warm orange prediction families: BMP2 uses deep navy/burnt
+orange, BMPR1A uses blue/bright orange, and ACVR2A uses cyan-blue/gold. The same
+group definitions drive the cartoons and existing protein legend. Structures
+remain opaque; protein visibility and reference-only/predictions-only modes
+can isolate overlapping interfaces.
