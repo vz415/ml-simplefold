@@ -24,30 +24,15 @@ def write_json(path, value):
     Path(path).write_text(json.dumps(value, indent=2, allow_nan=False) + '\n')
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--config', type=Path, required=True)
-    parser.add_argument('--fasta-path', type=Path, required=True)
-    parser.add_argument('--reference-cif', type=Path, required=True)
-    parser.add_argument('--reference-pdb', type=Path, required=True)
-    parser.add_argument('--ckpt-dir', type=Path, required=True)
-    parser.add_argument('--cache-dir', type=Path, required=True)
-    parser.add_argument('--output-dir', type=Path, required=True)
-    parser.add_argument('--model', default='simplefold_3B')
-    parser.add_argument('--num-steps', type=int, default=500)
-    parser.add_argument('--particles', type=int, default=10)
-    parser.add_argument('--tau', type=float, default=.01)
-    parser.add_argument('--seed', type=int, default=None,
-                        help='Override config initial_seed')
-    args = parser.parse_args()
+def run_fk(args, config):
+    """Run the paired pilot using settings resolved by run_sampling.py."""
     if not os.environ.get('SLURM_JOB_ID'):
-        parser.error('Protein inference is permitted only inside a Slurm GPU job')
+        raise RuntimeError('Protein inference is permitted only inside a Slurm GPU job')
     if args.particles < 2 or args.num_steps < 2:
-        parser.error('Need at least two particles and two steps')
+        raise ValueError('Need at least two particles and two steps')
 
     import numpy as np
     import torch
-    import yaml
     import lightning.pytorch as pl
     from inference import initialize_folding_model, initialize_esm_model, initialize_others
     from model.torch.fk_sampler import FKSampler, make_initial_noise
@@ -59,8 +44,6 @@ def main():
 
     if not torch.cuda.is_available():
         raise RuntimeError('CUDA unavailable; refusing CPU inference')
-    config = yaml.safe_load(args.config.read_text())
-    args.seed = config['initial_seed'] if args.seed is None else args.seed
     if any(not isinstance(seed, int) or seed < 0 for seed in
            (args.seed, config['brownian_seed'], config['resampling_seed'])):
         raise ValueError('RNG seeds must be nonnegative integers')
@@ -122,7 +105,7 @@ def main():
         'common_start': bool(config['common_start']), 'initial_seed': args.seed,
         'brownian_seed': config['brownian_seed'], 'resampling_seed': config['resampling_seed'],
         'checkpoint_indices': indices, 'checkpoint_times': [float(steps[i]) for i in indices],
-        'config': config, 'config_sha256': digest(args.config),
+        'config': config, 'config_sha256': digest(args.output_dir / 'resolved-config.yaml'),
         'fasta_sha256': digest(args.fasta_path), 'reference_cif_sha256': digest(args.reference_cif),
         'reference_pdb_sha256': digest(args.reference_pdb),
         'checkpoint': str(checkpoint_path), 'checkpoint_bytes': checkpoint_path.stat().st_size,
@@ -220,4 +203,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    raise SystemExit('Use: python scripts/run_sampling.py experiment=2goo_fk')

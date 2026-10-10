@@ -2,7 +2,9 @@
 
 The pilot compares ten baseline particles against ten FK-steered particles
 using SimpleFold-3B, 500 EM steps and tau 0.01. Model parameters are frozen;
-there is no optimizer or training. Configuration:
+there is no optimizer or training. The Hydra experiment profile is
+`configs/experiment/2goo_fk.yaml`, composed with shared settings in
+`configs/sample.yaml` and steering settings in
 `configs/sampling/2goo_fk_pilot.yaml`. This is reference-guided reconstruction,
 not a binding affinity estimate.
 
@@ -36,17 +38,35 @@ not part of this frozen-weight pilot.
 The corrected symmetry-derived reference must be staged as
 `/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2goo-native/reference.cif`
 and `reference.pdb`. Reference paths are checked before model loading.
-Submit only after committing/pushing and pulling the remote checkout:
+Inspect the composed configuration locally without sampling or loading model
+weights:
 
 ```bash
-sbatch --parsable --gres=gpu:A100:1 --mem=96G --time=01:45:00 --job-name=2goo-3B-fk-pilot scripts/hpc_sample.slurm examples/2goo_hexamer.fasta 500 10 0.01 42 simplefold_3B configs/sampling/2goo_fk_pilot.yaml
+python scripts/run_sampling.py experiment=2goo_fk --cfg job --resolve
 ```
 
-The seventh launcher argument selects the pilot; existing six-argument
-sampling is preserved. Explicit resources override the toy-job defaults.
+The launch remains held for user inspection. After inspection, commit/push
+and pull the remote checkout before submitting:
+
+```bash
+sbatch --parsable --gres=gpu:A100:1 --mem=96G --time=01:45:00 --job-name=2goo-3B-fk-pilot scripts/hpc_sample.slurm experiment=2goo_fk
+```
+
+The launcher accepts named Hydra overrides rather than positional sampling
+arguments. Override `fasta`, `num_steps`, `samples`, `tau`, `seed`, or `model`
+after `experiment=2goo_fk`; nested steering settings use names such as
+`sampling.beta=1.0`. Ordinary ten-sample 3B inference uses
+`scripts/hpc_sample.slurm experiment=2goo_3b` with appropriate `sbatch` resource
+flags. Explicit resources override the toy-job defaults and remain separate
+from the sampling configuration.
+
 All inference runs through Slurm. Outputs belong in `/pub/.../artifacts/runs/JOBID/`
 with `baseline/` and `fk/` conditions, rewards, ESS/parent histories, source
 states, parameter immutability checks, final coordinate validation and runtime.
+Hydra records `.hydra/config.yaml`, `.hydra/hydra.yaml`, and
+`.hydra/overrides.yaml`; `resolved-config.yaml` saves fully resolved task
+settings alongside `experiment.json`, Git/package receipts, and the existing
+FK summaries. Obsidian notes continue to track decisions and measured outcomes.
 Terminal particles retain weights; no terminal resampling is performed.
 Unweighted PDB averages describe the returned population, not independent
 samples from the reward-tilted distribution. Report weighted summaries too.
@@ -59,3 +79,7 @@ steering improvement. No local protein sampling or model loading occurred.
 The complete 100M run was retrieved and the comparison viewer updated before
 any new pilot submission. A job receipt and measured outcome must be appended
 after execution; no successful FK protein rollout is claimed here.
+
+The earlier positional launch commands in historical experiment receipts
+refer to the launcher before this Hydra refactor. Use the named profiles
+above with the current checkout.

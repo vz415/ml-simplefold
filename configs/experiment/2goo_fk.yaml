@@ -1,0 +1,11 @@
+# @package _global_
+defaults:
+  - override /sampling: 2goo_fk_pilot
+
+name: 2goo_fk
+model: simplefold_3B
+fasta: examples/2goo_hexamer.fasta
+num_steps: 500
+samples: 10
+tau: 0.01
+seed: 42

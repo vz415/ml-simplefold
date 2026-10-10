@@ -1,0 +1,5 @@
+# @package _global_
+name: 2goo_3b
+model: simplefold_3B
+fasta: examples/2goo_hexamer.fasta
+samples: 10

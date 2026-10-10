@@ -1,0 +1,35 @@
+# Sampling settings shared by ordinary inference and the frozen-weight FK pilot.
+defaults:
+  - sampling: standard
+  - _self_
+  - optional experiment: null
+
+name: crambin
+model: simplefold_100M
+fasta: examples/crambin.fasta
+num_steps: 500
+samples: 1
+tau: 0.01
+seed: 42
+storage_timeout_seconds: ${oc.env:SIMPLEFOLD_STORAGE_TIMEOUT_SECONDS,120}
+
+paths:
+  artifact_dir: ${oc.env:SIMPLEFOLD_ARTIFACT_DIR,/pub/ynkim4/ml-simplefold/artifacts}
+  cache_dir: ${oc.env:SIMPLEFOLD_CACHE_DIR,${paths.artifact_dir}}
+  checkpoint_dir: ${paths.cache_dir}/checkpoints
+  ccd_dir: ${paths.cache_dir}/ccd
+  reference_dir: ${oc.env:SIMPLEFOLD_FK_REFERENCE_DIR,${paths.artifact_dir}/datasets/references/2goo-native}
+  reference_cif: ${paths.reference_dir}/reference.cif
+  reference_pdb: ${paths.reference_dir}/reference.pdb
+
+hydra:
+  callbacks:
+    storage_preflight:
+      _target_: sampling_preflight.StoragePreflight
+  job:
+    chdir: false
+  run:
+    dir: ${paths.artifact_dir}/runs/${oc.env:SLURM_JOB_ID,unsubmitted}
+  sweep:
+    dir: ${paths.artifact_dir}/runs/${oc.env:SLURM_JOB_ID,unsubmitted}
+    subdir: ${hydra.job.num}

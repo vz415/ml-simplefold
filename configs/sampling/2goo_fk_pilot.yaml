@@ -1,9 +1,9 @@
 # Fixed-weight, reference-guided pilot; no optimizer, adapter, or retraining.
+mode: fk
 beta: 2.0
 ess_threshold: 0.8
 checkpoint_times: [0.60, 0.75, 0.90, 0.97]
 common_start: true
-initial_seed: 42
 brownian_seed: 43
 resampling_seed: 44
 # Late clean estimates are scored using the same definitions as final PDBs.

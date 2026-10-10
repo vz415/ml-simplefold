@@ -90,7 +90,7 @@ After setup has completed successfully:
 
 ```bash
 cd /data/homezvol2/ynkim4/ml-simplefold
-sbatch scripts/hpc_sample.slurm examples/crambin.fasta 500 1
+sbatch scripts/hpc_sample.slurm fasta=examples/crambin.fasta num_steps=500 samples=1
 squeue -u ynkim4
 sacct -j JOB_ID --format=JobID,State,ExitCode,Elapsed,MaxRSS,NodeList
 ```
@@ -98,12 +98,18 @@ sacct -j JOB_ID --format=JobID,State,ExitCode,Elapsed,MaxRSS,NodeList
 The default job requests one GPU, four CPU cores, 32 GiB host memory, and
 15 minutes on `gpu`, charged to `eehui_lab_gpu`. Even the 100M folding model
 uses an ESM2-3B encoder. CPU sampling is refused if CUDA is unavailable.
-The arguments are FASTA file/directory, step count, samples per protein, tau,
-and seed. Tau defaults to 0.01 and seed to 42. For example, ten samples at
-tau 0.3 use `sbatch scripts/hpc_sample.slurm examples/7wf9_a.fasta 500 10 0.3 42`.
-Use one protein sequence per FASTA file. For multiple targets, pass a directory
-containing separate single-record FASTA files; multichain input is not validated
-by this setup.
+The launcher passes named Hydra overrides to `scripts/run_sampling.py`.
+Settings live in `configs/sample.yaml`; override `fasta`, `num_steps`, `samples`,
+`tau`, `seed`, and `model` as needed. Tau defaults to 0.01 and seed to 42.
+For example, ten samples at tau 0.3 use:
+
+```bash
+sbatch scripts/hpc_sample.slurm fasta=examples/7wf9_a.fasta num_steps=500 samples=10 tau=0.3 seed=42
+```
+
+For multiple targets, pass a directory containing separate FASTA files.
+A multichain complex uses one FASTA file containing its chain records;
+validation checks their sequences and the saved chain order.
 The supplied crambin sequence has 46 residues (PDB 1CRN). Default sampling is
 500 steps, tau 0.01, seed 42, and one PDB output. pLDDT is disabled because it
 requires an additional 1.6B model; its absence means the PDB B-factors are
@@ -111,10 +117,47 @@ placeholders, not confidence scores.
 
 Results go to
 `/pub/ynkim4/ml-simplefold/artifacts/runs/JOB_ID/predictions_simplefold_100M/`.
-Each run records its Git commit, installed packages, sampling parameters in
-`experiment.json`, and `validation.json`, which
+Hydra saves `.hydra/config.yaml` (composed task settings), `.hydra/hydra.yaml`
+(Hydra runtime settings), and `.hydra/overrides.yaml` (explicit overrides) in
+the run directory. `resolved-config.yaml` additionally saves the task settings
+with environment variables and interpolations resolved. Each run also records
+its Git commit, installed packages, sampling parameters in `experiment.json`,
+and `validation.json`, which
 checks output count, sequence, CA atoms, and finite coordinates. This verifies
 the inference pipeline; it is not a folding-accuracy benchmark.
+
+Hydra tracks executable configuration; the existing metadata and Obsidian
+experiment receipts retain provenance, results, and research decisions.
+The storage callback checks `/pub` with a timeout before Hydra writes its
+receipts, and rejects an output directory containing an existing run receipt.
+Override `paths.cache_dir` to move all pretrained/CCD caches together;
+individual checkpoint/CCD directory overrides are rejected to keep download
+and inference destinations consistent.
+Inspect settings locally without creating a sampling run or loading weights:
+
+```bash
+python scripts/run_sampling.py experiment=2goo_fk --cfg job --resolve
+```
+
+Hydra's basic multirun can vary scalar settings inside an existing Slurm
+allocation, for example `-m seed=42,43`; each run gets its own numbered
+subdirectory and configuration receipts. It does not submit additional Slurm
+jobs. Storage paths and experiment/sampling-mode selection must remain shared
+within a sweep, using the default numbered subdirectories.
+Sweep storage/output paths can reference shared `paths.*` settings and
+environment variables, but cannot depend on task parameters such as `seed`.
+Steering parameters can also be swept, for example
+`experiment=2goo_fk -m sampling.beta=1.0,2.0`.
+
+The named `experiment=2goo_3b` profile selects ordinary ten-sample SimpleFold-3B
+inference on the BMP2–BMPR1A–ACVR2A complex. The `experiment=2goo_fk` profile
+selects the matched baseline/FK pilot described in
+[`bmp2_fk_pilot.md`](experiments/bmp2_fk_pilot.md). Resource requests remain
+`sbatch` flags, separate from Hydra sampling settings:
+
+```bash
+sbatch --gres=gpu:A100:1 --mem=96G --time=01:00:00 scripts/hpc_sample.slurm experiment=2goo_3b
+```
 
 To run on free GPU resources, override scheduling explicitly:
 
