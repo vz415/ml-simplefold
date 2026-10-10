@@ -178,3 +178,19 @@ Collection of the completed 100M ensemble is in progress. Initial /pub transfer
 and checksum reads stalled; the current viewer still shows the earlier 100M
 pilot until the ten files can be retrieved and analyzed. Do not interpret
 its one-sample metrics as this completed ensemble's results.
+
+### 2026-10-09 download retry
+
+Retried the completed 100M run57888889 through the dedicated transfer endpoint
+with exact SFTP file paths and temporary `.part` names. The50-second limit
+expired while opening `2goo_hexamer_sampled_0.pdb`; zero PDBs downloaded.
+No partial file was promoted to a final name. The remote checksum attempt
+also failed. A login-node check confirmed `/pub` points to `/dfs6b/pub`;
+checking the exact prediction through that physical path timed out with137
+(after the timeout's forced kill). SSH authentication and home-storage commands
+work. These failures are stalled filesystem reads, not a reported permission
+error, and do not invalidate the completed sampling jobs.
+
+Viewer contents remain the old single 100M pilot plus all ten 3B samples.
+The latest receptor-only labels and numbered sample choices are retained.
+Retry collection when file reads respond; no new sampling job is necessary.
