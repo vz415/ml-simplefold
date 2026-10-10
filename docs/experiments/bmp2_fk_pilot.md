@@ -45,8 +45,8 @@ weights:
 python scripts/run_sampling.py experiment=2goo_fk --cfg job --resolve
 ```
 
-The launch remains held for user inspection. After inspection, commit/push
-and pull the remote checkout before submitting:
+The user authorized the pilot after inspecting the sampler and reward.
+Commit/push and pull the remote checkout before submitting future runs:
 
 ```bash
 sbatch --parsable --gres=gpu:A100:1 --mem=96G --time=01:45:00 --job-name=2goo-3B-fk-pilot scripts/hpc_sample.slurm experiment=2goo_fk
@@ -79,6 +79,25 @@ steering improvement. No local protein sampling or model loading occurred.
 The complete 100M run was retrieved and the comparison viewer updated before
 any new pilot submission. A job receipt and measured outcome must be appended
 after execution; no successful FK protein rollout is claimed here.
+
+## First A100 submission — 2026-10-09
+
+Job `57994351` was submitted on `hpc3y` as `ynkim4` using the command above,
+one A100, 96 GB RAM and a 1h45 limit. It runs ten baseline particles followed
+by ten FK particles with the configured seeds and frozen SimpleFold-3B weights.
+The submitted source commit is `e206e3c610f2647bfab6c9c3b0779dd79a1b2136`.
+All 24 local toy/objective/orchestration checks passed before submission.
+
+The corrected reference CIF/PDB were staged at the explicit reference paths
+above and their SHA-256 hashes verified against the local files:
+
+- CIF: `8dd16e85f43060da7cd4a079868826f680f011b36f7c591678374f399276daa8`.
+- PDB: `26eb29d9eec1b26c5c7141057e425a9e3503d5df281d31c129e7a217b7906c7b`.
+
+Outputs: `/pub/ynkim4/ml-simplefold/artifacts/runs/57994351/`.
+Logs: `/data/homezvol2/ynkim4/ml-simplefold/logs/sample-57994351.{out,err}`.
+Initial state was pending for resources; no inference result is claimed in
+this submission receipt. Record execution status and outcomes separately.
 
 The earlier positional launch commands in historical experiment receipts
 refer to the launcher before this Hydra refactor. Use the named profiles
