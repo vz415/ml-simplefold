@@ -8,6 +8,10 @@
   analysis of downloaded artifacts. Run remote installation, downloads, and
   inference through Slurm; login nodes are for Git, submission, and status.
 - See `docs/hpc3y.md` for launch commands and environment details.
+- A100 is the default sampling GPU. For an authorized A30 fallback on the
+  ten-particle FK complex, override `--gres=gpu:A30:1` and use
+  `sampling.model_batch_size=2`; retain the full ten-particle selection pool.
+  Keep fallback submissions explicit rather than launching duplicate jobs.
 - Store remote model weights, trained checkpoints, synthetic datasets, and run
   outputs under `/pub/ynkim4/ml-simplefold/artifacts`. Launchers default
   `SIMPLEFOLD_ARTIFACT_DIR` to that path; `SIMPLEFOLD_CACHE_DIR` defaults to the

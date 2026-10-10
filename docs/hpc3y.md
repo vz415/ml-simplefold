@@ -95,7 +95,7 @@ squeue -u ynkim4
 sacct -j JOB_ID --format=JobID,State,ExitCode,Elapsed,MaxRSS,NodeList
 ```
 
-The default job requests one GPU, four CPU cores, 32 GiB host memory, and
+The default job requests one A100, four CPU cores, 32 GiB host memory, and
 15 minutes on `gpu`, charged to `eehui_lab_gpu`. Even the 100M folding model
 uses an ESM2-3B encoder. CPU sampling is refused if CUDA is unavailable.
 The launcher passes named Hydra overrides to `scripts/run_sampling.py`.
@@ -158,6 +158,19 @@ selects the matched baseline/FK pilot described in
 ```bash
 sbatch --gres=gpu:A100:1 --mem=96G --time=01:00:00 scripts/hpc_sample.slurm experiment=2goo_3b
 ```
+
+A100 remains the default GPU. For an explicitly selected A30 fallback of
+the ten-particle baseline/FK pilot, use two-particle model batches:
+
+```bash
+sbatch --gres=gpu:A30:1 --mem=96G --time=01:45:00 scripts/hpc_sample.slurm experiment=2goo_fk sampling.model_batch_size=2
+```
+
+Chunking limits model forwards while keeping ten particles for rewards, ESS
+and resampling. Inputs share singleton feature storage, and folding weights
+are offloaded during ESM encoding. Submit a fallback explicitly; the launcher
+does not automatically create a second job when an A100 job is queued. Job
+`57994634` is testing this path; completion remains to be verified.
 
 To run on free GPU resources, override scheduling explicitly:
 
