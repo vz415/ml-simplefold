@@ -288,3 +288,34 @@ The generic viewer infers disulfides from sampled distances, while this reward
 uses declared fixed disulfides. Their clash counts can therefore differ for
 strained bonds; use this reward's coordinate-only CLI on both baseline and FK
 PDBs for a consistent objective comparison.
+
+## Earlier-result A30 fallback: 2026-10-10
+
+The user approved moving **only tau 0.3** to A30 after a scheduler preview and
+the previous completed A30 FK runtime (**2,839 s / 47.3 min**) suggested earlier
+results. The other four FK jobs remain on A100; A100 remains the default.
+
+- Cancelled pending A100 job **57998501** before any compute started.
+- Replacement A30 job **57999713** uses the same ten-particle FK pool, with
+  `sampling.model_batch_size=2`, tau 0.3 and all other sampling settings unchanged.
+- Source **7262e4c** was pushed and pulled before submission; it changes only
+  tests and documentation relative to the original sweep source. Reward and
+  FK sampler source are identical.
+- The replacement was submitted held, the old job cancelled, then the new
+  job released, so no duplicate tau-0.3 rollout can execute.
+- Confirmed **RUNNING** around 12:42 PDT on `hpc3-gpu-18-03`, with initial
+  storage/input preflight output. Sampling completion is not claimed.
+
+```bash
+sbatch --parsable --hold --gres=gpu:A30:1 --mem=96G --time=01:15:00 \
+  --job-name=2h62-fk-tau0.3-A30 scripts/hpc_sample.slurm \
+  experiment=2h62-inpaint-fk tau=0.3 sampling.model_batch_size=2
+scancel 57998501
+scontrol release 57999713
+```
+
+Output: `/pub/ynkim4/ml-simplefold/artifacts/runs/57999713/fk/predictions_simplefold_3B/`.
+The local sweep manifest now maps tau 0.3 to 57999713 and preserves the cancelled
+original in `superseded_jobs`. Its remote archival directory creation exceeded
+a bounded 15-second check, so archival transfer remains pending. Batch chunking
+can change numerical trajectories; do not claim bitwise equivalence with A100.
