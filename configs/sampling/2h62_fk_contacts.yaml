@@ -1,0 +1,15 @@
+# Original 2H62 steering with the successful 2GOO BMPR1A contact block.
+defaults:
+  - 2h62_fk
+  - _self_
+
+reward_kind: 2h62_partial_contacts
+reward:
+  positive_weights:
+    W60_packing: 2.0
+    Y42_engagement: 1.0
+    # Explicit zero prevents inherited Q86 geometry from driving selection.
+    Q86_geometry: 0.0
+    BMPR1A_hotspot_contact_recall: 1.0
+    BMPR1A_native_contact_recall: 1.0
+    BMPR1A_native_contact_precision: 0.5

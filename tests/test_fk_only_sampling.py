@@ -64,6 +64,21 @@ class FKOnlySamplingTests(unittest.TestCase):
         partial.assert_not_called()
         complete.assert_not_called()
 
+    def test_contact_reward_dispatch_is_explicit_and_preserves_settings(self):
+        contacts, topology, partial = Mock(), Mock(), Mock()
+        args = argparse.Namespace(reference_cif=Path("observed.cif"), reference_pdb=Path("observed.pdb"))
+        settings = {"positive_weights": {"Q86_geometry": 0., "BMPR1A_hotspot_contact_recall": 1.}}
+        with patch.dict(sys.modules, {
+            "fk_2h62_contact_reward": SimpleNamespace(ContactComplexReward=contacts),
+            "fk_2h62_topology_reward": SimpleNamespace(TopologyComplexReward=topology),
+            "fk_2h62_reward": SimpleNamespace(PartialComplexReward=partial),
+        }):
+            result = make_reward(args, {"reward_kind": "2h62_partial_contacts", "reward": settings})
+        self.assertIs(result, contacts.return_value)
+        contacts.assert_called_once_with(args.reference_cif, args.reference_pdb, settings)
+        topology.assert_not_called()
+        partial.assert_not_called()
+
     def test_missing_baseline_is_recorded_without_sampling(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
