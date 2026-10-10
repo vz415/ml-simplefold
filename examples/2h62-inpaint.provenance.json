@@ -1,0 +1,296 @@
+{
+  "target": "2h62-inpaint",
+  "pdb_id": "2H62",
+  "source_url": "https://www.rcsb.org/structure/2H62",
+  "source_cif": "artifacts/structures/2h62-inpaint/2H62.cif",
+  "source_cif_sha256": "352eb284da77faf3a1e764005521e3af935d95f02c7ac96239d29bf2aef7fe78",
+  "source_assembly": "Deposited author biological assembly 1 is BMP2:BMPR1A:ACVR2B = 2:1:1, identity operation only.",
+  "requested_stoichiometry": "BMP2:BMPR1A:ACVR2B = 2:2:2",
+  "chains": {
+    "A": 114,
+    "B": 129,
+    "C": 98,
+    "D": 114,
+    "E": 129,
+    "F": 98
+  },
+  "total_residues": 682,
+  "chain_proteins": {
+    "A": "BMP2",
+    "B": "BMPR1A",
+    "C": "ACVR2B",
+    "D": "BMP2",
+    "E": "BMPR1A",
+    "F": "ACVR2B"
+  },
+  "source_author_chain_mapping": {
+    "A": "A",
+    "B": "C",
+    "C": "D",
+    "D": "B",
+    "E": "C",
+    "F": "D"
+  },
+  "experimental_chains": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "modeled_chains": [
+    "E",
+    "F"
+  ],
+  "input": "Full canonical deposited construct sequences including unresolved termini; no coordinates passed to baseline inference.",
+  "coordinate_policy": "Native four-chain protein coordinates unchanged. E/F are approximate ligand-copy-swap receptor placements. No residues/atoms repaired, no minimization. Alternate locations and occupancies retained. Explicit source bonds remapped/copied; no new bonds inferred.",
+  "reference_warning": "The six-chain symmetry_completion is PROVISIONAL MODELING, NOT EXPERIMENTAL GROUND TRUTH. Its short-distance overlaps must not become enforced native contacts. Use observed.cif for experimental validation and future known-coordinate constraints.",
+  "transform": {
+    "definition": "row coordinates: x_new = x_old @ R + t; jointly fit BMP2 A\u2192B and B\u2192A",
+    "R": [
+      [
+        -0.5797556617630617,
+        -0.3462487022364807,
+        -0.7375603086210847
+      ],
+      [
+        -0.34624870223648097,
+        -0.7147179559790938,
+        0.6076924218719699
+      ],
+      [
+        -0.7375603086210846,
+        0.6076924218719701,
+        0.2944736177421538
+      ]
+    ],
+    "t_angstrom": [
+      148.84897081432592,
+      -17.629064957784312,
+      93.0865954931196
+    ],
+    "common_ligand_full_positions_zero_based": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113
+    ],
+    "matched_CA_per_monomer": 103,
+    "copy_swap_CA_RMSD_angstrom": 1.6251805160990036,
+    "rotation_degrees": 180.0,
+    "rotation_determinant": 1.0000000000000029,
+    "involution_max_displacement_angstrom": 1.1506624801925828e-13
+  },
+  "placement_diagnostics": {
+    "definition": "Occupied heavy atoms, blank/A alternates, strict distance cutoffs; diagnostic, not a van der Waals clashscore.",
+    "involving_modeled_receptors": [
+      {
+        "chains": [
+          "A",
+          "E"
+        ],
+        "minimum_heavy_atom_distance_angstrom": 0.36645921349306426,
+        "heavy_atom_pairs_below_2_angstrom": 20,
+        "heavy_atom_pairs_below_4_angstrom": 229
+      },
+      {
+        "chains": [
+          "A",
+          "F"
+        ],
+        "minimum_heavy_atom_distance_angstrom": 11.183656838310736,
+        "heavy_atom_pairs_below_2_angstrom": 0,
+        "heavy_atom_pairs_below_4_angstrom": 0
+      },
+      {
+        "chains": [
+          "B",
+          "E"
+        ],
+        "minimum_heavy_atom_distance_angstrom": 23.267788026648685,
+        "heavy_atom_pairs_below_2_angstrom": 0,
+        "heavy_atom_pairs_below_4_angstrom": 0
+      },
+      {
+        "chains": [
+          "B",
+          "F"
+        ],
+        "minimum_heavy_atom_distance_angstrom": 12.260061623690822,
+        "heavy_atom_pairs_below_2_angstrom": 0,
+        "heavy_atom_pairs_below_4_angstrom": 0
+      },
+      {
+        "chains": [
+          "C",
+          "E"
+        ],
+        "minimum_heavy_atom_distance_angstrom": 12.260061623682763,
+        "heavy_atom_pairs_below_2_angstrom": 0,
+        "heavy_atom_pairs_below_4_angstrom": 0
+      },
+      {
+        "chains": [
+          "C",
+          "F"
+        ],
+        "minimum_heavy_atom_distance_angstrom": 25.921450223573785,
+        "heavy_atom_pairs_below_2_angstrom": 0,
+        "heavy_atom_pairs_below_4_angstrom": 0
+      },
+      {
+        "chains": [
+          "D",
+          "E"
+        ],
+        "minimum_heavy_atom_distance_angstrom": 0.8089753304684639,
+        "heavy_atom_pairs_below_2_angstrom": 15,
+        "heavy_atom_pairs_below_4_angstrom": 92
+      },
+      {
+        "chains": [
+          "D",
+          "F"
+        ],
+        "minimum_heavy_atom_distance_angstrom": 0.7812025245331473,
+        "heavy_atom_pairs_below_2_angstrom": 16,
+        "heavy_atom_pairs_below_4_angstrom": 204
+      },
+      {
+        "chains": [
+          "E",
+          "F"
+        ],
+        "minimum_heavy_atom_distance_angstrom": 9.926153988361728,
+        "heavy_atom_pairs_below_2_angstrom": 0,
+        "heavy_atom_pairs_below_4_angstrom": 0
+      }
+    ],
+    "total_modeled_interchain_heavy_atom_pairs_below_2_angstrom": 51
+  },
+  "fasta_sha256": "a605cdac5e0b1f081eead982faa42842efa48587022eea667adc1decfc7fc914",
+  "outputs": {
+    "observed_cif": {
+      "path": "artifacts/structures/2h62-inpaint/prepared/observed.cif",
+      "sha256": "2da53281c6e1bc5c172f21153013b44338e20795aeb6391583a7f93853d01d47"
+    },
+    "observed_pdb": {
+      "path": "artifacts/structures/2h62-inpaint/prepared/observed.pdb",
+      "sha256": "d2dbffed109fc1175b0779964ed96cbecb30d5ed385b6361fd5aaec1aebd9724"
+    },
+    "symmetry_completion_cif": {
+      "path": "artifacts/structures/2h62-inpaint/prepared/symmetry_completion.cif",
+      "sha256": "3f8de7606859d1904b5e320b204501cb4022b4d9bd37c2a86802ab4f55f0dce2"
+    },
+    "symmetry_completion_pdb": {
+      "path": "artifacts/structures/2h62-inpaint/prepared/symmetry_completion.pdb",
+      "sha256": "0e9cdf2ed2d20bb346ef007c74a3f47e5c0669daa73af116e06392b1229d947e"
+    },
+    "fasta": {
+      "path": "examples/2h62-inpaint.fasta",
+      "sha256": "a605cdac5e0b1f081eead982faa42842efa48587022eea667adc1decfc7fc914"
+    },
+    "known_regions": {
+      "path": "artifacts/structures/2h62-inpaint/prepared/known_regions.json",
+      "sha256": "f1a4de9c8c5863571b04aaa5a84a30b00fe48774b8a5fcd70ba53c788a5991be"
+    }
+  }
+}

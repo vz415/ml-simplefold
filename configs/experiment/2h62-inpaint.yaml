@@ -1,0 +1,15 @@
+# @package _global_
+# Sequence-only baseline for later observed-coordinate/FK completion experiments.
+# The project label "inpaint" does not enable coordinate conditioning.
+name: 2h62-inpaint
+model: simplefold_3B
+fasta: examples/2h62-inpaint.fasta
+num_steps: 500
+samples: 10
+tau: 0.01
+seed: 42
+
+paths:
+  reference_dir: ${paths.artifact_dir}/datasets/references/2h62-inpaint
+  reference_cif: ${paths.reference_dir}/observed.cif
+  reference_pdb: ${paths.reference_dir}/observed.pdb
