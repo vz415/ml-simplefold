@@ -146,6 +146,19 @@ selection across model chunks and unchanged RNG/history. A storage test checks
 that expanded features retain the singleton backing allocation. These tests
 do not establish A30 fit; that requires remote execution.
 
+Chunked A30 job `57994634` uses source `0045498` and the override above. It
+passed singleton preparation and ESM encoding, reported 11.26 GiB allocated
+before sampling, and was running its baseline at the latest check. No finished
+FK results are claimed yet. At the user's request, queued A100 job `57994351`
+was cancelled at 23:43:15 PDT on 2026-10-09 without running any GPU compute.
+A100 remains the launcher's default, with explicit chunked A30 fallback.
+
+The user adopted the current configured interface/clash reward as the
+automated objective for subsequent FK sampling. Its coefficients remain
+revisable; this decision does not establish measured steering improvement.
+A separate preference fine-tuning plan is recorded in
+[`bmp2_preference_finetuning.md`](bmp2_preference_finetuning.md).
+
 The earlier positional launch commands in historical experiment receipts
 refer to the launcher before this Hydra refactor. Use the named profiles
 above with the current checkout.
