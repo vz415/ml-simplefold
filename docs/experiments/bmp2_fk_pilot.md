@@ -99,6 +99,22 @@ Logs: `/data/homezvol2/ynkim4/ml-simplefold/logs/sample-57994351.{out,err}`.
 Initial state was pending for resources; no inference result is claimed in
 this submission receipt. Record execution status and outcomes separately.
 
+## A30 memory-test submission — 2026-10-09
+
+At the user's request, job `57994465` tests the same ten-particle 3B
+baseline/FK configuration on one A30. A100 job `57994351` remains unchanged.
+Submitted source `bfd20e4099844d40c9a4f31ebe973624a74ed749` differs from the
+A100 source only in submission documentation, with identical sampler/config.
+
+```bash
+sbatch --parsable --gres=gpu:A30:1 --mem=96G --time=01:45:00 --job-name=2goo-3B-fk-A30-test scripts/hpc_sample.slurm experiment=2goo_fk
+```
+
+Outputs: `/pub/ynkim4/ml-simplefold/artifacts/runs/57994465/`.
+Logs: `/data/homezvol2/ynkim4/ml-simplefold/logs/sample-57994465.{out,err}`.
+The 96 GB request is host RAM, not GPU VRAM. This is a fit/runtime test;
+submission alone does not establish that encoding or sampling fits on A30.
+
 The earlier positional launch commands in historical experiment receipts
 refer to the launcher before this Hydra refactor. Use the named profiles
 above with the current checkout.
