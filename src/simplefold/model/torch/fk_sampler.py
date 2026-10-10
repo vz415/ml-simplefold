@@ -12,7 +12,6 @@ finite-particle approximation, not exact independent reward-tilted sampling.
 """
 
 import math
-from collections.abc import Mapping
 
 import torch
 
@@ -57,18 +56,6 @@ class FKSampler(EMSampler):
         self.ess_threshold = float(ess_threshold)
 
     @staticmethod
-    def _check_shared_conditioning(value, count, path="batch"):
-        if isinstance(value, torch.Tensor) and value.ndim and value.shape[0] == count:
-            if not torch.equal(value, value[:1].expand_as(value)):
-                raise ValueError(f"Particles must share identical conditioning: {path}")
-        elif isinstance(value, Mapping):
-            for key, child in value.items():
-                FKSampler._check_shared_conditioning(child, count, f"{path}.{key}")
-        elif isinstance(value, (list, tuple)):
-            for index, child in enumerate(value):
-                FKSampler._check_shared_conditioning(child, count, f"{path}[{index}]")
-
-    @staticmethod
     def _reward(score_fn, estimate, t):
         rewards = torch.as_tensor(
             score_fn(estimate.detach().clone(), float(t)),
@@ -86,7 +73,6 @@ class FKSampler(EMSampler):
         if noise.ndim != 3 or noise.shape[0] < 1 or noise.shape[-1] != 3:
             raise ValueError("noise must have shape (particles, atoms, 3)")
         count = noise.shape[0]
-        self._check_shared_conditioning(batch, count)
         mask = batch["atom_pad_mask"]
         if mask.shape != noise.shape[:2] or torch.any(mask.sum(dim=1) <= 0):
             raise ValueError("atom_pad_mask must match noise and include occupied atoms")

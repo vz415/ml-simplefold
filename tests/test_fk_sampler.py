@@ -195,12 +195,8 @@ class FKSamplerTests(unittest.TestCase):
             event = next(h for h in observed["history"] if h["step"] == index)
             self.assertEqual(event["time"], t)
 
-    def test_incompatible_conditioning_and_invalid_rewards_are_rejected(self):
+    def test_invalid_rewards_are_rejected(self):
         sampler = FKSampler(num_timesteps=3, t_start=.1)
-        self.batch["other_features"] = torch.arange(5)[:, None]
-        with self.assertRaisesRegex(ValueError, "identical conditioning"):
-            self.run_sampler(sampler)
-        del self.batch["other_features"]
         for bad in (lambda x, t: float("nan"), lambda x, t: torch.zeros(1)):
             with self.assertRaisesRegex(ValueError, "finite reward"):
                 self.run_sampler(sampler, score=bad)
