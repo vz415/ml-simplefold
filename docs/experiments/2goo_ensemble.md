@@ -164,3 +164,17 @@ sbatch --parsable --gres=gpu:A100:1 --mem=96G --time=00:15:00 --job-name=2goo-10
 Output target `/pub/ynkim4/ml-simplefold/artifacts/runs/57888889/`.
 Use A100 for subsequent ten-sample 2GOO batches for either model unless memory
 optimizations are separately implemented and verified. No local inference.
+
+### 2026-10-09 status: both requested batches completed
+
+Slurm confirms **100M 57888889 COMPLETED 0:0**. Started 2026-10-06
+23:53:48 and ended 23:56:03 on `hpc3-gpu-l54-03`; total job 2:15,
+500-step sampling 1:24. All ten six-chain structures passed sequence,
+residue coverage and finite-coordinate validation. **3B 57882919** remains
+COMPLETED 0:0 with ten samples, sampling 21:23 and total job 34:46.
+No sampling jobs remain active and no further batches were submitted.
+
+Collection of the completed 100M ensemble is in progress. Initial /pub transfer
+and checksum reads stalled; the current viewer still shows the earlier 100M
+pilot until the ten files can be retrieved and analyzed. Do not interpret
+its one-sample metrics as this completed ensemble's results.
