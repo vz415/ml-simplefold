@@ -96,3 +96,81 @@ comparison, with a mutated ligand; it is not wild-type native ground truth
 for all interfaces. No 2H64 comparison or guided sampling has been started.
 
 Related: [ligand panel and completion proposal](bmp_partial_complex_completion.md).
+
+## Baseline submission: 2026-10-10
+
+A100 job **57998266**, submitted from source
+`dc0946221b5123c48ee5604805467774bed81928`, uses the command above. Initial
+status is `PENDING (Resources)`; no prediction is available yet.
+Outputs: `/pub/ynkim4/ml-simplefold/artifacts/runs/57998266/`.
+Prepared/raw references are archived separately in
+`/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2h62-inpaint/`.
+Local coordinate comparison is available through
+[analyze_2h62_baseline.py](../../scripts/analyze_2h62_baseline.py).
+
+## Hotspot clues and proposed FK reward
+
+These are experimental clues and a proposed objective, not an implemented
+2H62 reward or an FK submission.
+
+| Feature | Evidence / local target |
+|---|---|
+| ACVR2B W60 | W60A binding is below detection in the paper's assay. W60 packs against BMP2 A34/P35/S88/L90/L100. |
+| ACVR2B Y42 | Y42A raises apparent Kd 61-fold for BMP2 in the paper's assay. Reward native-like engagement rather than an arbitrary short distance. |
+| BMPR1A Q86 | Q86A has approximately 100-fold weaker BMP2 affinity. Its side chain interacts with the Leu51 backbone. |
+
+Sources: [Weber et al. 2007, including Table 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC1802081/)
+and [Kotzsch et al. 2009, discussing BMPR1A Q86](https://pmc.ncbi.nlm.nih.gov/articles/PMC2670865/).
+The W60A assay result is censored, not a measured finite fold change. These
+affinity changes motivate priorities; they do not determine numerical reward
+weights. Weber's F83A variant has a possible folding defect, so do not transfer
+the previous ACVR2A F83 reward blindly.
+
+Direct sequence/coordinate audit: paper numbering equals the full-input
+one-based positions for BMP2 A34/P35/L51/D53/S88/L90/L100, BMPR1A F85/Q86,
+and ACVR2B Y42/W60/L61. Saved prediction chain groups are documented above.
+In the actual crystal, native BMPR1A chain C Q86 OE1 is **2.848 Å** from
+BMP2 chain B L51 N; Q86 NE2 is **2.974 Å** from L51 O. These are heavy-atom
+geometry targets; hydrogen-bond claims additionally require compatible
+donor/acceptor orientation. D53 may contribute elsewhere but is not a direct
+Q86 hydrogen-bond partner in this coordinate audit.
+
+Proposed first objective, with each local feature normalized to [0,1]:
+
+`R = 2 min(W60 packing across copies) + min(Y42 engagement across copies)`
+`    + 2 min(Q86 geometry across copies) - structural penalties`
+
+The 2:1:2 positive weights are an interpretable initial hypothesis, not fitted
+binding energies. Positive terms have maximum 5 before penalties. Keep them
+configurable and inspect the separate contributions before tuning beta.
+
+- **Local geometry:** use smooth, bounded distance/orientation agreement with
+  observed 2H62 interactions, not unlimited contact counts or shorter-is-better
+  attraction. For W60, distribute credit across the named pocket residues;
+  for Q86, require both complementary backbone partners with plausible geometry.
+- **Both copies and topology:** take the worse copy for each feature, with a
+  one-to-one assignment of identical receptors to two distinct wrist sites
+  and two distinct knuckle sites. The second site's motif is inferred by
+  exchanging ligand identities, not by enforcing the clashing copied receptor
+  coordinates. Two receptors at one site must not receive two successful scores.
+- **Known structure:** preserve the observed subcomplex using a declared
+  coordinate restraint or fixed-region mechanism. Penalize its deformation,
+  ligand-dimer distortion, severe nonbonded clashes, and strained covalent
+  geometry. Keep native disulfides separate from nonbonded overlap counts.
+- **Scope:** retain whole observed-interface recovery and precision as reported
+  diagnostics initially, rather than hiding them inside a larger objective.
+  The wild-type S88–L61 hydrogen bond is not an energetic hotspot; do not elevate
+  it to a leading reward merely because it is visible. Mutant 2H64 is an
+  external comparison, not the unknown wild-type completion's ground truth.
+- **FK mechanics:** a starting choice is the established late clean-estimate
+  checkpoints (t=0.60/0.75/0.90/0.97), with terminal scoring and fixed weights.
+  The same potential-difference/ESS selection machinery can be reused after
+  implementing the new reward and observed-region policy.
+
+**User instruction:** future FK submissions must run FK only and reuse this
+baseline; do not regenerate a baseline inside every job. The current
+`sample_complex_fk.py` always loops over baseline and FK, so a skip-baseline/FK-only
+execution path is required before submitting this experiment. No such change
+has been made yet. Reusing an ordinary baseline avoids extra inference, but
+does not imply exact paired RNG/initial-latent matching; preserve that distinction
+in any comparison.
