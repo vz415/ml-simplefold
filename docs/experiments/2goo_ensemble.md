@@ -194,3 +194,20 @@ error, and do not invalidate the completed sampling jobs.
 Viewer contents remain the old single 100M pilot plus all ten 3B samples.
 The latest receptor-only labels and numbered sample choices are retained.
 Retry collection when file reads respond; no new sampling job is necessary.
+
+### 2026-10-09 interactive 3B viewer
+
+The viewer now labels the complex **BMP2–BMPR1A–ACVR2A**; PDB 2GOO remains
+the experimental provenance. A dedicated ten-sample 3B viewer is available at
+`artifacts/analysis/2goo_3B/57882919/index.html`, with all ten aligned predictions
+embedded. Its Samples selector offers Sample 1–10 and All samples (10).
+Overlay, Reference only, Predictions only, protein visibility, receptor end
+dots, and per-sample metrics remain available. Rebuild with:
+
+```bash
+python scripts/build_complex_ensemble_viewer.py --analysis-dir artifacts/analysis/2goo_3B/57882919
+```
+
+The combined viewer at `artifacts/analysis/2goo_models/2026-10-06/index.html`
+also places the 3B ensemble first; its 100M card still contains the old pilot.
+No new sampling or remote transfers were needed for this viewer update.
