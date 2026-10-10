@@ -282,6 +282,19 @@ class PartialComplexReward:
                     site_evidence="experimental local motif" if site == 0 else "inferred ligand-swapped local motif",
                     features=result, details=details)
 
+    def _assignment_features(self, copies):
+        return {key: min(copy["features"][key] for copy in copies if key in copy["features"])
+                for key in self.settings["positive_weights"]}
+
+    def _penalty_contributions(self, features):
+        result = {}
+        for key, spec in self.settings["penalties"].items():
+            value = features[key] / spec["scale"]
+            if spec["cap"] is not None:
+                value = min(value, spec["cap"])
+            result[key] = -spec["weight"] * value
+        return result
+
     def score(self, path):
         chains = read_prediction(path, self.prediction_references)
         records, atoms, omitted = atom_records(path, chains)
@@ -299,13 +312,13 @@ class PartialComplexReward:
                 copies = [local[component, pc, site] for component, order in (("BMPR1A", bmpr), ("ACVR2B", acvr)) for site, pc in enumerate(order)]
                 mapping = dict(ligand, B=bmpr[0], C=acvr[0])
                 placement = {rc: float(np.sqrt(np.mean(np.sum((chains[mapping[rc]].coordinates[self.references[rc].full_positions] @ rotation + translation - self.references[rc].coordinates) ** 2, axis=1)))) for rc in "BC"}
-                features = {key: min(copy["features"][key] for copy in copies if key in copy["features"]) for key in self.settings["positive_weights"]}
+                features = self._assignment_features(copies)
                 features.update(BMP2_dimer_CA_RMSD_angstrom=float(np.sqrt(np.mean(errors ** 2))),
                                 observed_receptor_placement_CA_RMSD_angstrom=max(placement.values()),
                                 clashes_per_1000_heavy_atoms=geometry["clashes_per_1000_heavy_atoms"],
                                 covalent_bond_strain=geometry["covalent_bond_strain"])
                 contributions = {key: weight * features[key] for key, weight in self.settings["positive_weights"].items()}
-                contributions.update({key: -spec["weight"] * min(features[key] / spec["scale"], spec["cap"]) for key, spec in self.settings["penalties"].items()})
+                contributions.update(self._penalty_contributions(features))
                 candidates.append(dict(reward=sum(contributions.values()), features=features, contributions=contributions,
                                        assignment=dict(experimental_reference_to_prediction=mapping,
                                                        BMPR1A_site_to_prediction=list(bmpr), ACVR2B_site_to_prediction=list(acvr)),

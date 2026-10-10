@@ -39,6 +39,9 @@ def sampling_conditions(config):
 
 
 def make_reward(args, config):
+    if config.get('reward_kind') == '2h62_partial_topology':
+        from fk_2h62_topology_reward import TopologyComplexReward
+        return TopologyComplexReward(args.reference_cif, args.reference_pdb, config['reward'])
     if config.get('reward_kind', '2goo_reference') == '2h62_partial':
         from fk_2h62_reward import PartialComplexReward
         return PartialComplexReward(args.reference_cif, args.reference_pdb, config['reward'])

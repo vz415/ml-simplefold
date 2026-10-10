@@ -49,6 +49,21 @@ class FKOnlySamplingTests(unittest.TestCase):
         complete.assert_called_once_with(args.reference_cif, args.reference_pdb, settings)
         partial.assert_not_called()
 
+    def test_topology_reward_dispatch_is_explicit_and_preserves_settings(self):
+        topology, partial, complete = Mock(), Mock(), Mock()
+        args = argparse.Namespace(reference_cif=Path("observed.cif"), reference_pdb=Path("observed.pdb"))
+        settings = {"topology": {"distance_scale_angstrom": 5.}}
+        with patch.dict(sys.modules, {
+            "fk_2h62_topology_reward": SimpleNamespace(TopologyComplexReward=topology),
+            "fk_2h62_reward": SimpleNamespace(PartialComplexReward=partial),
+            "fk_complex_reward": SimpleNamespace(ComplexReward=complete),
+        }):
+            result = make_reward(args, {"reward_kind": "2h62_partial_topology", "reward": settings})
+        self.assertIs(result, topology.return_value)
+        topology.assert_called_once_with(args.reference_cif, args.reference_pdb, settings)
+        partial.assert_not_called()
+        complete.assert_not_called()
+
     def test_missing_baseline_is_recorded_without_sampling(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

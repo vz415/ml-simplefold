@@ -1,0 +1,18 @@
+# All four typed interfaces get a broad distance-pattern penalty.
+# Original 2h62_fk settings remain available for the existing sweep.
+defaults:
+  - 2h62_fk
+  - _self_
+
+reward_kind: 2h62_partial_topology
+# Retain chunk-two evaluation to match the original tau-0.3 run's batching.
+model_batch_size: 2
+reward:
+  penalties:
+    typed_interface_error: {weight: 1.0, scale: 1.0, cap: null}
+  topology:
+    distance_tolerance_angstrom: 2.0
+    distance_scale_angstrom: 5.0
+    receptor_anchor_count: 6
+    ligand_anchor_count_per_chain: 4
+    worst_copy_weight: 0.5
