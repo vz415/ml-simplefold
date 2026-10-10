@@ -52,20 +52,8 @@ class FKSampler(EMSampler):
     def __init__(self, *, beta=1.0, checkpoint_indices=(), ess_threshold=0.8,
                  **kwargs):
         super().__init__(**kwargs)
-        if not math.isfinite(beta) or beta < 0:
-            raise ValueError("beta must be finite and nonnegative")
-        if not 0 <= ess_threshold <= 1:
-            raise ValueError("ess_threshold must be in [0, 1]")
-        if self.num_timesteps < 1 or not 0 < self.t_start < 1:
-            raise ValueError("num_timesteps must be positive and t_start in (0, 1)")
-        if self.tau < 0 or not math.isfinite(self.tau):
-            raise ValueError("tau must be finite and nonnegative")
-        checkpoints = tuple(checkpoint_indices)
-        if any(not isinstance(i, int) or not 0 <= i < self.num_timesteps
-               for i in checkpoints):
-            raise ValueError("checkpoint_indices must be source-state indices 0 <= i < N")
         self.beta = float(beta)
-        self.checkpoint_indices = frozenset(checkpoints)
+        self.checkpoint_indices = frozenset(checkpoint_indices)
         self.ess_threshold = float(ess_threshold)
 
     @staticmethod
