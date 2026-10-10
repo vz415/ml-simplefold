@@ -22,6 +22,10 @@ try:
     from .structure_clashes import analyze_clashes
 except ImportError:
     from structure_clashes import analyze_clashes
+try:
+    from .complex_interfaces import InterfaceReference
+except ImportError:
+    from complex_interfaces import InterfaceReference
 
 GROUPS = (("BMP2", ("A", "D"), ("A", "B")),
           ("BMPR1A", ("B", "E"), ("C", "D")),
@@ -187,6 +191,7 @@ def analyze(args):
         actual = np.array([display_coords[(c, r)] for r in references[c].author_residues])
         if not np.allclose(actual, references[c].coordinates, atol=0.001, rtol=0):
             raise ValueError("Displayed reference coordinates differ from mmCIF")
+    interface_reference = InterfaceReference(args.reference_pdb, references)
     args.output_dir.mkdir(parents=True, exist_ok=True)
     reference_output = args.output_dir / "reference.pdb"
     if args.reference_pdb.resolve() != reference_output.resolve():
@@ -205,6 +210,8 @@ def analyze(args):
         output.mkdir(parents=True, exist_ok=True)
         raw_output = args.output_dir / "raw_predictions" / name
         raw_output.mkdir(parents=True, exist_ok=True)
+        ligand_output = args.output_dir / "ligand_aligned_predictions" / name
+        ligand_output.mkdir(parents=True, exist_ok=True)
         samples, parsed, matched = [], [], []
         for index, path in enumerate(paths):
             chains = read_prediction(path, references)
@@ -216,6 +223,11 @@ def analyze(args):
                 shutil.copyfile(path, raw)
             transformed_pdb(path, aligned, rotation, translation)
             metrics = {"global_CA_RMSD_angstrom": rmsd, **distance_metrics(fixed, moving, labels)}
+            interfaces = interface_reference.analyze(path, chains)
+            metrics.update(interfaces["metrics"])
+            ligand_aligned = ligand_output / f"sample_{index:03d}.pdb"
+            transformed_pdb(path, ligand_aligned, np.asarray(interfaces["rotation"]),
+                            np.asarray(interfaces["translation"]))
             clashes = analyze_clashes(path)
             for key in ("clash_count", "intrachain_clash_count", "interchain_clash_count",
                         "clashes_per_1000_heavy_atoms", "max_overlap_angstrom", "CA_nonadjacent_clash_count"):
@@ -233,7 +245,9 @@ def analyze(args):
             samples.append(dict(id=sample_id, source=str(path.resolve()), source_sha256=digest(path),
                                 raw_pdb=raw.relative_to(args.output_dir).as_posix(),
                                 aligned_pdb=aligned.relative_to(args.output_dir).as_posix(),
-                                mapping=mapping, metrics=metrics, per_chain=per_chain, clashes=clashes))
+                                ligand_aligned_pdb=ligand_aligned.relative_to(args.output_dir).as_posix(),
+                                mapping=mapping, metrics=metrics, per_chain=per_chain, clashes=clashes,
+                                interfaces=interfaces))
             parsed.append(chains)
             matched.append(matched_coordinates(chains, diversity_refs, mapping))
         pairs = []
@@ -248,6 +262,7 @@ def analyze(args):
     reference_clashes = analyze_clashes(args.reference_pdb, chain_components={
         "A": "BMP2", "D": "BMP2", "B": "BMPR1A", "E": "BMPR1A", "C": "ActRIIA", "F": "ActRIIA"})
     report = dict(reference_pdb="reference.pdb", matched_reference_CA=len(fixed),
+                  interface_reference=interface_reference.metadata,
                   reference_clashes=reference_clashes,
                   reference_BMP2_dimer_SG_distance_angstrom=bmp2_disulfide_site_distance(args.reference_pdb, ("A", "D")),
                   matched_diversity_CA=diversity_count, prediction_CA=full_length,

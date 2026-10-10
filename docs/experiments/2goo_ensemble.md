@@ -211,3 +211,62 @@ python scripts/build_complex_ensemble_viewer.py --analysis-dir artifacts/analysi
 The combined viewer at `artifacts/analysis/2goo_models/2026-10-06/index.html`
 also places the 3B ensemble first; its 100M card still contains the old pilot.
 No new sampling or remote transfers were needed for this viewer update.
+
+### 2026-10-09 wrist/knuckle and receptor placement analysis
+
+Added native interface diagnostics to the ten downloaded 3B predictions and
+the old single 100M pilot. Definitions, numbering correspondence, source papers,
+and reproduction commands are in [BMP2 receptor interfaces](bmp2_receptor_interfaces.md).
+Both viewers now default to BMP2-dimer alignment, with whole-assembly alignment
+still selectable. Individual sample selection shows all four receptor copies,
+their contact recovery/precision, placement/orientation, interface RMSD, and
+expandable hotspot and BMPR1A α1 details. All-sample mode compares samples and
+summarizes their new metrics alongside the established clashes and fold scores.
+
+The fixed reference has 53 wrist residue-pair contacts per BMPR1A copy
+(36/17 across the BMP2 monomers, reversed in the other copy), and 23 knuckle
+contacts per ACVR2A copy, all on its native BMP2 monomer. These are computed
+occupied-heavy-atom ≤4 Å contacts on our reference; do not force the paper's
+reported contact-residue totals onto this atom mask. Native α1 has six of seven
+residues in the chosen helix-like φ/ψ window; Gly82 has a helix-cap conformation.
+Its fraction is a diagnostic relative to 0.857, not a scalar to maximize.
+
+| 3B sample | Wrist contact recovery, copy mean ↑ | Knuckle contact recovery, copy mean ↑ | BMPR1A placement RMSD, copy mean (Å) ↓ | ACVR2A placement RMSD, copy mean (Å) ↓ | Raw clashes ↓ |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 1 | 0.358 | 0.348 | 29.38 | 31.72 | 364 |
+| 2 | 0.453 | 0.000 | 6.96 | 43.95 | 399 |
+| 3 | 0.396 | 0.000 | 20.91 | 39.44 | 2,321 |
+| 4 | 0.358 | 0.000 | 22.66 | 51.08 | 166 |
+| 5 | 0.396 | 0.283 | 28.63 | 32.16 | 471 |
+| 6 | 0.340 | 0.457 | 20.77 | 20.05 | 170 |
+| 7 | 0.349 | 0.000 | 21.56 | 39.88 | 1,886 |
+| 8 | 0.434 | 0.000 | 20.44 | 48.00 | 216 |
+| 9 | 0.396 | 0.000 | 19.12 | 40.54 | 2,345 |
+| 10 | 0.764 | 0.152 | 1.41 | 18.74 | 182 |
+
+Useful partial successes support the user's qualitative observation that some
+predictions work well at particular interfaces:
+
+- Sample 10: both wrist copies have 1.35–1.48 Å placement RMSD and 72–81%
+  contact recovery. Both knuckle copies are misplaced by 18.68–18.81 Å and
+  recover 13–17%. Its 0.63 Å C₂ deviation shows why near symmetry alone
+  cannot establish native receptor topology.
+- Sample 6: one ACVR2A copy has 1.20 Å placement RMSD, 0.50 Å interface
+  backbone RMSD, and 91.3% contact recovery; its counterpart is displaced
+  by 38.89 Å with zero recovery. Component means conceal this asymmetry.
+
+Across 3B samples, wrist contact recovery is 0.4245 ± 0.1248 and knuckle
+recovery 0.1239 ± 0.1760 (sample SD). BMP2-dimer fitted RMSD is
+1.131 ± 0.493 Å. The one 100M pilot has wrist recovery 0.0283 and knuckle
+recovery zero; this remains an unmatched one-sample comparison. Geometry
+agreement does not demonstrate functional binding, and favorable contact
+scores must be inspected with clashes.
+
+Validation: 33 coordinate-only tests cover rigid transforms, equivalent-copy
+assignment, contact masking and missing atoms, displaced but correctly folded
+receptors, incorrectly docked symmetric assemblies, hotspot correspondence,
+and dihedral conventions. Programmatic viewer checks use the actual 3Dmol
+GLModel API and a DOM harness to exercise sample/reference/alignment, protein,
+and red-dot toggles for both the dedicated 3B and combined viewers. This is not
+a WebGL screenshot check. Independent numerical review on real Sample 10
+confirmed invariance to all eight copy renamings and arbitrary rigid transforms.
