@@ -36,7 +36,9 @@ class FKSampler(EMSampler):
     as a finished structure. Only requested intermediate checkpoints can
     resample. ess_threshold is a fraction of particle count; 0 disables
     resampling. Decisions require ESS strictly below the threshold (with a small
-    numerical tolerance). All conditioning tensors whose leading dimension is
+    numerical tolerance). model_batch_size limits velocity forward calls, while
+    scoring, ESS, resampling and Brownian draws cover the full particle pool.
+    All conditioning tensors whose leading dimension is
     particle count must be identical across particles; this permits shared
     features and cached model conditioning to remain unchanged after selection.
 
@@ -49,11 +51,29 @@ class FKSampler(EMSampler):
     """
 
     def __init__(self, *, beta=1.0, checkpoint_indices=(), ess_threshold=0.8,
+                 model_batch_size=None,
                  **kwargs):
         super().__init__(**kwargs)
         self.beta = float(beta)
         self.checkpoint_indices = frozenset(checkpoint_indices)
         self.ess_threshold = float(ess_threshold)
+        self.model_batch_size = model_batch_size
+
+    def _velocity(self, model_fn, y, t, batch):
+        """Chunk model work only; weights and selection still cover all particles."""
+        count = y.shape[0]
+        if self.model_batch_size is None:
+            return model_fn(noised_pos=y, t=t.expand(count), feats=batch)["predict_velocity"]
+        velocity = torch.empty_like(y)
+        for start in range(0, count, self.model_batch_size):
+            end = min(start + self.model_batch_size, count)
+            feats = {key: value[start:end] if isinstance(value, torch.Tensor)
+                     and value.ndim and value.shape[0] == count else value
+                     for key, value in batch.items()}
+            velocity[start:end] = model_fn(
+                noised_pos=y[start:end], t=t.expand(end - start), feats=feats,
+            )["predict_velocity"]
+        return velocity
 
     @staticmethod
     def _reward(score_fn, estimate, t):
@@ -120,7 +140,7 @@ class FKSampler(EMSampler):
             # Same centering, model evaluation, score/drift and noise scaling as
             # EMSampler.euler_maruyama_step. Only RNG source and selection differ.
             y = center_random_augmentation(y, mask, augmentation=False, centering=True)
-            velocity = model_fn(noised_pos=y, t=t.expand(count), feats=batch)["predict_velocity"]
+            velocity = self._velocity(model_fn, y, t, batch)
             if checkpoint_fn is not None and index in self.checkpoint_indices:
                 checkpoint_fn(index, float(t), y.detach().clone())
             if index == 0 or index in self.checkpoint_indices:

@@ -6,6 +6,8 @@ checkpoint_times: [0.60, 0.75, 0.90, 0.97]
 common_start: true
 brownian_seed: 43
 resampling_seed: 44
+# Null keeps the full model batch; 2 evaluates pairs within the ten-particle pool.
+model_batch_size: null
 # Late clean estimates are scored using the same definitions as final PDBs.
 # Each receptor feature is the minimum across its two equivalent copies.
 reward:

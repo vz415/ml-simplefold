@@ -30,9 +30,11 @@ class SamplingLaunchTests(unittest.TestCase):
         self.assertEqual((standard.model, standard.samples, standard.sampling.mode),
                          ('simplefold_3B', 10, 'standard'))
         fk = config('experiment=2goo_fk', 'seed=9', 'sampling.beta=1.5',
+                    'sampling.model_batch_size=2',
                     'paths.cache_dir=/tmp/test-simplefold-cache')
         run_sampling.validate_config(fk)
         self.assertEqual((fk.seed, fk.sampling.beta), (9, 1.5))
+        self.assertEqual(fk.sampling.model_batch_size, 2)
         self.assertEqual(fk.paths.checkpoint_dir, '/tmp/test-simplefold-cache/checkpoints')
         self.assertEqual(fk.paths.ccd_dir, '/tmp/test-simplefold-cache/ccd')
 

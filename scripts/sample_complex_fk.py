@@ -24,6 +24,14 @@ def write_json(path, value):
     Path(path).write_text(json.dumps(value, indent=2, allow_nan=False) + '\n')
 
 
+def expand_shared_batch(batch, particles):
+    """Share singleton conditioning storage instead of copying large features."""
+    import torch
+    return {key: value.expand(particles, *value.shape[1:])
+            if isinstance(value, torch.Tensor) and value.ndim and value.shape[0] == 1
+            else value for key, value in batch.items()}
+
+
 def run_fk(args, config):
     """Run the paired pilot using settings resolved by run_sampling.py."""
     if not os.environ.get('SLURM_JOB_ID'):
@@ -55,12 +63,18 @@ def run_fk(args, config):
     if not checkpoint_path.is_file():
         raise FileNotFoundError(checkpoint_path)
     # Use the existing inference setup and atom mapping, with no training path.
+    model_batch_size = config['model_batch_size']
+    chunked = model_batch_size is not None
     inference_args = argparse.Namespace(
         backend='torch', simplefold_model=args.model, ckpt_dir=str(args.ckpt_dir),
-        nsample_per_protein=args.particles, num_steps=args.num_steps,
+        nsample_per_protein=1 if chunked else args.particles, num_steps=args.num_steps,
         tau=args.tau, plddt=False)
     model, device = initialize_folding_model(inference_args)
     model.eval().requires_grad_(False)
+    if chunked:
+        model.to('cpu')
+        torch.cuda.empty_cache()
+        print('Folding model offloaded for singleton ESM/input preparation.', flush=True)
     esm_model, esm_dict, af2_to_esm = initialize_esm_model(inference_args, device)
     esm_model.eval().requires_grad_(False)
     tokenizer, featurizer, processor, flow, base_sampler = initialize_others(inference_args, device)
@@ -82,6 +96,13 @@ def run_fk(args, config):
     # batch; release encoder GPU memory before running the two folding paths.
     del esm_model
     torch.cuda.empty_cache()
+    if chunked:
+        model.to(device)
+        batch = expand_shared_batch(batch, args.particles)
+        print(f'Shared inputs prepared; {args.particles} particles, '
+              f'model batches of {model_batch_size}.', flush=True)
+    print(f'GPU memory before sampling: allocated={torch.cuda.memory_allocated()/2**30:.2f} GiB, '
+          f'reserved={torch.cuda.memory_reserved()/2**30:.2f} GiB.', flush=True)
     steps = base_sampler.steps
     times = config['checkpoint_times']
     if not times or any(not 0 < t < base_sampler.w_cutoff for t in times):
@@ -102,6 +123,8 @@ def run_fk(args, config):
         'job_id': os.environ['SLURM_JOB_ID'], 'model': args.model, 'weights_fixed': True,
         'optimizer': None, 'compute_plddt': False, 'scale_angstrom': processor.scale,
         'num_steps': args.num_steps, 'tau': args.tau, 'particles': args.particles,
+        'model_batch_size': model_batch_size,
+        'shared_conditioning_storage': chunked,
         'common_start': bool(config['common_start']), 'initial_seed': args.seed,
         'brownian_seed': config['brownian_seed'], 'resampling_seed': config['resampling_seed'],
         'checkpoint_indices': indices, 'checkpoint_times': [float(steps[i]) for i in indices],
@@ -162,8 +185,11 @@ def run_fk(args, config):
             sampler = FKSampler(num_timesteps=args.num_steps, t_start=base_sampler.t_start,
                                 tau=args.tau, log_timesteps=base_sampler.log_timesteps,
                                 w_cutoff=base_sampler.w_cutoff, beta=beta,
-                                checkpoint_indices=indices, ess_threshold=config['ess_threshold'])
+                                checkpoint_indices=indices, ess_threshold=config['ess_threshold'],
+                                model_batch_size=model_batch_size)
             started = time.monotonic()
+            print(f'{label}: starting {args.num_steps} steps for {args.particles} particles.',
+                  flush=True)
             result = sampler.sample(
                 model, flow, initial.clone(), batch, score_fn=score_fn,
                 brownian_generator=torch.Generator(device=device).manual_seed(config['brownian_seed']),

@@ -8,9 +8,11 @@ import torch
 
 # The upstream model uses absolute imports rooted at src/simplefold.
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src" / "simplefold"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from model.flow import LinearPath
 from model.torch.fk_sampler import FKSampler, make_initial_noise
 from model.torch.sampler import EMSampler
+from sample_complex_fk import expand_shared_batch
 
 
 def generator(seed):
@@ -201,6 +203,53 @@ class FKSamplerTests(unittest.TestCase):
             with self.subTest(value=value):
                 with self.assertRaisesRegex(ValueError, "NaN or Inf"):
                     self.run_sampler(sampler, score=lambda x, t: torch.full((5,), value))
+
+    def test_chunked_velocity_preserves_global_resampling_and_rng(self):
+        noise = torch.zeros_like(self.noise)
+        noise[:, 0, 0] = torch.arange(5, dtype=noise.dtype)
+        noise[:, 1, 0] = -torch.arange(5, dtype=noise.dtype)
+        sizes = []
+
+        class ChunkModel(ToyVelocity):
+            def __call__(self, *, noised_pos, t, feats):
+                sizes.append(noised_pos.shape[0])
+                self.assert_shapes(noised_pos, t, feats)
+                return super().__call__(noised_pos=noised_pos, t=t, feats=feats)
+
+            @staticmethod
+            def assert_shapes(y, t, feats):
+                assert t.shape == (y.shape[0],)
+                assert feats['atom_pad_mask'].shape == y.shape[:2]
+
+        for beta in (0, 1000):
+            kwargs = dict(num_timesteps=5, t_start=.1, tau=.02, beta=beta,
+                          checkpoint_indices=(0, 2, 4), ess_threshold=1)
+            score = lambda x, t: x[:, 0, 0]
+            expected = self.run_sampler(FKSampler(**kwargs), noise=noise, score=score)
+            sizes.clear()
+            observed = self.run_sampler(FKSampler(model_batch_size=2, **kwargs),
+                                        model=ChunkModel(), noise=noise, score=score)
+            self.assertEqual(sizes, [2, 2, 1] * 5)
+            self.assertEqual(observed['history'], expected['history'])
+            torch.testing.assert_close(observed['denoised_coords'], expected['denoised_coords'],
+                                       rtol=0, atol=0)
+            if beta:
+                # Parent 4 lies in a different model chunk from descendants 0/1.
+                self.assertEqual(observed['history'][0]['parents'], [4] * 5)
+
+    def test_shared_conditioning_expands_without_copying_feature_storage(self):
+        source = {'coords': self.noise[:1].clone(),
+                  'atom_pad_mask': self.batch['atom_pad_mask'][:1].clone(),
+                  'dense_feature': torch.ones(1, 4, 4, dtype=torch.float64),
+                  'scalar': torch.tensor(1), 'aa_seq': ['AAAA']}
+        expanded = expand_shared_batch(source, 10)
+        for key in ('coords', 'atom_pad_mask', 'dense_feature'):
+            self.assertEqual(expanded[key].shape[0], 10)
+            self.assertEqual(expanded[key].stride(0), 0)
+            self.assertEqual(expanded[key].untyped_storage().data_ptr(),
+                             source[key].untyped_storage().data_ptr())
+        self.assertIs(expanded['scalar'], source['scalar'])
+        self.assertIs(expanded['aa_seq'], source['aa_seq'])
 
 
 if __name__ == "__main__":

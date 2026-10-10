@@ -115,6 +115,37 @@ Logs: `/data/homezvol2/ynkim4/ml-simplefold/logs/sample-57994465.{out,err}`.
 The 96 GB request is host RAM, not GPU VRAM. This is a fit/runtime test;
 submission alone does not establish that encoding or sampling fits on A30.
 
+Job `57994465` failed after 2m26s with CUDA OOM in `batch_to_device`, before
+ESM feature computation or sampling. Both models had loaded, but staging
+replicated ten-particle inputs requested 2.30 GiB with only 967.44 MiB free
+on the 23.60 GiB A30. No baseline/FK structures were produced.
+
+## Model evaluation in chunks of two
+
+Use `sampling.model_batch_size=2` to retain a ten-particle FK population while
+evaluating velocities two particles at a time. Rewards, ESS, parent selection
+and Brownian draws still span all ten particles at each step. The default
+`null` preserves full-batch inference. CUDA kernels can produce small numeric
+differences between batch sizes; chunking does not change the intended kernel
+or introduce five separate two-particle selection pools.
+
+For chunked runs, input preparation uses one copy. Folding weights are moved
+to CPU while ESM features are computed under `no_grad`; the encoder is then
+released before folding weights return to GPU. Shared conditioning is expanded
+as tensor views, avoiding ten physical copies of dense input features.
+Model outputs are collected in the original particle order before selection.
+Checkpoint metadata records the configured model batch size and shared storage.
+
+```bash
+sbatch --parsable --gres=gpu:A30:1 --mem=96G --time=01:45:00 --job-name=2goo-3B-fk-A30-chunk2 scripts/hpc_sample.slurm experiment=2goo_fk sampling.model_batch_size=2
+```
+
+All 26 local toy/objective/orchestration tests pass. The chunking test covers
+a final partial chunk, identical baseline/steered CPU trajectories, parent
+selection across model chunks and unchanged RNG/history. A storage test checks
+that expanded features retain the singleton backing allocation. These tests
+do not establish A30 fit; that requires remote execution.
+
 The earlier positional launch commands in historical experiment receipts
 refer to the launcher before this Hydra refactor. Use the named profiles
 above with the current checkout.
