@@ -270,3 +270,29 @@ GLModel API and a DOM harness to exercise sample/reference/alignment, protein,
 and red-dot toggles for both the dedicated 3B and combined viewers. This is not
 a WebGL screenshot check. Independent numerical review on real Sample 10
 confirmed invariance to all eight copy renamings and arbitrary rigid transforms.
+
+### Sample 1 interpretation: wrong receptor identity at overlapping sites
+
+The user's Sample 1 screenshot appeared to show favorable receptor overlays
+despite zero contact scores for BMPR1A reference B → prediction C and ACVR2A
+reference C → prediction F. These labels compare chains in different structures;
+they are not receptor–ligand chain pairs. A contact score of zero means zero
+recovered native residue pairs, not zero physical predicted contacts.
+
+| Reference → prediction | Native contacts recovered | Precision: recovered / predicted | Placement RMSD (Å) |
+| --- | ---: | ---: | ---: |
+| BMPR1A B → C | 0/53 | 0/69 | 55.82 |
+| BMPR1A E → D | 38/53 | 38/46 | 2.93 |
+| ACVR2A C → F | 0/23 | 0/21 | 58.48 |
+| ACVR2A F → E | 16/23 | 16/22 | 4.95 |
+
+In the BMP2 frame, prediction BMPR1A C is 8.58 Å by matched-residue centroid
+from reference ACVR2A C, and its ligand-contact residues overlap 12 of the
+14 BMP2 residues in that knuckle epitope. Prediction ACVR2A F is 4.37 Å by
+centroid from reference BMPR1A B, with contacts to 10 of 23 BMP2 residues in
+that wrist epitope. This supports a wrong-type receptor occupying each of those
+sites, rather than successful native docking of those copies. The other pair
+has partial native interface recovery. Shape/projection overlap alone is
+insufficient; toggling each protein type separately reveals the distinction.
+The viewer now shows recovered/native and recovered/predicted counts beside
+the percentages, and explicitly explains cross-structure chain labels.
