@@ -53,3 +53,20 @@ independent starting seeds.
 
 Submission receipts record the source commit and exact tau-to-job mapping.
 No completed sweep or improvement is claimed by this experiment setup.
+
+## Submitted jobs
+
+Source: `f431a171a8f62f1cce5d7efccffc13f918fa0423`. All five were initially
+pending for resources. Each job uses the command above with its named tau.
+
+| Tau | A100 job | Expected baseline / FK structures |
+| --- | --- | --- |
+| 0.01 | 57994904 | 10 / 10 |
+| 0.05 | 57994905 | 10 / 10 |
+| 0.1 | 57994906 | 10 / 10 |
+| 0.3 | 57994907 | 10 / 10 |
+| 0.8 | 57994908 | 10 / 10 |
+
+The same mapping and exact submission commands are saved in the local/remote
+sweep manifest and per-job Obsidian receipts. No new model weights were
+downloaded or loaded locally.
