@@ -296,3 +296,23 @@ has partial native interface recovery. Shape/projection overlap alone is
 insufficient; toggling each protein type separately reveals the distinction.
 The viewer now shows recovered/native and recovered/predicted counts beside
 the percentages, and explicitly explains cross-structure chain labels.
+
+### Sample selection and ordering audit
+
+The user reported that the lowest-error Sample 10 appeared to be displayed as
+Sample 1. No mismatch was reproduced in the generated artifacts: every source
+SHA-256 matches, every ligand-aligned Cα equals its source transformed by the
+saved BMP2 fit within PDB rounding, and independently recalculated displayed
+receptor placement scores match the JSON. Sample 1 is `sampled_0` (global
+assembly RMSD 26.52 Å); Sample 10 is `sampled_9` (10.73 Å, lowest in this batch).
+An in-app browser connection failed, so the user's older tab state was not
+verified. The prior Sample 1 interpretation applies to the actual `sampled_0`
+coordinates, not an independently confirmed identity of the screenshot.
+
+The selector now includes assembly RMSD beside each sample label. Buttons in
+the **Sample metrics and structure files** table select the same sample and
+highlight its row; clicking from reference-only mode returns to overlay.
+Programmatic checks of the actual GLModel hidden flags and all displayed Cα
+coordinates passed for every sample in both ligand and global alignments,
+including the combined viewer's one-sample 100M card. Table RMSD, selected
+status, and highlighted row agree with each chosen structure.
