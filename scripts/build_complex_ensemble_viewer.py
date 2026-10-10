@@ -69,7 +69,7 @@ function renderCard(model,index){
    if(!atoms.length)return;
    const atom=atoms.reduce((last,a)=>Number(a.resi)>=Number(last.resi)?a:last);
    structure.setStyle({chain,resi:atom.resi,atom:'CA'},{sphere:{color:'#d7191c',radius:1.8}},true);
-   if(withLabels)endLabels.push(viewer.addLabel(`${label} · ${chain}:${atom.resi} C-end`,{
+   if(withLabels)endLabels.push(viewer.addLabel(label,{
     position:{x:atom.x,y:atom.y,z:atom.z},fontSize:11,fontColor:'#b51219',
     backgroundColor:'white',backgroundOpacity:0.85,showBackground:true,
     borderThickness:0,inFront:true}));
@@ -87,11 +87,11 @@ function renderCard(model,index){
     const groupIndex=Number(input.dataset.group);
     if(!input.checked||groupIndex===0)return; // BMP2 is a secreted ligand.
     const g=groups[groupIndex],name=groupIndex===1?'BMPR1A':'ActRIIA';
-    if(mode.value!=='predictions')markReceptorEnds(reference,g.ref,name+' ref',true);
+    if(mode.value!=='predictions')markReceptorEnds(reference,g.ref,name,true);
     predictions.forEach((m,j)=>{
      if(mode.value==='reference'||(selector.value!=='all'&&Number(selector.value)!==j))return;
      const withLabels=mode.value==='predictions'&&(selector.value!=='all'||samples.length===1);
-     markReceptorEnds(m,g.pred,name+' sample '+samples[j].id,withLabels);
+     markReceptorEnds(m,g.pred,name,withLabels);
     });
    });
   }
