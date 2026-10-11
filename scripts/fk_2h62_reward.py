@@ -172,6 +172,9 @@ class PartialComplexReward:
             self.settings.update(settings)
         self.references = {c: reference_ca(reference_cif, c) for c in "ABCD"}
         self.prediction_references = dict(self.references, E=self.references["B"], F=self.references["C"])
+        # Terminal-trim controls declare zero-based, half-open spans in the
+        # original polymer. Native contacts and hotspot numbering stay fixed.
+        self.prediction_sequence_spans = self.settings.get("prediction_sequence_spans", {})
         self.reference_records, self.native, _ = atom_records(reference_pdb, self.references)
         self.motifs = {}
         self.motifs["W60_packing"] = self._packing("C", 59, W60_RING, (33, 34, 87, 89, 99))
@@ -196,6 +199,8 @@ class PartialComplexReward:
             "distance_policy": "Native-centered flat window with Gaussian decay on either side; full native geometry scores 1 including native distances >4 Å.",
             "Q86_policy": "Both complementary heavy-atom distances and four native-centered approach angles required. This is heavy-atom geometry, not explicit-hydrogen hydrogen-bond validation.",
             "positive_maximum": sum(self.settings["positive_weights"].values()),
+            "prediction_sequence_spans": self.prediction_sequence_spans,
+            "prediction_sequence_span_policy": "Zero-based half-open original-polymer spans per component; atom keys and observed CAs are mapped back to the original full-sequence positions. Internal unresolved residues are retained.",
             "motifs": self.motifs, "Q86_native_distances_angstrom": self.q_targets,
             "Q86_native_approach_angles_degrees": self.q_angle_targets,
             "fixed_disulfides": self.fixed_disulfides,
@@ -295,8 +300,34 @@ class PartialComplexReward:
             result[key] = -spec["weight"] * value
         return result
 
+    def _read_prediction(self, path):
+        references = dict(self.prediction_references)
+        reference_components = {"A": "BMP2", "D": "BMP2", "B": "BMPR1A",
+                                "E": "BMPR1A", "C": "ACVR2B", "F": "ACVR2B"}
+        for chain, component in reference_components.items():
+            if component in self.prediction_sequence_spans:
+                start, end = self.prediction_sequence_spans[component]
+                references[chain] = replace(references[chain],
+                                             full_sequence=references[chain].full_sequence[start:end])
+        chains = read_prediction(path, references)
+        for chain, component in COMPONENTS.items():
+            if component in self.prediction_sequence_spans:
+                start, _ = self.prediction_sequence_spans[component]
+                reference_chain = {"BMP2": "A", "BMPR1A": "B", "ACVR2B": "C"}[component]
+                record = chains[chain]
+                chains[chain] = replace(record,
+                                        full_positions=[position + start for position in record.full_positions],
+                                        full_sequence=self.references[reference_chain].full_sequence)
+        return chains
+
+    @staticmethod
+    def _observed_coordinates(chain, full_positions):
+        # Predictions are contiguous polymer segments, including internal gaps
+        # unresolved in the experiment. Coordinate arrays remain unpadded.
+        return chain.coordinates[np.asarray(full_positions) - chain.full_positions[0]]
+
     def score(self, path):
-        chains = read_prediction(path, self.prediction_references)
+        chains = self._read_prediction(path)
         records, atoms, omitted = atom_records(path, chains)
         geometry = fixed_geometry(records, self.fixed_disulfides, self.bond_targets,
                                   self.settings["bond_tolerance_angstrom"], self.settings["clash_overlap_threshold_angstrom"])
@@ -304,14 +335,14 @@ class PartialComplexReward:
         candidates = []
         for ligand_order in (("A", "B"), ("B", "A")):
             ligand = dict(zip(("A", "D"), ligand_order))
-            moving = np.concatenate([chains[ligand[c]].coordinates[self.references[c].full_positions] for c in ("A", "D")])
+            moving = np.concatenate([self._observed_coordinates(chains[ligand[c]], self.references[c].full_positions) for c in ("A", "D")])
             rotation, translation, errors = kabsch(moving, fixed)
             local = {(component, pc, site): self._copy_features(atoms, pc, ligand, site, component)
                      for component, copies in (("BMPR1A", "CD"), ("ACVR2B", "EF")) for pc in copies for site in (0, 1)}
             for bmpr, acvr in itertools.product(itertools.permutations("CD"), itertools.permutations("EF")):
                 copies = [local[component, pc, site] for component, order in (("BMPR1A", bmpr), ("ACVR2B", acvr)) for site, pc in enumerate(order)]
                 mapping = dict(ligand, B=bmpr[0], C=acvr[0])
-                placement = {rc: float(np.sqrt(np.mean(np.sum((chains[mapping[rc]].coordinates[self.references[rc].full_positions] @ rotation + translation - self.references[rc].coordinates) ** 2, axis=1)))) for rc in "BC"}
+                placement = {rc: float(np.sqrt(np.mean(np.sum((self._observed_coordinates(chains[mapping[rc]], self.references[rc].full_positions) @ rotation + translation - self.references[rc].coordinates) ** 2, axis=1)))) for rc in "BC"}
                 features = self._assignment_features(copies)
                 features.update(BMP2_dimer_CA_RMSD_angstrom=float(np.sqrt(np.mean(errors ** 2))),
                                 observed_receptor_placement_CA_RMSD_angstrom=max(placement.values()),
