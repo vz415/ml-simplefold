@@ -1,0 +1,15 @@
+# Contact steering plus the ACVR2B L61 / BMP2 S88 backbone approach penalty.
+defaults:
+  - 2h62_fk_contacts
+  - _self_
+
+reward_kind: 2h62_partial_contacts_l61
+reward:
+  l61_geometry:
+    distance_tolerance_angstrom: 0.75
+    distance_scale_angstrom: 3.0
+    angle_tolerance_degrees: 20.0
+    angle_scale_degrees: 30.0
+    missing_geometry_error: 10.0
+  penalties:
+    ACVR2B_L61_geometry_error: {weight: 0.5, scale: 1.0, cap: null}
