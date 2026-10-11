@@ -1,0 +1,15 @@
+# Cooperative ACVR2B anchors plus whole-interface contacts; L61 diagnostic only.
+defaults:
+  - 2h62_fk_contacts_l61
+  - _self_
+
+reward_kind: 2h62_partial_cooperative
+run_baseline: false
+checkpoint_times: [0.30, 0.60, 0.75, 0.90, 0.97]
+reward:
+  positive_weights:
+    W60_packing: 0.0
+    Y42_engagement: 0.0
+    ACVR2B_interface_score: 3.0
+  penalties:
+    ACVR2B_L61_geometry_error: {weight: 0.0, scale: 1.0, cap: null}

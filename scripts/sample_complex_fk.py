@@ -39,6 +39,9 @@ def sampling_conditions(config):
 
 
 def make_reward(args, config):
+    if config.get('reward_kind') == '2h62_partial_cooperative':
+        from fk_2h62_cooperative_reward import CooperativeComplexReward
+        return CooperativeComplexReward(args.reference_cif, args.reference_pdb, config['reward'])
     if config.get('reward_kind') == '2h62_partial_contacts_l61':
         from fk_2h62_l61_reward import L61ComplexReward
         return L61ComplexReward(args.reference_cif, args.reference_pdb, config['reward'])
