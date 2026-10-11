@@ -76,3 +76,124 @@ inputs, zero changes for a no-op, known chain mapping with changed residue
 numbers, sequence/missing-atom rejection, and separation of receptor translation
 from fold drift. Native connectivity and coordinate-preserving preparation are
 checked on the actual pilot files.
+
+## Submission — 2026-10-11 10:43 PDT
+
+Array **58031292** started both tasks immediately on standard CPU nodes.
+
+| Array task | Numeric task job / artifact directory | Input |
+|---|---|---|
+| 58031292_0 | 58031293 | τ=0.3, source 58030762, displayed sample 5 |
+| 58031292_1 | 58031292 | τ=0.8, source 58030763, displayed sample 6 |
+
+Source commit: `cec470e`. Remote command: `sbatch --array=0-1 scripts/hpc_refine.slurm`
+from `/data/homezvol2/ynkim4/ml-simplefold`. Python entry point:
+`python scripts/run_rosetta_refinement.py`; case selection comes from
+`SLURM_ARRAY_TASK_ID`, with no explicit Hydra overrides. Resource request per
+structure: 1 CPU, 8 GB, 1 hour, account `eehui_lab`, QoS `normal`.
+
+Remote outputs: `/pub/ynkim4/ml-simplefold/artifacts/runs/58031293/` and
+`/pub/ynkim4/ml-simplefold/artifacts/runs/58031292/`.
+
+Local downloads will be under `artifacts/remote-runs/<numeric-task-job>/`.
+Local checkout had unrelated viewer/research-note edits; only the new refinement
+workflow, tests, config, allowlist entry and this protocol note were committed.
+
+### Startup I/O correction — 2026-10-11
+
+Initial array 58031292 was cancelled after roughly four minutes without entering
+Rosetta: both Python tasks were blocked in BeeGFS metadata I/O while closing
+Hydra log/config files under `/pub`. No refinement took place in that attempt.
+
+Replacement array **58031310** (source commit `ac9d7e2`) uses the same two inputs,
+protocol and seed; only output staging changes. Array task 0 is numeric job
+**58031311** (τ=0.3 sample 5), task 1 is **58031310** (τ=0.8 sample 6).
+Both started immediately. Rosetta/Hydra writes use
+`$TMPDIR/simplefold-refinement`; a temporary recovery copy is retained at
+`artifacts/refinement-stage/<job-id>/` in the remote home checkout before
+publication to `/pub/ynkim4/ml-simplefold/artifacts/runs/<job-id>/`.
+The launcher supplies `hydra.run.dir` accordingly; model/reference inputs and
+canonical long-term storage remain under `/pub`.
+
+Starting independent heavy-atom measurements:
+
+| Source | Total / interchain clashes | Bonds outside 0.1 Å tolerance | Largest bond deviation | FK reward |
+|---|---:|---:|---:|---:|
+| τ=0.3 sample 5 | 86 / 21 | 122 / 4843 | 0.917 Å | +2.4090 |
+| τ=0.8 sample 6 | 166 / 46 | 356 / 4843 | 0.494 Å | +2.8483 |
+
+## Completed pilot: τ=0.3 displayed sample 5
+
+Task **58031311** completed in approximately 9.1 minutes of Rosetta plus
+analysis. All 18 output files were downloaded and verified against remote
+SHA-256 hashes (see local `download-verification.json`). All 27 final SSBOND
+records match the explicit prepared topology. Raw sampling PDB remains intact.
+
+| Measure | Original | Refined |
+|---|---:|---:|
+| Heavy-atom overlaps counted as clashes | 86 | 48 |
+| Interchain clashes | 21 | 5 |
+| Bond deviations >0.1 Å | 122 / 4843 | 2 / 4849 |
+| Bond-length deviation RMS | 0.0481 Å | 0.0165 Å |
+| Maximum bond-length deviation | 0.9169 Å | 0.1313 Å |
+| SG–SG range across 27 fixed disulfides | 1.693–2.249 Å | 2.020–2.062 Å |
+| Rescored FK reward | +2.4090 | +4.2537 |
+
+Assembly Cα drift is **0.137 Å**; BMP2 dimer drift is 0.130 Å. Receptor
+orientation changes are below 0.08°, and centers move under 0.02 Å in the BMP2
+frame. The six added heavy atoms are terminal OXT atoms; hydrogens are excluded
+from these counts.
+
+### Interface tradeoffs (original coherent assignment held fixed)
+
+| Receptor copy | Site | Native-contact recovery before → after |
+|---|---|---:|
+| BMPR1A D | observed | 80.4% → 80.4% |
+| BMPR1A C | inferred | 84.3% → 76.5% |
+| ACVR2B F | observed | 70.0% → 63.3% |
+| ACVR2B E | inferred | 66.7% → 53.3% |
+
+W60 and Y42 distance features remain 1.0 for both ACVR2B copies, and L61
+geometry remains compatible. However, inferred-side BMPR1A Q86 reorients:
+its OE1–BMP2 L51-N distance changes from 2.747 to 5.156 Å. Its inactive
+Q86 geometry feature drops from 0.9983 to 0.0010. **The FK reward rises mainly
+because the bond-strain penalty is removed, not because every interface
+improves.** This is a repaired candidate to inspect, not an automatically
+accepted replacement for the raw seed.
+
+Remaining overlap counts use uniform heavy-atom radii and can include close
+polar contacts; they are not MolProbity clashscores. The largest remaining
+interchain overlaps involve BMP2 Lys101 and the trimmed BMPR1A C-terminal
+Asp84 at approximately 2.44 Å. Full stereochemical validation is still separate.
+
+Local comparison:
+`artifacts/remote-runs/58031311/comparison.json`.
+Refined PDB:
+`artifacts/remote-runs/58031311/relaxed/input_0001.pdb`.
+Remote canonical directory:
+`/pub/ynkim4/ml-simplefold/artifacts/runs/58031311/`.
+
+## Connectivity interruption during the second pilot
+
+Direct laptop HPC3 SSH was working, then timed out. Cisco status reports
+**Disconnected** on both the current laptop and documented old-Mac fallback.
+No VPN was started, stopped, or reconfigured. Reconnection was requested.
+
+Last confirmed task 58031310 state: running, third of four stages, approximately
+15 minutes elapsed. Do not infer its final status until Slurm is reachable again.
+Task 58031311 is complete, published under `/pub`, downloaded and verified.
+
+After reconnecting, query array 58031310 with `sacct`/`squeue`, then collect
+finished task 58031310 via the dedicated transfer endpoint. The local collector
+is `logs/rosetta-refinement/collect_pilot.py` and can be run with:
+
+```bash
+/Users/vincentzaballa/anaconda3/envs/simplefold/bin/python \
+  logs/rosetta-refinement/collect_pilot.py 58031310
+```
+
+It checks completion, downloads the exact run directory, verifies every SHA-256
+hash and all 27 final disulfide annotations, and writes a summary under
+`artifacts/refinement/2h62/`. Inspect original-assignment per-copy contacts and
+Q86 geometry alongside chemistry improvements. No further refinement variant
+or BMP2–BMPR1A–ACVR2A job has been launched.
