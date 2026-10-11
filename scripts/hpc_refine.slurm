@@ -18,4 +18,17 @@ conda activate "${SIMPLEFOLD_ENV_PREFIX:-/data/homezvol2/ynkim4/.conda/envs/simp
 export OMP_NUM_THREADS=1
 export OPENBLAS_NUM_THREADS=1
 export PYTHONUNBUFFERED=1
-exec python scripts/run_rosetta_refinement.py "$@"
+# Keep Rosetta's frequent writes off the shared filesystem. The home copy is
+# temporary recovery storage; /pub remains the canonical output destination.
+work_dir="${TMPDIR:?Slurm must provide node-local TMPDIR}/simplefold-refinement"
+stage_dir="${SIMPLEFOLD_REFINEMENT_STAGE_DIR:-$PWD/artifacts/refinement-stage}/${SLURM_JOB_ID}"
+publish_dir="${SIMPLEFOLD_ARTIFACT_DIR:-/pub/ynkim4/ml-simplefold/artifacts}/runs/${SLURM_JOB_ID}"
+status=0
+python scripts/run_rosetta_refinement.py "hydra.run.dir=$work_dir" "$@" || status=$?
+mkdir -p "$stage_dir"
+cp -a "$work_dir/." "$stage_dir/"
+printf 'Recovery copy: %s\n' "$stage_dir"
+mkdir -p "$publish_dir"
+cp -a "$stage_dir/." "$publish_dir/"
+printf 'Published refinement: %s\n' "$publish_dir"
+exit "$status"
