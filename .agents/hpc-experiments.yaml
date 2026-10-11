@@ -9,3 +9,5 @@ allowed_scripts:
   - hpc_sample.slurm
   - hpc_cpu_smoke.slurm
   - hpc_storage_migrate.slurm
+  # Explicitly authorized restrained Rosetta pilot on the two selected predictions.
+  - hpc_refine.slurm

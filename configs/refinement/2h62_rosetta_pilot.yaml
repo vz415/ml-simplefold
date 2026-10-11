@@ -1,0 +1,28 @@
+# Two selected successful structures; array tasks choose one source each.
+name: 2h62-rosetta-pilot
+case_index: ${oc.env:SLURM_ARRAY_TASK_ID,0}
+artifact_dir: ${oc.env:SIMPLEFOLD_ARTIFACT_DIR,/pub/ynkim4/ml-simplefold/artifacts}
+reference_cif: ${artifact_dir}/datasets/references/2h62-inpaint/observed.cif
+reference_pdb: ${artifact_dir}/datasets/references/2h62-inpaint/observed.pdb
+cases:
+  - source_job: '58030762'
+    source_sample: 5
+    source_file: 2h62-inpaint-bmpr1a-trimmed_sampled_4.pdb
+  - source_job: '58030763'
+    source_sample: 6
+    source_file: 2h62-inpaint-bmpr1a-trimmed_sampled_5.pdb
+rosetta:
+  executable: relax.hdf5.linuxgccrelease
+  database: ${oc.env:ROSETTA3_DB,/dfs8/commondata/rosetta/3.13/database}
+  score_weights: ref2015_cart
+  backbone_constraint_sd_angstrom: 0.5
+  repeats: 1
+  repulsive_weights: [0.02, 0.25, 0.55, 1.0]
+  minimizer_tolerance: 0.01
+  final_minimizer_tolerance: 0.00001
+  seed: 73
+hydra:
+  job:
+    chdir: false
+  run:
+    dir: ${artifact_dir}/runs/${oc.env:SLURM_JOB_ID,unsubmitted}
