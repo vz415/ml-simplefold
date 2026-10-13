@@ -1,0 +1,962 @@
+{
+  "schema_version": 1,
+  "purpose": "Single authoritative catalog of scoring recipes and their within-complex rankings. Existing YAML files are historical launch configurations, not a ranking source.",
+  "created_at": "2026-10-13T16:48:21.664698+00:00",
+  "ranking_policy": {
+    "rank_1": "Best supported recipe for this complex and construct; set only after reviewing results or recording Vincent confirmation.",
+    "unranked": "rank=null means not evaluated/ranked here; array order does not imply performance.",
+    "criteria": [
+      "type-I interface quality for both copies",
+      "type-II interface quality for both copies",
+      "physical geometry and clashes",
+      "consistency across samples, seeds and tau"
+    ],
+    "reward_warning": "Raw optimized rewards are not comparable across different scoring functions.",
+    "history": "Retain previous best recipes and append promotions to ranking_history. Do not overwrite their configurations.",
+    "construct_warning": "Different constructs require separate comparison groups and compatible baselines."
+  },
+  "future_sampling_defaults": {
+    "tau_sweep": [
+      0.1,
+      0.3,
+      0.8
+    ],
+    "checkpoint_times": [
+      0.1,
+      0.3,
+      0.6,
+      0.75,
+      0.9
+    ],
+    "status": "User-approved planning settings only; historical recipe settings below are preserved. No jobs launched."
+  },
+  "complexes": {
+    "BMP2_BMPR1A_ACVR2A": {
+      "reference_structure": "2GOO",
+      "best_recipe_id": null,
+      "previous_best_recipe_ids": [],
+      "ranking_status": "awaiting_Vincent_clarification_and_result_links",
+      "ranking_history": [],
+      "recipes": [
+        {
+          "recipe_id": "2goo_contacts",
+          "rank": null,
+          "status": "unranked_existing_candidate",
+          "comparison_group": "original_construct",
+          "parent_recipe_id": null,
+          "source": {
+            "git_revision": "77acf12379a0cbd76fa95e032d49e1f1c938f31b",
+            "experiment_profile": "2goo_fk",
+            "fasta": "examples/2goo_hexamer.fasta",
+            "fasta_sha256": "201f421fa4a4ee5c7c8768cd5bbc0bbe93cc9274a19c417abba259436561cf86"
+          },
+          "sampling_snapshot": {
+            "mode": "fk",
+            "beta": 2.0,
+            "ess_threshold": 0.8,
+            "checkpoint_times": [
+              0.6,
+              0.75,
+              0.9,
+              0.97
+            ],
+            "common_start": true,
+            "brownian_seed": 43,
+            "resampling_seed": 44,
+            "model_batch_size": null,
+            "reward": {
+              "positive_weights": {
+                "ACVR2A_hotspot_contact_recall": 2.0,
+                "ACVR2A_native_contact_recall": 1.0,
+                "ACVR2A_native_contact_precision": 1.0,
+                "BMPR1A_hotspot_contact_recall": 1.0,
+                "BMPR1A_native_contact_recall": 1.0,
+                "BMPR1A_native_contact_precision": 0.5
+              },
+              "penalties": {
+                "BMP2_dimer_CA_RMSD_angstrom": {
+                  "weight": 0.25,
+                  "scale": 2.0,
+                  "cap": 4.0
+                },
+                "BMPR1A_worst_placement_CA_RMSD_angstrom": {
+                  "weight": 0.25,
+                  "scale": 5.0,
+                  "cap": 4.0
+                },
+                "clashes_per_1000_heavy_atoms": {
+                  "weight": 0.5,
+                  "scale": 50.0,
+                  "cap": 4.0
+                }
+              }
+            },
+            "reward_kind": "2goo_reference"
+          },
+          "run_settings_snapshot": {
+            "model": "simplefold_3B",
+            "num_steps": 500,
+            "samples": 10,
+            "tau": 0.01,
+            "seed": 42
+          },
+          "reference_paths_snapshot": {
+            "reference_dir": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2goo-native",
+            "reference_cif": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2goo-native/reference.cif",
+            "reference_pdb": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2goo-native/reference.pdb"
+          },
+          "evaluation": {
+            "type_I": null,
+            "type_II": null,
+            "geometry_and_clashes": null,
+            "consistency": null
+          },
+          "successful_tau_values": [],
+          "evidence_runs": [],
+          "success_confirmation": null
+        }
+      ]
+    },
+    "BMP2_BMPR1A_ACVR2B": {
+      "reference_structure": "2H62",
+      "best_recipe_id": "2h62_contacts_l61_trimmed",
+      "previous_best_recipe_ids": [],
+      "ranking_status": "Vincent_confirmed_preferred_starting_recipe",
+      "ranking_history": [
+        {
+          "timestamp": "2026-10-13T16:58:38.311875+00:00",
+          "previous_best_recipe_id": null,
+          "new_best_recipe_id": "2h62_contacts_l61_trimmed",
+          "authority": "Vincent",
+          "reason": "Practical starting-point preference: L61-on succeeded at tau 0.3 and 0.8. This is not a claim of highest DockQ or proof that L61 is necessary."
+        }
+      ],
+      "recipes": [
+        {
+          "recipe_id": "2h62_hotspots",
+          "rank": null,
+          "status": "unranked_existing_candidate",
+          "comparison_group": "original_construct",
+          "parent_recipe_id": null,
+          "source": {
+            "git_revision": "77acf12379a0cbd76fa95e032d49e1f1c938f31b",
+            "experiment_profile": "2h62-inpaint-fk",
+            "fasta": "examples/2h62-inpaint.fasta",
+            "fasta_sha256": "a605cdac5e0b1f081eead982faa42842efa48587022eea667adc1decfc7fc914"
+          },
+          "sampling_snapshot": {
+            "mode": "fk",
+            "reward_kind": "2h62_partial",
+            "run_baseline": false,
+            "baseline_prediction_dir": "/pub/ynkim4/ml-simplefold/artifacts/runs/57998266/predictions_simplefold_3B",
+            "beta": 2.0,
+            "ess_threshold": 0.8,
+            "checkpoint_times": [
+              0.6,
+              0.75,
+              0.9,
+              0.97
+            ],
+            "common_start": true,
+            "brownian_seed": 43,
+            "resampling_seed": 44,
+            "model_batch_size": null,
+            "reward": {
+              "positive_weights": {
+                "W60_packing": 2.0,
+                "Y42_engagement": 1.0,
+                "Q86_geometry": 2.0
+              },
+              "penalties": {
+                "BMP2_dimer_CA_RMSD_angstrom": {
+                  "weight": 0.5,
+                  "scale": 2.0,
+                  "cap": 4.0
+                },
+                "observed_receptor_placement_CA_RMSD_angstrom": {
+                  "weight": 0.5,
+                  "scale": 10.0,
+                  "cap": 4.0
+                },
+                "clashes_per_1000_heavy_atoms": {
+                  "weight": 0.5,
+                  "scale": 50.0,
+                  "cap": 4.0
+                },
+                "covalent_bond_strain": {
+                  "weight": 0.5,
+                  "scale": 1.0,
+                  "cap": 4.0
+                }
+              },
+              "distance_tolerance_angstrom": 0.75,
+              "orientation_tolerance_degrees": 20.0,
+              "bond_tolerance_angstrom": 0.1,
+              "clash_overlap_threshold_angstrom": 0.4
+            }
+          },
+          "run_settings_snapshot": {
+            "model": "simplefold_3B",
+            "num_steps": 500,
+            "samples": 10,
+            "tau": 0.01,
+            "seed": 42
+          },
+          "reference_paths_snapshot": {
+            "reference_dir": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2h62-inpaint",
+            "reference_cif": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2h62-inpaint/observed.cif",
+            "reference_pdb": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2h62-inpaint/observed.pdb"
+          },
+          "evaluation": {
+            "type_I": null,
+            "type_II": null,
+            "geometry_and_clashes": null,
+            "consistency": null
+          },
+          "successful_tau_values": [],
+          "evidence_runs": [],
+          "success_confirmation": null,
+          "evidence_ids": [
+            "BMP2_ACVR2B_W60_Y42"
+          ],
+          "evidence_link_scope": "Partial source links; recipe inclusion does not mean every evidence-linked term is enabled. See actual weights."
+        },
+        {
+          "recipe_id": "2h62_topology",
+          "rank": null,
+          "status": "unranked_existing_candidate",
+          "comparison_group": "original_construct",
+          "parent_recipe_id": "2h62_hotspots",
+          "source": {
+            "git_revision": "77acf12379a0cbd76fa95e032d49e1f1c938f31b",
+            "experiment_profile": "2h62-inpaint-fk-topology",
+            "fasta": "examples/2h62-inpaint.fasta",
+            "fasta_sha256": "a605cdac5e0b1f081eead982faa42842efa48587022eea667adc1decfc7fc914"
+          },
+          "sampling_snapshot": {
+            "mode": "fk",
+            "reward_kind": "2h62_partial_topology",
+            "run_baseline": false,
+            "baseline_prediction_dir": "/pub/ynkim4/ml-simplefold/artifacts/runs/57998266/predictions_simplefold_3B",
+            "beta": 2.0,
+            "ess_threshold": 0.8,
+            "checkpoint_times": [
+              0.6,
+              0.75,
+              0.9,
+              0.97
+            ],
+            "common_start": true,
+            "brownian_seed": 43,
+            "resampling_seed": 44,
+            "model_batch_size": 2,
+            "reward": {
+              "positive_weights": {
+                "W60_packing": 2.0,
+                "Y42_engagement": 1.0,
+                "Q86_geometry": 2.0
+              },
+              "penalties": {
+                "BMP2_dimer_CA_RMSD_angstrom": {
+                  "weight": 0.5,
+                  "scale": 2.0,
+                  "cap": 4.0
+                },
+                "observed_receptor_placement_CA_RMSD_angstrom": {
+                  "weight": 0.5,
+                  "scale": 10.0,
+                  "cap": 4.0
+                },
+                "clashes_per_1000_heavy_atoms": {
+                  "weight": 0.5,
+                  "scale": 50.0,
+                  "cap": 4.0
+                },
+                "covalent_bond_strain": {
+                  "weight": 0.5,
+                  "scale": 1.0,
+                  "cap": 4.0
+                },
+                "typed_interface_error": {
+                  "weight": 1.0,
+                  "scale": 1.0,
+                  "cap": null
+                }
+              },
+              "distance_tolerance_angstrom": 0.75,
+              "orientation_tolerance_degrees": 20.0,
+              "bond_tolerance_angstrom": 0.1,
+              "clash_overlap_threshold_angstrom": 0.4,
+              "topology": {
+                "distance_tolerance_angstrom": 2.0,
+                "distance_scale_angstrom": 5.0,
+                "receptor_anchor_count": 6,
+                "ligand_anchor_count_per_chain": 4,
+                "worst_copy_weight": 0.5
+              }
+            }
+          },
+          "run_settings_snapshot": {
+            "model": "simplefold_3B",
+            "num_steps": 500,
+            "samples": 10,
+            "tau": 0.3,
+            "seed": 42
+          },
+          "reference_paths_snapshot": {
+            "reference_dir": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2h62-inpaint",
+            "reference_cif": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2h62-inpaint/observed.cif",
+            "reference_pdb": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2h62-inpaint/observed.pdb"
+          },
+          "evaluation": {
+            "type_I": null,
+            "type_II": null,
+            "geometry_and_clashes": null,
+            "consistency": null
+          },
+          "successful_tau_values": [],
+          "evidence_runs": [],
+          "success_confirmation": null,
+          "evidence_ids": [
+            "BMP2_ACVR2B_W60_Y42"
+          ],
+          "evidence_link_scope": "Partial source links; recipe inclusion does not mean every evidence-linked term is enabled. See actual weights."
+        },
+        {
+          "recipe_id": "2h62_contacts",
+          "rank": null,
+          "status": "unranked_existing_candidate",
+          "comparison_group": "original_construct",
+          "parent_recipe_id": "2h62_hotspots",
+          "source": {
+            "git_revision": "77acf12379a0cbd76fa95e032d49e1f1c938f31b",
+            "experiment_profile": "2h62-inpaint-fk-contacts",
+            "fasta": "examples/2h62-inpaint.fasta",
+            "fasta_sha256": "a605cdac5e0b1f081eead982faa42842efa48587022eea667adc1decfc7fc914"
+          },
+          "sampling_snapshot": {
+            "mode": "fk",
+            "reward_kind": "2h62_partial_contacts",
+            "run_baseline": false,
+            "baseline_prediction_dir": "/pub/ynkim4/ml-simplefold/artifacts/runs/57998266/predictions_simplefold_3B",
+            "beta": 2.0,
+            "ess_threshold": 0.8,
+            "checkpoint_times": [
+              0.6,
+              0.75,
+              0.9,
+              0.97
+            ],
+            "common_start": true,
+            "brownian_seed": 43,
+            "resampling_seed": 44,
+            "model_batch_size": null,
+            "reward": {
+              "positive_weights": {
+                "W60_packing": 2.0,
+                "Y42_engagement": 1.0,
+                "Q86_geometry": 0.0,
+                "BMPR1A_hotspot_contact_recall": 1.0,
+                "BMPR1A_native_contact_recall": 1.0,
+                "BMPR1A_native_contact_precision": 0.5
+              },
+              "penalties": {
+                "BMP2_dimer_CA_RMSD_angstrom": {
+                  "weight": 0.5,
+                  "scale": 2.0,
+                  "cap": 4.0
+                },
+                "observed_receptor_placement_CA_RMSD_angstrom": {
+                  "weight": 0.5,
+                  "scale": 10.0,
+                  "cap": 4.0
+                },
+                "clashes_per_1000_heavy_atoms": {
+                  "weight": 0.5,
+                  "scale": 50.0,
+                  "cap": 4.0
+                },
+                "covalent_bond_strain": {
+                  "weight": 0.5,
+                  "scale": 1.0,
+                  "cap": 4.0
+                }
+              },
+              "distance_tolerance_angstrom": 0.75,
+              "orientation_tolerance_degrees": 20.0,
+              "bond_tolerance_angstrom": 0.1,
+              "clash_overlap_threshold_angstrom": 0.4
+            }
+          },
+          "run_settings_snapshot": {
+            "model": "simplefold_3B",
+            "num_steps": 500,
+            "samples": 10,
+            "tau": 0.01,
+            "seed": 42
+          },
+          "reference_paths_snapshot": {
+            "reference_dir": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2h62-inpaint",
+            "reference_cif": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2h62-inpaint/observed.cif",
+            "reference_pdb": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2h62-inpaint/observed.pdb"
+          },
+          "evaluation": {
+            "type_I": null,
+            "type_II": null,
+            "geometry_and_clashes": null,
+            "consistency": null
+          },
+          "successful_tau_values": [],
+          "evidence_runs": [],
+          "success_confirmation": null,
+          "evidence_ids": [
+            "BMP2_ACVR2B_W60_Y42"
+          ],
+          "evidence_link_scope": "Partial source links; recipe inclusion does not mean every evidence-linked term is enabled. See actual weights."
+        },
+        {
+          "recipe_id": "2h62_contacts_l61",
+          "rank": null,
+          "status": "unranked_existing_candidate",
+          "comparison_group": "original_construct",
+          "parent_recipe_id": "2h62_contacts",
+          "source": {
+            "git_revision": "77acf12379a0cbd76fa95e032d49e1f1c938f31b",
+            "experiment_profile": "2h62-inpaint-fk-l61",
+            "fasta": "examples/2h62-inpaint.fasta",
+            "fasta_sha256": "a605cdac5e0b1f081eead982faa42842efa48587022eea667adc1decfc7fc914"
+          },
+          "sampling_snapshot": {
+            "mode": "fk",
+            "reward_kind": "2h62_partial_contacts_l61",
+            "run_baseline": false,
+            "baseline_prediction_dir": "/pub/ynkim4/ml-simplefold/artifacts/runs/57998266/predictions_simplefold_3B",
+            "beta": 2.0,
+            "ess_threshold": 0.8,
+            "checkpoint_times": [
+              0.6,
+              0.75,
+              0.9,
+              0.97
+            ],
+            "common_start": true,
+            "brownian_seed": 43,
+            "resampling_seed": 44,
+            "model_batch_size": null,
+            "reward": {
+              "positive_weights": {
+                "W60_packing": 2.0,
+                "Y42_engagement": 1.0,
+                "Q86_geometry": 0.0,
+                "BMPR1A_hotspot_contact_recall": 1.0,
+                "BMPR1A_native_contact_recall": 1.0,
+                "BMPR1A_native_contact_precision": 0.5
+              },
+              "penalties": {
+                "BMP2_dimer_CA_RMSD_angstrom": {
+                  "weight": 0.5,
+                  "scale": 2.0,
+                  "cap": 4.0
+                },
+                "observed_receptor_placement_CA_RMSD_angstrom": {
+                  "weight": 0.5,
+                  "scale": 10.0,
+                  "cap": 4.0
+                },
+                "clashes_per_1000_heavy_atoms": {
+                  "weight": 0.5,
+                  "scale": 50.0,
+                  "cap": 4.0
+                },
+                "covalent_bond_strain": {
+                  "weight": 0.5,
+                  "scale": 1.0,
+                  "cap": 4.0
+                },
+                "ACVR2B_L61_geometry_error": {
+                  "weight": 0.5,
+                  "scale": 1.0,
+                  "cap": null
+                }
+              },
+              "distance_tolerance_angstrom": 0.75,
+              "orientation_tolerance_degrees": 20.0,
+              "bond_tolerance_angstrom": 0.1,
+              "clash_overlap_threshold_angstrom": 0.4,
+              "l61_geometry": {
+                "distance_tolerance_angstrom": 0.75,
+                "distance_scale_angstrom": 3.0,
+                "angle_tolerance_degrees": 20.0,
+                "angle_scale_degrees": 30.0,
+                "missing_geometry_error": 10.0
+              }
+            }
+          },
+          "run_settings_snapshot": {
+            "model": "simplefold_3B",
+            "num_steps": 500,
+            "samples": 10,
+            "tau": 0.01,
+            "seed": 42
+          },
+          "reference_paths_snapshot": {
+            "reference_dir": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2h62-inpaint",
+            "reference_cif": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2h62-inpaint/observed.cif",
+            "reference_pdb": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2h62-inpaint/observed.pdb"
+          },
+          "evaluation": {
+            "type_I": null,
+            "type_II": null,
+            "geometry_and_clashes": null,
+            "consistency": null
+          },
+          "successful_tau_values": [],
+          "evidence_runs": [],
+          "success_confirmation": null,
+          "evidence_ids": [
+            "BMP2_ACVR2B_W60_Y42",
+            "BMP2_ACVR2B_L61_S88"
+          ],
+          "evidence_link_scope": "Partial source links; recipe inclusion does not mean every evidence-linked term is enabled. See actual weights."
+        },
+        {
+          "recipe_id": "2h62_cooperative",
+          "rank": null,
+          "status": "unranked_existing_candidate",
+          "comparison_group": "original_construct",
+          "parent_recipe_id": "2h62_contacts_l61",
+          "source": {
+            "git_revision": "77acf12379a0cbd76fa95e032d49e1f1c938f31b",
+            "experiment_profile": "2h62-inpaint-fk-cooperative",
+            "fasta": "examples/2h62-inpaint.fasta",
+            "fasta_sha256": "a605cdac5e0b1f081eead982faa42842efa48587022eea667adc1decfc7fc914"
+          },
+          "sampling_snapshot": {
+            "mode": "fk",
+            "reward_kind": "2h62_partial_cooperative",
+            "run_baseline": false,
+            "baseline_prediction_dir": "/pub/ynkim4/ml-simplefold/artifacts/runs/57998266/predictions_simplefold_3B",
+            "beta": 2.0,
+            "ess_threshold": 0.8,
+            "checkpoint_times": [
+              0.3,
+              0.6,
+              0.75,
+              0.9,
+              0.97
+            ],
+            "common_start": true,
+            "brownian_seed": 43,
+            "resampling_seed": 44,
+            "model_batch_size": null,
+            "reward": {
+              "positive_weights": {
+                "W60_packing": 0.0,
+                "Y42_engagement": 0.0,
+                "Q86_geometry": 0.0,
+                "BMPR1A_hotspot_contact_recall": 1.0,
+                "BMPR1A_native_contact_recall": 1.0,
+                "BMPR1A_native_contact_precision": 0.5,
+                "ACVR2B_interface_score": 3.0
+              },
+              "penalties": {
+                "BMP2_dimer_CA_RMSD_angstrom": {
+                  "weight": 0.5,
+                  "scale": 2.0,
+                  "cap": 4.0
+                },
+                "observed_receptor_placement_CA_RMSD_angstrom": {
+                  "weight": 0.5,
+                  "scale": 10.0,
+                  "cap": 4.0
+                },
+                "clashes_per_1000_heavy_atoms": {
+                  "weight": 0.5,
+                  "scale": 50.0,
+                  "cap": 4.0
+                },
+                "covalent_bond_strain": {
+                  "weight": 0.5,
+                  "scale": 1.0,
+                  "cap": 4.0
+                },
+                "ACVR2B_L61_geometry_error": {
+                  "weight": 0.0,
+                  "scale": 1.0,
+                  "cap": null
+                }
+              },
+              "distance_tolerance_angstrom": 0.75,
+              "orientation_tolerance_degrees": 20.0,
+              "bond_tolerance_angstrom": 0.1,
+              "clash_overlap_threshold_angstrom": 0.4,
+              "l61_geometry": {
+                "distance_tolerance_angstrom": 0.75,
+                "distance_scale_angstrom": 3.0,
+                "angle_tolerance_degrees": 20.0,
+                "angle_scale_degrees": 30.0,
+                "missing_geometry_error": 10.0
+              }
+            }
+          },
+          "run_settings_snapshot": {
+            "model": "simplefold_3B",
+            "num_steps": 500,
+            "samples": 10,
+            "tau": 0.01,
+            "seed": 42
+          },
+          "reference_paths_snapshot": {
+            "reference_dir": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2h62-inpaint",
+            "reference_cif": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2h62-inpaint/observed.cif",
+            "reference_pdb": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2h62-inpaint/observed.pdb"
+          },
+          "evaluation": {
+            "type_I": null,
+            "type_II": null,
+            "geometry_and_clashes": null,
+            "consistency": null
+          },
+          "successful_tau_values": [],
+          "evidence_runs": [],
+          "success_confirmation": null,
+          "evidence_ids": [
+            "BMP2_ACVR2B_W60_Y42",
+            "BMP2_ACVR2B_L61_S88"
+          ],
+          "evidence_link_scope": "Partial source links; recipe inclusion does not mean every evidence-linked term is enabled. See actual weights."
+        },
+        {
+          "recipe_id": "2h62_contacts_l61_trimmed",
+          "rank": 1,
+          "status": "preferred_starting_recipe",
+          "comparison_group": "BMPR1A_trimmed",
+          "parent_recipe_id": "2h62_contacts_l61",
+          "source": {
+            "git_revision": "77acf12379a0cbd76fa95e032d49e1f1c938f31b",
+            "experiment_profile": "2h62-inpaint-fk-l61-bmpr1a-trimmed",
+            "fasta": "examples/2h62-inpaint-bmpr1a-trimmed.fasta",
+            "fasta_sha256": "eda7b7102480559e2a5d0385a97a0cc7eb861f5ee22eaaff84f25a86ab9709b5"
+          },
+          "sampling_snapshot": {
+            "mode": "fk",
+            "reward_kind": "2h62_partial_contacts_l61",
+            "run_baseline": false,
+            "baseline_prediction_dir": null,
+            "beta": 2.0,
+            "ess_threshold": 0.8,
+            "checkpoint_times": [
+              0.3,
+              0.6,
+              0.75,
+              0.9,
+              0.97
+            ],
+            "common_start": true,
+            "brownian_seed": 43,
+            "resampling_seed": 44,
+            "model_batch_size": null,
+            "reward": {
+              "positive_weights": {
+                "W60_packing": 2.0,
+                "Y42_engagement": 1.0,
+                "Q86_geometry": 0.0,
+                "BMPR1A_hotspot_contact_recall": 1.0,
+                "BMPR1A_native_contact_recall": 1.0,
+                "BMPR1A_native_contact_precision": 0.5
+              },
+              "penalties": {
+                "BMP2_dimer_CA_RMSD_angstrom": {
+                  "weight": 0.5,
+                  "scale": 2.0,
+                  "cap": 4.0
+                },
+                "observed_receptor_placement_CA_RMSD_angstrom": {
+                  "weight": 0.5,
+                  "scale": 10.0,
+                  "cap": 4.0
+                },
+                "clashes_per_1000_heavy_atoms": {
+                  "weight": 0.5,
+                  "scale": 50.0,
+                  "cap": 4.0
+                },
+                "covalent_bond_strain": {
+                  "weight": 0.5,
+                  "scale": 1.0,
+                  "cap": 4.0
+                },
+                "ACVR2B_L61_geometry_error": {
+                  "weight": 0.5,
+                  "scale": 1.0,
+                  "cap": null
+                }
+              },
+              "distance_tolerance_angstrom": 0.75,
+              "orientation_tolerance_degrees": 20.0,
+              "bond_tolerance_angstrom": 0.1,
+              "clash_overlap_threshold_angstrom": 0.4,
+              "l61_geometry": {
+                "distance_tolerance_angstrom": 0.75,
+                "distance_scale_angstrom": 3.0,
+                "angle_tolerance_degrees": 20.0,
+                "angle_scale_degrees": 30.0,
+                "missing_geometry_error": 10.0
+              },
+              "prediction_sequence_spans": {
+                "BMPR1A": [
+                  33,
+                  117
+                ]
+              }
+            }
+          },
+          "run_settings_snapshot": {
+            "model": "simplefold_3B",
+            "num_steps": 500,
+            "samples": 10,
+            "tau": 0.1,
+            "seed": 42
+          },
+          "reference_paths_snapshot": {
+            "reference_dir": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2h62-inpaint",
+            "reference_cif": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2h62-inpaint/observed.cif",
+            "reference_pdb": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2h62-inpaint/observed.pdb"
+          },
+          "evaluation": {
+            "type_I": null,
+            "type_II": null,
+            "geometry_and_clashes": null,
+            "consistency": null
+          },
+          "successful_tau_values": [
+            0.3,
+            0.8
+          ],
+          "evidence_runs": [
+            {
+              "job_id": "58030762",
+              "tau": 0.3,
+              "gpu": "A30",
+              "model_batch_size": 2,
+              "ACVR2B_contact_recovery_percent": 81.1,
+              "clashes_per_1000_heavy_atoms": 22.3
+            },
+            {
+              "job_id": "58030763",
+              "tau": 0.8,
+              "gpu": "A30",
+              "model_batch_size": 2,
+              "ensemble_mean_DockQ": 0.829,
+              "ensemble_DockQ_reported_plus_minus": 0.028,
+              "ACVR2B_contact_recovery_percent": 70.8,
+              "clashes_per_1000_heavy_atoms": 39.0,
+              "selected_highest_reward_sample": 6,
+              "selected_raw_sample_mean_DockQ": 0.851
+            }
+          ],
+          "success_confirmation": {
+            "authority": "Vincent",
+            "reason": "Successful results at two noise levels favor retaining L61 guidance."
+          },
+          "evidence_source": {
+            "path": "/Users/vincent_zaballa/Development/boltzgen/handoffs/2026-10-13_095423_2h62-successful-reward-fyi/FYI.md",
+            "sha256": "309db6a32c0220fbdcf46d18f640288397ac4a28e358f945eb93979cee3ef0e7",
+            "verification": "Results reported by current-laptop agent; raw outputs not independently re-evaluated here.",
+            "reported_source_revision": "ae820ca47334c3704e3ccb56ad54dca9c3a7c8d0"
+          },
+          "optional_constraints": {
+            "L61_geometry": {
+              "default_weight": 0.5,
+              "disable_override": "sampling.reward.penalties.ACVR2B_L61_geometry_error.weight=0.0",
+              "guidance": "Retain by default. May disable if a transferred or otherwise plausible interface conflicts with this local geometry constraint; evaluate both interfaces and physical geometry before promoting the alternative.",
+              "necessity": "Not demonstrated necessary by existing results."
+            }
+          },
+          "evidence_ids": [
+            "BMP2_ACVR2B_W60_Y42",
+            "BMP2_ACVR2B_L61_S88"
+          ],
+          "evidence_link_scope": "Partial source links; recipe inclusion does not mean every evidence-linked term is enabled. See actual weights."
+        },
+        {
+          "recipe_id": "2h62_contacts_l61_off_trimmed",
+          "rank": 2,
+          "status": "supported_alternative",
+          "comparison_group": "BMPR1A_trimmed",
+          "parent_recipe_id": "2h62_contacts_l61_trimmed",
+          "source": {
+            "git_revision": "77acf12379a0cbd76fa95e032d49e1f1c938f31b",
+            "experiment_profile": "2h62-inpaint-fk-l61-bmpr1a-trimmed",
+            "fasta": "examples/2h62-inpaint-bmpr1a-trimmed.fasta",
+            "fasta_sha256": "eda7b7102480559e2a5d0385a97a0cc7eb861f5ee22eaaff84f25a86ab9709b5",
+            "experiment_overrides": [
+              "sampling.reward.penalties.ACVR2B_L61_geometry_error.weight=0.0"
+            ]
+          },
+          "sampling_snapshot": {
+            "mode": "fk",
+            "reward_kind": "2h62_partial_contacts_l61",
+            "run_baseline": false,
+            "baseline_prediction_dir": null,
+            "beta": 2.0,
+            "ess_threshold": 0.8,
+            "checkpoint_times": [
+              0.3,
+              0.6,
+              0.75,
+              0.9,
+              0.97
+            ],
+            "common_start": true,
+            "brownian_seed": 43,
+            "resampling_seed": 44,
+            "model_batch_size": null,
+            "reward": {
+              "positive_weights": {
+                "W60_packing": 2.0,
+                "Y42_engagement": 1.0,
+                "Q86_geometry": 0.0,
+                "BMPR1A_hotspot_contact_recall": 1.0,
+                "BMPR1A_native_contact_recall": 1.0,
+                "BMPR1A_native_contact_precision": 0.5
+              },
+              "penalties": {
+                "BMP2_dimer_CA_RMSD_angstrom": {
+                  "weight": 0.5,
+                  "scale": 2.0,
+                  "cap": 4.0
+                },
+                "observed_receptor_placement_CA_RMSD_angstrom": {
+                  "weight": 0.5,
+                  "scale": 10.0,
+                  "cap": 4.0
+                },
+                "clashes_per_1000_heavy_atoms": {
+                  "weight": 0.5,
+                  "scale": 50.0,
+                  "cap": 4.0
+                },
+                "covalent_bond_strain": {
+                  "weight": 0.5,
+                  "scale": 1.0,
+                  "cap": 4.0
+                },
+                "ACVR2B_L61_geometry_error": {
+                  "weight": 0.0,
+                  "scale": 1.0,
+                  "cap": null
+                }
+              },
+              "distance_tolerance_angstrom": 0.75,
+              "orientation_tolerance_degrees": 20.0,
+              "bond_tolerance_angstrom": 0.1,
+              "clash_overlap_threshold_angstrom": 0.4,
+              "l61_geometry": {
+                "distance_tolerance_angstrom": 0.75,
+                "distance_scale_angstrom": 3.0,
+                "angle_tolerance_degrees": 20.0,
+                "angle_scale_degrees": 30.0,
+                "missing_geometry_error": 10.0
+              },
+              "prediction_sequence_spans": {
+                "BMPR1A": [
+                  33,
+                  117
+                ]
+              }
+            }
+          },
+          "run_settings_snapshot": {
+            "model": "simplefold_3B",
+            "num_steps": 500,
+            "samples": 10,
+            "tau": 0.1,
+            "seed": 42
+          },
+          "reference_paths_snapshot": {
+            "reference_dir": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2h62-inpaint",
+            "reference_cif": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2h62-inpaint/observed.cif",
+            "reference_pdb": "/pub/ynkim4/ml-simplefold/artifacts/datasets/references/2h62-inpaint/observed.pdb"
+          },
+          "evaluation": {
+            "type_I": null,
+            "type_II": null,
+            "geometry_and_clashes": null,
+            "consistency": null
+          },
+          "successful_tau_values": [
+            0.8
+          ],
+          "evidence_runs": [
+            {
+              "job_id": "58069253",
+              "tau": 0.8,
+              "gpu": "A100",
+              "model_batch_size": 2,
+              "ensemble_mean_DockQ": 0.836,
+              "ensemble_DockQ_reported_plus_minus": 0.024
+            }
+          ],
+          "success_confirmation": {
+            "authority": "Current-laptop FYI and Vincent acknowledgement",
+            "reason": "Successful L61-off control; retain as optional alternative."
+          },
+          "evidence_source": {
+            "path": "/Users/vincent_zaballa/Development/boltzgen/handoffs/2026-10-13_095423_2h62-successful-reward-fyi/FYI.md",
+            "sha256": "309db6a32c0220fbdcf46d18f640288397ac4a28e358f945eb93979cee3ef0e7",
+            "verification": "Results reported by current-laptop agent; raw outputs not independently re-evaluated here.",
+            "reported_source_revision": "ae820ca47334c3704e3ccb56ad54dca9c3a7c8d0"
+          },
+          "evidence_ids": [
+            "BMP2_ACVR2B_W60_Y42",
+            "BMP2_ACVR2B_L61_S88"
+          ],
+          "evidence_link_scope": "Partial source links; recipe inclusion does not mean every evidence-linked term is enabled. See actual weights."
+        }
+      ],
+      "ranking_basis": "Practical starting-point preference: L61-on succeeded at tau 0.3 and 0.8. This is not a claim of highest DockQ or proof that L61 is necessary.",
+      "metric_leaders": {
+        "reported_ensemble_mean_DockQ": {
+          "recipe_id": "2h62_contacts_l61_off_trimmed",
+          "job_id": "58069253",
+          "value": 0.836,
+          "interpretation": "Slightly higher reported mean than L61-on; hardware differs, so not proof of superiority."
+        },
+        "selected_highest_reward_L61_on_structure": {
+          "recipe_id": "2h62_contacts_l61_trimmed",
+          "job_id": "58030763",
+          "sample": 6,
+          "interpretation": "Selection within L61-on scoring; raw rewards cannot rank different score definitions."
+        }
+      },
+      "evidence_caveats": [
+        "DockQ values use full mutant 2H64 reference, not absolute wild-type ground truth. Reported contact recovery excludes substituted residues.",
+        "Ten FK particles are correlated resampled descendants, not ten independent discoveries.",
+        "L61-on used A30 and L61-off A100, both model_batch_size=2.",
+        "Successful historical checkpoint schedule is [0.3,0.6,0.75,0.9,0.97]; future schedule [0.1,0.3,0.6,0.75,0.9] is not yet tested.",
+        "Sampling and run_settings snapshots retain profile defaults; evidence_runs records successful run-specific tau, GPU and model batch overrides.",
+        "Trimming was useful in the observed recipe but is not proven necessary by a fully matched ablation."
+      ],
+      "pending_evidence": [
+        {
+          "reported_at": "2026-10-13T17:26:42.045826+00:00",
+          "authority": "Vincent",
+          "claim": "An untrimmed version worked for the complex referred to as 6H2.",
+          "interpreted_complex": "2H62, inferred from conversation; exact identifier/construct and successful run remain to be matched.",
+          "status": "user_reported_success_pending_run_identification",
+          "numbering_and_construct_caution": "User described untrimmed BMP2; existing documented trim is BMPR1A 129 to 84 residues. Do not silently equate these or assign the success to a particular recipe.",
+          "implication": "Trimming is not a prerequisite for successful guidance; start with untrimmed constructs unless evidence warrants a change."
+        }
+      ]
+    }
+  },
+  "updated_at": "2026-10-13T17:26:42.045826+00:00",
+  "interface_evidence_registry": "configs/bmp90/interface_evidence_registry.json",
+  "failure_registry": "configs/bmp90/failure_registry.json",
+  "construct_policy": {
+    "starting_preference": "Biologically justified untrimmed constructs; do not inherit truncations merely because a successful source recipe used them.",
+    "trimming_exception": "Consider only when structural evidence implicates a specific region in interference despite principled guidance, with explicit mapping and compatible comparison.",
+    "recipe_transfer": "Transfer supported scoring modules separately from construct choices. The preferred historical trimmed recipe does not imply trimming is necessary."
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "title": "BMP complex evaluation and acceptance protocol",
+  "version": "1.0",
+  "date": "2026-10-13",
+  "scope": "Reference-free assessment of candidate ligand–type-I–type-II ectodomain assemblies. This is a proposed workflow, not a validated confidence estimator. Numeric acceptance thresholds remain unset until benchmark calibration.",
+  "primary_instruction": "Separate rewarded-contact satisfaction from independent support. Report every receptor copy and interface, including the weakest one. Missing evidence is unknown, not a pass or a failure.",
+  "stages": [
+    {
+      "order": 1,
+      "name": "Biological target and construct",
+      "actions": [
+        "Confirm ligand, receptor identities, mature sequences, modeled domains, stoichiometry and sequence-to-reference mapping.",
+        "Record evidence that this ligand–receptor combination binds or signals, separately from evidence identifying the pose.",
+        "Mark combinatorial targets without binding evidence as exploratory; do not assume every enumerated combination forms a stable complex.",
+        "Document mutations, glycans, tethering, disulfides and terminal-group assumptions."
+      ],
+      "output": "Target definition and biological evidence record."
+    },
+    {
+      "order": 2,
+      "name": "Evidence allocation",
+      "actions": [
+        "For every experimental datum record its source, construct, assay, uncertainty and what it constrains: binding existence, residue involvement, local contact, orientation or assembly.",
+        "Label use as guidance, tuning, ranking, held-out evaluation or contextual information.",
+        "A datum used to tune weights or choose models is no longer held-out evaluation evidence.",
+        "Structural contacts and energetic mutation effects are different observations; mutation interpretation must consider folding and expression effects."
+      ],
+      "output": "Evidence ledger; explicit list of genuinely held-out observations."
+    },
+    {
+      "order": 3,
+      "name": "Reference-backed calibration",
+      "actions": [
+        "Benchmark using experimental assemblies and interfaces with compatible constructs; label homologous or mutant references as surrogate comparisons.",
+        "Include generated incorrect poses and alternative orientations, especially plausible ones satisfying the rewarded contacts. Easy clash-heavy decoys alone are insufficient.",
+        "Use reference DockQ to label benchmark accuracy, and test how well the reference-free criteria distinguish successful and unsuccessful models.",
+        "Separate calibration and evaluation targets or interface families where feasible. Tune no threshold on the unknown target's eventual reference.",
+        "Document model training/template exposure where known; withholding coordinates from guidance alone does not establish a training-blind test.",
+        "Freeze thresholds, preparation, ranking and compute budgets after calibration. Report uncertainty from the small benchmark panel."
+      ],
+      "output": "Versioned calibration profile with thresholds and observed false-positive/false-negative behavior."
+    },
+    {
+      "order": 4,
+      "name": "Physical plausibility",
+      "actions": [
+        "Run all-atom contact and geometry validation with documented hydrogen placement and protonation.",
+        "Inspect clashes, packing, hydrogen-bond geometry, unsatisfied buried polar groups, backbone and rotamer outliers, fold preservation and native disulfides.",
+        "Report whole-assembly metrics and local/interface outliers before and after refinement.",
+        "Use calibrated rejection criteria for severe geometry failures; physical plausibility alone never establishes the correct docking pose.",
+        "Keep energetically plausible rankings as model-dependent evidence; do not equate model energy with measured affinity."
+      ],
+      "output": "Physical checks: pass, fail or unassessed, with metric values and calibration profile."
+    },
+    {
+      "order": 5,
+      "name": "Independent runs and perturbations",
+      "actions": [
+        "Use separately initialized FK populations with distinct random seeds. Log ancestry/resampling information when available.",
+        "Treat population descendants as correlated samples; summarize recovery at the independently initialized run level.",
+        "Sweep plausible noise settings and perturb uncertain guidance weights or remove selected restraints. Keep other inputs controlled.",
+        "Cluster arrangements after aligning the ligand and allowing valid identical-chain permutations; compare receptor orientations and interface contact patterns.",
+        "Record best and alternative clusters recovered by each independent run, rather than treating particle counts as independent confirmations.",
+        "Report recurrence and sensitivity as robustness diagnostics, not calibrated probabilities of correctness."
+      ],
+      "output": "Run-level cluster recovery and sensitivity table."
+    },
+    {
+      "order": 6,
+      "name": "Independent support and alternatives",
+      "actions": [
+        "Evaluate held-out experiments separately from guidance satisfaction.",
+        "Distinguish agreement with a related interface from target-specific evidence.",
+        "Retain substantially different plausible arrangements when independent evidence does not discriminate among them.",
+        "Identify one or more measurable contacts or experiments whose predicted outcomes differ between alternatives; include appropriate folding or expression controls for mutations.",
+        "If evidence conflicts, investigate construct, assay, mapping and model assumptions before forcing compliance."
+      ],
+      "output": "Per-interface support level, unresolved alternatives and a discriminating observation."
+    },
+    {
+      "order": 7,
+      "name": "Acceptance and transfer",
+      "actions": [
+        "Assign the output labels below per interface and for the assembly. Do not average away an unsupported or failed receptor interface.",
+        "Preserve candidates and alternative clusters with provenance. Do not label a reference-free structure experimentally solved.",
+        "Transfer newly predicted contacts as hypotheses with uncertainty; never relabel them experimental evidence.",
+        "An uncalibrated screen can produce provisional candidates but cannot award a calibrated acceptance status."
+      ],
+      "output": "Acceptance record and eligible transferable hypotheses."
+    }
+  ],
+  "result_labels": [
+    {
+      "label": "rejected_or_needs_repair",
+      "definition": "Fails a calibrated severe physical check or conflicts with reliable evidence after contextual review.",
+      "next_action": "Repair preparation or model; revisit inconsistent assumptions. Do not propagate its contacts."
+    },
+    {
+      "label": "plausible_candidate",
+      "definition": "Passes calibrated physical checks, but independent pose-specific support is absent or insufficient.",
+      "next_action": "Retain candidate ensemble and seek discriminating evidence."
+    },
+    {
+      "label": "supported_prediction",
+      "definition": "Passes calibrated physical checks; has positive, independent support at the stated structural scale; robustness has been assessed and alternatives are documented.",
+      "next_action": "Use for hypothesis generation and cautious transfer; state which geometry is supported and what remains uncertain."
+    }
+  ],
+  "separate_reference_comparison": {
+    "available": false,
+    "reference_id": null,
+    "exact_target_or_surrogate": null,
+    "coverage": null,
+    "dockq_per_interface": null,
+    "chain_mapping": null,
+    "mutation_mask": null,
+    "note": "If a suitable experimental reference exists, report reference-based accuracy alongside the support label. A partial reference validates only covered regions/interfaces; a homologous or mutant reference measures similarity to that surrogate."
+  },
+  "acceptance_record_template": {
+    "target_id": null,
+    "construct_manifest": null,
+    "calibration_profile_id": null,
+    "threshold_status": "pending_calibration",
+    "physical_status": "unassessed",
+    "guidance_satisfaction": {
+      "metrics": null,
+      "evidence_ids": []
+    },
+    "independent_support": {
+      "status": "unknown",
+      "positive_evidence_ids": [],
+      "contradiction_evidence_ids": [],
+      "structural_scope": null
+    },
+    "run_robustness": {
+      "independent_population_count": null,
+      "settings_tested": [],
+      "cluster_recovery_by_run": [],
+      "ancestry_available": null
+    },
+    "receptor_interface_records": [],
+    "alternative_clusters": [],
+    "assembly_label": null,
+    "unresolved_assumptions": [],
+    "best_discriminating_observation": null,
+    "transferable_hypotheses": [],
+    "claim": "No conclusion yet."
+  },
+  "implementation_notes": [
+    "Use explicit null/unknown/unassessed values; no numeric zero for missing data.",
+    "No universal DockQ-equivalent threshold exists for the reference-free checks in this proposed protocol.",
+    "Independent validation means independence from this project's guidance, tuning and selection; experimental sources and model training may still be correlated.",
+    "A robust wrong restraint can reproducibly produce a wrong pose. Sensitivity checks therefore complement, rather than replace, independent evidence.",
+    "A practical first pilot is a small reference-backed panel with multiple independent restarts, several plausible noise settings and matched guided/unguided compute. Choose replicate counts after observing variability.",
+    "Keep a structurally precise claim, for example: type-I interface supported; type-II placement remains ambiguous.",
+    "Do not force all target combinations through a complete assembly requirement when biological binding itself is uncertain."
+  ],
+  "sources": [
+    {
+      "name": "DockQ official implementation",
+      "url": "https://github.com/wallnerlab/DockQ",
+      "supports": "DockQ compares model and native structures; reports per-interface scores and chain mappings."
+    },
+    {
+      "name": "Chen et al. 2010, MolProbity",
+      "url": "https://journals.iucr.org/d/issues/2010/01/00/dz5180/",
+      "supports": "Hydrogen-dependent all-atom contact, clash and stereochemical validation."
+    },
+    {
+      "name": "Maddipatla et al. 2026, inference-time optimization",
+      "url": "https://proceedings.mlr.press/v306/maddipatla26a.html",
+      "supports": "MSA-embedding optimization can inflate iPTM confidence, motivating scrutiny of optimized model scores."
+    }
+  ],
+  "attribution": "The operational calibration, evidence-allocation and acceptance workflow is a methodological recommendation for this project, not an established universal BMP validation standard."
+}

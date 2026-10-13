@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-13T17:26:42.045826+00:00",
+  "purpose": "Reusable record of unsuccessful scoring hypotheses, structural failure modes and operational failures, with context and evidence; not a blacklist of universally invalid rules.",
+  "scoring_registry": "configs/bmp90/scoring_registry.json",
+  "interface_evidence_registry": "configs/bmp90/interface_evidence_registry.json",
+  "policy": {
+    "entry_requirement": "Record an observed outcome with a run or analysis reference. Do not invent failures from untested hypotheses.",
+    "separate_causes": "Distinguish structural/scoring failure, invalid evaluation, and operational failure such as out-of-memory. A failed job is not evidence against a scoring rule.",
+    "causality": "Observed symptom and suspected explanation are separate; mark causes unconfirmed until tested.",
+    "scope": "Record exact sequences, constructs, score version, tau, checkpoints and seeds. Failure in one setting does not establish failure in another.",
+    "transfer": "Consult matching receptors and local interface contexts before repeating an unsuccessful idea; reassess when meaningful conditions differ.",
+    "resolution": "Preserve the original failure and append follow-up outcomes, including successful rescues.",
+    "trimming": "Start with biologically justified untrimmed constructs. Consider trimming only with evidence that a particular region interferes despite principled guidance; retain a compatible control.",
+    "negative_evidence": "Failure to sample a plausible interface is not proof of nonbinding."
+  },
+  "entry_template": {
+    "failure_id": null,
+    "complex_id": null,
+    "recipe_id": null,
+    "parent_failure_id": null,
+    "failure_category": null,
+    "run_ids": [],
+    "artifact_references": [],
+    "code_revision": null,
+    "sequence_hashes": {},
+    "construct_description": null,
+    "sampling_settings": {
+      "tau": null,
+      "checkpoint_times": [],
+      "seeds": {},
+      "particle_count": null
+    },
+    "expected_behavior": null,
+    "observed_symptoms": [],
+    "interface_evaluation": {
+      "type_I": null,
+      "type_II": null,
+      "copy_specific_findings": [],
+      "assembly_geometry": null
+    },
+    "suspected_causes": [],
+    "supporting_evidence_ids": [],
+    "contradicting_evidence_ids": [],
+    "attempted_changes": [],
+    "followups": [],
+    "status": "unreviewed",
+    "transfer_limits": null
+  },
+  "entries": [],
+  "initialization_note": "No specific failed run has been adjudicated for this registry yet; entries intentionally empty."
+}

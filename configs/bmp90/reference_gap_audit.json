@@ -1,0 +1,2955 @@
+{
+  "date": "2026-10-13",
+  "scope": "Experimental PDB accession and polymer-description searches, 2026-10-13. Reviewed vertebrate ortholog accessions plus selected alias cross-checks. Excludes computed models. No-hit results are search findings, not proof of universal absence; unpublished, unreleased, unindexed and unusually named constructs may be missed.",
+  "accessions": {
+    "BMP2": [
+      {
+        "accession": "P12643",
+        "species": "Homo sapiens"
+      },
+      {
+        "accession": "P21274",
+        "species": "Mus musculus"
+      },
+      {
+        "accession": "P49001",
+        "species": "Rattus norvegicus"
+      },
+      {
+        "accession": "O46564",
+        "species": "Oryctolagus cuniculus"
+      },
+      {
+        "accession": "Q90751",
+        "species": "Gallus gallus"
+      },
+      {
+        "accession": "V4HJ70",
+        "species": "Pseudoalteromonas luteoviolacea (strain 2ta16)"
+      },
+      {
+        "accession": "O19006",
+        "species": "Dama dama"
+      },
+      {
+        "accession": "Q804S2",
+        "species": "Tetraodon nigroviridis"
+      }
+    ],
+    "BMP3": [
+      {
+        "accession": "P12645",
+        "species": "Homo sapiens"
+      },
+      {
+        "accession": "P22444",
+        "species": "Bos taurus"
+      },
+      {
+        "accession": "Q8BHE5",
+        "species": "Mus musculus"
+      },
+      {
+        "accession": "P49002",
+        "species": "Rattus norvegicus"
+      },
+      {
+        "accession": "Q7T2X7",
+        "species": "Xenopus laevis"
+      }
+    ],
+    "BMP4": [
+      {
+        "accession": "P12644",
+        "species": "Homo sapiens"
+      },
+      {
+        "accession": "Q06826",
+        "species": "Rattus norvegicus"
+      },
+      {
+        "accession": "P21275",
+        "species": "Mus musculus"
+      },
+      {
+        "accession": "Q2KJH1",
+        "species": "Bos taurus"
+      },
+      {
+        "accession": "P30885",
+        "species": "Xenopus laevis"
+      },
+      {
+        "accession": "Q90752",
+        "species": "Gallus gallus"
+      },
+      {
+        "accession": "O46576",
+        "species": "Oryctolagus cuniculus"
+      },
+      {
+        "accession": "Q8MJV5",
+        "species": "Suncus murinus"
+      },
+      {
+        "accession": "Q29607",
+        "species": "Dama dama"
+      }
+    ],
+    "BMP5": [
+      {
+        "accession": "P22003",
+        "species": "Homo sapiens"
+      },
+      {
+        "accession": "P49003",
+        "species": "Mus musculus"
+      },
+      {
+        "accession": "V4HM83",
+        "species": "Pseudoalteromonas luteoviolacea (strain 2ta16)"
+      },
+      {
+        "accession": "F2K079",
+        "species": "Marinomonas mediterranea (strain ATCC 700492 / JCM 21426 / NBRC 103028 / MMB-1)"
+      }
+    ],
+    "BMP6": [
+      {
+        "accession": "P22004",
+        "species": "Homo sapiens"
+      },
+      {
+        "accession": "Q04906",
+        "species": "Rattus norvegicus"
+      },
+      {
+        "accession": "P20722",
+        "species": "Mus musculus"
+      }
+    ],
+    "BMP7": [
+      {
+        "accession": "P18075",
+        "species": "Homo sapiens"
+      },
+      {
+        "accession": "P23359",
+        "species": "Mus musculus"
+      },
+      {
+        "accession": "P30886",
+        "species": "Xenopus laevis"
+      },
+      {
+        "accession": "V4HJ73",
+        "species": "Pseudoalteromonas luteoviolacea (strain 2ta16)"
+      },
+      {
+        "accession": "P34819",
+        "species": "Canis lupus familiaris"
+      }
+    ],
+    "BMP8A": [
+      {
+        "accession": "Q7Z5Y6",
+        "species": "Homo sapiens"
+      },
+      {
+        "accession": "P34821",
+        "species": "Mus musculus"
+      }
+    ],
+    "BMP8B": [
+      {
+        "accession": "P55105",
+        "species": "Mus musculus"
+      },
+      {
+        "accession": "P34820",
+        "species": "Homo sapiens"
+      }
+    ],
+    "BMP9": [
+      {
+        "accession": "Q9UK05",
+        "species": "Homo sapiens"
+      },
+      {
+        "accession": "Q9WV56",
+        "species": "Mus musculus"
+      },
+      {
+        "accession": "F1QWZ4",
+        "species": "Danio rerio"
+      }
+    ],
+    "BMP10": [
+      {
+        "accession": "O95393",
+        "species": "Homo sapiens"
+      },
+      {
+        "accession": "Q4AEG6",
+        "species": "Rattus norvegicus"
+      },
+      {
+        "accession": "Q9R229",
+        "species": "Mus musculus"
+      }
+    ],
+    "BMP15": [
+      {
+        "accession": "O95972",
+        "species": "Homo sapiens"
+      },
+      {
+        "accession": "Q9Z0L4",
+        "species": "Mus musculus"
+      },
+      {
+        "accession": "Q6PX77",
+        "species": "Bos taurus"
+      },
+      {
+        "accession": "Q9MZE2",
+        "species": "Ovis aries"
+      }
+    ],
+    "GDF5": [
+      {
+        "accession": "P43026",
+        "species": "Homo sapiens"
+      },
+      {
+        "accession": "P43027",
+        "species": "Mus musculus"
+      }
+    ],
+    "GDF6": [
+      {
+        "accession": "Q6KF10",
+        "species": "Homo sapiens"
+      },
+      {
+        "accession": "P43028",
+        "species": "Mus musculus"
+      },
+      {
+        "accession": "Q6HA10",
+        "species": "Rattus norvegicus"
+      },
+      {
+        "accession": "P55106",
+        "species": "Bos taurus"
+      }
+    ],
+    "GDF7": [
+      {
+        "accession": "P43029",
+        "species": "Mus musculus"
+      },
+      {
+        "accession": "Q7Z4P5",
+        "species": "Homo sapiens"
+      },
+      {
+        "accession": "Q9BDW8",
+        "species": "Chlorocebus aethiops"
+      }
+    ],
+    "GDF10": [
+      {
+        "accession": "P55107",
+        "species": "Homo sapiens"
+      },
+      {
+        "accession": "P97737",
+        "species": "Mus musculus"
+      },
+      {
+        "accession": "P55108",
+        "species": "Rattus norvegicus"
+      },
+      {
+        "accession": "Q7T2X6",
+        "species": "Xenopus laevis"
+      },
+      {
+        "accession": "Q08DX6",
+        "species": "Bos taurus"
+      }
+    ],
+    "ACVR1": [
+      {
+        "accession": "Q04771",
+        "species": "Homo sapiens"
+      },
+      {
+        "accession": "P80201",
+        "species": "Rattus norvegicus"
+      },
+      {
+        "accession": "P37172",
+        "species": "Mus musculus"
+      },
+      {
+        "accession": "Q28041",
+        "species": "Bos taurus"
+      },
+      {
+        "accession": "Q90ZK6",
+        "species": "Gallus gallus"
+      }
+    ],
+    "BMPR1A": [
+      {
+        "accession": "P36894",
+        "species": "Homo sapiens"
+      },
+      {
+        "accession": "P36895",
+        "species": "Mus musculus"
+      },
+      {
+        "accession": "Q78EA7",
+        "species": "Rattus norvegicus"
+      }
+    ],
+    "ACVR2A": [
+      {
+        "accession": "P27037",
+        "species": "Homo sapiens"
+      },
+      {
+        "accession": "P27038",
+        "species": "Mus musculus"
+      },
+      {
+        "accession": "P38444",
+        "species": "Rattus norvegicus"
+      },
+      {
+        "accession": "Q28043",
+        "species": "Bos taurus"
+      },
+      {
+        "accession": "Q90669",
+        "species": "Gallus gallus"
+      },
+      {
+        "accession": "P27039",
+        "species": "Xenopus laevis"
+      },
+      {
+        "accession": "Q28560",
+        "species": "Ovis aries"
+      }
+    ],
+    "ACVR2B": [
+      {
+        "accession": "Q13705",
+        "species": "Homo sapiens"
+      },
+      {
+        "accession": "P27040",
+        "species": "Mus musculus"
+      },
+      {
+        "accession": "P38445",
+        "species": "Rattus norvegicus"
+      },
+      {
+        "accession": "Q90670",
+        "species": "Gallus gallus"
+      },
+      {
+        "accession": "Q95126",
+        "species": "Bos taurus"
+      },
+      {
+        "accession": "Q66T47",
+        "species": "Sus scrofa"
+      },
+      {
+        "accession": "P27041",
+        "species": "Xenopus laevis"
+      }
+    ],
+    "BMPR2": [
+      {
+        "accession": "Q13873",
+        "species": "Homo sapiens"
+      },
+      {
+        "accession": "O35607",
+        "species": "Mus musculus"
+      }
+    ],
+    "ACVRL1": [
+      {
+        "accession": "P37023",
+        "species": "Homo sapiens"
+      },
+      {
+        "accession": "P80203",
+        "species": "Rattus norvegicus"
+      },
+      {
+        "accession": "Q61288",
+        "species": "Mus musculus"
+      },
+      {
+        "accession": "Q5RAN0",
+        "species": "Pongo abelii"
+      }
+    ],
+    "BMPR1B": [
+      {
+        "accession": "O00238",
+        "species": "Homo sapiens"
+      },
+      {
+        "accession": "P36898",
+        "species": "Mus musculus"
+      },
+      {
+        "accession": "Q05438",
+        "species": "Gallus gallus"
+      }
+    ]
+  },
+  "ligand_entry_hits": {
+    "BMP2": [
+      "1ES7",
+      "1REU",
+      "1REW",
+      "2GOO",
+      "2H62",
+      "2H64",
+      "2QJ9",
+      "2QJA",
+      "2QJB",
+      "3BK3",
+      "3BMP",
+      "4MID",
+      "4N1D",
+      "4UHY",
+      "4UHZ",
+      "4UI0",
+      "4UI1",
+      "4UI2",
+      "6OMN",
+      "7AG0",
+      "8E3G"
+    ],
+    "BMP3": [
+      "2QCQ"
+    ],
+    "BMP4": [],
+    "BMP5": [],
+    "BMP6": [
+      "2QCW",
+      "2R52",
+      "2R53",
+      "6OMO",
+      "9N4K"
+    ],
+    "BMP7": [
+      "1BMP",
+      "1LX5",
+      "1LXI",
+      "1M4U"
+    ],
+    "BMP8A": [],
+    "BMP8B": [],
+    "BMP9": [
+      "1ZKZ",
+      "4FAO",
+      "4MPL",
+      "4YCG",
+      "4YCI",
+      "5HZW",
+      "5I05",
+      "6SF2",
+      "9DPM",
+      "9DPN",
+      "9DPO",
+      "9DPP",
+      "9DPQ",
+      "9DPR",
+      "9DPS",
+      "9DPT",
+      "9DPU",
+      "9DPV",
+      "9DPW",
+      "9DPX"
+    ],
+    "BMP10": [
+      "6SF1",
+      "6SF3",
+      "7POI",
+      "7POJ",
+      "7PPA",
+      "7PPB",
+      "7PPC",
+      "9DPY"
+    ],
+    "BMP15": [],
+    "GDF5": [
+      "1WAQ",
+      "2BHK",
+      "3EVS",
+      "3QB4",
+      "5HK5",
+      "6Z3G",
+      "6Z3H",
+      "6Z3J",
+      "6Z3L",
+      "6Z3M",
+      "7ZJF",
+      "8BWL",
+      "8BWM",
+      "8BWN",
+      "8E3G"
+    ],
+    "GDF6": [],
+    "GDF7": [],
+    "GDF10": []
+  },
+  "entries": {
+    "1BMP": {
+      "title": "BONE MORPHOGENETIC PROTEIN-7",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "BONE MORPHOGENETIC PROTEIN-7",
+          "accessions": [
+            "P18075"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "1ES7": {
+      "title": "COMPLEX BETWEEN BMP-2 AND TWO BMP RECEPTOR IA ECTODOMAINS",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "BONE MORPHOGENETIC PROTEIN-2",
+          "accessions": [
+            "P12643"
+          ],
+          "chains": [
+            "A",
+            "C"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "BONE MORPHOGENETIC PROTEIN RECEPTOR IA",
+          "accessions": [
+            "P36894"
+          ],
+          "chains": [
+            "B",
+            "D"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "1LX5": {
+      "title": "Crystal Structure of the BMP7/ActRII Extracellular Domain Complex",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "bone morphogenetic protein 7",
+          "accessions": [
+            "P18075"
+          ],
+          "chains": [
+            "A"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Activin Type II Receptor",
+          "accessions": [
+            "P27038"
+          ],
+          "chains": [
+            "B"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "1LXI": {
+      "title": "Refinement of BMP7 crystal structure",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "BONE MORPHOGENETIC PROTEIN 7",
+          "accessions": [
+            "P18075"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "1M4U": {
+      "title": "Crystal structure of Bone Morphogenetic Protein-7 (BMP-7) in complex with the secreted antagonist Noggin",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Bone Morphogenetic Protein-7",
+          "accessions": [
+            "P18075"
+          ],
+          "chains": [
+            "L"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Noggin",
+          "accessions": [
+            "Q13253"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "1REU": {
+      "title": "Structure of the bone morphogenetic protein 2 mutant L51P",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "bone morphogenetic protein 2",
+          "accessions": [
+            "P12643"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 2,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "1REW": {
+      "title": "Structural refinement of the complex of bone morphogenetic protein 2 and its type IA receptor",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "bone morphogenetic protein 2",
+          "accessions": [
+            "P12643"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "bone morphogenetic protein receptor type IA",
+          "accessions": [
+            "P36894"
+          ],
+          "chains": [
+            "C",
+            "D"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "1WAQ": {
+      "title": "Crystal structure of human Growth and Differentiation Factor 5 (GDF-5)",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "GROWTH/DIFFERENTIATION FACTOR 5",
+          "accessions": [
+            "P43026"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "1ZKZ": {
+      "title": "Crystal Structure of BMP9",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 2",
+          "accessions": [
+            "Q9UK05"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "2BHK": {
+      "title": "Crystal structure of human growth and differentiation factor 5 (GDF5)",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "GROWTH DIFFERENTIATION FACTOR 5",
+          "accessions": [
+            "P43026"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "2GOO": {
+      "title": "Ternary Complex of BMP-2 bound to BMPR-Ia-ECD and ActRII-ECD",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Bone morphogenetic protein 2",
+          "accessions": [
+            "P12643"
+          ],
+          "chains": [
+            "A",
+            "D"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Bone morphogenetic protein receptor type IA",
+          "accessions": [
+            "P36894"
+          ],
+          "chains": [
+            "B",
+            "E"
+          ]
+        },
+        {
+          "entity": "3",
+          "description": "Activin receptor type 2A",
+          "accessions": [
+            "P27038"
+          ],
+          "chains": [
+            "C",
+            "F"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 2,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "2H62": {
+      "title": "Crystal structure of a ternary ligand-receptor complex of BMP-2",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Bone morphogenetic protein 2",
+          "accessions": [
+            "P12643"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Bone morphogenetic protein receptor type IA",
+          "accessions": [
+            "P36894"
+          ],
+          "chains": [
+            "C"
+          ]
+        },
+        {
+          "entity": "3",
+          "description": "Acvr2b protein",
+          "accessions": [
+            "Q13705"
+          ],
+          "chains": [
+            "D"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "2H64": {
+      "title": "Crystal structure of a ternary ligand-receptor complex of BMP-2",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Bone morphogenetic protein 2",
+          "accessions": [
+            "P12643"
+          ],
+          "chains": [
+            "A"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Bone morphogenetic protein receptor type IA",
+          "accessions": [
+            "P36894"
+          ],
+          "chains": [
+            "B"
+          ]
+        },
+        {
+          "entity": "3",
+          "description": "Acvr2b protein",
+          "accessions": [
+            "P27040"
+          ],
+          "chains": [
+            "C"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "2QCQ": {
+      "title": "Crystal structure of Bone Morphogenetic Protein-3 (BMP-3)",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Bone morphogenetic protein 3",
+          "accessions": [
+            "P12645"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "2QCW": {
+      "title": "Crystal Structure of Bone Morphogenetic Protein-6 (BMP-6)",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Bone morphogenetic protein 6",
+          "accessions": [
+            "P22004"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "2QJ9": {
+      "title": "Crystal structure analysis of BMP-2 in complex with BMPR-IA variant B1",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Bone morphogenetic protein 2",
+          "accessions": [
+            "P12643"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Bone morphogenetic protein receptor type IA",
+          "accessions": [
+            "P36894"
+          ],
+          "chains": [
+            "C",
+            "D"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "2QJA": {
+      "title": "Crystal structure analysis of BMP-2 in complex with BMPR-IA variant B12",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Bone morphogenetic protein 2",
+          "accessions": [
+            "P12643"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Bone morphogenetic protein receptor type IA",
+          "accessions": [
+            "P36894"
+          ],
+          "chains": [
+            "C",
+            "D"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "2QJB": {
+      "title": "Crystal structure analysis of BMP-2 in complex with BMPR-IA variant IA/IB",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Bone morphogenetic protein 2",
+          "accessions": [
+            "P12643"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Bone morphogenetic protein receptor type IA",
+          "accessions": [
+            "P36894"
+          ],
+          "chains": [
+            "C",
+            "D"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "2R52": {
+      "title": "Crystal structure analysis of Bone Morphogenetic Protein-6 (BMP-6)",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Bone morphogenetic protein 6",
+          "accessions": [
+            "P22004"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "2R53": {
+      "title": "Crystal structure analysis of Bone Morphogenetic Protein-6 variant B2 (B2-BMP-6)",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Bone morphogenetic protein 6",
+          "accessions": [
+            "P22004"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "3BK3": {
+      "title": "Crystal structure of the complex of BMP-2 and the first Von Willebrand domain type C of Crossveinless-2",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Bone morphogenetic protein 2",
+          "accessions": [
+            "P12643"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Crossveinless 2",
+          "accessions": [
+            "Q5D734"
+          ],
+          "chains": [
+            "C",
+            "D"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "3BMP": {
+      "title": "HUMAN BONE MORPHOGENETIC PROTEIN-2 (BMP-2)",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "PROTEIN (BONE MORPHOGENETIC PROTEIN 2 (BMP-2))",
+          "accessions": [
+            "P12643"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "3EVS": {
+      "title": "Crystal structure of the GDF-5:BMP receptor IB complex.",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 5",
+          "accessions": [
+            "P43026"
+          ],
+          "chains": [
+            "B"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Bone morphogenetic protein receptor type-1B",
+          "accessions": [
+            "P36898"
+          ],
+          "chains": [
+            "C"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 2,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "3QB4": {
+      "title": "Crystal structure of a TGF-beta ligand-receptor complex",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 5",
+          "accessions": [
+            "P43026"
+          ],
+          "chains": [
+            "A",
+            "C"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Bone morphogenetic protein receptor type-1A",
+          "accessions": [
+            "P36894"
+          ],
+          "chains": [
+            "B",
+            "D"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "4FAO": {
+      "title": "Specificity and Structure of a high affinity Activin-like 1 (ALK1) signaling complex",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 2",
+          "accessions": [
+            "Q9UK05"
+          ],
+          "chains": [
+            "A",
+            "B",
+            "G",
+            "H",
+            "M",
+            "N",
+            "S",
+            "T",
+            "a",
+            "b",
+            "g",
+            "h"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Serine/threonine-protein kinase receptor R3",
+          "accessions": [
+            "P37023"
+          ],
+          "chains": [
+            "C",
+            "D",
+            "I",
+            "J",
+            "O",
+            "P",
+            "U",
+            "V",
+            "c",
+            "d",
+            "i",
+            "j"
+          ]
+        },
+        {
+          "entity": "3",
+          "description": "Activin receptor type-2B",
+          "accessions": [
+            "Q13705"
+          ],
+          "chains": [
+            "E",
+            "F",
+            "K",
+            "L",
+            "Q",
+            "R",
+            "W",
+            "X",
+            "e",
+            "f",
+            "k",
+            "l"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "4MID": {
+      "title": "Crystal Structure of Activin A/BMP2 chimera",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "AB204 Activin A/BMP2 chimera",
+          "accessions": [
+            "P08476",
+            "P12643"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "4MPL": {
+      "title": "Crystal structure of BMP9 at 1.90 Angstrom",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 2",
+          "accessions": [
+            "Q9UK05"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "4N1D": {
+      "title": "Nodal/BMP2 chimera NB250",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Nodal/BMP2 chimera protein",
+          "accessions": [
+            "P12643",
+            "Q96S42"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "4UHY": {
+      "title": "Crystal structure of the human RGMA-BMP2 complex",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "BONE MORPHOGENETIC PROTEIN 2",
+          "accessions": [
+            "P12643"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "REPULSIVE GUIDANCE MOLECULE A",
+          "accessions": [
+            "Q96B86"
+          ],
+          "chains": [
+            "C"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "4UHZ": {
+      "title": "Crystal structure of the human RGMB-BMP2 complex, crystal form 1",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "BONE MORPHOGENETIC PROTEIN 2",
+          "accessions": [
+            "P12643"
+          ],
+          "chains": [
+            "A"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "RGM DOMAIN FAMILY MEMBER B",
+          "accessions": [
+            "Q6NW40"
+          ],
+          "chains": [
+            "B"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "4UI0": {
+      "title": "Crystal structure of the human RGMB-BMP2 complex, crystal form 2",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "BONE MORPHOGENETIC PROTEIN 2",
+          "accessions": [
+            "P12643"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "RGM DOMAIN FAMILY MEMBER B",
+          "accessions": [
+            "Q6NW40"
+          ],
+          "chains": [
+            "C"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "4UI1": {
+      "title": "Crystal structure of the human RGMC-BMP2 complex",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "BONE MORPHOGENETIC PROTEIN 2",
+          "accessions": [
+            "P12643"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "HEMOJUVELIN",
+          "accessions": [
+            "Q6ZVN8"
+          ],
+          "chains": [
+            "C",
+            "D"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "4UI2": {
+      "title": "Crystal structure of the ternary RGMB-BMP2-NEO1 complex",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "NEOGENIN",
+          "accessions": [
+            "Q92859"
+          ],
+          "chains": [
+            "A"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "BONE MORPHOGENETIC PROTEIN 2, BMP2",
+          "accessions": [
+            "P12643"
+          ],
+          "chains": [
+            "B"
+          ]
+        },
+        {
+          "entity": "3",
+          "description": "REPULSIVE GUIDANCE MOLECULE C, RGMC, HEMOJUVELIN",
+          "accessions": [
+            "Q6NW40"
+          ],
+          "chains": [
+            "C"
+          ]
+        },
+        {
+          "entity": "4",
+          "description": "REPULSIVE GUIDANCE MOLECULE C, RGMC, HEMOJUVELIN",
+          "accessions": [
+            "Q6NW40"
+          ],
+          "chains": [
+            "D"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "4YCG": {
+      "title": "Pro-bone morphogenetic protein 9",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Bone Morphogenetic Protein 9 Growth Factor Domain",
+          "accessions": [
+            "Q9WV56"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Bone Morphogenetic Protein 9 Prodomain",
+          "accessions": [
+            "Q9UK05"
+          ],
+          "chains": [
+            "C",
+            "D"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "4YCI": {
+      "title": "non-latent pro-bone morphogenetic protein 9",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Bone Morphogenetic Protein 9 Growth Factor Domain",
+          "accessions": [
+            "Q9WV56"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Bone Morphogenetic Protein 9 Prodomain",
+          "accessions": [
+            "Q9UK05"
+          ],
+          "chains": [
+            "C",
+            "D"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "5HK5": {
+      "title": "Structure of the Grem2-GDF5 Inhibitory Complex",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Gremlin-2",
+          "accessions": [
+            "O88273"
+          ],
+          "chains": [
+            "E",
+            "F",
+            "G",
+            "H"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Growth/differentiation factor 5",
+          "accessions": [
+            "P43026"
+          ],
+          "chains": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "5HZW": {
+      "title": "Crystal structure of the orphan region of human endoglin/CD105 in complex with BMP9",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Maltose-binding periplasmic protein,Endoglin",
+          "accessions": [
+            "P0AEX9",
+            "P17813"
+          ],
+          "chains": [
+            "A"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Growth/differentiation factor 2",
+          "accessions": [
+            "Q9UK05"
+          ],
+          "chains": [
+            "B"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "5I05": {
+      "title": "Crystal structure of human BMP9 at 1.87 A resolution",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 2",
+          "accessions": [
+            "Q9UK05"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "6OMN": {
+      "title": "Glycosylated BMP2 homodimer",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Bone morphogenetic protein 2",
+          "accessions": [
+            "P12643"
+          ],
+          "chains": [
+            "E",
+            "F",
+            "G",
+            "H"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "6OMO": {
+      "title": "Human BMP6 homodimer",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Bone morphogenetic protein 6",
+          "accessions": [
+            "P22004"
+          ],
+          "chains": [
+            "I",
+            "J"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "6SF1": {
+      "title": "Bone morphogenetic protein 10 (BMP10) complexed with extracellular domain of activin receptor-like kinase 1 (ALK1).",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Serine/threonine-protein kinase receptor R3",
+          "accessions": [
+            "P37023"
+          ],
+          "chains": [
+            "A"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Bone morphogenetic protein 10",
+          "accessions": [
+            "O95393"
+          ],
+          "chains": [
+            "B"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "6SF2": {
+      "title": "Ternary complex of human bone morphogenetic protein 9 (BMP9) growth factor domain, its prodomain and extracellular domain of activin receptor-like kinase 1 (ALK1).",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Serine/threonine-protein kinase receptor R3",
+          "accessions": [
+            "P37023"
+          ],
+          "chains": [
+            "A",
+            "D"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Growth/differentiation factor 2",
+          "accessions": [
+            "Q9UK05"
+          ],
+          "chains": [
+            "B",
+            "E"
+          ]
+        },
+        {
+          "entity": "3",
+          "description": "Growth/differentiation factor 2",
+          "accessions": [
+            "Q9UK05"
+          ],
+          "chains": [
+            "C",
+            "F"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "6SF3": {
+      "title": "Bone morphogenetic protein 10 (BMP10) in complex with extracellular domain of activin receptor-like kinase 1 (ALK1) at 2.3 Angstrom",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Serine/threonine-protein kinase receptor R3",
+          "accessions": [
+            "P37023"
+          ],
+          "chains": [
+            "A"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Bone morphogenetic protein 10",
+          "accessions": [
+            "O95393"
+          ],
+          "chains": [
+            "B"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "6Z3G": {
+      "title": "Repulsive Guidance Molecule A (RGMA) in complex with Growth Differentiation Factor 5 (GDF5)",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 5",
+          "accessions": [
+            "P43026"
+          ],
+          "chains": [
+            "A"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Repulsive guidance molecule A",
+          "accessions": [
+            "Q96B86"
+          ],
+          "chains": [
+            "B"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "6Z3H": {
+      "title": "Repulsive Guidance Molecule B (RGMB) in complex with Growth Differentiation Factor 5 (GDF5) (crystal form 2)",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 5",
+          "accessions": [
+            "P43026"
+          ],
+          "chains": [
+            "A"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "RGM domain family member B",
+          "accessions": [
+            "Q6NW40"
+          ],
+          "chains": [
+            "B"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "6Z3J": {
+      "title": "Repulsive Guidance Molecule B (RGMB) in complex with Growth Differentiation Factor 5 (GDF5) (crystal form 1)",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 5",
+          "accessions": [
+            "P43026"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "RGM domain family member B",
+          "accessions": [
+            "Q6NW40"
+          ],
+          "chains": [
+            "C",
+            "D"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "6Z3L": {
+      "title": "Repulsive Guidance Molecule C (RGMC, Hemojuvelin, HJV, HFE2) in complex with Growth Differentiation Factor 5 (GDF5)",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 5",
+          "accessions": [
+            "P43026"
+          ],
+          "chains": [
+            "A"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Hemojuvelin",
+          "accessions": [
+            "Q6ZVN8"
+          ],
+          "chains": [
+            "B"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "6Z3M": {
+      "title": "Repulsive Guidance Molecule B (RGMB) in complex with Growth Differentiation Factor 5 (GDF5) and Neogenin 1 (NEO1).",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 5",
+          "accessions": [
+            "P43026"
+          ],
+          "chains": [
+            "A",
+            "B",
+            "G",
+            "H",
+            "M",
+            "N"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "RGM domain family member B",
+          "accessions": [
+            "Q6NW40"
+          ],
+          "chains": [
+            "C",
+            "D",
+            "I",
+            "J",
+            "O",
+            "P",
+            "S",
+            "T",
+            "U",
+            "V",
+            "W",
+            "X",
+            "c",
+            "d",
+            "i",
+            "j",
+            "o",
+            "p"
+          ]
+        },
+        {
+          "entity": "3",
+          "description": "Neogenin",
+          "accessions": [
+            "P97798"
+          ],
+          "chains": [
+            "E",
+            "F",
+            "K",
+            "L",
+            "Q",
+            "R"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "7AG0": {
+      "title": "Complex between the bone morphogenetic protein 2 and its antagonist Noggin",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Noggin",
+          "accessions": [
+            "Q13253"
+          ],
+          "chains": [
+            "A"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Bone morphogenetic protein 2",
+          "accessions": [
+            "P12643"
+          ],
+          "chains": [
+            "B"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "7POI": {
+      "title": "Prodomain bound BMP10 crystal form 1",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Bone morphogenetic protein 10",
+          "accessions": [
+            "O95393"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Bone morphogenetic protein 10",
+          "accessions": [
+            "O95393"
+          ],
+          "chains": [
+            "C",
+            "D"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "7POJ": {
+      "title": "Prodomain bound BMP10 crystal form 2",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Bone morphogenetic protein 10",
+          "accessions": [
+            "O95393"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Bone morphogenetic protein 10",
+          "accessions": [
+            "O95393"
+          ],
+          "chains": [
+            "C",
+            "D"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "7PPA": {
+      "title": "High resolution structure of bone morphogenetic protein receptor type II (BMPRII) extracellular domain in complex with BMP10",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Bone morphogenetic protein 10",
+          "accessions": [
+            "O95393"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Bone morphogenetic protein receptor type-2",
+          "accessions": [
+            "Q13873"
+          ],
+          "chains": [
+            "C",
+            "D"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "7PPB": {
+      "title": "2.4 angstrom crystal structure of bone morphogenetic protein receptor type II (BMPRII) extracellular domain in complex with BMP10",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Bone morphogenetic protein 10",
+          "accessions": [
+            "O95393"
+          ],
+          "chains": [
+            "A"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Bone morphogenetic protein receptor type-2",
+          "accessions": [
+            "Q13873"
+          ],
+          "chains": [
+            "B"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "7PPC": {
+      "title": "Ternary signalling complex of BMP10 bound to ALK1 and BMPRII",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Bone morphogenetic protein 10",
+          "accessions": [
+            "O95393"
+          ],
+          "chains": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Serine/threonine-protein kinase receptor R3",
+          "accessions": [
+            "P37023"
+          ],
+          "chains": [
+            "E",
+            "F",
+            "G",
+            "H"
+          ]
+        },
+        {
+          "entity": "3",
+          "description": "Bone morphogenetic protein receptor type-2",
+          "accessions": [
+            "Q13873"
+          ],
+          "chains": [
+            "I",
+            "J",
+            "K",
+            "L"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "7ZJF": {
+      "title": "R399E, a mutated form of GDF5, for disease modification of osteoarthritis",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 5",
+          "accessions": [
+            "P43026"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "8BWL": {
+      "title": "Crystal structure of human Twisted gastrulation protein homolog 1 (TWSG1) in complex with human Growth Differentiation factor 5 (GDF5) and calcium",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 5",
+          "accessions": [
+            "P43026"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Twisted gastrulation protein homolog 1",
+          "accessions": [
+            "Q9GZX9"
+          ],
+          "chains": [
+            "C",
+            "D"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "8BWM": {
+      "title": "Crystal structure of human Twisted gastrulation protein homolog 1 (TWSG1) in complex with human Growth Differentiation factor 5 (GDF5) and calcium, long-wavelength X-ray dataset (4042 eV)",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 5",
+          "accessions": [
+            "P43026"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Twisted gastrulation protein homolog 1",
+          "accessions": [
+            "Q9GZX9"
+          ],
+          "chains": [
+            "C",
+            "D"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "8BWN": {
+      "title": "Crystal structure of human Twisted gastrulation protein homolog 1 (TWSG1) in complex with human Growth Differentiation Factor 5 (GDF5) and calcium, long-wavelength X-ray dataset (4010 eV)",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 5",
+          "accessions": [
+            "P43026"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Twisted gastrulation protein homolog 1",
+          "accessions": [
+            "Q9GZX9"
+          ],
+          "chains": [
+            "C",
+            "D"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "8E3G": {
+      "title": "BMP2/GDF5 heterodimer",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Bone morphogenetic protein 2",
+          "accessions": [
+            "P12643"
+          ],
+          "chains": [
+            "A",
+            "C"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Growth/differentiation factor 5",
+          "accessions": [
+            "P43026"
+          ],
+          "chains": [
+            "B",
+            "D"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "9DPM": {
+      "title": "BMP-9 Monomer Growth Factor with Cysteinylation",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 2",
+          "accessions": [
+            "Q9UK05"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "9DPN": {
+      "title": "BMP-9 Wild-Type Dimer Without Radiation Damage in Neutral pH",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 2",
+          "accessions": [
+            "Q9UK05"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "9DPO": {
+      "title": "BMP-9 Wild-Type Dimer With Radiation Damage in Neutral pH",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 2",
+          "accessions": [
+            "Q9UK05"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "9DPP": {
+      "title": "BMP-9 Wild-Type Dimer in Acidic pH",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 2",
+          "accessions": [
+            "Q9UK05"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "9DPQ": {
+      "title": "BMP-9 Wild-Type Dimer without Radiation Damage in Acidic pH",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 2",
+          "accessions": [
+            "Q9UK05"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "9DPR": {
+      "title": "BMP-9 Wild-Type Dimer with Radiation Damage in Acidic pH",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 2",
+          "accessions": [
+            "Q9UK05"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "9DPS": {
+      "title": "BMP-9 G389S Dimer Without Radiation Damage in Neutral pH",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 2",
+          "accessions": [
+            "Q9UK05"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "9DPT": {
+      "title": "BMP-9 G389S Dimer With Radiation Damage in Neutral pH",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 2",
+          "accessions": [
+            "Q9UK05"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "9DPU": {
+      "title": "BMP-9 G389S Dimer in Acidic pH",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 2",
+          "accessions": [
+            "Q9UK05"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "9DPV": {
+      "title": "BMP-9 K357R G389S Dimer Without Radiation Damage in Neutral pH",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 2",
+          "accessions": [
+            "Q9UK05"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "9DPW": {
+      "title": "BMP-9 K357R G389S Dimer With Radiation Damage in Neutral pH",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 2",
+          "accessions": [
+            "Q9UK05"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "9DPX": {
+      "title": "BMP-9 G389S K357R Dimer in Acidic pH",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Growth/differentiation factor 2",
+          "accessions": [
+            "Q9UK05"
+          ],
+          "chains": [
+            "A"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "9DPY": {
+      "title": "BMP-10 with BMP-9 Crystal Contacts",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Bone morphogenetic protein 10",
+          "accessions": [
+            "O95393"
+          ],
+          "chains": [
+            "A",
+            "B"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "crystals_number": 1,
+          "method": "X-RAY DIFFRACTION"
+        }
+      ]
+    },
+    "9N4K": {
+      "title": "CryoEM structure of ALK2-ActRIIB bound to BMP6",
+      "entities": [
+        {
+          "entity": "1",
+          "description": "Activin receptor type-2B",
+          "accessions": [
+            "Q13705"
+          ],
+          "chains": [
+            "A",
+            "F"
+          ]
+        },
+        {
+          "entity": "2",
+          "description": "Bone morphogenetic protein 6",
+          "accessions": [
+            "P22004"
+          ],
+          "chains": [
+            "B",
+            "E"
+          ]
+        },
+        {
+          "entity": "3",
+          "description": "Activin receptor type-1",
+          "accessions": [
+            "Q04771"
+          ],
+          "chains": [
+            "C",
+            "D"
+          ]
+        }
+      ],
+      "method": [
+        {
+          "method": "ELECTRON MICROSCOPY"
+        }
+      ]
+    }
+  },
+  "excluded_false_matches": {
+    "9MS3": "Bacterial cytochrome P450 Bmp7; unrelated to bone morphogenetic protein 7.",
+    "9YV5": "Same bacterial protein.",
+    "9YVV": "Same bacterial protein."
+  },
+  "name_crosscheck": {
+    "BMP4": {
+      "aliases": [
+        "BMP4",
+        "BMP-4",
+        "bone morphogenetic protein 4",
+        "bone morphogenetic protein 2B"
+      ],
+      "ids": []
+    },
+    "BMP5": {
+      "aliases": [
+        "BMP5",
+        "BMP-5",
+        "bone morphogenetic protein 5"
+      ],
+      "ids": []
+    },
+    "BMP8A": {
+      "aliases": [
+        "BMP8A",
+        "BMP-8A",
+        "bone morphogenetic protein 8A"
+      ],
+      "ids": []
+    },
+    "BMP8B": {
+      "aliases": [
+        "BMP8B",
+        "BMP-8B",
+        "bone morphogenetic protein 8B"
+      ],
+      "ids": []
+    },
+    "BMP15": {
+      "aliases": [
+        "BMP15",
+        "BMP-15",
+        "bone morphogenetic protein 15"
+      ],
+      "ids": []
+    },
+    "GDF6": {
+      "aliases": [
+        "GDF6",
+        "GDF-6",
+        "growth differentiation factor 6",
+        "growth/differentiation factor 6",
+        "BMP13",
+        "BMP-13"
+      ],
+      "ids": []
+    },
+    "GDF7": {
+      "aliases": [
+        "GDF7",
+        "GDF-7",
+        "growth differentiation factor 7",
+        "growth/differentiation factor 7",
+        "BMP12",
+        "BMP-12"
+      ],
+      "ids": []
+    },
+    "GDF10": {
+      "aliases": [
+        "GDF10",
+        "GDF-10",
+        "growth differentiation factor 10",
+        "growth/differentiation factor 10",
+        "BMP3B",
+        "BMP-3B"
+      ],
+      "ids": []
+    },
+    "BMP6": {
+      "aliases": [
+        "BMP6",
+        "BMP-6",
+        "bone morphogenetic protein 6"
+      ],
+      "ids": [
+        "2QCW",
+        "2R52",
+        "2R53",
+        "6OMO",
+        "9MIR",
+        "6OML",
+        "9N4K"
+      ]
+    }
+  },
+  "manually_verified_additional_entries": {
+    "9MIR": {
+      "title": "CryoEM structure of ALK3-ActRIIB bound to BMP6",
+      "url": "https://www.rcsb.org/structure/9MIR",
+      "qualification": "Engineered receptor-trap construct; missed by reviewed ligand-accession query."
+    },
+    "6OML": {
+      "title": "Human BMP chimera BV261",
+      "url": "https://www.rcsb.org/structure/6OML",
+      "qualification": "Engineered BMP chimera, not a BMP6 homodimer receptor interface; no signaling receptor in this structure."
+    }
+  },
+  "verified_signaling_receptor_interface_examples": {
+    "BMP2": {
+      "BMPR1A": [
+        "1ES7",
+        "2GOO",
+        "2H62",
+        "2H64"
+      ],
+      "ACVR2A": [
+        "2GOO"
+      ],
+      "ACVR2B": [
+        "2H62",
+        "2H64"
+      ]
+    },
+    "BMP6": {
+      "ACVR1": [
+        "9N4K"
+      ],
+      "BMPR1A": [
+        "9MIR"
+      ],
+      "ACVR2B": [
+        "9N4K",
+        "9MIR"
+      ]
+    },
+    "BMP7": {
+      "ACVR2A": [
+        "1LX5"
+      ]
+    },
+    "BMP9": {
+      "ACVRL1": [
+        "4FAO",
+        "6SF2"
+      ],
+      "ACVR2B": [
+        "4FAO"
+      ]
+    },
+    "BMP10": {
+      "ACVRL1": [
+        "6SF1",
+        "6SF3",
+        "7PPC"
+      ],
+      "BMPR2": [
+        "7PPA",
+        "7PPB",
+        "7PPC"
+      ]
+    },
+    "GDF5": {
+      "BMPR1A": [
+        "3QB4"
+      ],
+      "BMPR1B": [
+        "3EVS"
+      ]
+    }
+  },
+  "reference_qualifications": {
+    "3QB4": "GDF5 R57A mutant, not exact wild-type ligand.",
+    "2H64": "BMP2 L100K/N102D mutant.",
+    "9N4K": "Engineered receptor trap; glycosylated BMP6.",
+    "9MIR": "Engineered receptor trap; glycosylated BMP6.",
+    "ACVRL1": "ALK1 is outside the two type-I receptors in the working panel.",
+    "BMPR1B": "ALK6 is outside the two type-I receptors in the working panel."
+  },
+  "no_direct_signaling_receptor_complex_found": [
+    "BMP3",
+    "BMP4",
+    "BMP5",
+    "BMP8A",
+    "BMP8B",
+    "BMP15",
+    "GDF6",
+    "GDF7",
+    "GDF10"
+  ],
+  "selected_nonstructural_evidence": [
+    {
+      "ligand": "BMP4",
+      "receptor": "BMPR1A",
+      "evidence": "Ligand-binding-site mutagenesis study.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/11241215/"
+    },
+    {
+      "ligand": "BMP3",
+      "receptor": "ACVR2A/ACVR2B",
+      "evidence": "SPR affinities and receptor specificity mutation study; BMP3 structure alone is 2QCQ.",
+      "url": "https://doi.org/10.1021/bi700907k"
+    },
+    {
+      "ligand": "BMP8A",
+      "receptor": "BMPR1A with ACVR2A or BMPR2",
+      "evidence": "Receptor-dependent signaling in mouse spermatogonia.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28465413/"
+    },
+    {
+      "ligand": "BMP8B/BMP15",
+      "receptor": "BMPR2/ACVR2A",
+      "evidence": "Binding panel tested both ligands; binding outcome is ligand\u2013receptor-specific.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35643319/"
+    },
+    {
+      "ligand": "GDF6/GDF7",
+      "receptor": "BMPR1A, BMPR2, ACVR2A",
+      "evidence": "Receptor involvement from cell signaling and knockdown assays.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16049014/"
+    },
+    {
+      "ligand": "GDF10",
+      "receptor": "BMPR1A/BMPR2",
+      "evidence": "2025 hepatic stellate cell study reports receptor binding and signaling.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40125634/"
+    }
+  ],
+  "nonstructural_evidence_scope": "Selected positive examples, not a systematic literature audit of all 75 pairwise combinations. BMP5 and unlisted individual pairings remain unassessed here; do not label them no-data.",
+  "search_endpoints": [
+    "https://rest.uniprot.org/uniprotkb/search",
+    "https://search.rcsb.org/rcsbsearch/v2/query",
+    "https://data.rcsb.org/rest/v1/core/entry/{id}",
+    "https://data.rcsb.org/rest/v1/core/polymer_entity/{id}/{entity}"
+  ],
+  "search_definitions": {
+    "uniprot": "gene_exact:<gene> AND reviewed:true; BMP9 includes GDF2 alias; bacterial BMP7 accession removed.",
+    "rcsb_accession_attribute": "rcsb_polymer_entity_container_identifiers.reference_sequence_identifiers.database_accession",
+    "accession_operator": "in",
+    "name_attribute": "rcsb_polymer_entity.pdbx_description",
+    "name_operator": "contains_phrase",
+    "results_content_type": [
+      "experimental"
+    ]
+  }
+}

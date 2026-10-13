@@ -1,0 +1,845 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-13T17:02:55.168765+00:00",
+  "purpose": "Reusable contact, binding, mutation, and negative evidence for scoring-rule design; scientific evidence is separate from empirical scoring success.",
+  "scoring_registry": "configs/bmp90/scoring_registry.json",
+  "policy": {
+    "missing_evidence": "Unknown is distinct from experimentally absent.",
+    "negative_evidence": "Keep nonbinding, absent coordinate contacts, and mutation-with-no-effect distinct; never infer one from another.",
+    "transfer": "Search shared receptor and related interface, then verify species, construct, sequence identities, substitutions, chain mapping, and geometry. Shared receptor alone does not validate a transferred contact.",
+    "numbering": "Preserve original numbering, canonical accession/position when verified, and target input indices separately. Unverified mappings cannot activate hard restraints.",
+    "updates": "Add stable evidence IDs, source provenance and context; retain conflicting or superseded findings with explicit links.",
+    "old_plans": "Imported evidence does not adopt historical single-component pilot plans or held-out masks; current joint-interface strategy takes precedence.",
+    "scope": "Initial BMP2/BMP4/BMP6 evidence seed, not an exhaustive literature catalog.",
+    "automation": "This registry supplies evidence; it does not activate scoring rules or submit jobs."
+  },
+  "sources": {
+    "bmp4_preparation": {
+      "local_path": "artifacts/bmp90/preparation/bmp4/evidence.json",
+      "sha256": "4241f53cb103cff0b0bec87a7baee9bf8e3e93edb323cbe5c1c635d13e83a66b",
+      "review_status": "Imported from existing reviewed preparation; no fresh literature review in this update.",
+      "primary_sources": {
+        "hatta2000": {
+          "url": "https://pubmed.ncbi.nlm.nih.gov/11241215/",
+          "doi": "10.1002/1097-0282(2000)55:5<399::AID-BIP1014>3.0.CO;2-9",
+          "review_scope": "Primary abstract read; Wiley full text/PDF routes returned abstract. Exact construct methods not verified.",
+          "evidence_class": "experimental_mutation",
+          "findings": "Soluble receptor alanine scan used SPR against BMP4; thioredoxin fusion was cleaved after bacterial expression. I52A/F75A caused approximately 17/15-fold weaker affinity; E54A/T62A/T64A about 3/4/4-fold. Y70A did not reduce affinity. Representative-mutant CD did not reveal folding changes.",
+          "numbering_caveat": "All six reported residue identities fit mouse BMPR1A at paper position+33. Human has A97 where mouse has T97 (paper T64). Species/construct inference is not full-method confirmation.",
+          "allowed_inference": "Contributing receptor surface; atom partners and exact BMP4 geometry are not measured."
+        },
+        "khodr2021": {
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7614001/",
+          "doi": "10.1116/6.0000926",
+          "review_scope": "Primary full text methods/results and Table2 read",
+          "evidence_class": "experimental_binding",
+          "bmp4_alk3_KD_nM": {
+            "mean": 1.7,
+            "sd": 0.5,
+            "independent_experiments": 3
+          },
+          "bmp4_acvr2b_KD_nM": {
+            "mean": 26.0,
+            "sd": 0.5,
+            "independent_experiments": 3
+          },
+          "assay_context": "Immobilized dimeric receptor-Fc, BLI, 1:1 kinetic fitting; BMP4 produced in E.coli; avidity and construct dependence limit transfer to monomeric ECD affinities.",
+          "glycan_context": "Separate ALK3 comparison reported nonglycosylated BMP4 KD1.32+/-0.48 versus glycosylated0.30+/-0.06 nM. Protein-only sampling is a defined approximation.",
+          "allowed_inference": "Supports receptor compatibility, not a six-chain structure or residue contact accuracy."
+        },
+        "weber2007": {
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1802081/",
+          "doi": "10.1186/1472-6807-7-6",
+          "review_scope": "Primary full text read from Europe PMC XML snapshot",
+          "evidence_class_for_bmp4": "homologous_interface_transfer",
+          "findings": "2H62 contains BMP2 dimer plus one receptor of each class. The paper reports hexamer in solution and crystal packing blocking remaining sites. W60/Y42 are ACVR2B binding determinants for BMP2; L61 backbone-N/S88-Ogamma is a geometric contact with little WT energetic contribution. BMPR1A contacts both ligand chains.",
+          "allowed_inference": "Mapped BMP2 interface hypothesis. Do not label its RMSD/DockQ as BMP4 accuracy."
+        },
+        "rcsb_2h62": {
+          "url": "https://www.rcsb.org/structure/2H62",
+          "coordinates": "sources/2H62.pdb",
+          "entity_metadata": "sources/2H62_entity3.json",
+          "resolution_A": 1.85,
+          "assembly_stoichiometry": [
+            2,
+            1,
+            1
+          ],
+          "human_receptor_sequence_identity_verified": true
+        },
+        "uniprot": {
+          "urls": [
+            "https://rest.uniprot.org/uniprotkb/P12643.json",
+            "https://rest.uniprot.org/uniprotkb/P12644.json",
+            "https://rest.uniprot.org/uniprotkb/P36894.json",
+            "https://rest.uniprot.org/uniprotkb/P36895.json",
+            "https://rest.uniprot.org/uniprotkb/Q13705.json"
+          ],
+          "scope": "Canonical sequence/domain/chain annotations and candidate disulfide/glycosylation positions; not the actual sampling construct"
+        }
+      }
+    },
+    "bmp6_preparation": {
+      "local_path": "artifacts/bmp90/preparation/bmp6/evidence_and_pilot.json",
+      "sha256": "70cb19f5cde215baa2cfde064cb2d331a964b12b236f36667fa08770a9b25ee0",
+      "review_status": "Imported from existing reviewed preparation; no fresh literature review in this update.",
+      "primary_sources": {
+        "primary_paper": "https://www.pnas.org/doi/10.1073/pnas.2502788122",
+        "structure": "https://www.rcsb.org/structure/9N4K",
+        "coordinates": "https://files.rcsb.org/download/9N4K.cif",
+        "entity_metadata": "https://data.rcsb.org/rest/v1/core/polymer_entity/9N4K/{1,2,3}",
+        "canonical_sequences": [
+          "https://rest.uniprot.org/uniprotkb/P22004.json",
+          "https://rest.uniprot.org/uniprotkb/Q04771.json",
+          "https://rest.uniprot.org/uniprotkb/Q13705.json"
+        ],
+        "download_checksums": "source_manifest.json"
+      }
+    },
+    "protein_interface_rules_v1": {
+      "local_path": "/Users/vincent_zaballa/Development/boltzgen/handoffs/2026-10-13_101313_protein-interface-priors/Protein_interface_rules.json",
+      "sha256": "9baa196f2829b2829f417b92e524b22438fbbe4f391152b611735c4fa6d31d43",
+      "handoff_path": "/Users/vincent_zaballa/Development/boltzgen/handoffs/2026-10-13_101313_protein-interface-priors/HANDOFF.md",
+      "handoff_sha256": "2cd1967fdecc2e99a827a270b70728ef629cf0d4d432922c453a0021bcb64d46",
+      "provenance": "Vincent-supplied candidate inspection priors via authorized current-laptop handoff.",
+      "review_status": "Imported faithfully; cited external resources not independently re-reviewed in this update.",
+      "resources": {
+        "arpeggio": {
+          "name": "PDBe Arpeggio",
+          "url": "https://github.com/PDBeurope/arpeggio",
+          "role": "Rule-based interaction classification; mmCIF input and JSON output."
+        },
+        "molprobity": {
+          "name": "MolProbity",
+          "url": "https://journals.iucr.org/d/issues/2010/01/00/dz5180/",
+          "role": "All-atom contact and stereochemical validation."
+        },
+        "rosetta": {
+          "name": "Alford et al. 2017: Rosetta all-atom energy function",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28430426/",
+          "role": "Combined energetic treatment of packing, electrostatics, hydrogen bonding, solvation and conformation."
+        },
+        "hotspots": {
+          "name": "Bogan and Thorn 1998: Anatomy of hot spots in protein interfaces",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/9653027/",
+          "role": "Experimental mutation analysis separating contact area from energetic importance."
+        },
+        "bmp2_actriib": {
+          "name": "Weber et al. 2007: A silent H-bond can be mutationally activated",
+          "url": "https://link.springer.com/article/10.1186/1472-6807-7-6",
+          "role": "Target-specific example of geometry versus energetic contribution."
+        }
+      }
+    }
+  },
+  "records": [
+    {
+      "evidence_id": "BMP2_ACVR2B_W60_Y42",
+      "ligand": "BMP2",
+      "receptor": "ACVR2B",
+      "evidence_class": "experimental_mutation_and_structure",
+      "observation": "W60 and Y42 are BMP2-binding determinants in the cited construct.",
+      "source_id": "bmp4_preparation",
+      "interpretation_limits": "Energetic effects do not establish all atom partners; BMP4 transfer is a hypothesis.",
+      "details": {
+        "citation_key": "weber2007",
+        "residue_mapping": {
+          "numbering": "2H62 receptor construct -> human canonical Q13705",
+          "W60": "W78",
+          "Y42": "Y60"
+        }
+      },
+      "scoring_use": "Candidate evidence only; requires target-specific mapping and explicit recipe linkage.",
+      "contradicts_evidence_ids": [],
+      "supersedes_evidence_ids": []
+    },
+    {
+      "evidence_id": "BMP2_ACVR2B_L61_S88",
+      "ligand": "BMP2",
+      "receptor": "ACVR2B",
+      "evidence_class": "observed_structural_contact",
+      "observation": "ACVR2B L61 backbone N approaches BMP2 S88 OG.",
+      "source_id": "bmp4_preparation",
+      "interpretation_limits": "Geometric contact with little WT energetic contribution; optional scoring constraint, not a mandatory energetic hotspot.",
+      "details": {
+        "citation_key": "weber2007",
+        "numbering": "2H62 construct numbering; remap for each new construct",
+        "optional_constraint": true
+      },
+      "scoring_use": "Candidate evidence only; requires target-specific mapping and explicit recipe linkage.",
+      "contradicts_evidence_ids": [],
+      "supersedes_evidence_ids": [],
+      "supplemental_evidence": [
+        {
+          "source_id": "protein_interface_rules_v1",
+          "evidence_class": "supplied_target_specific_literature_summary",
+          "content": {
+            "source": "bmp2_actriib",
+            "contact": "ActRIIB L61 backbone amide and BMP2 S88 side-chain oxygen form a central hydrogen bond in the reported structures.",
+            "energy_evidence": "The paper describes this hydrogen bond as energetically silent for wild-type BMP2; surrounding mutations can activate its energetic contribution.",
+            "agent_instruction": "For the reported 2.93 \u00c5 contact in your model, identify the exact atoms and check hydrogen-bond geometry before assigning the label. Use the paper's residue numbering only after sequence mapping.",
+            "terminology": "Describe the interface as contacts between \u03b2-sheet surfaces unless actual interchain backbone hydrogen-bond patterns support a more specific description."
+          },
+          "interpretation": "Distinguish reported structural hydrogen bonding from WT energetic silence and mutation-dependent energetic contribution. This does not establish hydrogen bonding in any generated model without atom/angle checks."
+        }
+      ]
+    },
+    {
+      "evidence_id": "BMP4_BMPR1A_MUTATIONS",
+      "ligand": "BMP4",
+      "receptor": "BMPR1A",
+      "evidence_class": "experimental_mutation",
+      "observation": "I52A/F75A weaken affinity approximately 17/15-fold; E54A/T62A/T64A approximately 3/4/4-fold in paper numbering.",
+      "source_id": "bmp4_preparation",
+      "interpretation_limits": "Exact paper species/construct not confirmed from methods. Mutation effects do not identify ligand atom partners.",
+      "details": {
+        "citation_key": "hatta2000",
+        "mapping": "Paper +33 matches mouse BMPR1A; human I85/E87/T95/F108 match, but paper T64 maps to human A97, not Thr."
+      },
+      "scoring_use": "Candidate evidence only; requires target-specific mapping and explicit recipe linkage.",
+      "contradicts_evidence_ids": [],
+      "supersedes_evidence_ids": []
+    },
+    {
+      "evidence_id": "BMP4_BMPR1A_Y70_NEGATIVE",
+      "ligand": "BMP4",
+      "receptor": "BMPR1A",
+      "evidence_class": "mutation_no_affinity_reduction",
+      "observation": "Paper Y70A did not reduce affinity.",
+      "source_id": "bmp4_preparation",
+      "interpretation_limits": "No affinity reduction is not evidence of no physical contact or universal dispensability.",
+      "details": {
+        "citation_key": "hatta2000",
+        "mapping": "Candidate human Y103; paper construct/species remains inferred."
+      },
+      "scoring_use": "Candidate evidence only; requires target-specific mapping and explicit recipe linkage.",
+      "contradicts_evidence_ids": [],
+      "supersedes_evidence_ids": []
+    },
+    {
+      "evidence_id": "BMP4_BMPR1A_BINDING",
+      "ligand": "BMP4",
+      "receptor": "BMPR1A",
+      "evidence_class": "experimental_binding",
+      "observation": "Receptor compatibility supported by receptor-Fc BLI.",
+      "source_id": "bmp4_preparation",
+      "interpretation_limits": "Dimeric receptor-Fc avidity and assay conditions limit extrapolation; binding does not specify atomic contacts.",
+      "details": {
+        "citation_key": "khodr2021",
+        "KD_nM": {
+          "mean": 1.7,
+          "sd": 0.5,
+          "independent_experiments": 3
+        },
+        "assay_context": "Immobilized dimeric receptor-Fc, BLI, 1:1 kinetic fitting; BMP4 produced in E.coli; avidity and construct dependence limit transfer to monomeric ECD affinities."
+      },
+      "scoring_use": "Candidate evidence only; requires target-specific mapping and explicit recipe linkage.",
+      "contradicts_evidence_ids": [],
+      "supersedes_evidence_ids": []
+    },
+    {
+      "evidence_id": "BMP4_ACVR2B_BINDING",
+      "ligand": "BMP4",
+      "receptor": "ACVR2B",
+      "evidence_class": "experimental_binding",
+      "observation": "Receptor compatibility supported by receptor-Fc BLI.",
+      "source_id": "bmp4_preparation",
+      "interpretation_limits": "Dimeric receptor-Fc avidity and assay conditions limit extrapolation; binding does not specify atomic contacts.",
+      "details": {
+        "citation_key": "khodr2021",
+        "KD_nM": {
+          "mean": 26.0,
+          "sd": 0.5,
+          "independent_experiments": 3
+        },
+        "assay_context": "Immobilized dimeric receptor-Fc, BLI, 1:1 kinetic fitting; BMP4 produced in E.coli; avidity and construct dependence limit transfer to monomeric ECD affinities."
+      },
+      "scoring_use": "Candidate evidence only; requires target-specific mapping and explicit recipe linkage.",
+      "contradicts_evidence_ids": [],
+      "supersedes_evidence_ids": []
+    },
+    {
+      "evidence_id": "bmp4_typeI_f108_patch_v0",
+      "ligand": "BMP4",
+      "receptor": "BMPR1A",
+      "evidence_class": "homologous_transfer_hypothesis",
+      "observation": "Soft packing around BMPR1A F108 using mapped 2H62 C85 contact patch spanning both ligand chains; candidate contact table stores measured template distances. Use bounded normalized contact satisfaction and a lower-distance clash penalty. No forced identical BMP2 pose.",
+      "source_id": "bmp4_preparation",
+      "interpretation_limits": "BMP4 receptor mutation supports residue contribution; BMP4 partner contacts remain a homologous-template hypothesis.",
+      "details": {
+        "mapped_residues": {
+          "BMPR1A_canonical": [
+            108
+          ],
+          "BMPR1A_candidate": [
+            85
+          ]
+        },
+        "mapping_status": "canonical_and_template_identity_verified; paper_construct_assignment_inferred",
+        "source_reference": "2H62",
+        "source_paper": "hatta2000"
+      },
+      "scoring_use": "Candidate evidence only; requires target-specific mapping and explicit recipe linkage.",
+      "contradicts_evidence_ids": [],
+      "supersedes_evidence_ids": []
+    },
+    {
+      "evidence_id": "bmp4_typeII_w78_y60_patch_v0",
+      "ligand": "BMP4",
+      "receptor": "ACVR2B",
+      "evidence_class": "homologous_transfer_hypothesis",
+      "observation": "Soft mapped hydrophobic-patch contacts",
+      "source_id": "bmp4_preparation",
+      "interpretation_limits": "No BMP4 residue-level ACVR2B mutagenesis was established in this review.",
+      "details": {
+        "mapped_residues": {
+          "canonical": [
+            78,
+            60
+          ],
+          "candidate": [
+            60,
+            42
+          ]
+        },
+        "mapping_status": "receptor_identity_verified; ligand_core_sequence_alignment_only",
+        "source_reference": "2H62",
+        "source_paper": "weber2007"
+      },
+      "scoring_use": "Candidate evidence only; requires target-specific mapping and explicit recipe linkage.",
+      "contradicts_evidence_ids": [],
+      "supersedes_evidence_ids": []
+    },
+    {
+      "evidence_id": "BMP6_ACVR1_9N4K_PAIR_1",
+      "ligand": "BMP6",
+      "receptor": "ACVR1",
+      "evidence_class": "observed_structural_proximity",
+      "observation": "Coordinate-measured receptor/ligand residue proximity in 9N4K.",
+      "source_id": "bmp6_preparation",
+      "interpretation_limits": "CA distance is a geometric target, not a direct atom contact or binding energy; symmetric copies are not independent evidence.",
+      "details": {
+        "points": [
+          {
+            "input_chain": "C",
+            "gene": "ACVR1",
+            "uniprot_position": 41,
+            "amino_acid": "S",
+            "input_index_1based": 11,
+            "input_index_0based": 10,
+            "atom": "CA"
+          },
+          {
+            "input_chain": "A",
+            "gene": "BMP6",
+            "uniprot_position": 450,
+            "amino_acid": "N",
+            "input_index_1based": 41,
+            "input_index_0based": 40,
+            "atom": "CA"
+          }
+        ],
+        "reference_distance_A": 8.044,
+        "source_contact": {
+          "receptor_type": "I",
+          "receptor_auth_chain": "C",
+          "receptor_auth_residue": 41,
+          "receptor_residue_name": "SER",
+          "ligand_auth_chain": "B",
+          "ligand_auth_residue": 450,
+          "ligand_residue_name": "ASN",
+          "minimum_heavy_atom_distance_A": 3.17,
+          "closest_receptor_atom": "O",
+          "closest_ligand_atom": "ND2",
+          "ca_distance_A": 8.044
+        }
+      },
+      "scoring_use": "Candidate evidence only; requires target-specific mapping and explicit recipe linkage.",
+      "contradicts_evidence_ids": [],
+      "supersedes_evidence_ids": []
+    },
+    {
+      "evidence_id": "BMP6_ACVR1_9N4K_PAIR_2",
+      "ligand": "BMP6",
+      "receptor": "ACVR1",
+      "evidence_class": "observed_structural_proximity",
+      "observation": "Coordinate-measured receptor/ligand residue proximity in 9N4K.",
+      "source_id": "bmp6_preparation",
+      "interpretation_limits": "CA distance is a geometric target, not a direct atom contact or binding energy; symmetric copies are not independent evidence.",
+      "details": {
+        "points": [
+          {
+            "input_chain": "C",
+            "gene": "ACVR1",
+            "uniprot_position": 60,
+            "amino_acid": "N",
+            "input_index_1based": 30,
+            "input_index_0based": 29,
+            "atom": "CA"
+          },
+          {
+            "input_chain": "A",
+            "gene": "BMP6",
+            "uniprot_position": 444,
+            "amino_acid": "E",
+            "input_index_1based": 35,
+            "input_index_0based": 34,
+            "atom": "CA"
+          }
+        ],
+        "reference_distance_A": 11.091,
+        "source_contact": {
+          "receptor_type": "I",
+          "receptor_auth_chain": "C",
+          "receptor_auth_residue": 60,
+          "receptor_residue_name": "ASN",
+          "ligand_auth_chain": "B",
+          "ligand_auth_residue": 444,
+          "ligand_residue_name": "GLU",
+          "minimum_heavy_atom_distance_A": 3.767,
+          "closest_receptor_atom": "ND2",
+          "closest_ligand_atom": "OE2",
+          "ca_distance_A": 11.091
+        }
+      },
+      "scoring_use": "Candidate evidence only; requires target-specific mapping and explicit recipe linkage.",
+      "contradicts_evidence_ids": [],
+      "supersedes_evidence_ids": []
+    },
+    {
+      "evidence_id": "BMP6_ACVR1_9N4K_PAIR_3",
+      "ligand": "BMP6",
+      "receptor": "ACVR1",
+      "evidence_class": "observed_structural_proximity",
+      "observation": "Coordinate-measured receptor/ligand residue proximity in 9N4K.",
+      "source_id": "bmp6_preparation",
+      "interpretation_limits": "CA distance is a geometric target, not a direct atom contact or binding energy; symmetric copies are not independent evidence.",
+      "details": {
+        "points": [
+          {
+            "input_chain": "C",
+            "gene": "ACVR1",
+            "uniprot_position": 83,
+            "amino_acid": "T",
+            "input_index_1based": 53,
+            "input_index_0based": 52,
+            "atom": "CA"
+          },
+          {
+            "input_chain": "B",
+            "gene": "BMP6",
+            "uniprot_position": 424,
+            "amino_acid": "L",
+            "input_index_1based": 15,
+            "input_index_0based": 14,
+            "atom": "CA"
+          }
+        ],
+        "reference_distance_A": 7.246,
+        "source_contact": {
+          "receptor_type": "I",
+          "receptor_auth_chain": "C",
+          "receptor_auth_residue": 83,
+          "receptor_residue_name": "THR",
+          "ligand_auth_chain": "E",
+          "ligand_auth_residue": 424,
+          "ligand_residue_name": "LEU",
+          "minimum_heavy_atom_distance_A": 3.559,
+          "closest_receptor_atom": "OG1",
+          "closest_ligand_atom": "O",
+          "ca_distance_A": 7.246
+        }
+      },
+      "scoring_use": "Candidate evidence only; requires target-specific mapping and explicit recipe linkage.",
+      "contradicts_evidence_ids": [],
+      "supersedes_evidence_ids": []
+    },
+    {
+      "evidence_id": "BMP6_ACVR1_9N4K_PAIR_4",
+      "ligand": "BMP6",
+      "receptor": "ACVR1",
+      "evidence_class": "observed_structural_proximity",
+      "observation": "Coordinate-measured receptor/ligand residue proximity in 9N4K.",
+      "source_id": "bmp6_preparation",
+      "interpretation_limits": "CA distance is a geometric target, not a direct atom contact or binding energy; symmetric copies are not independent evidence.",
+      "details": {
+        "points": [
+          {
+            "input_chain": "D",
+            "gene": "ACVR1",
+            "uniprot_position": 41,
+            "amino_acid": "S",
+            "input_index_1based": 11,
+            "input_index_0based": 10,
+            "atom": "CA"
+          },
+          {
+            "input_chain": "B",
+            "gene": "BMP6",
+            "uniprot_position": 450,
+            "amino_acid": "N",
+            "input_index_1based": 41,
+            "input_index_0based": 40,
+            "atom": "CA"
+          }
+        ],
+        "reference_distance_A": 8.112,
+        "source_contact": {
+          "receptor_type": "I",
+          "receptor_auth_chain": "D",
+          "receptor_auth_residue": 41,
+          "receptor_residue_name": "SER",
+          "ligand_auth_chain": "E",
+          "ligand_auth_residue": 450,
+          "ligand_residue_name": "ASN",
+          "minimum_heavy_atom_distance_A": 3.289,
+          "closest_receptor_atom": "O",
+          "closest_ligand_atom": "ND2",
+          "ca_distance_A": 8.112
+        }
+      },
+      "scoring_use": "Candidate evidence only; requires target-specific mapping and explicit recipe linkage.",
+      "contradicts_evidence_ids": [],
+      "supersedes_evidence_ids": []
+    },
+    {
+      "evidence_id": "BMP6_ACVR1_9N4K_PAIR_5",
+      "ligand": "BMP6",
+      "receptor": "ACVR1",
+      "evidence_class": "observed_structural_proximity",
+      "observation": "Coordinate-measured receptor/ligand residue proximity in 9N4K.",
+      "source_id": "bmp6_preparation",
+      "interpretation_limits": "CA distance is a geometric target, not a direct atom contact or binding energy; symmetric copies are not independent evidence.",
+      "details": {
+        "points": [
+          {
+            "input_chain": "D",
+            "gene": "ACVR1",
+            "uniprot_position": 60,
+            "amino_acid": "N",
+            "input_index_1based": 30,
+            "input_index_0based": 29,
+            "atom": "CA"
+          },
+          {
+            "input_chain": "B",
+            "gene": "BMP6",
+            "uniprot_position": 444,
+            "amino_acid": "E",
+            "input_index_1based": 35,
+            "input_index_0based": 34,
+            "atom": "CA"
+          }
+        ],
+        "reference_distance_A": 11.398,
+        "source_contact": {
+          "receptor_type": "I",
+          "receptor_auth_chain": "D",
+          "receptor_auth_residue": 60,
+          "receptor_residue_name": "ASN",
+          "ligand_auth_chain": "E",
+          "ligand_auth_residue": 444,
+          "ligand_residue_name": "GLU",
+          "minimum_heavy_atom_distance_A": 4.087,
+          "closest_receptor_atom": "ND2",
+          "closest_ligand_atom": "OE2",
+          "ca_distance_A": 11.398
+        }
+      },
+      "scoring_use": "Candidate evidence only; requires target-specific mapping and explicit recipe linkage.",
+      "contradicts_evidence_ids": [],
+      "supersedes_evidence_ids": []
+    },
+    {
+      "evidence_id": "BMP6_ACVR1_9N4K_PAIR_6",
+      "ligand": "BMP6",
+      "receptor": "ACVR1",
+      "evidence_class": "observed_structural_proximity",
+      "observation": "Coordinate-measured receptor/ligand residue proximity in 9N4K.",
+      "source_id": "bmp6_preparation",
+      "interpretation_limits": "CA distance is a geometric target, not a direct atom contact or binding energy; symmetric copies are not independent evidence.",
+      "details": {
+        "points": [
+          {
+            "input_chain": "D",
+            "gene": "ACVR1",
+            "uniprot_position": 83,
+            "amino_acid": "T",
+            "input_index_1based": 53,
+            "input_index_0based": 52,
+            "atom": "CA"
+          },
+          {
+            "input_chain": "A",
+            "gene": "BMP6",
+            "uniprot_position": 424,
+            "amino_acid": "L",
+            "input_index_1based": 15,
+            "input_index_0based": 14,
+            "atom": "CA"
+          }
+        ],
+        "reference_distance_A": 7.258,
+        "source_contact": {
+          "receptor_type": "I",
+          "receptor_auth_chain": "D",
+          "receptor_auth_residue": 83,
+          "receptor_residue_name": "THR",
+          "ligand_auth_chain": "B",
+          "ligand_auth_residue": 424,
+          "ligand_residue_name": "LEU",
+          "minimum_heavy_atom_distance_A": 3.542,
+          "closest_receptor_atom": "OG1",
+          "closest_ligand_atom": "O",
+          "ca_distance_A": 7.258
+        }
+      },
+      "scoring_use": "Candidate evidence only; requires target-specific mapping and explicit recipe linkage.",
+      "contradicts_evidence_ids": [],
+      "supersedes_evidence_ids": []
+    },
+    {
+      "evidence_id": "BMP6_GLYCAN_NO_DIRECT_ACVR1_CONTACT",
+      "ligand": "BMP6",
+      "receptor": "ACVR1",
+      "evidence_class": "structure_scoped_contact_absence",
+      "observation": "No protein on another chain within 4 A of BMP6-linked glycan atoms in the existing coordinate analysis.",
+      "source_id": "bmp6_preparation",
+      "interpretation_limits": "Absence within this structure/cutoff does not imply no binding or no glycan function. Glycan stabilizes intraligand prehelix context.",
+      "details": {
+        "structure": "9N4K",
+        "glycosylation_site": "BMP6 N454 canonical",
+        "cutoff_angstrom": 4,
+        "context": "BMP6 B:601 NAG O6 to B:482 LYS NZ = 3.517 A. No protein from another chain lies within 4 A of any BMP6-linked glycan atom in this coordinate analysis."
+      },
+      "scoring_use": "Candidate evidence only; requires target-specific mapping and explicit recipe linkage.",
+      "contradicts_evidence_ids": [],
+      "supersedes_evidence_ids": []
+    },
+    {
+      "evidence_id": "BMP6_ACVR1_ALK3_SALTBRIDGE_NOT_TRANSFERABLE",
+      "ligand": "BMP6",
+      "receptor": "ACVR1",
+      "evidence_class": "receptor_specific_negative_transfer",
+      "observation": "ALK3 D69\u2013BMP6 R413 salt bridge is absent from ALK2; do not transfer that restraint to ACVR1.",
+      "source_id": "bmp6_preparation",
+      "interpretation_limits": "Preserve receptor-specific identity and geometry; paper numbering must be mapped before any restraint.",
+      "details": {
+        "primary_paper": "https://www.pnas.org/doi/10.1073/pnas.2502788122"
+      },
+      "scoring_use": "Candidate evidence only; requires target-specific mapping and explicit recipe linkage.",
+      "contradicts_evidence_ids": [],
+      "supersedes_evidence_ids": []
+    }
+  ],
+  "generic_inspection_priors": {
+    "protein_interface_rules_v1": {
+      "title": "Protein\u2013protein interface inspection rules",
+      "version": "1.0",
+      "date": "2026-10-13",
+      "purpose": "Agent instructions for inspecting interfaces and proposing guidance terms. These are heuristic checks, not a calibrated binding-affinity predictor or an executable scoring function.",
+      "core_instruction": "Evaluate atom-level chemistry and three-dimensional geometry. Use general physical plausibility to filter models, and experimentally supported interface constraints to supply target specificity.",
+      "preparation": [
+        "Identify exact sequences, constructs, chain copies and biological assembly. Map all paper residue numbers to the modeled sequences before activating constraints.",
+        "Resolve alternate conformations and document missing residues or atoms. Preserve an original coordinate file and record any preparation or refinement.",
+        "Assign protonation consistently with the assay context, add hydrogens where required, and record glycan, water, disulfide and terminal-group assumptions.",
+        "Record software versions and classifier thresholds. Do not mix different contact definitions across runs."
+      ],
+      "rules": [
+        {
+          "id": "R1",
+          "name": "Hydrogen bonding",
+          "look_for": "Chemically valid donor and acceptor atoms with appropriate distances and directional geometry.",
+          "action": "Classify atom pairs using an established hydrogen-bond detector; retain measured distances and angles.",
+          "caution": "A short residue-to-residue distance or an angle-free polar-contact label does not establish a hydrogen bond.",
+          "sources": [
+            "arpeggio",
+            "rosetta"
+          ],
+          "evidence_label": "generic_chemistry",
+          "activation_status": "inspection_prior_only_not_activated"
+        },
+        {
+          "id": "R2",
+          "name": "Electrostatics",
+          "look_for": "Complementary charged groups, protonation-dependent contacts and nearby charge networks.",
+          "action": "Inspect charge placement together with solvent exposure and desolvation using a consistent energy model.",
+          "caution": "An opposite-charge residue pair is a candidate interaction, not an unconditional reward; its environment changes its contribution.",
+          "sources": [
+            "rosetta"
+          ],
+          "evidence_label": "generic_chemistry",
+          "activation_status": "inspection_prior_only_not_activated"
+        },
+        {
+          "id": "R3",
+          "name": "Nonpolar packing",
+          "look_for": "Burial of complementary nonpolar surfaces with favorable van der Waals packing.",
+          "action": "Measure interface burial and inspect packing; report separately for each ligand\u2013receptor interface.",
+          "caution": "Increasing contact count or buried area alone does not establish favorable binding energy.",
+          "sources": [
+            "rosetta",
+            "hotspots"
+          ],
+          "evidence_label": "generic_chemistry",
+          "activation_status": "inspection_prior_only_not_activated"
+        },
+        {
+          "id": "R4",
+          "name": "Steric compatibility",
+          "look_for": "Excessive overlap, strained backbone geometry and implausible side-chain conformations.",
+          "action": "Use MolProbity/PROBE for all-atom clashes and geometry validation.",
+          "caution": "PROBE serious clashes use non-hydrogen-bond overlaps greater than 0.4 \u00c5 with explicit hydrogens. A custom heavy-atom distance count is a different metric.",
+          "sources": [
+            "molprobity"
+          ],
+          "evidence_label": "generic_chemistry",
+          "activation_status": "inspection_prior_only_not_activated"
+        },
+        {
+          "id": "R5",
+          "name": "Aromatic interactions",
+          "look_for": "Aromatic ring arrangements and cation\u2013\u03c0 contacts.",
+          "action": "Use plane-aware classification, not only a residue-distance cutoff.",
+          "caution": "Two nearby aromatic residues do not automatically form a favorable \u03c0 interaction.",
+          "sources": [
+            "arpeggio"
+          ],
+          "evidence_label": "generic_chemistry",
+          "activation_status": "inspection_prior_only_not_activated"
+        },
+        {
+          "id": "R6",
+          "name": "Polar satisfaction",
+          "look_for": "Polar or charged groups buried without suitable partners.",
+          "action": "Flag candidate unsatisfied groups and assess their hydrogen-bond and solvation context.",
+          "caution": "Missing water or uncertain protonation can change the interpretation.",
+          "sources": [
+            "rosetta"
+          ],
+          "evidence_label": "generic_chemistry",
+          "activation_status": "inspection_prior_only_not_activated"
+        },
+        {
+          "id": "R7",
+          "name": "Structural integrity",
+          "look_for": "Backbone, rotamer, bond-geometry or disulfide strain introduced while satisfying interface constraints.",
+          "action": "Inspect local validation outliers as well as the interface score.",
+          "caution": "A model should not distort its individual protein folds to satisfy a contact reward.",
+          "sources": [
+            "molprobity",
+            "rosetta"
+          ],
+          "evidence_label": "generic_chemistry",
+          "activation_status": "inspection_prior_only_not_activated"
+        },
+        {
+          "id": "R8",
+          "name": "Energetic hotspots",
+          "look_for": "Mutation or binding-energy evidence that a residue contributes substantially to affinity.",
+          "action": "Track experimentally supported hotspots separately from observed structural contacts and predicted important residues.",
+          "caution": "A visible contact, hydrogen bond or large buried side chain is not by itself a demonstrated energetic hotspot.",
+          "sources": [
+            "hotspots",
+            "bmp2_actriib"
+          ],
+          "evidence_label": "generic_chemistry",
+          "activation_status": "inspection_prior_only_not_activated"
+        }
+      ],
+      "evidence_labels": [
+        {
+          "label": "experimental_contact",
+          "meaning": "Contact supported by an experimental structure of this interface."
+        },
+        {
+          "label": "experimental_energetic_effect",
+          "meaning": "Binding or mutation measurement; document whether folding or expression changes were controlled."
+        },
+        {
+          "label": "transferred_hypothesis",
+          "meaning": "Mapped from a related ligand/receptor interface; not validated for this exact pair."
+        },
+        {
+          "label": "predicted_contact",
+          "meaning": "Observed in a generated model; does not independently validate that model."
+        },
+        {
+          "label": "generic_chemistry",
+          "meaning": "Physical plausibility criterion without target-specific binding evidence."
+        }
+      ],
+      "suggested_workflow": [
+        "Read target-specific structural and biochemical papers first.",
+        "Map sequences and record contact evidence separately from mutation effects.",
+        "Preserve validated interface modules; add hypotheses for the unknown interfaces.",
+        "Use smooth, bounded guidance terms and penalize geometry failures. Choose weights through validation rather than assigning universal energies to contact classes.",
+        "Compare baseline and guided ensembles with matched compute and inputs; report each receptor interface and the whole assembly.",
+        "Use held-out references or experimental constraints where possible. Promote predictions to transferable hypotheses, not experimental facts."
+      ],
+      "bmp_example": {
+        "source": "bmp2_actriib",
+        "contact": "ActRIIB L61 backbone amide and BMP2 S88 side-chain oxygen form a central hydrogen bond in the reported structures.",
+        "energy_evidence": "The paper describes this hydrogen bond as energetically silent for wild-type BMP2; surrounding mutations can activate its energetic contribution.",
+        "agent_instruction": "For the reported 2.93 \u00c5 contact in your model, identify the exact atoms and check hydrogen-bond geometry before assigning the label. Use the paper's residue numbering only after sequence mapping.",
+        "terminology": "Describe the interface as contacts between \u03b2-sheet surfaces unless actual interchain backbone hydrogen-bond patterns support a more specific description."
+      },
+      "suggested_observation_fields": [
+        "sample_id",
+        "interface_chain_ids",
+        "residue_mapping",
+        "atom_ids",
+        "interaction_class",
+        "distance_angstrom",
+        "angles_degrees",
+        "burial_measure_and_definition",
+        "evidence_label",
+        "source",
+        "software_version",
+        "thresholds",
+        "protonation_assumptions",
+        "guidance_weight",
+        "validation_flags"
+      ],
+      "guardrails": [
+        "Use classifier-specific definitions; do not hard-code one distance for every interaction.",
+        "Avoid double-counting one atom pair across overlapping contact classes.",
+        "Keep per-interface results so that one good receptor does not hide another poor one.",
+        "Do not infer Kd, calibrated binding probability or experimental correctness from a contact count or model energy alone.",
+        "Do not enforce a universal receptor arrangement, glycan dependency or covalent link across unrelated complexes."
+      ],
+      "resources": {
+        "arpeggio": {
+          "name": "PDBe Arpeggio",
+          "url": "https://github.com/PDBeurope/arpeggio",
+          "role": "Rule-based interaction classification; mmCIF input and JSON output."
+        },
+        "molprobity": {
+          "name": "MolProbity",
+          "url": "https://journals.iucr.org/d/issues/2010/01/00/dz5180/",
+          "role": "All-atom contact and stereochemical validation."
+        },
+        "rosetta": {
+          "name": "Alford et al. 2017: Rosetta all-atom energy function",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28430426/",
+          "role": "Combined energetic treatment of packing, electrostatics, hydrogen bonding, solvation and conformation."
+        },
+        "hotspots": {
+          "name": "Bogan and Thorn 1998: Anatomy of hot spots in protein interfaces",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/9653027/",
+          "role": "Experimental mutation analysis separating contact area from energetic importance."
+        },
+        "bmp2_actriib": {
+          "name": "Weber et al. 2007: A silent H-bond can be mutationally activated",
+          "url": "https://link.springer.com/article/10.1186/1472-6807-7-6",
+          "role": "Target-specific example of geometry versus energetic contribution."
+        }
+      },
+      "source_id": "protein_interface_rules_v1",
+      "scope": "Generic inspection and candidate scoring heuristics, not target-specific experimental evidence or an executable/calibrated affinity score. The BMP example supplements the existing target record.",
+      "linked_target_evidence_id": "BMP2_ACVR2B_L61_S88",
+      "evidence_label_scope": "Vocabulary for future observations; no existing evidence_class is reclassified by this import. R8 instructs evaluation of energetic evidence; it does not establish a hotspot for any target."
+    }
+  },
+  "updated_at": "2026-10-13T17:14:41.754419+00:00"
+}

@@ -1,5 +1,14 @@
 # SimpleFold experiments
 
+- Before BMP90 work, read [the BMP90 workflow](docs/experiments/bmp90_workflow.md).
+  It links the scoring, interface-evidence, and failure registries and the evaluation
+  protocol, and defines target priority, transfer, analysis, and recording rules.
+  Follow `configs/bmp90/evaluation_protocol.json` and
+  `configs/bmp90/reference_gap_audit.json` throughout reconstruction; these are
+  standing project guidance, not receipt-only handoff notes.
+  Its reference-gap subsection links the dated audit and requires extra scrutiny
+  for uncovered interfaces; no reference found is not proof of absence.
+  It does not authorize execution; follow current user instructions for submissions.
 - Read the global HPC access runbook in `~/.codex/docs/runbooks/hpc-access.md`.
 - Use direct laptop SSH to `hpc3y` (account `ynkim4`). The checkout is
   `/data/homezvol2/ynkim4/ml-simplefold`; the conda prefix is
