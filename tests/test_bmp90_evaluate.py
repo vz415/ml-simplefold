@@ -31,6 +31,19 @@ class AlignmentTests(unittest.TestCase):
         self.assertEqual(result["fraction_native_contacts"], 0.)
         self.assertIsNone(ev.contact_recovery({}, {})["fraction_native_contacts"])
 
+    def test_provenance_requires_exact_filename_and_hash(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            reference = Path(tmp)/"reference.pdb"
+            reference.write_text("END\n")
+            with self.assertRaisesRegex(ValueError, "require --reference-provenance"):
+                ev.verify_reference_provenance(reference, None, required=True)
+            provenance = Path(tmp)/"provenance.json"
+            provenance.write_text(json.dumps({"human_conserved_pdb":{"path":reference.name, "sha256":ev.sha256(reference)}}))
+            self.assertEqual(ev.verify_reference_provenance(reference, provenance, True)["status"], "verified")
+            reference.write_text("REMARK changed\nEND\n")
+            with self.assertRaisesRegex(ValueError, "SHA256"):
+                ev.verify_reference_provenance(reference, provenance, True)
+
 
 @unittest.skipUnless(REFERENCE.exists(), "Needs pinned ignored 9N4K preparation bundle")
 class ReferenceChecks(unittest.TestCase):
@@ -120,6 +133,66 @@ class ReferenceChecks(unittest.TestCase):
         self.assertEqual(len(residues), 104+104+79)
         self.assertEqual({p for c, p in residues if c == "X"}, set(range(36, 140)) | set(range(175, 279)))
         self.assertEqual({p for c, p in residues if c == "Y"}, set(range(11, 90)))
+
+
+BMP7 = ROOT / "artifacts/bmp90/preparation/bmp7"
+BMP7_REFERENCE = BMP7 / "1LX5_assembly1_human_conserved_reference.pdb"
+
+
+@unittest.skipUnless(BMP7_REFERENCE.exists() and REFERENCE.exists(), "Needs pinned ignored BMP7/BMP6 preparation bundles")
+class PartialReferenceChecks(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.mapping = json.loads((BMP7/"BMP7_ACVR1_ACVR2A.mapping.json").read_text())
+        cls.reference, _ = ev.read_atoms(BMP7_REFERENCE)
+
+    def test_partial_coverage_and_species_mask_are_enforced(self):
+        coverage, covered, excluded = ev.validate_reference(self.reference, self.mapping)
+        self.assertEqual(covered, list("ABEF"))
+        self.assertEqual(coverage["C"]["reference_status"], "uncovered")
+        self.assertEqual(set(excluded), {("E",20),("E",73),("F",20),("F",73)})
+        source, _ = ev.read_atoms(BMP7/"1LX5_assembly1_source_protein.pdb")
+        with self.assertRaisesRegex(ValueError, "Amino-acid mismatch"):
+            ev.validate_reference(source, self.mapping)
+        altered = json.loads(json.dumps(self.mapping))
+        altered["chains"][4]["residues"][19]["has_reference_coordinates"] = True
+        with self.assertRaisesRegex(ValueError, "species-masked"):
+            ev.validate_reference(self.reference, altered)
+
+    def test_uncovered_copies_stay_unassessed_and_cannot_inflate_assembly_mean(self):
+        # Actual resolved ALK2 coordinates serve only as a deterministic model
+        # fixture; they are never added to the experimental BMP7 reference.
+        lines = [line for line in BMP7_REFERENCE.read_text().splitlines() if line[:6].strip() not in ("END",)]
+        lines += [line for line in REFERENCE.read_text().splitlines() if line.startswith("ATOM") and line[21] in "CD"]
+        with tempfile.TemporaryDirectory() as tmp:
+            model = Path(tmp)/"partial_fixture.pdb"
+            model.write_text("\n".join(lines+["TER","END"])+"\n")
+            result = ev.evaluate_model(model, self.reference, self.mapping["chains"],
+                                       self.mapping["expected_saved_chain_to_input_chain"], ["A","B"], allow_partial=True)
+        by_chain = {r["reference_receptor_chain"]:r for r in result["interfaces"]}
+        for c in "CD":
+            self.assertIsNone(by_chain[c]["all_native_contacts"])
+            self.assertIsNone(by_chain[c]["receptor_CA_rmsd_in_ligand_frame_A"])
+            self.assertEqual(by_chain[c]["official_dockq"]["status"], "unassessed")
+            self.assertIsNone(result["fold_preservation"][c]["fitted_backbone_rmsd_A"])
+        for c in "EF":
+            self.assertEqual(by_chain[c]["all_native_contacts"]["fraction_native_contacts"], 1.)
+        self.assertEqual(result["interface_coverage_counts"], {"covered":2,"total":4})
+        self.assertIsNone(result["native_contact_recovery_summary"]["mean"])
+        self.assertEqual(result["covered_interface_native_contact_recovery_summary"], {"mean":1.,"weakest":1.})
+        self.assertEqual(len(result["assignment_alternatives"]), 4)
+        self.assertEqual(result["reference_uncovered_chains"], ["C","D"])
+
+    def test_actual_partial_reference_is_a_diagnostic_only_with_explicit_flag(self):
+        with self.assertRaisesRegex(ValueError, "missing"):
+            ev.evaluate_model(BMP7_REFERENCE, self.reference, self.mapping["chains"],
+                              self.mapping["expected_saved_chain_to_input_chain"], ["A","B"])
+        result = ev.evaluate_model(BMP7_REFERENCE, self.reference, self.mapping["chains"],
+                                   self.mapping["expected_saved_chain_to_input_chain"], ["A","B"], allow_partial=True)
+        self.assertEqual(result["model_coordinate_scope"], "partial diagnostic")
+        self.assertEqual(result["sequence_coverage"]["C"]["observed_CA_residues"], 0)
+        self.assertIsNone(result["native_contact_recovery_summary"]["mean"])
+        self.assertIsNone(result["assembly_label"])
 
 
 if __name__ == "__main__":

@@ -64,7 +64,7 @@ def read_atoms(path):
     return result, omitted
 
 
-def validate_atoms(atoms, chains, require_complete):
+def validate_atoms(atoms, chains, require_complete, allow_uncovered=False):
     sequences = {c["input_chain"]: c["sequence"] for c in chains}
     for (chain, pos, _), a in atoms.items():
         if chain not in sequences or not 1 <= pos <= len(sequences[chain]):
@@ -78,9 +78,73 @@ def validate_atoms(atoms, chains, require_complete):
                            "missing_CA_input_indices": missing}
         if require_complete and missing:
             raise ValueError(f"Model {chain} is missing {len(missing)} expected CA residues; use --allow-partial-model only for explicit partial-reference validation")
+        if allow_uncovered and not any(k[0] == chain for k in atoms):
+            coverage[chain]["coordinate_status"] = "uncovered"
+            continue
         if len(seq)-len(missing) < 3:
             raise ValueError(f"Insufficient CA coordinates in chain {chain}")
     return coverage
+
+
+def validate_reference(atoms, mapping):
+    """Enforce declared residue coverage, including deliberate mutation masks."""
+    coverage = validate_atoms(atoms, mapping["chains"], False, allow_uncovered=True)
+    expected = set()
+    excluded = []
+    for c in mapping["chains"]:
+        if len(c.get("residues", [])) != len(c["sequence"]):
+            raise ValueError("Reference validation requires one mapping row per input residue")
+        if {r["input_index_1based"] for r in c["residues"]} != set(range(1,len(c["sequence"])+1)):
+            raise ValueError("Mapping residue indices must cover every input position exactly once")
+        for r in c["residues"]:
+            key = (c["input_chain"], r["input_index_1based"])
+            if r["amino_acid"] != c["sequence"][r["input_index_1based"]-1]:
+                raise ValueError("Reference mapping row identity disagrees with chain sequence")
+            if r.get("excluded_due_to_species_difference"):
+                if r["has_reference_coordinates"]:
+                    raise ValueError("A species-masked residue cannot have reference coordinates")
+                excluded.append(key)
+            if r["has_reference_coordinates"]:
+                expected.add(key)
+    observed = {k[:2] for k in atoms if k[2] == "CA"}
+    if observed != expected or any(k[:2] not in expected for k in atoms):
+        raise ValueError(f"Reference coordinates disagree with declared coverage/mutation mask: missing_CA={sorted(expected-observed)}, unexpected_CA={sorted(observed-expected)}")
+    covered = sorted({c for c, _ in expected})
+    for chain, info in coverage.items():
+        info["reference_status"] = "covered" if chain in covered else "uncovered"
+    if "reference_covered_chains" in mapping and set(mapping["reference_covered_chains"]) != set(covered):
+        raise ValueError("Declared reference-covered chains disagree with residue mapping")
+    return coverage, covered, excluded
+
+
+def verify_reference_provenance(reference_path, provenance_path, required=False):
+    if provenance_path is None:
+        candidate = Path(reference_path).with_suffix(".provenance.json")
+        provenance_path = candidate if candidate.exists() else None
+    if provenance_path is None:
+        if required:
+            raise ValueError("Partial/surrogate references require --reference-provenance with a matching output PDB SHA256")
+        return {"status": "unassessed", "reason": "No reference provenance sidecar supplied"}
+    data = json.loads(Path(provenance_path).read_text())
+    actual = sha256(reference_path)
+    matched = []
+    def visit(value, location="root"):
+        if isinstance(value, dict):
+            if value.get("output_pdb_sha256") == actual and Path(value.get("output_pdb", "")).name == Path(reference_path).name:
+                matched.append(location+".output_pdb_sha256")
+            if value.get("sha256") == actual and Path(value.get("path", "")).name == Path(reference_path).name:
+                matched.append(location+".sha256")
+            for key, item in value.items():
+                visit(item, location+"."+key)
+        elif isinstance(value, list):
+            for i, item in enumerate(value):
+                visit(item, location+f"[{i}]")
+    visit(data)
+    if not matched:
+        raise ValueError("Reference PDB filename/SHA256 is not recorded in supplied provenance")
+    return {"status": "verified", "path": str(provenance_path), "sha256": sha256(provenance_path),
+            "matching_records": matched, "reference_sha256": actual,
+            "source_url": data.get("source_url"), "source_cif_sha256": data.get("source_cif_sha256")}
 
 
 def remap_saved_atoms(atoms, saved_to_input):
@@ -119,9 +183,13 @@ def coherent_assignment(reference, model, chains, ligand_chains):
     groups = list(by_identity.values())
     if math.prod(math.factorial(len(g)) for g in groups) > 4096:
         raise ValueError("Too many identity-preserving assignments")
-    receptor_chains = [c["input_chain"] for c in chains if c["input_chain"] not in ligand_chains]
+    covered_chains = {k[0] for k in reference if k[2] == "CA"}
+    if not set(ligand_chains).issubset(covered_chains):
+        raise ValueError("Every alignment ligand chain needs reference coordinates")
+    receptor_chains = [c["input_chain"] for c in chains if c["input_chain"] not in ligand_chains and c["input_chain"] in covered_chains]
+    permutations = [itertools.permutations(g) if set(g).intersection(covered_chains) else [tuple(g)] for g in groups]
     alternatives = []
-    for perm_groups in itertools.product(*(itertools.permutations(g) for g in groups)):
+    for perm_groups in itertools.product(*permutations):
         assignment = dict(x for group, perm in zip(groups, perm_groups) for x in zip(group, perm))
         _, ref, mod = matched(reference, model, assignment, ligand_chains)
         rotation, translation, ligand_rmsd = fit(mod, ref)
@@ -192,16 +260,19 @@ def guidance_info(spec, chains):
     return excluded, pairs
 
 
-def pair_measurements(pairs, assigned):
+def pair_measurements(pairs, assigned, covered_chains=None):
     values = []
     for pair in pairs:
         keys = [(pair[s]["chain"], pair[s]["position"], pair[s]["atom"]) for s in ("left", "right")]
         observed = all(k in assigned for k in keys)
-        distance = float(np.linalg.norm(np.asarray(assigned[keys[0]].xyz)-assigned[keys[1]].xyz)) if observed else None
+        supported = covered_chains is None or all(k[0] in covered_chains for k in keys)
+        distance = float(np.linalg.norm(np.asarray(assigned[keys[0]].xyz)-assigned[keys[1]].xyz)) if observed and supported else None
         values.append({"id": pair["id"], "evidence_labels": pair.get("evidence_labels", []),
                        "observed": observed, "distance_A": distance,
+                       "reference_assignment_supported": supported,
+                       "status": "assessed" if observed and supported else "unassessed_no_reference_assignment" if not supported else "unassessed_missing_atoms",
                        "target_distance_A": pair["distance_angstrom"],
-                       "deviation_A": distance-pair["distance_angstrom"] if observed else None,
+                       "deviation_A": distance-pair["distance_angstrom"] if distance is not None else None,
                        "sigma_A": pair["sigma_angstrom"]})
     return values
 
@@ -262,18 +333,30 @@ def evaluate_model(model_path, reference, chains, saved_to_input, ligand_chains,
                    work_dir=None):
     raw, omitted = read_atoms(model_path)
     model = remap_saved_atoms(raw, saved_to_input)
-    coverage = validate_atoms(model, chains, require_complete=not allow_partial)
+    coverage = validate_atoms(model, chains, require_complete=not allow_partial, allow_uncovered=allow_partial)
     best, alternatives = coherent_assignment(reference, model, chains, ligand_chains)
     assignment = best["reference_to_model_input_chain"]
     input_to_saved = {inp: saved for saved, inp in saved_to_input.items()}
     best["reference_to_model_saved_chain"] = {ref: input_to_saved[inp] for ref, inp in assignment.items()}
     assigned = rename_assignment(model, assignment)
+    covered_chains = {k[0] for k in reference if k[2] == "CA"}
     excluded, pairs = guidance_info(spec, chains)
     lengths = {c["input_chain"]: len(c["sequence"]) for c in chains}
     interfaces = []
     for c in chains:
         rec = c["input_chain"]
         if rec in ligand_chains:
+            continue
+        if rec not in covered_chains:
+            interfaces.append({"reference_receptor_chain": rec, "gene": c["gene"],
+                               "reference_status": "uncovered", "model_input_chain": assignment[rec],
+                               "chain_assignment_status": "Input label for bookkeeping only; no reference-based site assignment",
+                               "all_native_contacts": None, "unrewarded_reference_contacts": None,
+                               "guided_endpoint_contact_count_excluded": None,
+                               "shared_reference_atom_count": 0, "reference_atom_count": 0,
+                               "reference_atom_coverage_fraction": None,
+                               "receptor_CA_rmsd_in_ligand_frame_A": None,
+                               "official_dockq": {"status":"unassessed", "reason":"No reference coordinates for this receptor copy", "interface":None}})
             continue
         native = native_contacts(reference, rec, ligand_chains)
         predicted = native_contacts(assigned, rec, ligand_chains)
@@ -288,6 +371,7 @@ def evaluate_model(model_path, reference, chains, saved_to_input, ligand_chains,
         ref_keys = {k for k in reference if k[0] in ligand_chains or k[0] == rec}
         observed = ref_keys.intersection(assigned)
         interfaces.append({"reference_receptor_chain": rec, "gene": c["gene"],
+                           "reference_status": "covered", "chain_assignment_status": "Part of the single coherent reference assignment",
                            "model_input_chain": assignment[rec], "all_native_contacts": contact_recovery(native, predicted),
                            "unrewarded_reference_contacts": contact_recovery(residual, predicted) if spec is not None else None,
                            "guided_endpoint_contact_count_excluded": len(native)-len(residual) if spec is not None else None,
@@ -298,20 +382,32 @@ def evaluate_model(model_path, reference, chains, saved_to_input, ligand_chains,
     folds = {}
     for c in chains:
         name = c["input_chain"]
+        if name not in covered_chains:
+            folds[name] = {"status":"unassessed", "reason":"No reference coordinates", "matched_backbone_atoms":0, "fitted_backbone_rmsd_A":None}
+            continue
         keys, ref, mod = matched(reference, model, assignment, [name], ("N", "CA", "C", "O"))
         folds[name] = {"matched_backbone_atoms": len(keys), "fitted_backbone_rmsd_A": fit(mod, ref)[2]}
     def summary(values):
         return {"mean": sum(values)/len(values), "weakest": min(values)} if values and all(x is not None for x in values) else {"mean": None, "weakest": None}
     dockq_values = [i["official_dockq"].get("interface", {}).get("DockQ") if i["official_dockq"].get("interface") else None for i in interfaces]
+    contact_values = [i["all_native_contacts"]["fraction_native_contacts"] if i["all_native_contacts"] else None for i in interfaces]
+    covered_indices = [j for j,i in enumerate(interfaces) if i["reference_status"] == "covered"]
     component_map = {saved: next(c["gene"] for c in chains if c["input_chain"] == inp)+":"+inp for saved, inp in saved_to_input.items()}
     return {"model_path": str(model_path), "model_sha256": sha256(model_path), "sequence_coverage": coverage,
+            "model_coordinate_scope": "partial diagnostic" if any(v["missing_CA_input_indices"] for v in coverage.values()) else "complete input CA coverage",
             "omitted_atom_counts": omitted, "coherent_assignment": best, "assignment_alternatives": alternatives,
             "assignment_objective": "Ligand CA fitted RMSD squared plus sum of receptor-copy CA mean squared deviations in that same frame; one bijection for every metric",
+            "reference_covered_chains": sorted(covered_chains),
+            "reference_uncovered_chains": sorted(set(assignment)-covered_chains),
+            "uncovered_chain_assignments": "Identity labels are retained for bookkeeping only; no reference-based orientation or site assignment is inferred",
             "interfaces": interfaces, "fold_preservation": folds,
             "reference_close_cysteine_sulfur_pairs": cysteine_geometry(reference, assigned),
-            "guidance_distances_under_reference_assignment": pair_measurements(pairs, assigned),
-            "native_contact_recovery_summary": summary([i["all_native_contacts"]["fraction_native_contacts"] for i in interfaces]),
+            "guidance_distances_under_reference_assignment": pair_measurements(pairs, assigned, covered_chains),
+            "native_contact_recovery_summary": summary(contact_values),
             "official_dockq_summary": summary(dockq_values),
+            "covered_interface_native_contact_recovery_summary": summary([contact_values[j] for j in covered_indices]),
+            "covered_interface_dockq_summary": summary([dockq_values[j] for j in covered_indices]),
+            "interface_coverage_counts": {"covered":len(covered_indices), "total":len(interfaces)},
             "heavy_atom_sterics": analyze_clashes(model_path, chain_components=component_map),
             "physical_status": "unassessed", "threshold_status": "pending_calibration", "assembly_label": None,
             "unassessed_checks": ["Hydrogen/protonation-dependent MolProbity validation", "hydrogen-bond geometry", "buried unsatisfied polar groups", "rotamer/backbone outlier probabilities", "disulfide covalent topology assignment", "glycan-mediated interactions", "membrane placement", "experimental binding/signaling"]}
@@ -322,6 +418,7 @@ def main():
     p.add_argument("--models", type=Path, nargs="+", required=True)
     p.add_argument("--reference", type=Path, required=True)
     p.add_argument("--mapping", type=Path, required=True)
+    p.add_argument("--reference-provenance", type=Path, help="Required for partial/surrogate references; checks exact PDB filename and SHA256")
     p.add_argument("--guidance-spec", type=Path)
     p.add_argument("--ligand-chains", default="A,B")
     p.add_argument("--dockq-python", default=sys.executable)
@@ -332,7 +429,10 @@ def main():
     mapping = json.loads(args.mapping.read_text())
     chains = mapping["chains"]
     reference, omitted = read_atoms(args.reference)
-    reference_coverage = validate_atoms(reference, chains, require_complete=False)
+    reference_coverage, covered_chains, species_excluded = validate_reference(reference, mapping)
+    partial = set(covered_chains) != {c["input_chain"] for c in chains}
+    surrogate = bool(species_excluded) or "surrogate" in mapping.get("reference_kind", "").lower()
+    provenance = verify_reference_provenance(args.reference, args.reference_provenance, required=partial or surrogate)
     saved = mapping["expected_saved_chain_to_input_chain"]
     if set(saved.values()) != {c["input_chain"] for c in chains} or len(saved) != len(chains):
         raise ValueError("Saved chain map must be a complete bijection")
@@ -354,19 +454,38 @@ def main():
         for model in args.models:
             results.append(evaluate_model(model, reference, chains, saved, ligand_chains,
                                           spec, args.allow_partial_model, args.dockq_python, available, tmp))
+    comparison_label = "species_surrogate_agreement" if surrogate else "partial_reference_recovery" if partial else "reference_recovery"
+    comparison_interpretation = ("Agreement with conserved, observed portions of the species surrogate; human target accuracy and uncovered interfaces remain unassessed."
+                                 if surrogate else "Recovery of observed portions of the supplied reference; uncovered interfaces remain unassessed."
+                                 if partial else "Recovery of observed portions of the supplied reference; source construct qualifications apply.")
+    for result in results:
+        result["reference_comparison_scope"] = {"label":comparison_label, "interpretation":comparison_interpretation,
+                                                "partial_assembly":partial, "surrogate":surrogate}
+        for interface in result["interfaces"]:
+            interface["comparison_scope"] = comparison_label if interface["reference_status"] == "covered" else "unassessed_no_reference"
+            interface["official_dockq"]["interpretation"] = comparison_interpretation if interface["reference_status"] == "covered" else "No reference coordinates for this receptor copy."
     result = {"schema_version": 1, "created_utc": datetime.now(timezone.utc).isoformat(),
               "reference": {"path": str(args.reference), "sha256": sha256(args.reference), "coverage": reference_coverage,
-                            "omitted_atom_counts": omitted},
+                            "omitted_atom_counts": omitted, "provenance":provenance,
+                            "kind":mapping.get("reference_kind", "Reference coverage follows supplied construct mapping"),
+                            "construct_scope":mapping.get("scope", mapping.get("construct", mapping.get("reference_kind"))),
+                            "construct_rationale":mapping.get("construct_rationale"),
+                            "source_species_qualification":mapping.get("source_species_qualification"),
+                            "comparison_label":comparison_label, "comparison_interpretation":comparison_interpretation,
+                            "source_pdb_ids":sorted({c["reference_pdb"] for c in chains if c.get("reference_pdb")}),
+                            "glycan_qualification":mapping.get("glycans"), "tether_qualification":mapping.get("tether"),
+                            "partial_assembly":partial, "surrogate":surrogate, "species_masked_residues":species_excluded},
               "mapping": {"path": str(args.mapping), "sha256": sha256(args.mapping)},
               "guidance_spec": {"path": str(args.guidance_spec), "sha256": sha256(args.guidance_spec)} if args.guidance_spec else None,
               "ligand_chains": ligand_chains, "dockq_backend": backend, "dockq_python": args.dockq_python,
+              "partial_models_explicitly_allowed":args.allow_partial_model,
               "dockq_scope": "Official DockQ per receptor against the merged ligand dimer, fixed XY:XY mapping with no_align=True. Full input numbering is preserved; prediction residues outside reference-observed coverage are excluded from DockQ only.",
               "evidence_allocation": {"guidance_endpoint_exclusions": sorted(excluded),
                                       "exclusion_rule": "Exclude every native contact touching any guidance/integrity endpoint and all identical-sequence equivalents",
                                       "unrewarded_contacts_status": "Coordinate holdout relative to the supplied guidance endpoints only; no claim of independence from tuning, ranking, selection or model training",
                                       "source_independence": "Same reference and C2-related copies are not independent experiments",
                                       "claimed_independent_heldout_evidence": None},
-              "limitations": ["Protein-only comparison to an engineered glycosylated receptor trap; no native signaling claim.",
+              "limitations": ["Protein-only comparison; preserve the source construct/species qualifications in mapping and provenance. No native signaling claim.",
                               "Unresolved reference tails cannot be assessed for reference accuracy but remain included in model sterics.",
                               "Native-contact recovery and DockQ against guidance coordinates quantify reference recovery.",
                               "No acceptance thresholds calibrated; a geometric heavy-atom overlap count is not MolProbity clashscore.",
