@@ -38,6 +38,40 @@ class SamplingLaunchTests(unittest.TestCase):
         self.assertEqual(fk.paths.checkpoint_dir, '/tmp/test-simplefold-cache/checkpoints')
         self.assertEqual(fk.paths.ccd_dir, '/tmp/test-simplefold-cache/ccd')
 
+    def test_generic_bmp90_profile_requires_external_inputs_and_has_prespecified_defaults(self):
+        cfg = config('experiment=bmp90-mapped')
+        with self.assertRaisesRegex(ValueError, 'explicit target FASTA'):
+            run_sampling.validate_config(cfg)
+        cfg = config('experiment=bmp90-mapped', 'fasta=/external/full-target.fasta')
+        with self.assertRaisesRegex(ValueError, 'explicit reward.spec_json'):
+            run_sampling.validate_config(cfg)
+        cfg = config('experiment=bmp90-mapped', 'fasta=/external/full-target.fasta',
+                     'sampling.reward.spec_json=/external/mapped-recipe.json', hydra=True)
+        run_sampling.validate_config(cfg)
+        self.assertEqual((cfg.model, cfg.num_steps, cfg.samples, cfg.tau), ('simplefold_3B', 500, 10, .1))
+        self.assertEqual(list(cfg.sampling.checkpoint_times), [.1, .3, .6, .75, .9])
+        self.assertEqual(cfg.sampling.model_batch_size, 2)
+        self.assertTrue(cfg.sampling.run_baseline)
+        self.assertIsNone(cfg.sampling.baseline_prediction_dir)
+        self.assertEqual(cfg.hydra.sweeper.params.tau, '0.1,0.3,0.8')
+        self.assertIsNone(cfg.paths.reference_cif)
+        self.assertIsNone(cfg.paths.reference_pdb)
+
+    def test_generic_bmp90_tau_and_population_overrides_compose_without_reference_inputs(self):
+        cfg = config('experiment=bmp90-mapped', 'fasta=/external/full-target.fasta',
+                     'sampling.reward.spec_json=/external/mapped-recipe.json', 'tau=.8',
+                     'seed=74102', 'sampling.brownian_seed=75102', 'sampling.resampling_seed=76102', hydra=True)
+        run_sampling.validate_config(cfg)
+        self.assertEqual((cfg.seed, cfg.sampling.brownian_seed, cfg.sampling.resampling_seed),
+                         (74102, 75102, 76102))
+        self.assertEqual(cfg.tau, .8)
+        with patch.dict(os.environ, {'SLURM_JOB_ID': '999'}), \
+                patch('sampling_preflight.subprocess.run') as launched:
+            StoragePreflight().on_multirun_start(cfg)
+        paths = json.loads(launched.call_args.args[0][-1])['paths']
+        self.assertIn('/external/mapped-recipe.json', paths)
+        self.assertFalse(any('2goo' in path for path in paths))
+
     def test_individual_cache_override_and_invalid_particle_count_rejected(self):
         with self.assertRaisesRegex(ValueError, 'derived'):
             run_sampling.validate_config(config('paths.checkpoint_dir=/some/other/place'))

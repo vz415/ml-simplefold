@@ -23,6 +23,13 @@ must contain identical sequences. All pair distances share ONE bijection, chosen
 by exhaustive maximization of the weighted mean Gaussian score. Missing atoms
 score zero with the original denominator. This is a sparse reconstruction
 objective, not an energy, affinity, signaling, or native-accuracy estimate.
+
+Version 2 adds ``interface_groups`` (id, receptor_chain, type, pair_ids, weight),
+``aggregation`` (minimum_fraction in [0,1]), optional ``integrity_pairs`` using
+the same pair schema, and explicit ``safeguards``. Every interface pair belongs
+to exactly one group. The score combines mean and weakest interface, then applies
+bounded CA-overlap/backbone/coverage penalties and a gentle integrity multiplier.
+Integrity targets are additional guidance, never independent validation.
 """
 from __future__ import annotations
 
@@ -88,9 +95,10 @@ class MappedDistanceReward:
         spec_bytes = Path(spec_json_path).read_bytes()
         spec = json.loads(spec_bytes)
         if (not isinstance(spec, dict) or type(spec.get("schema_version")) is not int
-                or spec.get("schema_version") != 1 or spec.get("active") is not True
+                or spec.get("schema_version") not in (1, 2) or spec.get("active") is not True
                 or spec.get("mapping_status") != "verified"):
-            raise ValueError("Reward spec must be version 1, active, and mapping verified")
+            raise ValueError("Reward spec must be version 1 or 2, active, and mapping verified")
+        self._version = spec["schema_version"]
         if any(not isinstance(spec.get(k), str) or not spec[k].strip()
                for k in ("target_id", "scope")):
             raise ValueError("target_id and scope must be nonempty descriptive strings")
@@ -148,6 +156,11 @@ class MappedDistanceReward:
         pairs = spec.get("pairs")
         if not isinstance(pairs, list) or not pairs:
             raise ValueError("At least one distance pair is required")
+        self._interface_count = len(pairs)
+        integrity_pairs = spec.get("integrity_pairs", []) if self._version == 2 else []
+        if not isinstance(integrity_pairs, list):
+            raise ValueError("integrity_pairs must be a list")
+        pairs = pairs + integrity_pairs
         for pair in pairs:
             if not isinstance(pair, dict):
                 raise ValueError("Each distance pair must be an object")
@@ -180,8 +193,10 @@ class MappedDistanceReward:
             self._total_weight = math.fsum(p["weight"] for p in self._pairs)
         except OverflowError as exc:
             raise ValueError("Total pair weight must be finite") from exc
+        if self._version == 2:
+            self._configure_joint(spec)
         self.metadata = {
-            "kind": "mapped_ca_distance", "schema_version": 1,
+            "kind": "mapped_ca_distance", "schema_version": self._version,
             "target_id": spec.get("target_id"), "scope": spec.get("scope"),
             "fasta_sha256": fasta_hash, "spec_sha256": hashlib.sha256(spec_bytes).hexdigest(),
             "specification": spec,
@@ -193,6 +208,71 @@ class MappedDistanceReward:
             "missing_atoms": "zero feature with full fixed denominator",
             "overlap_diagnostic_threshold_angstrom": 2.0,
             "limited_scope": "Sparse protein CA geometry only; not physical energy, binding affinity, signaling, or independent structural accuracy."}
+        if self._version == 2:
+            self.metadata.update({
+                "score_definition": "((1-minimum_fraction)*weighted_mean_interface + minimum_fraction*weakest_interface) * safeguards * integrity_factor",
+                "interface_pair_count": self._interface_count,
+                "integrity_pair_count": len(integrity_pairs),
+                "integrity_definition": "floor + (1-floor)*minimum_integrity_pair_Gaussian",
+                "safeguard_threshold_status": "Engineering settings, not calibrated acceptance thresholds"})
+
+    def _configure_joint(self, spec):
+        groups = spec.get("interface_groups")
+        if not isinstance(groups, list) or not groups:
+            raise ValueError("Version 2 requires interface_groups")
+        expected = {p["id"]: p for p in self._pairs[:self._interface_count]}
+        seen, group_ids, self._interfaces = set(), set(), []
+        for group in groups:
+            if not isinstance(group, dict):
+                raise ValueError("Interface group must be an object")
+            name, receptor = group.get("id"), group.get("receptor_chain")
+            members = group.get("pair_ids")
+            if (not isinstance(name, str) or not name or name in group_ids
+                    or receptor not in self._sequences or group.get("type") not in ("type_I", "type_II")
+                    or not isinstance(members, list) or not members
+                    or any(not isinstance(m, str) or m not in expected for m in members)
+                    or len(set(members)) != len(members) or seen.intersection(members)):
+                raise ValueError("Invalid interface group or repeated/unknown pair")
+            if any(sum(c == receptor for c, _ in expected[m]["endpoints"]) != 1 for m in members):
+                raise ValueError("Each interface pair must touch its receptor exactly once")
+            seen.update(members)
+            group_ids.add(name)
+            self._interfaces.append(dict(id=name, receptor_chain=receptor, type=group["type"],
+                                         pair_ids=list(members), weight=_positive(group.get("weight"), "interface weight")))
+        if seen != set(expected):
+            raise ValueError("Every interface pair must belong to exactly one group")
+        fraction = spec.get("aggregation", {}).get("minimum_fraction")
+        if isinstance(fraction, bool) or not isinstance(fraction, (int, float)) or not 0 <= fraction <= 1:
+            raise ValueError("minimum_fraction must be finite in [0,1]")
+        self._minimum_fraction = float(fraction)
+        guard = spec.get("safeguards")
+        if not isinstance(guard, dict):
+            raise ValueError("Version 2 requires explicit safeguards")
+        keys = ("ca_clash_distance_angstrom", "ca_clash_weight", "backbone_min_angstrom",
+                "backbone_max_angstrom", "backbone_sigma_angstrom", "backbone_weight",
+                "missing_core_weight", "maximum_penalty_exponent")
+        self._guard = {k: _positive(guard.get(k), k) for k in keys}
+        if self._guard["backbone_min_angstrom"] >= self._guard["backbone_max_angstrom"]:
+            raise ValueError("Backbone bounds must be ordered")
+        floor = guard.get("integrity_factor_floor")
+        if isinstance(floor, bool) or not isinstance(floor, (int, float)) or not 0 <= floor <= 1:
+            raise ValueError("integrity_factor_floor must be finite in [0,1]")
+        self._guard["integrity_factor_floor"] = floor
+        self._required = set()
+        ranges = guard.get("required_ca_ranges")
+        if not isinstance(ranges, list) or not ranges:
+            raise ValueError("Explicit required_ca_ranges are needed for missing-core checks")
+        for segment in ranges:
+            if not isinstance(segment, dict):
+                raise ValueError("Required CA range must be an object")
+            chain, start, stop = segment.get("chain"), segment.get("start"), segment.get("end")
+            if (chain not in self._sequences or type(start) is not int or type(stop) is not int
+                    or not 1 <= start <= stop <= len(self._sequences[chain])):
+                raise ValueError("Invalid required CA range")
+            for position in range(start, stop + 1):
+                if (chain, position) in self._required:
+                    raise ValueError("Required CA ranges cannot overlap")
+                self._required.add((chain, position))
 
     def _read_ca(self, path):
         lines = Path(path).read_text().splitlines()
@@ -241,8 +321,8 @@ class MappedDistanceReward:
         return {key: row[1] for key, row in selected.items()}, atom_count
 
     @staticmethod
-    def _overlaps(atoms):
-        count, closest = 0, None
+    def _overlaps(atoms, guard_distance=None):
+        count, closest, soft_sum, guard_count = 0, None, 0., 0
         for (left, xyz), (right, other) in itertools.combinations(atoms.items(), 2):
             if left[0] == right[0]:
                 continue
@@ -251,12 +331,74 @@ class MappedDistanceReward:
                 raise ValueError("Nonfinite distance from PDB coordinates")
             closest = d if closest is None else min(closest, d)
             count += d < 2.0
+            if guard_distance is not None and d < guard_distance:
+                guard_count += 1
+                soft_sum += ((guard_distance - d) / guard_distance) ** 2
         return {"interchain_CA_pairs_below_2_angstrom": count,
                 "minimum_interchain_CA_distance_angstrom": closest,
+                "guard_overlap_pairs": guard_count if guard_distance is not None else None,
+                "guard_overlap_squared_sum": soft_sum if guard_distance is not None else None,
                 "interpretation": "Conservative CA overlap diagnostic only; not an all-atom clash score or energy."}
+
+    def _physical_guard(self, atoms, overlaps):
+        g = self._guard
+        backbone_rows, worst_error = [], 0.
+        for chain, sequence in self._sequences.items():
+            observed, failures, chain_worst = 0, 0, 0.
+            for position in range(1, len(sequence)):
+                if (chain, position) not in atoms or (chain, position + 1) not in atoms:
+                    continue
+                d = math.dist(atoms[chain, position], atoms[chain, position + 1])
+                if not math.isfinite(d):
+                    raise ValueError("Nonfinite backbone distance")
+                error = max(g["backbone_min_angstrom"] - d, d - g["backbone_max_angstrom"], 0.)
+                observed += 1
+                failures += error > 0
+                chain_worst = max(chain_worst, error)
+            worst_error = max(worst_error, chain_worst)
+            backbone_rows.append({"input_chain": chain, "observed_bonds": observed,
+                                  "expected_bonds": len(sequence) - 1, "out_of_range_bonds": failures,
+                                  "maximum_bound_excess_angstrom": chain_worst if observed else None})
+        missing = self._required.difference(atoms)
+        terms = {"ca_clash": g["ca_clash_weight"] * overlaps["guard_overlap_squared_sum"],
+                 "backbone": g["backbone_weight"] * (worst_error / g["backbone_sigma_angstrom"]) ** 2,
+                 "missing_core": g["missing_core_weight"] * len(missing) / len(self._required)}
+        exponent = min(g["maximum_penalty_exponent"], sum(terms.values()))
+        return {"factor": math.exp(-exponent), "penalty_exponent": exponent,
+                "uncapped_penalty_terms": terms, "backbone": backbone_rows,
+                "required_CA_present": len(self._required) - len(missing),
+                "required_CA_total": len(self._required),
+                "missing_required_CA": [{"chain": c, "position": p} for c, p in sorted(missing)],
+                "unobserved_tail_status": "Absent coordinates outside required ranges are unassessed, not a geometry pass.",
+                "threshold_status": "uncalibrated engineering safeguards"}
+
+    def _joint_value(self, rows, physical_guard):
+        by_id = {r["id"]: r for r in rows}
+        copies = []
+        for group in self._interfaces:
+            pairs = [by_id[p] for p in group["pair_ids"]]
+            denominator = math.fsum(p["weight"] for p in pairs)
+            value = math.fsum(p["weight"] * p["feature"] for p in pairs) / denominator
+            copies.append({**group, "score": value,
+                           "present_pairs": sum(p["present"] for p in pairs), "total_pairs": len(pairs)})
+        mean = math.fsum(c["weight"] * c["score"] for c in copies) / math.fsum(c["weight"] for c in copies)
+        minimum = min(c["score"] for c in copies)
+        interface_score = (1 - self._minimum_fraction) * mean + self._minimum_fraction * minimum
+        integrity_rows = rows[self._interface_count:]
+        integrity = min((p["feature"] for p in integrity_rows), default=1.)
+        floor = self._guard["integrity_factor_floor"]
+        factor = floor + (1 - floor) * integrity
+        return {"reward": interface_score * physical_guard["factor"] * factor,
+                "interfaces": copies, "mean_interface_score": mean,
+                "minimum_interface_score": minimum, "interface_score": interface_score,
+                "weakest_interface_ids": [c["id"] for c in copies if c["score"] == minimum],
+                "integrity_minimum": integrity, "integrity_factor": factor,
+                "physical_safeguards": physical_guard}
 
     def score(self, pdb_path):
         atoms, atom_count = self._read_ca(pdb_path)
+        overlaps = self._overlaps(atoms, self._guard["ca_clash_distance_angstrom"] if self._version == 2 else None)
+        physical_guard = self._physical_guard(atoms, overlaps) if self._version == 2 else None
         best, best_key = None, None
         for assignment in self._assignments:
             rows = []
@@ -276,7 +418,8 @@ class MappedDistanceReward:
                              "missing_atoms": [{"input_chain": chain, "saved_chain": self._saved[chain],
                                                 "position": pos, "atom": "CA"}
                                                for chain, pos in keys if (chain, pos) not in atoms]})
-            reward = math.fsum(p["weight"] * p["feature"] for p in rows) / self._total_weight
+            joint = self._joint_value(rows, physical_guard) if self._version == 2 else {}
+            reward = joint.get("reward", math.fsum(p["weight"] * p["feature"] for p in rows) / self._total_weight)
             present_weight = math.fsum(p["weight"] for p in rows if p["present"])
             covered = sum(p["present"] for p in rows)
             key = reward, present_weight, covered
@@ -289,8 +432,9 @@ class MappedDistanceReward:
                         "coverage": {"present_pairs": covered, "total_pairs": len(rows),
                                      "pair_fraction": covered / len(rows),
                                      "weighted_fraction": present_weight / self._total_weight}}
+                best.update(joint)
         best.update({"assignments_evaluated": len(self._assignments),
                      "observed_CA_atoms": len(atoms), "observed_ATOM_records": atom_count,
-                     "diagnostics": self._overlaps(atoms),
+                     "diagnostics": overlaps,
                      "limited_scope": self.metadata["limited_scope"]})
         return best

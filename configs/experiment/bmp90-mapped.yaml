@@ -1,0 +1,26 @@
+# @package _global_
+# Shared launcher: exact target constructs and scoring recipes are external inputs.
+# Non-multirun defaults to tau 0.1; -m uses the three prespecified tau values.
+defaults:
+  - override /sampling: bmp90_mapped
+
+name: bmp90-mapped
+model: simplefold_3B
+# Null deliberately replaces sample.yaml's default; ??? would retain crambin
+# during OmegaConf merging. validate_config rejects this until overridden.
+fasta: null
+num_steps: 500
+samples: 10
+tau: 0.1
+seed: 74101
+storage_timeout_seconds: 600
+
+paths:
+  reference_dir: null
+  reference_cif: null
+  reference_pdb: null
+
+hydra:
+  sweeper:
+    params:
+      tau: "0.1,0.3,0.8"

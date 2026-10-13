@@ -270,6 +270,101 @@ class MappedDistanceRewardTests(unittest.TestCase):
             self.pdb.write_text("".join(base + order))
             self.assertEqual(reward.score(self.pdb)["reward"], 1.)
 
+    def joint_spec(self):
+        spec = copy.deepcopy(self.spec)
+        spec["schema_version"] = 2
+        for receptor, ligand in (("E", "A"), ("F", "B")):
+            for r, l in ((1, 1), (2, 2), (1, 2)):
+                spec["pairs"].append({"id": f"{receptor}{r}_{ligand}{l}",
+                    "left": {"chain": receptor, "position": r,
+                             "residue": self.sequences[receptor][r - 1], "atom": "CA"},
+                    "right": {"chain": ligand, "position": l,
+                              "residue": self.sequences[ligand][l - 1], "atom": "CA"},
+                    "distance_angstrom": math.dist(self.coords[receptor, r], self.coords[ligand, l]),
+                    "sigma_angstrom": 2., "weight": 1., "evidence_labels": ["synthetic_fixture"]})
+        spec["interface_groups"] = [
+            {"id": receptor, "receptor_chain": receptor, "type": "type_I" if receptor in "CD" else "type_II",
+             "weight": 1., "pair_ids": [p["id"] for p in spec["pairs"] if p["left"]["chain"] == receptor]}
+            for receptor in "CDEF"]
+        spec["aggregation"] = {"minimum_fraction": .5}
+        spec["integrity_pairs"] = [{"id": "ligand_dimer", "left": {"chain": "A", "position": 1, "residue": "A", "atom": "CA"},
+            "right": {"chain": "B", "position": 1, "residue": "A", "atom": "CA"},
+            "distance_angstrom": 40., "sigma_angstrom": 3., "weight": 1., "evidence_labels": ["synthetic_fixture"]}]
+        spec["safeguards"] = {"ca_clash_distance_angstrom": 3., "ca_clash_weight": 1.,
+            "backbone_min_angstrom": 2.8, "backbone_max_angstrom": 7., "backbone_sigma_angstrom": .5,
+            "backbone_weight": .2, "missing_core_weight": 2., "maximum_penalty_exponent": 6.,
+            "integrity_factor_floor": .5,
+            "required_ca_ranges": [{"chain": c, "start": 1, "end": 2} for c in self.sequences]}
+        return spec
+
+    def test_joint_reference_optimum_has_four_copy_scores(self):
+        result = self.reward(self.joint_spec()).score(self.write_pdb())
+        self.assertEqual(result["reward"], 1.)
+        self.assertEqual(len(result["interfaces"]), 4)
+        self.assertEqual(result["minimum_interface_score"], 1.)
+        self.assertEqual(result["physical_safeguards"]["factor"], 1.)
+        self.assertEqual(result["integrity_factor"], 1.)
+        json.dumps(result, allow_nan=False)
+
+    def test_joint_weak_copy_is_not_hidden_by_three_good_copies(self):
+        coords = {key: (x + 40, y, z) if key[0] == "F" else (x, y, z)
+                  for key, (x, y, z) in self.coords.items()}
+        result = self.reward(self.joint_spec()).score(self.write_pdb(coords))
+        self.assertAlmostEqual(result["mean_interface_score"], .75)
+        self.assertLess(result["minimum_interface_score"], .01)
+        self.assertAlmostEqual(result["reward"], .375)
+        self.assertIn("F", result["weakest_interface_ids"])
+
+    def test_joint_duplicate_site_and_core_overlap_are_penalized(self):
+        coords = dict(self.coords)
+        for pos in (1, 2):
+            coords["F", pos] = coords["E", pos]
+        result = self.reward(self.joint_spec()).score(self.write_pdb(coords))
+        self.assertLess(result["physical_safeguards"]["factor"], .15)
+        self.assertLess(result["reward"], result["interface_score"])
+        self.assertEqual(result["diagnostics"]["guard_overlap_pairs"], 2)
+
+    def test_joint_backbone_stretch_and_missing_core_are_explicit(self):
+        reward = self.reward(self.joint_spec())
+        coords = dict(self.coords)
+        coords["E", 2] = (10, 12, 0)
+        stretched = reward.score(self.write_pdb(coords))
+        self.assertLess(stretched["physical_safeguards"]["factor"], .01)
+        del coords["E", 2]
+        missing = reward.score(self.write_pdb(coords))
+        self.assertEqual(missing["physical_safeguards"]["required_CA_present"], 11)
+        self.assertEqual(missing["physical_safeguards"]["missing_required_CA"], [{"chain": "E", "position": 2}])
+        self.assertGreater(missing["physical_safeguards"]["uncapped_penalty_terms"]["missing_core"], 0.)
+
+    def test_joint_dimer_integrity_has_gentle_floor(self):
+        coords = {key: (x + 30, y, z) if key[0] in "BDF" else (x, y, z)
+                  for key, (x, y, z) in self.coords.items()}
+        result = self.reward(self.joint_spec()).score(self.write_pdb(coords))
+        self.assertEqual(result["interface_score"], 1.)
+        self.assertAlmostEqual(result["integrity_factor"], .5)
+        self.assertAlmostEqual(result["reward"], .5)
+
+    def test_joint_copy_permutation_preserves_whole_assignment_and_guards(self):
+        swaps = dict(zip("ABCDEF", "BADCFE"))
+        coords = {(swaps[c], p): xyz for (c, p), xyz in self.coords.items()}
+        result = self.reward(self.joint_spec()).score(self.write_pdb(coords))
+        self.assertEqual(result["reward"], 1.)
+        self.assertEqual(len(set(result["assignment"]["role_to_input_chain"].values())), 6)
+
+    def test_joint_group_and_safeguard_validation(self):
+        spec = self.joint_spec()
+        spec["interface_groups"][1]["pair_ids"] = spec["interface_groups"][0]["pair_ids"]
+        with self.assertRaises(ValueError):
+            self.reward(spec)
+        spec = self.joint_spec()
+        spec["safeguards"]["backbone_min_angstrom"] = 8.
+        with self.assertRaisesRegex(ValueError, "bounds"):
+            self.reward(spec)
+        spec = self.joint_spec()
+        spec["safeguards"]["ca_clash_weight"] = float("nan")
+        with self.assertRaises(ValueError):
+            self.reward(spec)
+
 
 if __name__ == "__main__":
     unittest.main()

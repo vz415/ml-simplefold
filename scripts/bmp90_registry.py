@@ -17,7 +17,7 @@ import uuid
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_ROOT = ROOT / "artifacts/bmp90"
 DEFAULT_PLAN = DEFAULT_ROOT / "BMP_90_target_plan.json"
-STATUSES = ("prepared_blocked", "ready_for_submission", "submitted", "running",
+STATUSES = ("prepared_blocked", "ready_for_submission", "superseded", "submitted", "running",
             "completed", "failed", "cancelled")
 
 
@@ -169,6 +169,12 @@ def preflight(spec_path, plan_path=DEFAULT_PLAN):
     scoring_text = artifact("scoring_json", True)
     artifact("runner")
     artifact("checkpoint")
+    expected_checkpoint = spec.get("checkpoint_expected_sha256")
+    if expected_checkpoint is not None:
+        if not isinstance(expected_checkpoint, str) or not re.fullmatch(r"[0-9a-f]{64}", expected_checkpoint):
+            issues.append("checkpoint_expected_sha256 must be an observed lowercase SHA256")
+        elif "checkpoint" in artifacts and artifacts["checkpoint"]["sha256"] != expected_checkpoint:
+            issues.append("checkpoint SHA256 differs from checkpoint_expected_sha256")
     if spec.get("hydra_experiment") or spec.get("resolved_config"):
         artifact("resolved_config", True)
     auxiliary = spec.get("auxiliary_inputs", {})
@@ -391,6 +397,12 @@ def append_event(root, run_id, status, job_id=None, note="", output_dir=None, lo
         raise ValueError("Expected an actual numeric Slurm job ID (optionally array task)")
     events = sorted((manifest_path.parent / "events").glob("*.json"))
     prior_jobs = {read_json(p).get("job_id") for p in events} - {None}
+    if status == "superseded" and (job_id or prior_jobs or manifest.get("job_id")):
+        raise ValueError("Only unsubmitted preparations can be superseded; preserve observed Slurm states")
+    if status == "superseded" and not note.strip():
+        raise ValueError("A superseded preparation requires a reason in --note")
+    if any(read_json(p)["status"] == "superseded" for p in events):
+        raise ValueError("Superseded preparations are terminal; register a new run")
     if job_id and prior_jobs and job_id not in prior_jobs:
         raise ValueError("A different job ID requires a new run linked with --retry-of")
     timestamp = now()
@@ -455,7 +467,8 @@ Specification keys:
   budget: {max_gpu_hours, max_samples, max_particles, scope}.
 Optional: hydra_experiment (named profile), resolved_config (resolved YAML
   path, required when hydra_experiment is set), auxiliary_inputs (label ->
-  file path; reference structures, config sources or other dependencies).
+  file path; reference structures, config sources or other dependencies),
+  checkpoint_expected_sha256 (previously observed hash; rechecked against bytes).
 
 Mapping JSON: {"chains": {"A": {"gene": "BMP4", "residues": [
   {"input_residue": 1, "aa": "S", "source": "UniProt:P12644",
@@ -480,6 +493,9 @@ text and hashes every artifact, including the checkpoint; it never edits a
 manifest. Run preflight again before a real submission to detect changed files.
 Use --retry-of for every new attempt; each attempt receives a new run ID.
 event adds one immutable JSON file; use verified Slurm IDs and observed states.
+  Mark an outdated, never-submitted preparation with event RUN_ID superseded
+  --note 'Reason for replacement'. This never alters the original manifest or
+  pretends a scheduler cancellation occurred. Register a new run for new inputs.
   Link existing SimpleFold receipts with --output-dir and --local-mirror-dir:
   HPC /pub/ynkim4/ml-simplefold/artifacts/runs/JOB_ID/
   local <ml-simplefold>/artifacts/remote-runs/JOB_ID/.

@@ -65,6 +65,15 @@ class RegistryTests(unittest.TestCase):
         (self.root / "checkpoint.bin").write_bytes(b"changed synthetic fixture")
         self.assertNotEqual(old_hash, registry.preflight(self.spec_path, self.plan_path)["artifacts"]["checkpoint"]["sha256"])
 
+    def test_recorded_checkpoint_identity_must_match_actual_bytes(self):
+        self.spec["checkpoint_expected_sha256"] = registry.sha((self.root / "checkpoint.bin").read_bytes())
+        self.save()
+        self.assertTrue(registry.preflight(self.spec_path, self.plan_path)["ready"])
+        (self.root / "checkpoint.bin").write_bytes(b"different synthetic checkpoint")
+        report = registry.preflight(self.spec_path, self.plan_path)
+        self.assertFalse(report["ready"])
+        self.assertIn("checkpoint SHA256 differs from checkpoint_expected_sha256", report["issues"])
+
     def test_named_hydra_profile_requires_frozen_config_and_hashes_inputs(self):
         self.spec["hydra_experiment"] = "synthetic-profile"
         self.save()
@@ -194,6 +203,28 @@ class RegistryTests(unittest.TestCase):
         for status in ("ready_for_submission", "submitted", "running", "completed"):
             with self.subTest(status=status), self.assertRaises(ValueError):
                 registry.append_event(self.root, manifest["run_id"], status, "12345")
+
+    def test_superseded_preparation_preserves_manifest_and_is_terminal(self):
+        self.spec["checkpoint"] = None
+        self.save()
+        manifest = registry.create_run(self.spec_path, self.root, self.plan_path)
+        path = registry.run_dir(self.root, manifest["run_id"]) / "manifest.json"
+        original = path.read_bytes()
+        with self.assertRaises(ValueError):
+            registry.append_event(self.root, manifest["run_id"], "superseded")
+        registry.append_event(self.root, manifest["run_id"], "superseded", note="New target construct replaces this preparation")
+        self.assertEqual(path.read_bytes(), original)
+        rows = list(csv.DictReader(io.StringIO(registry.index_csv(self.root).decode())))
+        self.assertEqual(rows[0]["status"], "superseded")
+        self.assertEqual(rows[0]["job_id"], "")
+        with self.assertRaises(ValueError):
+            registry.append_event(self.root, manifest["run_id"], "prepared_blocked")
+
+    def test_submitted_run_cannot_be_marked_superseded(self):
+        manifest = registry.create_run(self.spec_path, self.root, self.plan_path)
+        registry.append_event(self.root, manifest["run_id"], "submitted", "12345")
+        with self.assertRaises(ValueError):
+            registry.append_event(self.root, manifest["run_id"], "superseded", note="Replacement planned")
 
     def test_inventory_preserves_all_source_statuses_and_refuses_overwrite(self):
         registry.inventory(self.plan_path, self.root)

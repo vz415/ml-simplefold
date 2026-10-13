@@ -22,6 +22,9 @@ MODELS = {f'simplefold_{size}' for size in ('100M', '360M', '700M', '1.1B', '1.6
 
 def validate_config(cfg):
     """Check launch settings without importing Torch or opening weights."""
+    if (OmegaConf.is_missing(cfg, 'fasta') or not isinstance(cfg.get('fasta'), str)
+            or not cfg.fasta.strip()):
+        raise ValueError('fasta must name an explicit target FASTA path')
     if cfg.model not in MODELS or cfg.sampling.mode not in ('standard', 'fk'):
         raise ValueError('Unknown model or sampling mode')
     for key in ('num_steps', 'samples'):
@@ -60,6 +63,11 @@ def validate_config(cfg):
             raise ValueError('sampling.model_batch_size must be null or a positive integer')
         if type(sampling.get('run_baseline', True)) is not bool:
             raise ValueError('sampling.run_baseline must be boolean')
+        if sampling.get('reward_kind') == 'mapped_distance':
+            reward = sampling.get('reward')
+            if (not isinstance(reward, DictConfig) or OmegaConf.is_missing(reward, 'spec_json')
+                    or not isinstance(reward.get('spec_json'), str) or not reward.spec_json.strip()):
+                raise ValueError('mapped_distance requires an explicit reward.spec_json path')
 
 
 def run_python(script, *args):

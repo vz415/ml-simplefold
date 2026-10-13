@@ -1,0 +1,14 @@
+# Paired control/guided population; use distinct seed triplets across replicates.
+mode: fk
+reward_kind: mapped_distance
+run_baseline: true
+baseline_prediction_dir: null
+beta: 2.0
+ess_threshold: 0.8
+checkpoint_times: [0.1, 0.3, 0.6, 0.75, 0.9]
+common_start: true
+brownian_seed: 75101
+resampling_seed: 76101
+model_batch_size: 2
+reward:
+  spec_json: null
