@@ -11,6 +11,17 @@ the five-target sequence below, with agent assistance and parallel A100/A30
 experiments, followed by a review after BMP4. Earlier single-component pilot
 plans and one-GPU limits are historical, not the current scientific strategy.
 
+Vincent subsequently authorized paid A30 batches on `gpu` / `eehui_lab_gpu`
+and proactive additional experiments within this five-target milestone. Keep
+informative batches overlapping and give periodic recaps of findings, GPU-hours,
+queue/runtime efficiency, and the next decisions. Do not make every target wait
+for all results from its predecessor: a mapped, validated transfer hypothesis can
+run provisionally while its parent is still being evaluated. Incorporate arriving
+results into subsequent revisions and retain the exact parent evidence available
+at submission. The first paid expansion is three tau jobs each for
+BMP6–BMPR1A–ACVR2B and BMP7–BMPR1A–ACVR2A. Additional informative jobs are
+authorized; no further routine permission question is needed within this scope.
+
 ## Current five-target milestone
 
 1. BMP6–ACVR1–ACVR2B: recover the interfaces covered by 9N4K.
@@ -28,9 +39,11 @@ constructs and the species mapping needed for 1LX5.
 
 The first wave per target uses one joint scoring hypothesis at tau 0.1, 0.3,
 and 0.8, with a matched unguided population at each setting. Allocate distinct
-seed triplets and record them before submission. Assess that wave before choosing
-an additional independent restart or a specific revised hypothesis; a failed job
-is not an automatic reason to launch a duplicate. Keep one submission owner.
+seed triplets and record them before submission. Use available outcomes or an
+explicit information-gathering rationale to choose independent restarts and
+revisions; do not impose a full-wave completion barrier on useful parallel work.
+A failed job is not an automatic reason to launch a duplicate. Keep one submission
+owner and declare the job count and requested GPU-hours for each bounded batch.
 
 ## Sources of truth
 

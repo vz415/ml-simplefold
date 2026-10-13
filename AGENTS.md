@@ -21,6 +21,11 @@
   ten-particle FK complex, override `--gres=gpu:A30:1` and use
   `sampling.model_batch_size=2`; retain the full ten-particle selection pool.
   Keep fallback submissions explicit rather than launching duplicate jobs.
+- Vincent authorized paid A30 BMP90 batches on `gpu` / `eehui_lab_gpu` and
+  proactive informative experiments within the five-target milestone. Overlap
+  validated transfer hypotheses instead of waiting for every predecessor tau
+  result. Keep one submission owner, bounded batch receipts, and periodic
+  findings/resource-efficiency recaps; stop after BMP4 for review.
 - Store remote model weights, trained checkpoints, synthetic datasets, and run
   outputs under `/pub/ynkim4/ml-simplefold/artifacts`. Launchers default
   `SIMPLEFOLD_ARTIFACT_DIR` to that path; `SIMPLEFOLD_CACHE_DIR` defaults to the
