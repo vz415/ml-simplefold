@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "active": true,
+  "mapping_status": "verified",
+  "target_id": "BMP6_ACVR1_ACVR2B",
+  "fasta_sha256": "70ae6cc9cefdd55a42cfbe879b7298bc3d9c46a474b5e8324c497fd9e54c5e03",
+  "scope": "Observed protein-core reconstruction benchmark against engineered, glycosylated 9N4K. Glycan and receptor tether omitted. No native affinity or signaling claim.",
+  "evidence_labels": [
+    "https://www.pnas.org/doi/10.1073/pnas.2502788122",
+    "https://www.rcsb.org/structure/9N4K"
+  ],
+  "chains": [
+    {
+      "input_chain": "A",
+      "saved_chain": "A",
+      "length": 104,
+      "sequence_sha256": "bb6791c72eb40c096663f8bd06bf8a8cff202a9924d04aa21c184d185431af35"
+    },
+    {
+      "input_chain": "B",
+      "saved_chain": "B",
+      "length": 104,
+      "sequence_sha256": "bb6791c72eb40c096663f8bd06bf8a8cff202a9924d04aa21c184d185431af35"
+    },
+    {
+      "input_chain": "C",
+      "saved_chain": "C",
+      "length": 79,
+      "sequence_sha256": "9f7cbccf536e36d272e5e8a2f08475db8440e50498417056b98301b535657533"
+    },
+    {
+      "input_chain": "D",
+      "saved_chain": "D",
+      "length": 79,
+      "sequence_sha256": "9f7cbccf536e36d272e5e8a2f08475db8440e50498417056b98301b535657533"
+    },
+    {
+      "input_chain": "E",
+      "saved_chain": "E",
+      "length": 93,
+      "sequence_sha256": "a1ecaf093c49828af92a563a8e8519b12ada35e3b36b909b8e88a7ebfdbba3a0"
+    },
+    {
+      "input_chain": "F",
+      "saved_chain": "F",
+      "length": 93,
+      "sequence_sha256": "a1ecaf093c49828af92a563a8e8519b12ada35e3b36b909b8e88a7ebfdbba3a0"
+    }
+  ],
+  "equivalent_chain_groups": [
+    [
+      "A",
+      "B"
+    ],
+    [
+      "C",
+      "D"
+    ],
+    [
+      "E",
+      "F"
+    ]
+  ],
+  "pairs": [
+    {
+      "id": "alk2_sparse_1",
+      "left": {
+        "chain": "C",
+        "position": 11,
+        "residue": "S",
+        "atom": "CA"
+      },
+      "right": {
+        "chain": "A",
+        "position": 41,
+        "residue": "N",
+        "atom": "CA"
+      },
+      "distance_angstrom": 8.044,
+      "sigma_angstrom": 2.0,
+      "weight": 1.0,
+      "evidence_labels": [
+        "experimental_contact_9N4K",
+        "engineered_glycosylated_reference"
+      ]
+    },
+    {
+      "id": "alk2_sparse_2",
+      "left": {
+        "chain": "C",
+        "position": 30,
+        "residue": "N",
+        "atom": "CA"
+      },
+      "right": {
+        "chain": "A",
+        "position": 35,
+        "residue": "E",
+        "atom": "CA"
+      },
+      "distance_angstrom": 11.091,
+      "sigma_angstrom": 2.0,
+      "weight": 1.0,
+      "evidence_labels": [
+        "experimental_contact_9N4K",
+        "engineered_glycosylated_reference"
+      ]
+    },
+    {
+      "id": "alk2_sparse_3",
+      "left": {
+        "chain": "C",
+        "position": 53,
+        "residue": "T",
+        "atom": "CA"
+      },
+      "right": {
+        "chain": "B",
+        "position": 15,
+        "residue": "L",
+        "atom": "CA"
+      },
+      "distance_angstrom": 7.246,
+      "sigma_angstrom": 2.0,
+      "weight": 1.0,
+      "evidence_labels": [
+        "experimental_contact_9N4K",
+        "engineered_glycosylated_reference"
+      ]
+    },
+    {
+      "id": "alk2_sparse_4",
+      "left": {
+        "chain": "D",
+        "position": 11,
+        "residue": "S",
+        "atom": "CA"
+      },
+      "right": {
+        "chain": "B",
+        "position": 41,
+        "residue": "N",
+        "atom": "CA"
+      },
+      "distance_angstrom": 8.112,
+      "sigma_angstrom": 2.0,
+      "weight": 1.0,
+      "evidence_labels": [
+        "experimental_contact_9N4K",
+        "engineered_glycosylated_reference"
+      ]
+    },
+    {
+      "id": "alk2_sparse_5",
+      "left": {
+        "chain": "D",
+        "position": 30,
+        "residue": "N",
+        "atom": "CA"
+      },
+      "right": {
+        "chain": "B",
+        "position": 35,
+        "residue": "E",
+        "atom": "CA"
+      },
+      "distance_angstrom": 11.398,
+      "sigma_angstrom": 2.0,
+      "weight": 1.0,
+      "evidence_labels": [
+        "experimental_contact_9N4K",
+        "engineered_glycosylated_reference"
+      ]
+    },
+    {
+      "id": "alk2_sparse_6",
+      "left": {
+        "chain": "D",
+        "position": 53,
+        "residue": "T",
+        "atom": "CA"
+      },
+      "right": {
+        "chain": "A",
+        "position": 15,
+        "residue": "L",
+        "atom": "CA"
+      },
+      "distance_angstrom": 7.258,
+      "sigma_angstrom": 2.0,
+      "weight": 1.0,
+      "evidence_labels": [
+        "experimental_contact_9N4K",
+        "engineered_glycosylated_reference"
+      ]
+    }
+  ],
+  "calibration": {
+    "sigma_angstrom": 2.0,
+    "beta": 2.0,
+    "basis": "Engineering starting settings; not fitted binding energies. Frozen before new samples.",
+    "heldout_contact_count": 201,
+    "heldout_sha256": "985345050cff1a6b0ed629800ef6b52cd5466ce414f3bbfa41908d63a250c909"
+  },
+  "reference_source": {
+    "url": "https://files.rcsb.org/download/9N4K.cif",
+    "sha256": "b7431692a4e42cc72551832074b7ebc2c26024b9cea5e20fc2785d06404504a7"
+  },
+  "activation_scope": "Local validated scoring and candidate Slurm profile; not evidence that a GPU run has passed preflight or been submitted."
+}

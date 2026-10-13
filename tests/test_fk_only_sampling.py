@@ -12,6 +12,29 @@ from scripts.sample_complex_fk import make_reward, sampling_conditions, score_ex
 
 
 class FKOnlySamplingTests(unittest.TestCase):
+    def test_mapped_reward_uses_explicit_target_spec_and_fasta(self):
+        mapped, complete = Mock(), Mock()
+        args = argparse.Namespace(fasta_path=Path("bmp6.fasta"))
+        with patch.dict(sys.modules, {
+            "fk_mapped_distance_reward": SimpleNamespace(MappedDistanceReward=mapped),
+            "fk_complex_reward": SimpleNamespace(ComplexReward=complete),
+        }):
+            result = make_reward(args, {"reward_kind": "mapped_distance",
+                                       "reward": {"spec_json": "bmp6-rules.json"}})
+        self.assertIs(result, mapped.return_value)
+        mapped.assert_called_once_with(args.fasta_path, "bmp6-rules.json")
+        complete.assert_not_called()
+
+    def test_unknown_target_reward_does_not_fall_back_to_bmp2(self):
+        complete = Mock()
+        with patch.dict(sys.modules, {
+            "fk_complex_reward": SimpleNamespace(ComplexReward=complete),
+        }):
+            for kind in ("bmp4_unmapped", "2h62_partial_contatcs", None):
+                with self.subTest(kind=kind), self.assertRaisesRegex(ValueError, "Unsupported reward_kind"):
+                    make_reward(argparse.Namespace(), {"reward_kind": kind, "reward": {}})
+        complete.assert_not_called()
+
     def test_fk_only_does_not_include_another_baseline_condition(self):
         self.assertEqual(sampling_conditions({"beta": 2, "run_baseline": False}), [("fk", 2.)])
 

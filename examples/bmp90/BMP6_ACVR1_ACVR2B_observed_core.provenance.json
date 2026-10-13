@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "target": "BMP6_ACVR1_ACVR2B_observed_core",
+  "fasta_sha256": "70ae6cc9cefdd55a42cfbe879b7298bc3d9c46a474b5e8324c497fd9e54c5e03",
+  "scope": "Observed protein-core reconstruction benchmark against engineered, glycosylated 9N4K. Glycan and receptor tether omitted. No native affinity or signaling claim.",
+  "chains": {
+    "A": {
+      "gene": "BMP6",
+      "accession": "P22004",
+      "canonical_range": [
+        410,
+        513
+      ],
+      "length": 104,
+      "sequence_sha256": "bb6791c72eb40c096663f8bd06bf8a8cff202a9924d04aa21c184d185431af35",
+      "reference_author_chain": "B"
+    },
+    "B": {
+      "gene": "BMP6",
+      "accession": "P22004",
+      "canonical_range": [
+        410,
+        513
+      ],
+      "length": 104,
+      "sequence_sha256": "bb6791c72eb40c096663f8bd06bf8a8cff202a9924d04aa21c184d185431af35",
+      "reference_author_chain": "E"
+    },
+    "C": {
+      "gene": "ACVR1",
+      "accession": "Q04771",
+      "canonical_range": [
+        31,
+        109
+      ],
+      "length": 79,
+      "sequence_sha256": "9f7cbccf536e36d272e5e8a2f08475db8440e50498417056b98301b535657533",
+      "reference_author_chain": "C"
+    },
+    "D": {
+      "gene": "ACVR1",
+      "accession": "Q04771",
+      "canonical_range": [
+        31,
+        109
+      ],
+      "length": 79,
+      "sequence_sha256": "9f7cbccf536e36d272e5e8a2f08475db8440e50498417056b98301b535657533",
+      "reference_author_chain": "D"
+    },
+    "E": {
+      "gene": "ACVR2B",
+      "accession": "Q13705",
+      "canonical_range": [
+        26,
+        118
+      ],
+      "length": 93,
+      "sequence_sha256": "a1ecaf093c49828af92a563a8e8519b12ada35e3b36b909b8e88a7ebfdbba3a0",
+      "reference_author_chain": "A"
+    },
+    "F": {
+      "gene": "ACVR2B",
+      "accession": "Q13705",
+      "canonical_range": [
+        26,
+        118
+      ],
+      "length": 93,
+      "sequence_sha256": "a1ecaf093c49828af92a563a8e8519b12ada35e3b36b909b8e88a7ebfdbba3a0",
+      "reference_author_chain": "F"
+    }
+  },
+  "numbering": "Each input residue i maps to canonical_range.start + i - 1. FASTA chain groups already match SimpleFold saved chain order; verify validation.json on actual outputs.",
+  "source_evidence_sha256": "70cb19f5cde215baa2cfde064cb2d331a964b12b236f36667fa08770a9b25ee0",
+  "source_evidence_local": "artifacts/bmp90/preparation/bmp6/evidence_and_pilot.json",
+  "glycans": "omitted explicitly",
+  "disulfides": "No extra restraint supplied for initial sampling; evaluate annotated disulfide geometry separately."
+}

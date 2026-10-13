@@ -55,6 +55,11 @@ def validate_config(cfg):
                 raise ValueError(f'sampling.{key} must be a nonnegative integer')
         if type(sampling.common_start) is not bool:
             raise ValueError('sampling.common_start must be boolean')
+        batch_size = sampling.get('model_batch_size')
+        if batch_size is not None and (type(batch_size) is not int or batch_size < 1):
+            raise ValueError('sampling.model_batch_size must be null or a positive integer')
+        if type(sampling.get('run_baseline', True)) is not bool:
+            raise ValueError('sampling.run_baseline must be boolean')
 
 
 def run_python(script, *args):
@@ -66,7 +71,7 @@ def main(cfg: DictConfig):
     if not os.environ.get('SLURM_JOB_ID'):
         raise RuntimeError('Protein sampling is permitted only inside a Slurm GPU job')
     validate_config(cfg)
-    paths = {k: Path(to_absolute_path(v)) for k, v in cfg.paths.items()}
+    paths = {k: Path(to_absolute_path(v)) for k, v in cfg.paths.items() if v is not None}
     fasta = Path(to_absolute_path(cfg.fasta))
     output = Path(HydraConfig.get().runtime.output_dir)
     if (output / 'experiment.json').exists():
@@ -111,7 +116,7 @@ def main(cfg: DictConfig):
             model=cfg.model, fasta_path=fasta, num_steps=cfg.num_steps,
             particles=cfg.samples, tau=cfg.tau, seed=cfg.seed,
             ckpt_dir=paths['checkpoint_dir'], cache_dir=paths['ccd_dir'],
-            reference_cif=paths['reference_cif'], reference_pdb=paths['reference_pdb'],
+            reference_cif=paths.get('reference_cif'), reference_pdb=paths.get('reference_pdb'),
             output_dir=output)
         conditions = run_fk(args, OmegaConf.to_container(cfg.sampling, resolve=True))
     else:

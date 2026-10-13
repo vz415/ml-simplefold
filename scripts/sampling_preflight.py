@@ -38,14 +38,22 @@ class StoragePreflight(Callback):
                 for override in overrides:
                     key = override.key_or_group
                     if override.is_sweep_override() and (key.startswith('paths.') or key in
-                            ('paths', 'experiment', 'sampling', 'sampling.mode')):
+                            ('paths', 'experiment', 'sampling', 'sampling.mode',
+                             'sampling.reward_kind', 'sampling.reward', 'sampling.reward.spec_json')):
                         raise ValueError('Keep storage and sampling mode shared within one sweep')
                 subdir = OmegaConf.to_container(config.hydra.sweep, resolve=False)['subdir']
                 if subdir != '${hydra.job.num}':
                     raise ValueError('Use the default hydra.job.num sweep subdirectories')
                 raw_paths = OmegaConf.to_container(config.paths, resolve=False)
                 raw_paths['sweep_dir'] = OmegaConf.to_container(config.hydra.sweep, resolve=False)['dir']
+                if config.sampling.get('reward_kind') == 'mapped_distance':
+                    raw_sampling = OmegaConf.to_container(config.sampling, resolve=False)
+                    raw_paths['reward_spec'] = raw_sampling.get('reward', {}).get('spec_json')
                 for value in raw_paths.values():
+                    if value is None:
+                        continue
+                    if not isinstance(value, str):
+                        raise ValueError('Storage, output and reward spec paths must be strings or null')
                     # Inspect nested expressions from the inside out. A swept
                     # task value must not move a later job outside the checked root.
                     while references := re.findall(r'\$\{([^${}]+)\}', value):
@@ -58,7 +66,15 @@ class StoragePreflight(Callback):
                       f'{paths.cache_dir}/torch/hub/checkpoints/esm2_t36_3B_UR50D.pt',
                       f'{paths.ccd_dir}/ccd.pkl']
             if config.sampling.mode == 'fk':
-                checks += [paths.reference_cif, paths.reference_pdb]
+                if config.sampling.get('reward_kind') == 'mapped_distance':
+                    spec_path = config.sampling.get('reward', {}).get('spec_json')
+                    if not isinstance(spec_path, str) or not spec_path.strip():
+                        raise ValueError('mapped_distance requires a nonempty reward.spec_json path')
+                    checks.append(spec_path)
+                else:
+                    if not paths.reference_cif or not paths.reference_pdb:
+                        raise ValueError('Legacy FK rewards require reference_cif and reference_pdb')
+                    checks += [paths.reference_cif, paths.reference_pdb]
             output = config.hydra.sweep.dir if sweep else config.hydra.run.dir
             payload = json.dumps({'paths': [to_absolute_path(p) for p in checks],
                                   'output': to_absolute_path(output)})

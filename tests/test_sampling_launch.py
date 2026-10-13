@@ -44,6 +44,17 @@ class SamplingLaunchTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'at least two'):
             run_sampling.validate_config(config('experiment=2goo_fk', 'samples=1'))
 
+    def test_invalid_fk_batch_size_and_ambiguous_baseline_flag_fail_early(self):
+        for value in (0, -1, 1.5, True):
+            cfg = config('experiment=bmp6-alk2-sparse-pilot')
+            cfg.sampling.model_batch_size = value
+            with self.subTest(batch_size=value), self.assertRaisesRegex(ValueError, 'model_batch_size'):
+                run_sampling.validate_config(cfg)
+        cfg = config('experiment=bmp6-alk2-sparse-pilot')
+        cfg.sampling.run_baseline = 'false'
+        with self.assertRaisesRegex(ValueError, 'run_baseline'):
+            run_sampling.validate_config(cfg)
+
     def test_cli_preview_is_safe_and_execution_refused_before_output_creation(self):
         with tempfile.TemporaryDirectory() as tmp:
             env = {k: v for k, v in os.environ.items() if k != 'SLURM_JOB_ID'}
@@ -95,6 +106,11 @@ class SamplingLaunchTests(unittest.TestCase):
                     self.assertEqual(args.output_dir, output)
                     self.assertEqual(args.seed, cfg.seed)
                     self.assertEqual(sampling['beta'], cfg.sampling.beta)
+                    if cfg.sampling.get('reward_kind') == 'mapped_distance':
+                        self.assertIsNone(args.reference_cif)
+                        self.assertIsNone(args.reference_pdb)
+                        self.assertEqual(sampling['reward']['spec_json'],
+                                         'configs/bmp90/bmp6_alk2_sparse_v1.json')
                     self.assertEqual(len(validations), len(labels))
                     for condition, call in zip(labels, validations):
                         self.assertEqual(call[4], output / condition / f'predictions_{cfg.model}')
@@ -116,6 +132,12 @@ class SamplingLaunchTests(unittest.TestCase):
 
     def test_partial_complex_fk_only_validates_fk_outputs(self):
         self.exercise_task('2h62-inpaint-fk')
+
+    def test_bmp6_sparse_task_accepts_explicitly_absent_full_references(self):
+        self.exercise_task('bmp6-alk2-sparse-pilot')
+
+    def test_bmp4_baseline_routes_to_ordinary_sampling(self):
+        self.exercise_task('bmp4-bmpr1a-baseline')
 
     def test_storage_preparation_preserves_existing_receipts(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -168,6 +190,55 @@ class SamplingLaunchTests(unittest.TestCase):
                 with self.assertRaisesRegex(SystemExit, 'paths must use only'):
                     StoragePreflight().on_multirun_start(cfg)
             launched.assert_not_called()
+
+    def test_mapped_storage_checks_spec_without_full_reference_paths(self):
+        for sweep in (False, True):
+            with self.subTest(sweep=sweep):
+                cfg = config('experiment=bmp6-alk2-sparse-pilot', hydra=True)
+                if sweep:
+                    cfg.hydra.overrides.task.append('sampling.beta=1.0,2.0')
+                with patch.dict(os.environ, {'SLURM_JOB_ID': '999'}), \
+                        patch('sampling_preflight.subprocess.run') as launched:
+                    StoragePreflight()._prepare(cfg, sweep=sweep)
+                payload = json.loads(launched.call_args.args[0][-1])
+                self.assertEqual(len(payload['paths']), 4)
+                self.assertIn(str(ROOT / 'configs/bmp90/bmp6_alk2_sparse_v1.json'), payload['paths'])
+                self.assertTrue(all(isinstance(path, str) for path in payload['paths']))
+                self.assertFalse(any('2goo-native' in path for path in payload['paths']))
+
+    def test_mapped_storage_rejects_missing_or_swept_spec_path(self):
+        cases = [('sampling.reward.spec_json=null', None),
+                 (None, 'sampling.reward.spec_json=first.json,second.json'),
+                 (None, 'sampling.reward_kind=mapped_distance,2goo_reference'),
+                 ('sampling.reward.spec_json=spec-${seed}.json', None)]
+        for override, sweep_override in cases:
+            with self.subTest(override=override, sweep_override=sweep_override):
+                overrides = ['experiment=bmp6-alk2-sparse-pilot']
+                if override:
+                    overrides.append(override)
+                cfg = config(*overrides, hydra=True)
+                if sweep_override:
+                    cfg.hydra.overrides.task.append(sweep_override)
+                with patch.dict(os.environ, {'SLURM_JOB_ID': '999'}), \
+                        patch('sampling_preflight.subprocess.run') as launched:
+                    with self.assertRaises(SystemExit):
+                        StoragePreflight().on_multirun_start(cfg)
+                launched.assert_not_called()
+
+    def test_legacy_storage_still_requires_both_full_references(self):
+        cfg = config('experiment=2goo_fk', hydra=True)
+        with patch.dict(os.environ, {'SLURM_JOB_ID': '999'}), \
+                patch('sampling_preflight.subprocess.run') as launched:
+            StoragePreflight().on_run_start(cfg)
+        paths = json.loads(launched.call_args.args[0][-1])['paths']
+        self.assertTrue(any(path.endswith('/reference.cif') for path in paths))
+        self.assertTrue(any(path.endswith('/reference.pdb') for path in paths))
+        cfg = config('experiment=2goo_fk', 'paths.reference_cif=null', hydra=True)
+        with patch.dict(os.environ, {'SLURM_JOB_ID': '999'}), \
+                patch('sampling_preflight.subprocess.run') as launched:
+            with self.assertRaisesRegex(SystemExit, 'Legacy FK rewards require'):
+                StoragePreflight().on_run_start(cfg)
+        launched.assert_not_called()
 
 
 if __name__ == '__main__':

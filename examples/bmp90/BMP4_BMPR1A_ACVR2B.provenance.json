@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "target": "BMP4_BMPR1A_ACVR2B",
+  "fasta_sha256": "7a229f193e7c43a7246e2ac1bddbcc48a12a99af72480bec084f6e1ed96b7d73",
+  "scope": "Human mature BMP4, BMPR1A ECD, and template-matched truncated ACVR2B ECD. Protein only; receptor occupancy and affinity are not established. Baseline construct, guidance remains a hypothesis.",
+  "chains": {
+    "A": {
+      "gene": "BMP4",
+      "accession": "P12644",
+      "canonical_range": [
+        293,
+        408
+      ],
+      "length": 116,
+      "sequence_sha256": "a3597754935ac67664f78ed0e8524c8f655154070e6c7b803f8497a84626d902"
+    },
+    "B": {
+      "gene": "BMP4",
+      "accession": "P12644",
+      "canonical_range": [
+        293,
+        408
+      ],
+      "length": 116,
+      "sequence_sha256": "a3597754935ac67664f78ed0e8524c8f655154070e6c7b803f8497a84626d902"
+    },
+    "C": {
+      "gene": "BMPR1A",
+      "accession": "P36894",
+      "canonical_range": [
+        24,
+        152
+      ],
+      "length": 129,
+      "sequence_sha256": "21ee8b4725d8e4ce746ed60243bd241d36f7432ebce4c377d40ae6127521dc1c"
+    },
+    "D": {
+      "gene": "BMPR1A",
+      "accession": "P36894",
+      "canonical_range": [
+        24,
+        152
+      ],
+      "length": 129,
+      "sequence_sha256": "21ee8b4725d8e4ce746ed60243bd241d36f7432ebce4c377d40ae6127521dc1c"
+    },
+    "E": {
+      "gene": "ACVR2B",
+      "accession": "Q13705",
+      "canonical_range": [
+        19,
+        116
+      ],
+      "length": 98,
+      "sequence_sha256": "8d30c8ccef4412e0b611db7e461b31c65171d7f0875c8fa6cf3a38a0de07a22b"
+    },
+    "F": {
+      "gene": "ACVR2B",
+      "accession": "Q13705",
+      "canonical_range": [
+        19,
+        116
+      ],
+      "length": 98,
+      "sequence_sha256": "8d30c8ccef4412e0b611db7e461b31c65171d7f0875c8fa6cf3a38a0de07a22b"
+    }
+  },
+  "numbering": "Each input residue i maps to canonical_range.start + i - 1. FASTA chain groups already match SimpleFold saved chain order; verify validation.json on actual outputs.",
+  "source_evidence_sha256": "4241f53cb103cff0b0bec87a7baee9bf8e3e93edb323cbe5c1c635d13e83a66b",
+  "source_evidence_local": "artifacts/bmp90/preparation/bmp4/evidence.json",
+  "glycans": "omitted explicitly",
+  "disulfides": "No extra restraint supplied for initial sampling; evaluate annotated disulfide geometry separately."
+}

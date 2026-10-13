@@ -39,6 +39,19 @@ def sampling_conditions(config):
 
 
 def make_reward(args, config):
+    # An unfamiliar target/rule name must not silently select the BMP2/2GOO
+    # objective. New BMP90 targets require their own verified reward mapping.
+    supported = {
+        '2goo_reference', '2h62_partial', '2h62_partial_topology',
+        '2h62_partial_contacts', '2h62_partial_contacts_l61',
+        '2h62_partial_cooperative', 'mapped_distance',
+    }
+    kind = config.get('reward_kind', '2goo_reference')
+    if kind not in supported:
+        raise ValueError(f'Unsupported reward_kind {kind!r}; select a verified target reward')
+    if kind == 'mapped_distance':
+        from fk_mapped_distance_reward import MappedDistanceReward
+        return MappedDistanceReward(args.fasta_path, config['reward']['spec_json'])
     if config.get('reward_kind') == '2h62_partial_cooperative':
         from fk_2h62_cooperative_reward import CooperativeComplexReward
         return CooperativeComplexReward(args.reference_cif, args.reference_pdb, config['reward'])
@@ -99,6 +112,8 @@ def run_fk(args, config):
     # Fail on incompatible reference inputs before loading either large model.
     reward = make_reward(args, config)
     args.output_dir.mkdir(parents=True, exist_ok=True)
+    if config.get('reward_kind') == 'mapped_distance':
+        write_json(args.output_dir / 'reward-definition.json', reward.metadata)
     if config.get('baseline_prediction_dir'):
         score_existing_baseline(reward, config['baseline_prediction_dir'], args.output_dir,
                                 expected_samples=args.particles)
@@ -173,8 +188,11 @@ def run_fk(args, config):
         'brownian_seed': config['brownian_seed'], 'resampling_seed': config['resampling_seed'],
         'checkpoint_indices': indices, 'checkpoint_times': [float(steps[i]) for i in indices],
         'config': config, 'config_sha256': digest(args.output_dir / 'resolved-config.yaml'),
-        'fasta_sha256': digest(args.fasta_path), 'reference_cif_sha256': digest(args.reference_cif),
-        'reference_pdb_sha256': digest(args.reference_pdb),
+        'fasta_sha256': digest(args.fasta_path),
+        'reference_cif_sha256': digest(args.reference_cif) if args.reference_cif else None,
+        'reference_pdb_sha256': digest(args.reference_pdb) if args.reference_pdb else None,
+        'reward_spec_sha256': (reward.metadata['spec_sha256']
+                               if config.get('reward_kind') == 'mapped_distance' else None),
         'checkpoint': str(checkpoint_path), 'checkpoint_bytes': checkpoint_path.stat().st_size,
         'source_commit': (args.output_dir / 'git-commit.txt').read_text().strip(),
         'initial_potential': 1.0,
