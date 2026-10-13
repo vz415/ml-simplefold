@@ -28,7 +28,7 @@
       0.75,
       0.9
     ],
-    "status": "Authorized finite five-target sequence on 2026-10-13; new-target GPU wave is being prepared. Historical settings preserved."
+    "status": "First new-target joint-interface wave submitted on 2026-10-13. Historical settings preserved."
   },
   "complexes": {
     "BMP2_BMPR1A_ACVR2A": {
@@ -954,13 +954,13 @@
       "reference_structure": "9N4K",
       "best_recipe_id": null,
       "previous_best_recipe_ids": [],
-      "ranking_status": "No new-target sampling results yet; candidate is unranked.",
+      "ranking_status": "Initial joint-recipe tau wave submitted; no outcome or best recipe assigned.",
       "ranking_history": [],
       "recipes": [
         {
           "recipe_id": "bmp6_joint_v1",
           "rank": null,
-          "status": "prepared_joint_hypothesis",
+          "status": "sampling_submitted_unranked",
           "comparison_group": "deposited_native_no_tags_716",
           "parent_relationships": [
             {
@@ -1845,7 +1845,47 @@
           ],
           "expected_improvement": "Recover both receptor classes while limiting weak-copy masking and contact-satisfaction through severe CA distortions.",
           "falsification": "Independent populations repeatedly yield one failed copy or high-reward implausible/incorrect orientations after full physical and reference evaluation.",
-          "evidence_runs": [],
+          "evidence_runs": [
+            {
+              "job_id": "58107636",
+              "run_id": "20261013T182639837457Z_BMP6_ACVR1_ACVR2B_bmp6_joint_v1_03e3b0ab",
+              "tau": 0.1,
+              "gpu_requested": "A100",
+              "status": "submitted_pending_priority",
+              "evaluation_job_id": "58107637",
+              "model_batch_size": 2,
+              "beta": 4.0,
+              "output_dir": "/pub/ynkim4/ml-simplefold/artifacts/runs/58107636",
+              "source_revision": "47cd6e20fb70c41e9ab5366fd57d407f143e0319",
+              "metrics": null
+            },
+            {
+              "job_id": "58107638",
+              "run_id": "20261013T182714871011Z_BMP6_ACVR1_ACVR2B_bmp6_joint_v1_24f7537e",
+              "tau": 0.3,
+              "gpu_requested": "A30",
+              "status": "submitted_pending_priority",
+              "evaluation_job_id": "58107639",
+              "model_batch_size": 2,
+              "beta": 4.0,
+              "output_dir": "/pub/ynkim4/ml-simplefold/artifacts/runs/58107638",
+              "source_revision": "47cd6e20fb70c41e9ab5366fd57d407f143e0319",
+              "metrics": null
+            },
+            {
+              "job_id": "58107640",
+              "run_id": "20261013T182750120588Z_BMP6_ACVR1_ACVR2B_bmp6_joint_v1_45065160",
+              "tau": 0.8,
+              "gpu_requested": "A100",
+              "status": "submitted_pending_priority",
+              "evaluation_job_id": "58107641",
+              "model_batch_size": 2,
+              "beta": 4.0,
+              "output_dir": "/pub/ynkim4/ml-simplefold/artifacts/runs/58107640",
+              "source_revision": "47cd6e20fb70c41e9ab5366fd57d407f143e0319",
+              "metrics": null
+            }
+          ],
           "evaluation": {
             "type_I": null,
             "type_II": null,
@@ -1858,7 +1898,7 @@
       ]
     }
   },
-  "updated_at": "2026-10-13T18:20:38.384484+00:00",
+  "updated_at": "2026-10-13T18:31:42.652660+00:00",
   "interface_evidence_registry": "configs/bmp90/interface_evidence_registry.json",
   "failure_registry": "configs/bmp90/failure_registry.json",
   "construct_policy": {
