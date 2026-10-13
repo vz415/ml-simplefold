@@ -1096,6 +1096,58 @@
       "interpretation_limits": "Engineered receptor trap and glycosylated ligand reference; generated protein-only assemblies omit tether and glycans. No affinity/signaling inference.",
       "contradicts_evidence_ids": [],
       "supersedes_evidence_ids": []
+    },
+    {
+      "evidence_id": "BMP6_BMPR1A_ACVR2B_9MIR_MAPPED_CONTACTS",
+      "ligand": "BMP6",
+      "receptor": [
+        "BMPR1A",
+        "ACVR2B"
+      ],
+      "evidence_class": "experimental_coordinate_observation_with_construct_qualifications",
+      "observation": "Protein coordinates cover 576 of 768 input residues. The joint candidate uses three mapped CA pairs per receptor copy; the same six type-II targets differ by at most 0.356 Angstrom from 9N4K. This supports testing transfer, not assuming sampling success.",
+      "sources": [
+        {
+          "path": "artifacts/bmp90/preparation/bmp6_alk3/evidence_and_construct_audit.json",
+          "sha256": "0b9ca44c1d452489feadb1ee23592d797116d679bf6e24944a6829d9821c28e9"
+        },
+        {
+          "path": "artifacts/bmp90/preparation/bmp6_alk3/9MIR_native_768_reference.provenance.json",
+          "sha256": "1475c671710af6e947d7bdaa7883bcdbfb0c8426fd6662db21599898da9c4eeb"
+        }
+      ],
+      "primary_source": "https://www.rcsb.org/structure/9MIR",
+      "interpretation_limits": {
+        "species": "9MIR gene-source fields say Homo sapiens but BMPR1A _struct_ref names hamster A0A8C2MQM3_CRIGR. All observed protein residues match human input. Do not call source an unqualified human WT construct.",
+        "construct": "Human full mature BMP6 and BMPR1A ECD; ACVR2B 19\u2013134 matches the preceding target, with complete 19\u2013137 alternative preserved. Source mutations S39L/S44P are outside the observed BMPR1A core; glycans and engineered tether are omitted.",
+        "numbering": "BMPR1A author numbering is canonical human P36894+1; use explicit mapping.",
+        "chemistry": "CA geometry is a footprint proxy, not an atom-specific hydrogen bond or energetic measurement.",
+        "evidence_allocation": "160 contacts withheld from numerical score are source-correlated and were inspected during selection; not blind independent validation."
+      }
+    },
+    {
+      "evidence_id": "BMP7_ACVR2A_1LX5_PARTIAL_MOUSE_SURROGATE",
+      "ligand": "BMP7",
+      "receptor": "ACVR2A",
+      "evidence_class": "experimental_partial_species_surrogate",
+      "observation": "Deposited assembly 1 supplies the BMP7 dimer and two symmetry-related mouse ACVR2A copies; no type-I receptor coordinates. Human comparison removes whole mismatched source residues at human canonical positions 39 and 92 in both receptor copies. All 82 protein contacts within 5 Angstrom remain after masking.",
+      "sources": [
+        {
+          "path": "artifacts/bmp90/preparation/bmp7/1LX5_reference.provenance.json",
+          "sha256": "f483bd78cdea0b954c7168fc3e88517b031da8d9008496088a8ee017a0b62157"
+        },
+        {
+          "path": "artifacts/bmp90/preparation/bmp7/1LX5_typeII_contacts.json",
+          "sha256": "066a2f9a7b437aa4a5af67d92750f68bfa75187b69d7b5c012393a4cc8f25141"
+        }
+      ],
+      "primary_source": "https://www.rcsb.org/structure/1LX5",
+      "interpretation_limits": {
+        "species": "Mouse R39 \u2192 human K39 and mouse I92 \u2192 human V92; no atoms relabeled or rebuilt.",
+        "coverage": "392 observed conserved residues; type-I copies remain unassessed. Human target accuracy is not established by surrogate DockQ.",
+        "independence": "Both copies come from one crystal asymmetric unit via symmetry and are not independent evidence.",
+        "chemistry": "Protein-only contact geometry; missing atoms, unresolved tails and glycans are not rebuilt."
+      }
     }
   ],
   "generic_inspection_priors": {
@@ -1307,5 +1359,5 @@
       "evidence_label_scope": "Vocabulary for future observations; no existing evidence_class is reclassified by this import. R8 instructs evaluation of energetic evidence; it does not establish a hotspot for any target."
     }
   },
-  "updated_at": "2026-10-13T18:20:38.384484+00:00"
+  "updated_at": "2026-10-13T18:51:02.647523+00:00"
 }

@@ -47,6 +47,78 @@
     "status": "unreviewed",
     "transfer_limits": null
   },
-  "entries": [],
-  "initialization_note": "No specific failed run has been adjudicated for this registry yet; entries intentionally empty."
+  "entries": [
+    {
+      "failure_id": "BMP4_CA_TWO_ANCHOR_ROTATION_20261013",
+      "complex_id": "BMP4_BMPR1A_ACVR2B",
+      "recipe_id": "bmp4_joint_ca_l61_off_v1",
+      "parent_failure_id": null,
+      "failure_category": "preflight_geometry_degeneracy",
+      "run_ids": [],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/preparation/bmp4_joint_hypotheses/v1/hypotheses.json",
+          "sha256": "b9dc6ea64625ca8b7d7d7b5858f1502899d5b8b6ed0942b826acc62c9d5d9901"
+        },
+        {
+          "path": "artifacts/bmp90/preparation/bmp4_joint_hypotheses/v2/rotation_geometry_audit.json",
+          "sha256": "5bbd224c4b7f8b2c1e946a0c252f96a2e97cef6a6eb983367e3c8944eec415f9"
+        },
+        {
+          "path": "artifacts/bmp90/preparation/bmp4_joint_hypotheses/v2_verification_receipt.json",
+          "sha256": "796e071a9c3def89e0b6c83b60d2c9f1e9262677222812314cd165443bdd505e"
+        }
+      ],
+      "code_revision": "6767529e03dfcbbbc2d9ef0ef104f3479ec41b55",
+      "sequence_hashes": {
+        "fasta_sha256": "81b55c1aef957940d9e9e752264fab73af7a32ad6a1e25a3f3b0d93b5e367c38"
+      },
+      "construct_description": "Proposed full human BMP4/BMPR1A/ACVR2B ectodomain assembly, 728 residues; perturbation uses the observed raw 2H62 receptor chain only.",
+      "sampling_settings": {
+        "tau": null,
+        "checkpoint_times": [],
+        "seeds": {},
+        "particle_count": null
+      },
+      "expected_behavior": "Type-II anchor geometry should respond to meaningful rigid receptor rotations.",
+      "observed_symptoms": [
+        "All seven v1 type-II CA distances are invariant to rotation about receptor Y42\u2013W60 CA axis (canonical Y60\u2013W78).",
+        "A +15 degree rotation moves receptor CAs by 2.727405 Angstrom RMSD and produces zero interchain CA pairs below 3 Angstrom while preserving all seven distances."
+      ],
+      "interface_evaluation": {
+        "type_I": null,
+        "type_II": "Source-template rotation leaves the proposed v1 anchor distances unchanged.",
+        "copy_specific_findings": [],
+        "assembly_geometry": "Zero interchain CA overlaps below 3 Angstrom for the +15 degree example; all-atom plausibility remains unassessed."
+      },
+      "suspected_causes": [
+        {
+          "mechanism": "Only two distinct receptor CA points define the seven distances, leaving rotation about their connecting axis unconstrained.",
+          "status": "Analytically identified and reproduced by independent rotation calculations."
+        }
+      ],
+      "supporting_evidence_ids": [],
+      "contradicting_evidence_ids": [],
+      "attempted_changes": [
+        {
+          "recipe_id": "bmp4_joint_ca_l61_off_v2",
+          "change": "Add conserved canonical F101 as a third receptor anchor, with two source-supported ligand contacts and equal total proposed weight per receptor anchor."
+        }
+      ],
+      "followups": [
+        {
+          "analysis": {
+            "path": "artifacts/bmp90/preparation/bmp4_joint_hypotheses/v2/rotation_geometry_audit.json",
+            "sha256": "5bbd224c4b7f8b2c1e946a0c252f96a2e97cef6a6eb983367e3c8944eec415f9"
+          },
+          "result": "Exact invariance removed across the audited rotations; at +15 degrees analytical v2 copy score is about 0.990552 versus 1.0 for v1. This small penalty leaves substantial ambiguity under broad widths. Production scoring, target poses and calibration remain untested."
+        }
+      ],
+      "status": "preflight_issue_partially_mitigated_calibration_pending",
+      "transfer_limits": "Geometric warning for CA-only schemes with two receptor anchor points. Does not invalidate earlier atom/ring/contact-based BMP2 scoring, demonstrate failed sampling, prove nonbinding, or establish a unique BMP4 pose.",
+      "analysis_scope": "Observed source-template perturbation; no production scorer or sampling run"
+    }
+  ],
+  "initialization_note": "The first entry records a preflight geometry finding. No sampled-run failure has yet been adjudicated.",
+  "updated_at": "2026-10-13T18:55:53.726305+00:00"
 }
