@@ -117,8 +117,49 @@
       "status": "preflight_issue_partially_mitigated_calibration_pending",
       "transfer_limits": "Geometric warning for CA-only schemes with two receptor anchor points. Does not invalidate earlier atom/ring/contact-based BMP2 scoring, demonstrate failed sampling, prove nonbinding, or establish a unique BMP4 pose.",
       "analysis_scope": "Observed source-template perturbation; no production scorer or sampling run"
+    },
+    {
+      "failure_id": "BMP7_CA_HIGH_SCORE_ATOMIC_CLASH_20261013",
+      "complex_ids": [
+        "BMP7_BMPR1A_ACVR2A",
+        "BMP7_ACVR1_ACVR2A"
+      ],
+      "recipe_ids": [
+        "bmp7_alk3_joint_v1",
+        "bmp7_alk2_joint_v1"
+      ],
+      "failure_category": "preflight_high_reward_does_not_establish_all_atom_plausibility",
+      "run_ids": [],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/preparation/bmp7/bmp7_alk3_joint_v1.readiness.json",
+          "sha256": "05ae24dfcb47ec5619558efaea6c17e7db13ae970a9246bd86d3f29e65eb0fdc"
+        },
+        {
+          "path": "artifacts/bmp90/preparation/bmp7/bmp7_alk2_joint_v1.bundle.json",
+          "sha256": "9a7a8c2326f9f46d7797ceadd1d730e17467da99e8f598a8275904f5e95ac03e"
+        }
+      ],
+      "observed_symptoms": [
+        "Synthetic rigid-transfer ALK3 composite scores0.987974 while moved receptorC has20 interchain heavy overlaps above0.4Angstrom; maximum1.76Angstrom.",
+        "Synthetic rigid-transfer ALK2 composite scores0.998042 while moved receptorC has30 such overlaps; maximum2.39Angstrom.",
+        "Both pass the explicitly coarse CA-overlap guard."
+      ],
+      "suspected_causes": [
+        {
+          "mechanism": "Sparse CA restraints do not resolve side-chain sterics; transplant constructs can clash despite compatible anchor distances.",
+          "status": "Observed scoring limitation; no claim this predicts sampled all-atom failure."
+        }
+      ],
+      "followups": [
+        {
+          "result": "Supplemental moved-receptor heavy-clean pose alternatives also receive substantial reward; finite panels do not establish uniqueness or whole-assembly acceptance."
+        }
+      ],
+      "status": "documented_limitation_requires_separate_physical_evaluation",
+      "transfer_limits": "Synthetic fixtures only, no sampled failures or evidence of nonbinding. Do not promote high reward to physical acceptance; protein-only scoring omits glycan effects."
     }
   ],
   "initialization_note": "The first entry records a preflight geometry finding. No sampled-run failure has yet been adjudicated.",
-  "updated_at": "2026-10-13T18:55:53.726305+00:00"
+  "updated_at": "2026-10-14T00:05:51.437470+00:00"
 }
