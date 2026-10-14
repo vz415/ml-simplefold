@@ -1176,6 +1176,30 @@
         "independence": "Two symmetry-related copies and seven descendants of one lineage do not provide independent replication.",
         "generic_vs_specific": "This record concerns target-specific reference geometry; generic chemistry inspection priors remain separately classified."
       }
+    },
+    {
+      "evidence_id": "BMP7_ACVR1_ADDITIONAL_9N4K_TRANSFER_20261014",
+      "evidence_class": "homologous_interface_transfer",
+      "target_id": "BMP7_ACVR1_ACVR2A",
+      "source": {
+        "path": "artifacts/bmp90/preparation/bmp7_alk2_revision_v2_20261014/anchor_mapping_evidence.json",
+        "sha256": "df55d64f148cb3c7ad5b72a93fe3b6d9568da0b191637c9f69ba729d4af0a3b6"
+      },
+      "finding": "Conserved mapping of ACVR1 F71/Q76/Q89 contacts from BMP6 9N4K to BMP7 ligand L367/N375/L382 supplies three additional CA-distance hypotheses per receptor copy.",
+      "evidence_allocation": "guidance_and_tuning",
+      "limits": "Observed coordinates are BMP6 in an engineered glycosylated trap, not experimental BMP7-ACVR1 contacts. Broad/fine components are engineering basis functions for each unique distance, not independent evidence."
+    },
+    {
+      "evidence_id": "BMP6_ACVR1_N60_S446_LOCAL_GEOMETRY_20261014",
+      "evidence_class": "target_specific_coordinate_geometry",
+      "target_id": "BMP6_ACVR1_ACVR2B",
+      "source": {
+        "path": "artifacts/bmp90/preparation/bmp6_revision_v3_20261014/bmp6_joint_n60_local_v3.json",
+        "sha256": "f59e3389356db55978494954058a616f9e8a61f688a4d9d7961fb1d3c7c1a12f"
+      },
+      "finding": "Focused ACVR1 N60 / BMP6 S446 local distance and approach-angle guidance measured from 9N4K for both receptor copies.",
+      "evidence_allocation": "guidance_and_tuning_after_observed_loop_defect",
+      "limits": "Geometric proxy from engineered glycosylated receptor trap; does not assert hydrogen bond, energy, or independent validation."
     }
   ],
   "generic_inspection_priors": {
@@ -1387,5 +1411,5 @@
       "evidence_label_scope": "Vocabulary for future observations; no existing evidence_class is reclassified by this import. R8 instructs evaluation of energetic evidence; it does not establish a hotspot for any target."
     }
   },
-  "updated_at": "2026-10-14T00:53:39.862485+00:00"
+  "updated_at": "2026-10-14T15:17:51.985529+00:00"
 }

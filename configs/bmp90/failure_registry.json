@@ -323,6 +323,37 @@
             "58121329"
           ],
           "result": "Unchanged recipe beta12, tau0.1/0.3/0.8; tau0.8 addendum also found no resampling, despite one baseline recovering both typeII copies. Results pending; automatic afterok CPU evaluations attached."
+        },
+        {
+          "recorded_at": "2026-10-14T15:08:26.465610+00:00",
+          "job_ids": [
+            "58121327",
+            "58121328",
+            "58121329"
+          ],
+          "status": "completed_evaluated",
+          "result": "Beta12 induced one resampling per run. Both typeII copies>=0.6 at tau0.8 improved 1/10 baseline to4/10 FK; tau0.1/0.3 remain0/10. TypeI copies remain poorly placed. Next authorized revision expands mapped typeI constraints while preserving typeII.",
+          "artifact_reference": {
+            "path": "artifacts/bmp90/evaluation/followup_status_20261014/results.json",
+            "sha256": "bb529039a6305d41a358286653624b0092d86cb6f5fc95fde240c1621728d3c5"
+          },
+          "qualification": "Correlated descendants; covered-interface comparisons only, no calibrated physical acceptance."
+        },
+        {
+          "recorded_at": "2026-10-14T15:25:49.646092+00:00",
+          "status": "submitted",
+          "recipe_id": "bmp7_alk2_joint_v2",
+          "job_ids": [
+            "58134299",
+            "58134300",
+            "58134301"
+          ],
+          "evaluation_job_ids": [
+            "58134308",
+            "58134309",
+            "58134310"
+          ],
+          "result": "Wave8 revised joint constraints, tau0.1/0.3/0.8; preflight passed, sampled outcomes pending."
         }
       ],
       "artifact_references": [
@@ -399,6 +430,36 @@
             "58121763"
           ],
           "result": "Unchanged v2 beta6, tau0.1/0.3, original seed triplets and A30. Results pending; automatic afterok CPU evaluations attached."
+        },
+        {
+          "recorded_at": "2026-10-14T15:08:26.465610+00:00",
+          "job_ids": [
+            "58121762",
+            "58121763"
+          ],
+          "status": "completed_evaluated",
+          "result": "Beta6 retained all-four DockQ>=0.6 counts 4/10 and 0/10 at tau0.1/0.3, without repairing the targeted defect. Next authorized recipe returns to v1 docking with one focused N60 geometry module.",
+          "artifact_reference": {
+            "path": "artifacts/bmp90/evaluation/followup_status_20261014/results.json",
+            "sha256": "bb529039a6305d41a358286653624b0092d86cb6f5fc95fde240c1621728d3c5"
+          },
+          "qualification": "Correlated descendants; covered-interface comparisons only, no calibrated physical acceptance."
+        },
+        {
+          "recorded_at": "2026-10-14T15:25:49.646092+00:00",
+          "status": "submitted",
+          "recipe_id": "bmp6_joint_n60_local_v3",
+          "job_ids": [
+            "58134296",
+            "58134297",
+            "58134298"
+          ],
+          "evaluation_job_ids": [
+            "58134305",
+            "58134306",
+            "58134307"
+          ],
+          "result": "Wave8 revised joint constraints, tau0.1/0.3/0.8; preflight passed, sampled outcomes pending."
         }
       ],
       "artifact_references": [
@@ -440,6 +501,38 @@
             "58121761"
           ],
           "result": "Matched 2x2 L61 on/off and beta4/12, tau0.3, fresh seed triplet on A100. Results pending; automatic afterok CPU evaluations attached."
+        },
+        {
+          "recorded_at": "2026-10-14T15:08:26.465610+00:00",
+          "job_ids": [
+            "58121758",
+            "58121759",
+            "58121760",
+            "58121761"
+          ],
+          "status": "completed_evaluated",
+          "result": "Only L61-off/beta12 changed the paired population: covered homolog C/E recovery 2/10 baseline to 4/10 FK. Other three arms remained 2/10 with no resampling. None satisfies all four guidance groups>=0.5. Next authorized revision retains off/beta12 and targets remaining receptor copies.",
+          "artifact_reference": {
+            "path": "artifacts/bmp90/evaluation/followup_status_20261014/results.json",
+            "sha256": "bb529039a6305d41a358286653624b0092d86cb6f5fc95fde240c1621728d3c5"
+          },
+          "qualification": "Correlated descendants; covered-interface comparisons only, no calibrated physical acceptance."
+        },
+        {
+          "recorded_at": "2026-10-14T15:25:49.646092+00:00",
+          "status": "submitted",
+          "recipe_id": "bmp4_joint_coarse_fine_l61_off_v2",
+          "job_ids": [
+            "58134288",
+            "58134289",
+            "58134290"
+          ],
+          "evaluation_job_ids": [
+            "58134302",
+            "58134303",
+            "58134304"
+          ],
+          "result": "Wave8 revised joint constraints, tau0.1/0.3/0.8; preflight passed, sampled outcomes pending."
         }
       ],
       "artifact_references": [
@@ -476,6 +569,20 @@
             "58121331"
           ],
           "result": "Control and weak-third-anchor sensitivity submitted; complete-removal draft remains rejected. Results pending; automatic afterok CPU evaluations attached."
+        },
+        {
+          "recorded_at": "2026-10-14T15:08:26.465610+00:00",
+          "job_ids": [
+            "58121330",
+            "58121331"
+          ],
+          "status": "completed_evaluated",
+          "result": "Weak-anchor versus control produced byte-identical baseline and FK populations. Both recovered both typeII copies>=0.6 in4/10 FK versus1/10 baseline. No observed structural improvement from this weight reduction; defer another repeat.",
+          "artifact_reference": {
+            "path": "artifacts/bmp90/evaluation/followup_status_20261014/results.json",
+            "sha256": "bb529039a6305d41a358286653624b0092d86cb6f5fc95fde240c1621728d3c5"
+          },
+          "qualification": "Correlated descendants; covered-interface comparisons only, no calibrated physical acceptance."
         }
       ],
       "artifact_references": [
@@ -488,5 +595,5 @@
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-14T06:31:21.182684+00:00"
+  "updated_at": "2026-10-14T15:25:49.646092+00:00"
 }
