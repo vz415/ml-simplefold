@@ -287,8 +287,72 @@
       ],
       "status": "revised_before_sampling_with_remaining_limitations",
       "transfer_limits": "Targeted fixture tuning, not benchmark calibration. Margin remains modest; some full recovered descendants still score below wrong-pose fixtures. Monitor actual sampling rather than treating the score as an acceptance metric."
+    },
+    {
+      "failure_id": "BMP7_ACVR1_NO_RESAMPLING_58114403_58114404",
+      "complex_id": "BMP7_ACVR1_ACVR2A",
+      "recipe_id": "bmp7_alk2_joint_v1",
+      "job_ids": [
+        "58114403",
+        "58114404"
+      ],
+      "failure_category": "ineffective_population_selection_and_wrong_receptor_placement",
+      "observed_symptoms": [
+        "Zero resampling; all20 paired FK PDBs identical to baseline despite active terminal reweighting.",
+        "Neither population recovers both typeII copies; median weakest-copy DockQ approximately0.02.",
+        "TypeII folds fit at median0.62/0.69A but ligand-frame displacement RMSD approximately38A.",
+        "Severe fullconstruct overlaps remain, including core non-sulfur overlaps."
+      ],
+      "suspected_causes": [
+        {
+          "mechanism": "Weak reward discrimination leaves ESS above the configured selection gate.",
+          "status": "Directly supported by logged checkpoints; not proof of incompatible contact constraints."
+        }
+      ],
+      "followups": [
+        {
+          "hypothesis": "beta12 with unchanged recipe and gate; actual future sampling required",
+          "status": "proposed_not_submitted"
+        }
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/evaluation/bmp7_alk2_diagnosis/diagnosis.json",
+          "sha256": "7751bf9f28e17d80d9c848049478d2461b11eeda0d7bbbcc7297aded8e6675ee"
+        }
+      ],
+      "transfer_limits": "Only tau0.1/0.3 analyzed. TypeI has no experimental reference; species-surrogate and common-start qualifications apply."
+    },
+    {
+      "failure_id": "BMP7_BMPR1A_RECOVERY_WITH_PHYSICAL_DEFECTS_20261013",
+      "complex_id": "BMP7_BMPR1A_ACVR2A",
+      "recipe_id": "bmp7_alk3_joint_v1",
+      "job_ids": [
+        "58114311",
+        "58114312",
+        "58114313"
+      ],
+      "failure_category": "physical_defects_despite_reference_recovery",
+      "observed_symptoms": [
+        "Both typeII copies DockQ>=0.6 in5/10,10/10,8/10 FK descendants across tau0.1/0.3/0.8; recovered lineages1/2/2.",
+        "Best-reward FK models retain95/40/27 interchain C/N/O vdW overlaps>1A, including6/5/2 inside source-observed core masks.",
+        "Uncovered typeI geometry follows a transferred hypothesis; no native typeI accuracy or fullassembly validation."
+      ],
+      "followups": [
+        {
+          "hypothesis": "Preserve typeII module; validate uncertain D69-K331 typeI restraint sensitivity and diagnose tail/sidechain defects without trimming.",
+          "status": "proposed_not_submitted"
+        }
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/evaluation/bmp7_alk3_diagnosis/diagnosis.json",
+          "sha256": "bd1600f3c07f8475ae9d58e65d6654544439e2bd1969d06c3f7221340b6c046b"
+        }
+      ],
+      "transfer_limits": "Diagnostic overlap threshold not calibrated acceptance. Tau and seed triplets confounded. Missing reference coverage does not prove disorder."
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-14T03:28:26.754383+00:00"
+  "updated_at": "2026-10-14T03:52:12.867939+00:00"
 }

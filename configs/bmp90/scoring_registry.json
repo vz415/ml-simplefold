@@ -8703,7 +8703,63 @@
             "Sparse scoring and CA guards do not establish all-atom physical plausibility or a unique pose.",
             "52 scoring-withheld contacts come from the same inspected source, not independent blind evidence."
           ],
-          "prepared_at": "2026-10-14T00:03:15.813521+00:00"
+          "prepared_at": "2026-10-14T00:03:15.813521+00:00",
+          "completed_population_diagnosis": {
+            "recorded_at": "2026-10-14T03:52:12.867939+00:00",
+            "jobs": [
+              "58114311",
+              "58114312",
+              "58114313"
+            ],
+            "report": {
+              "path": "artifacts/bmp90/evaluation/bmp7_alk3_diagnosis/diagnosis.json",
+              "sha256": "bd1600f3c07f8475ae9d58e65d6654544439e2bd1969d06c3f7221340b6c046b"
+            },
+            "combined_report": {
+              "path": "artifacts/bmp90/evaluation/bmp7_combined_diagnosis/report.json",
+              "sha256": "ad5e0d990e3fb8b5824fdb3ec69afddbbbb326082bea4d54eafdfd61e690aad4"
+            },
+            "per_run_balanced_reference_metrics": {
+              "58114311": {
+                "baseline": {
+                  "median_min_typeII_DockQ": 0.020051727921586573,
+                  "both_typeII_at_least_0p6": 2
+                },
+                "fk": {
+                  "median_min_typeII_DockQ": 0.4621030155670355,
+                  "both_typeII_at_least_0p6": 5
+                }
+              },
+              "58114312": {
+                "baseline": {
+                  "median_min_typeII_DockQ": 0.020653852775601785,
+                  "both_typeII_at_least_0p6": 2
+                },
+                "fk": {
+                  "median_min_typeII_DockQ": 0.8297901833347224,
+                  "both_typeII_at_least_0p6": 10
+                }
+              },
+              "58114313": {
+                "baseline": {
+                  "median_min_typeII_DockQ": 0.019559431093890734,
+                  "both_typeII_at_least_0p6": 2
+                },
+                "fk": {
+                  "median_min_typeII_DockQ": 0.6686159935962115,
+                  "both_typeII_at_least_0p6": 8
+                }
+              }
+            },
+            "reference_scope": "1LX5 observed conserved species-surrogate typeII agreement; typeI and fullassembly DockQ unavailable. Same-reference contacts are not independent validation.",
+            "acceptance": "No physical acceptance or recipe-rank promotion.",
+            "preferred_setting_for_provisional_typeII_recovery": {
+              "tau": 0.3,
+              "job": "58114312",
+              "limitation": "Tau and seeds vary together; ten recovered descendants come from two branches of common-start population."
+            },
+            "next_hypothesis": "Validate then test uncertain transferred D69-K331 restraint sensitivity with paired control/new seedtriplet; retain known typeII module and fullconstruct. Proposed, not submitted."
+          }
         }
       ]
     },
@@ -11906,7 +11962,48 @@
             "Sparse scoring and CA guards do not establish all-atom physical plausibility or a unique pose.",
             "52 scoring-withheld contacts come from the same inspected source, not independent blind evidence."
           ],
-          "prepared_at": "2026-10-14T00:03:15.813521+00:00"
+          "prepared_at": "2026-10-14T00:03:15.813521+00:00",
+          "completed_population_diagnosis": {
+            "recorded_at": "2026-10-14T03:52:12.867939+00:00",
+            "jobs": [
+              "58114403",
+              "58114404"
+            ],
+            "report": {
+              "path": "artifacts/bmp90/evaluation/bmp7_alk2_diagnosis/diagnosis.json",
+              "sha256": "7751bf9f28e17d80d9c848049478d2461b11eeda0d7bbbcc7297aded8e6675ee"
+            },
+            "combined_report": {
+              "path": "artifacts/bmp90/evaluation/bmp7_combined_diagnosis/report.json",
+              "sha256": "ad5e0d990e3fb8b5824fdb3ec69afddbbbb326082bea4d54eafdfd61e690aad4"
+            },
+            "per_run_balanced_reference_metrics": {
+              "58114403": {
+                "baseline": {
+                  "median_min_typeII_DockQ": 0.020027485892736438,
+                  "both_typeII_at_least_0p6": 0
+                },
+                "fk": {
+                  "median_min_typeII_DockQ": 0.020027485892736438,
+                  "both_typeII_at_least_0p6": 0
+                }
+              },
+              "58114404": {
+                "baseline": {
+                  "median_min_typeII_DockQ": 0.020443784401157072,
+                  "both_typeII_at_least_0p6": 0
+                },
+                "fk": {
+                  "median_min_typeII_DockQ": 0.020443784401157072,
+                  "both_typeII_at_least_0p6": 0
+                }
+              }
+            },
+            "reference_scope": "1LX5 observed conserved species-surrogate typeII agreement; typeI and fullassembly DockQ unavailable. Same-reference contacts are not independent validation.",
+            "acceptance": "No physical acceptance or recipe-rank promotion.",
+            "mechanism": "No resampling in either run: all20 FK coordinates equal paired baselines; terminal reweighting active. Allowed-checkpoint ESS minima9.346/9.574 exceed gate8.",
+            "next_hypothesis": "Beta12 only with existing joint recipe and ESSgate0.8. Logged first-crossing near0.75 is diagnostic, not prediction of a new trajectory; may favor halfoccupied assemblies. Proposed, not submitted."
+          }
         }
       ]
     },
@@ -17967,7 +18064,7 @@
       "historical_snapshot_note": "common_preparation_snapshot and optional_l61_geometry_snapshot preserve preimplementation proposal state. Current executabledefinitions and newruntime are in appended mapped recipes."
     }
   },
-  "updated_at": "2026-10-14T03:28:26.754383+00:00",
+  "updated_at": "2026-10-14T03:52:12.867939+00:00",
   "interface_evidence_registry": "configs/bmp90/interface_evidence_registry.json",
   "failure_registry": "configs/bmp90/failure_registry.json",
   "construct_policy": {
