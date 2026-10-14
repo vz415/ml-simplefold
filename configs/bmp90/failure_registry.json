@@ -1080,12 +1080,87 @@
             }
           ],
           "scope": "All three beta12 taus lacked a guidance effect; typeII-only baseline recovery does not establish whole-assembly improvement."
+        },
+        {
+          "recorded_at": "2026-10-14T23:24:37.237209+00:00",
+          "status": "selection_restored_but_structure_defects_remain",
+          "job_ids": [
+            "58142372",
+            "58142373",
+            "58142374"
+          ],
+          "reports": [
+            {
+              "path": "artifacts/bmp90/evaluation/paid_wave11_status_20261014T2319/collection.json",
+              "sha256": "509f96bfe778b5190ded2f6068f685560c57aef935c24ac6acf95378a79dfea6"
+            },
+            {
+              "path": "artifacts/bmp90/evaluation/bmp7_alk2_beta24_20261014/scientific_summary.json",
+              "sha256": "8ccaa7322faed4a7ce324290fc3da8ee03b7938bafa09d9c70ea4a9cff43cabe"
+            }
+          ],
+          "result": "Beta24 triggered1/1/2 resampling events at tau0.1/0.3/0.8, correcting absent selection. TypeI placement and packing remain deficient; no new overall leader."
         }
       ],
-      "status": "documented_beta12_sweep_no_guidance_effect_beta24_running",
+      "status": "selection_scale_corrected_beta24_structure_failure_recorded_separately",
       "transfer_limits": "One noise setting. Do not reject a recipe because one tau regresses; do not claim absent binding or an invalid transferred contact from this result."
+    },
+    {
+      "failure_id": "BMP7_ACVR1_V3_BETA24_UNRESOLVED_PLACEMENT_58142372_58142374",
+      "complex_id": "BMP7_ACVR1_ACVR2A",
+      "recipe_id": "bmp7_alk2_bridge_cauchy_v3",
+      "parent_failure_id": "BMP7_ACVR1_V3_TAU01_NO_SELECTION_58139952",
+      "failure_category": "selection_active_but_no_new_overall_structure",
+      "run_ids": [
+        "58142372",
+        "58142373",
+        "58142374"
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/evaluation/paid_wave11_status_20261014T2319/collection.json",
+          "sha256": "509f96bfe778b5190ded2f6068f685560c57aef935c24ac6acf95378a79dfea6"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/bmp7_alk2_beta24_20261014/scientific_summary.json",
+          "sha256": "8ccaa7322faed4a7ce324290fc3da8ee03b7938bafa09d9c70ea4a9cff43cabe"
+        }
+      ],
+      "sampling_settings": {
+        "beta": 24,
+        "tau": [
+          0.1,
+          0.3,
+          0.8
+        ],
+        "historical_controls": [
+          "58134299",
+          "58134300",
+          "58134301"
+        ]
+      },
+      "expected_behavior": "Stronger selection preserves covered typeII interfaces and improves both typeI copies under unchanged face/bridge constraints.",
+      "observed_symptoms": [
+        "Selection activated at all taus; tau0.8 recovered four correlated typeII-positive descendants, but neither typeI copy was jointly recovered.",
+        "All ten tau0.8 FK PDBs exactly reproduce prior v2 tau0.8 outputs; these are not independent confirmations.",
+        "Packing alternative suffix7 has54 severe CNO overlaps versus64 in prior leader, but13 core-only versus6, slightly worse typeII DockQ and worse source-parent fold fits."
+      ],
+      "status": "documented_completed_no_promotion",
+      "suspected_causes": [],
+      "attempted_changes": [],
+      "followups": [],
+      "proposed_next_change": {
+        "proposal": "Add the already implemented gentle bounded severe interchain C/N/O overlap guard to the unchanged v3 contact geometry at beta24, using all716residues.",
+        "scientific_basis": "Repeated subangstrom heavy-atom separations are concrete physical defects missed by CA-only safeguards. The existing BMP7-BMPR1A guard offers an available implementation; it is not yet evidence of efficacy for ACVR1.",
+        "preserve": "Keep both type-II anchors, every type-I face/bridge requirement, global aggregation, integrity, full sequences and current CA safeguards. Add no invented contact endpoint and do not weaken the bridge to increase reward.",
+        "mapping_requirement": "Rebuild and verify fixed native covalent/disulfide topology for the ACVR1 construct; never copy BMPR1A residue indices. Do not infer exclusions from close coordinates.",
+        "minimum_validation": "Identical-CA same-pose clash-relief versus collision controls must move reward in the correct direction; receptor displacement cannot win by escaping contacts; missing-heavy behavior and all copy permutations must remain correct.",
+        "limit": "This guard targets demonstrated packing defects. It does not by itself guarantee recovery of the still-distant ACVR1 copy or prove the transferred pose correct.",
+        "execution_status": "Proposal only in this report; no new recipe preparation, sampling or submission performed."
+      },
+      "transfer_limits": "Do not infer nonbinding or invalidate a transferred contact. TypeI experimental evidence remains absent; fewer whole-model clashes alone do not establish better overall structure."
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-14T22:45:45.853296+00:00"
+  "updated_at": "2026-10-14T23:24:37.237209+00:00"
 }

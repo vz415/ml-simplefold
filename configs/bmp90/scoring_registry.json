@@ -17660,7 +17660,34 @@
           "campaign_receipt": {
             "path": "artifacts/bmp90/operations/paid_wave9/submission_receipt.json",
             "sha256": "f9f2faa9cc9cdb2eefdf7856dad6211836fd7ccc1922ede72c24cbd48e05102e"
-          }
+          },
+          "prepared_resource_fallbacks": [
+            {
+              "campaign": "bmp90-paid-wave12-20261014",
+              "status": "prepared_not_submitted_preserve_aged_A100_queue",
+              "recorded_at": "2026-10-14T23:28:40.958348+00:00",
+              "original_pending_A100_jobs": [
+                "58139988",
+                "58139989",
+                "58139990"
+              ],
+              "same_scoring_recipe": true,
+              "planned_gpu": "A30",
+              "planned_sampling_jobs": 3,
+              "requested_gpu_hours_cap": 9,
+              "fresh_paired_baselines": true,
+              "runtime_revision": "97a2b3a140c84d7b59fe4ba42d906a65d257941f",
+              "transfer_receipt": {
+                "path": "artifacts/bmp90/operations/paid_wave12/transfer_receipt.json",
+                "sha256": "6966da2fac3e5c6877fc833fb9ab4708659c583bf55d595a53b6757d77beec3f"
+              },
+              "scheduler_review": {
+                "path": "artifacts/bmp90/operations/paid_wave12_scheduler_review_20261014.json",
+                "sha256": "9410e6c95b357bd0e5eb73195f00a6e47f483f80b82dab5fe95ead30ea3302cf"
+              },
+              "decision": "Keep original A100 jobs: current new-A30 scheduler estimate is later. No CPU registration, cancellation or replacement GPU job submitted. Reassess scheduling before using prepared replacement."
+            }
+          ]
         }
       ],
       "current_iteration_parent": {
@@ -25239,7 +25266,7 @@
         {
           "recipe_id": "bmp7_alk2_bridge_cauchy_v3",
           "rank": null,
-          "status": "beta12_sweep_completed_no_guidance_effect_beta24_running",
+          "status": "completed_beta12_beta24_evaluated_not_preferred",
           "parent_relationships": [
             {
               "recipe_id": "bmp7_alk2_joint_v1",
@@ -27808,7 +27835,7 @@
               "seed": 74401,
               "brownian_seed": 75401,
               "resampling_seed": 76401,
-              "status": "running_evaluation_dependency_pending",
+              "status": "completed_evaluated_no_new_overall_leader",
               "canonical_output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58142372",
               "runtime_revision": "4dbba9dd4f369037ba431095535a230ddc904754",
               "scoring_sha256": "b7fcffcfc89cfa2591518984d6c35411db00e6faecb8dbc869135756a6838da1",
@@ -27827,7 +27854,17 @@
               },
               "independent_population_id": "BMP7_ACVR1_ACVR2A_bmp7_alk2_bridge_cauchy_v3_bmp7_alk2_v3_beta24_tau01_r1",
               "reference_scope": "Partial 1LX5 conserved mouse-to-human type-II surrogate only: E/F covered, C/D experimentally unassessed. Composite diagnostics never establish type-I accuracy.",
-              "requested_walltime_minutes": 90
+              "requested_walltime_minutes": 90,
+              "evaluation": [
+                {
+                  "path": "artifacts/bmp90/evaluation/paid_wave11_status_20261014T2319/collection.json",
+                  "sha256": "509f96bfe778b5190ded2f6068f685560c57aef935c24ac6acf95378a79dfea6"
+                },
+                {
+                  "path": "artifacts/bmp90/evaluation/bmp7_alk2_beta24_20261014/scientific_summary.json",
+                  "sha256": "8ccaa7322faed4a7ce324290fc3da8ee03b7938bafa09d9c70ea4a9cff43cabe"
+                }
+              ]
             },
             {
               "job_id": "58142373",
@@ -27839,7 +27876,7 @@
               "seed": 74402,
               "brownian_seed": 75402,
               "resampling_seed": 76402,
-              "status": "running_evaluation_dependency_pending",
+              "status": "completed_evaluated_no_new_overall_leader",
               "canonical_output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58142373",
               "runtime_revision": "4dbba9dd4f369037ba431095535a230ddc904754",
               "scoring_sha256": "b7fcffcfc89cfa2591518984d6c35411db00e6faecb8dbc869135756a6838da1",
@@ -27858,7 +27895,17 @@
               },
               "independent_population_id": "BMP7_ACVR1_ACVR2A_bmp7_alk2_bridge_cauchy_v3_bmp7_alk2_v3_beta24_tau03_r2",
               "reference_scope": "Partial 1LX5 conserved mouse-to-human type-II surrogate only: E/F covered, C/D experimentally unassessed. Composite diagnostics never establish type-I accuracy.",
-              "requested_walltime_minutes": 90
+              "requested_walltime_minutes": 90,
+              "evaluation": [
+                {
+                  "path": "artifacts/bmp90/evaluation/paid_wave11_status_20261014T2319/collection.json",
+                  "sha256": "509f96bfe778b5190ded2f6068f685560c57aef935c24ac6acf95378a79dfea6"
+                },
+                {
+                  "path": "artifacts/bmp90/evaluation/bmp7_alk2_beta24_20261014/scientific_summary.json",
+                  "sha256": "8ccaa7322faed4a7ce324290fc3da8ee03b7938bafa09d9c70ea4a9cff43cabe"
+                }
+              ]
             },
             {
               "job_id": "58142374",
@@ -27870,7 +27917,7 @@
               "seed": 74403,
               "brownian_seed": 75403,
               "resampling_seed": 76403,
-              "status": "running_evaluation_dependency_pending",
+              "status": "completed_evaluated_no_new_overall_leader",
               "canonical_output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58142374",
               "runtime_revision": "4dbba9dd4f369037ba431095535a230ddc904754",
               "scoring_sha256": "b7fcffcfc89cfa2591518984d6c35411db00e6faecb8dbc869135756a6838da1",
@@ -27889,7 +27936,17 @@
               },
               "independent_population_id": "BMP7_ACVR1_ACVR2A_bmp7_alk2_bridge_cauchy_v3_bmp7_alk2_v3_beta24_tau08_r3",
               "reference_scope": "Partial 1LX5 conserved mouse-to-human type-II surrogate only: E/F covered, C/D experimentally unassessed. Composite diagnostics never establish type-I accuracy.",
-              "requested_walltime_minutes": 90
+              "requested_walltime_minutes": 90,
+              "evaluation": [
+                {
+                  "path": "artifacts/bmp90/evaluation/paid_wave11_status_20261014T2319/collection.json",
+                  "sha256": "509f96bfe778b5190ded2f6068f685560c57aef935c24ac6acf95378a79dfea6"
+                },
+                {
+                  "path": "artifacts/bmp90/evaluation/bmp7_alk2_beta24_20261014/scientific_summary.json",
+                  "sha256": "8ccaa7322faed4a7ce324290fc3da8ee03b7938bafa09d9c70ea4a9cff43cabe"
+                }
+              ]
             }
           ],
           "sampling_settings": {
@@ -27916,7 +27973,7 @@
             "beta_scope": "Original beta12 sweep; exact per-run beta and baseline source are recorded in evidence_runs. Beta24 follow-up uses compatible historical controls."
           },
           "evaluation_limits": [
-            "Beta12 sweep completed with zero resampling and baseline-identical structures at all three taus; no overall improvement. Beta24 sweep running; no promotion or rejection of all selection strengths.",
+            "Beta12 lacked resampling at all taus. Beta24 activated selection at all taus but reproduced prior v2 tau0.8 structures and did not improve overall preference. TypeI placement remains unresolved.",
             "1LX5 supplies conserved mouse-to-human typeII surrogate comparison only; typeI remains experimentally unassessed.",
             "Judge best overall structures across tau; isolated weaker tau is not recipe rejection.",
             "Tuned fixtures and optimized contacts are not independent validation; full assembly physical acceptance remains uncalibrated."
@@ -27996,7 +28053,7 @@
             {
               "recorded_at": "2026-10-14T22:10:10.286797+00:00",
               "campaign": "bmp90-paid-wave11-20261014",
-              "status": "running_pending_evaluation",
+              "status": "completed_evaluated_no_new_overall_leader",
               "reason": "Vincent requested keeping usable GPU capacity busy while away; overlap a direct selection-strength correction with the remaining beta12 taus rather than impose full-wave waiting.",
               "change": "Exact v3 score unchanged; beta12 to24. Tau0.1/0.3/0.8, same74401\u20133 seed families. Reuse verified compatible historical A30 baseline populations rather than repeat identical controls.",
               "planned_gpu": "A30",
@@ -28031,7 +28088,17 @@
               "decision_addendum": {
                 "path": "artifacts/bmp90/evaluation/bmp7_alk2_v3_first_20261014/beta24_decision_addendum.json",
                 "sha256": "e6badc300a98bea56d58fb55078272b07758508154d75c61723af0a4cd76c6f8"
-              }
+              },
+              "evaluation": [
+                {
+                  "path": "artifacts/bmp90/evaluation/paid_wave11_status_20261014T2319/collection.json",
+                  "sha256": "509f96bfe778b5190ded2f6068f685560c57aef935c24ac6acf95378a79dfea6"
+                },
+                {
+                  "path": "artifacts/bmp90/evaluation/bmp7_alk2_beta24_20261014/scientific_summary.json",
+                  "sha256": "8ccaa7322faed4a7ce324290fc3da8ee03b7938bafa09d9c70ea4a9cff43cabe"
+                }
+              ]
             }
           ],
           "completed_beta12_sweep_evaluation": {
@@ -28129,6 +28196,391 @@
               "candidate_is_historical_baseline": true
             },
             "qualification": "1LX5 conserved mouse-to-human typeII E/F surrogate comparison only. TypeI C/D lacks an experimental reference. No whole-assembly DockQ or calibrated acceptance; compare best overall across tau, not per-tau uniformity."
+          },
+          "completed_beta24_sweep_evaluation": {
+            "recorded_at": "2026-10-14T23:24:37.237209+00:00",
+            "status": "three_tau_sweep_complete_selection_active_no_new_overall_leader",
+            "reports": [
+              {
+                "path": "artifacts/bmp90/evaluation/paid_wave11_status_20261014T2319/collection.json",
+                "sha256": "509f96bfe778b5190ded2f6068f685560c57aef935c24ac6acf95378a79dfea6"
+              },
+              {
+                "path": "artifacts/bmp90/evaluation/bmp7_alk2_beta24_20261014/scientific_summary.json",
+                "sha256": "8ccaa7322faed4a7ce324290fc3da8ee03b7938bafa09d9c70ea4a9cff43cabe"
+              }
+            ],
+            "per_tau": [
+              {
+                "job_id": "58142372",
+                "evaluation_job_id": "58142375",
+                "tau": 0.1,
+                "beta": 24,
+                "historical_source_job": "58134299",
+                "resampling_events": [
+                  {
+                    "time": 0.7492666244506836,
+                    "ess": 7.728505669145627
+                  }
+                ],
+                "both_typeII_ge0p6": 0,
+                "best_weaker_covered_interface": {
+                  "name": "BMP7_ACVR1_ACVR2A_sampled_1.pdb",
+                  "path": "artifacts/remote-runs/58142372/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_1.pdb",
+                  "sha256": "4bf6f3cbc66bea590823f76cfa08cea2aa64411ba35bb96646487f9b7086ff1f",
+                  "covered_DockQ": {
+                    "E": 0.021256156793004865,
+                    "F": 0.021058683846484686
+                  },
+                  "weakest_covered_DockQ": 0.021058683846484686,
+                  "interchain_heavy_clashes": 421,
+                  "physical_status": "unassessed"
+                }
+              },
+              {
+                "job_id": "58142373",
+                "evaluation_job_id": "58142376",
+                "tau": 0.3,
+                "beta": 24,
+                "historical_source_job": "58134300",
+                "resampling_events": [
+                  {
+                    "time": 0.9003610014915466,
+                    "ess": 7.961928249298766
+                  }
+                ],
+                "both_typeII_ge0p6": 0,
+                "best_weaker_covered_interface": {
+                  "name": "BMP7_ACVR1_ACVR2A_sampled_5.pdb",
+                  "path": "artifacts/remote-runs/58142373/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_5.pdb",
+                  "sha256": "49e5b187068cea522fb415b991751ce6c0286a59139ad00d0b1d8c595593643d",
+                  "covered_DockQ": {
+                    "E": 0.02845768644370479,
+                    "F": 0.8150186231696726
+                  },
+                  "weakest_covered_DockQ": 0.02845768644370479,
+                  "interchain_heavy_clashes": 453,
+                  "physical_status": "unassessed"
+                }
+              },
+              {
+                "job_id": "58142374",
+                "evaluation_job_id": "58142377",
+                "tau": 0.8,
+                "beta": 24,
+                "historical_source_job": "58134301",
+                "resampling_events": [
+                  {
+                    "time": 0.6004964113235474,
+                    "ess": 5.183371365217674
+                  },
+                  {
+                    "time": 0.7492666244506836,
+                    "ess": 7.925568738670908
+                  }
+                ],
+                "both_typeII_ge0p6": 4,
+                "best_weaker_covered_interface": {
+                  "name": "BMP7_ACVR1_ACVR2A_sampled_1.pdb",
+                  "path": "artifacts/remote-runs/58142374/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_1.pdb",
+                  "sha256": "cac8eb2e9136c2307cd506bcc6de529a00779f4da207a2dfbc9b9e178a797f6a",
+                  "covered_DockQ": {
+                    "E": 0.7218361602591098,
+                    "F": 0.7163520649785124
+                  },
+                  "weakest_covered_DockQ": 0.7163520649785124,
+                  "interchain_heavy_clashes": 462,
+                  "physical_status": "unassessed"
+                }
+              }
+            ],
+            "decision": "Retain v1 beta12 tau0.8 job58121329 suffix8 as provisional overall leader. Beta24 restores selection under v3, but its tau0.8 structures exactly repeat prior v2 outputs and neither ACVR1 copy is jointly recovered.",
+            "tau08_identity_to_prior_v2": {
+              "source_job": "58134301",
+              "same_index_byte_identical_models": 10,
+              "models": [
+                {
+                  "sample": 0,
+                  "new": {
+                    "path": "artifacts/remote-runs/58142374/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_0.pdb",
+                    "sha256": "58d0d7b4355649c0745f1d410de56819277a528efe517bdab0d0d9bb8b3df7eb"
+                  },
+                  "same_prior_v2_output": {
+                    "path": "artifacts/remote-runs/58134301/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_0.pdb",
+                    "sha256": "58d0d7b4355649c0745f1d410de56819277a528efe517bdab0d0d9bb8b3df7eb"
+                  }
+                },
+                {
+                  "sample": 1,
+                  "new": {
+                    "path": "artifacts/remote-runs/58142374/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_1.pdb",
+                    "sha256": "cac8eb2e9136c2307cd506bcc6de529a00779f4da207a2dfbc9b9e178a797f6a"
+                  },
+                  "same_prior_v2_output": {
+                    "path": "artifacts/remote-runs/58134301/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_1.pdb",
+                    "sha256": "cac8eb2e9136c2307cd506bcc6de529a00779f4da207a2dfbc9b9e178a797f6a"
+                  }
+                },
+                {
+                  "sample": 2,
+                  "new": {
+                    "path": "artifacts/remote-runs/58142374/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_2.pdb",
+                    "sha256": "0c17bb60701d6a9cb0dff9ca44c3c3f371778354b56eb6daed44915d942146b1"
+                  },
+                  "same_prior_v2_output": {
+                    "path": "artifacts/remote-runs/58134301/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_2.pdb",
+                    "sha256": "0c17bb60701d6a9cb0dff9ca44c3c3f371778354b56eb6daed44915d942146b1"
+                  }
+                },
+                {
+                  "sample": 3,
+                  "new": {
+                    "path": "artifacts/remote-runs/58142374/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_3.pdb",
+                    "sha256": "4a87ced66d090a4f5f4c4080755f24d7921664a020ff0bb8b5a45ea40a798055"
+                  },
+                  "same_prior_v2_output": {
+                    "path": "artifacts/remote-runs/58134301/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_3.pdb",
+                    "sha256": "4a87ced66d090a4f5f4c4080755f24d7921664a020ff0bb8b5a45ea40a798055"
+                  }
+                },
+                {
+                  "sample": 4,
+                  "new": {
+                    "path": "artifacts/remote-runs/58142374/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_4.pdb",
+                    "sha256": "066823335d93e773031aff2d6712febb945c53fa7846902f4554d6ab855a5dde"
+                  },
+                  "same_prior_v2_output": {
+                    "path": "artifacts/remote-runs/58134301/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_4.pdb",
+                    "sha256": "066823335d93e773031aff2d6712febb945c53fa7846902f4554d6ab855a5dde"
+                  }
+                },
+                {
+                  "sample": 5,
+                  "new": {
+                    "path": "artifacts/remote-runs/58142374/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_5.pdb",
+                    "sha256": "21dc95d87369b40965e8b0cd3d09ae5e50cb5c09c3de137e39fd65532d21318a"
+                  },
+                  "same_prior_v2_output": {
+                    "path": "artifacts/remote-runs/58134301/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_5.pdb",
+                    "sha256": "21dc95d87369b40965e8b0cd3d09ae5e50cb5c09c3de137e39fd65532d21318a"
+                  }
+                },
+                {
+                  "sample": 6,
+                  "new": {
+                    "path": "artifacts/remote-runs/58142374/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_6.pdb",
+                    "sha256": "45bf668c5ea0c425287af004abc869b3c2e8574eb66c13f10ee5a5d2bf59728d"
+                  },
+                  "same_prior_v2_output": {
+                    "path": "artifacts/remote-runs/58134301/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_6.pdb",
+                    "sha256": "45bf668c5ea0c425287af004abc869b3c2e8574eb66c13f10ee5a5d2bf59728d"
+                  }
+                },
+                {
+                  "sample": 7,
+                  "new": {
+                    "path": "artifacts/remote-runs/58142374/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_7.pdb",
+                    "sha256": "e89ee88b03d29d397c86f3373204d61db776194e833357df4fda49e23bd19ed7"
+                  },
+                  "same_prior_v2_output": {
+                    "path": "artifacts/remote-runs/58134301/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_7.pdb",
+                    "sha256": "e89ee88b03d29d397c86f3373204d61db776194e833357df4fda49e23bd19ed7"
+                  }
+                },
+                {
+                  "sample": 8,
+                  "new": {
+                    "path": "artifacts/remote-runs/58142374/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_8.pdb",
+                    "sha256": "8a22384235cc589573cddc7613c1b77cf30d1f85b838cd1f2aab0d0983e0c0ad"
+                  },
+                  "same_prior_v2_output": {
+                    "path": "artifacts/remote-runs/58134301/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_8.pdb",
+                    "sha256": "8a22384235cc589573cddc7613c1b77cf30d1f85b838cd1f2aab0d0983e0c0ad"
+                  }
+                },
+                {
+                  "sample": 9,
+                  "new": {
+                    "path": "artifacts/remote-runs/58142374/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_9.pdb",
+                    "sha256": "2bfb5ef3c49f388ea494b50f6b9daf0a6de16f182b0ee36953b311b4670d0e59"
+                  },
+                  "same_prior_v2_output": {
+                    "path": "artifacts/remote-runs/58134301/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_9.pdb",
+                    "sha256": "2bfb5ef3c49f388ea494b50f6b9daf0a6de16f182b0ee36953b311b4670d0e59"
+                  }
+                }
+              ],
+              "meaning": "This is coordinate identity verified by SHA256, not merely similar metrics. V3 beta24 added no new tau0.8 structural candidates relative to prior v2 beta12."
+            },
+            "candidate_assessment": {
+              "best_DockQ_suffix1": "E/F0.721836/0.716352 versus prior leader0.724344/0.745965. Original common type-I fine scores~0/0.1992 versus~0/0.1386; the small stronger-copy change leaves the other copy absent. Bridges32.83/23.51A versus7.25/7.26A targets. SevereCNO151(145outside-source-core) versus64(58outside-source-core). The smallest explicit collision B1SER:N--E29GLU:OE2 is0.262A.",
+              "packing_suffix7": "Retain as a packing alternative:54 total severe overlaps versus64 for the prior leader, but13core-only versus6; E/F0.712618/0.736752 are both lower. Source-parent ACVR1 fold RMSDs3.926/3.449A versus3.373/3.015A are worse. Bridges30.84/24.64A and common fine~0/0.1514 still leave missing/misposed ACVR1. Core A42GLU:OE2--D66SER:O is0.959A apart. A lower total clash count alone does not justify promotion.",
+              "highest_reward_suffix0": "Raw v3 reward0.13165 ranks suffix0 first, but E/F0.726368/0.692206,90severe overlaps and common typeI~0/0.1207 do not beat the prior overall leader. Optimized reward is not the ranking criterion.",
+              "source_scope": "ACVR1 fold fits compare to observed human9N4K source coordinates; ligand-frame poses and bridge targets are transferred BMP7 hypotheses, not experimental BMP7 type-I accuracy. Neither prior nor new candidates are physically accepted."
+            },
+            "packing_alternative": {
+              "job": "58142374",
+              "sample": 7,
+              "path": "artifacts/remote-runs/58142374/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_7.pdb",
+              "sha256": "e89ee88b03d29d397c86f3373204d61db776194e833357df4fda49e23bd19ed7",
+              "typeII_DockQ": {
+                "E": 0.7126184143097958,
+                "F": 0.73675205650057
+              },
+              "typeII_min": 0.7126184143097958,
+              "typeI_common_fine": {
+                "C": 4.352042007928646e-13,
+                "D": 0.15140819806883946
+              },
+              "typeI_expanded_fine": {
+                "C": 4.68080561323259e-10,
+                "D": 0.0757691926734992
+              },
+              "common_mapping": {
+                "A": "B",
+                "B": "A",
+                "C": "D",
+                "D": "C",
+                "E": "E",
+                "F": "F"
+              },
+              "face_bridge": {
+                "C": {
+                  "face_sigma3_mean": 5.616892238164115e-10,
+                  "face_cauchy_mean": 0.016322064085249853,
+                  "bridge": {
+                    "id": "interface_CT83_BL342",
+                    "chain": "C",
+                    "ligand_chain": "B",
+                    "receptor_canonical_position": 83,
+                    "ligand_canonical_position": 342,
+                    "distance_A": 30.83750456830124,
+                    "target_A": 7.24554,
+                    "error_A": 23.591964568301243,
+                    "fine_sigma3_feature": 3.7248857497008425e-14,
+                    "cauchy_scale3_feature": 0.015912845917414098
+                  },
+                  "cauchy_required_min": 0.015912845917414098
+                },
+                "D": {
+                  "face_sigma3_mean": 0.09092302099425645,
+                  "face_cauchy_mean": 0.1253083883079706,
+                  "bridge": {
+                    "id": "interface_DT83_AL342",
+                    "chain": "D",
+                    "ligand_chain": "A",
+                    "receptor_canonical_position": 83,
+                    "ligand_canonical_position": 342,
+                    "distance_A": 24.64290725543559,
+                    "target_A": 7.258393,
+                    "error_A": 17.38451425543559,
+                    "fine_sigma3_feature": 5.106971297526378e-08,
+                    "cauchy_scale3_feature": 0.02891832584050654
+                  },
+                  "cauchy_required_min": 0.02891832584050654
+                }
+              },
+              "typeI_hypothesis_pose": {
+                "C": {
+                  "sampled_input_chain": "D",
+                  "source_core_CA_count": 79,
+                  "ligand_frame_hypothesis_CA_RMSD_A": 46.040819235270796,
+                  "hypothesis_centroid_displacement_A": 43.12900165462953,
+                  "separately_fitted_9N4K_fold_CA_RMSD_A": 3.9262480856472384
+                },
+                "D": {
+                  "sampled_input_chain": "C",
+                  "source_core_CA_count": 79,
+                  "ligand_frame_hypothesis_CA_RMSD_A": 18.983381604755767,
+                  "hypothesis_centroid_displacement_A": 12.742658906491057,
+                  "separately_fitted_9N4K_fold_CA_RMSD_A": 3.4486344566519027
+                }
+              },
+              "physical": {
+                "severe_interchain_CNO_gt1A": 54,
+                "core_only_count": 13,
+                "outside_source_core_count": 41,
+                "typeI_involved_count": 34,
+                "chain_pair_counts": {
+                  "B-C": 6,
+                  "B-E": 8,
+                  "A-D": 6,
+                  "C-D": 9,
+                  "D-E": 4,
+                  "A-C": 8,
+                  "A-E": 3,
+                  "B-F": 4,
+                  "A-B": 1,
+                  "A-F": 4,
+                  "C-F": 1
+                },
+                "worst": [
+                  {
+                    "left": "B:7:ARG:NH2",
+                    "right": "E:21:ASP:CA",
+                    "distance_A": 1.0452272480183438,
+                    "overlap_A": 2.2047727519816562,
+                    "outside_source_core_involved": true,
+                    "typeI_involved": false,
+                    "chain_pair": "B-E"
+                  },
+                  {
+                    "left": "A:42:GLU:OE2",
+                    "right": "D:66:SER:O",
+                    "distance_A": 0.9590380597244307,
+                    "overlap_A": 2.0809619402755692,
+                    "outside_source_core_involved": false,
+                    "typeI_involved": true,
+                    "chain_pair": "A-D"
+                  },
+                  {
+                    "left": "B:68:GLU:OE1",
+                    "right": "F:116:PRO:CD",
+                    "distance_A": 1.3605370263245318,
+                    "overlap_A": 1.859462973675468,
+                    "outside_source_core_involved": true,
+                    "typeI_involved": false,
+                    "chain_pair": "B-F"
+                  },
+                  {
+                    "left": "C:93:SER:O",
+                    "right": "D:54:TYR:CD1",
+                    "distance_A": 1.374322014667596,
+                    "overlap_A": 1.8456779853324037,
+                    "outside_source_core_involved": true,
+                    "typeI_involved": true,
+                    "chain_pair": "C-D"
+                  },
+                  {
+                    "left": "A:7:ARG:N",
+                    "right": "F:80:GLU:OE2",
+                    "distance_A": 1.2250881600929777,
+                    "overlap_A": 1.8449118399070226,
+                    "outside_source_core_involved": true,
+                    "typeI_involved": false,
+                    "chain_pair": "A-F"
+                  }
+                ],
+                "standard_heavy_missing": [],
+                "observed_heavy_atoms": 5654,
+                "residue_count": 716
+              },
+              "sampling_reward": 0.11004461367605921,
+              "sampling_CA_guard_factor": 0.9223565414364603,
+              "sampling_integrity_factor": 0.8707822994185104,
+              "v1_reward": 0.21159993894069465,
+              "initial_ancestor": 1
+            },
+            "next_constraint_proposal": {
+              "proposal": "Add the already implemented gentle bounded severe interchain C/N/O overlap guard to the unchanged v3 contact geometry at beta24, using all716residues.",
+              "scientific_basis": "Repeated subangstrom heavy-atom separations are concrete physical defects missed by CA-only safeguards. The existing BMP7-BMPR1A guard offers an available implementation; it is not yet evidence of efficacy for ACVR1.",
+              "preserve": "Keep both type-II anchors, every type-I face/bridge requirement, global aggregation, integrity, full sequences and current CA safeguards. Add no invented contact endpoint and do not weaken the bridge to increase reward.",
+              "mapping_requirement": "Rebuild and verify fixed native covalent/disulfide topology for the ACVR1 construct; never copy BMPR1A residue indices. Do not infer exclusions from close coordinates.",
+              "minimum_validation": "Identical-CA same-pose clash-relief versus collision controls must move reward in the correct direction; receptor displacement cannot win by escaping contacts; missing-heavy behavior and all copy permutations must remain correct.",
+              "limit": "This guard targets demonstrated packing defects. It does not by itself guarantee recovery of the still-distant ACVR1 copy or prove the transferred pose correct.",
+              "execution_status": "Proposal only in this report; no new recipe preparation, sampling or submission performed."
+            },
+            "scope": "1LX5 conserved species-surrogate E/F comparison only; C/D experimentally unassessed. Historical controls reused with provenance; no independent-replicate or whole-assembly acceptance claim."
           }
         }
       ],
@@ -38859,7 +39311,7 @@
       }
     }
   },
-  "updated_at": "2026-10-14T22:45:45.853296+00:00",
+  "updated_at": "2026-10-14T23:28:40.959011+00:00",
   "interface_evidence_registry": "configs/bmp90/interface_evidence_registry.json",
   "failure_registry": "configs/bmp90/failure_registry.json",
   "construct_policy": {
@@ -38880,6 +39332,16 @@
       "path": "artifacts/bmp90/operations/paid_wave11/submission_receipt.json",
       "sha256": "31036f8699ef73135be7da08094ba415939bf52a94127c99a24dffe838bd85cc"
     },
-    "qualification": "Same v3 score at stronger selection; reused compatible controls. Unranked pending outcomes; no automatic retries."
+    "qualification": "Completed beta24 sweep evaluated; prior overall leader retained. No automatic retries.",
+    "evaluation": [
+      {
+        "path": "artifacts/bmp90/evaluation/paid_wave11_status_20261014T2319/collection.json",
+        "sha256": "509f96bfe778b5190ded2f6068f685560c57aef935c24ac6acf95378a79dfea6"
+      },
+      {
+        "path": "artifacts/bmp90/evaluation/bmp7_alk2_beta24_20261014/scientific_summary.json",
+        "sha256": "8ccaa7322faed4a7ce324290fc3da8ee03b7938bafa09d9c70ea4a9cff43cabe"
+      }
+    ]
   }
 }
