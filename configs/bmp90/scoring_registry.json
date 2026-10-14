@@ -6365,7 +6365,39 @@
           "zero_based_sample": 1,
           "qualification": "N60 improved; severe whole-assembly clashes remain."
         }
-      }
+      },
+      "refinement_comparisons": [
+        {
+          "comparison_id": "bmp6_core_restrained_cartesian_20261014",
+          "status": "running",
+          "recorded_at": "2026-10-14T18:28:11.955597+00:00",
+          "protocol_document": "docs/experiments/bmp6_rosetta_refinement.md",
+          "runtime_revision": "7adb822",
+          "batch_receipt": "artifacts/bmp90/operations/bmp6_refinement_20261014/batch.json",
+          "source_recipe_snapshots_unchanged": true,
+          "candidates": [
+            {
+              "refinement_job": "58139634",
+              "source_job": "58134298",
+              "zero_based_sample": 1,
+              "recipe_id": "bmp6_joint_n60_local_v3",
+              "tau": 0.8
+            },
+            {
+              "refinement_job": "58139638",
+              "source_job": "58107636",
+              "zero_based_sample": 9,
+              "recipe_id": "bmp6_joint_v1",
+              "tau": 0.1
+            }
+          ],
+          "assessment": "Pending paired physical quality, N60 geometry and fixed-assignment four-interface DockQ. No post-refinement ranking assigned.",
+          "failed_setup_jobs": [
+            "58139611",
+            "58139612"
+          ]
+        }
+      ]
     },
     "BMP6_BMPR1A_ACVR2B": {
       "reference_structure": "9MIR",
@@ -31322,7 +31354,7 @@
       }
     }
   },
-  "updated_at": "2026-10-14T17:57:48.100993+00:00",
+  "updated_at": "2026-10-14T18:28:11.955597+00:00",
   "interface_evidence_registry": "configs/bmp90/interface_evidence_registry.json",
   "failure_registry": "configs/bmp90/failure_registry.json",
   "construct_policy": {

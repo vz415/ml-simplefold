@@ -694,8 +694,75 @@
         }
       ],
       "transfer_limits": "Designed diagnostic, not sampled biophysical failure. Complete-removal draft preserved, no GPU submissions use it."
+    },
+    {
+      "failure_id": "BMP6_ROSETTA313_SELECTOR_XML_20261014",
+      "complex_id": "BMP6_ACVR1_ACVR2B",
+      "recipe_id": null,
+      "parent_failure_id": null,
+      "failure_category": "operational_setup_failure",
+      "run_ids": [
+        "58139611",
+        "58139612"
+      ],
+      "artifact_references": [
+        "artifacts/bmp90/operations/bmp6_refinement_20261014/batch.json",
+        {
+          "path": "artifacts/remote-runs/58139611/refinement-experiment.json",
+          "sha256": "5f476d94fd27dce550c6be7216a17c008202aa13d19f7db551aa04873892a6e0"
+        },
+        {
+          "path": "artifacts/remote-runs/58139612/refinement-experiment.json",
+          "sha256": "9ccbec5fb729299e07f557d36df734cf468c2dc4457df0736e19df50b33a62ac"
+        }
+      ],
+      "code_revision": "5871d3d",
+      "sequence_hashes": {},
+      "construct_description": null,
+      "sampling_settings": {
+        "tau": null,
+        "checkpoint_times": [],
+        "seeds": {},
+        "particle_count": null
+      },
+      "expected_behavior": "Apply observed-core starting-coordinate restraints, then relax both complete candidate assemblies",
+      "observed_symptoms": [
+        "Rosetta3.13 XML schema rejects OperateOnResidueSubset.flip_subset before minimization; both sources imported and all27native bonds declared."
+      ],
+      "interface_evaluation": {
+        "type_I": null,
+        "type_II": null,
+        "copy_specific_findings": [],
+        "assembly_geometry": null
+      },
+      "suspected_causes": [
+        {
+          "cause": "Version-specific unsupported XML attribute",
+          "status": "confirmed_by_installed_parser_error"
+        }
+      ],
+      "supporting_evidence_ids": [],
+      "contradicting_evidence_ids": [],
+      "attempted_changes": [
+        {
+          "revision": "7adb822",
+          "change": "Explicit complementary Index selector, including virtual root; scientific masks and restraint strengths unchanged"
+        }
+      ],
+      "followups": [
+        {
+          "job_id": "58139634",
+          "observation": "Installed XML validation passes and FastRelax starts; initial jobs finish FAILED1:0 after about3:20walltime and9CPUseconds each"
+        },
+        {
+          "job_id": "58139638",
+          "observation": "Paired corrected-protocol retry submitted"
+        }
+      ],
+      "status": "schema_failure_resolved_refinement_results_pending",
+      "transfer_limits": "Execution failure only; no evidence against either scoring recipe or structural hypothesis."
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-14T17:57:48.100993+00:00"
+  "updated_at": "2026-10-14T18:28:11.955597+00:00"
 }
