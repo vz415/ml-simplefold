@@ -1,0 +1,19 @@
+name: bmp4-bmpr1a-acvr2b-sample2-relax
+input_pdb: ${oc.env:SIMPLEFOLD_REFINEMENT_INPUT}
+topology_file: ${oc.env:SIMPLEFOLD_REFINEMENT_TOPOLOGY}
+source_job: '58134290'
+source_sample: 2
+chain_components: {A: BMP4, B: BMP4, C: BMPR1A, D: BMPR1A, E: ACVR2B, F: ACVR2B}
+rosetta:
+  executable: relax.hdf5.linuxgccrelease
+  database: ${oc.env:ROSETTA3_DB,/dfs8/commondata/rosetta/3.13/database}
+  score_weights: ref2015_cart
+  backbone_constraint_sd_angstrom: 0.5
+  repeats: 1
+  repulsive_weights: [0.02, 0.25, 0.55, 1.0]
+  minimizer_tolerance: 0.01
+  final_minimizer_tolerance: 0.00001
+  seed: 73
+hydra:
+  job:
+    chdir: false

@@ -24,7 +24,11 @@ work_dir="${TMPDIR:?Slurm must provide node-local TMPDIR}/simplefold-refinement"
 stage_dir="${SIMPLEFOLD_REFINEMENT_STAGE_DIR:-$PWD/artifacts/refinement-stage}/${SLURM_JOB_ID}"
 publish_dir="${SIMPLEFOLD_ARTIFACT_DIR:-/pub/ynkim4/ml-simplefold/artifacts}/runs/${SLURM_JOB_ID}"
 status=0
-python scripts/run_rosetta_refinement.py "hydra.run.dir=$work_dir" "$@" || status=$?
+if [[ "${SIMPLEFOLD_REFINEMENT_MODE:-reference}" == reference-free ]]; then
+    python scripts/run_reference_free_refinement.py "hydra.run.dir=$work_dir" "$@" || status=$?
+else
+    python scripts/run_rosetta_refinement.py "hydra.run.dir=$work_dir" "$@" || status=$?
+fi
 mkdir -p "$stage_dir"
 cp -a "$work_dir/." "$stage_dir/"
 printf 'Recovery copy: %s\n' "$stage_dir"
