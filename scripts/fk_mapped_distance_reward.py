@@ -30,6 +30,16 @@ the same pair schema, and explicit ``safeguards``. Every interface pair belongs
 to exactly one group. The score combines mean and weakest interface, then applies
 bounded CA-overlap/backbone/coverage penalties and a gentle integrity multiplier.
 Integrity targets are additional guidance, never independent validation.
+
+Version 3 preserves the CA objective and adds ``local_geometry_modules``. Each
+``distance_three_angles`` module contains ``copies`` with one ``distance``
+(two ``atoms``, ``target_angstrom``) and three ``angles`` (three ordered ``atoms``,
+``target_degrees``; the middle atom is the vertex). Endpoints use the same chain,
+position, residue and atom fields. Each copy names its receptor/interface group.
+Module settings are distance/angle tolerance and scale, missing_geometry_error,
+strength, factor_floor and evidence_labels. The worst copy's flat-tolerance Huber
+error gives ``floor + (1-floor)*exp(-strength*error)``. All modules and CA terms
+share one assignment. Strength zero exactly retains the version-2 scalar/map.
 """
 from __future__ import annotations
 
@@ -45,6 +55,7 @@ AMINO_ACIDS = dict(zip(
      "LEU", "LYS", "MET", "PHE", "PRO", "SER", "THR", "TRP", "TYR", "VAL"),
     "ARNDCQEGHILKMFPSTWYV"))
 MAX_ASSIGNMENTS = 4096
+GEOMETRY_ATOMS = {"N", "CA", "C", "CB", "OG"}
 
 
 def _positive(value, label):
@@ -63,6 +74,167 @@ def _labels(value):
             not isinstance(x, str) or not x.strip() for x in value):
         raise ValueError("evidence_labels must be a nonempty list of strings")
     return list(value)
+
+
+def _nonnegative(value, label):
+    if value == 0 and not isinstance(value, bool):
+        return 0.0
+    return _positive(value, label)
+
+
+def validate_local_geometry_modules(modules, sequences, interfaces):
+    """Validate the deliberately narrow, mapped local-geometry schema."""
+    if not isinstance(modules, list) or not modules:
+        raise ValueError("Version 3 requires nonempty local_geometry_modules")
+    groups = {g["id"]: g for g in interfaces}
+    ids = set()
+    for module in modules:
+        if not isinstance(module, dict):
+            raise ValueError("Geometry module must be an object")
+        name = module.get("id")
+        if (not isinstance(name, str) or not name or name in ids
+                or module.get("kind") != "distance_three_angles"):
+            raise ValueError("Invalid or repeated geometry module id/kind")
+        ids.add(name)
+        _labels(module.get("evidence_labels"))
+        for key in ("distance_scale_angstrom", "angle_scale_degrees", "missing_geometry_error"):
+            _positive(module.get(key), key)
+        for key in ("distance_tolerance_angstrom", "angle_tolerance_degrees", "strength", "factor_floor"):
+            _nonnegative(module.get(key), key)
+        if module["factor_floor"] > 1 or module["angle_tolerance_degrees"] > 180:
+            raise ValueError("Geometry factor floor/angle tolerance out of range")
+        copies = module.get("copies")
+        if not isinstance(copies, list) or not copies:
+            raise ValueError("Geometry module requires copies")
+        copy_ids, receptor_ids = set(), set()
+        for copy in copies:
+            if not isinstance(copy, dict):
+                raise ValueError("Geometry copy must be an object")
+            cid, receptor, group_id = copy.get("id"), copy.get("receptor_chain"), copy.get("interface_group")
+            if (not isinstance(cid, str) or not cid or cid in copy_ids
+                    or not isinstance(receptor, str) or receptor not in sequences
+                    or receptor in receptor_ids or not isinstance(group_id, str) or group_id not in groups
+                    or groups[group_id]["receptor_chain"] != receptor):
+                raise ValueError("Geometry copy must identify a unique receptor/interface")
+            copy_ids.add(cid)
+            receptor_ids.add(receptor)
+            _labels(copy.get("evidence_labels"))
+            angles = copy.get("angles")
+            if not isinstance(angles, list) or len(angles) != 3:
+                raise ValueError("Geometry copy requires exactly three angles")
+            distance = copy.get("distance")
+            angle_keys = set()
+            for measurement, size, field in [(distance, 2, "target_angstrom")] + [
+                    (a, 3, "target_degrees") for a in angles]:
+                if not isinstance(measurement, dict):
+                    raise ValueError("Geometry measurement must be an object")
+                target = _positive(measurement.get(field), field)
+                if size == 3 and target >= 180:
+                    raise ValueError("Angle target must be strictly between 0 and 180 degrees")
+                points = measurement.get("atoms")
+                if not isinstance(points, list) or len(points) != size:
+                    raise ValueError("Invalid number of geometry atoms")
+                keys = []
+                for point in points:
+                    if not isinstance(point, dict):
+                        raise ValueError("Geometry atom must be a mapped endpoint")
+                    chain, pos, aa, atom = (point.get(k) for k in ("chain", "position", "residue", "atom"))
+                    if (not isinstance(chain, str) or chain not in sequences or type(pos) is not int
+                            or not 1 <= pos <= len(sequences[chain]) or aa != sequences[chain][pos-1]):
+                        raise ValueError("Geometry endpoint residue/position mismatch")
+                    if (not isinstance(atom, str) or atom not in GEOMETRY_ATOMS
+                            or (atom == "OG" and aa != "S") or (atom == "CB" and aa == "G")):
+                        raise ValueError("Unsupported geometry atom for residue")
+                    keys.append((chain, pos, atom))
+                if len(set(keys)) != size or not any(k[0] == receptor for k in keys):
+                    raise ValueError("Geometry measurement requires distinct atoms and its receptor")
+                if size == 3:
+                    angle_key = (keys[1], tuple(sorted((keys[0], keys[2]))))
+                    if angle_key in angle_keys:
+                        raise ValueError("Geometry approach angles must be distinct")
+                    angle_keys.add(angle_key)
+            distance_chains = {p["chain"] for p in distance["atoms"]}
+            if len(distance_chains) != 2 or receptor not in distance_chains:
+                raise ValueError("Geometry distance must connect its receptor to one other chain")
+            if any(p["chain"] not in distance_chains for a in angles for p in a["atoms"]):
+                raise ValueError("Geometry angles must use the same receptor/partner chains")
+        receptor_sequences = {sequences[c] for c in receptor_ids}
+        if len(receptor_sequences) != 1 or receptor_ids != {
+                c for c, sequence in sequences.items() if sequence in receptor_sequences}:
+            raise ValueError("Geometry module must cover every copy of one receptor sequence")
+    return modules
+
+
+def geometry_measurement(coordinates):
+    """Finite distance or ordered angle; None for degenerate angle arms."""
+    if len(coordinates) == 2:
+        value = math.dist(*coordinates)
+        if not math.isfinite(value):
+            raise ValueError("Nonfinite local geometry distance")
+        return value
+    left, vertex, right = coordinates
+    u = tuple(a-b for a, b in zip(left, vertex))
+    v = tuple(a-b for a, b in zip(right, vertex))
+    a, b = math.hypot(*u), math.hypot(*v)
+    if not math.isfinite(a) or not math.isfinite(b):
+        raise ValueError("Nonfinite local geometry angle arm")
+    if a <= 1e-12 or b <= 1e-12:
+        return None
+    dot = math.fsum((x/a)*(y/b) for x, y in zip(u, v))
+    return math.degrees(math.acos(max(-1., min(1., dot))))
+
+
+def _huber_excess(value, target, tolerance, scale):
+    z = max(abs(value-target)-tolerance, 0.)/scale
+    if not math.isfinite(z):
+        raise ValueError("Nonfinite normalized local geometry deviation")
+    return 0.5*z*z if z <= 1 else z-0.5
+
+
+def local_geometry_results(modules, atoms, assignment, supported_chains=None):
+    """Measurements under one supplied assignment; never remap locally."""
+    results = []
+    for module in modules:
+        copies = []
+        for copy in module["copies"]:
+            measurements, all_keys = [], set()
+            definitions = [(copy["distance"], "distance", "target_angstrom", "angstrom")] + [
+                (a, "angle", "target_degrees", "degrees") for a in copy["angles"]]
+            for definition, kind, target_field, units in definitions:
+                roles = [(p["chain"], p["position"], p["atom"]) for p in definition["atoms"]]
+                keys = [(assignment[c], p, a) for c, p, a in roles]
+                all_keys.update(keys)
+                missing = [k for k in keys if k not in atoms]
+                supported = supported_chains is None or all(c in supported_chains for c, _, _ in roles)
+                value = geometry_measurement([atoms[k] for k in keys]) if not missing and supported else None
+                status = ("unassessed_no_reference_assignment" if not supported else
+                          "missing_atoms" if missing else "degenerate_geometry" if value is None else "assessed")
+                scale_key = "distance_scale_angstrom" if kind == "distance" else "angle_scale_degrees"
+                tolerance_key = "distance_tolerance_angstrom" if kind == "distance" else "angle_tolerance_degrees"
+                error = (_huber_excess(value, definition[target_field], module[tolerance_key], module[scale_key])
+                         if value is not None else None)
+                measurements.append({"kind": kind, "atoms": definition["atoms"], "assigned_atom_keys": keys,
+                                     "value": value, "target": definition[target_field], "units": units,
+                                     "error": error, "status": status, "missing_atom_keys": missing})
+            complete = all(m["error"] is not None for m in measurements)
+            error = (measurements[0]["error"] or 0.) + math.fsum(m["error"] or 0. for m in measurements[1:])/3
+            if not complete:
+                error = max(error, module["missing_geometry_error"])
+            if not math.isfinite(error):
+                raise ValueError("Nonfinite local geometry error")
+            copies.append({"id": copy["id"], "receptor_chain": copy["receptor_chain"],
+                           "interface_group": copy["interface_group"], "evidence_labels": copy["evidence_labels"],
+                           "geometry_error": error, "complete": complete,
+                           "status": "assessed" if complete else "missing_degenerate_or_unassessed_geometry",
+                           "measurements": measurements, "required_atoms": len(all_keys),
+                           "present_atoms": sum(k in atoms for k in all_keys)})
+        worst = max(c["geometry_error"] for c in copies)
+        factor = (1.0 if module["strength"] == 0 else module["factor_floor"] +
+                  (1-module["factor_floor"])*math.exp(-module["strength"]*worst))
+        results.append({"id": module["id"], "copies": copies, "maximum_copy_error": worst,
+                        "factor": factor, "strength": module["strength"], "factor_floor": module["factor_floor"],
+                        "evidence_labels": module["evidence_labels"]})
+    return results
 
 
 def _fasta(path):
@@ -87,6 +259,82 @@ def _fasta(path):
     return sequences
 
 
+def read_local_geometry_atoms(path, sequences, saved_to_input, modules):
+    """Read mapped records; retain one conformer per geometry residue.
+
+    CA selection remains byte-for-byte legacy behavior for on/off equality.
+    Heavy-atom local geometry follows that CA altloc when it is nonblank.
+    """
+    required = set()
+    for module in modules:
+        for copy in module["copies"]:
+            for definition in [copy["distance"]] + copy["angles"]:
+                for point in definition["atoms"]:
+                    # Every sequence-equivalent copy can be used by a bijection.
+                    for c, seq in sequences.items():
+                        if seq == sequences[point["chain"]]:
+                            required.add((c, point["position"], point["atom"]))
+    residues = {k[:2] for k in required}
+    records = {}
+    lines = Path(path).read_text().splitlines()
+    models = [i for i, line in enumerate(lines) if line[:6].strip() == "MODEL"]
+    ends = [i for i, line in enumerate(lines) if line[:6].strip() == "ENDMDL"]
+    if len(models) > 1 or len(ends) != len(models) or (models and ends[0] <= models[0]):
+        raise ValueError("Local geometry requires a single PDB model")
+    for lineno, line in enumerate(lines):
+        if line[:6].strip() != "ATOM":
+            continue
+        if models and not models[0] < lineno < ends[0]:
+            raise ValueError("ATOM outside the single PDB model")
+        try:
+            chain, pos = saved_to_input[line[21]], int(line[22:26])
+            atom, alt = line[12:16].strip(), line[16]
+            occupancy = float(line[54:60]) if line[54:60].strip() else 1.
+            xyz = tuple(float(line[i:i+8]) for i in (30, 38, 46))
+        except (IndexError, KeyError, ValueError) as exc:
+            raise ValueError("Malformed mapped geometry ATOM record") from exc
+        if not all(math.isfinite(x) for x in (*xyz, occupancy)) or not 0 <= occupancy <= 1:
+            raise ValueError("Geometry coordinates and occupancies must be finite and valid")
+        if (line[26:27].strip() or not 1 <= pos <= len(sequences[chain])
+                or AMINO_ACIDS.get(line[17:20].strip()) != sequences[chain][pos-1]):
+            raise ValueError("Geometry ATOM residue identity/number mismatch")
+        if (chain, pos) not in residues or ((chain, pos, atom) not in required and atom != "CA"):
+            continue
+        if occupancy == 0:
+            continue
+        priority = (-occupancy, 0 if alt == " " else 1 if alt == "A" else 2, alt, xyz)
+        key = (chain, pos, atom, alt)
+        if key not in records or priority < records[key][0]:
+            records[key] = priority, xyz, occupancy
+    atoms, choices = {}, []
+    for chain, pos in sorted(residues):
+        local = {(name, alt): value for (c, p, name, alt), value in records.items() if (c, p) == (chain, pos)}
+        ca = [(value[0], alt) for (name, alt), value in local.items() if name == "CA"]
+        ca_alt = min(ca)[1] if ca else " "
+        alts = sorted({alt for _, alt in local if alt != " "})
+        if ca_alt != " ":
+            selected = ca_alt
+        elif alts:
+            def alt_priority(alt):
+                occupied = [v[2] for (name, a), v in local.items() if a == alt]
+                return -math.fsum(occupied)/len(occupied), 0 if alt == "A" else 1, alt
+            selected = min(alts, key=alt_priority)
+        else:
+            selected = " "
+        choices.append({"input_chain": chain, "position": pos, "selected_altloc": selected,
+                        "legacy_CA_altloc": ca_alt})
+        for c, p, name in required:
+            if (c, p) != (chain, pos):
+                continue
+            # The local CA must be exactly the CA used by the parent objective,
+            # even when a shared blank CA coexists with lower-occupancy alt CAs.
+            record = (local.get((name, ca_alt)) if name == "CA" else
+                      local.get((name, selected), local.get((name, " "))))
+            if record is not None:
+                atoms[c, p, name] = record[1]
+    return atoms, choices
+
+
 class MappedDistanceReward:
     """Freeze a verified specification and score single-model standard PDBs."""
 
@@ -95,9 +343,9 @@ class MappedDistanceReward:
         spec_bytes = Path(spec_json_path).read_bytes()
         spec = json.loads(spec_bytes)
         if (not isinstance(spec, dict) or type(spec.get("schema_version")) is not int
-                or spec.get("schema_version") not in (1, 2) or spec.get("active") is not True
+                or spec.get("schema_version") not in (1, 2, 3) or spec.get("active") is not True
                 or spec.get("mapping_status") != "verified"):
-            raise ValueError("Reward spec must be version 1 or 2, active, and mapping verified")
+            raise ValueError("Reward spec must be version 1, 2 or 3, active, and mapping verified")
         self._version = spec["schema_version"]
         if any(not isinstance(spec.get(k), str) or not spec[k].strip()
                for k in ("target_id", "scope")):
@@ -157,7 +405,7 @@ class MappedDistanceReward:
         if not isinstance(pairs, list) or not pairs:
             raise ValueError("At least one distance pair is required")
         self._interface_count = len(pairs)
-        integrity_pairs = spec.get("integrity_pairs", []) if self._version == 2 else []
+        integrity_pairs = spec.get("integrity_pairs", []) if self._version >= 2 else []
         if not isinstance(integrity_pairs, list):
             raise ValueError("integrity_pairs must be a list")
         pairs = pairs + integrity_pairs
@@ -193,8 +441,14 @@ class MappedDistanceReward:
             self._total_weight = math.fsum(p["weight"] for p in self._pairs)
         except OverflowError as exc:
             raise ValueError("Total pair weight must be finite") from exc
-        if self._version == 2:
+        if self._version >= 2:
             self._configure_joint(spec)
+        self._geometry_modules = []
+        if self._version == 3:
+            self._geometry_modules = validate_local_geometry_modules(
+                spec.get("local_geometry_modules"), self._sequences, self._interfaces)
+        elif "local_geometry_modules" in spec:
+            raise ValueError("Local geometry modules require schema version 3")
         self.metadata = {
             "kind": "mapped_ca_distance", "schema_version": self._version,
             "target_id": spec.get("target_id"), "scope": spec.get("scope"),
@@ -208,13 +462,21 @@ class MappedDistanceReward:
             "missing_atoms": "zero feature with full fixed denominator",
             "overlap_diagnostic_threshold_angstrom": 2.0,
             "limited_scope": "Sparse protein CA geometry only; not physical energy, binding affinity, signaling, or independent structural accuracy."}
-        if self._version == 2:
+        if self._version >= 2:
             self.metadata.update({
                 "score_definition": "((1-minimum_fraction)*weighted_mean_interface + minimum_fraction*weakest_interface) * safeguards * integrity_factor",
                 "interface_pair_count": self._interface_count,
                 "integrity_pair_count": len(integrity_pairs),
                 "integrity_definition": "floor + (1-floor)*minimum_integrity_pair_Gaussian",
                 "safeguard_threshold_status": "Engineering settings, not calibrated acceptance thresholds"})
+        if self._version == 3:
+            self.metadata.update({
+                "kind": "mapped_ca_distance_with_local_geometry",
+                "score_definition": self.metadata["score_definition"] + " * product(local_geometry_module_factors)",
+                "local_geometry_definition": "Per module: floor+(1-floor)*exp(-strength*maximum_copy_error); copy error = distance flat-tolerance Huber + mean of three angle flat-tolerance Hubers. Multiply module factors into the CA reward under the same assignment.",
+                "local_geometry_missing_policy": "Any absent or degenerate measurement gives at least missing_geometry_error; three-angle denominator remains fixed.",
+                "local_geometry_altloc_policy": "Use the legacy selected CA conformer if nonblank; otherwise choose one residue conformer by mean required-atom occupancy, then A/lexical. Blank atoms are shared; incompatible alternate conformers are never mixed within local geometry.",
+                "limited_scope": "Sparse CA and local heavy-atom geometry priors only; not all-atom packing, explicit-hydrogen chemistry, physical energy, affinity, or independent structural accuracy."})
 
     def _configure_joint(self, spec):
         groups = spec.get("interface_groups")
@@ -397,8 +659,9 @@ class MappedDistanceReward:
 
     def score(self, pdb_path):
         atoms, atom_count = self._read_ca(pdb_path)
-        overlaps = self._overlaps(atoms, self._guard["ca_clash_distance_angstrom"] if self._version == 2 else None)
-        physical_guard = self._physical_guard(atoms, overlaps) if self._version == 2 else None
+        geometry_atoms, conformers = read_local_geometry_atoms(pdb_path, self._sequences, self._input, self._geometry_modules) if self._version == 3 else ({}, [])
+        overlaps = self._overlaps(atoms, self._guard["ca_clash_distance_angstrom"] if self._version >= 2 else None)
+        physical_guard = self._physical_guard(atoms, overlaps) if self._version >= 2 else None
         best, best_key = None, None
         for assignment in self._assignments:
             rows = []
@@ -418,8 +681,15 @@ class MappedDistanceReward:
                              "missing_atoms": [{"input_chain": chain, "saved_chain": self._saved[chain],
                                                 "position": pos, "atom": "CA"}
                                                for chain, pos in keys if (chain, pos) not in atoms]})
-            joint = self._joint_value(rows, physical_guard) if self._version == 2 else {}
+            joint = self._joint_value(rows, physical_guard) if self._version >= 2 else {}
             reward = joint.get("reward", math.fsum(p["weight"] * p["feature"] for p in rows) / self._total_weight)
+            if self._version == 3:
+                geometry = local_geometry_results(self._geometry_modules, geometry_atoms, assignment)
+                factor = math.prod(m["factor"] for m in geometry)
+                joint.update({"ca_reward_under_selected_assignment": reward,
+                              "local_geometry": geometry, "local_geometry_factor": factor,
+                              "local_geometry_conformers": conformers, "reward": reward*factor})
+                reward = joint["reward"]
             present_weight = math.fsum(p["weight"] for p in rows if p["present"])
             covered = sum(p["present"] for p in rows)
             key = reward, present_weight, covered

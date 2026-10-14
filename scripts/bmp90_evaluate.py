@@ -39,6 +39,8 @@ import numpy as np
 from scipy.spatial import cKDTree
 
 from structure_clashes import _read, analyze_clashes
+from fk_mapped_distance_reward import (validate_local_geometry_modules,
+                                      read_local_geometry_atoms, local_geometry_results)
 
 AA1 = dict(zip("ALA CYS ASP GLU PHE GLY HIS ILE LYS LEU MET ASN PRO GLN ARG SER THR VAL TRP TYR".split(), "ACDEFGHIKLMNPQRSTVWY"))
 
@@ -145,6 +147,26 @@ def verify_reference_provenance(reference_path, provenance_path, required=False)
     return {"status": "verified", "path": str(provenance_path), "sha256": sha256(provenance_path),
             "matching_records": matched, "reference_sha256": actual,
             "source_url": data.get("source_url"), "source_cif_sha256": data.get("source_cif_sha256")}
+
+
+def reference_comparison_scope(mapping, partial, species_excluded):
+    kind = mapping.get("reference_kind", "").lower()
+    homologous = (mapping.get("reference_surrogate_kind") == "homologous_ligand"
+                  or "homologous" in kind)
+    surrogate = homologous or bool(species_excluded) or "surrogate" in kind
+    if homologous:
+        return True, "homologous_surrogate_agreement", (
+            "Agreement with conserved, observed portions of a homologous-ligand surrogate; "
+            "this is not exact target-ligand accuracy. Uncovered/inferred receptor sites remain unassessed.")
+    if surrogate:
+        return True, "species_surrogate_agreement", (
+            "Agreement with conserved, observed portions of the species surrogate; "
+            "human target accuracy and uncovered interfaces remain unassessed.")
+    if partial:
+        return False, "partial_reference_recovery", (
+            "Recovery of observed portions of the supplied reference; uncovered interfaces remain unassessed.")
+    return False, "reference_recovery", (
+        "Recovery of observed portions of the supplied reference; source construct qualifications apply.")
 
 
 def remap_saved_atoms(atoms, saved_to_input):
@@ -257,6 +279,17 @@ def guidance_info(spec, chains):
             for other, seq in seqs.items():
                 if seq == seqs[c]:
                     excluded.add((other, i))
+    if spec.get("schema_version") == 3:
+        modules = validate_local_geometry_modules(spec.get("local_geometry_modules"), seqs, spec["interface_groups"])
+        for module in modules:
+            for copy in module["copies"]:
+                for definition in [copy["distance"]] + copy["angles"]:
+                    for p in definition["atoms"]:
+                        for other, seq in seqs.items():
+                            if seq == seqs[p["chain"]]:
+                                excluded.add((other, p["position"]))
+    elif "local_geometry_modules" in spec:
+        raise ValueError("Local geometry modules require schema version 3")
     return excluded, pairs
 
 
@@ -393,6 +426,37 @@ def evaluate_model(model_path, reference, chains, saved_to_input, ligand_chains,
     contact_values = [i["all_native_contacts"]["fraction_native_contacts"] if i["all_native_contacts"] else None for i in interfaces]
     covered_indices = [j for j,i in enumerate(interfaces) if i["reference_status"] == "covered"]
     component_map = {saved: next(c["gene"] for c in chains if c["input_chain"] == inp)+":"+inp for saved, inp in saved_to_input.items()}
+    geometry = {}
+    if spec is not None and spec.get("schema_version") == 3:
+        sequences = {c["input_chain"]: c["sequence"] for c in chains}
+        geometry_atoms, conformers = read_local_geometry_atoms(
+            model_path, sequences, saved_to_input, spec["local_geometry_modules"])
+        measurements = local_geometry_results(spec["local_geometry_modules"], geometry_atoms,
+                                              assignment, covered_chains)
+        # A missing reference assignment cannot support a numerical geometry error.
+        for module in measurements:
+            for copy in module["copies"]:
+                for measurement in copy["measurements"]:
+                    missing_reference = [(p["chain"], p["position"], p["atom"])
+                                         for p in measurement["atoms"]
+                                         if (p["chain"], p["position"], p["atom"]) not in reference]
+                    measurement["missing_reference_atom_keys"] = missing_reference
+                    if missing_reference and measurement["status"] != "unassessed_no_reference_assignment":
+                        measurement["value"] = measurement["error"] = None
+                        measurement["status"] = "unassessed_missing_reference_atoms"
+                if any(m["status"] == "unassessed_no_reference_assignment" for m in copy["measurements"]):
+                    copy["geometry_error"] = None
+                    copy["complete"] = False
+                    copy["status"] = "unassessed_no_reference_assignment"
+                elif any(m["status"] == "unassessed_missing_reference_atoms" for m in copy["measurements"]):
+                    copy["geometry_error"] = None
+                    copy["complete"] = False
+                    copy["status"] = "unassessed_missing_reference_atoms"
+            if any(c["geometry_error"] is None for c in module["copies"]):
+                module["maximum_copy_error"] = module["factor"] = None
+        geometry = {"local_geometry_under_reference_assignment": measurements,
+                    "local_geometry_conformers": conformers,
+                    "local_geometry_scope": "Deviation from transferred guidance targets under the single reference assignment; not explicit-hydrogen chemistry or independent evidence."}
     return {"model_path": str(model_path), "model_sha256": sha256(model_path), "sequence_coverage": coverage,
             "model_coordinate_scope": "partial diagnostic" if any(v["missing_CA_input_indices"] for v in coverage.values()) else "complete input CA coverage",
             "omitted_atom_counts": omitted, "coherent_assignment": best, "assignment_alternatives": alternatives,
@@ -403,6 +467,7 @@ def evaluate_model(model_path, reference, chains, saved_to_input, ligand_chains,
             "interfaces": interfaces, "fold_preservation": folds,
             "reference_close_cysteine_sulfur_pairs": cysteine_geometry(reference, assigned),
             "guidance_distances_under_reference_assignment": pair_measurements(pairs, assigned, covered_chains),
+            **geometry,
             "native_contact_recovery_summary": summary(contact_values),
             "official_dockq_summary": summary(dockq_values),
             "covered_interface_native_contact_recovery_summary": summary([contact_values[j] for j in covered_indices]),
@@ -431,7 +496,7 @@ def main():
     reference, omitted = read_atoms(args.reference)
     reference_coverage, covered_chains, species_excluded = validate_reference(reference, mapping)
     partial = set(covered_chains) != {c["input_chain"] for c in chains}
-    surrogate = bool(species_excluded) or "surrogate" in mapping.get("reference_kind", "").lower()
+    surrogate, comparison_label, comparison_interpretation = reference_comparison_scope(mapping, partial, species_excluded)
     provenance = verify_reference_provenance(args.reference, args.reference_provenance, required=partial or surrogate)
     saved = mapping["expected_saved_chain_to_input_chain"]
     if set(saved.values()) != {c["input_chain"] for c in chains} or len(saved) != len(chains):
@@ -454,10 +519,6 @@ def main():
         for model in args.models:
             results.append(evaluate_model(model, reference, chains, saved, ligand_chains,
                                           spec, args.allow_partial_model, args.dockq_python, available, tmp))
-    comparison_label = "species_surrogate_agreement" if surrogate else "partial_reference_recovery" if partial else "reference_recovery"
-    comparison_interpretation = ("Agreement with conserved, observed portions of the species surrogate; human target accuracy and uncovered interfaces remain unassessed."
-                                 if surrogate else "Recovery of observed portions of the supplied reference; uncovered interfaces remain unassessed."
-                                 if partial else "Recovery of observed portions of the supplied reference; source construct qualifications apply.")
     for result in results:
         result["reference_comparison_scope"] = {"label":comparison_label, "interpretation":comparison_interpretation,
                                                 "partial_assembly":partial, "surrogate":surrogate}
@@ -481,7 +542,7 @@ def main():
               "partial_models_explicitly_allowed":args.allow_partial_model,
               "dockq_scope": "Official DockQ per receptor against the merged ligand dimer, fixed XY:XY mapping with no_align=True. Full input numbering is preserved; prediction residues outside reference-observed coverage are excluded from DockQ only.",
               "evidence_allocation": {"guidance_endpoint_exclusions": sorted(excluded),
-                                      "exclusion_rule": "Exclude every native contact touching any guidance/integrity endpoint and all identical-sequence equivalents",
+                                      "exclusion_rule": "Exclude every native contact touching any guidance/integrity/local-geometry endpoint and all identical-sequence equivalents",
                                       "unrewarded_contacts_status": "Coordinate holdout relative to the supplied guidance endpoints only; no claim of independence from tuning, ranking, selection or model training",
                                       "source_independence": "Same reference and C2-related copies are not independent experiments",
                                       "claimed_independent_heldout_evidence": None},
