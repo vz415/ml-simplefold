@@ -288,6 +288,26 @@
             "path": "artifacts/bmp90/evaluation/bmp6_refinement_20261014/results.json",
             "sha256": "c8c6c1c094580c0a830465dc564cc2f65535a1b914321ea9650f28deaac99632"
           }
+        },
+        {
+          "recorded_at": "2026-10-14T22:08:39.035664+00:00",
+          "status": "submitted",
+          "recipe_id": "bmp6_joint_n60_surround_v4",
+          "job_ids": [
+            "58142162",
+            "58142163",
+            "58142164"
+          ],
+          "evaluation_job_ids": [
+            "58142171",
+            "58142172",
+            "58142173"
+          ],
+          "result": "Defect-targeted joint revision submitted across tau0.1/0.3/0.8 after local tests, actual cluster score fixtures and reference self-DockQ; outcomes pending.",
+          "submission_receipt": {
+            "path": "artifacts/bmp90/operations/paid_wave10/submission_receipt.json",
+            "sha256": "0b1bd336dea8f04821a726d4fdd4a01c930527eee231ea33697d169949920604"
+          }
         }
       ],
       "status": "postprocessing_completed_N60_defect_remains",
@@ -876,8 +896,175 @@
       "followups": [],
       "status": "documented_residual_postprocessing_limitation",
       "transfer_limits": "One selected v3 candidate and fixed restraint protocol. Does not show Rosetta cannot repair the geometry or invalidate BMP6 binding. Zero CNO overlaps exclude sulfur covalent bond quality and do not establish physical acceptance."
+    },
+    {
+      "failure_id": "BMP6_V4_PREFLIGHT_LOCAL_VS_OVERALL_REWARD_ORDER_20261014",
+      "complex_id": "BMP6_ACVR1_ACVR2B",
+      "recipe_id": "bmp6_joint_n60_surround_v4",
+      "failure_category": "preflight_ranking_limitation_not_sampled_failure",
+      "run_ids": [],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/preparation/bmp6_acvr1_v4_20261014/scientific_summary.json",
+          "sha256": "b065f259886ae18308947458d300eb3bcb24ecb5795acb005b376b058dc0c551"
+        },
+        {
+          "path": "artifacts/bmp90/preparation/bmp6_acvr1_v4_20261014/validation.json",
+          "sha256": "b9f3d81c4b931155d791133a3227aba7e5c2de750efc90534f6a533b258dc091"
+        }
+      ],
+      "expected_behavior": "Surrounding contacts could make total reward favor better-overall relaxedv1 over local-N60-improved relaxedv3.",
+      "observed_symptoms": [
+        "Total v4 reward remains0.77394 for relaxedv3 versus0.74115 for relaxedv1; added surrounding factors correctly favor relaxedv1 but do not reverse the full ranking."
+      ],
+      "attempted_changes": [],
+      "status": "accepted_provisional_limitation_no_parameter_tuning",
+      "followups": [
+        {
+          "recorded_at": "2026-10-14T22:08:39.035664+00:00",
+          "status": "submitted",
+          "recipe_id": "bmp6_joint_n60_surround_v4",
+          "job_ids": [
+            "58142162",
+            "58142163",
+            "58142164"
+          ],
+          "evaluation_job_ids": [
+            "58142171",
+            "58142172",
+            "58142173"
+          ],
+          "result": "Defect-targeted joint revision submitted across tau0.1/0.3/0.8 after local tests, actual cluster score fixtures and reference self-DockQ; outcomes pending.",
+          "submission_receipt": {
+            "path": "artifacts/bmp90/operations/paid_wave10/submission_receipt.json",
+            "sha256": "0b1bd336dea8f04821a726d4fdd4a01c930527eee231ea33697d169949920604"
+          }
+        }
+      ],
+      "transfer_limits": "Posthoc comparison of two selected candidates. Do not rank overall structures by this scalar alone; test the finite hypothesis and select by per-copy DockQ/physical quality across tau."
+    },
+    {
+      "failure_id": "BMP7_ACVR1_V3_TAU01_NO_SELECTION_58139952",
+      "complex_id": "BMP7_ACVR1_ACVR2A",
+      "recipe_id": "bmp7_alk2_bridge_cauchy_v3",
+      "parent_failure_id": "BMP7_ACVR1_NO_RESAMPLING_58114403_58114404",
+      "failure_category": "completed_population_no_guidance_effect_and_missing_interface_copy",
+      "run_ids": [
+        "58139952"
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/evaluation/paid_wave9_status_20261014/collection.json",
+          "sha256": "8cf40cf2f00cb5e10d1f29f9b95e07307694ec749201e430fb425f469ad051d1"
+        },
+        {
+          "path": "artifacts/remote-runs/58139952/evaluation/paid_analysis_58139992/receipt.json",
+          "sha256": "9c9ead978f54247cb75ae458f38bd708243e66d1382e8997726949deb39dbc72"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/bmp7_alk2_v3_first_20261014/scientific_summary.json",
+          "sha256": "76cbf09892b0e9110df0e5d84df5507268d74ec4e6f774ac72be8fd02ec6b98d"
+        }
+      ],
+      "code_revision": "134bf1549ff0d1acf601c1a4812d2a07b64c289b",
+      "sampling_settings": {
+        "tau": 0.1,
+        "beta": 12,
+        "checkpoint_times": [
+          0.1,
+          0.3,
+          0.6,
+          0.75,
+          0.9
+        ],
+        "seeds": {
+          "initial": 74401,
+          "brownian": 75401,
+          "resampling": 76401
+        },
+        "particle_count": 10
+      },
+      "expected_behavior": "Recover both covered typeII copies while improving the transferred typeI face and opposite-protomer bridge.",
+      "observed_symptoms": [
+        "All10 FK PDBs byte-identical to fresh baseline; zero resampling events.",
+        "No candidate has both covered typeII DockQ at least0.6; best weaker-copy DockQ0.02155, although an individual copy reaches about0.906.",
+        "Both ACVR1 copies remain experimentally unassessed; optimized transfer geometry cannot establish their accuracy."
+      ],
+      "interface_evaluation": {
+        "recorded_at": "2026-10-14T22:00:38.406346+00:00",
+        "completed_tau": [
+          0.1
+        ],
+        "incomplete_tau": [
+          0.3,
+          0.8
+        ],
+        "job_id": "58139952",
+        "evaluation_job_id": "58139992",
+        "artifact_references": [
+          {
+            "path": "artifacts/bmp90/evaluation/paid_wave9_status_20261014/collection.json",
+            "sha256": "8cf40cf2f00cb5e10d1f29f9b95e07307694ec749201e430fb425f469ad051d1"
+          },
+          {
+            "path": "artifacts/remote-runs/58139952/evaluation/paid_analysis_58139992/receipt.json",
+            "sha256": "9c9ead978f54247cb75ae458f38bd708243e66d1382e8997726949deb39dbc72"
+          },
+          {
+            "path": "artifacts/bmp90/evaluation/bmp7_alk2_v3_first_20261014/scientific_summary.json",
+            "sha256": "76cbf09892b0e9110df0e5d84df5507268d74ec4e6f774ac72be8fd02ec6b98d"
+          }
+        ],
+        "baseline_fk_byte_identical": 10,
+        "resampling_events": 0,
+        "best_weaker_covered_interface": {
+          "name": "BMP7_ACVR1_ACVR2A_sampled_2.pdb",
+          "sha256": "36d5512193e3e820b2655d7b65e23c8ea744f4e578f4c878f51c5ef7fc1c46b5",
+          "covered_DockQ": {
+            "E": 0.02154918522011197,
+            "F": 0.022447199788686308
+          },
+          "weakest_covered_DockQ": 0.02154918522011197,
+          "interchain_heavy_clashes": 560,
+          "physical_status": "unassessed"
+        },
+        "best_individual_covered_DockQ": 0.906043710584789,
+        "covered_both_at_least_0p6": 0,
+        "particle_lineage_count": 10,
+        "finding": "No improvement at tau0.1: every guided model equals its paired baseline. Individual typeII copies can fit well but no model recovers both covered copies. Unfinished tau sweep cannot yet be ranked as a whole.",
+        "decision": "Retain previous preferred recipe; inspect remaining tau results before choosing a BMP7 follow-up. Preserve useful typeII selection while revising how uncertain typeI constraints contribute.",
+        "scope": "1LX5 conserved mouse-to-human E/F surrogate reference only. C/D unassessed experimentally; same-reference tuning and guidance satisfaction are not independent validation. No physical acceptance."
+      },
+      "suspected_causes": [
+        {
+          "hypothesis": "Stricter global weakest-copy and required face/bridge aggregation compresses useful selection contrasts at beta12.",
+          "status": "Supported score-scale concern; not a biological conclusion and not a final judgement across the unfinished tau sweep."
+        }
+      ],
+      "attempted_changes": [],
+      "followups": [
+        {
+          "recorded_at": "2026-10-14T22:19:16.408218+00:00",
+          "campaign": "bmp90-paid-wave11-20261014",
+          "status": "submitted",
+          "recipe_id": "bmp7_alk2_bridge_cauchy_v3",
+          "beta": 24,
+          "job_ids": [
+            "58142372",
+            "58142373",
+            "58142374"
+          ],
+          "result": "Prospective selection-strength correction, preserving all contacts and guards. User requested overlapping next-best experiments while other beta12 taus were still running. Results pending.",
+          "submission_receipt": {
+            "path": "artifacts/bmp90/operations/paid_wave11/submission_receipt.json",
+            "sha256": "31036f8699ef73135be7da08094ba415939bf52a94127c99a24dffe838bd85cc"
+          }
+        }
+      ],
+      "status": "documented_tau01_failure_other_taus_pending",
+      "transfer_limits": "One noise setting. Do not reject a recipe because one tau regresses; do not claim absent binding or an invalid transferred contact from this result."
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-14T19:15:06.300554+00:00"
+  "updated_at": "2026-10-14T22:19:16.408218+00:00"
 }

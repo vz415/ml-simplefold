@@ -1232,6 +1232,22 @@
       "finding": "Preserve every v1 contact and integrity rule. Add a bounded C/N/O interchain severe-overlap factor including full terminal regions; annotated native disulfides and standard connectivity define covalent exclusions. Maximum penalty20%; generic chemistry is not new target-specific contact evidence.",
       "evidence_allocation": "guidance_and_tuning",
       "limits": "No new experimental BMP7 typeI interface evidence. Native topology annotations only support covalent exclusions. Counterfactual fixtures test implementation/design behavior and do not validate a sampled structure."
+    },
+    {
+      "evidence_id": "BMP6_ACVR1_N60_SURROUNDING_CONTACTS_20261014",
+      "target_id": "BMP6_ACVR1_ACVR2B",
+      "evidence_class": "target_specific_observed_coordinates_and_posthoc_contact_loss",
+      "source": {
+        "path": "artifacts/bmp90/preparation/bmp6_acvr1_v4_20261014/anchor_evidence.json",
+        "sha256": "e76289cdd0ed490244f57158163a6ebce9377544208bddbd9dd652348fb490b9"
+      },
+      "specification": {
+        "path": "artifacts/bmp90/preparation/bmp6_acvr1_v4_20261014/bmp6_joint_n60_surround_v4.json",
+        "sha256": "4aa7610b6ab6d4d2c73e7032408fe2fac377f77c65f54449a4369ad6892b00c4"
+      },
+      "finding": "9N4K shows ACVR1 K78 contacting opposite-protomer BMP6 Y490 and V91 contacting same-protomer P448. Selected v3/relaxedv3 contact losses motivate CB/backbone approach proxies around retained N60. F71/L449 was inspected but already matched and was not added.",
+      "evidence_allocation": "guidance_and_posthoc_selection_not_independent_validation",
+      "limits": "Engineered glycosylated trap represented protein-only; contact geometry is not terminal sidechain energy or proof of affinity. Generic chemistry motivates plausible geometry but supplies no extra target-specific observation.113 scoring-withheld same-reference contacts remain descriptive."
     }
   ],
   "generic_inspection_priors": {
@@ -1443,5 +1459,5 @@
       "evidence_label_scope": "Vocabulary for future observations; no existing evidence_class is reclassified by this import. R8 instructs evaluation of energetic evidence; it does not establish a hotspot for any target."
     }
   },
-  "updated_at": "2026-10-14T19:02:26.165194+00:00"
+  "updated_at": "2026-10-14T21:59:36.305301+00:00"
 }
