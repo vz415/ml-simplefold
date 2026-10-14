@@ -533,6 +533,36 @@
             "58134304"
           ],
           "result": "Wave8 revised joint constraints, tau0.1/0.3/0.8; preflight passed, sampled outcomes pending."
+        },
+        {
+          "recorded_at": "2026-10-14T16:32:03.544072+00:00",
+          "job_ids": [
+            "58134288",
+            "58134289",
+            "58134290"
+          ],
+          "status": "completed_evaluated_partial_rescue",
+          "result": "New coarse/fine recipe recovers homologous C/E in10/10 FK at tau0.1 and0.8, each from one initial lineage; tau0.3 remains incomplete and declines4/10 to3/10 versus matched parent. Best covered-DockQ model at tau0.3 has109 severe interchain CNO overlaps versus56 parent. Improvement at other tau is not a matched old-recipe comparison. All-copy common fine metric pending.",
+          "artifact_reference": {
+            "path": "artifacts/bmp90/evaluation/paid_wave8_status_20261014/results.json",
+            "sha256": "2a5d5a1e1e5a959761d0ccdfef11640fba93a667af6dc5b03a36b0dbf26b222e"
+          },
+          "qualification": "Covered-reference recovery only. Remaining D/F, native BMP4 accuracy and physical acceptance unvalidated; do not generalize tau0.3 failure to whole recipe."
+        },
+        {
+          "recorded_at": "2026-10-14T16:33:42.944781+00:00",
+          "job_ids": [
+            "58134288",
+            "58134289",
+            "58134290"
+          ],
+          "status": "common_metric_evaluated_partial_rescue",
+          "result": "Parent fine-only all4>=0.6 counts: tau0.1 baseline1/FK10; tau0.3 baseline0/FK0, parentFK0; tau0.8 baseline2/FK10. Tau0.8all10also>=0.8. Thus tighter contact satisfaction improved in observed tau0.1/0.8 populations, not just changed score definition. Severe CNO overlap FK ranges14-23 at0.1 and19-44 at0.8 remain; tau0.3regressed at matched settings.",
+          "artifact_reference": {
+            "path": "artifacts/bmp90/evaluation/bmp4_wave8_independent/analysis.json",
+            "sha256": "6dee7b7a0c664a90c89811ac0a526307540b76117cc852c9b2fc9e34b8b26f42"
+          },
+          "qualification": "One surviving initial lineage per successful run; source-covered homolog agreement only. Required-core mask does not mean residues outside it are biologically dispensable."
         }
       ],
       "artifact_references": [
@@ -595,5 +625,5 @@
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-14T15:25:49.646092+00:00"
+  "updated_at": "2026-10-14T16:33:42.944781+00:00"
 }

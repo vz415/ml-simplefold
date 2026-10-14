@@ -5888,7 +5888,11 @@
               },
               "cpu_preflight_job_id": "58134177",
               "manifest_sha256": "214bf7698375efcab6b96050fa03b482f0fd1142ff505b40c600e8d42435bb97",
-              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134296"
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134296",
+              "last_observed_slurm": {
+                "state": "RUNNING",
+                "observed_at": "2026-10-14T16:30:18+00:00"
+              }
             },
             {
               "job_id": "58134297",
@@ -5938,7 +5942,11 @@
               },
               "cpu_preflight_job_id": "58134177",
               "manifest_sha256": "d2bc52fd4fe1f23c9e1a777936cb7c6a8683cbc5a181e38a49f1f742d1a62607",
-              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134297"
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134297",
+              "last_observed_slurm": {
+                "state": "RUNNING",
+                "observed_at": "2026-10-14T16:30:18+00:00"
+              }
             },
             {
               "job_id": "58134298",
@@ -5988,7 +5996,11 @@
               },
               "cpu_preflight_job_id": "58134177",
               "manifest_sha256": "9d88c9367121d9ff6cf15a48db4164d2980121346e58504f6a6780aa92581789",
-              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134298"
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134298",
+              "last_observed_slurm": {
+                "state": "RUNNING",
+                "observed_at": "2026-10-14T16:30:18+00:00"
+              }
             }
           ]
         }
@@ -19815,7 +19827,11 @@
               },
               "cpu_preflight_job_id": "58134177",
               "manifest_sha256": "36ed113b449ef713733c9e07479410ec21ea4fd8b145f8480fce74b3ec7c2205",
-              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134299"
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134299",
+              "last_observed_slurm": {
+                "state": "RUNNING",
+                "observed_at": "2026-10-14T16:30:18+00:00"
+              }
             },
             {
               "job_id": "58134300",
@@ -19865,7 +19881,11 @@
               },
               "cpu_preflight_job_id": "58134177",
               "manifest_sha256": "a97493dec44a0d5be04fdb4ba3919b48f3bbfae3c28330e2d4aa7834d492112d",
-              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134300"
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134300",
+              "last_observed_slurm": {
+                "state": "RUNNING",
+                "observed_at": "2026-10-14T16:30:18+00:00"
+              }
             },
             {
               "job_id": "58134301",
@@ -19915,7 +19935,11 @@
               },
               "cpu_preflight_job_id": "58134177",
               "manifest_sha256": "dfe4f6be34c5384c1a3fe03864a294eaabfadfe52783ca46b455bc6d29b9a934",
-              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134301"
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134301",
+              "last_observed_slurm": {
+                "state": "RUNNING",
+                "observed_at": "2026-10-14T16:30:18+00:00"
+              }
             }
           ]
         }
@@ -19930,10 +19954,26 @@
     "BMP4_BMPR1A_ACVR2B": {
       "reference_structure": null,
       "surrogate_reference_structure": "2H62",
-      "best_recipe_id": null,
+      "best_recipe_id": "bmp4_joint_coarse_fine_l61_off_v2",
       "previous_best_recipe_ids": [],
-      "ranking_history": [],
-      "ranking_status": "Executable L61-on/off recipes validated; no empirical target rank. No native BMP4 reference found in the recorded search scope; partial 2H62 homolog comparison only.",
+      "ranking_history": [
+        {
+          "recorded_at": "2026-10-14T16:33:42.944781+00:00",
+          "previous_best_recipe_id": null,
+          "best_recipe_id": "bmp4_joint_coarse_fine_l61_off_v2",
+          "preferred_tau": [
+            0.1,
+            0.8
+          ],
+          "reason": "Provisional preferred starting recipe at tau0.1/0.8, both10/10all4parentfine>=0.6; tau0.8also10/10>=0.8. One surviving initial lineage per run. Tau0.3 regressed under matched comparison. Uncovered interfaces and physical acceptance remain unvalidated.",
+          "report": {
+            "path": "artifacts/bmp90/evaluation/bmp4_wave8_independent/analysis.json",
+            "sha256": "6dee7b7a0c664a90c89811ac0a526307540b76117cc852c9b2fc9e34b8b26f42"
+          },
+          "comparison_limits": "Tau0.1/0.8 versus earlier recipes use different populations; no isolated causal recipe-improvement claim. Tau0.3 exact baseline PDBs match parent and outcomes worsened."
+        }
+      ],
+      "ranking_status": "Provisional observed preference at tau0.1/0.8 based on common tight all-copy restraints and homologous C/E recovery; no accepted native BMP4 structure.",
       "preferred_starting_hypothesis_if_validated": "bmp4_joint_l61_on_mapped_v1",
       "preference_basis": "Vincent favors retaining the mapped L61 module based on earlier BMP2 success at two tau settings. The exact atom/angle adapter is now validated; preserve L61-off for conflicting constraints or a targeted comparison.",
       "recipes": [
@@ -24863,8 +24903,8 @@
         },
         {
           "recipe_id": "bmp4_joint_coarse_fine_l61_off_v2",
-          "rank": null,
-          "status": "submitted_unranked",
+          "rank": 1,
+          "status": "provisional_preferred_at_tau01_and_tau08",
           "parent_relationships": [
             {
               "recipe_id": "bmp4_joint_l61_off_mapped_v1",
@@ -28244,7 +28284,7 @@
               "campaign": "bmp90-paid-wave8-20261014",
               "arm": "bmp4_joint_v2",
               "submitted_at": "2026-10-14T15:23:49.994854+00:00",
-              "status": "submitted",
+              "status": "completed_evaluated",
               "runtime_revision": "ce0dff00a473e4acc3e4d251a7fe0cffc700b8ff",
               "scoring_sha256": "d62e35267eb25f3af0ffd4783b98a7f5927c3c3938aa00cdcb77c3283ba8dd4d",
               "sampling": {
@@ -28285,7 +28325,173 @@
               },
               "cpu_preflight_job_id": "58134177",
               "manifest_sha256": "f0858c6214d41bda0eab18c0d796bc2ea8d772dd0c6f09f5d0314e12aaacd27d",
-              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134288"
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134288",
+              "completed_evaluation_readout": {
+                "recorded_at": "2026-10-14T16:32:03.544072+00:00",
+                "report_path": "artifacts/bmp90/evaluation/paid_wave8_status_20261014/results.json",
+                "report_sha256": "2a5d5a1e1e5a959761d0ccdfef11640fba93a667af6dc5b03a36b0dbf26b222e",
+                "conditions": {
+                  "baseline": {
+                    "covered_ge06": 1,
+                    "covered_gt05": 1,
+                    "median_weakest": 0.021871125336939724,
+                    "best_by_weakest_covered": {
+                      "sample": 3,
+                      "dockq": {
+                        "C": 0.9279193559134226,
+                        "D": null,
+                        "E": 0.847778366080404,
+                        "F": null
+                      },
+                      "weakest_covered": 0.847778366080404,
+                      "reward": 0.8285828829764527,
+                      "ancestor": 3,
+                      "pdb": "artifacts/remote-runs/58134288/baseline/predictions_simplefold_3B/BMP4_BMPR1A_ACVR2B_full_ecd_sampled_3.pdb",
+                      "guidance_min": 0.7961873472459633,
+                      "severe_interchain_CNO_overlaps_gt1A": 14
+                    },
+                    "all_guidance_ge05": 1,
+                    "resamplings": 0,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "fk": {
+                    "covered_ge06": 10,
+                    "covered_gt05": 10,
+                    "median_weakest": 0.8600252313493301,
+                    "best_by_weakest_covered": {
+                      "sample": 6,
+                      "dockq": {
+                        "C": 0.9409155607495615,
+                        "D": null,
+                        "E": 0.8826334767656533,
+                        "F": null
+                      },
+                      "weakest_covered": 0.8826334767656533,
+                      "reward": 0.8533303806682002,
+                      "ancestor": 3,
+                      "pdb": "artifacts/remote-runs/58134288/fk/predictions_simplefold_3B/BMP4_BMPR1A_ACVR2B_full_ecd_sampled_6.pdb",
+                      "guidance_min": 0.8215759894083736,
+                      "severe_interchain_CNO_overlaps_gt1A": 16
+                    },
+                    "all_guidance_ge05": 10,
+                    "resamplings": 3,
+                    "ancestors": [
+                      3
+                    ]
+                  }
+                },
+                "limits": [
+                  "DockQ covers homologous 2H62 C/E only, not native BMP4 or D/F.",
+                  "Counts at 0.6 are descriptive; no calibrated acceptance. FK descendants are correlated.",
+                  "Raw rewards and mixed guidance scores are not comparable to previous recipes; common parent fine-only rescoring is separate.",
+                  "Severe C/N/O interchain overlaps >1 A were checked on the best covered-DockQ model per condition only."
+                ]
+              },
+              "common_parent_metric_readout": {
+                "recorded_at": "2026-10-14T16:33:42.944781+00:00",
+                "report": {
+                  "path": "artifacts/bmp90/evaluation/bmp4_wave8_independent/analysis.json",
+                  "sha256": "6dee7b7a0c664a90c89811ac0a526307540b76117cc852c9b2fc9e34b8b26f42"
+                },
+                "conditions": {
+                  "baseline": {
+                    "all4_fine_at_least": {
+                      "0.5": 1,
+                      "0.6": 1,
+                      "0.8": 0
+                    },
+                    "both_covered_homolog_DockQ_at_least": {
+                      "0.5": 1,
+                      "0.6": 1,
+                      "0.8": 1
+                    },
+                    "count": 10,
+                    "covered_homolog_DockQ_per_copy_median": {
+                      "C": 0.8511201886663069,
+                      "E": 0.06671859272772337
+                    },
+                    "fine_all4_ge0p6_initial_ancestors": {
+                      "3": 1
+                    },
+                    "fine_per_copy_median": {
+                      "ACVR2B_E": 1.902188297495827e-05,
+                      "ACVR2B_F": 2.488835256932623e-05,
+                      "BMPR1A_C": 0.17687089108899762,
+                      "BMPR1A_D": 0.9924005993629301
+                    },
+                    "fine_weakest_min_median_max": [
+                      1.643359798850964e-30,
+                      2.1179757421667647e-13,
+                      0.7090233741814512
+                    ],
+                    "parent_reward_mean": 0.20545984894036567,
+                    "required_core_severe_count_min_median_max": [
+                      2.0,
+                      11.0,
+                      116.0
+                    ],
+                    "severe_CNO_count_min_median_max": [
+                      14.0,
+                      65.5,
+                      199.0
+                    ]
+                  },
+                  "fk": {
+                    "all4_fine_at_least": {
+                      "0.5": 10,
+                      "0.6": 10,
+                      "0.8": 0
+                    },
+                    "both_covered_homolog_DockQ_at_least": {
+                      "0.5": 10,
+                      "0.6": 10,
+                      "0.8": 10
+                    },
+                    "count": 10,
+                    "covered_homolog_DockQ_per_copy_median": {
+                      "C": 0.9416110728246614,
+                      "E": 0.8600252313493301
+                    },
+                    "fine_all4_ge0p6_initial_ancestors": {
+                      "3": 10
+                    },
+                    "fine_per_copy_median": {
+                      "ACVR2B_E": 0.8695651141412363,
+                      "ACVR2B_F": 0.8646949348868345,
+                      "BMPR1A_C": 0.9995380665296398,
+                      "BMPR1A_D": 0.9995816265090711
+                    },
+                    "fine_weakest_min_median_max": [
+                      0.7203200332430938,
+                      0.7301291828383347,
+                      0.7434603109737666
+                    ],
+                    "parent_reward_mean": 0.8292169750314095,
+                    "required_core_severe_count_min_median_max": [
+                      0.0,
+                      1.0,
+                      2.0
+                    ],
+                    "severe_CNO_count_min_median_max": [
+                      14.0,
+                      16.0,
+                      23.0
+                    ]
+                  }
+                },
+                "qualification": "Single coherent parent assignment; thresholds descriptive, guidance satisfaction is not independent validation."
+              }
             },
             {
               "job_id": "58134289",
@@ -28294,7 +28500,7 @@
               "campaign": "bmp90-paid-wave8-20261014",
               "arm": "bmp4_joint_v2",
               "submitted_at": "2026-10-14T15:23:50.086817+00:00",
-              "status": "submitted",
+              "status": "completed_evaluated",
               "runtime_revision": "ce0dff00a473e4acc3e4d251a7fe0cffc700b8ff",
               "scoring_sha256": "d62e35267eb25f3af0ffd4783b98a7f5927c3c3938aa00cdcb77c3283ba8dd4d",
               "sampling": {
@@ -28335,7 +28541,175 @@
               },
               "cpu_preflight_job_id": "58134177",
               "manifest_sha256": "a6d0d756b6d74a1cf1325e704765548e4686beef00637fa839706ab65d9e7c55",
-              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134289"
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134289",
+              "completed_evaluation_readout": {
+                "recorded_at": "2026-10-14T16:32:03.544072+00:00",
+                "report_path": "artifacts/bmp90/evaluation/paid_wave8_status_20261014/results.json",
+                "report_sha256": "2a5d5a1e1e5a959761d0ccdfef11640fba93a667af6dc5b03a36b0dbf26b222e",
+                "conditions": {
+                  "baseline": {
+                    "covered_ge06": 2,
+                    "covered_gt05": 2,
+                    "median_weakest": 0.018137678765866076,
+                    "best_by_weakest_covered": {
+                      "sample": 6,
+                      "dockq": {
+                        "C": 0.8633859582130635,
+                        "D": null,
+                        "E": 0.8596874228558463,
+                        "F": null
+                      },
+                      "weakest_covered": 0.8596874228558463,
+                      "reward": 0.21170961985371,
+                      "ancestor": 6,
+                      "pdb": "artifacts/remote-runs/58134289/baseline/predictions_simplefold_3B/BMP4_BMPR1A_ACVR2B_full_ecd_sampled_6.pdb",
+                      "guidance_min": 0.09947047141842795,
+                      "severe_interchain_CNO_overlaps_gt1A": 62
+                    },
+                    "all_guidance_ge05": 0,
+                    "resamplings": 0,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "fk": {
+                    "covered_ge06": 3,
+                    "covered_gt05": 3,
+                    "median_weakest": 0.01463225049278151,
+                    "best_by_weakest_covered": {
+                      "sample": 1,
+                      "dockq": {
+                        "C": 0.8562539687169733,
+                        "D": null,
+                        "E": 0.8710356236111426,
+                        "F": null
+                      },
+                      "weakest_covered": 0.8562539687169733,
+                      "reward": 0.10571760863310752,
+                      "ancestor": 1,
+                      "pdb": "artifacts/remote-runs/58134289/fk/predictions_simplefold_3B/BMP4_BMPR1A_ACVR2B_full_ecd_sampled_1.pdb",
+                      "guidance_min": 0.060246388693096016,
+                      "severe_interchain_CNO_overlaps_gt1A": 109
+                    },
+                    "all_guidance_ge05": 0,
+                    "resamplings": 1,
+                    "ancestors": [
+                      1,
+                      2,
+                      3,
+                      5,
+                      6,
+                      7,
+                      8
+                    ]
+                  }
+                },
+                "limits": [
+                  "DockQ covers homologous 2H62 C/E only, not native BMP4 or D/F.",
+                  "Counts at 0.6 are descriptive; no calibrated acceptance. FK descendants are correlated.",
+                  "Raw rewards and mixed guidance scores are not comparable to previous recipes; common parent fine-only rescoring is separate.",
+                  "Severe C/N/O interchain overlaps >1 A were checked on the best covered-DockQ model per condition only."
+                ]
+              },
+              "common_parent_metric_readout": {
+                "recorded_at": "2026-10-14T16:33:42.944781+00:00",
+                "report": {
+                  "path": "artifacts/bmp90/evaluation/bmp4_wave8_independent/analysis.json",
+                  "sha256": "6dee7b7a0c664a90c89811ac0a526307540b76117cc852c9b2fc9e34b8b26f42"
+                },
+                "conditions": {
+                  "baseline": {
+                    "all4_fine_at_least": {
+                      "0.5": 0,
+                      "0.6": 0,
+                      "0.8": 0
+                    },
+                    "both_covered_homolog_DockQ_at_least": {
+                      "0.5": 2,
+                      "0.6": 2,
+                      "0.8": 2
+                    },
+                    "count": 10,
+                    "covered_homolog_DockQ_per_copy_median": {
+                      "C": 0.7633891599310826,
+                      "E": 0.03705377704880463
+                    },
+                    "fine_all4_ge0p6_initial_ancestors": {},
+                    "fine_per_copy_median": {
+                      "ACVR2B_E": 3.828651822030458e-07,
+                      "ACVR2B_F": 0.22794027433743472,
+                      "BMPR1A_C": 0.4889878084182213,
+                      "BMPR1A_D": 0.37805969063447503
+                    },
+                    "fine_weakest_min_median_max": [
+                      1.0425912848331738e-28,
+                      1.3318499875670296e-13,
+                      7.436075599803593e-06
+                    ],
+                    "parent_reward_mean": 0.13948450536933438,
+                    "required_core_severe_count_min_median_max": [
+                      1.0,
+                      10.0,
+                      3939.0
+                    ],
+                    "severe_CNO_count_min_median_max": [
+                      25.0,
+                      87.5,
+                      4478.0
+                    ]
+                  },
+                  "fk": {
+                    "all4_fine_at_least": {
+                      "0.5": 0,
+                      "0.6": 0,
+                      "0.8": 0
+                    },
+                    "both_covered_homolog_DockQ_at_least": {
+                      "0.5": 3,
+                      "0.6": 3,
+                      "0.8": 3
+                    },
+                    "count": 10,
+                    "covered_homolog_DockQ_per_copy_median": {
+                      "C": 0.789129575599105,
+                      "E": 0.41992299400477784
+                    },
+                    "fine_all4_ge0p6_initial_ancestors": {},
+                    "fine_per_copy_median": {
+                      "ACVR2B_E": 1.2269987127508683e-06,
+                      "ACVR2B_F": 5.949214184907281e-06,
+                      "BMPR1A_C": 0.2102540967570194,
+                      "BMPR1A_D": 0.6512696023130822
+                    },
+                    "fine_weakest_min_median_max": [
+                      2.381093648019624e-28,
+                      1.2221431733660984e-14,
+                      1.1896791542282256e-05
+                    ],
+                    "parent_reward_mean": 0.15207499043443803,
+                    "required_core_severe_count_min_median_max": [
+                      3.0,
+                      6.5,
+                      3844.0
+                    ],
+                    "severe_CNO_count_min_median_max": [
+                      28.0,
+                      58.5,
+                      4372.0
+                    ]
+                  }
+                },
+                "qualification": "Single coherent parent assignment; thresholds descriptive, guidance satisfaction is not independent validation."
+              }
             },
             {
               "job_id": "58134290",
@@ -28344,7 +28718,7 @@
               "campaign": "bmp90-paid-wave8-20261014",
               "arm": "bmp4_joint_v2",
               "submitted_at": "2026-10-14T15:23:50.173181+00:00",
-              "status": "submitted",
+              "status": "completed_evaluated",
               "runtime_revision": "ce0dff00a473e4acc3e4d251a7fe0cffc700b8ff",
               "scoring_sha256": "d62e35267eb25f3af0ffd4783b98a7f5927c3c3938aa00cdcb77c3283ba8dd4d",
               "sampling": {
@@ -28385,9 +28759,193 @@
               },
               "cpu_preflight_job_id": "58134177",
               "manifest_sha256": "59d630ad4f94a575a1b2e22b4d0720af58268073829aeb505c44d73d788f74ce",
-              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134290"
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134290",
+              "completed_evaluation_readout": {
+                "recorded_at": "2026-10-14T16:32:03.544072+00:00",
+                "report_path": "artifacts/bmp90/evaluation/paid_wave8_status_20261014/results.json",
+                "report_sha256": "2a5d5a1e1e5a959761d0ccdfef11640fba93a667af6dc5b03a36b0dbf26b222e",
+                "conditions": {
+                  "baseline": {
+                    "covered_ge06": 2,
+                    "covered_gt05": 2,
+                    "median_weakest": 0.01915839164617568,
+                    "best_by_weakest_covered": {
+                      "sample": 4,
+                      "dockq": {
+                        "C": 0.9150478860081374,
+                        "D": null,
+                        "E": 0.8361060077288659,
+                        "F": null
+                      },
+                      "weakest_covered": 0.8361060077288659,
+                      "reward": 0.7508875619640504,
+                      "ancestor": 4,
+                      "pdb": "artifacts/remote-runs/58134290/baseline/predictions_simplefold_3B/BMP4_BMPR1A_ACVR2B_full_ecd_sampled_4.pdb",
+                      "guidance_min": 0.990601610285296,
+                      "severe_interchain_CNO_overlaps_gt1A": 37
+                    },
+                    "all_guidance_ge05": 2,
+                    "resamplings": 0,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "fk": {
+                    "covered_ge06": 10,
+                    "covered_gt05": 10,
+                    "median_weakest": 0.8942786894550954,
+                    "best_by_weakest_covered": {
+                      "sample": 2,
+                      "dockq": {
+                        "C": 0.9479986471427444,
+                        "D": null,
+                        "E": 0.9400887682732623,
+                        "F": null
+                      },
+                      "weakest_covered": 0.9400887682732623,
+                      "reward": 0.9260866052241254,
+                      "ancestor": 8,
+                      "pdb": "artifacts/remote-runs/58134290/fk/predictions_simplefold_3B/BMP4_BMPR1A_ACVR2B_full_ecd_sampled_2.pdb",
+                      "guidance_min": 0.9940151686973867,
+                      "severe_interchain_CNO_overlaps_gt1A": 44
+                    },
+                    "all_guidance_ge05": 10,
+                    "resamplings": 3,
+                    "ancestors": [
+                      8
+                    ]
+                  }
+                },
+                "limits": [
+                  "DockQ covers homologous 2H62 C/E only, not native BMP4 or D/F.",
+                  "Counts at 0.6 are descriptive; no calibrated acceptance. FK descendants are correlated.",
+                  "Raw rewards and mixed guidance scores are not comparable to previous recipes; common parent fine-only rescoring is separate.",
+                  "Severe C/N/O interchain overlaps >1 A were checked on the best covered-DockQ model per condition only."
+                ]
+              },
+              "common_parent_metric_readout": {
+                "recorded_at": "2026-10-14T16:33:42.944781+00:00",
+                "report": {
+                  "path": "artifacts/bmp90/evaluation/bmp4_wave8_independent/analysis.json",
+                  "sha256": "6dee7b7a0c664a90c89811ac0a526307540b76117cc852c9b2fc9e34b8b26f42"
+                },
+                "conditions": {
+                  "baseline": {
+                    "all4_fine_at_least": {
+                      "0.5": 2,
+                      "0.6": 2,
+                      "0.8": 2
+                    },
+                    "both_covered_homolog_DockQ_at_least": {
+                      "0.5": 2,
+                      "0.6": 2,
+                      "0.8": 2
+                    },
+                    "count": 10,
+                    "covered_homolog_DockQ_per_copy_median": {
+                      "C": 0.2706500643954472,
+                      "E": 0.01915839164617568
+                    },
+                    "fine_all4_ge0p6_initial_ancestors": {
+                      "4": 1,
+                      "8": 1
+                    },
+                    "fine_per_copy_median": {
+                      "ACVR2B_E": 3.349678295880064e-07,
+                      "ACVR2B_F": 4.3330166956944465e-05,
+                      "BMPR1A_C": 0.3124477902613392,
+                      "BMPR1A_D": 0.24705695522760607
+                    },
+                    "fine_weakest_min_median_max": [
+                      6.560927403196458e-26,
+                      1.0527506699585959e-10,
+                      0.9862150348997357
+                    ],
+                    "parent_reward_mean": 0.19414424630570054,
+                    "required_core_severe_count_min_median_max": [
+                      4.0,
+                      45.0,
+                      421.0
+                    ],
+                    "severe_CNO_count_min_median_max": [
+                      37.0,
+                      277.5,
+                      978.0
+                    ]
+                  },
+                  "fk": {
+                    "all4_fine_at_least": {
+                      "0.5": 10,
+                      "0.6": 10,
+                      "0.8": 10
+                    },
+                    "both_covered_homolog_DockQ_at_least": {
+                      "0.5": 10,
+                      "0.6": 10,
+                      "0.8": 10
+                    },
+                    "count": 10,
+                    "covered_homolog_DockQ_per_copy_median": {
+                      "C": 0.8976626440039837,
+                      "E": 0.8960123632922813
+                    },
+                    "fine_all4_ge0p6_initial_ancestors": {
+                      "8": 10
+                    },
+                    "fine_per_copy_median": {
+                      "ACVR2B_E": 0.9918327809352397,
+                      "ACVR2B_F": 0.9910199450450466,
+                      "BMPR1A_C": 0.9919752750075823,
+                      "BMPR1A_D": 0.9898096470622729
+                    },
+                    "fine_weakest_min_median_max": [
+                      0.9795734747193007,
+                      0.9855295919295358,
+                      0.9912213988472468
+                    ],
+                    "parent_reward_mean": 0.8367901266667387,
+                    "required_core_severe_count_min_median_max": [
+                      1.0,
+                      4.5,
+                      8.0
+                    ],
+                    "severe_CNO_count_min_median_max": [
+                      19.0,
+                      33.5,
+                      44.0
+                    ]
+                  }
+                },
+                "qualification": "Single coherent parent assignment; thresholds descriptive, guidance satisfaction is not independent validation."
+              }
             }
-          ]
+          ],
+          "observed_reference_recovery_tau": [
+            0.1,
+            0.8
+          ],
+          "evaluation_interpretation": {
+            "recorded_at": "2026-10-14T16:32:03.544072+00:00",
+            "summary": "Tau0.1 and0.8 recover covered homologous C/E in10/10 guided versus1/10 and2/10 baseline; each guided population has one surviving initial lineage. Tau0.3 gives3/10 versus2/10 baseline and4/10 parent recipe at matched seeds. Best covered-DockQ models retain16,109,44 severe interchain CNO overlaps at tau0.1,0.3,0.8.",
+            "report": {
+              "path": "artifacts/bmp90/evaluation/paid_wave8_status_20261014/results.json",
+              "sha256": "2a5d5a1e1e5a959761d0ccdfef11640fba93a667af6dc5b03a36b0dbf26b222e"
+            },
+            "ranking": "Provisional preferred starting recipe at tau0.1/0.8, both10/10all4parentfine>=0.6; tau0.8also10/10>=0.8. One surviving initial lineage per run. Tau0.3 regressed under matched comparison. Uncovered interfaces and physical acceptance remain unvalidated.",
+            "common_metric_report": {
+              "path": "artifacts/bmp90/evaluation/bmp4_wave8_independent/analysis.json",
+              "sha256": "6dee7b7a0c664a90c89811ac0a526307540b76117cc852c9b2fc9e34b8b26f42"
+            }
+          }
         }
       ],
       "common_preparation_snapshot": {
@@ -30049,7 +30607,7 @@
           "sha256": "72ae82b4d6da4d24f8de63296ef643daac5606494682e268ca8da25f7803eb5f"
         }
       },
-      "next_required_work": "Evaluate submitted three-tau paired runs; report homologous C/E reference agreement and newly inferred D/F support separately, then review five-target milestone.",
+      "next_required_work": "Use current candidates to identify remaining physical clashes and uncovered-interface ambiguity; complete BMP6/BMP7 wave8 evaluation and review five-target milestone. Preserve successful tight contact geometry; no expansion beyond milestone.",
       "execution_preference_note": "L61-on selected for initial authorized3taupairedwave after CPUpreflight; off retained to test conflictingconstraints. Preference inherits Vincent prior, not demonstratedBMP4superiority.",
       "historical_snapshot_note": "common_preparation_snapshot and optional_l61_geometry_snapshot preserve preimplementation proposal state. Current executabledefinitions and newruntime are in appended mapped recipes.",
       "current_iteration_parent": {
@@ -30057,10 +30615,29 @@
         "recorded_at": "2026-10-14T15:17:51.985529+00:00",
         "purpose": "Practical parent for this bounded revision; not calibrated full-assembly acceptance.",
         "revision_recipe_id": "bmp4_joint_coarse_fine_l61_off_v2"
+      },
+      "metric_specific_leaders": {
+        "best_covered_homolog_DockQ": {
+          "job_id": "58134290",
+          "zero_based_sample": 2,
+          "tau": 0.8,
+          "C": 0.9479986471427444,
+          "E": 0.9400887682732623,
+          "severe_CNO_interchain_overlaps_gt1A": 44
+        },
+        "lower_overlap_high_reference_candidate": {
+          "job_id": "58134288",
+          "zero_based_sample": 6,
+          "tau": 0.1,
+          "C": 0.9409155607495615,
+          "E": 0.8826334767656533,
+          "severe_CNO_interchain_overlaps_gt1A": 16
+        },
+        "qualification": "Metric-specific candidates, not an overall accepted structure; native BMP4 and D/F reference accuracy unknown."
       }
     }
   },
-  "updated_at": "2026-10-14T15:25:02.807680+00:00",
+  "updated_at": "2026-10-14T16:33:42.944781+00:00",
   "interface_evidence_registry": "configs/bmp90/interface_evidence_registry.json",
   "failure_registry": "configs/bmp90/failure_registry.json",
   "construct_policy": {
