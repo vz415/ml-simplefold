@@ -158,8 +158,61 @@
       ],
       "status": "documented_limitation_requires_separate_physical_evaluation",
       "transfer_limits": "Synthetic fixtures only, no sampled failures or evidence of nonbinding. Do not promote high reward to physical acceptance; protein-only scoring omits glycan effects."
+    },
+    {
+      "failure_id": "BMP4_INFERRED_SITE_COMPOSITE_CLASH_20261013",
+      "complex_id": "BMP4_BMPR1A_ACVR2B",
+      "recipe_id": "bmp4_joint_l61_on_mapped_v1",
+      "failure_category": "preflight_high_reward_physical_failure",
+      "run_ids": [],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/preparation/bmp4_joint_hypotheses/execution_v1/frozen_bundle.json",
+          "sha256": "f4d0bbed34611e34bdaafd3df52aea2c204a8f3871f3af0df67db4ee1d589dc7"
+        }
+      ],
+      "observed_symptoms": [
+        "Synthetic inferred six-chain source fixture has120 interchain heavy overlaps above0.4Angstrom; maximum2.883Angstrom.",
+        "Sparse CA+L61-on reward0.902105 versus off0.902156 does not reject this physically clashing fixture."
+      ],
+      "suspected_causes": [
+        {
+          "mechanism": "Rigidly inferred second receptor sites plus sparse local geometry fail to resolve full assembly packing.",
+          "status": "Fixture diagnostic; no sampledfailure or biological nonbinding inference."
+        }
+      ],
+      "followups": [
+        {
+          "result": "Alternative rigid fixture has no receptor-involving interchain heavy overlaps and retains ligand contacts; off0.600738/on0.512614. One liganddimer overlap and sourceintrachainoutliers remain, so no wholeassemblyphysicalpass."
+        }
+      ],
+      "status": "preserved_physical_failure_diagnostic",
+      "transfer_limits": "SourceBMP2homolog fixture, not experimentally observed BMP4 pose. Actualsamplingphysicalassessment required; successful localL61geometry does not validate global assembly."
+    },
+    {
+      "failure_id": "BMP4_PARTIAL_REFERENCE_SELF_CHECK_58114522",
+      "complex_id": "BMP4_BMPR1A_ACVR2B",
+      "failure_category": "evaluation_tooling_preflight",
+      "job_id": "58114522",
+      "run_ids": [],
+      "observed_symptoms": [
+        "CPU reference self-check attempted E-to-absent-F symmetry assignment and raised insufficient shared CA atoms. Actual on/off scorer diagnostics had passed."
+      ],
+      "status": "resolved_before_gpu_submission",
+      "resolution": {
+        "revision": "ad211de5fcd5fb724454e3187dd3f51d771f23ba",
+        "change": "Skip impossible partial-model assignments; retain coherent observed-chain assignments and strict full generated-model checks.",
+        "tests": "19 evaluator tests passed including two regression tests."
+      },
+      "followups": [
+        {
+          "job_id": "58114562",
+          "result": "Corrected CPU preflight58114562 COMPLETED0:0 in2:02: reference self-check passed and all three actual checkpoint registrations ready. GPU jobs58114622\u201358114624 submitted afterward."
+        }
+      ],
+      "transfer_limits": "Tooling failure before run registration; zero GPU attempts and no biological failure inferred. Original failed campaign and logs preserved."
     }
   ],
   "initialization_note": "The first entry records a preflight geometry finding. No sampled-run failure has yet been adjudicated.",
-  "updated_at": "2026-10-14T00:05:51.437470+00:00"
+  "updated_at": "2026-10-14T00:33:35.526064+00:00"
 }
