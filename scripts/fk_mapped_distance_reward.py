@@ -40,6 +40,20 @@ Module settings are distance/angle tolerance and scale, missing_geometry_error,
 strength, factor_floor and evidence_labels. The worst copy's flat-tolerance Huber
 error gives ``floor + (1-floor)*exp(-strength*error)``. All modules and CA terms
 share one assignment. Strength zero exactly retains the version-2 scalar/map.
+
+Optional version-2/3 extensions preserve omitted-field behavior exactly:
+``distance_feature: "cauchy"`` on a pair uses 1/(1+((d-target)/sigma)^2)
+instead of the default Gaussian. ``required_subgroups`` on an interface is a
+disjoint, complete partition of its pair_ids into {id, pair_ids} objects; the
+interface is the minimum of their independently normalized weighted means.
+Every subgroup uses the same assembly assignment and fixed missing-atom
+denominators. These are engineering objectives, not additional contact evidence.
+
+``heavy_atom_safeguard`` optionally multiplies the final reward by a bounded
+interchain-overlap factor. It requires explicit symmetric native disulfides,
+standard residue/peptide topology, finite coordinates, and complete standard
+heavy atoms. No coordinate-inferred bonds or PDB CONECT exclusions are used.
+The spatial grid is evaluated once per model, outside the assignment loop.
 """
 from __future__ import annotations
 
@@ -335,6 +349,206 @@ def read_local_geometry_atoms(path, sequences, saved_to_input, modules):
     return atoms, choices
 
 
+# Standard amino-acid heavy-atom connectivity. Kept dependency-free so the
+# optional safeguard does not introduce NumPy/SciPy into checkpoint scoring.
+_SIDECHAIN_BONDS = {
+    "G": "", "A": "CA-CB", "R": "CA-CB CB-CG CG-CD CD-NE NE-CZ CZ-NH1 CZ-NH2",
+    "N": "CA-CB CB-CG CG-OD1 CG-ND2", "D": "CA-CB CB-CG CG-OD1 CG-OD2",
+    "C": "CA-CB CB-SG", "Q": "CA-CB CB-CG CG-CD CD-OE1 CD-NE2",
+    "E": "CA-CB CB-CG CG-CD CD-OE1 CD-OE2",
+    "H": "CA-CB CB-CG CG-ND1 ND1-CE1 CE1-NE2 NE2-CD2 CD2-CG",
+    "I": "CA-CB CB-CG1 CB-CG2 CG1-CD1", "L": "CA-CB CB-CG CG-CD1 CG-CD2",
+    "K": "CA-CB CB-CG CG-CD CD-CE CE-NZ", "M": "CA-CB CB-CG CG-SD SD-CE",
+    "F": "CA-CB CB-CG CG-CD1 CG-CD2 CD1-CE1 CD2-CE2 CE1-CZ CE2-CZ",
+    "P": "CA-CB CB-CG CG-CD CD-N", "S": "CA-CB CB-OG",
+    "T": "CA-CB CB-OG1 CB-CG2",
+    "W": "CA-CB CB-CG CG-CD1 CG-CD2 CD1-NE1 NE1-CE2 CE2-CD2 CD2-CE3 CE3-CZ3 CZ3-CH2 CH2-CZ2 CZ2-CE2",
+    "Y": "CA-CB CB-CG CG-CD1 CG-CD2 CD1-CE1 CD2-CE2 CE1-CZ CE2-CZ CZ-OH",
+    "V": "CA-CB CB-CG1 CB-CG2"}
+_HEAVY_RADII = {"C": 1.70, "N": 1.55, "O": 1.52, "S": 1.80}
+
+
+class _HeavyAtomSafeguard:
+    """A fixed-topology, assignment-invariant, bounded overlap multiplier."""
+
+    def __init__(self, config, sequences, saved_to_input, assignments):
+        if not isinstance(config, dict) or config.get("kind") != "interchain_overlap":
+            raise ValueError("heavy_atom_safeguard must have kind interchain_overlap")
+        elements = config.get("elements")
+        if (not isinstance(elements, list) or any(not isinstance(e, str) for e in elements)
+                or len(set(elements)) != len(elements) or set(elements) not in ({"C", "N", "O"}, {"C", "N", "O", "S"})):
+            raise ValueError("Heavy safeguard elements must be C/N/O or C/N/O/S")
+        self.elements = set(elements)
+        self.threshold = _positive(config.get("overlap_threshold_angstrom"), "overlap_threshold_angstrom")
+        self.scale = _positive(config.get("overlap_scale_angstrom"), "overlap_scale_angstrom")
+        self.pair_scale = _positive(config.get("pair_scale"), "pair_scale")
+        self.strength = _nonnegative(config.get("strength"), "strength")
+        self.floor = _nonnegative(config.get("factor_floor"), "factor_floor")
+        self.cutoff = 2*max(_HEAVY_RADII[e] for e in elements)-self.threshold
+        if self.floor > 1 or self.cutoff <= 0:
+            raise ValueError("Heavy safeguard floor/overlap threshold out of range")
+        if config.get("missing_heavy_atom_policy") != "factor_floor":
+            raise ValueError("Heavy safeguard requires missing_heavy_atom_policy=factor_floor")
+        _labels(config.get("evidence_labels"))
+        self.sequences, self.input = sequences, saved_to_input
+        self.required, self.allowed, graph = set(), set(), {}
+
+        def bond(a, b):
+            graph.setdefault(a, set()).add(b)
+            graph.setdefault(b, set()).add(a)
+
+        for chain, sequence in sequences.items():
+            for pos, aa in enumerate(sequence, 1):
+                for pair in ("N-CA CA-C C-O "+_SIDECHAIN_BONDS[aa]).split():
+                    a, b = pair.split("-")
+                    left, right = (chain, pos, a), (chain, pos, b)
+                    self.required.update((left, right))
+                    bond(left, right)
+                if pos > 1:
+                    bond((chain, pos-1, "C"), (chain, pos, "N"))
+            terminal = (chain, len(sequence), "OXT")
+            self.allowed.add(terminal)
+            bond((chain, len(sequence), "C"), terminal)
+        self.allowed.update(self.required)
+        disulfides = config.get("native_disulfides")
+        if not isinstance(disulfides, list):
+            raise ValueError("Explicit native_disulfides list is required")
+        bonds, used = set(), set()
+        for row in disulfides:
+            if not isinstance(row, dict):
+                raise ValueError("Native disulfide must be an object")
+            _labels(row.get("evidence_labels"))
+            keys = []
+            for label in ("left", "right"):
+                point = row.get(label)
+                if not isinstance(point, dict):
+                    raise ValueError("Disulfide requires two mapped SG endpoints")
+                c, pos = point.get("chain"), point.get("position")
+                if (not isinstance(c, str) or c not in sequences or type(pos) is not int
+                        or not 1 <= pos <= len(sequences[c]) or sequences[c][pos-1] != "C"
+                        or point.get("residue") != "C" or point.get("atom") != "SG"):
+                    raise ValueError("Disulfide endpoint must be a mapped CYS SG")
+                keys.append((c, pos, "SG"))
+            if keys[0] == keys[1] or any(k in used for k in keys):
+                raise ValueError("Disulfide endpoints must be distinct and singly paired")
+            used.update(keys)
+            bonds.add(frozenset(keys))
+            bond(*keys)
+        cysteines = {k for k in self.required if k[2] == "SG"}
+        if used != cysteines:
+            raise ValueError("Declared native disulfides must cover every CYS exactly once")
+        for assignment in assignments:
+            mapped = {frozenset((assignment[c], p, a) for c, p, a in pair) for pair in bonds}
+            if mapped != bonds:
+                raise ValueError("Native topology must be invariant under equivalent-copy assignments")
+        self.disulfide_count = len(bonds)
+        self.excluded = set()
+        # Only interchain exclusions are needed. The complete standard graph
+        # supplies the paths through an annotated interchain disulfide.
+        for key in graph:
+            visited, frontier = {key}, {key}
+            for _ in range(3):
+                frontier = {n for k in frontier for n in graph[k]}-visited
+                visited.update(frontier)
+            self.excluded.update(frozenset((key, other)) for other in visited if key[0] != other[0])
+
+    def _read(self, path):
+        """Use legacy CA selection and one compatible heavy-atom conformer."""
+        residues = {}
+        for line in Path(path).read_text().splitlines():
+            if line[:6].strip() != "ATOM":
+                continue
+            # _read_ca has already validated every ATOM's identity, numbering,
+            # occupancy, finite coordinates and single-model boundaries.
+            c, pos = self.input[line[21]], int(line[22:26])
+            name, alt = line[12:16].strip(), line[16]
+            element = line[76:78].strip().upper() or name.lstrip("0123456789")[0]
+            if element in ("H", "D"):
+                if name.lstrip("0123456789")[0] not in ("H", "D"):
+                    raise ValueError("Heavy atom mislabeled as hydrogen")
+                continue
+            key = c, pos, name
+            if key not in self.allowed or element != name[0] or element not in _HEAVY_RADII:
+                raise ValueError(f"Unsupported heavy atom identity/element: {key}/{element}")
+            occupancy = float(line[54:60]) if line[54:60].strip() else 1.
+            if occupancy == 0:
+                continue
+            xyz = tuple(float(line[i:i+8]) for i in (30, 38, 46))
+            priority = (-occupancy, 0 if alt == " " else 1 if alt == "A" else 2, alt, xyz)
+            records = residues.setdefault((c, pos), {})
+            if (name, alt) not in records or priority < records[name, alt][0]:
+                records[name, alt] = priority, xyz, occupancy
+        atoms = {}
+        for (c, pos), records in residues.items():
+            ca = [(r[0], alt) for (name, alt), r in records.items() if name == "CA"]
+            ca_alt = min(ca)[1] if ca else " "
+            alts = sorted({alt for _, alt in records if alt != " "})
+            if ca_alt != " ":
+                selected = ca_alt
+            elif alts:
+                def priority(alt):
+                    values = [r[2] for (name, a), r in records.items() if a == alt]
+                    return -math.fsum(values)/len(values), alt != "A", alt
+                selected = min(alts, key=priority)
+            else:
+                selected = " "
+            for name in {name for name, _ in records}:
+                row = (records.get((name, ca_alt)) if name == "CA" else
+                       records.get((name, selected), records.get((name, " "))))
+                if row is not None:
+                    atoms[c, pos, name] = row[1]
+        return atoms
+
+    def score(self, path):
+        atoms = self._read(path)
+        missing = self.required-atoms.keys()
+        grid, rows, candidate_count, excluded_count = {}, [], 0, 0
+        offsets = tuple(itertools.product((-1, 0, 1), repeat=3))
+        for key in sorted(atoms):
+            if key[2][0] not in self.elements:
+                continue
+            xyz = atoms[key]
+            cell = tuple(math.floor(x/self.cutoff) for x in xyz)
+            for offset in offsets:
+                neighbor = tuple(a+b for a, b in zip(cell, offset))
+                for other in grid.get(neighbor, ()):
+                    if key[0] == other[0]:
+                        continue
+                    candidate_count += 1
+                    if frozenset((key, other)) in self.excluded:
+                        excluded_count += 1
+                        continue
+                    distance = math.dist(xyz, atoms[other])
+                    if not math.isfinite(distance):
+                        raise ValueError("Nonfinite heavy-atom distance")
+                    overlap = _HEAVY_RADII[key[2][0]]+_HEAVY_RADII[other[2][0]]-distance
+                    excess = max(overlap-self.threshold, 0.)
+                    if excess:
+                        z = excess/self.scale
+                        severity = -math.expm1(-.5*z*z)
+                        rows.append({"atoms": [key, other], "distance_angstrom": distance,
+                                     "overlap_angstrom": overlap, "severity": severity})
+            grid.setdefault(cell, []).append(key)
+        total = math.fsum(r["severity"] for r in rows)
+        normalized = total/self.pair_scale
+        if not math.isfinite(normalized):
+            raise ValueError("Nonfinite normalized heavy-atom overlap severity")
+        factor = (1. if self.strength == 0 else self.floor if missing else
+                  self.floor+(1-self.floor)*math.exp(-self.strength*normalized))
+        return {"factor": factor, "overlap_pair_count": len(rows), "severity_sum": total,
+                "normalized_overlap": normalized, "strength": self.strength, "factor_floor": self.floor,
+                "pair_scale": self.pair_scale, "overlap_threshold_angstrom": self.threshold,
+                "overlap_scale_angstrom": self.scale, "elements": sorted(self.elements),
+                "required_heavy_atoms": len(self.required), "observed_required_heavy_atoms": len(self.required)-len(missing),
+                "missing_heavy_atoms": [list(k) for k in sorted(missing)],
+                "status": "unassessed_missing_heavy_atoms_factor_floor" if missing else "assessed_geometric_overlaps",
+                "candidate_interchain_pairs": candidate_count, "excluded_topology_candidate_pairs": excluded_count,
+                "native_disulfide_count": self.disulfide_count,
+                "worst_overlaps": sorted(rows, key=lambda r: (-r["overlap_angstrom"], r["atoms"]))[:20],
+                "method": "Interchain geometric overlaps; fixed annotated and standard covalent graph excludes 1–2/1–3/1–4; no distance-inferred bonds or CONECT",
+                "interpretation": "Bounded engineering safeguard, not calibrated physical acceptance, energy or MolProbity clashscore"}
+
+
 class MappedDistanceReward:
     """Freeze a verified specification and score single-model standard PDBs."""
 
@@ -432,10 +646,14 @@ class MappedDistanceReward:
                 endpoints.append((chain, pos))
             if endpoints[0] == endpoints[1]:
                 raise ValueError("Distance pair endpoints must be different atoms")
+            feature = pair.get("distance_feature", "gaussian")
+            if feature not in ("gaussian", "cauchy") or (feature != "gaussian" and self._version < 2):
+                raise ValueError("distance_feature must be gaussian or version-2/3 cauchy")
             self._pairs.append({"id": name, "endpoints": tuple(endpoints),
                                 "distance": _positive(pair.get("distance_angstrom"), "distance"),
                                 "sigma": _positive(pair.get("sigma_angstrom"), "sigma"),
                                 "weight": _positive(pair.get("weight"), "weight"),
+                                "distance_feature": feature,
                                 "evidence_labels": _labels(pair.get("evidence_labels"))})
         try:
             self._total_weight = math.fsum(p["weight"] for p in self._pairs)
@@ -449,6 +667,12 @@ class MappedDistanceReward:
                 spec.get("local_geometry_modules"), self._sequences, self._interfaces)
         elif "local_geometry_modules" in spec:
             raise ValueError("Local geometry modules require schema version 3")
+        self._heavy_guard = None
+        if "heavy_atom_safeguard" in spec:
+            if self._version < 2:
+                raise ValueError("heavy_atom_safeguard requires schema version 2 or 3")
+            self._heavy_guard = _HeavyAtomSafeguard(spec["heavy_atom_safeguard"], self._sequences,
+                                                  self._input, self._assignments)
         self.metadata = {
             "kind": "mapped_ca_distance", "schema_version": self._version,
             "target_id": spec.get("target_id"), "scope": spec.get("scope"),
@@ -477,6 +701,18 @@ class MappedDistanceReward:
                 "local_geometry_missing_policy": "Any absent or degenerate measurement gives at least missing_geometry_error; three-angle denominator remains fixed.",
                 "local_geometry_altloc_policy": "Use the legacy selected CA conformer if nonblank; otherwise choose one residue conformer by mean required-atom occupancy, then A/lexical. Blank atoms are shared; incompatible alternate conformers are never mixed within local geometry.",
                 "limited_scope": "Sparse CA and local heavy-atom geometry priors only; not all-atom packing, explicit-hydrogen chemistry, physical energy, affinity, or independent structural accuracy."})
+        if any(p["distance_feature"] == "cauchy" for p in self._pairs):
+            self.metadata["distance_feature_definitions"] = {
+                "gaussian": "exp(-0.5*((distance-target)/sigma)^2)",
+                "cauchy": "1/(1+((distance-target)/sigma)^2); sigma is the half-maximum distance error"}
+        if self._version >= 2 and any("required_subgroups" in g for g in self._interfaces):
+            self.metadata["required_subgroup_definition"] = "Each interface is the minimum of its complete, disjoint subgroups' fixed-denominator weighted means under one assignment"
+        if self._heavy_guard is not None:
+            self.metadata.update({
+                "score_definition": self.metadata["score_definition"]+" * heavy_atom_safeguard_factor",
+                "heavy_atom_safeguard_definition": "floor+(1-floor)*exp(-strength*sum(1-exp(-0.5*(max(overlap-threshold,0)/scale)^2))/pair_scale); missing required heavy atoms give floor; strength zero gives exactly one",
+                "heavy_atom_topology": "Standard atom-name and peptide bonds plus explicit symmetric native disulfides; no coordinate inference or CONECT; exclude 1–2/1–3/1–4",
+                "limited_scope": self.metadata["limited_scope"]+" Includes a bounded interchain heavy-atom overlap safeguard, not calibrated physical validation."})
 
     def _configure_joint(self, spec):
         groups = spec.get("interface_groups")
@@ -499,8 +735,29 @@ class MappedDistanceReward:
                 raise ValueError("Each interface pair must touch its receptor exactly once")
             seen.update(members)
             group_ids.add(name)
-            self._interfaces.append(dict(id=name, receptor_chain=receptor, type=group["type"],
-                                         pair_ids=list(members), weight=_positive(group.get("weight"), "interface weight")))
+            configured = dict(id=name, receptor_chain=receptor, type=group["type"],
+                              pair_ids=list(members), weight=_positive(group.get("weight"), "interface weight"))
+            if "required_subgroups" in group:
+                subgroups = group["required_subgroups"]
+                if not isinstance(subgroups, list) or len(subgroups) < 2:
+                    raise ValueError("required_subgroups must contain at least two disjoint groups")
+                subgroup_ids, covered, configured_subgroups = set(), set(), []
+                for subgroup in subgroups:
+                    if not isinstance(subgroup, dict):
+                        raise ValueError("Required subgroup must be an object")
+                    sid, ids = subgroup.get("id"), subgroup.get("pair_ids")
+                    if (not isinstance(sid, str) or not sid or sid in subgroup_ids
+                            or not isinstance(ids, list) or not ids
+                            or any(not isinstance(p, str) or p not in members for p in ids)
+                            or len(set(ids)) != len(ids) or covered.intersection(ids)):
+                        raise ValueError("Invalid, duplicate, overlapping or unknown required subgroup")
+                    subgroup_ids.add(sid)
+                    covered.update(ids)
+                    configured_subgroups.append({"id": sid, "pair_ids": list(ids)})
+                if covered != set(members):
+                    raise ValueError("required_subgroups must partition every interface pair exactly once")
+                configured["required_subgroups"] = configured_subgroups
+            self._interfaces.append(configured)
         if seen != set(expected):
             raise ValueError("Every interface pair must belong to exactly one group")
         fraction = spec.get("aggregation", {}).get("minimum_fraction")
@@ -641,7 +898,17 @@ class MappedDistanceReward:
             pairs = [by_id[p] for p in group["pair_ids"]]
             denominator = math.fsum(p["weight"] for p in pairs)
             value = math.fsum(p["weight"] * p["feature"] for p in pairs) / denominator
-            copies.append({**group, "score": value,
+            extra = {}
+            if "required_subgroups" in group:
+                subgroups = []
+                for subgroup in group["required_subgroups"]:
+                    selected = [by_id[p] for p in subgroup["pair_ids"]]
+                    score = math.fsum(p["weight"]*p["feature"] for p in selected)/math.fsum(p["weight"] for p in selected)
+                    subgroups.append({**subgroup, "score": score, "present_pairs": sum(p["present"] for p in selected),
+                                      "total_pairs": len(selected)})
+                extra = {"unpartitioned_weighted_mean": value, "subgroup_scores": subgroups}
+                value = min(s["score"] for s in subgroups)
+            copies.append({**group, "score": value, **extra,
                            "present_pairs": sum(p["present"] for p in pairs), "total_pairs": len(pairs)})
         mean = math.fsum(c["weight"] * c["score"] for c in copies) / math.fsum(c["weight"] for c in copies)
         minimum = min(c["score"] for c in copies)
@@ -662,6 +929,7 @@ class MappedDistanceReward:
         geometry_atoms, conformers = read_local_geometry_atoms(pdb_path, self._sequences, self._input, self._geometry_modules) if self._version == 3 else ({}, [])
         overlaps = self._overlaps(atoms, self._guard["ca_clash_distance_angstrom"] if self._version >= 2 else None)
         physical_guard = self._physical_guard(atoms, overlaps) if self._version >= 2 else None
+        heavy_guard = self._heavy_guard.score(pdb_path) if self._heavy_guard is not None else None
         best, best_key = None, None
         for assignment in self._assignments:
             rows = []
@@ -674,7 +942,8 @@ class MappedDistanceReward:
                     if not math.isfinite(distance):
                         raise ValueError("Nonfinite pair distance")
                     z = abs(distance - pair["distance"]) / pair["sigma"]
-                    value = math.exp(-0.5 * z * z)
+                    value = ((1/math.hypot(1., z))**2 if pair["distance_feature"] == "cauchy"
+                             else math.exp(-0.5 * z * z))
                 rows.append({"id": pair["id"], "feature": value,
                              "distance_angstrom": distance, "present": present,
                              "weight": pair["weight"],
@@ -689,6 +958,10 @@ class MappedDistanceReward:
                 joint.update({"ca_reward_under_selected_assignment": reward,
                               "local_geometry": geometry, "local_geometry_factor": factor,
                               "local_geometry_conformers": conformers, "reward": reward*factor})
+                reward = joint["reward"]
+            if heavy_guard is not None:
+                joint.update({"reward_before_heavy_atom_safeguard": reward,
+                              "heavy_atom_safeguard": heavy_guard, "reward": reward*heavy_guard["factor"]})
                 reward = joint["reward"]
             present_weight = math.fsum(p["weight"] for p in rows if p["present"])
             covered = sum(p["present"] for p in rows)
