@@ -250,6 +250,31 @@
         },
         {
           "result": "Optional bounded atom-overlap guard retained as a separate unimplemented proposal; no raw clash-count penalty activated."
+        },
+        {
+          "recorded_at": "2026-10-14T17:57:48.100993+00:00",
+          "recipe_id": "bmp6_joint_n60_local_v3",
+          "job_ids": [
+            "58134296",
+            "58134297",
+            "58134298"
+          ],
+          "status": "completed_evaluated_partial_local_rescue",
+          "result": "V3 tau 0.8 sample 1 reduces N60 receptor-fit CA errors to 1.16/1.74 A versus v1 best 4.12/3.89 A, but has 102 severe CNO interchain overlaps. V3 tau 0.1 preserves prior docking without repairing N60. Retain improved-loop alternative and prior overall candidate; no failure generalized from a single tau.",
+          "artifact_references": [
+            {
+              "path": "artifacts/bmp90/evaluation/paid_wave8_completed_20261014/results.json",
+              "sha256": "a379336bf5dd57eb18d0b4c336703e65a9005975a2b86cb06765a28f6d265ddb"
+            },
+            {
+              "path": "artifacts/bmp90/evaluation/bmp6_v3_diagnosis_20261014/diagnosis.json",
+              "sha256": "0096585302f46dc50d845f7b752f9bc64acf1656842a0ba7ae94dce05eb8e324"
+            },
+            {
+              "path": "artifacts/bmp90/evaluation/bmp6_v3_diagnosis_20261014/identity_and_core_overlap_check.json",
+              "sha256": "32a6d07ad7b4d69124d998b5eaedcc76c444464e77609e68df2544e847a0faf8"
+            }
+          ]
         }
       ],
       "status": "documented_residual_defects_revision_submitted",
@@ -354,6 +379,28 @@
             "58134310"
           ],
           "result": "Wave8 revised joint constraints, tau0.1/0.3/0.8; preflight passed, sampled outcomes pending."
+        },
+        {
+          "recorded_at": "2026-10-14T17:57:48.100993+00:00",
+          "recipe_id": "bmp7_alk2_joint_v2",
+          "job_ids": [
+            "58134299",
+            "58134300",
+            "58134301"
+          ],
+          "status": "completed_evaluated_typeI_failure_persists",
+          "result": "Added mapped type-I anchors and broad/fine kernels did not recover the missing ACVR1 copy across the tau sweep. Type-II recovery remains 0/0/4 guided models; best tau 0.8 type-II DockQ 0.722/0.716 and 151 severe CNO overlaps versus v1 0.724/0.746 and 64. Keep v1 as provisional overall parent and revise missing-copy placement.",
+          "artifact_references": [
+            {
+              "path": "artifacts/bmp90/evaluation/paid_wave8_completed_20261014/results.json",
+              "sha256": "a379336bf5dd57eb18d0b4c336703e65a9005975a2b86cb06765a28f6d265ddb"
+            },
+            {
+              "path": "artifacts/bmp90/evaluation/bmp7_alk2_revision_v2_20261014/scientific_summary.json",
+              "sha256": "a138b234b0ce77b4c6017f8f7a4f2e38f6c569182e1e6369dee88d1e4cd36d98"
+            }
+          ],
+          "qualification": "Experimental reference covers only conserved type-II species-surrogate interfaces. Type-I common-score dissatisfaction is not experimental evidence against binding."
         }
       ],
       "artifact_references": [
@@ -460,6 +507,31 @@
             "58134307"
           ],
           "result": "Wave8 revised joint constraints, tau0.1/0.3/0.8; preflight passed, sampled outcomes pending."
+        },
+        {
+          "recorded_at": "2026-10-14T17:57:48.100993+00:00",
+          "recipe_id": "bmp6_joint_n60_local_v3",
+          "job_ids": [
+            "58134296",
+            "58134297",
+            "58134298"
+          ],
+          "status": "completed_evaluated_partial_local_rescue",
+          "result": "V3 tau 0.8 sample 1 reduces N60 receptor-fit CA errors to 1.16/1.74 A versus v1 best 4.12/3.89 A, but has 102 severe CNO interchain overlaps. V3 tau 0.1 preserves prior docking without repairing N60. Retain improved-loop alternative and prior overall candidate; no failure generalized from a single tau.",
+          "artifact_references": [
+            {
+              "path": "artifacts/bmp90/evaluation/paid_wave8_completed_20261014/results.json",
+              "sha256": "a379336bf5dd57eb18d0b4c336703e65a9005975a2b86cb06765a28f6d265ddb"
+            },
+            {
+              "path": "artifacts/bmp90/evaluation/bmp6_v3_diagnosis_20261014/diagnosis.json",
+              "sha256": "0096585302f46dc50d845f7b752f9bc64acf1656842a0ba7ae94dce05eb8e324"
+            },
+            {
+              "path": "artifacts/bmp90/evaluation/bmp6_v3_diagnosis_20261014/identity_and_core_overlap_check.json",
+              "sha256": "32a6d07ad7b4d69124d998b5eaedcc76c444464e77609e68df2544e847a0faf8"
+            }
+          ]
         }
       ],
       "artifact_references": [
@@ -625,5 +697,5 @@
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-14T16:33:42.944781+00:00"
+  "updated_at": "2026-10-14T17:57:48.100993+00:00"
 }

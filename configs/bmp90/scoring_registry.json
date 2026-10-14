@@ -960,15 +960,42 @@
     },
     "BMP6_ACVR1_ACVR2B": {
       "reference_structure": "9N4K",
-      "best_recipe_id": null,
+      "best_recipe_id": "bmp6_joint_v1",
       "previous_best_recipe_ids": [],
-      "ranking_status": "One tau0.1 paired population evaluated; same-ancestor reference recovery enriched, physical acceptance and independent-run robustness unassessed. Best recipe remains unassigned.",
-      "ranking_history": [],
+      "ranking_status": "Provisional overall preference: v1 at tau 0.1. V3 at tau 0.8 supplies an improved N60-loop candidate with worse whole-assembly sterics; retain it as a targeted-repair alternative.",
+      "ranking_history": [
+        {
+          "recorded_at": "2026-10-14T17:57:48.100993+00:00",
+          "previous_best_recipe_id": null,
+          "best_recipe_id": "bmp6_joint_v1",
+          "preferred_settings": {
+            "tau": 0.1,
+            "beta": 4,
+            "job_id": "58107636",
+            "zero_based_sample": 9
+          },
+          "reason": "Across all tested tau, the new v3 recipe has not surpassed the prior overall candidate. V3 tau 0.8 improves the targeted N60 region but retains 102 severe CNO interchain overlaps. A weak tau alone is not a rejection criterion.",
+          "reports": [
+            {
+              "path": "artifacts/bmp90/evaluation/paid_wave8_completed_20261014/results.json",
+              "sha256": "a379336bf5dd57eb18d0b4c336703e65a9005975a2b86cb06765a28f6d265ddb"
+            },
+            {
+              "path": "artifacts/bmp90/evaluation/bmp6_v3_diagnosis_20261014/diagnosis.json",
+              "sha256": "0096585302f46dc50d845f7b752f9bc64acf1656842a0ba7ae94dce05eb8e324"
+            },
+            {
+              "path": "artifacts/bmp90/evaluation/bmp6_v3_diagnosis_20261014/identity_and_core_overlap_check.json",
+              "sha256": "32a6d07ad7b4d69124d998b5eaedcc76c444464e77609e68df2544e847a0faf8"
+            }
+          ]
+        }
+      ],
       "recipes": [
         {
           "recipe_id": "bmp6_joint_v1",
-          "rank": null,
-          "status": "one_paired_run_evaluated_unranked",
+          "rank": 1,
+          "status": "provisional_preferred_overall_with_residual_defects",
           "comparison_group": "deposited_native_no_tags_716",
           "parent_relationships": [
             {
@@ -4725,8 +4752,8 @@
         },
         {
           "recipe_id": "bmp6_joint_n60_local_v3",
-          "rank": null,
-          "status": "submitted_unranked",
+          "rank": 2,
+          "status": "evaluated_local_geometry_alternative_not_overall_preferred",
           "parent_relationships": [
             {
               "recipe_id": "bmp6_joint_v1",
@@ -5855,7 +5882,7 @@
               "campaign": "bmp90-paid-wave8-20261014",
               "arm": "bmp6_joint_v3",
               "submitted_at": "2026-10-14T15:24:20.037141+00:00",
-              "status": "submitted",
+              "status": "completed_evaluated",
               "runtime_revision": "ce0dff00a473e4acc3e4d251a7fe0cffc700b8ff",
               "scoring_sha256": "f59e3389356db55978494954058a616f9e8a61f688a4d9d7961fb1d3c7c1a12f",
               "sampling": {
@@ -5898,8 +5925,89 @@
               "manifest_sha256": "214bf7698375efcab6b96050fa03b482f0fd1142ff505b40c600e8d42435bb97",
               "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134296",
               "last_observed_slurm": {
-                "state": "RUNNING",
-                "observed_at": "2026-10-14T16:30:18+00:00"
+                "sampling_state": "COMPLETED",
+                "sampling_exit_code": "0:0",
+                "sampling_elapsed_seconds": 3746,
+                "evaluation_state": "COMPLETED",
+                "evaluation_exit_code": "0:0",
+                "observed_at": "2026-10-14T17:55:37.111668+00:00"
+              },
+              "completed_evaluation_readout": {
+                "recorded_at": "2026-10-14T17:55:37.111668+00:00",
+                "report_path": "artifacts/bmp90/evaluation/paid_wave8_completed_20261014/results.json",
+                "report_sha256": "a379336bf5dd57eb18d0b4c336703e65a9005975a2b86cb06765a28f6d265ddb",
+                "conditions": {
+                  "baseline": {
+                    "covered_ge06": 1,
+                    "covered_gt05": 1,
+                    "median_weakest": 0.01832655234442339,
+                    "best_by_weakest_covered": {
+                      "sample": 2,
+                      "dockq": {
+                        "C": 0.6507670921042866,
+                        "D": 0.6461649981149936,
+                        "E": 0.8846521706594954,
+                        "F": 0.8971873690806995
+                      },
+                      "weakest_covered": 0.6461649981149936,
+                      "reward": 0.6626818567914484,
+                      "ancestor": 2,
+                      "pdb": "artifacts/remote-runs/58134296/baseline/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_2.pdb",
+                      "guidance_min": 0.8352291297023848,
+                      "severe_interchain_CNO_overlaps_gt1A": 12
+                    },
+                    "all_guidance_ge05": 1,
+                    "resamplings": 0,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "fk": {
+                    "covered_ge06": 4,
+                    "covered_gt05": 4,
+                    "median_weakest": 0.01968216408834142,
+                    "best_by_weakest_covered": {
+                      "sample": 0,
+                      "dockq": {
+                        "C": 0.6621339509867886,
+                        "D": 0.654307426337296,
+                        "E": 0.8886009051860463,
+                        "F": 0.8820149299437617
+                      },
+                      "weakest_covered": 0.654307426337296,
+                      "reward": 0.7192600129401872,
+                      "ancestor": 2,
+                      "pdb": "artifacts/remote-runs/58134296/fk/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_0.pdb",
+                      "guidance_min": 0.8835090078508223,
+                      "severe_interchain_CNO_overlaps_gt1A": 15
+                    },
+                    "all_guidance_ge05": 4,
+                    "resamplings": 1,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      7,
+                      8
+                    ]
+                  }
+                },
+                "limits": [
+                  "DockQ>=0.6 is a descriptive bin, not calibrated physical acceptance.",
+                  "BMP6 uses engineered9N4K observed-core target-reference recovery; BMP7 covers typeII conserved species-surrogate E/F only, with typeI C/D unassessed.",
+                  "Changed rewards are not comparable across recipes; original fine-score and local-geometry comparisons recorded separately.",
+                  "FK descendants are correlated. Severe interchain CNO overlaps >1A are a geometric diagnostic; this summary computes them for the best weakest-covered-DockQ model per phase."
+                ]
               }
             },
             {
@@ -5909,7 +6017,7 @@
               "campaign": "bmp90-paid-wave8-20261014",
               "arm": "bmp6_joint_v3",
               "submitted_at": "2026-10-14T15:24:20.121779+00:00",
-              "status": "submitted",
+              "status": "completed_evaluated",
               "runtime_revision": "ce0dff00a473e4acc3e4d251a7fe0cffc700b8ff",
               "scoring_sha256": "f59e3389356db55978494954058a616f9e8a61f688a4d9d7961fb1d3c7c1a12f",
               "sampling": {
@@ -5952,8 +6060,88 @@
               "manifest_sha256": "d2bc52fd4fe1f23c9e1a777936cb7c6a8683cbc5a181e38a49f1f742d1a62607",
               "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134297",
               "last_observed_slurm": {
-                "state": "RUNNING",
-                "observed_at": "2026-10-14T16:30:18+00:00"
+                "sampling_state": "COMPLETED",
+                "sampling_exit_code": "0:0",
+                "sampling_elapsed_seconds": 3741,
+                "evaluation_state": "COMPLETED",
+                "evaluation_exit_code": "0:0",
+                "observed_at": "2026-10-14T17:55:37.111668+00:00"
+              },
+              "completed_evaluation_readout": {
+                "recorded_at": "2026-10-14T17:55:37.111668+00:00",
+                "report_path": "artifacts/bmp90/evaluation/paid_wave8_completed_20261014/results.json",
+                "report_sha256": "a379336bf5dd57eb18d0b4c336703e65a9005975a2b86cb06765a28f6d265ddb",
+                "conditions": {
+                  "baseline": {
+                    "covered_ge06": 0,
+                    "covered_gt05": 1,
+                    "median_weakest": 0.01669000440883365,
+                    "best_by_weakest_covered": {
+                      "sample": 4,
+                      "dockq": {
+                        "C": 0.5684749041495887,
+                        "D": 0.5606001782347215,
+                        "E": 0.8845946085934676,
+                        "F": 0.8940669746975852
+                      },
+                      "weakest_covered": 0.5606001782347215,
+                      "reward": 0.6533328984146827,
+                      "ancestor": 4,
+                      "pdb": "artifacts/remote-runs/58134297/baseline/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_4.pdb",
+                      "guidance_min": 0.7847539040117407,
+                      "severe_interchain_CNO_overlaps_gt1A": 11
+                    },
+                    "all_guidance_ge05": 1,
+                    "resamplings": 0,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "fk": {
+                    "covered_ge06": 0,
+                    "covered_gt05": 4,
+                    "median_weakest": 0.018150246308257165,
+                    "best_by_weakest_covered": {
+                      "sample": 7,
+                      "dockq": {
+                        "C": 0.5712039153222661,
+                        "D": 0.5647450694046648,
+                        "E": 0.8880545154113652,
+                        "F": 0.8753761743671148
+                      },
+                      "weakest_covered": 0.5647450694046648,
+                      "reward": 0.6819002264397704,
+                      "ancestor": 4,
+                      "pdb": "artifacts/remote-runs/58134297/fk/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_7.pdb",
+                      "guidance_min": 0.8049473070196479,
+                      "severe_interchain_CNO_overlaps_gt1A": 8
+                    },
+                    "all_guidance_ge05": 4,
+                    "resamplings": 1,
+                    "ancestors": [
+                      3,
+                      4,
+                      5,
+                      6,
+                      8
+                    ]
+                  }
+                },
+                "limits": [
+                  "DockQ>=0.6 is a descriptive bin, not calibrated physical acceptance.",
+                  "BMP6 uses engineered9N4K observed-core target-reference recovery; BMP7 covers typeII conserved species-surrogate E/F only, with typeI C/D unassessed.",
+                  "Changed rewards are not comparable across recipes; original fine-score and local-geometry comparisons recorded separately.",
+                  "FK descendants are correlated. Severe interchain CNO overlaps >1A are a geometric diagnostic; this summary computes them for the best weakest-covered-DockQ model per phase."
+                ]
               }
             },
             {
@@ -5963,7 +6151,7 @@
               "campaign": "bmp90-paid-wave8-20261014",
               "arm": "bmp6_joint_v3",
               "submitted_at": "2026-10-14T15:24:20.200184+00:00",
-              "status": "submitted",
+              "status": "completed_evaluated",
               "runtime_revision": "ce0dff00a473e4acc3e4d251a7fe0cffc700b8ff",
               "scoring_sha256": "f59e3389356db55978494954058a616f9e8a61f688a4d9d7961fb1d3c7c1a12f",
               "sampling": {
@@ -6006,11 +6194,155 @@
               "manifest_sha256": "9d88c9367121d9ff6cf15a48db4164d2980121346e58504f6a6780aa92581789",
               "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134298",
               "last_observed_slurm": {
-                "state": "RUNNING",
-                "observed_at": "2026-10-14T16:30:18+00:00"
+                "sampling_state": "COMPLETED",
+                "sampling_exit_code": "0:0",
+                "sampling_elapsed_seconds": 3709,
+                "evaluation_state": "COMPLETED",
+                "evaluation_exit_code": "0:0",
+                "observed_at": "2026-10-14T17:55:37.111668+00:00"
+              },
+              "completed_evaluation_readout": {
+                "recorded_at": "2026-10-14T17:55:37.111668+00:00",
+                "report_path": "artifacts/bmp90/evaluation/paid_wave8_completed_20261014/results.json",
+                "report_sha256": "a379336bf5dd57eb18d0b4c336703e65a9005975a2b86cb06765a28f6d265ddb",
+                "conditions": {
+                  "baseline": {
+                    "covered_ge06": 0,
+                    "covered_gt05": 1,
+                    "median_weakest": 0.018877408169560208,
+                    "best_by_weakest_covered": {
+                      "sample": 8,
+                      "dockq": {
+                        "C": 0.5890493146464707,
+                        "D": 0.5443922314540236,
+                        "E": 0.7852952496098403,
+                        "F": 0.8032025833784422
+                      },
+                      "weakest_covered": 0.5443922314540236,
+                      "reward": 0.40992108198244354,
+                      "ancestor": 8,
+                      "pdb": "artifacts/remote-runs/58134298/baseline/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_8.pdb",
+                      "guidance_min": 0.8089746107407586,
+                      "severe_interchain_CNO_overlaps_gt1A": 122
+                    },
+                    "all_guidance_ge05": 1,
+                    "resamplings": 0,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "fk": {
+                    "covered_ge06": 1,
+                    "covered_gt05": 3,
+                    "median_weakest": 0.02034843537231077,
+                    "best_by_weakest_covered": {
+                      "sample": 1,
+                      "dockq": {
+                        "C": 0.6098433706020737,
+                        "D": 0.6230900211401925,
+                        "E": 0.8154950054011794,
+                        "F": 0.8225817804515897
+                      },
+                      "weakest_covered": 0.6098433706020737,
+                      "reward": 0.5973299110100941,
+                      "ancestor": 8,
+                      "pdb": "artifacts/remote-runs/58134298/fk/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_1.pdb",
+                      "guidance_min": 0.9379375947266458,
+                      "severe_interchain_CNO_overlaps_gt1A": 102
+                    },
+                    "all_guidance_ge05": 3,
+                    "resamplings": 1,
+                    "ancestors": [
+                      1,
+                      3,
+                      5,
+                      6,
+                      8
+                    ]
+                  }
+                },
+                "limits": [
+                  "DockQ>=0.6 is a descriptive bin, not calibrated physical acceptance.",
+                  "BMP6 uses engineered9N4K observed-core target-reference recovery; BMP7 covers typeII conserved species-surrogate E/F only, with typeI C/D unassessed.",
+                  "Changed rewards are not comparable across recipes; original fine-score and local-geometry comparisons recorded separately.",
+                  "FK descendants are correlated. Severe interchain CNO overlaps >1A are a geometric diagnostic; this summary computes them for the best weakest-covered-DockQ model per phase."
+                ]
               }
             }
-          ]
+          ],
+          "completed_run_diagnosis": {
+            "recorded_at": "2026-10-14T17:57:48.100993+00:00",
+            "reports": [
+              {
+                "path": "artifacts/bmp90/evaluation/paid_wave8_completed_20261014/results.json",
+                "sha256": "a379336bf5dd57eb18d0b4c336703e65a9005975a2b86cb06765a28f6d265ddb"
+              },
+              {
+                "path": "artifacts/bmp90/evaluation/bmp6_v3_diagnosis_20261014/diagnosis.json",
+                "sha256": "0096585302f46dc50d845f7b752f9bc64acf1656842a0ba7ae94dce05eb8e324"
+              },
+              {
+                "path": "artifacts/bmp90/evaluation/bmp6_v3_diagnosis_20261014/identity_and_core_overlap_check.json",
+                "sha256": "32a6d07ad7b4d69124d998b5eaedcc76c444464e77609e68df2544e847a0faf8"
+              },
+              {
+                "path": "artifacts/bmp90/evaluation/bmp6_v3_diagnosis_20261014/scientific_summary.json",
+                "sha256": "d8fa98775f0502abec304bc1141358696d94818a234ad35be3bcbb21d800bfae"
+              }
+            ],
+            "best_new_reference_recovery": {
+              "job_id": "58134296",
+              "tau": 0.1,
+              "zero_based_sample": 0,
+              "DockQ_CDEF": [
+                0.6621339509867886,
+                0.654307426337296,
+                0.8886009051860463,
+                0.8820149299437617
+              ],
+              "N60_CA_residual_after_receptor_fit_A": [
+                4.055718765110955,
+                3.9522024103033373
+              ],
+              "qualification": "No local N60 repair; coordinates nearly equal prior v2 best, shared-atom RMSD 0.000548 A."
+            },
+            "local_geometry_lead": {
+              "job_id": "58134298",
+              "tau": 0.8,
+              "zero_based_sample": 1,
+              "N60_CA_residual_after_receptor_fit_A": [
+                1.1632040360274554,
+                1.7402271236864542
+              ],
+              "prior_v1_tau01_best_N60_CA_residual_A": [
+                4.1168916604264085,
+                3.8899531132415164
+              ],
+              "matched_tau08_baseline_ancestor8_N60_CA_residual_A": [
+                3.582,
+                2.869
+              ],
+              "DockQ_CDEF": [
+                0.6098433706020737,
+                0.6230900211401925,
+                0.8154950054011794,
+                0.8225817804515897
+              ],
+              "severe_CNO_interchain_overlaps_gt1A": 102,
+              "all_heavy_interchain_overlaps_gt1A": 106,
+              "qualification": "Distinct overlap assays; CNO excludes sulfur. Engineered 9N4K observed-core recovery, not independent validation or calibrated physical acceptance."
+            },
+            "next_constraint_work": "Preserve improved local geometry while addressing ligand/type-II packing and full-construct overlaps; retain v1 overall candidate."
+          }
         }
       ],
       "current_iteration_parent": {
@@ -6018,6 +6350,21 @@
         "recorded_at": "2026-10-14T15:17:51.985529+00:00",
         "purpose": "Practical parent for this bounded revision; not calibrated full-assembly acceptance.",
         "revision_recipe_id": "bmp6_joint_n60_local_v3"
+      },
+      "metric_specific_leaders": {
+        "provisional_overall": {
+          "recipe_id": "bmp6_joint_v1",
+          "job_id": "58107636",
+          "tau": 0.1,
+          "zero_based_sample": 9
+        },
+        "local_N60_geometry_alternative": {
+          "recipe_id": "bmp6_joint_n60_local_v3",
+          "job_id": "58134298",
+          "tau": 0.8,
+          "zero_based_sample": 1,
+          "qualification": "N60 improved; severe whole-assembly clashes remain."
+        }
       }
     },
     "BMP6_BMPR1A_ACVR2B": {
@@ -12683,10 +13030,33 @@
     },
     "BMP7_ACVR1_ACVR2A": {
       "reference_structure": "1LX5 (partial mouse-receptor surrogate; no type-I coordinates)",
-      "best_recipe_id": null,
+      "best_recipe_id": "bmp7_alk2_joint_v1",
       "previous_best_recipe_ids": [],
-      "ranking_history": [],
-      "ranking_status": "Paid three-tau paired wave submitted; no empirical ranking until evaluation.",
+      "ranking_history": [
+        {
+          "recorded_at": "2026-10-14T17:57:48.100993+00:00",
+          "previous_best_recipe_id": null,
+          "best_recipe_id": "bmp7_alk2_joint_v1",
+          "preferred_settings": {
+            "tau": 0.8,
+            "beta": 12,
+            "job_id": "58121329",
+            "zero_based_sample": 8
+          },
+          "reason": "Across all tau, v2 failed to rescue the missing ACVR1 copy and did not improve overall structure quality. Type-II recovery counts are unchanged, with more clashes in the best covered-reference candidate.",
+          "reports": [
+            {
+              "path": "artifacts/bmp90/evaluation/paid_wave8_completed_20261014/results.json",
+              "sha256": "a379336bf5dd57eb18d0b4c336703e65a9005975a2b86cb06765a28f6d265ddb"
+            },
+            {
+              "path": "artifacts/bmp90/evaluation/bmp7_alk2_revision_v2_20261014/scientific_summary.json",
+              "sha256": "a138b234b0ce77b4c6017f8f7a4f2e38f6c569182e1e6369dee88d1e4cd36d98"
+            }
+          ]
+        }
+      ],
+      "ranking_status": "V1 beta 12, tau 0.8 remains provisional best observed candidate. Neither v1 nor v2 recovers both type-I copies; no accepted full assembly.",
       "reference_context": {
         "created_utc": "2026-10-13T18:50:07.419204+00:00",
         "active": false,
@@ -13796,8 +14166,8 @@
         },
         {
           "recipe_id": "bmp7_alk2_joint_v1",
-          "rank": null,
-          "status": "submitted_unranked",
+          "rank": 1,
+          "status": "provisional_preferred_partial_recovery_typeI_unresolved",
           "executable": true,
           "comparison_group": "human_native_untrimmed_716",
           "parent_relationships": [
@@ -16309,8 +16679,8 @@
         },
         {
           "recipe_id": "bmp7_alk2_joint_v2",
-          "rank": null,
-          "status": "submitted_unranked",
+          "rank": 2,
+          "status": "completed_evaluated_not_preferred",
           "parent_relationships": [
             {
               "recipe_id": "bmp7_alk2_joint_v1",
@@ -19794,7 +20164,7 @@
               "campaign": "bmp90-paid-wave8-20261014",
               "arm": "bmp7_alk2_v2",
               "submitted_at": "2026-10-14T15:24:20.548364+00:00",
-              "status": "submitted",
+              "status": "completed_evaluated",
               "runtime_revision": "ce0dff00a473e4acc3e4d251a7fe0cffc700b8ff",
               "scoring_sha256": "fdf1c31a82222ce4374deb661669c81e5460bd955a53c3da84f645a19929485a",
               "sampling": {
@@ -19837,8 +20207,88 @@
               "manifest_sha256": "36ed113b449ef713733c9e07479410ec21ea4fd8b145f8480fce74b3ec7c2205",
               "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134299",
               "last_observed_slurm": {
-                "state": "RUNNING",
-                "observed_at": "2026-10-14T16:30:18+00:00"
+                "sampling_state": "COMPLETED",
+                "sampling_exit_code": "0:0",
+                "sampling_elapsed_seconds": 6027,
+                "evaluation_state": "COMPLETED",
+                "evaluation_exit_code": "0:0",
+                "observed_at": "2026-10-14T17:55:37.111668+00:00"
+              },
+              "completed_evaluation_readout": {
+                "recorded_at": "2026-10-14T17:55:37.111668+00:00",
+                "report_path": "artifacts/bmp90/evaluation/paid_wave8_completed_20261014/results.json",
+                "report_sha256": "a379336bf5dd57eb18d0b4c336703e65a9005975a2b86cb06765a28f6d265ddb",
+                "conditions": {
+                  "baseline": {
+                    "covered_ge06": 0,
+                    "covered_gt05": 0,
+                    "median_weakest": 0.020027485892736438,
+                    "best_by_weakest_covered": {
+                      "sample": 2,
+                      "dockq": {
+                        "C": null,
+                        "D": null,
+                        "E": 0.02154918522011197,
+                        "F": 0.022447199788686308
+                      },
+                      "weakest_covered": 0.02154918522011197,
+                      "reward": 0.00903334991403684,
+                      "ancestor": 2,
+                      "pdb": "artifacts/remote-runs/58134299/baseline/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_2.pdb",
+                      "guidance_min": 5.618352405027512e-10,
+                      "severe_interchain_CNO_overlaps_gt1A": 193
+                    },
+                    "all_guidance_ge05": 0,
+                    "resamplings": 0,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "fk": {
+                    "covered_ge06": 0,
+                    "covered_gt05": 0,
+                    "median_weakest": 0.020180782183415916,
+                    "best_by_weakest_covered": {
+                      "sample": 1,
+                      "dockq": {
+                        "C": null,
+                        "D": null,
+                        "E": 0.021007760692818702,
+                        "F": 0.021237946725645513
+                      },
+                      "weakest_covered": 0.021007760692818702,
+                      "reward": 0.004522845563167393,
+                      "ancestor": 6,
+                      "pdb": "artifacts/remote-runs/58134299/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_1.pdb",
+                      "guidance_min": 3.9954321590708853e-10,
+                      "severe_interchain_CNO_overlaps_gt1A": 223
+                    },
+                    "all_guidance_ge05": 0,
+                    "resamplings": 1,
+                    "ancestors": [
+                      4,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  }
+                },
+                "limits": [
+                  "DockQ>=0.6 is a descriptive bin, not calibrated physical acceptance.",
+                  "BMP6 uses engineered9N4K observed-core target-reference recovery; BMP7 covers typeII conserved species-surrogate E/F only, with typeI C/D unassessed.",
+                  "Changed rewards are not comparable across recipes; original fine-score and local-geometry comparisons recorded separately.",
+                  "FK descendants are correlated. Severe interchain CNO overlaps >1A are a geometric diagnostic; this summary computes them for the best weakest-covered-DockQ model per phase."
+                ]
               }
             },
             {
@@ -19848,7 +20298,7 @@
               "campaign": "bmp90-paid-wave8-20261014",
               "arm": "bmp7_alk2_v2",
               "submitted_at": "2026-10-14T15:24:20.632857+00:00",
-              "status": "submitted",
+              "status": "completed_evaluated",
               "runtime_revision": "ce0dff00a473e4acc3e4d251a7fe0cffc700b8ff",
               "scoring_sha256": "fdf1c31a82222ce4374deb661669c81e5460bd955a53c3da84f645a19929485a",
               "sampling": {
@@ -19891,8 +20341,89 @@
               "manifest_sha256": "a97493dec44a0d5be04fdb4ba3919b48f3bbfae3c28330e2d4aa7834d492112d",
               "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134300",
               "last_observed_slurm": {
-                "state": "RUNNING",
-                "observed_at": "2026-10-14T16:30:18+00:00"
+                "sampling_state": "COMPLETED",
+                "sampling_exit_code": "0:0",
+                "sampling_elapsed_seconds": 6031,
+                "evaluation_state": "COMPLETED",
+                "evaluation_exit_code": "0:0",
+                "observed_at": "2026-10-14T17:55:37.111668+00:00"
+              },
+              "completed_evaluation_readout": {
+                "recorded_at": "2026-10-14T17:55:37.111668+00:00",
+                "report_path": "artifacts/bmp90/evaluation/paid_wave8_completed_20261014/results.json",
+                "report_sha256": "a379336bf5dd57eb18d0b4c336703e65a9005975a2b86cb06765a28f6d265ddb",
+                "conditions": {
+                  "baseline": {
+                    "covered_ge06": 0,
+                    "covered_gt05": 0,
+                    "median_weakest": 0.020443784401157072,
+                    "best_by_weakest_covered": {
+                      "sample": 6,
+                      "dockq": {
+                        "C": null,
+                        "D": null,
+                        "E": 0.028474449375499544,
+                        "F": 0.7920851240334584
+                      },
+                      "weakest_covered": 0.028474449375499544,
+                      "reward": 0.17021730602673368,
+                      "ancestor": 6,
+                      "pdb": "artifacts/remote-runs/58134300/baseline/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_6.pdb",
+                      "guidance_min": 4.6099486429958186e-10,
+                      "severe_interchain_CNO_overlaps_gt1A": 137
+                    },
+                    "all_guidance_ge05": 0,
+                    "resamplings": 0,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "fk": {
+                    "covered_ge06": 0,
+                    "covered_gt05": 0,
+                    "median_weakest": 0.020881225571393852,
+                    "best_by_weakest_covered": {
+                      "sample": 9,
+                      "dockq": {
+                        "C": null,
+                        "D": null,
+                        "E": 0.0284266817951013,
+                        "F": 0.7636339658503206
+                      },
+                      "weakest_covered": 0.0284266817951013,
+                      "reward": 0.18226674233177623,
+                      "ancestor": 6,
+                      "pdb": "artifacts/remote-runs/58134300/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_9.pdb",
+                      "guidance_min": 2.268744683117742e-10,
+                      "severe_interchain_CNO_overlaps_gt1A": 120
+                    },
+                    "all_guidance_ge05": 0,
+                    "resamplings": 1,
+                    "ancestors": [
+                      1,
+                      3,
+                      4,
+                      5,
+                      6,
+                      8
+                    ]
+                  }
+                },
+                "limits": [
+                  "DockQ>=0.6 is a descriptive bin, not calibrated physical acceptance.",
+                  "BMP6 uses engineered9N4K observed-core target-reference recovery; BMP7 covers typeII conserved species-surrogate E/F only, with typeI C/D unassessed.",
+                  "Changed rewards are not comparable across recipes; original fine-score and local-geometry comparisons recorded separately.",
+                  "FK descendants are correlated. Severe interchain CNO overlaps >1A are a geometric diagnostic; this summary computes them for the best weakest-covered-DockQ model per phase."
+                ]
               }
             },
             {
@@ -19902,7 +20433,7 @@
               "campaign": "bmp90-paid-wave8-20261014",
               "arm": "bmp7_alk2_v2",
               "submitted_at": "2026-10-14T15:24:20.715760+00:00",
-              "status": "submitted",
+              "status": "completed_evaluated",
               "runtime_revision": "ce0dff00a473e4acc3e4d251a7fe0cffc700b8ff",
               "scoring_sha256": "fdf1c31a82222ce4374deb661669c81e5460bd955a53c3da84f645a19929485a",
               "sampling": {
@@ -19945,11 +20476,123 @@
               "manifest_sha256": "dfe4f6be34c5384c1a3fe03864a294eaabfadfe52783ca46b455bc6d29b9a934",
               "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58134301",
               "last_observed_slurm": {
-                "state": "RUNNING",
-                "observed_at": "2026-10-14T16:30:18+00:00"
+                "sampling_state": "COMPLETED",
+                "sampling_exit_code": "0:0",
+                "sampling_elapsed_seconds": 5991,
+                "evaluation_state": "COMPLETED",
+                "evaluation_exit_code": "0:0",
+                "observed_at": "2026-10-14T17:55:37.111668+00:00"
+              },
+              "completed_evaluation_readout": {
+                "recorded_at": "2026-10-14T17:55:37.111668+00:00",
+                "report_path": "artifacts/bmp90/evaluation/paid_wave8_completed_20261014/results.json",
+                "report_sha256": "a379336bf5dd57eb18d0b4c336703e65a9005975a2b86cb06765a28f6d265ddb",
+                "conditions": {
+                  "baseline": {
+                    "covered_ge06": 1,
+                    "covered_gt05": 1,
+                    "median_weakest": 0.01601161823768872,
+                    "best_by_weakest_covered": {
+                      "sample": 1,
+                      "dockq": {
+                        "C": null,
+                        "D": null,
+                        "E": 0.7664096593166652,
+                        "F": 0.7268988720292299
+                      },
+                      "weakest_covered": 0.7268988720292299,
+                      "reward": 0.11063742040772913,
+                      "ancestor": 1,
+                      "pdb": "artifacts/remote-runs/58134301/baseline/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_1.pdb",
+                      "guidance_min": 0.0337422694055319,
+                      "severe_interchain_CNO_overlaps_gt1A": 222
+                    },
+                    "all_guidance_ge05": 0,
+                    "resamplings": 0,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "fk": {
+                    "covered_ge06": 4,
+                    "covered_gt05": 4,
+                    "median_weakest": 0.022405856674989906,
+                    "best_by_weakest_covered": {
+                      "sample": 1,
+                      "dockq": {
+                        "C": null,
+                        "D": null,
+                        "E": 0.7218361602591098,
+                        "F": 0.7163520649785124
+                      },
+                      "weakest_covered": 0.7163520649785124,
+                      "reward": 0.1359954945465485,
+                      "ancestor": 1,
+                      "pdb": "artifacts/remote-runs/58134301/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_1.pdb",
+                      "guidance_min": 0.039259059274351804,
+                      "severe_interchain_CNO_overlaps_gt1A": 151
+                    },
+                    "all_guidance_ge05": 0,
+                    "resamplings": 2,
+                    "ancestors": [
+                      1,
+                      2,
+                      5,
+                      9
+                    ]
+                  }
+                },
+                "limits": [
+                  "DockQ>=0.6 is a descriptive bin, not calibrated physical acceptance.",
+                  "BMP6 uses engineered9N4K observed-core target-reference recovery; BMP7 covers typeII conserved species-surrogate E/F only, with typeI C/D unassessed.",
+                  "Changed rewards are not comparable across recipes; original fine-score and local-geometry comparisons recorded separately.",
+                  "FK descendants are correlated. Severe interchain CNO overlaps >1A are a geometric diagnostic; this summary computes them for the best weakest-covered-DockQ model per phase."
+                ]
               }
             }
-          ]
+          ],
+          "completed_run_diagnosis": {
+            "recorded_at": "2026-10-14T17:57:48.100993+00:00",
+            "reports": [
+              {
+                "path": "artifacts/bmp90/evaluation/paid_wave8_completed_20261014/results.json",
+                "sha256": "a379336bf5dd57eb18d0b4c336703e65a9005975a2b86cb06765a28f6d265ddb"
+              },
+              {
+                "path": "artifacts/bmp90/evaluation/bmp7_alk2_revision_v2_20261014/scientific_summary.json",
+                "sha256": "a138b234b0ce77b4c6017f8f7a4f2e38f6c569182e1e6369dee88d1e4cd36d98"
+              }
+            ],
+            "summary": "Both type-II copies reach descriptive DockQ >=0.6 in 0/0/4 guided structures at tau 0.1/0.3/0.8, unchanged from v1. The best covered candidate has original fine type-I scores approximately 0/0.199 versus 0/0.139 previously; the missing copy remains 26-33 A from anchor partners.",
+            "best_covered_candidate_comparison": {
+              "old_job": "58121329",
+              "old_sample_zero_based": 8,
+              "new_job": "58134301",
+              "new_sample_zero_based": 1,
+              "old_typeII_DockQ": [
+                0.7243444669284416,
+                0.7459651698587693
+              ],
+              "new_typeII_DockQ": [
+                0.7218361602591098,
+                0.7163520649785124
+              ],
+              "old_severe_CNO_interchain_overlaps_gt1A": 64,
+              "new_severe_CNO_interchain_overlaps_gt1A": 151
+            },
+            "robustness": "All 30 baseline PDBs repeat the parent wave byte-for-byte. Guided descendants remain correlated; recovered tau 0.8 structures share ancestor 1.",
+            "next_constraint_work": "Keep the recovered type-II interface and revise the placement constraints for the missing ACVR1 copy. Avoid another repeat of this unchanged recipe.",
+            "reference_scope": "1LX5 conserved species-surrogate type-II E/F only; C/D type-I accuracy unassessed."
+          }
         }
       ],
       "current_iteration_parent": {
@@ -19957,6 +20600,16 @@
         "recorded_at": "2026-10-14T15:17:51.985529+00:00",
         "purpose": "Practical parent for this bounded revision; not calibrated full-assembly acceptance.",
         "revision_recipe_id": "bmp7_alk2_joint_v2"
+      },
+      "metric_specific_leaders": {
+        "provisional_partial_recovery_candidate": {
+          "recipe_id": "bmp7_alk2_joint_v1",
+          "job_id": "58121329",
+          "tau": 0.8,
+          "beta": 12,
+          "zero_based_sample": 8
+        },
+        "qualification": "Type-I placement remains unresolved and severe overlaps remain; no accepted full assembly."
       }
     },
     "BMP4_BMPR1A_ACVR2B": {
@@ -28499,6 +29152,14 @@
                   }
                 },
                 "qualification": "Single coherent parent assignment; thresholds descriptive, guidance satisfaction is not independent validation."
+              },
+              "last_observed_slurm": {
+                "sampling_state": "COMPLETED",
+                "sampling_exit_code": "0:0",
+                "sampling_elapsed_seconds": 3287,
+                "evaluation_state": "COMPLETED",
+                "evaluation_exit_code": "0:0",
+                "observed_at": "2026-10-14T17:55:37.111668+00:00"
               }
             },
             {
@@ -28717,6 +29378,14 @@
                   }
                 },
                 "qualification": "Single coherent parent assignment; thresholds descriptive, guidance satisfaction is not independent validation."
+              },
+              "last_observed_slurm": {
+                "sampling_state": "COMPLETED",
+                "sampling_exit_code": "0:0",
+                "sampling_elapsed_seconds": 3276,
+                "evaluation_state": "COMPLETED",
+                "evaluation_exit_code": "0:0",
+                "observed_at": "2026-10-14T17:55:37.111668+00:00"
               }
             },
             {
@@ -28934,6 +29603,14 @@
                   }
                 },
                 "qualification": "Single coherent parent assignment; thresholds descriptive, guidance satisfaction is not independent validation."
+              },
+              "last_observed_slurm": {
+                "sampling_state": "COMPLETED",
+                "sampling_exit_code": "0:0",
+                "sampling_elapsed_seconds": 3518,
+                "evaluation_state": "COMPLETED",
+                "evaluation_exit_code": "0:0",
+                "observed_at": "2026-10-14T17:55:37.111668+00:00"
               }
             }
           ],
@@ -30645,7 +31322,7 @@
       }
     }
   },
-  "updated_at": "2026-10-14T16:39:45.217580+00:00",
+  "updated_at": "2026-10-14T17:57:48.100993+00:00",
   "interface_evidence_registry": "configs/bmp90/interface_evidence_registry.json",
   "failure_registry": "configs/bmp90/failure_registry.json",
   "construct_policy": {
