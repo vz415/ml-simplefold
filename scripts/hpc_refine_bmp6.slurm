@@ -22,8 +22,10 @@ publish_dir="${SIMPLEFOLD_ARTIFACT_DIR:-/pub/ynkim4/ml-simplefold/artifacts}/run
 status=0
 python scripts/run_bmp6_refinement.py --output "$work_dir" "$@" || status=$?
 if [[ -d "$work_dir" ]]; then
-    mkdir -p "$stage_dir" "$publish_dir"
+    mkdir -p "$stage_dir"
     cp -a "$work_dir/." "$stage_dir/"
+    printf 'Recovery copy: %s\n' "$stage_dir"
+    mkdir -p "$publish_dir"
     cp -a "$stage_dir/." "$publish_dir/"
     printf 'Published BMP6 refinement: %s\n' "$publish_dir"
 fi

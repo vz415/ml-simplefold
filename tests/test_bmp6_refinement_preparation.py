@@ -60,7 +60,7 @@ def test_inputs_are_hash_locked(tmp_path):
 
 
 def test_constraint_selection_does_not_freeze_tail_repacking():
-    xml = ET.fromstring(protocol_xml([2, 4], Path('/tmp/relax.script')))
+    xml = ET.fromstring(protocol_xml([2, 4], Path('/tmp/relax.script'), residue_count=4))
     cst = xml.find('./MOVERS/AtomCoordinateCstMover')
     relax = xml.find('./MOVERS/FastRelax')
     assert cst.attrib['task_operations'] == 'core_for_constraints'
@@ -69,3 +69,7 @@ def test_constraint_selection_does_not_freeze_tail_repacking():
     assert relax.attrib['ramp_down_constraints'] == 'false'
     assert relax.find('MoveMap').attrib['jump'] == 'false'
     assert xml.find('./RESIDUE_SELECTORS/Index').attrib['resnums'] == '2,4'
+    assert xml.find('./RESIDUE_SELECTORS/Index[@name="noncore"]').attrib['resnums'] == '1,3,5'
+    task = xml.find('./TASKOPERATIONS/OperateOnResidueSubset')
+    assert task.attrib['selector'] == 'noncore'
+    assert 'flip_subset' not in task.attrib

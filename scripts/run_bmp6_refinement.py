@@ -116,8 +116,11 @@ def prepare_input(original, topology, output):
     return metadata
 
 
-def protocol_xml(core, script, sd=0.5):
+def protocol_xml(core, script, sd=0.5, residue_count=716):
     resnums = ','.join(map(str, core))
+    # Rosetta 3.13 lacks OperateOnResidueSubset.flip_subset. Include the added
+    # virtual root in the explicit complement so it cannot receive restraints.
+    complement = ','.join(str(i) for i in range(1, residue_count + 2) if i not in core)
     return f'''<ROSETTASCRIPTS>
   <SCOREFXNS>
     <ScoreFunction name="cart" weights="ref2015_cart">
@@ -126,10 +129,13 @@ def protocol_xml(core, script, sd=0.5):
       <Reweight scoretype="pro_close" weight="0.0"/>
     </ScoreFunction>
   </SCOREFXNS>
-  <RESIDUE_SELECTORS><Index name="core" resnums="{resnums}"/></RESIDUE_SELECTORS>
+  <RESIDUE_SELECTORS>
+    <Index name="core" resnums="{resnums}"/>
+    <Index name="noncore" resnums="{complement}"/>
+  </RESIDUE_SELECTORS>
   <TASKOPERATIONS>
     <RestrictToRepacking name="repack"/>
-    <OperateOnResidueSubset name="core_for_constraints" selector="core" flip_subset="true">
+    <OperateOnResidueSubset name="core_for_constraints" selector="noncore">
       <PreventRepackingRLT/>
     </OperateOnResidueSubset>
   </TASKOPERATIONS>
@@ -178,7 +184,8 @@ def main():
     script.write_text('repeat 1\nramp_repack_min 0.02 0.01 1.0\nramp_repack_min 0.25 0.01 1.0\n'
                       'ramp_repack_min 0.55 0.01 1.0\nramp_repack_min 1 0.00001 1.0\naccept_to_best\nendrepeat\n')
     xml = output / 'protocol.xml'
-    xml.write_text(protocol_xml(metadata['core_pose_indices'], script, config['core_backbone_sd_angstrom']))
+    xml.write_text(protocol_xml(metadata['core_pose_indices'], script, config['core_backbone_sd_angstrom'],
+                                metadata['residue_count']))
     receipt = dict(status='prepared', job_id=os.environ.get('SLURM_JOB_ID'), case=case,
                    source_commit=subprocess.check_output(['git', '-C', str(ROOT), 'rev-parse', 'HEAD'], text=True).strip(),
                    created_at=datetime.now(timezone.utc).isoformat(),
