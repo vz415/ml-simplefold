@@ -9,6 +9,11 @@
   Its reference-gap subsection links the dated audit and requires extra scrutiny
   for uncovered interfaces; no reference found is not proof of absence.
   It does not authorize execution; follow current user instructions for submissions.
+- Rank BMP90 recipes by the best overall evaluated structures obtained across
+  tau 0.1, 0.3, and 0.8, recording the winning settings. A weaker result at one
+  tau does not disqualify a recipe or require a separate investigation. Retain
+  all outcomes and robustness context; prioritize remaining structural defects.
+  See the workflow's guidance on selecting recipes across noise levels.
 - Read the global HPC access runbook in `~/.codex/docs/runbooks/hpc-access.md`.
 - Use direct laptop SSH to `hpc3y` (account `ynkim4`). The checkout is
   `/data/homezvol2/ynkim4/ml-simplefold`; the conda prefix is

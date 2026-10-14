@@ -194,6 +194,26 @@ satisfaction, reference agreement where available, independent evidence, physica
 checks, and run-level robustness. Raw reward values across different scoring
 definitions are not a ranking metric.
 
+### Select recipes across noise levels
+
+Vincent clarified on 2026-10-14 that the tau sweep searches for useful settings
+for each scoring function. Prefer the recipe and settings that produce the best
+overall evaluated structures across tau 0.1, 0.3, and 0.8. Consider per-interface
+DockQ where a suitable reference exists, support for uncovered interfaces, and
+whole-assembly physical quality together. The largest single DockQ or optimized
+reward alone does not define the best overall structure.
+
+A recipe need not improve at every tau. A weaker result at one noise level does
+not disqualify it when another setting produces better overall candidates. Keep
+all run outcomes, winning settings, seeds, ancestry, and reference qualifications
+in the registry. Treat cross-tau consistency as supporting robustness information;
+do not make uniform performance a prerequisite for choosing a useful recipe.
+Sampling variability is a possible explanation for an isolated weaker result,
+not an established cause. Do not spend experiments distinguishing contact-rule
+effects from sampling difficulty by default. Preserve successful constraints and
+address the remaining structural defects; investigate causes when a systematic
+problem obstructs progress.
+
 | Finding | Next action |
 | --- | --- |
 | Type I recovers well; type II fails | Preserve type-I rules and revise the type-II hypothesis |

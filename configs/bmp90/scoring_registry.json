@@ -9,11 +9,19 @@
       "type-I interface quality for both copies",
       "type-II interface quality for both copies",
       "physical geometry and clashes",
-      "consistency across samples, seeds and tau"
+      "consistency across samples, seeds and tau as supporting robustness context, not a requirement to improve at every tau"
     ],
     "reward_warning": "Raw optimized rewards are not comparable across different scoring functions.",
     "history": "Retain previous best recipes and append promotions to ranking_history. Do not overwrite their configurations.",
-    "construct_warning": "Different constructs require separate comparison groups and compatible baselines."
+    "construct_warning": "Different constructs require separate comparison groups and compatible baselines.",
+    "across_noise_selection": {
+      "user_clarification_date": "2026-10-14",
+      "primary_rule": "Prefer the recipe and settings producing the best overall evaluated structures across tau0.1,0.3,0.8. Combine per-interface reference agreement, support for uncovered interfaces, and whole-assembly physical quality.",
+      "isolated_weaker_result": "A weaker outcome at one tau does not disqualify a recipe or require a separate diagnostic experiment when another setting produces better overall candidates.",
+      "recording": "Retain all outcomes, winning tau/settings, seeds, ancestry, and reference scope. A selected best candidate is not an estimate of typical success or a calibrated acceptance claim.",
+      "iteration": "Preserve successful constraints and target remaining structural defects. Investigate sampling-versus-rule causes only when a systematic problem obstructs progress; isolated variability has no established causal explanation.",
+      "guidance": "docs/experiments/bmp90_workflow.md#select-recipes-across-noise-levels"
+    }
   },
   "future_sampling_defaults": {
     "tau_sweep": [
@@ -30637,7 +30645,7 @@
       }
     }
   },
-  "updated_at": "2026-10-14T16:33:42.944781+00:00",
+  "updated_at": "2026-10-14T16:39:45.217580+00:00",
   "interface_evidence_registry": "configs/bmp90/interface_evidence_registry.json",
   "failure_registry": "configs/bmp90/failure_registry.json",
   "construct_policy": {
