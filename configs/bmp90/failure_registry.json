@@ -246,13 +246,13 @@
       "followups": [
         {
           "recipe_id": "bmp6_joint_v2",
-          "result": "Frozen joint type-I contact-and-shape revision passed CPU score and official reference self-checks; awaiting checkpoint registration before three authorized A30 submissions. Type-II restraints and untrimmed constructs preserved."
+          "result": "Revision submitted as paid A30 jobs58118260/58118261/58118262 at tau0.1/0.3/0.8; CPU evaluations58118362/58118363/58118364 depend on successful sampling. No revised results yet."
         },
         {
           "result": "Optional bounded atom-overlap guard retained as a separate unimplemented proposal; no raw clash-count penalty activated."
         }
       ],
-      "status": "documented_residual_defects_revision_frozen_awaiting_registration",
+      "status": "documented_residual_defects_revision_submitted",
       "transfer_limits": "One correlated recovered lineage; source reference is an engineered glycosylated trap. Geometric overlap counts are not calibrated acceptance thresholds or MolProbity clashscores. Tail coordinates lack experimental coverage; no nonbinding inference."
     },
     {
@@ -290,5 +290,5 @@
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-14T01:08:54.001098+00:00"
+  "updated_at": "2026-10-14T03:28:26.754383+00:00"
 }

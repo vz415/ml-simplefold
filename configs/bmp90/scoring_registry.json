@@ -3160,12 +3160,38 @@
           "prepared_at": "2026-10-13T18:20:38.384484+00:00",
           "followup_recipe_ids": [
             "bmp6_joint_v2"
-          ]
+          ],
+          "provisional_reference_recovery_update": {
+            "recorded_at": "2026-10-14T03:28:26.754383+00:00",
+            "runs": {
+              "58107640": {
+                "baseline": {
+                  "n": 10,
+                  "median_min_interface_DockQ": 0.01887746169450013,
+                  "all_four_at_least_0p6": 0,
+                  "median_typeI": 0.050082370660458383,
+                  "median_typeII": 0.30763173318794534,
+                  "path": "artifacts/remote-runs/58107640/evaluation/baseline.json",
+                  "sha256": "3e93d9ee875bed5bd3c44136c2ca1aad1d606d9001e5049ee4457c3baab66189"
+                },
+                "fk": {
+                  "n": 10,
+                  "median_min_interface_DockQ": 0.019201045910561876,
+                  "all_four_at_least_0p6": 0,
+                  "median_typeI": 0.06806597239582463,
+                  "median_typeII": 0.7750510666733517,
+                  "path": "artifacts/remote-runs/58107640/evaluation/fk.json",
+                  "sha256": "66769b88cfec37308877ae728744206284ee50de6618cc46b8ac6977519ff2b1"
+                }
+              }
+            },
+            "qualification": "Descriptive all-four DockQ>=0.6 count, not calibrated acceptance. Same-reference recovery; descendants correlated. Physical/ancestry review pending. No recipe rank promotion."
+          }
         },
         {
           "recipe_id": "bmp6_joint_v2",
           "rank": null,
-          "status": "validated_awaiting_checkpoint_registration",
+          "status": "submitted_unranked",
           "comparison_group": "deposited_native_no_tags_716",
           "parent_relationships": [
             {
@@ -4354,7 +4380,35 @@
           },
           "expected_improvement": "Discriminate typeI placement and distorted local receptor shape that pass the original three anchors; preserve the useful typeII module.",
           "falsification": "Matched v2 populations fail to improve weakest-copy typeI DockQ and receptor-fitted shape, worsen typeII recovery, or increase severe physical defects despite higher new reward.",
-          "evidence_runs": [],
+          "evidence_runs": [
+            {
+              "run_id": "20261014T005849631765Z_BMP6_ACVR1_ACVR2B_bmp6_joint_v2_8478f7fe",
+              "job_id": "58118260",
+              "slot": "BMP6_ACVR1_ACVR2B_tau01_r1",
+              "status": "submitted",
+              "evaluation_job_id": "58118362",
+              "submitted_at": "2026-10-14T03:26:51.744488+00:00",
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58118260"
+            },
+            {
+              "run_id": "20261014T011411619304Z_BMP6_ACVR1_ACVR2B_bmp6_joint_v2_86141496",
+              "job_id": "58118261",
+              "slot": "BMP6_ACVR1_ACVR2B_tau03_r2",
+              "status": "submitted",
+              "evaluation_job_id": "58118363",
+              "submitted_at": "2026-10-14T03:26:51.830403+00:00",
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58118261"
+            },
+            {
+              "run_id": "20261014T011448871814Z_BMP6_ACVR1_ACVR2B_bmp6_joint_v2_fedc6349",
+              "job_id": "58118262",
+              "slot": "BMP6_ACVR1_ACVR2B_tau08_r3",
+              "status": "submitted",
+              "evaluation_job_id": "58118364",
+              "submitted_at": "2026-10-14T03:26:51.908757+00:00",
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58118262"
+            }
+          ],
           "successful_tau_values": [],
           "evidence_allocation": {
             "guidance": "18 interface CA pairs (6/typeIcopy,3/typeIIcopy) plus13integrity pairs,31total.",
@@ -4381,9 +4435,9 @@
               "E": 0.9999999999990731,
               "F": 0.9999999999694554
             },
-            "checkpoint_registration": "running",
+            "checkpoint_registration": "completed_three_ready_receipts",
             "qualification": "Diagnostic software and fixture check only; no sampled v2 performance or physical acceptance.",
-            "storage_delay": "First manifest and initial event exist after checkpoint hashing. Subsequent checkpoint metadata probes timed out; CPU registration remains active, no v2 GPU submissions."
+            "storage_delay": "Recovered; CPU58115051 completed successfully in17m22s. All three registrations ready before submission."
           }
         }
       ]
@@ -5360,7 +5414,73 @@
             "Full tails remain sampled; only experimentally observed core coordinates are required by the missing-core guard.",
             "Source BMPR1A species annotations conflict; only its human-identical observed core is evaluated.",
             "D69\u2013R413 CA guidance is a coarse salt-bridge pose proxy; it does not score side-chain charge or hydrogen-bond geometry."
-          ]
+          ],
+          "provisional_reference_recovery_update": {
+            "recorded_at": "2026-10-14T03:28:26.754383+00:00",
+            "runs": {
+              "58114263": {
+                "baseline": {
+                  "n": 10,
+                  "median_min_interface_DockQ": 0.013163685110049787,
+                  "all_four_at_least_0p6": 1,
+                  "median_typeI": 0.13553054369971101,
+                  "median_typeII": 0.018956412374876393,
+                  "path": "artifacts/remote-runs/58114263/evaluation/paid_analysis_58114301/baseline.json",
+                  "sha256": "3ea8519a328d9da56750a902cc8c74a94de13da109942f6b24c1260aeda6876f"
+                },
+                "fk": {
+                  "n": 10,
+                  "median_min_interface_DockQ": 0.7253121183770379,
+                  "all_four_at_least_0p6": 8,
+                  "median_typeI": 0.7296533970438337,
+                  "median_typeII": 0.8811172326661062,
+                  "path": "artifacts/remote-runs/58114263/evaluation/paid_analysis_58114301/fk.json",
+                  "sha256": "b4e75ea56a07deb455d351cc86fa37ad7a55c7138ddd6e8b5c477d814ff7d4c8"
+                }
+              },
+              "58114264": {
+                "baseline": {
+                  "n": 10,
+                  "median_min_interface_DockQ": 0.730342743138467,
+                  "all_four_at_least_0p6": 6,
+                  "median_typeI": 0.7381005013378608,
+                  "median_typeII": 0.8251652318834152,
+                  "path": "artifacts/remote-runs/58114264/evaluation/paid_analysis_58114302/baseline.json",
+                  "sha256": "4ea0a1a1b80c43c0bb941f384d2e7ae27298d34decef1f82bb553709a669be2e"
+                },
+                "fk": {
+                  "n": 10,
+                  "median_min_interface_DockQ": 0.7366807493553261,
+                  "all_four_at_least_0p6": 9,
+                  "median_typeI": 0.7413420745216561,
+                  "median_typeII": 0.8508263181457236,
+                  "path": "artifacts/remote-runs/58114264/evaluation/paid_analysis_58114302/fk.json",
+                  "sha256": "57d94d6305d09c05344385d54fd1bb6549ee235810b6cedb251bb3749402a40b"
+                }
+              },
+              "58114265": {
+                "baseline": {
+                  "n": 10,
+                  "median_min_interface_DockQ": 0.019752915540525308,
+                  "all_four_at_least_0p6": 1,
+                  "median_typeI": 0.050414979307582874,
+                  "median_typeII": 0.6481451796912908,
+                  "path": "artifacts/remote-runs/58114265/evaluation/paid_analysis_58114303/baseline.json",
+                  "sha256": "aabf3c14bee41c5976badad0c1ed14e747b3b29f1d5d10a535c5066c9843c630"
+                },
+                "fk": {
+                  "n": 10,
+                  "median_min_interface_DockQ": 0.7401820128357266,
+                  "all_four_at_least_0p6": 9,
+                  "median_typeI": 0.7473613693177188,
+                  "median_typeII": 0.8407450433855124,
+                  "path": "artifacts/remote-runs/58114265/evaluation/paid_analysis_58114303/fk.json",
+                  "sha256": "87bf0354e425b4771acae7ca349b28d1bc1eefd58e3096aaa4edad1a3be5fa23"
+                }
+              }
+            },
+            "qualification": "Descriptive all-four DockQ>=0.6 count, not calibrated acceptance. Same-reference recovery; descendants correlated. Physical/ancestry review pending. No recipe rank promotion."
+          }
         }
       ]
     },
@@ -17847,7 +17967,7 @@
       "historical_snapshot_note": "common_preparation_snapshot and optional_l61_geometry_snapshot preserve preimplementation proposal state. Current executabledefinitions and newruntime are in appended mapped recipes."
     }
   },
-  "updated_at": "2026-10-14T01:08:54.001098+00:00",
+  "updated_at": "2026-10-14T03:28:26.754383+00:00",
   "interface_evidence_registry": "configs/bmp90/interface_evidence_registry.json",
   "failure_registry": "configs/bmp90/failure_registry.json",
   "construct_policy": {
