@@ -3191,7 +3191,7 @@
         {
           "recipe_id": "bmp6_joint_v2",
           "rank": null,
-          "status": "submitted_unranked",
+          "status": "evaluated_provisional_unranked",
           "comparison_group": "deposited_native_no_tags_716",
           "parent_relationships": [
             {
@@ -4385,7 +4385,7 @@
               "run_id": "20261014T005849631765Z_BMP6_ACVR1_ACVR2B_bmp6_joint_v2_8478f7fe",
               "job_id": "58118260",
               "slot": "BMP6_ACVR1_ACVR2B_tau01_r1",
-              "status": "submitted",
+              "status": "completed_evaluated",
               "evaluation_job_id": "58118362",
               "submitted_at": "2026-10-14T03:26:51.744488+00:00",
               "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58118260"
@@ -4394,7 +4394,7 @@
               "run_id": "20261014T011411619304Z_BMP6_ACVR1_ACVR2B_bmp6_joint_v2_86141496",
               "job_id": "58118261",
               "slot": "BMP6_ACVR1_ACVR2B_tau03_r2",
-              "status": "submitted",
+              "status": "completed_evaluated",
               "evaluation_job_id": "58118363",
               "submitted_at": "2026-10-14T03:26:51.830403+00:00",
               "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58118261"
@@ -4403,7 +4403,7 @@
               "run_id": "20261014T011448871814Z_BMP6_ACVR1_ACVR2B_bmp6_joint_v2_fedc6349",
               "job_id": "58118262",
               "slot": "BMP6_ACVR1_ACVR2B_tau08_r3",
-              "status": "submitted",
+              "status": "completed_evaluated",
               "evaluation_job_id": "58118364",
               "submitted_at": "2026-10-14T03:26:51.908757+00:00",
               "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58118262"
@@ -4438,7 +4438,129 @@
             "checkpoint_registration": "completed_three_ready_receipts",
             "qualification": "Diagnostic software and fixture check only; no sampled v2 performance or physical acceptance.",
             "storage_delay": "Recovered; CPU58115051 completed successfully in17m22s. All three registrations ready before submission."
-          }
+          },
+          "completed_run_diagnosis": {
+            "recorded_at": "2026-10-14T06:14:20.870314+00:00",
+            "jobs": [
+              "58118260",
+              "58118261",
+              "58118262"
+            ],
+            "reports": [
+              {
+                "path": "artifacts/bmp90/evaluation/bmp6_v2_diagnosis/diagnosis.json",
+                "sha256": "e8cba589d64c86e95e13a7a9ce4b670c03d4459f799a7672fd0a75b8c24b9163"
+              },
+              {
+                "path": "artifacts/bmp90/evaluation/bmp6_v2_diagnosis/scientific_summary.json",
+                "sha256": "25827127b014522e89cd990cdba0ecdfe8934533f454f9aa9fde53665e29655c"
+              }
+            ],
+            "acceptance": "No calibrated physical acceptance; recipe ranking remains provisional.",
+            "finding": "N60 shape error persists. Descriptive all-four DockQ>=0.6 counts4/0/0; all-four>0.5 counts4/3/0. Weaker/later selection motivates beta6 followup at tau0.1/0.3, not more contacts or newtau0.8."
+          },
+          "followup_experiments": [
+            {
+              "job_id": "58121762",
+              "evaluation_job_id": "58121768",
+              "run_id": "20261014T062710190432Z_BMP6_ACVR1_ACVR2B_bmp6_joint_v2_b7afc371",
+              "campaign": "bmp90-paid-wave7-20261013",
+              "arm": "bmp6_beta6",
+              "submitted_at": "2026-10-14T06:29:57.347807+00:00",
+              "status": "submitted",
+              "runtime_revision": "5af05542f43f0af1b2b1f16c249996b3ddc8e730",
+              "scoring_sha256": "26c3b5e419a5cef9114564b278de963dc440915004c4eaf1b8302d58592aafe0",
+              "sampling": {
+                "beta": 6.0,
+                "brownian_seed": 75101,
+                "checkpoint_times": [
+                  0.1,
+                  0.3,
+                  0.6,
+                  0.75,
+                  0.9
+                ],
+                "comparison_scope": "Fresh baseline/guided populations share initial and Brownian streams within each job. BMP6 repeats prior seed arguments on A30 while changing beta4 to6; runtime differs. BMP4 factorial shares fresh seeds and A100 hardware across all four arms; beta and L61 toggles are the only planned changes. Repeated controls are not independent replication.",
+                "conditions_in_job": [
+                  "unguided",
+                  "full_interface_guidance_plus_target_specific_geometry"
+                ],
+                "expected_final_structures": 20,
+                "independent_population_id": "BMP6_ACVR1_ACVR2B_bmp6_joint_v2_bmp6_beta6_tau01_r1",
+                "initial_seed": 74101,
+                "model": "simplefold_3B",
+                "model_batch_size": 2,
+                "particles": 10,
+                "resampling_seed": 76101,
+                "samples": 10,
+                "steps": 500,
+                "tau": 0.1
+              },
+              "resources": {
+                "account": "eehui_lab_gpu",
+                "cpus": 4,
+                "gpu_count": 1,
+                "gpu_type": "A30",
+                "memory_gb": 48,
+                "partition": "gpu",
+                "qos": "normal",
+                "walltime_minutes": 180
+              },
+              "cpu_preflight_job_id": "58121360",
+              "manifest_sha256": "5234a6206dc5d6689cefb7b04776d9c4dca0585cbb0c6ff2912eec92defe7bf2",
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121762"
+            },
+            {
+              "job_id": "58121763",
+              "evaluation_job_id": "58121769",
+              "run_id": "20261014T062744376347Z_BMP6_ACVR1_ACVR2B_bmp6_joint_v2_c6fe4cef",
+              "campaign": "bmp90-paid-wave7-20261013",
+              "arm": "bmp6_beta6",
+              "submitted_at": "2026-10-14T06:29:57.427883+00:00",
+              "status": "submitted",
+              "runtime_revision": "5af05542f43f0af1b2b1f16c249996b3ddc8e730",
+              "scoring_sha256": "26c3b5e419a5cef9114564b278de963dc440915004c4eaf1b8302d58592aafe0",
+              "sampling": {
+                "beta": 6.0,
+                "brownian_seed": 75102,
+                "checkpoint_times": [
+                  0.1,
+                  0.3,
+                  0.6,
+                  0.75,
+                  0.9
+                ],
+                "comparison_scope": "Fresh baseline/guided populations share initial and Brownian streams within each job. BMP6 repeats prior seed arguments on A30 while changing beta4 to6; runtime differs. BMP4 factorial shares fresh seeds and A100 hardware across all four arms; beta and L61 toggles are the only planned changes. Repeated controls are not independent replication.",
+                "conditions_in_job": [
+                  "unguided",
+                  "full_interface_guidance_plus_target_specific_geometry"
+                ],
+                "expected_final_structures": 20,
+                "independent_population_id": "BMP6_ACVR1_ACVR2B_bmp6_joint_v2_bmp6_beta6_tau03_r2",
+                "initial_seed": 74102,
+                "model": "simplefold_3B",
+                "model_batch_size": 2,
+                "particles": 10,
+                "resampling_seed": 76102,
+                "samples": 10,
+                "steps": 500,
+                "tau": 0.3
+              },
+              "resources": {
+                "account": "eehui_lab_gpu",
+                "cpus": 4,
+                "gpu_count": 1,
+                "gpu_type": "A30",
+                "memory_gb": 48,
+                "partition": "gpu",
+                "qos": "normal",
+                "walltime_minutes": 180
+              },
+              "cpu_preflight_job_id": "58121360",
+              "manifest_sha256": "3920bf587a5bfbf0b1be583e53bf6f3c882dc8bfb641750bd45f075695ae48fe",
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121763"
+            }
+          ]
         }
       ]
     },
@@ -8759,7 +8881,2191 @@
               "limitation": "Tau and seeds vary together; ten recovered descendants come from two branches of common-start population."
             },
             "next_hypothesis": "Validate then test uncertain transferred D69-K331 restraint sensitivity with paired control/new seedtriplet; retain known typeII module and fullconstruct. Proposed, not submitted."
-          }
+          },
+          "followup_experiments": [
+            {
+              "job_id": "58121330",
+              "evaluation_job_id": "58121338",
+              "run_id": "20261014T061819421936Z_BMP7_BMPR1A_ACVR2A_bmp7_alk3_joint_v1_d9f41ad2",
+              "campaign": "bmp90-paid-wave6-20261013",
+              "arm": "alk3_control",
+              "submitted_at": "2026-10-14T06:19:21.245706+00:00",
+              "status": "submitted",
+              "runtime_revision": "5af05542f43f0af1b2b1f16c249996b3ddc8e730",
+              "scoring_sha256": "5e2abc989911651b9fbdd46c13daed62f8ed766d2fcccef9b08af2bc61bb67b4",
+              "sampling": {
+                "beta": 4.0,
+                "brownian_seed": 75601,
+                "checkpoint_times": [
+                  0.1,
+                  0.3,
+                  0.6,
+                  0.75,
+                  0.9
+                ],
+                "comparison_scope": "Fresh baseline/guided populations share initial and Brownian streams within each job. ALK2 repeats original seed arguments on A30 with beta changed4 to12, but runtime differs. ALK3 control/sensitivity share new seeds, tau and A100 hardware; historical v1 used A30. Tau and seed vary together in ALK2.",
+                "conditions_in_job": [
+                  "unguided",
+                  "full_interface_guidance_plus_target_specific_geometry"
+                ],
+                "expected_final_structures": 20,
+                "independent_population_id": "BMP7_BMPR1A_ACVR2A_bmp7_alk3_joint_v1_alk3_control_tau03_r1",
+                "initial_seed": 74601,
+                "model": "simplefold_3B",
+                "model_batch_size": 2,
+                "particles": 10,
+                "resampling_seed": 76601,
+                "samples": 10,
+                "steps": 500,
+                "tau": 0.3
+              },
+              "resources": {
+                "account": "eehui_lab_gpu",
+                "cpus": 4,
+                "gpu_count": 1,
+                "gpu_type": "A100",
+                "memory_gb": 48,
+                "partition": "gpu",
+                "qos": "normal",
+                "walltime_minutes": 180
+              },
+              "cpu_preflight_job_id": "58121302",
+              "manifest_sha256": "b14eba834d1bf69b421ac60680b26c37971054339bede36a9959792e3323cd9c",
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121330"
+            }
+          ]
+        },
+        {
+          "recipe_id": "bmp7_alk3_D69_K331_low01_v1",
+          "rank": null,
+          "status": "submitted_unranked",
+          "parent_relationships": [
+            {
+              "recipe_id": "bmp7_alk3_joint_v1",
+              "change": "Both uncertain D69-K331 pair weights0.5\u21920.1; allotherpair definitions, constructs, integrity and physicalguards retained. Normalized relativeweights change accordingly."
+            }
+          ],
+          "reward_specification_snapshot": {
+            "activation_scope": "Authorized finite paid A30 wave; provisional beta4, tau0.1/0.3/0.8. Parent controls submissions.",
+            "active": true,
+            "aggregation": {
+              "minimum_fraction": 0.5
+            },
+            "calibration": {
+              "beta": 4,
+              "beta_rationale": "Retain preceding batch setting; deterministic diagnostics do not calibrate FK population behavior or confidence",
+              "heldout_contact_count": 52,
+              "heldout_path": "artifacts/bmp90/specifications/bmp7_alk3_joint_v1.heldout.json",
+              "heldout_sha256": "08f9cbf05338f9268cdcd63e8dc3d0f8b39bb95ed37a74b8b91568c4b527c830",
+              "original_evidence_allocation_preserved": true,
+              "planned_comparison": {
+                "brownian_seed": 75601,
+                "control_recipe": "bmp7_alk3_joint_v1",
+                "gpu": "A100",
+                "initial_seed": 74601,
+                "paired_baseline_each_arm": true,
+                "resampling_seed": 76601,
+                "tau": 0.3
+              },
+              "score_never_estimates": [
+                "DockQ",
+                "binding energy",
+                "affinity",
+                "probability of correctness"
+              ],
+              "sigma_status": "Frozen proposal engineering widths: measured1LX5 distances2A, parent typeI3A; not chemical tolerances",
+              "status": "Uncalibrated targeted sensitivity experiment; orientation ambiguity audited."
+            },
+            "chain_namespace": "execution_logical_input_fasta; experimental comparison reference relabeled to match",
+            "chains": [
+              {
+                "input_chain": "A",
+                "length": 139,
+                "saved_chain": "A",
+                "sequence_sha256": "4e32e158e7a7b8151f651cea57912f5ccccb38b1f691b0489ad0426dc8819976"
+              },
+              {
+                "input_chain": "B",
+                "length": 139,
+                "saved_chain": "B",
+                "sequence_sha256": "4e32e158e7a7b8151f651cea57912f5ccccb38b1f691b0489ad0426dc8819976"
+              },
+              {
+                "input_chain": "C",
+                "length": 129,
+                "saved_chain": "C",
+                "sequence_sha256": "21ee8b4725d8e4ce746ed60243bd241d36f7432ebce4c377d40ae6127521dc1c"
+              },
+              {
+                "input_chain": "D",
+                "length": 129,
+                "saved_chain": "D",
+                "sequence_sha256": "21ee8b4725d8e4ce746ed60243bd241d36f7432ebce4c377d40ae6127521dc1c"
+              },
+              {
+                "input_chain": "E",
+                "length": 116,
+                "saved_chain": "E",
+                "sequence_sha256": "cd2fad8f77032c2547283a33379223d129f1fa7e3a7b9b9ea944b083ed341a83"
+              },
+              {
+                "input_chain": "F",
+                "length": 116,
+                "saved_chain": "F",
+                "sequence_sha256": "cd2fad8f77032c2547283a33379223d129f1fa7e3a7b9b9ea944b083ed341a83"
+              }
+            ],
+            "construct_manifest": "artifacts/bmp90/preparation/bmp7/BMP7_BMPR1A_ACVR2A.execution.mapping.json",
+            "construct_manifest_sha256": "c88ec68c448a818584b439508dd52a433ee11a2021f7c48210e5e0f530298f25",
+            "equivalent_chain_groups": [
+              [
+                "A",
+                "B"
+              ],
+              [
+                "C",
+                "D"
+              ],
+              [
+                "E",
+                "F"
+              ]
+            ],
+            "evidence_allocation": {
+              "context": "1LX5 mouse typeII surrogate and9MIR transferred typeI geometry; no target-specific typeI structure.",
+              "guidance": "Original observed typeII and transferred aromatic typeI anchors; all original integrity terms.",
+              "retired_or_reweighted_guidance": {
+                "interface_CD69_BK331": {
+                  "distance_angstrom": 9.938135,
+                  "evidence_allocation": "guidance",
+                  "evidence_labels": [
+                    "transferred BMP6 type-I geometry; BMP7-bound pose unobserved",
+                    "provisional_transfer_not_independent_validation"
+                  ],
+                  "id": "interface_CD69_BK331",
+                  "left": {
+                    "atom": "CA",
+                    "canonical_position": 69,
+                    "chain": "C",
+                    "position": 46,
+                    "residue": "D",
+                    "uniprot": "P36894"
+                  },
+                  "parent_pair_id": "ALK3_C_D69_R413",
+                  "right": {
+                    "atom": "CA",
+                    "canonical_position": 331,
+                    "chain": "B",
+                    "position": 39,
+                    "residue": "K",
+                    "uniprot": "P18075"
+                  },
+                  "sigma_angstrom": 3.0,
+                  "transfer_provenance": {
+                    "candidate_target_distance_A": 9.938135,
+                    "distance_independently_validated_for_human_BMP7": false,
+                    "evidence_role": "candidate_guidance",
+                    "interface_or_integrity": "interface",
+                    "left": {
+                      "atom": "CA",
+                      "canonical_position": 69,
+                      "chain": "C",
+                      "identity_conserved": true,
+                      "position": 46,
+                      "residue": "D",
+                      "source_canonical_position": 69,
+                      "source_position": 46,
+                      "source_residue": "D",
+                      "source_uniprot": "P36894",
+                      "uniprot": "P36894"
+                    },
+                    "parent_distance_A": 9.938135,
+                    "parent_pair_id": "ALK3_C_D69_R413",
+                    "parent_weight": 1.0,
+                    "recommended_initial_sigma_A": 3.0,
+                    "recommended_initial_weight": 0.5,
+                    "reference_measurement_atom_keys": null,
+                    "right": {
+                      "atom": "CA",
+                      "canonical_position": 331,
+                      "chain": "B",
+                      "identity_conserved": false,
+                      "position": 39,
+                      "residue": "K",
+                      "source_canonical_position": 413,
+                      "source_position": 39,
+                      "source_residue": "R",
+                      "source_uniprot": "P22004",
+                      "uniprot": "P18075"
+                    },
+                    "sequence_changes": [
+                      "BMP6 R413 -> BMP7 K331"
+                    ],
+                    "sigma_status": "Engineering proposal only; wider type-I transfer tolerance is uncalibrated",
+                    "source_of_candidate_distance": "transferred BMP6 type-I geometry; BMP7-bound pose unobserved",
+                    "specific_uncertainty": "BMP6 R413 maps to BMP7 K331: positive charge class remains, but lysine geometry does not establish the same D69 interaction. Suggested half weight is an uncalibrated uncertainty choice."
+                  },
+                  "weight": 0.5
+                },
+                "interface_DD69_AK331": {
+                  "distance_angstrom": 9.868409,
+                  "evidence_allocation": "guidance",
+                  "evidence_labels": [
+                    "transferred BMP6 type-I geometry; BMP7-bound pose unobserved",
+                    "provisional_transfer_not_independent_validation"
+                  ],
+                  "id": "interface_DD69_AK331",
+                  "left": {
+                    "atom": "CA",
+                    "canonical_position": 69,
+                    "chain": "D",
+                    "position": 46,
+                    "residue": "D",
+                    "uniprot": "P36894"
+                  },
+                  "parent_pair_id": "ALK3_D_D69_R413",
+                  "right": {
+                    "atom": "CA",
+                    "canonical_position": 331,
+                    "chain": "A",
+                    "position": 39,
+                    "residue": "K",
+                    "uniprot": "P18075"
+                  },
+                  "sigma_angstrom": 3.0,
+                  "transfer_provenance": {
+                    "candidate_target_distance_A": 9.868409,
+                    "distance_independently_validated_for_human_BMP7": false,
+                    "evidence_role": "candidate_guidance",
+                    "interface_or_integrity": "interface",
+                    "left": {
+                      "atom": "CA",
+                      "canonical_position": 69,
+                      "chain": "D",
+                      "identity_conserved": true,
+                      "position": 46,
+                      "residue": "D",
+                      "source_canonical_position": 69,
+                      "source_position": 46,
+                      "source_residue": "D",
+                      "source_uniprot": "P36894",
+                      "uniprot": "P36894"
+                    },
+                    "parent_distance_A": 9.868409,
+                    "parent_pair_id": "ALK3_D_D69_R413",
+                    "parent_weight": 1.0,
+                    "recommended_initial_sigma_A": 3.0,
+                    "recommended_initial_weight": 0.5,
+                    "reference_measurement_atom_keys": null,
+                    "right": {
+                      "atom": "CA",
+                      "canonical_position": 331,
+                      "chain": "A",
+                      "identity_conserved": false,
+                      "position": 39,
+                      "residue": "K",
+                      "source_canonical_position": 413,
+                      "source_position": 39,
+                      "source_residue": "R",
+                      "source_uniprot": "P22004",
+                      "uniprot": "P18075"
+                    },
+                    "sequence_changes": [
+                      "BMP6 R413 -> BMP7 K331"
+                    ],
+                    "sigma_status": "Engineering proposal only; wider type-I transfer tolerance is uncalibrated",
+                    "source_of_candidate_distance": "transferred BMP6 type-I geometry; BMP7-bound pose unobserved",
+                    "specific_uncertainty": "BMP6 R413 maps to BMP7 K331: positive charge class remains, but lysine geometry does not establish the same D69 interaction. Suggested half weight is an uncalibrated uncertainty choice."
+                  },
+                  "weight": 0.5
+                }
+              },
+              "tuning": "Three completed BMP7-ALK3 paired populations and finite validation fixtures; all are disclosed tuning evidence.",
+              "withheld": "Reuse the original scoring-withheld ledger and original exclusions; removed/reweighted evidence is not reclassified as independent validation."
+            },
+            "evidence_labels": [
+              "https://www.rcsb.org/structure/1LX5",
+              "https://www.rcsb.org/structure/9MIR",
+              "https://www.pnas.org/doi/10.1073/pnas.2502788122"
+            ],
+            "execution_reference_chain_map": {
+              "A": "A",
+              "B": "B",
+              "E": "E",
+              "F": "F"
+            },
+            "expected_improvement": "Assess whether inferred typeI orientation and covered typeII recovery depend on the uncertain R-to-K transferred contact; no assumed improvement in accuracy.",
+            "falsification": "Substantial typeII recovery loss, orientation degeneracy or physical worsening without independent support argues against using this variant as a preferred reconstruction recipe.",
+            "fasta_sha256": "8be664946ed0a33aa9bca53ea95bdfb36c0d158570e1da9810a330219f37ac4f",
+            "integrity_pairs": [
+              {
+                "distance_angstrom": 6.107248480289632,
+                "evidence_allocation": "guidance",
+                "evidence_labels": [
+                  "measured 1LX5 conserved-reference CA geometry",
+                  "provisional_transfer_not_independent_validation"
+                ],
+                "id": "integrity_AC395_BC395",
+                "left": {
+                  "atom": "CA",
+                  "canonical_position": 395,
+                  "chain": "A",
+                  "position": 103,
+                  "residue": "C",
+                  "uniprot": "P18075"
+                },
+                "parent_pair_id": "BMP6_dimer_C477_C477",
+                "right": {
+                  "atom": "CA",
+                  "canonical_position": 395,
+                  "chain": "B",
+                  "position": 103,
+                  "residue": "C",
+                  "uniprot": "P18075"
+                },
+                "sigma_angstrom": 2.0,
+                "transfer_provenance": {
+                  "candidate_target_distance_A": 6.107248480289632,
+                  "distance_independently_validated_for_human_BMP7": false,
+                  "evidence_role": "candidate_guidance",
+                  "interface_or_integrity": "integrity",
+                  "left": {
+                    "atom": "CA",
+                    "canonical_position": 395,
+                    "chain": "A",
+                    "identity_conserved": true,
+                    "position": 103,
+                    "residue": "C",
+                    "source_canonical_position": 477,
+                    "source_position": 103,
+                    "source_residue": "C",
+                    "source_uniprot": "P22004",
+                    "uniprot": "P18075"
+                  },
+                  "parent_distance_A": 6.925264,
+                  "parent_pair_id": "BMP6_dimer_C477_C477",
+                  "parent_weight": 1.0,
+                  "recommended_initial_sigma_A": 2.0,
+                  "recommended_initial_weight": 1.0,
+                  "reference_measurement_atom_keys": [
+                    [
+                      "A",
+                      103,
+                      "CA"
+                    ],
+                    [
+                      "B",
+                      103,
+                      "CA"
+                    ]
+                  ],
+                  "right": {
+                    "atom": "CA",
+                    "canonical_position": 395,
+                    "chain": "B",
+                    "identity_conserved": true,
+                    "position": 103,
+                    "residue": "C",
+                    "source_canonical_position": 477,
+                    "source_position": 103,
+                    "source_residue": "C",
+                    "source_uniprot": "P22004",
+                    "uniprot": "P18075"
+                  },
+                  "sequence_changes": [],
+                  "sigma_status": "Engineering proposal only; wider type-I transfer tolerance is uncalibrated",
+                  "source_of_candidate_distance": "measured 1LX5 conserved-reference CA geometry"
+                },
+                "weight": 1.0
+              },
+              {
+                "distance_angstrom": 23.462724031961848,
+                "evidence_allocation": "guidance",
+                "evidence_labels": [
+                  "measured 1LX5 conserved-reference CA geometry",
+                  "provisional_transfer_not_independent_validation"
+                ],
+                "id": "integrity_AN368_BY408",
+                "left": {
+                  "atom": "CA",
+                  "canonical_position": 368,
+                  "chain": "A",
+                  "position": 76,
+                  "residue": "N",
+                  "uniprot": "P18075"
+                },
+                "parent_pair_id": "BMP6_dimer_N450_Y490",
+                "right": {
+                  "atom": "CA",
+                  "canonical_position": 408,
+                  "chain": "B",
+                  "position": 116,
+                  "residue": "Y",
+                  "uniprot": "P18075"
+                },
+                "sigma_angstrom": 2.0,
+                "transfer_provenance": {
+                  "candidate_target_distance_A": 23.462724031961848,
+                  "distance_independently_validated_for_human_BMP7": false,
+                  "evidence_role": "candidate_guidance",
+                  "interface_or_integrity": "integrity",
+                  "left": {
+                    "atom": "CA",
+                    "canonical_position": 368,
+                    "chain": "A",
+                    "identity_conserved": true,
+                    "position": 76,
+                    "residue": "N",
+                    "source_canonical_position": 450,
+                    "source_position": 76,
+                    "source_residue": "N",
+                    "source_uniprot": "P22004",
+                    "uniprot": "P18075"
+                  },
+                  "parent_distance_A": 23.706198,
+                  "parent_pair_id": "BMP6_dimer_N450_Y490",
+                  "parent_weight": 1.0,
+                  "recommended_initial_sigma_A": 2.0,
+                  "recommended_initial_weight": 1.0,
+                  "reference_measurement_atom_keys": [
+                    [
+                      "A",
+                      76,
+                      "CA"
+                    ],
+                    [
+                      "B",
+                      116,
+                      "CA"
+                    ]
+                  ],
+                  "right": {
+                    "atom": "CA",
+                    "canonical_position": 408,
+                    "chain": "B",
+                    "identity_conserved": true,
+                    "position": 116,
+                    "residue": "Y",
+                    "source_canonical_position": 490,
+                    "source_position": 116,
+                    "source_residue": "Y",
+                    "source_uniprot": "P22004",
+                    "uniprot": "P18075"
+                  },
+                  "sequence_changes": [],
+                  "sigma_status": "Engineering proposal only; wider type-I transfer tolerance is uncalibrated",
+                  "source_of_candidate_distance": "measured 1LX5 conserved-reference CA geometry"
+                },
+                "weight": 1.0
+              },
+              {
+                "distance_angstrom": 23.462724031961848,
+                "evidence_allocation": "guidance",
+                "evidence_labels": [
+                  "measured 1LX5 conserved-reference CA geometry",
+                  "provisional_transfer_not_independent_validation"
+                ],
+                "id": "integrity_AY408_BN368",
+                "left": {
+                  "atom": "CA",
+                  "canonical_position": 408,
+                  "chain": "A",
+                  "position": 116,
+                  "residue": "Y",
+                  "uniprot": "P18075"
+                },
+                "parent_pair_id": "BMP6_dimer_Y490_N450",
+                "right": {
+                  "atom": "CA",
+                  "canonical_position": 368,
+                  "chain": "B",
+                  "position": 76,
+                  "residue": "N",
+                  "uniprot": "P18075"
+                },
+                "sigma_angstrom": 2.0,
+                "transfer_provenance": {
+                  "candidate_target_distance_A": 23.462724031961848,
+                  "distance_independently_validated_for_human_BMP7": false,
+                  "evidence_role": "candidate_guidance",
+                  "interface_or_integrity": "integrity",
+                  "left": {
+                    "atom": "CA",
+                    "canonical_position": 408,
+                    "chain": "A",
+                    "identity_conserved": true,
+                    "position": 116,
+                    "residue": "Y",
+                    "source_canonical_position": 490,
+                    "source_position": 116,
+                    "source_residue": "Y",
+                    "source_uniprot": "P22004",
+                    "uniprot": "P18075"
+                  },
+                  "parent_distance_A": 23.642762,
+                  "parent_pair_id": "BMP6_dimer_Y490_N450",
+                  "parent_weight": 1.0,
+                  "recommended_initial_sigma_A": 2.0,
+                  "recommended_initial_weight": 1.0,
+                  "reference_measurement_atom_keys": [
+                    [
+                      "A",
+                      116,
+                      "CA"
+                    ],
+                    [
+                      "B",
+                      76,
+                      "CA"
+                    ]
+                  ],
+                  "right": {
+                    "atom": "CA",
+                    "canonical_position": 368,
+                    "chain": "B",
+                    "identity_conserved": true,
+                    "position": 76,
+                    "residue": "N",
+                    "source_canonical_position": 450,
+                    "source_position": 76,
+                    "source_residue": "N",
+                    "source_uniprot": "P22004",
+                    "uniprot": "P18075"
+                  },
+                  "sequence_changes": [],
+                  "sigma_status": "Engineering proposal only; wider type-I transfer tolerance is uncalibrated",
+                  "source_of_candidate_distance": "measured 1LX5 conserved-reference CA geometry"
+                },
+                "weight": 1.0
+              },
+              {
+                "distance_angstrom": 7.759961597843124,
+                "evidence_allocation": "guidance",
+                "evidence_labels": [
+                  "measured 1LX5 conserved-reference CA geometry",
+                  "provisional_transfer_not_independent_validation"
+                ],
+                "id": "integrity_AC330_AC430",
+                "left": {
+                  "atom": "CA",
+                  "canonical_position": 330,
+                  "chain": "A",
+                  "position": 38,
+                  "residue": "C",
+                  "uniprot": "P18075"
+                },
+                "parent_pair_id": "fold_span_A",
+                "right": {
+                  "atom": "CA",
+                  "canonical_position": 430,
+                  "chain": "A",
+                  "position": 138,
+                  "residue": "C",
+                  "uniprot": "P18075"
+                },
+                "sigma_angstrom": 2.0,
+                "transfer_provenance": {
+                  "candidate_target_distance_A": 7.759961597843124,
+                  "distance_independently_validated_for_human_BMP7": false,
+                  "evidence_role": "candidate_guidance",
+                  "interface_or_integrity": "integrity",
+                  "left": {
+                    "atom": "CA",
+                    "canonical_position": 330,
+                    "chain": "A",
+                    "identity_conserved": true,
+                    "position": 38,
+                    "residue": "C",
+                    "source_canonical_position": 412,
+                    "source_position": 38,
+                    "source_residue": "C",
+                    "source_uniprot": "P22004",
+                    "uniprot": "P18075"
+                  },
+                  "parent_distance_A": 7.199308,
+                  "parent_pair_id": "fold_span_A",
+                  "parent_weight": 1.0,
+                  "recommended_initial_sigma_A": 2.0,
+                  "recommended_initial_weight": 1.0,
+                  "reference_measurement_atom_keys": [
+                    [
+                      "A",
+                      38,
+                      "CA"
+                    ],
+                    [
+                      "A",
+                      138,
+                      "CA"
+                    ]
+                  ],
+                  "right": {
+                    "atom": "CA",
+                    "canonical_position": 430,
+                    "chain": "A",
+                    "identity_conserved": true,
+                    "position": 138,
+                    "residue": "C",
+                    "source_canonical_position": 512,
+                    "source_position": 138,
+                    "source_residue": "C",
+                    "source_uniprot": "P22004",
+                    "uniprot": "P18075"
+                  },
+                  "sequence_changes": [],
+                  "sigma_status": "Engineering proposal only; wider type-I transfer tolerance is uncalibrated",
+                  "source_of_candidate_distance": "measured 1LX5 conserved-reference CA geometry"
+                },
+                "weight": 1.0
+              },
+              {
+                "distance_angstrom": 7.759961597843126,
+                "evidence_allocation": "guidance",
+                "evidence_labels": [
+                  "measured 1LX5 conserved-reference CA geometry",
+                  "provisional_transfer_not_independent_validation"
+                ],
+                "id": "integrity_BC330_BC430",
+                "left": {
+                  "atom": "CA",
+                  "canonical_position": 330,
+                  "chain": "B",
+                  "position": 38,
+                  "residue": "C",
+                  "uniprot": "P18075"
+                },
+                "parent_pair_id": "fold_span_B",
+                "right": {
+                  "atom": "CA",
+                  "canonical_position": 430,
+                  "chain": "B",
+                  "position": 138,
+                  "residue": "C",
+                  "uniprot": "P18075"
+                },
+                "sigma_angstrom": 2.0,
+                "transfer_provenance": {
+                  "candidate_target_distance_A": 7.759961597843126,
+                  "distance_independently_validated_for_human_BMP7": false,
+                  "evidence_role": "candidate_guidance",
+                  "interface_or_integrity": "integrity",
+                  "left": {
+                    "atom": "CA",
+                    "canonical_position": 330,
+                    "chain": "B",
+                    "identity_conserved": true,
+                    "position": 38,
+                    "residue": "C",
+                    "source_canonical_position": 412,
+                    "source_position": 38,
+                    "source_residue": "C",
+                    "source_uniprot": "P22004",
+                    "uniprot": "P18075"
+                  },
+                  "parent_distance_A": 7.2005,
+                  "parent_pair_id": "fold_span_B",
+                  "parent_weight": 1.0,
+                  "recommended_initial_sigma_A": 2.0,
+                  "recommended_initial_weight": 1.0,
+                  "reference_measurement_atom_keys": [
+                    [
+                      "B",
+                      38,
+                      "CA"
+                    ],
+                    [
+                      "B",
+                      138,
+                      "CA"
+                    ]
+                  ],
+                  "right": {
+                    "atom": "CA",
+                    "canonical_position": 430,
+                    "chain": "B",
+                    "identity_conserved": true,
+                    "position": 138,
+                    "residue": "C",
+                    "source_canonical_position": 512,
+                    "source_position": 138,
+                    "source_residue": "C",
+                    "source_uniprot": "P22004",
+                    "uniprot": "P18075"
+                  },
+                  "sequence_changes": [],
+                  "sigma_status": "Engineering proposal only; wider type-I transfer tolerance is uncalibrated",
+                  "source_of_candidate_distance": "measured 1LX5 conserved-reference CA geometry"
+                },
+                "weight": 1.0
+              },
+              {
+                "distance_angstrom": 7.568931,
+                "evidence_allocation": "guidance",
+                "evidence_labels": [
+                  "transferred BMP6 type-I geometry; BMP7-bound pose unobserved",
+                  "provisional_transfer_not_independent_validation"
+                ],
+                "id": "integrity_CC61_CC130",
+                "left": {
+                  "atom": "CA",
+                  "canonical_position": 61,
+                  "chain": "C",
+                  "position": 38,
+                  "residue": "C",
+                  "uniprot": "P36894"
+                },
+                "parent_pair_id": "fold_span_C",
+                "right": {
+                  "atom": "CA",
+                  "canonical_position": 130,
+                  "chain": "C",
+                  "position": 107,
+                  "residue": "C",
+                  "uniprot": "P36894"
+                },
+                "sigma_angstrom": 3.0,
+                "transfer_provenance": {
+                  "candidate_target_distance_A": 7.568931,
+                  "distance_independently_validated_for_human_BMP7": false,
+                  "evidence_role": "candidate_guidance",
+                  "interface_or_integrity": "integrity",
+                  "left": {
+                    "atom": "CA",
+                    "canonical_position": 61,
+                    "chain": "C",
+                    "identity_conserved": true,
+                    "position": 38,
+                    "residue": "C",
+                    "source_canonical_position": 61,
+                    "source_position": 38,
+                    "source_residue": "C",
+                    "source_uniprot": "P36894",
+                    "uniprot": "P36894"
+                  },
+                  "parent_distance_A": 7.568931,
+                  "parent_pair_id": "fold_span_C",
+                  "parent_weight": 1.0,
+                  "recommended_initial_sigma_A": 3.0,
+                  "recommended_initial_weight": 1.0,
+                  "reference_measurement_atom_keys": null,
+                  "right": {
+                    "atom": "CA",
+                    "canonical_position": 130,
+                    "chain": "C",
+                    "identity_conserved": true,
+                    "position": 107,
+                    "residue": "C",
+                    "source_canonical_position": 130,
+                    "source_position": 107,
+                    "source_residue": "C",
+                    "source_uniprot": "P36894",
+                    "uniprot": "P36894"
+                  },
+                  "sequence_changes": [],
+                  "sigma_status": "Engineering proposal only; wider type-I transfer tolerance is uncalibrated",
+                  "source_of_candidate_distance": "transferred BMP6 type-I geometry; BMP7-bound pose unobserved"
+                },
+                "weight": 1.0
+              },
+              {
+                "distance_angstrom": 7.568585,
+                "evidence_allocation": "guidance",
+                "evidence_labels": [
+                  "transferred BMP6 type-I geometry; BMP7-bound pose unobserved",
+                  "provisional_transfer_not_independent_validation"
+                ],
+                "id": "integrity_DC61_DC130",
+                "left": {
+                  "atom": "CA",
+                  "canonical_position": 61,
+                  "chain": "D",
+                  "position": 38,
+                  "residue": "C",
+                  "uniprot": "P36894"
+                },
+                "parent_pair_id": "fold_span_D",
+                "right": {
+                  "atom": "CA",
+                  "canonical_position": 130,
+                  "chain": "D",
+                  "position": 107,
+                  "residue": "C",
+                  "uniprot": "P36894"
+                },
+                "sigma_angstrom": 3.0,
+                "transfer_provenance": {
+                  "candidate_target_distance_A": 7.568585,
+                  "distance_independently_validated_for_human_BMP7": false,
+                  "evidence_role": "candidate_guidance",
+                  "interface_or_integrity": "integrity",
+                  "left": {
+                    "atom": "CA",
+                    "canonical_position": 61,
+                    "chain": "D",
+                    "identity_conserved": true,
+                    "position": 38,
+                    "residue": "C",
+                    "source_canonical_position": 61,
+                    "source_position": 38,
+                    "source_residue": "C",
+                    "source_uniprot": "P36894",
+                    "uniprot": "P36894"
+                  },
+                  "parent_distance_A": 7.568585,
+                  "parent_pair_id": "fold_span_D",
+                  "parent_weight": 1.0,
+                  "recommended_initial_sigma_A": 3.0,
+                  "recommended_initial_weight": 1.0,
+                  "reference_measurement_atom_keys": null,
+                  "right": {
+                    "atom": "CA",
+                    "canonical_position": 130,
+                    "chain": "D",
+                    "identity_conserved": true,
+                    "position": 107,
+                    "residue": "C",
+                    "source_canonical_position": 130,
+                    "source_position": 107,
+                    "source_residue": "C",
+                    "source_uniprot": "P36894",
+                    "uniprot": "P36894"
+                  },
+                  "sequence_changes": [],
+                  "sigma_status": "Engineering proposal only; wider type-I transfer tolerance is uncalibrated",
+                  "source_of_candidate_distance": "transferred BMP6 type-I geometry; BMP7-bound pose unobserved"
+                },
+                "weight": 1.0
+              },
+              {
+                "distance_angstrom": 6.8335086888069405,
+                "evidence_allocation": "guidance",
+                "evidence_labels": [
+                  "measured 1LX5 conserved-reference CA geometry",
+                  "provisional_transfer_not_independent_validation"
+                ],
+                "id": "integrity_EC30_EC110",
+                "left": {
+                  "atom": "CA",
+                  "canonical_position": 30,
+                  "chain": "E",
+                  "position": 11,
+                  "residue": "C",
+                  "uniprot": "P27037"
+                },
+                "parent_pair_id": "fold_span_E",
+                "right": {
+                  "atom": "CA",
+                  "canonical_position": 110,
+                  "chain": "E",
+                  "position": 91,
+                  "residue": "C",
+                  "uniprot": "P27037"
+                },
+                "sigma_angstrom": 2.0,
+                "transfer_provenance": {
+                  "candidate_target_distance_A": 6.8335086888069405,
+                  "distance_independently_validated_for_human_BMP7": false,
+                  "evidence_role": "candidate_guidance",
+                  "interface_or_integrity": "integrity",
+                  "left": {
+                    "atom": "CA",
+                    "canonical_position": 30,
+                    "chain": "E",
+                    "identity_conserved": true,
+                    "position": 11,
+                    "residue": "C",
+                    "source_canonical_position": 29,
+                    "source_position": 11,
+                    "source_residue": "C",
+                    "source_uniprot": "Q13705",
+                    "uniprot": "P27037"
+                  },
+                  "parent_distance_A": 6.96032,
+                  "parent_pair_id": "fold_span_E",
+                  "parent_weight": 1.0,
+                  "recommended_initial_sigma_A": 2.0,
+                  "recommended_initial_weight": 1.0,
+                  "reference_measurement_atom_keys": [
+                    [
+                      "F",
+                      11,
+                      "CA"
+                    ],
+                    [
+                      "F",
+                      91,
+                      "CA"
+                    ]
+                  ],
+                  "right": {
+                    "atom": "CA",
+                    "canonical_position": 110,
+                    "chain": "E",
+                    "identity_conserved": true,
+                    "position": 91,
+                    "residue": "C",
+                    "source_canonical_position": 109,
+                    "source_position": 91,
+                    "source_residue": "C",
+                    "source_uniprot": "Q13705",
+                    "uniprot": "P27037"
+                  },
+                  "sequence_changes": [],
+                  "sigma_status": "Engineering proposal only; wider type-I transfer tolerance is uncalibrated",
+                  "source_of_candidate_distance": "measured 1LX5 conserved-reference CA geometry"
+                },
+                "weight": 1.0
+              },
+              {
+                "distance_angstrom": 6.8335086888069405,
+                "evidence_allocation": "guidance",
+                "evidence_labels": [
+                  "measured 1LX5 conserved-reference CA geometry",
+                  "provisional_transfer_not_independent_validation"
+                ],
+                "id": "integrity_FC30_FC110",
+                "left": {
+                  "atom": "CA",
+                  "canonical_position": 30,
+                  "chain": "F",
+                  "position": 11,
+                  "residue": "C",
+                  "uniprot": "P27037"
+                },
+                "parent_pair_id": "fold_span_F",
+                "right": {
+                  "atom": "CA",
+                  "canonical_position": 110,
+                  "chain": "F",
+                  "position": 91,
+                  "residue": "C",
+                  "uniprot": "P27037"
+                },
+                "sigma_angstrom": 2.0,
+                "transfer_provenance": {
+                  "candidate_target_distance_A": 6.8335086888069405,
+                  "distance_independently_validated_for_human_BMP7": false,
+                  "evidence_role": "candidate_guidance",
+                  "interface_or_integrity": "integrity",
+                  "left": {
+                    "atom": "CA",
+                    "canonical_position": 30,
+                    "chain": "F",
+                    "identity_conserved": true,
+                    "position": 11,
+                    "residue": "C",
+                    "source_canonical_position": 29,
+                    "source_position": 11,
+                    "source_residue": "C",
+                    "source_uniprot": "Q13705",
+                    "uniprot": "P27037"
+                  },
+                  "parent_distance_A": 6.959729,
+                  "parent_pair_id": "fold_span_F",
+                  "parent_weight": 1.0,
+                  "recommended_initial_sigma_A": 2.0,
+                  "recommended_initial_weight": 1.0,
+                  "reference_measurement_atom_keys": [
+                    [
+                      "E",
+                      11,
+                      "CA"
+                    ],
+                    [
+                      "E",
+                      91,
+                      "CA"
+                    ]
+                  ],
+                  "right": {
+                    "atom": "CA",
+                    "canonical_position": 110,
+                    "chain": "F",
+                    "identity_conserved": true,
+                    "position": 91,
+                    "residue": "C",
+                    "source_canonical_position": 109,
+                    "source_position": 91,
+                    "source_residue": "C",
+                    "source_uniprot": "Q13705",
+                    "uniprot": "P27037"
+                  },
+                  "sequence_changes": [],
+                  "sigma_status": "Engineering proposal only; wider type-I transfer tolerance is uncalibrated",
+                  "source_of_candidate_distance": "measured 1LX5 conserved-reference CA geometry"
+                },
+                "weight": 1.0
+              }
+            ],
+            "interface_groups": [
+              {
+                "id": "BMPR1A_C",
+                "pair_ids": [
+                  "interface_CD69_BK331",
+                  "interface_CF83_BP366",
+                  "interface_CF108_AW344"
+                ],
+                "receptor_chain": "C",
+                "type": "type_I",
+                "weight": 1.0
+              },
+              {
+                "id": "BMPR1A_D",
+                "pair_ids": [
+                  "interface_DD69_AK331",
+                  "interface_DF83_AP366",
+                  "interface_DF108_BW344"
+                ],
+                "receptor_chain": "D",
+                "type": "type_I",
+                "weight": 1.0
+              },
+              {
+                "id": "ACVR2A_E",
+                "pair_ids": [
+                  "interface_EF61_BL417",
+                  "interface_EW79_BS405",
+                  "interface_EF102_BI349"
+                ],
+                "receptor_chain": "E",
+                "type": "type_II",
+                "weight": 1.0
+              },
+              {
+                "id": "ACVR2A_F",
+                "pair_ids": [
+                  "interface_FF61_AL417",
+                  "interface_FW79_AS405",
+                  "interface_FF102_AI349"
+                ],
+                "receptor_chain": "F",
+                "type": "type_II",
+                "weight": 1.0
+              }
+            ],
+            "logical_to_original_stored_1LX5_reference": {
+              "A": "A",
+              "B": "B",
+              "E": "F",
+              "F": "E"
+            },
+            "mapping_status": "verified",
+            "pairs": [
+              {
+                "distance_angstrom": 9.938135,
+                "evidence_allocation": "guidance",
+                "evidence_labels": [
+                  "transferred BMP6 type-I geometry; BMP7-bound pose unobserved",
+                  "provisional_transfer_not_independent_validation"
+                ],
+                "id": "interface_CD69_BK331",
+                "left": {
+                  "atom": "CA",
+                  "canonical_position": 69,
+                  "chain": "C",
+                  "position": 46,
+                  "residue": "D",
+                  "uniprot": "P36894"
+                },
+                "parent_pair_id": "ALK3_C_D69_R413",
+                "right": {
+                  "atom": "CA",
+                  "canonical_position": 331,
+                  "chain": "B",
+                  "position": 39,
+                  "residue": "K",
+                  "uniprot": "P18075"
+                },
+                "sigma_angstrom": 3.0,
+                "transfer_provenance": {
+                  "candidate_target_distance_A": 9.938135,
+                  "distance_independently_validated_for_human_BMP7": false,
+                  "evidence_role": "candidate_guidance",
+                  "interface_or_integrity": "interface",
+                  "left": {
+                    "atom": "CA",
+                    "canonical_position": 69,
+                    "chain": "C",
+                    "identity_conserved": true,
+                    "position": 46,
+                    "residue": "D",
+                    "source_canonical_position": 69,
+                    "source_position": 46,
+                    "source_residue": "D",
+                    "source_uniprot": "P36894",
+                    "uniprot": "P36894"
+                  },
+                  "parent_distance_A": 9.938135,
+                  "parent_pair_id": "ALK3_C_D69_R413",
+                  "parent_weight": 1.0,
+                  "recommended_initial_sigma_A": 3.0,
+                  "recommended_initial_weight": 0.5,
+                  "reference_measurement_atom_keys": null,
+                  "right": {
+                    "atom": "CA",
+                    "canonical_position": 331,
+                    "chain": "B",
+                    "identity_conserved": false,
+                    "position": 39,
+                    "residue": "K",
+                    "source_canonical_position": 413,
+                    "source_position": 39,
+                    "source_residue": "R",
+                    "source_uniprot": "P22004",
+                    "uniprot": "P18075"
+                  },
+                  "sequence_changes": [
+                    "BMP6 R413 -> BMP7 K331"
+                  ],
+                  "sigma_status": "Engineering proposal only; wider type-I transfer tolerance is uncalibrated",
+                  "source_of_candidate_distance": "transferred BMP6 type-I geometry; BMP7-bound pose unobserved",
+                  "specific_uncertainty": "BMP6 R413 maps to BMP7 K331: positive charge class remains, but lysine geometry does not establish the same D69 interaction. Suggested half weight is an uncalibrated uncertainty choice."
+                },
+                "weight": 0.1
+              },
+              {
+                "distance_angstrom": 9.350503,
+                "evidence_allocation": "guidance",
+                "evidence_labels": [
+                  "transferred BMP6 type-I geometry; BMP7-bound pose unobserved",
+                  "provisional_transfer_not_independent_validation"
+                ],
+                "id": "interface_CF83_BP366",
+                "left": {
+                  "atom": "CA",
+                  "canonical_position": 83,
+                  "chain": "C",
+                  "position": 60,
+                  "residue": "F",
+                  "uniprot": "P36894"
+                },
+                "parent_pair_id": "ALK3_C_F83_P448",
+                "right": {
+                  "atom": "CA",
+                  "canonical_position": 366,
+                  "chain": "B",
+                  "position": 74,
+                  "residue": "P",
+                  "uniprot": "P18075"
+                },
+                "sigma_angstrom": 3.0,
+                "transfer_provenance": {
+                  "candidate_target_distance_A": 9.350503,
+                  "distance_independently_validated_for_human_BMP7": false,
+                  "evidence_role": "candidate_guidance",
+                  "interface_or_integrity": "interface",
+                  "left": {
+                    "atom": "CA",
+                    "canonical_position": 83,
+                    "chain": "C",
+                    "identity_conserved": true,
+                    "position": 60,
+                    "residue": "F",
+                    "source_canonical_position": 83,
+                    "source_position": 60,
+                    "source_residue": "F",
+                    "source_uniprot": "P36894",
+                    "uniprot": "P36894"
+                  },
+                  "parent_distance_A": 9.350503,
+                  "parent_pair_id": "ALK3_C_F83_P448",
+                  "parent_weight": 1.0,
+                  "recommended_initial_sigma_A": 3.0,
+                  "recommended_initial_weight": 1.0,
+                  "reference_measurement_atom_keys": null,
+                  "right": {
+                    "atom": "CA",
+                    "canonical_position": 366,
+                    "chain": "B",
+                    "identity_conserved": true,
+                    "position": 74,
+                    "residue": "P",
+                    "source_canonical_position": 448,
+                    "source_position": 74,
+                    "source_residue": "P",
+                    "source_uniprot": "P22004",
+                    "uniprot": "P18075"
+                  },
+                  "sequence_changes": [],
+                  "sigma_status": "Engineering proposal only; wider type-I transfer tolerance is uncalibrated",
+                  "source_of_candidate_distance": "transferred BMP6 type-I geometry; BMP7-bound pose unobserved"
+                },
+                "weight": 1.0
+              },
+              {
+                "distance_angstrom": 8.533047,
+                "evidence_allocation": "guidance",
+                "evidence_labels": [
+                  "transferred BMP6 type-I geometry; BMP7-bound pose unobserved",
+                  "provisional_transfer_not_independent_validation"
+                ],
+                "id": "interface_CF108_AW344",
+                "left": {
+                  "atom": "CA",
+                  "canonical_position": 108,
+                  "chain": "C",
+                  "position": 85,
+                  "residue": "F",
+                  "uniprot": "P36894"
+                },
+                "parent_pair_id": "ALK3_C_F108_W426",
+                "right": {
+                  "atom": "CA",
+                  "canonical_position": 344,
+                  "chain": "A",
+                  "position": 52,
+                  "residue": "W",
+                  "uniprot": "P18075"
+                },
+                "sigma_angstrom": 3.0,
+                "transfer_provenance": {
+                  "candidate_target_distance_A": 8.533047,
+                  "distance_independently_validated_for_human_BMP7": false,
+                  "evidence_role": "candidate_guidance",
+                  "interface_or_integrity": "interface",
+                  "left": {
+                    "atom": "CA",
+                    "canonical_position": 108,
+                    "chain": "C",
+                    "identity_conserved": true,
+                    "position": 85,
+                    "residue": "F",
+                    "source_canonical_position": 108,
+                    "source_position": 85,
+                    "source_residue": "F",
+                    "source_uniprot": "P36894",
+                    "uniprot": "P36894"
+                  },
+                  "parent_distance_A": 8.533047,
+                  "parent_pair_id": "ALK3_C_F108_W426",
+                  "parent_weight": 1.0,
+                  "recommended_initial_sigma_A": 3.0,
+                  "recommended_initial_weight": 1.0,
+                  "reference_measurement_atom_keys": null,
+                  "right": {
+                    "atom": "CA",
+                    "canonical_position": 344,
+                    "chain": "A",
+                    "identity_conserved": true,
+                    "position": 52,
+                    "residue": "W",
+                    "source_canonical_position": 426,
+                    "source_position": 52,
+                    "source_residue": "W",
+                    "source_uniprot": "P22004",
+                    "uniprot": "P18075"
+                  },
+                  "sequence_changes": [],
+                  "sigma_status": "Engineering proposal only; wider type-I transfer tolerance is uncalibrated",
+                  "source_of_candidate_distance": "transferred BMP6 type-I geometry; BMP7-bound pose unobserved"
+                },
+                "weight": 1.0
+              },
+              {
+                "distance_angstrom": 9.868409,
+                "evidence_allocation": "guidance",
+                "evidence_labels": [
+                  "transferred BMP6 type-I geometry; BMP7-bound pose unobserved",
+                  "provisional_transfer_not_independent_validation"
+                ],
+                "id": "interface_DD69_AK331",
+                "left": {
+                  "atom": "CA",
+                  "canonical_position": 69,
+                  "chain": "D",
+                  "position": 46,
+                  "residue": "D",
+                  "uniprot": "P36894"
+                },
+                "parent_pair_id": "ALK3_D_D69_R413",
+                "right": {
+                  "atom": "CA",
+                  "canonical_position": 331,
+                  "chain": "A",
+                  "position": 39,
+                  "residue": "K",
+                  "uniprot": "P18075"
+                },
+                "sigma_angstrom": 3.0,
+                "transfer_provenance": {
+                  "candidate_target_distance_A": 9.868409,
+                  "distance_independently_validated_for_human_BMP7": false,
+                  "evidence_role": "candidate_guidance",
+                  "interface_or_integrity": "interface",
+                  "left": {
+                    "atom": "CA",
+                    "canonical_position": 69,
+                    "chain": "D",
+                    "identity_conserved": true,
+                    "position": 46,
+                    "residue": "D",
+                    "source_canonical_position": 69,
+                    "source_position": 46,
+                    "source_residue": "D",
+                    "source_uniprot": "P36894",
+                    "uniprot": "P36894"
+                  },
+                  "parent_distance_A": 9.868409,
+                  "parent_pair_id": "ALK3_D_D69_R413",
+                  "parent_weight": 1.0,
+                  "recommended_initial_sigma_A": 3.0,
+                  "recommended_initial_weight": 0.5,
+                  "reference_measurement_atom_keys": null,
+                  "right": {
+                    "atom": "CA",
+                    "canonical_position": 331,
+                    "chain": "A",
+                    "identity_conserved": false,
+                    "position": 39,
+                    "residue": "K",
+                    "source_canonical_position": 413,
+                    "source_position": 39,
+                    "source_residue": "R",
+                    "source_uniprot": "P22004",
+                    "uniprot": "P18075"
+                  },
+                  "sequence_changes": [
+                    "BMP6 R413 -> BMP7 K331"
+                  ],
+                  "sigma_status": "Engineering proposal only; wider type-I transfer tolerance is uncalibrated",
+                  "source_of_candidate_distance": "transferred BMP6 type-I geometry; BMP7-bound pose unobserved",
+                  "specific_uncertainty": "BMP6 R413 maps to BMP7 K331: positive charge class remains, but lysine geometry does not establish the same D69 interaction. Suggested half weight is an uncalibrated uncertainty choice."
+                },
+                "weight": 0.1
+              },
+              {
+                "distance_angstrom": 9.391608,
+                "evidence_allocation": "guidance",
+                "evidence_labels": [
+                  "transferred BMP6 type-I geometry; BMP7-bound pose unobserved",
+                  "provisional_transfer_not_independent_validation"
+                ],
+                "id": "interface_DF83_AP366",
+                "left": {
+                  "atom": "CA",
+                  "canonical_position": 83,
+                  "chain": "D",
+                  "position": 60,
+                  "residue": "F",
+                  "uniprot": "P36894"
+                },
+                "parent_pair_id": "ALK3_D_F83_P448",
+                "right": {
+                  "atom": "CA",
+                  "canonical_position": 366,
+                  "chain": "A",
+                  "position": 74,
+                  "residue": "P",
+                  "uniprot": "P18075"
+                },
+                "sigma_angstrom": 3.0,
+                "transfer_provenance": {
+                  "candidate_target_distance_A": 9.391608,
+                  "distance_independently_validated_for_human_BMP7": false,
+                  "evidence_role": "candidate_guidance",
+                  "interface_or_integrity": "interface",
+                  "left": {
+                    "atom": "CA",
+                    "canonical_position": 83,
+                    "chain": "D",
+                    "identity_conserved": true,
+                    "position": 60,
+                    "residue": "F",
+                    "source_canonical_position": 83,
+                    "source_position": 60,
+                    "source_residue": "F",
+                    "source_uniprot": "P36894",
+                    "uniprot": "P36894"
+                  },
+                  "parent_distance_A": 9.391608,
+                  "parent_pair_id": "ALK3_D_F83_P448",
+                  "parent_weight": 1.0,
+                  "recommended_initial_sigma_A": 3.0,
+                  "recommended_initial_weight": 1.0,
+                  "reference_measurement_atom_keys": null,
+                  "right": {
+                    "atom": "CA",
+                    "canonical_position": 366,
+                    "chain": "A",
+                    "identity_conserved": true,
+                    "position": 74,
+                    "residue": "P",
+                    "source_canonical_position": 448,
+                    "source_position": 74,
+                    "source_residue": "P",
+                    "source_uniprot": "P22004",
+                    "uniprot": "P18075"
+                  },
+                  "sequence_changes": [],
+                  "sigma_status": "Engineering proposal only; wider type-I transfer tolerance is uncalibrated",
+                  "source_of_candidate_distance": "transferred BMP6 type-I geometry; BMP7-bound pose unobserved"
+                },
+                "weight": 1.0
+              },
+              {
+                "distance_angstrom": 8.386263,
+                "evidence_allocation": "guidance",
+                "evidence_labels": [
+                  "transferred BMP6 type-I geometry; BMP7-bound pose unobserved",
+                  "provisional_transfer_not_independent_validation"
+                ],
+                "id": "interface_DF108_BW344",
+                "left": {
+                  "atom": "CA",
+                  "canonical_position": 108,
+                  "chain": "D",
+                  "position": 85,
+                  "residue": "F",
+                  "uniprot": "P36894"
+                },
+                "parent_pair_id": "ALK3_D_F108_W426",
+                "right": {
+                  "atom": "CA",
+                  "canonical_position": 344,
+                  "chain": "B",
+                  "position": 52,
+                  "residue": "W",
+                  "uniprot": "P18075"
+                },
+                "sigma_angstrom": 3.0,
+                "transfer_provenance": {
+                  "candidate_target_distance_A": 8.386263,
+                  "distance_independently_validated_for_human_BMP7": false,
+                  "evidence_role": "candidate_guidance",
+                  "interface_or_integrity": "interface",
+                  "left": {
+                    "atom": "CA",
+                    "canonical_position": 108,
+                    "chain": "D",
+                    "identity_conserved": true,
+                    "position": 85,
+                    "residue": "F",
+                    "source_canonical_position": 108,
+                    "source_position": 85,
+                    "source_residue": "F",
+                    "source_uniprot": "P36894",
+                    "uniprot": "P36894"
+                  },
+                  "parent_distance_A": 8.386263,
+                  "parent_pair_id": "ALK3_D_F108_W426",
+                  "parent_weight": 1.0,
+                  "recommended_initial_sigma_A": 3.0,
+                  "recommended_initial_weight": 1.0,
+                  "reference_measurement_atom_keys": null,
+                  "right": {
+                    "atom": "CA",
+                    "canonical_position": 344,
+                    "chain": "B",
+                    "identity_conserved": true,
+                    "position": 52,
+                    "residue": "W",
+                    "source_canonical_position": 426,
+                    "source_position": 52,
+                    "source_residue": "W",
+                    "source_uniprot": "P22004",
+                    "uniprot": "P18075"
+                  },
+                  "sequence_changes": [],
+                  "sigma_status": "Engineering proposal only; wider type-I transfer tolerance is uncalibrated",
+                  "source_of_candidate_distance": "transferred BMP6 type-I geometry; BMP7-bound pose unobserved"
+                },
+                "weight": 1.0
+              },
+              {
+                "distance_angstrom": 10.957814745650705,
+                "evidence_allocation": "guidance",
+                "evidence_labels": [
+                  "measured 1LX5 conserved-reference CA geometry",
+                  "provisional_transfer_not_independent_validation"
+                ],
+                "id": "interface_EF61_BL417",
+                "left": {
+                  "atom": "CA",
+                  "canonical_position": 61,
+                  "chain": "E",
+                  "position": 42,
+                  "residue": "F",
+                  "uniprot": "P27037"
+                },
+                "parent_pair_id": "ActRIIB_E_Y60_L499",
+                "right": {
+                  "atom": "CA",
+                  "canonical_position": 417,
+                  "chain": "B",
+                  "position": 125,
+                  "residue": "L",
+                  "uniprot": "P18075"
+                },
+                "sigma_angstrom": 2.0,
+                "transfer_provenance": {
+                  "candidate_target_distance_A": 10.957814745650705,
+                  "distance_independently_validated_for_human_BMP7": false,
+                  "evidence_role": "candidate_guidance",
+                  "interface_or_integrity": "interface",
+                  "left": {
+                    "atom": "CA",
+                    "canonical_position": 61,
+                    "chain": "E",
+                    "identity_conserved": false,
+                    "position": 42,
+                    "residue": "F",
+                    "source_canonical_position": 60,
+                    "source_position": 42,
+                    "source_residue": "Y",
+                    "source_uniprot": "Q13705",
+                    "uniprot": "P27037"
+                  },
+                  "parent_distance_A": 10.732311,
+                  "parent_pair_id": "ActRIIB_E_Y60_L499",
+                  "parent_weight": 1.0,
+                  "recommended_initial_sigma_A": 2.0,
+                  "recommended_initial_weight": 1.0,
+                  "reference_measurement_atom_keys": [
+                    [
+                      "F",
+                      42,
+                      "CA"
+                    ],
+                    [
+                      "B",
+                      125,
+                      "CA"
+                    ]
+                  ],
+                  "right": {
+                    "atom": "CA",
+                    "canonical_position": 417,
+                    "chain": "B",
+                    "identity_conserved": true,
+                    "position": 125,
+                    "residue": "L",
+                    "source_canonical_position": 499,
+                    "source_position": 125,
+                    "source_residue": "L",
+                    "source_uniprot": "P22004",
+                    "uniprot": "P18075"
+                  },
+                  "sequence_changes": [
+                    "ACVR2B Y60 -> ACVR2A F61"
+                  ],
+                  "sigma_status": "Engineering proposal only; wider type-I transfer tolerance is uncalibrated",
+                  "source_of_candidate_distance": "measured 1LX5 conserved-reference CA geometry",
+                  "specific_uncertainty": "ActRIIB Y60 maps to ActRIIA F61; aromatic character remains while the hydroxyl is absent. Use measured 1LX5 geometry, not unchanged Tyr-specific chemistry."
+                },
+                "weight": 1.0
+              },
+              {
+                "distance_angstrom": 6.2304412363812585,
+                "evidence_allocation": "guidance",
+                "evidence_labels": [
+                  "measured 1LX5 conserved-reference CA geometry",
+                  "provisional_transfer_not_independent_validation"
+                ],
+                "id": "interface_EW79_BS405",
+                "left": {
+                  "atom": "CA",
+                  "canonical_position": 79,
+                  "chain": "E",
+                  "position": 60,
+                  "residue": "W",
+                  "uniprot": "P27037"
+                },
+                "parent_pair_id": "ActRIIB_E_W78_S487",
+                "right": {
+                  "atom": "CA",
+                  "canonical_position": 405,
+                  "chain": "B",
+                  "position": 113,
+                  "residue": "S",
+                  "uniprot": "P18075"
+                },
+                "sigma_angstrom": 2.0,
+                "transfer_provenance": {
+                  "candidate_target_distance_A": 6.2304412363812585,
+                  "distance_independently_validated_for_human_BMP7": false,
+                  "evidence_role": "candidate_guidance",
+                  "interface_or_integrity": "interface",
+                  "left": {
+                    "atom": "CA",
+                    "canonical_position": 79,
+                    "chain": "E",
+                    "identity_conserved": true,
+                    "position": 60,
+                    "residue": "W",
+                    "source_canonical_position": 78,
+                    "source_position": 60,
+                    "source_residue": "W",
+                    "source_uniprot": "Q13705",
+                    "uniprot": "P27037"
+                  },
+                  "parent_distance_A": 5.85271,
+                  "parent_pair_id": "ActRIIB_E_W78_S487",
+                  "parent_weight": 1.0,
+                  "recommended_initial_sigma_A": 2.0,
+                  "recommended_initial_weight": 1.0,
+                  "reference_measurement_atom_keys": [
+                    [
+                      "F",
+                      60,
+                      "CA"
+                    ],
+                    [
+                      "B",
+                      113,
+                      "CA"
+                    ]
+                  ],
+                  "right": {
+                    "atom": "CA",
+                    "canonical_position": 405,
+                    "chain": "B",
+                    "identity_conserved": true,
+                    "position": 113,
+                    "residue": "S",
+                    "source_canonical_position": 487,
+                    "source_position": 113,
+                    "source_residue": "S",
+                    "source_uniprot": "P22004",
+                    "uniprot": "P18075"
+                  },
+                  "sequence_changes": [],
+                  "sigma_status": "Engineering proposal only; wider type-I transfer tolerance is uncalibrated",
+                  "source_of_candidate_distance": "measured 1LX5 conserved-reference CA geometry"
+                },
+                "weight": 1.0
+              },
+              {
+                "distance_angstrom": 7.487049352047843,
+                "evidence_allocation": "guidance",
+                "evidence_labels": [
+                  "measured 1LX5 conserved-reference CA geometry",
+                  "provisional_transfer_not_independent_validation"
+                ],
+                "id": "interface_EF102_BI349",
+                "left": {
+                  "atom": "CA",
+                  "canonical_position": 102,
+                  "chain": "E",
+                  "position": 83,
+                  "residue": "F",
+                  "uniprot": "P27037"
+                },
+                "parent_pair_id": "ActRIIB_E_F101_I431",
+                "right": {
+                  "atom": "CA",
+                  "canonical_position": 349,
+                  "chain": "B",
+                  "position": 57,
+                  "residue": "I",
+                  "uniprot": "P18075"
+                },
+                "sigma_angstrom": 2.0,
+                "transfer_provenance": {
+                  "candidate_target_distance_A": 7.487049352047843,
+                  "distance_independently_validated_for_human_BMP7": false,
+                  "evidence_role": "candidate_guidance",
+                  "interface_or_integrity": "interface",
+                  "left": {
+                    "atom": "CA",
+                    "canonical_position": 102,
+                    "chain": "E",
+                    "identity_conserved": true,
+                    "position": 83,
+                    "residue": "F",
+                    "source_canonical_position": 101,
+                    "source_position": 83,
+                    "source_residue": "F",
+                    "source_uniprot": "Q13705",
+                    "uniprot": "P27037"
+                  },
+                  "parent_distance_A": 7.504229,
+                  "parent_pair_id": "ActRIIB_E_F101_I431",
+                  "parent_weight": 1.0,
+                  "recommended_initial_sigma_A": 2.0,
+                  "recommended_initial_weight": 1.0,
+                  "reference_measurement_atom_keys": [
+                    [
+                      "F",
+                      83,
+                      "CA"
+                    ],
+                    [
+                      "B",
+                      57,
+                      "CA"
+                    ]
+                  ],
+                  "right": {
+                    "atom": "CA",
+                    "canonical_position": 349,
+                    "chain": "B",
+                    "identity_conserved": true,
+                    "position": 57,
+                    "residue": "I",
+                    "source_canonical_position": 431,
+                    "source_position": 57,
+                    "source_residue": "I",
+                    "source_uniprot": "P22004",
+                    "uniprot": "P18075"
+                  },
+                  "sequence_changes": [],
+                  "sigma_status": "Engineering proposal only; wider type-I transfer tolerance is uncalibrated",
+                  "source_of_candidate_distance": "measured 1LX5 conserved-reference CA geometry"
+                },
+                "weight": 1.0
+              },
+              {
+                "distance_angstrom": 10.957814745650705,
+                "evidence_allocation": "guidance",
+                "evidence_labels": [
+                  "measured 1LX5 conserved-reference CA geometry",
+                  "provisional_transfer_not_independent_validation"
+                ],
+                "id": "interface_FF61_AL417",
+                "left": {
+                  "atom": "CA",
+                  "canonical_position": 61,
+                  "chain": "F",
+                  "position": 42,
+                  "residue": "F",
+                  "uniprot": "P27037"
+                },
+                "parent_pair_id": "ActRIIB_F_Y60_L499",
+                "right": {
+                  "atom": "CA",
+                  "canonical_position": 417,
+                  "chain": "A",
+                  "position": 125,
+                  "residue": "L",
+                  "uniprot": "P18075"
+                },
+                "sigma_angstrom": 2.0,
+                "transfer_provenance": {
+                  "candidate_target_distance_A": 10.957814745650705,
+                  "distance_independently_validated_for_human_BMP7": false,
+                  "evidence_role": "candidate_guidance",
+                  "interface_or_integrity": "interface",
+                  "left": {
+                    "atom": "CA",
+                    "canonical_position": 61,
+                    "chain": "F",
+                    "identity_conserved": false,
+                    "position": 42,
+                    "residue": "F",
+                    "source_canonical_position": 60,
+                    "source_position": 42,
+                    "source_residue": "Y",
+                    "source_uniprot": "Q13705",
+                    "uniprot": "P27037"
+                  },
+                  "parent_distance_A": 10.762399,
+                  "parent_pair_id": "ActRIIB_F_Y60_L499",
+                  "parent_weight": 1.0,
+                  "recommended_initial_sigma_A": 2.0,
+                  "recommended_initial_weight": 1.0,
+                  "reference_measurement_atom_keys": [
+                    [
+                      "E",
+                      42,
+                      "CA"
+                    ],
+                    [
+                      "A",
+                      125,
+                      "CA"
+                    ]
+                  ],
+                  "right": {
+                    "atom": "CA",
+                    "canonical_position": 417,
+                    "chain": "A",
+                    "identity_conserved": true,
+                    "position": 125,
+                    "residue": "L",
+                    "source_canonical_position": 499,
+                    "source_position": 125,
+                    "source_residue": "L",
+                    "source_uniprot": "P22004",
+                    "uniprot": "P18075"
+                  },
+                  "sequence_changes": [
+                    "ACVR2B Y60 -> ACVR2A F61"
+                  ],
+                  "sigma_status": "Engineering proposal only; wider type-I transfer tolerance is uncalibrated",
+                  "source_of_candidate_distance": "measured 1LX5 conserved-reference CA geometry",
+                  "specific_uncertainty": "ActRIIB Y60 maps to ActRIIA F61; aromatic character remains while the hydroxyl is absent. Use measured 1LX5 geometry, not unchanged Tyr-specific chemistry."
+                },
+                "weight": 1.0
+              },
+              {
+                "distance_angstrom": 6.2304412363812585,
+                "evidence_allocation": "guidance",
+                "evidence_labels": [
+                  "measured 1LX5 conserved-reference CA geometry",
+                  "provisional_transfer_not_independent_validation"
+                ],
+                "id": "interface_FW79_AS405",
+                "left": {
+                  "atom": "CA",
+                  "canonical_position": 79,
+                  "chain": "F",
+                  "position": 60,
+                  "residue": "W",
+                  "uniprot": "P27037"
+                },
+                "parent_pair_id": "ActRIIB_F_W78_S487",
+                "right": {
+                  "atom": "CA",
+                  "canonical_position": 405,
+                  "chain": "A",
+                  "position": 113,
+                  "residue": "S",
+                  "uniprot": "P18075"
+                },
+                "sigma_angstrom": 2.0,
+                "transfer_provenance": {
+                  "candidate_target_distance_A": 6.2304412363812585,
+                  "distance_independently_validated_for_human_BMP7": false,
+                  "evidence_role": "candidate_guidance",
+                  "interface_or_integrity": "interface",
+                  "left": {
+                    "atom": "CA",
+                    "canonical_position": 79,
+                    "chain": "F",
+                    "identity_conserved": true,
+                    "position": 60,
+                    "residue": "W",
+                    "source_canonical_position": 78,
+                    "source_position": 60,
+                    "source_residue": "W",
+                    "source_uniprot": "Q13705",
+                    "uniprot": "P27037"
+                  },
+                  "parent_distance_A": 6.157664,
+                  "parent_pair_id": "ActRIIB_F_W78_S487",
+                  "parent_weight": 1.0,
+                  "recommended_initial_sigma_A": 2.0,
+                  "recommended_initial_weight": 1.0,
+                  "reference_measurement_atom_keys": [
+                    [
+                      "E",
+                      60,
+                      "CA"
+                    ],
+                    [
+                      "A",
+                      113,
+                      "CA"
+                    ]
+                  ],
+                  "right": {
+                    "atom": "CA",
+                    "canonical_position": 405,
+                    "chain": "A",
+                    "identity_conserved": true,
+                    "position": 113,
+                    "residue": "S",
+                    "source_canonical_position": 487,
+                    "source_position": 113,
+                    "source_residue": "S",
+                    "source_uniprot": "P22004",
+                    "uniprot": "P18075"
+                  },
+                  "sequence_changes": [],
+                  "sigma_status": "Engineering proposal only; wider type-I transfer tolerance is uncalibrated",
+                  "source_of_candidate_distance": "measured 1LX5 conserved-reference CA geometry"
+                },
+                "weight": 1.0
+              },
+              {
+                "distance_angstrom": 7.487049352047839,
+                "evidence_allocation": "guidance",
+                "evidence_labels": [
+                  "measured 1LX5 conserved-reference CA geometry",
+                  "provisional_transfer_not_independent_validation"
+                ],
+                "id": "interface_FF102_AI349",
+                "left": {
+                  "atom": "CA",
+                  "canonical_position": 102,
+                  "chain": "F",
+                  "position": 83,
+                  "residue": "F",
+                  "uniprot": "P27037"
+                },
+                "parent_pair_id": "ActRIIB_F_F101_I431",
+                "right": {
+                  "atom": "CA",
+                  "canonical_position": 349,
+                  "chain": "A",
+                  "position": 57,
+                  "residue": "I",
+                  "uniprot": "P18075"
+                },
+                "sigma_angstrom": 2.0,
+                "transfer_provenance": {
+                  "candidate_target_distance_A": 7.487049352047839,
+                  "distance_independently_validated_for_human_BMP7": false,
+                  "evidence_role": "candidate_guidance",
+                  "interface_or_integrity": "interface",
+                  "left": {
+                    "atom": "CA",
+                    "canonical_position": 102,
+                    "chain": "F",
+                    "identity_conserved": true,
+                    "position": 83,
+                    "residue": "F",
+                    "source_canonical_position": 101,
+                    "source_position": 83,
+                    "source_residue": "F",
+                    "source_uniprot": "Q13705",
+                    "uniprot": "P27037"
+                  },
+                  "parent_distance_A": 7.539562,
+                  "parent_pair_id": "ActRIIB_F_F101_I431",
+                  "parent_weight": 1.0,
+                  "recommended_initial_sigma_A": 2.0,
+                  "recommended_initial_weight": 1.0,
+                  "reference_measurement_atom_keys": [
+                    [
+                      "E",
+                      83,
+                      "CA"
+                    ],
+                    [
+                      "A",
+                      57,
+                      "CA"
+                    ]
+                  ],
+                  "right": {
+                    "atom": "CA",
+                    "canonical_position": 349,
+                    "chain": "A",
+                    "identity_conserved": true,
+                    "position": 57,
+                    "residue": "I",
+                    "source_canonical_position": 431,
+                    "source_position": 57,
+                    "source_residue": "I",
+                    "source_uniprot": "P22004",
+                    "uniprot": "P18075"
+                  },
+                  "sequence_changes": [],
+                  "sigma_status": "Engineering proposal only; wider type-I transfer tolerance is uncalibrated",
+                  "source_of_candidate_distance": "measured 1LX5 conserved-reference CA geometry"
+                },
+                "weight": 1.0
+              }
+            ],
+            "parent_relationships": [
+              {
+                "changed": "Aligned BMP7/typeII sequences; 1LX5 typeII/dimer/fold distances, parent typeI distances; proposal widths 2A measured/3A transferred; R413-to-K331 weight0.5 for BMPR1A",
+                "path": "artifacts/bmp90/specifications/bmp6_alk3_joint_v1.json",
+                "recipe_id": "bmp6_alk3_joint_v1",
+                "relationship": "Unvalidated geometric module transfer; no parent success assumption",
+                "retained": "Joint mean/weakest aggregation, copy balance, integrity design, physical guard constants",
+                "sha256": "acc71afdb862242e7fc3ea87c4a03828b14163e64907a3832751b382cbfa7790"
+              },
+              {
+                "only_scientific_change": "Reduce both D69-K331 pair weights from0.5to0.1; retain a weak orientation cue.",
+                "path": "artifacts/bmp90/specifications/bmp7_alk3_joint_v1.json",
+                "recipe_id": "bmp7_alk3_joint_v1",
+                "relationship": "Uncertain-contact sensitivity; posthoc proposal after BMP7-ALK3 three-tau evaluation.",
+                "retained": "Exact full768 human sequences, both aromatic typeI anchors/copy, all typeII rows, all integrity rows, aggregation, safeguards and beta4.",
+                "sha256": "5e2abc989911651b9fbdd46c13daed62f8ed766d2fcccef9b08af2bc61bb67b4"
+              }
+            ],
+            "physical_limits": [
+              "Parent recipe performance is pending the current BMP6 wave; mapping alone establishes no successful transfer.",
+              "Type-I contacts remain hypotheses even when every endpoint identity is conserved.",
+              "Glycans are absent; N-linked sites retained in sequence do not supply glycan coordinates.",
+              "No DockQ/native-accuracy claim is available for BMP7 type-I placement.",
+              "Core guard includes parent-observed type-I sequence positions as coverage checks, not experimental BMP7 type-I truth.",
+              "Three distances per copy cannot uniquely determine pose; beta and widths are uncalibrated.",
+              "CA overlap guard is not all-atom clash validation.",
+              "Removing one of three sparse typeI anchors can permit extra orientations. High score under the variant is not validation of those orientations."
+            ],
+            "proposal": {
+              "path": "artifacts/bmp90/preparation/bmp7/BMP7_transfer_hypotheses.json",
+              "sha256": "c5e32dccf213eef0e81585b1f015114c1197b2aa9c8cbb70963acba62ed83f70"
+            },
+            "recipe_id": "bmp7_alk3_D69_K331_low01_v1",
+            "reference_source": {
+              "coordinate_coverage": "392 conserved observed residues; no type-I experimental coordinates",
+              "path": "artifacts/bmp90/preparation/bmp7/1LX5_logical_roles_human_conserved_reference.pdb",
+              "provenance_path": "artifacts/bmp90/preparation/bmp7/1LX5_logical_roles_human_conserved_reference.provenance.json",
+              "provenance_sha256": "748807bae27208755dfa67724390d9749741a09672685bf214c3f5d2a87d5e3c",
+              "sha256": "7bede35a4a4abbc78a64694162395d0ac23cc756dab30a8ee577b0200d574679",
+              "source_url": "https://files.rcsb.org/download/1LX5.cif"
+            },
+            "required_core_provenance": {
+              "A": {
+                "CA_count": 104,
+                "meaning": "Observed conserved comparison core",
+                "source": "1LX5 observed conserved atoms"
+              },
+              "B": {
+                "CA_count": 104,
+                "meaning": "Observed conserved comparison core",
+                "source": "1LX5 observed conserved atoms"
+              },
+              "C": {
+                "CA_count": 92,
+                "meaning": "Input coordinate coverage safeguard; not experimental BMP7 type-I coverage",
+                "source": "Observed parent BMP6_BMPR1A_ACVR2B receptor sequence positions"
+              },
+              "D": {
+                "CA_count": 92,
+                "meaning": "Input coordinate coverage safeguard; not experimental BMP7 type-I coverage",
+                "source": "Observed parent BMP6_BMPR1A_ACVR2B receptor sequence positions"
+              },
+              "E": {
+                "CA_count": 92,
+                "meaning": "Observed conserved comparison core",
+                "source": "1LX5 observed conserved atoms"
+              },
+              "F": {
+                "CA_count": 92,
+                "meaning": "Observed conserved comparison core",
+                "source": "1LX5 observed conserved atoms"
+              }
+            },
+            "safeguards": {
+              "backbone_max_angstrom": 4.2,
+              "backbone_min_angstrom": 2.8,
+              "backbone_sigma_angstrom": 0.5,
+              "backbone_weight": 0.2,
+              "ca_clash_distance_angstrom": 3.0,
+              "ca_clash_weight": 1.0,
+              "integrity_factor_floor": 0.5,
+              "maximum_penalty_exponent": 6.0,
+              "missing_core_weight": 2.0,
+              "required_ca_ranges": [
+                {
+                  "chain": "A",
+                  "end": 139,
+                  "start": 36
+                },
+                {
+                  "chain": "B",
+                  "end": 139,
+                  "start": 36
+                },
+                {
+                  "chain": "C",
+                  "end": 117,
+                  "start": 26
+                },
+                {
+                  "chain": "D",
+                  "end": 117,
+                  "start": 26
+                },
+                {
+                  "chain": "E",
+                  "end": 19,
+                  "start": 7
+                },
+                {
+                  "chain": "E",
+                  "end": 72,
+                  "start": 21
+                },
+                {
+                  "chain": "E",
+                  "end": 100,
+                  "start": 74
+                },
+                {
+                  "chain": "F",
+                  "end": 19,
+                  "start": 7
+                },
+                {
+                  "chain": "F",
+                  "end": 72,
+                  "start": 21
+                },
+                {
+                  "chain": "F",
+                  "end": 100,
+                  "start": 74
+                }
+              ]
+            },
+            "schema_version": 2,
+            "scope": "Executable provisional BMP7 joint transfer hypothesis; type-II geometry from partial mouse-receptor 1LX5 surrogate, type-I geometry transferred from BMP6 parent. No solved-assembly or accuracy claim.",
+            "target_id": "BMP7_BMPR1A_ACVR2A"
+          },
+          "source": {
+            "path": "artifacts/bmp90/preparation/bmp7_alk3_sensitivity/bmp7_alk3_D69_K331_low01_v1.json",
+            "sha256": "e09e40c8299ebaefb64843b4cbe62e2433d0ddd6c5ea0b4d02ebf9a1e0754c8f"
+          },
+          "validation": {
+            "path": "artifacts/bmp90/preparation/bmp7_alk3_sensitivity/decision_and_validation.json",
+            "sha256": "8a3df50a5316e698255eeb661d181517cd4d0eb1d826033b8e27c4714f1a31bc"
+          },
+          "evidence_runs": [],
+          "successful_tau_values": [],
+          "limitations": [
+            "Complete removal rejected for exact rotationalblindspot; retainedweakthirdcue still doesnotprove uniqueorientation.",
+            "Syntheticpose and sampledstructure diagnostics are tuning evidence, not independentvalidation.",
+            "52 same-reference scoring-withheld contacts remain unchanged; no endpoint recycled as independent evidence."
+          ],
+          "planned_test": "Matched unchanged-v1 control and weight0.1 arm at tau0.3,beta4,A100,samefreshseed74601/75601/76601.",
+          "followup_experiments": [
+            {
+              "job_id": "58121331",
+              "evaluation_job_id": "58121339",
+              "run_id": "20261014T061855955798Z_BMP7_BMPR1A_ACVR2A_bmp7_alk3_D69_K331_low01_v1_ea6704c0",
+              "campaign": "bmp90-paid-wave6-20261013",
+              "arm": "alk3_sensitivity",
+              "submitted_at": "2026-10-14T06:19:21.379861+00:00",
+              "status": "submitted",
+              "runtime_revision": "5af05542f43f0af1b2b1f16c249996b3ddc8e730",
+              "scoring_sha256": "e09e40c8299ebaefb64843b4cbe62e2433d0ddd6c5ea0b4d02ebf9a1e0754c8f",
+              "sampling": {
+                "beta": 4.0,
+                "brownian_seed": 75601,
+                "checkpoint_times": [
+                  0.1,
+                  0.3,
+                  0.6,
+                  0.75,
+                  0.9
+                ],
+                "comparison_scope": "Fresh baseline/guided populations share initial and Brownian streams within each job. ALK2 repeats original seed arguments on A30 with beta changed4 to12, but runtime differs. ALK3 control/sensitivity share new seeds, tau and A100 hardware; historical v1 used A30. Tau and seed vary together in ALK2.",
+                "conditions_in_job": [
+                  "unguided",
+                  "full_interface_guidance_plus_target_specific_geometry"
+                ],
+                "expected_final_structures": 20,
+                "independent_population_id": "BMP7_BMPR1A_ACVR2A_bmp7_alk3_D69_K331_low01_v1_alk3_sensitivity_tau03_r1",
+                "initial_seed": 74601,
+                "model": "simplefold_3B",
+                "model_batch_size": 2,
+                "particles": 10,
+                "resampling_seed": 76601,
+                "samples": 10,
+                "steps": 500,
+                "tau": 0.3
+              },
+              "resources": {
+                "account": "eehui_lab_gpu",
+                "cpus": 4,
+                "gpu_count": 1,
+                "gpu_type": "A100",
+                "memory_gb": 48,
+                "partition": "gpu",
+                "qos": "normal",
+                "walltime_minutes": 180
+              },
+              "cpu_preflight_job_id": "58121302",
+              "manifest_sha256": "f71d9b78eb0a5cd341f26bd3a6e71960521e23d54a56352dde9eadafac470e37",
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121331"
+            }
+          ]
         }
       ]
     },
@@ -12003,7 +14309,163 @@
             "acceptance": "No physical acceptance or recipe-rank promotion.",
             "mechanism": "No resampling in either run: all20 FK coordinates equal paired baselines; terminal reweighting active. Allowed-checkpoint ESS minima9.346/9.574 exceed gate8.",
             "next_hypothesis": "Beta12 only with existing joint recipe and ESSgate0.8. Logged first-crossing near0.75 is diagnostic, not prediction of a new trajectory; may favor halfoccupied assemblies. Proposed, not submitted."
-          }
+          },
+          "tau08_diagnosis_addendum": {
+            "path": "artifacts/bmp90/evaluation/bmp7_alk2_diagnosis/tau08_addendum_2026-10-14.json",
+            "sha256": "d36df7474ecf2d6c746471338e0b7175ec3840840a1199892ce6f918019b658e"
+          },
+          "followup_experiments": [
+            {
+              "job_id": "58121327",
+              "evaluation_job_id": "58121335",
+              "run_id": "20261014T061634009006Z_BMP7_ACVR1_ACVR2A_bmp7_alk2_joint_v1_33d4a346",
+              "campaign": "bmp90-paid-wave6-20261013",
+              "arm": "alk2_beta12",
+              "submitted_at": "2026-10-14T06:19:20.929853+00:00",
+              "status": "submitted",
+              "runtime_revision": "5af05542f43f0af1b2b1f16c249996b3ddc8e730",
+              "scoring_sha256": "c7c3952fcd09bf01f6658013dea1f47427c164210d3441c69dce89fbe7aaee4c",
+              "sampling": {
+                "beta": 12.0,
+                "brownian_seed": 75401,
+                "checkpoint_times": [
+                  0.1,
+                  0.3,
+                  0.6,
+                  0.75,
+                  0.9
+                ],
+                "comparison_scope": "Fresh baseline/guided populations share initial and Brownian streams within each job. ALK2 repeats original seed arguments on A30 with beta changed4 to12, but runtime differs. ALK3 control/sensitivity share new seeds, tau and A100 hardware; historical v1 used A30. Tau and seed vary together in ALK2.",
+                "conditions_in_job": [
+                  "unguided",
+                  "full_interface_guidance_plus_target_specific_geometry"
+                ],
+                "expected_final_structures": 20,
+                "independent_population_id": "BMP7_ACVR1_ACVR2A_bmp7_alk2_joint_v1_alk2_beta12_tau01_r1",
+                "initial_seed": 74401,
+                "model": "simplefold_3B",
+                "model_batch_size": 2,
+                "particles": 10,
+                "resampling_seed": 76401,
+                "samples": 10,
+                "steps": 500,
+                "tau": 0.1
+              },
+              "resources": {
+                "account": "eehui_lab_gpu",
+                "cpus": 4,
+                "gpu_count": 1,
+                "gpu_type": "A30",
+                "memory_gb": 48,
+                "partition": "gpu",
+                "qos": "normal",
+                "walltime_minutes": 180
+              },
+              "cpu_preflight_job_id": "58121302",
+              "manifest_sha256": "fd85ca1a7b83b4e2c974170469cf7b526d94ec69ccd1610c89ba3131d80b41b8",
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121327"
+            },
+            {
+              "job_id": "58121328",
+              "evaluation_job_id": "58121336",
+              "run_id": "20261014T061708404126Z_BMP7_ACVR1_ACVR2A_bmp7_alk2_joint_v1_e1682867",
+              "campaign": "bmp90-paid-wave6-20261013",
+              "arm": "alk2_beta12",
+              "submitted_at": "2026-10-14T06:19:21.010792+00:00",
+              "status": "submitted",
+              "runtime_revision": "5af05542f43f0af1b2b1f16c249996b3ddc8e730",
+              "scoring_sha256": "c7c3952fcd09bf01f6658013dea1f47427c164210d3441c69dce89fbe7aaee4c",
+              "sampling": {
+                "beta": 12.0,
+                "brownian_seed": 75402,
+                "checkpoint_times": [
+                  0.1,
+                  0.3,
+                  0.6,
+                  0.75,
+                  0.9
+                ],
+                "comparison_scope": "Fresh baseline/guided populations share initial and Brownian streams within each job. ALK2 repeats original seed arguments on A30 with beta changed4 to12, but runtime differs. ALK3 control/sensitivity share new seeds, tau and A100 hardware; historical v1 used A30. Tau and seed vary together in ALK2.",
+                "conditions_in_job": [
+                  "unguided",
+                  "full_interface_guidance_plus_target_specific_geometry"
+                ],
+                "expected_final_structures": 20,
+                "independent_population_id": "BMP7_ACVR1_ACVR2A_bmp7_alk2_joint_v1_alk2_beta12_tau03_r2",
+                "initial_seed": 74402,
+                "model": "simplefold_3B",
+                "model_batch_size": 2,
+                "particles": 10,
+                "resampling_seed": 76402,
+                "samples": 10,
+                "steps": 500,
+                "tau": 0.3
+              },
+              "resources": {
+                "account": "eehui_lab_gpu",
+                "cpus": 4,
+                "gpu_count": 1,
+                "gpu_type": "A30",
+                "memory_gb": 48,
+                "partition": "gpu",
+                "qos": "normal",
+                "walltime_minutes": 180
+              },
+              "cpu_preflight_job_id": "58121302",
+              "manifest_sha256": "2dc1b40d6f371028bd6f7fd274745ac6078a1d5cf930cadc18ad5ecf9e68435f",
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121328"
+            },
+            {
+              "job_id": "58121329",
+              "evaluation_job_id": "58121337",
+              "run_id": "20261014T061742676907Z_BMP7_ACVR1_ACVR2A_bmp7_alk2_joint_v1_f26a6327",
+              "campaign": "bmp90-paid-wave6-20261013",
+              "arm": "alk2_beta12",
+              "submitted_at": "2026-10-14T06:19:21.092023+00:00",
+              "status": "submitted",
+              "runtime_revision": "5af05542f43f0af1b2b1f16c249996b3ddc8e730",
+              "scoring_sha256": "c7c3952fcd09bf01f6658013dea1f47427c164210d3441c69dce89fbe7aaee4c",
+              "sampling": {
+                "beta": 12.0,
+                "brownian_seed": 75403,
+                "checkpoint_times": [
+                  0.1,
+                  0.3,
+                  0.6,
+                  0.75,
+                  0.9
+                ],
+                "comparison_scope": "Fresh baseline/guided populations share initial and Brownian streams within each job. ALK2 repeats original seed arguments on A30 with beta changed4 to12, but runtime differs. ALK3 control/sensitivity share new seeds, tau and A100 hardware; historical v1 used A30. Tau and seed vary together in ALK2.",
+                "conditions_in_job": [
+                  "unguided",
+                  "full_interface_guidance_plus_target_specific_geometry"
+                ],
+                "expected_final_structures": 20,
+                "independent_population_id": "BMP7_ACVR1_ACVR2A_bmp7_alk2_joint_v1_alk2_beta12_tau08_r3",
+                "initial_seed": 74403,
+                "model": "simplefold_3B",
+                "model_batch_size": 2,
+                "particles": 10,
+                "resampling_seed": 76403,
+                "samples": 10,
+                "steps": 500,
+                "tau": 0.8
+              },
+              "resources": {
+                "account": "eehui_lab_gpu",
+                "cpus": 4,
+                "gpu_count": 1,
+                "gpu_type": "A30",
+                "memory_gb": 48,
+                "partition": "gpu",
+                "qos": "normal",
+                "walltime_minutes": 180
+              },
+              "cpu_preflight_job_id": "58121302",
+              "manifest_sha256": "feaa044efda7570969978832526668a5ca3ee3026770c07b6121e7a4ec867af0",
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121329"
+            }
+          ]
         }
       ]
     },
@@ -14228,12 +16690,114 @@
             "Hatta paper T64 maps to mouseT97 but humanA97; no Thr restraint transferred.",
             "Originalv1/v2 files remain checksum-verified unchanged."
           ],
-          "prepared_at": "2026-10-14T00:15:33.824459+00:00"
+          "prepared_at": "2026-10-14T00:15:33.824459+00:00",
+          "followup_experiments": [
+            {
+              "job_id": "58121758",
+              "evaluation_job_id": "58121764",
+              "run_id": "20261014T062438515965Z_BMP4_BMPR1A_ACVR2B_bmp4_joint_l61_off_mapped_v1_6bd288e4",
+              "campaign": "bmp90-paid-wave7-20261013",
+              "arm": "bmp4_off_beta12",
+              "submitted_at": "2026-10-14T06:29:56.757987+00:00",
+              "status": "submitted",
+              "runtime_revision": "5af05542f43f0af1b2b1f16c249996b3ddc8e730",
+              "scoring_sha256": "8e01cd2322785ce9c5d6a4384388e43cdaf532d6d14073bb340453b3cc7c11cd",
+              "sampling": {
+                "beta": 12.0,
+                "brownian_seed": 75701,
+                "checkpoint_times": [
+                  0.1,
+                  0.3,
+                  0.6,
+                  0.75,
+                  0.9
+                ],
+                "comparison_scope": "Fresh baseline/guided populations share initial and Brownian streams within each job. BMP6 repeats prior seed arguments on A30 while changing beta4 to6; runtime differs. BMP4 factorial shares fresh seeds and A100 hardware across all four arms; beta and L61 toggles are the only planned changes. Repeated controls are not independent replication.",
+                "conditions_in_job": [
+                  "unguided",
+                  "full_interface_guidance_plus_target_specific_geometry"
+                ],
+                "expected_final_structures": 20,
+                "independent_population_id": "BMP4_BMPR1A_ACVR2B_bmp4_joint_l61_off_mapped_v1_bmp4_off_beta12_tau03_r1",
+                "initial_seed": 74701,
+                "model": "simplefold_3B",
+                "model_batch_size": 2,
+                "particles": 10,
+                "resampling_seed": 76701,
+                "samples": 10,
+                "steps": 500,
+                "tau": 0.3
+              },
+              "resources": {
+                "account": "eehui_lab_gpu",
+                "cpus": 4,
+                "gpu_count": 1,
+                "gpu_type": "A100",
+                "memory_gb": 48,
+                "partition": "gpu",
+                "qos": "normal",
+                "walltime_minutes": 180
+              },
+              "cpu_preflight_job_id": "58121360",
+              "manifest_sha256": "17ec76fd464c6799bc53260195a9b9e917ca53266b0c8232b9c710a670c350e1",
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121758"
+            },
+            {
+              "job_id": "58121759",
+              "evaluation_job_id": "58121765",
+              "run_id": "20261014T062516255331Z_BMP4_BMPR1A_ACVR2B_bmp4_joint_l61_off_mapped_v1_dd351823",
+              "campaign": "bmp90-paid-wave7-20261013",
+              "arm": "bmp4_off_beta4",
+              "submitted_at": "2026-10-14T06:29:56.894794+00:00",
+              "status": "submitted",
+              "runtime_revision": "5af05542f43f0af1b2b1f16c249996b3ddc8e730",
+              "scoring_sha256": "8e01cd2322785ce9c5d6a4384388e43cdaf532d6d14073bb340453b3cc7c11cd",
+              "sampling": {
+                "beta": 4.0,
+                "brownian_seed": 75701,
+                "checkpoint_times": [
+                  0.1,
+                  0.3,
+                  0.6,
+                  0.75,
+                  0.9
+                ],
+                "comparison_scope": "Fresh baseline/guided populations share initial and Brownian streams within each job. BMP6 repeats prior seed arguments on A30 while changing beta4 to6; runtime differs. BMP4 factorial shares fresh seeds and A100 hardware across all four arms; beta and L61 toggles are the only planned changes. Repeated controls are not independent replication.",
+                "conditions_in_job": [
+                  "unguided",
+                  "full_interface_guidance_plus_target_specific_geometry"
+                ],
+                "expected_final_structures": 20,
+                "independent_population_id": "BMP4_BMPR1A_ACVR2B_bmp4_joint_l61_off_mapped_v1_bmp4_off_beta4_tau03_r1",
+                "initial_seed": 74701,
+                "model": "simplefold_3B",
+                "model_batch_size": 2,
+                "particles": 10,
+                "resampling_seed": 76701,
+                "samples": 10,
+                "steps": 500,
+                "tau": 0.3
+              },
+              "resources": {
+                "account": "eehui_lab_gpu",
+                "cpus": 4,
+                "gpu_count": 1,
+                "gpu_type": "A100",
+                "memory_gb": 48,
+                "partition": "gpu",
+                "qos": "normal",
+                "walltime_minutes": 180
+              },
+              "cpu_preflight_job_id": "58121360",
+              "manifest_sha256": "cd9d378d8faa1f3f64aca39e56b6a3b6690d6112487e1cc9541045d016a2c7ec",
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121759"
+            }
+          ]
         },
         {
           "recipe_id": "bmp4_joint_l61_on_mapped_v1",
           "rank": null,
-          "status": "submitted_unranked",
+          "status": "evaluated_provisional_unranked",
           "executable": true,
           "comparison_group": "human_native_untrimmed_728",
           "parent_relationships": [
@@ -16266,7 +18830,7 @@
               "seed": 74501,
               "brownian_seed": 75501,
               "resampling_seed": 76501,
-              "status": "pending",
+              "status": "completed_evaluated",
               "gpu_requested": "A30",
               "resources": {
                 "partition": "gpu",
@@ -16292,7 +18856,7 @@
               "seed": 74502,
               "brownian_seed": 75502,
               "resampling_seed": 76502,
-              "status": "pending",
+              "status": "completed_evaluated",
               "gpu_requested": "A30",
               "resources": {
                 "partition": "gpu",
@@ -16318,7 +18882,7 @@
               "seed": 74503,
               "brownian_seed": 75503,
               "resampling_seed": 76503,
-              "status": "pending",
+              "status": "completed_evaluated",
               "gpu_requested": "A30",
               "resources": {
                 "partition": "gpu",
@@ -16397,7 +18961,129 @@
             "elapsed": "00:02:02",
             "receipt": "artifacts/bmp90/operations/paid_wave4b/runtime_state/reference_selfcheck/receipt.json",
             "sha256": "f5c82640db136ef71b8aba5352b1bbe82898a8e6b9e30aef8beb0efbc8d91e23"
-          }
+          },
+          "completed_run_diagnosis": {
+            "recorded_at": "2026-10-14T06:14:20.870314+00:00",
+            "jobs": [
+              "58114622",
+              "58114623",
+              "58114624"
+            ],
+            "reports": [
+              {
+                "path": "artifacts/bmp90/evaluation/bmp4_completed_diagnosis/diagnosis.json",
+                "sha256": "15899c001f1a00b33d1b34b7fef33cfe05ce2c114ebe0893a7fa43c4c5392104"
+              },
+              {
+                "path": "artifacts/bmp90/evaluation/bmp4_completed_diagnosis/physical.json",
+                "sha256": "7a6b4bd790477a0536ceab4faf91ca05ce62e8c989b4427b76ca9ce2977e161a"
+              }
+            ],
+            "acceptance": "No calibrated physical acceptance; recipe ranking remains provisional.",
+            "finding": "Only tau0.3 resampled. Covered homolog C/E both>=0.6 counts1/6/2 vsbaseline1/3/2; no FK model has allfour CA interface groups>=0.5. D/F and nativeBMP4 accuracy unassessed. L61factor near0.5; severe physical defects persist. Test beta4/12 xL61on/off with matchednewseeds."
+          },
+          "followup_experiments": [
+            {
+              "job_id": "58121760",
+              "evaluation_job_id": "58121766",
+              "run_id": "20261014T062553984420Z_BMP4_BMPR1A_ACVR2B_bmp4_joint_l61_on_mapped_v1_b205de0e",
+              "campaign": "bmp90-paid-wave7-20261013",
+              "arm": "bmp4_on_beta12",
+              "submitted_at": "2026-10-14T06:29:57.034468+00:00",
+              "status": "submitted",
+              "runtime_revision": "5af05542f43f0af1b2b1f16c249996b3ddc8e730",
+              "scoring_sha256": "cd7753128fa9ffd070453c7e612d89f03d8cba4299ac8fbef364a83a05384566",
+              "sampling": {
+                "beta": 12.0,
+                "brownian_seed": 75701,
+                "checkpoint_times": [
+                  0.1,
+                  0.3,
+                  0.6,
+                  0.75,
+                  0.9
+                ],
+                "comparison_scope": "Fresh baseline/guided populations share initial and Brownian streams within each job. BMP6 repeats prior seed arguments on A30 while changing beta4 to6; runtime differs. BMP4 factorial shares fresh seeds and A100 hardware across all four arms; beta and L61 toggles are the only planned changes. Repeated controls are not independent replication.",
+                "conditions_in_job": [
+                  "unguided",
+                  "full_interface_guidance_plus_target_specific_geometry"
+                ],
+                "expected_final_structures": 20,
+                "independent_population_id": "BMP4_BMPR1A_ACVR2B_bmp4_joint_l61_on_mapped_v1_bmp4_on_beta12_tau03_r1",
+                "initial_seed": 74701,
+                "model": "simplefold_3B",
+                "model_batch_size": 2,
+                "particles": 10,
+                "resampling_seed": 76701,
+                "samples": 10,
+                "steps": 500,
+                "tau": 0.3
+              },
+              "resources": {
+                "account": "eehui_lab_gpu",
+                "cpus": 4,
+                "gpu_count": 1,
+                "gpu_type": "A100",
+                "memory_gb": 48,
+                "partition": "gpu",
+                "qos": "normal",
+                "walltime_minutes": 180
+              },
+              "cpu_preflight_job_id": "58121360",
+              "manifest_sha256": "367733c80a8caf4b75ccdec0839e39a638fa038946992099ac8b272eacaf32c3",
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121760"
+            },
+            {
+              "job_id": "58121761",
+              "evaluation_job_id": "58121767",
+              "run_id": "20261014T062631765044Z_BMP4_BMPR1A_ACVR2B_bmp4_joint_l61_on_mapped_v1_449f421a",
+              "campaign": "bmp90-paid-wave7-20261013",
+              "arm": "bmp4_on_beta4",
+              "submitted_at": "2026-10-14T06:29:57.169084+00:00",
+              "status": "submitted",
+              "runtime_revision": "5af05542f43f0af1b2b1f16c249996b3ddc8e730",
+              "scoring_sha256": "cd7753128fa9ffd070453c7e612d89f03d8cba4299ac8fbef364a83a05384566",
+              "sampling": {
+                "beta": 4.0,
+                "brownian_seed": 75701,
+                "checkpoint_times": [
+                  0.1,
+                  0.3,
+                  0.6,
+                  0.75,
+                  0.9
+                ],
+                "comparison_scope": "Fresh baseline/guided populations share initial and Brownian streams within each job. BMP6 repeats prior seed arguments on A30 while changing beta4 to6; runtime differs. BMP4 factorial shares fresh seeds and A100 hardware across all four arms; beta and L61 toggles are the only planned changes. Repeated controls are not independent replication.",
+                "conditions_in_job": [
+                  "unguided",
+                  "full_interface_guidance_plus_target_specific_geometry"
+                ],
+                "expected_final_structures": 20,
+                "independent_population_id": "BMP4_BMPR1A_ACVR2B_bmp4_joint_l61_on_mapped_v1_bmp4_on_beta4_tau03_r1",
+                "initial_seed": 74701,
+                "model": "simplefold_3B",
+                "model_batch_size": 2,
+                "particles": 10,
+                "resampling_seed": 76701,
+                "samples": 10,
+                "steps": 500,
+                "tau": 0.3
+              },
+              "resources": {
+                "account": "eehui_lab_gpu",
+                "cpus": 4,
+                "gpu_count": 1,
+                "gpu_type": "A100",
+                "memory_gb": 48,
+                "partition": "gpu",
+                "qos": "normal",
+                "walltime_minutes": 180
+              },
+              "cpu_preflight_job_id": "58121360",
+              "manifest_sha256": "a3dea7cba9f5f71533d53f2682f6ce84f9ec6fb9a96893cc33107de25b0b4d8e",
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121761"
+            }
+          ]
         }
       ],
       "common_preparation_snapshot": {
@@ -18064,7 +20750,7 @@
       "historical_snapshot_note": "common_preparation_snapshot and optional_l61_geometry_snapshot preserve preimplementation proposal state. Current executabledefinitions and newruntime are in appended mapped recipes."
     }
   },
-  "updated_at": "2026-10-14T03:52:12.867939+00:00",
+  "updated_at": "2026-10-14T06:30:48.380004+00:00",
   "interface_evidence_registry": "configs/bmp90/interface_evidence_registry.json",
   "failure_registry": "configs/bmp90/failure_registry.json",
   "construct_policy": {

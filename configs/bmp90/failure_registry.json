@@ -313,6 +313,16 @@
         {
           "hypothesis": "beta12 with unchanged recipe and gate; actual future sampling required",
           "status": "proposed_not_submitted"
+        },
+        {
+          "recorded_at": "2026-10-14T06:31:21.182684+00:00",
+          "status": "submitted",
+          "job_ids": [
+            "58121327",
+            "58121328",
+            "58121329"
+          ],
+          "result": "Unchanged recipe beta12, tau0.1/0.3/0.8; tau0.8 addendum also found no resampling, despite one baseline recovering both typeII copies. Results pending; automatic afterok CPU evaluations attached."
         }
       ],
       "artifact_references": [
@@ -342,6 +352,15 @@
         {
           "hypothesis": "Preserve typeII module; validate uncertain D69-K331 typeI restraint sensitivity and diagnose tail/sidechain defects without trimming.",
           "status": "proposed_not_submitted"
+        },
+        {
+          "recorded_at": "2026-10-14T06:31:21.182684+00:00",
+          "status": "submitted",
+          "job_ids": [
+            "58121330",
+            "58121331"
+          ],
+          "result": "Matched original versus uncertain D69-K331 weight0.1 sensitivity, A100 tau0.3 beta4. Results pending; automatic afterok CPU evaluations attached."
         }
       ],
       "artifact_references": [
@@ -351,8 +370,123 @@
         }
       ],
       "transfer_limits": "Diagnostic overlap threshold not calibrated acceptance. Tau and seed triplets confounded. Missing reference coverage does not prove disorder."
+    },
+    {
+      "failure_id": "BMP6_V2_SHAPE_UNREPAIRED_58118260_58118262",
+      "complex_id": "BMP6_ACVR1_ACVR2B",
+      "recipe_id": "bmp6_joint_v2",
+      "job_ids": [
+        "58118260",
+        "58118261",
+        "58118262"
+      ],
+      "failure_category": "targeted_shape_revision_did_not_repair_defect",
+      "observed_symptoms": [
+        "Recovered ACVR1 copies retain roughly4\u20135A N60 coordinate errors after receptor fitting.",
+        "Allfour DockQ>=0.6 counts4/0/0 versus pairedbaseline1/0/0. Descriptive >0.5 counts4/3/0 are a different grouping.",
+        "Selection occurs only once perrun and later/weaker than parent; tau0.8 has no allfour>0.5 recovery."
+      ],
+      "followups": [
+        {
+          "hypothesis": "Beta6 at tau0.1/0.3 with unchanged v2 and original seedtriplets, A30; may amplify flawed basin without fixing shape.",
+          "status": "authorized_preparing"
+        },
+        {
+          "recorded_at": "2026-10-14T06:31:21.182684+00:00",
+          "status": "submitted",
+          "job_ids": [
+            "58121762",
+            "58121763"
+          ],
+          "result": "Unchanged v2 beta6, tau0.1/0.3, original seed triplets and A30. Results pending; automatic afterok CPU evaluations attached."
+        }
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/evaluation/bmp6_v2_diagnosis/diagnosis.json",
+          "sha256": "e8cba589d64c86e95e13a7a9ce4b670c03d4459f799a7672fd0a75b8c24b9163"
+        }
+      ],
+      "transfer_limits": "One correlated recovered lineage each at tau0.1/0.3; priorv1tau0.1 hardwareA100 versusv2A30 confound. No physical acceptance."
+    },
+    {
+      "failure_id": "BMP4_WEAK_SELECTION_AND_INCOMPLETE_COPIES_20261013",
+      "complex_id": "BMP4_BMPR1A_ACVR2B",
+      "recipe_id": "bmp4_joint_l61_on_mapped_v1",
+      "job_ids": [
+        "58114622",
+        "58114623",
+        "58114624"
+      ],
+      "failure_category": "weak_selection_and_unresolved_fullassembly",
+      "observed_symptoms": [
+        "Tau0.1/0.8 neverresample and all10 paired outputs remain identical. Tau0.3 has one resampling.",
+        "Covered C/E homolog DockQ>=0.6 counts1/6/2 versusbaseline1/3/2; no FK structure has allfour CA-guidance groups>=0.5.",
+        "Median L61geometryfactor approximately0.5 compresses reward; raw off-reward increases are not quality improvements.",
+        "Severe interchain C/N/O overlap>1A medians157/59.5/279; transferred requiredcore mask medians71/3/28.5."
+      ],
+      "followups": [
+        {
+          "hypothesis": "2x2 beta4/12 xL61on/off at tau0.3, samefreshseedtriplet andA100; diagnose physical defects separately.",
+          "status": "authorized_preparing"
+        },
+        {
+          "recorded_at": "2026-10-14T06:31:21.182684+00:00",
+          "status": "submitted",
+          "job_ids": [
+            "58121758",
+            "58121759",
+            "58121760",
+            "58121761"
+          ],
+          "result": "Matched 2x2 L61 on/off and beta4/12, tau0.3, fresh seed triplet on A100. Results pending; automatic afterok CPU evaluations attached."
+        }
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/evaluation/bmp4_completed_diagnosis/diagnosis.json",
+          "sha256": "15899c001f1a00b33d1b34b7fef33cfe05ce2c114ebe0893a7fa43c4c5392104"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/bmp4_completed_diagnosis/physical.json",
+          "sha256": "7a6b4bd790477a0536ceab4faf91ca05ce62e8c989b4427b76ca9ce2977e161a"
+        }
+      ],
+      "transfer_limits": "C/E comparison uses partial homologous BMP2 source, not nativeBMP4. D/F and fullassembly unassessed; overlap thresholds diagnosticnotcalibrated."
+    },
+    {
+      "failure_id": "BMP7_ALK3_D69_K331_REMOVAL_ORIENTATION_BLINDSPOT",
+      "complex_id": "BMP7_BMPR1A_ACVR2A",
+      "recipe_id": "bmp7_alk3_D69_K331_off_v1",
+      "failure_category": "preflight_sparse_anchor_rotation_blindspot",
+      "observed_symptoms": [
+        "Removing both uncertain pairs leaves an exact score-invariant180degree receptor rotation around two retained CA anchors, with severe moved-receptor overlaps."
+      ],
+      "followups": [
+        {
+          "recipe_id": "bmp7_alk3_D69_K331_low01_v1",
+          "result": "Retain a weak thirdcue weight0.1; orientation uncertainty remains; matched sensitivity test authorized.",
+          "status": "authorized_preparing"
+        },
+        {
+          "recorded_at": "2026-10-14T06:31:21.182684+00:00",
+          "status": "submitted",
+          "job_ids": [
+            "58121330",
+            "58121331"
+          ],
+          "result": "Control and weak-third-anchor sensitivity submitted; complete-removal draft remains rejected. Results pending; automatic afterok CPU evaluations attached."
+        }
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/preparation/bmp7_alk3_sensitivity/decision_and_validation.json",
+          "sha256": "8a3df50a5316e698255eeb661d181517cd4d0eb1d826033b8e27c4714f1a31bc"
+        }
+      ],
+      "transfer_limits": "Designed diagnostic, not sampled biophysical failure. Complete-removal draft preserved, no GPU submissions use it."
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-14T03:52:12.867939+00:00"
+  "updated_at": "2026-10-14T06:31:21.182684+00:00"
 }
