@@ -4467,7 +4467,7 @@
               "campaign": "bmp90-paid-wave7-20261013",
               "arm": "bmp6_beta6",
               "submitted_at": "2026-10-14T06:29:57.347807+00:00",
-              "status": "submitted",
+              "status": "completed_evaluated",
               "runtime_revision": "5af05542f43f0af1b2b1f16c249996b3ddc8e730",
               "scoring_sha256": "26c3b5e419a5cef9114564b278de963dc440915004c4eaf1b8302d58592aafe0",
               "sampling": {
@@ -4508,7 +4508,84 @@
               },
               "cpu_preflight_job_id": "58121360",
               "manifest_sha256": "5234a6206dc5d6689cefb7b04776d9c4dca0585cbb0c6ff2912eec92defe7bf2",
-              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121762"
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121762",
+              "completed_evaluation_readout": {
+                "recorded_at": "2026-10-14T14:31:31.077902+00:00",
+                "report_path": "artifacts/bmp90/evaluation/followup_status_20261014/results.json",
+                "report_sha256": "bb529039a6305d41a358286653624b0092d86cb6f5fc95fde240c1621728d3c5",
+                "conditions": {
+                  "baseline": {
+                    "covered_ge06": 1,
+                    "covered_gt05": 1,
+                    "median_weakest": 0.01890709869538082,
+                    "best_by_weakest_covered": {
+                      "sample": 2,
+                      "dockq": {
+                        "C": 0.6507681494473564,
+                        "D": 0.6461655085532377,
+                        "E": 0.8846509584121321,
+                        "F": 0.8971869070271564
+                      },
+                      "weakest_covered": 0.6461655085532377,
+                      "reward": 0.4974722223194245,
+                      "ancestor": 2,
+                      "pdb": "artifacts/remote-runs/58121762/baseline/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_2.pdb",
+                      "guidance_min": 0.5538718069000714,
+                      "severe_interchain_CNO_overlaps_gt1A": 12
+                    },
+                    "all_guidance_ge05": 2,
+                    "resamplings": 0,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "fk": {
+                    "covered_ge06": 4,
+                    "covered_gt05": 4,
+                    "median_weakest": 0.08463518314412481,
+                    "best_by_weakest_covered": {
+                      "sample": 0,
+                      "dockq": {
+                        "C": 0.6621363881905002,
+                        "D": 0.654308414095927,
+                        "E": 0.8886007062810002,
+                        "F": 0.8820156121661046
+                      },
+                      "weakest_covered": 0.654308414095927,
+                      "reward": 0.5257626409203141,
+                      "ancestor": 2,
+                      "pdb": "artifacts/remote-runs/58121762/fk/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_0.pdb",
+                      "guidance_min": 0.588682737536515,
+                      "severe_interchain_CNO_overlaps_gt1A": 15
+                    },
+                    "all_guidance_ge05": 4,
+                    "resamplings": 1,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      4,
+                      7,
+                      8
+                    ]
+                  }
+                },
+                "limits": [
+                  "Counts at DockQ >=0.6 describe reference recovery, not calibrated physical acceptance.",
+                  "BMP7 covers typeII only; BMP4 covers homologous C/E only. Uncovered interfaces remain unassessed.",
+                  "FK descendants are correlated. Best model selected by weakest covered DockQ, not by reward.",
+                  "Severe C/N/O interchain overlaps >1 A were checked on the best covered-DockQ model per condition only."
+                ]
+              }
             },
             {
               "job_id": "58121763",
@@ -4517,7 +4594,7 @@
               "campaign": "bmp90-paid-wave7-20261013",
               "arm": "bmp6_beta6",
               "submitted_at": "2026-10-14T06:29:57.427883+00:00",
-              "status": "submitted",
+              "status": "completed_evaluated",
               "runtime_revision": "5af05542f43f0af1b2b1f16c249996b3ddc8e730",
               "scoring_sha256": "26c3b5e419a5cef9114564b278de963dc440915004c4eaf1b8302d58592aafe0",
               "sampling": {
@@ -4558,7 +4635,83 @@
               },
               "cpu_preflight_job_id": "58121360",
               "manifest_sha256": "3920bf587a5bfbf0b1be583e53bf6f3c882dc8bfb641750bd45f075695ae48fe",
-              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121763"
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121763",
+              "completed_evaluation_readout": {
+                "recorded_at": "2026-10-14T14:31:31.077902+00:00",
+                "report_path": "artifacts/bmp90/evaluation/followup_status_20261014/results.json",
+                "report_sha256": "bb529039a6305d41a358286653624b0092d86cb6f5fc95fde240c1621728d3c5",
+                "conditions": {
+                  "baseline": {
+                    "covered_ge06": 0,
+                    "covered_gt05": 1,
+                    "median_weakest": 0.01054920216057493,
+                    "best_by_weakest_covered": {
+                      "sample": 4,
+                      "dockq": {
+                        "C": 0.5684750781939676,
+                        "D": 0.5605998230171686,
+                        "E": 0.8845936251062908,
+                        "F": 0.8940675958405665
+                      },
+                      "weakest_covered": 0.5605998230171686,
+                      "reward": 0.47187106017151903,
+                      "ancestor": 4,
+                      "pdb": "artifacts/remote-runs/58121763/baseline/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_4.pdb",
+                      "guidance_min": 0.47448321214051353,
+                      "severe_interchain_CNO_overlaps_gt1A": 11
+                    },
+                    "all_guidance_ge05": 0,
+                    "resamplings": 0,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "fk": {
+                    "covered_ge06": 0,
+                    "covered_gt05": 4,
+                    "median_weakest": 0.018409788637191987,
+                    "best_by_weakest_covered": {
+                      "sample": 2,
+                      "dockq": {
+                        "C": 0.556720528641769,
+                        "D": 0.5628258614148157,
+                        "E": 0.9038370800417111,
+                        "F": 0.8941679370321235
+                      },
+                      "weakest_covered": 0.556720528641769,
+                      "reward": 0.48260306259131297,
+                      "ancestor": 4,
+                      "pdb": "artifacts/remote-runs/58121763/fk/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_2.pdb",
+                      "guidance_min": 0.48896911553388117,
+                      "severe_interchain_CNO_overlaps_gt1A": 4
+                    },
+                    "all_guidance_ge05": 1,
+                    "resamplings": 1,
+                    "ancestors": [
+                      3,
+                      4,
+                      5,
+                      6,
+                      8
+                    ]
+                  }
+                },
+                "limits": [
+                  "Counts at DockQ >=0.6 describe reference recovery, not calibrated physical acceptance.",
+                  "BMP7 covers typeII only; BMP4 covers homologous C/E only. Uncovered interfaces remain unassessed.",
+                  "FK descendants are correlated. Best model selected by weakest covered DockQ, not by reward.",
+                  "Severe C/N/O interchain overlaps >1 A were checked on the best covered-DockQ model per condition only."
+                ]
+              }
             }
           ]
         }
@@ -8890,7 +9043,7 @@
               "campaign": "bmp90-paid-wave6-20261013",
               "arm": "alk3_control",
               "submitted_at": "2026-10-14T06:19:21.245706+00:00",
-              "status": "submitted",
+              "status": "completed_evaluated",
               "runtime_revision": "5af05542f43f0af1b2b1f16c249996b3ddc8e730",
               "scoring_sha256": "5e2abc989911651b9fbdd46c13daed62f8ed766d2fcccef9b08af2bc61bb67b4",
               "sampling": {
@@ -8931,7 +9084,85 @@
               },
               "cpu_preflight_job_id": "58121302",
               "manifest_sha256": "b14eba834d1bf69b421ac60680b26c37971054339bede36a9959792e3323cd9c",
-              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121330"
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121330",
+              "completed_evaluation_readout": {
+                "recorded_at": "2026-10-14T14:31:31.077902+00:00",
+                "report_path": "artifacts/bmp90/evaluation/followup_status_20261014/results.json",
+                "report_sha256": "bb529039a6305d41a358286653624b0092d86cb6f5fc95fde240c1621728d3c5",
+                "conditions": {
+                  "baseline": {
+                    "covered_ge06": 1,
+                    "covered_gt05": 1,
+                    "median_weakest": 0.016949280186773316,
+                    "best_by_weakest_covered": {
+                      "sample": 9,
+                      "dockq": {
+                        "C": null,
+                        "D": null,
+                        "E": 0.8837473668465239,
+                        "F": 0.9050440438229136
+                      },
+                      "weakest_covered": 0.8837473668465239,
+                      "reward": 0.7997163001063842,
+                      "ancestor": 9,
+                      "pdb": "artifacts/remote-runs/58121330/baseline/predictions_simplefold_3B/BMP7_BMPR1A_ACVR2A_sampled_9.pdb",
+                      "guidance_min": 0.960034923660318,
+                      "severe_interchain_CNO_overlaps_gt1A": 65
+                    },
+                    "all_guidance_ge05": 1,
+                    "resamplings": 0,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "fk": {
+                    "covered_ge06": 4,
+                    "covered_gt05": 4,
+                    "median_weakest": 0.1079432540772237,
+                    "best_by_weakest_covered": {
+                      "sample": 8,
+                      "dockq": {
+                        "C": null,
+                        "D": null,
+                        "E": 0.9015124860824432,
+                        "F": 0.8939659762294511
+                      },
+                      "weakest_covered": 0.8939659762294511,
+                      "reward": 0.7985510026283799,
+                      "ancestor": 9,
+                      "pdb": "artifacts/remote-runs/58121330/fk/predictions_simplefold_3B/BMP7_BMPR1A_ACVR2A_sampled_8.pdb",
+                      "guidance_min": 0.9626907205478835,
+                      "severe_interchain_CNO_overlaps_gt1A": 84
+                    },
+                    "all_guidance_ge05": 4,
+                    "resamplings": 1,
+                    "ancestors": [
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  }
+                },
+                "limits": [
+                  "Counts at DockQ >=0.6 describe reference recovery, not calibrated physical acceptance.",
+                  "BMP7 covers typeII only; BMP4 covers homologous C/E only. Uncovered interfaces remain unassessed.",
+                  "FK descendants are correlated. Best model selected by weakest covered DockQ, not by reward.",
+                  "Severe C/N/O interchain overlaps >1 A were checked on the best covered-DockQ model per condition only."
+                ]
+              }
             }
           ]
         },
@@ -11022,7 +11253,7 @@
               "campaign": "bmp90-paid-wave6-20261013",
               "arm": "alk3_sensitivity",
               "submitted_at": "2026-10-14T06:19:21.379861+00:00",
-              "status": "submitted",
+              "status": "completed_evaluated",
               "runtime_revision": "5af05542f43f0af1b2b1f16c249996b3ddc8e730",
               "scoring_sha256": "e09e40c8299ebaefb64843b4cbe62e2433d0ddd6c5ea0b4d02ebf9a1e0754c8f",
               "sampling": {
@@ -11063,7 +11294,85 @@
               },
               "cpu_preflight_job_id": "58121302",
               "manifest_sha256": "f71d9b78eb0a5cd341f26bd3a6e71960521e23d54a56352dde9eadafac470e37",
-              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121331"
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121331",
+              "completed_evaluation_readout": {
+                "recorded_at": "2026-10-14T14:31:31.077902+00:00",
+                "report_path": "artifacts/bmp90/evaluation/followup_status_20261014/results.json",
+                "report_sha256": "bb529039a6305d41a358286653624b0092d86cb6f5fc95fde240c1621728d3c5",
+                "conditions": {
+                  "baseline": {
+                    "covered_ge06": 1,
+                    "covered_gt05": 1,
+                    "median_weakest": 0.016949280186773316,
+                    "best_by_weakest_covered": {
+                      "sample": 9,
+                      "dockq": {
+                        "C": null,
+                        "D": null,
+                        "E": 0.8837473668465239,
+                        "F": 0.9050440438229136
+                      },
+                      "weakest_covered": 0.8837473668465239,
+                      "reward": 0.8009915836037905,
+                      "ancestor": 9,
+                      "pdb": "artifacts/remote-runs/58121331/baseline/predictions_simplefold_3B/BMP7_BMPR1A_ACVR2A_sampled_9.pdb",
+                      "guidance_min": 0.961504234487954,
+                      "severe_interchain_CNO_overlaps_gt1A": 65
+                    },
+                    "all_guidance_ge05": 1,
+                    "resamplings": 0,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "fk": {
+                    "covered_ge06": 4,
+                    "covered_gt05": 4,
+                    "median_weakest": 0.1079432540772237,
+                    "best_by_weakest_covered": {
+                      "sample": 8,
+                      "dockq": {
+                        "C": null,
+                        "D": null,
+                        "E": 0.9015124860824432,
+                        "F": 0.8939659762294511
+                      },
+                      "weakest_covered": 0.8939659762294511,
+                      "reward": 0.8036716215151747,
+                      "ancestor": 9,
+                      "pdb": "artifacts/remote-runs/58121331/fk/predictions_simplefold_3B/BMP7_BMPR1A_ACVR2A_sampled_8.pdb",
+                      "guidance_min": 0.9719209358112655,
+                      "severe_interchain_CNO_overlaps_gt1A": 84
+                    },
+                    "all_guidance_ge05": 4,
+                    "resamplings": 1,
+                    "ancestors": [
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  }
+                },
+                "limits": [
+                  "Counts at DockQ >=0.6 describe reference recovery, not calibrated physical acceptance.",
+                  "BMP7 covers typeII only; BMP4 covers homologous C/E only. Uncovered interfaces remain unassessed.",
+                  "FK descendants are correlated. Best model selected by weakest covered DockQ, not by reward.",
+                  "Severe C/N/O interchain overlaps >1 A were checked on the best covered-DockQ model per condition only."
+                ]
+              }
             }
           ]
         }
@@ -14322,7 +14631,7 @@
               "campaign": "bmp90-paid-wave6-20261013",
               "arm": "alk2_beta12",
               "submitted_at": "2026-10-14T06:19:20.929853+00:00",
-              "status": "submitted",
+              "status": "completed_evaluated",
               "runtime_revision": "5af05542f43f0af1b2b1f16c249996b3ddc8e730",
               "scoring_sha256": "c7c3952fcd09bf01f6658013dea1f47427c164210d3441c69dce89fbe7aaee4c",
               "sampling": {
@@ -14363,7 +14672,83 @@
               },
               "cpu_preflight_job_id": "58121302",
               "manifest_sha256": "fd85ca1a7b83b4e2c974170469cf7b526d94ec69ccd1610c89ba3131d80b41b8",
-              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121327"
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121327",
+              "completed_evaluation_readout": {
+                "recorded_at": "2026-10-14T14:31:31.077902+00:00",
+                "report_path": "artifacts/bmp90/evaluation/followup_status_20261014/results.json",
+                "report_sha256": "bb529039a6305d41a358286653624b0092d86cb6f5fc95fde240c1621728d3c5",
+                "conditions": {
+                  "baseline": {
+                    "covered_ge06": 0,
+                    "covered_gt05": 0,
+                    "median_weakest": 0.020027485892736438,
+                    "best_by_weakest_covered": {
+                      "sample": 2,
+                      "dockq": {
+                        "C": null,
+                        "D": null,
+                        "E": 0.02154918522011197,
+                        "F": 0.022447199788686308
+                      },
+                      "weakest_covered": 0.02154918522011197,
+                      "reward": 5.299269034525008e-05,
+                      "ancestor": 2,
+                      "pdb": "artifacts/remote-runs/58121327/baseline/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_2.pdb",
+                      "guidance_min": 5.618352405027512e-10,
+                      "severe_interchain_CNO_overlaps_gt1A": 193
+                    },
+                    "all_guidance_ge05": 0,
+                    "resamplings": 0,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "fk": {
+                    "covered_ge06": 0,
+                    "covered_gt05": 0,
+                    "median_weakest": 0.019519087382847265,
+                    "best_by_weakest_covered": {
+                      "sample": 2,
+                      "dockq": {
+                        "C": null,
+                        "D": null,
+                        "E": 0.020185314061233955,
+                        "F": 0.36395485232158453
+                      },
+                      "weakest_covered": 0.020185314061233955,
+                      "reward": 0.04798944006848826,
+                      "ancestor": 8,
+                      "pdb": "artifacts/remote-runs/58121327/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_2.pdb",
+                      "guidance_min": 1.21741832334433e-09,
+                      "severe_interchain_CNO_overlaps_gt1A": 133
+                    },
+                    "all_guidance_ge05": 0,
+                    "resamplings": 1,
+                    "ancestors": [
+                      3,
+                      5,
+                      7,
+                      8,
+                      9
+                    ]
+                  }
+                },
+                "limits": [
+                  "Counts at DockQ >=0.6 describe reference recovery, not calibrated physical acceptance.",
+                  "BMP7 covers typeII only; BMP4 covers homologous C/E only. Uncovered interfaces remain unassessed.",
+                  "FK descendants are correlated. Best model selected by weakest covered DockQ, not by reward.",
+                  "Severe C/N/O interchain overlaps >1 A were checked on the best covered-DockQ model per condition only."
+                ]
+              }
             },
             {
               "job_id": "58121328",
@@ -14372,7 +14757,7 @@
               "campaign": "bmp90-paid-wave6-20261013",
               "arm": "alk2_beta12",
               "submitted_at": "2026-10-14T06:19:21.010792+00:00",
-              "status": "submitted",
+              "status": "completed_evaluated",
               "runtime_revision": "5af05542f43f0af1b2b1f16c249996b3ddc8e730",
               "scoring_sha256": "c7c3952fcd09bf01f6658013dea1f47427c164210d3441c69dce89fbe7aaee4c",
               "sampling": {
@@ -14413,7 +14798,83 @@
               },
               "cpu_preflight_job_id": "58121302",
               "manifest_sha256": "2dc1b40d6f371028bd6f7fd274745ac6078a1d5cf930cadc18ad5ecf9e68435f",
-              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121328"
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121328",
+              "completed_evaluation_readout": {
+                "recorded_at": "2026-10-14T14:31:31.077902+00:00",
+                "report_path": "artifacts/bmp90/evaluation/followup_status_20261014/results.json",
+                "report_sha256": "bb529039a6305d41a358286653624b0092d86cb6f5fc95fde240c1621728d3c5",
+                "conditions": {
+                  "baseline": {
+                    "covered_ge06": 0,
+                    "covered_gt05": 0,
+                    "median_weakest": 0.020443784401157072,
+                    "best_by_weakest_covered": {
+                      "sample": 6,
+                      "dockq": {
+                        "C": null,
+                        "D": null,
+                        "E": 0.028474449375499544,
+                        "F": 0.7920851240334584
+                      },
+                      "weakest_covered": 0.028474449375499544,
+                      "reward": 0.18171498435176772,
+                      "ancestor": 6,
+                      "pdb": "artifacts/remote-runs/58121328/baseline/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_6.pdb",
+                      "guidance_min": 4.6099486429958186e-10,
+                      "severe_interchain_CNO_overlaps_gt1A": 137
+                    },
+                    "all_guidance_ge05": 0,
+                    "resamplings": 0,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "fk": {
+                    "covered_ge06": 0,
+                    "covered_gt05": 0,
+                    "median_weakest": 0.020684094093495593,
+                    "best_by_weakest_covered": {
+                      "sample": 9,
+                      "dockq": {
+                        "C": null,
+                        "D": null,
+                        "E": 0.0284266817951013,
+                        "F": 0.7636339658503206
+                      },
+                      "weakest_covered": 0.0284266817951013,
+                      "reward": 0.19474553796236252,
+                      "ancestor": 6,
+                      "pdb": "artifacts/remote-runs/58121328/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_9.pdb",
+                      "guidance_min": 2.268744683117774e-10,
+                      "severe_interchain_CNO_overlaps_gt1A": 120
+                    },
+                    "all_guidance_ge05": 0,
+                    "resamplings": 1,
+                    "ancestors": [
+                      1,
+                      3,
+                      5,
+                      6,
+                      8
+                    ]
+                  }
+                },
+                "limits": [
+                  "Counts at DockQ >=0.6 describe reference recovery, not calibrated physical acceptance.",
+                  "BMP7 covers typeII only; BMP4 covers homologous C/E only. Uncovered interfaces remain unassessed.",
+                  "FK descendants are correlated. Best model selected by weakest covered DockQ, not by reward.",
+                  "Severe C/N/O interchain overlaps >1 A were checked on the best covered-DockQ model per condition only."
+                ]
+              }
             },
             {
               "job_id": "58121329",
@@ -14422,7 +14883,7 @@
               "campaign": "bmp90-paid-wave6-20261013",
               "arm": "alk2_beta12",
               "submitted_at": "2026-10-14T06:19:21.092023+00:00",
-              "status": "submitted",
+              "status": "completed_evaluated",
               "runtime_revision": "5af05542f43f0af1b2b1f16c249996b3ddc8e730",
               "scoring_sha256": "c7c3952fcd09bf01f6658013dea1f47427c164210d3441c69dce89fbe7aaee4c",
               "sampling": {
@@ -14463,7 +14924,83 @@
               },
               "cpu_preflight_job_id": "58121302",
               "manifest_sha256": "feaa044efda7570969978832526668a5ca3ee3026770c07b6121e7a4ec867af0",
-              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121329"
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121329",
+              "completed_evaluation_readout": {
+                "recorded_at": "2026-10-14T14:31:31.077902+00:00",
+                "report_path": "artifacts/bmp90/evaluation/followup_status_20261014/results.json",
+                "report_sha256": "bb529039a6305d41a358286653624b0092d86cb6f5fc95fde240c1621728d3c5",
+                "conditions": {
+                  "baseline": {
+                    "covered_ge06": 1,
+                    "covered_gt05": 1,
+                    "median_weakest": 0.01601161823768872,
+                    "best_by_weakest_covered": {
+                      "sample": 1,
+                      "dockq": {
+                        "C": null,
+                        "D": null,
+                        "E": 0.7664096593166652,
+                        "F": 0.7268988720292299
+                      },
+                      "weakest_covered": 0.7268988720292299,
+                      "reward": 0.09821743255522405,
+                      "ancestor": 1,
+                      "pdb": "artifacts/remote-runs/58121329/baseline/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_1.pdb",
+                      "guidance_min": 2.986811026568671e-12,
+                      "severe_interchain_CNO_overlaps_gt1A": 222
+                    },
+                    "all_guidance_ge05": 0,
+                    "resamplings": 0,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "fk": {
+                    "covered_ge06": 4,
+                    "covered_gt05": 4,
+                    "median_weakest": 0.01670670017242474,
+                    "best_by_weakest_covered": {
+                      "sample": 8,
+                      "dockq": {
+                        "C": null,
+                        "D": null,
+                        "E": 0.7243444669284416,
+                        "F": 0.7459651698587693
+                      },
+                      "weakest_covered": 0.7243444669284416,
+                      "reward": 0.22050006688185733,
+                      "ancestor": 1,
+                      "pdb": "artifacts/remote-runs/58121329/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_8.pdb",
+                      "guidance_min": 1.945993929935942e-12,
+                      "severe_interchain_CNO_overlaps_gt1A": 64
+                    },
+                    "all_guidance_ge05": 0,
+                    "resamplings": 1,
+                    "ancestors": [
+                      1,
+                      2,
+                      5,
+                      7,
+                      9
+                    ]
+                  }
+                },
+                "limits": [
+                  "Counts at DockQ >=0.6 describe reference recovery, not calibrated physical acceptance.",
+                  "BMP7 covers typeII only; BMP4 covers homologous C/E only. Uncovered interfaces remain unassessed.",
+                  "FK descendants are correlated. Best model selected by weakest covered DockQ, not by reward.",
+                  "Severe C/N/O interchain overlaps >1 A were checked on the best covered-DockQ model per condition only."
+                ]
+              }
             }
           ]
         }
@@ -16699,7 +17236,7 @@
               "campaign": "bmp90-paid-wave7-20261013",
               "arm": "bmp4_off_beta12",
               "submitted_at": "2026-10-14T06:29:56.757987+00:00",
-              "status": "submitted",
+              "status": "completed_evaluated",
               "runtime_revision": "5af05542f43f0af1b2b1f16c249996b3ddc8e730",
               "scoring_sha256": "8e01cd2322785ce9c5d6a4384388e43cdaf532d6d14073bb340453b3cc7c11cd",
               "sampling": {
@@ -16740,7 +17277,82 @@
               },
               "cpu_preflight_job_id": "58121360",
               "manifest_sha256": "17ec76fd464c6799bc53260195a9b9e917ca53266b0c8232b9c710a670c350e1",
-              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121758"
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121758",
+              "completed_evaluation_readout": {
+                "recorded_at": "2026-10-14T14:31:31.077902+00:00",
+                "report_path": "artifacts/bmp90/evaluation/followup_status_20261014/results.json",
+                "report_sha256": "bb529039a6305d41a358286653624b0092d86cb6f5fc95fde240c1621728d3c5",
+                "conditions": {
+                  "baseline": {
+                    "covered_ge06": 2,
+                    "covered_gt05": 2,
+                    "median_weakest": 0.018137678765866076,
+                    "best_by_weakest_covered": {
+                      "sample": 6,
+                      "dockq": {
+                        "C": 0.8633859582130635,
+                        "D": null,
+                        "E": 0.8596874228558463,
+                        "F": null
+                      },
+                      "weakest_covered": 0.8596874228558463,
+                      "reward": 0.2508239653269964,
+                      "ancestor": 6,
+                      "pdb": "artifacts/remote-runs/58121758/baseline/predictions_simplefold_3B/BMP4_BMPR1A_ACVR2B_full_ecd_sampled_6.pdb",
+                      "guidance_min": 4.6694488312485274e-06,
+                      "severe_interchain_CNO_overlaps_gt1A": 62
+                    },
+                    "all_guidance_ge05": 0,
+                    "resamplings": 0,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "fk": {
+                    "covered_ge06": 4,
+                    "covered_gt05": 4,
+                    "median_weakest": 0.02886977443984806,
+                    "best_by_weakest_covered": {
+                      "sample": 5,
+                      "dockq": {
+                        "C": 0.8625263892460647,
+                        "D": null,
+                        "E": 0.8549906116991655,
+                        "F": null
+                      },
+                      "weakest_covered": 0.8549906116991655,
+                      "reward": 0.254531293281336,
+                      "ancestor": 1,
+                      "pdb": "artifacts/remote-runs/58121758/fk/predictions_simplefold_3B/BMP4_BMPR1A_ACVR2B_full_ecd_sampled_5.pdb",
+                      "guidance_min": 1.5612243884585095e-06,
+                      "severe_interchain_CNO_overlaps_gt1A": 56
+                    },
+                    "all_guidance_ge05": 0,
+                    "resamplings": 2,
+                    "ancestors": [
+                      1,
+                      4,
+                      6,
+                      7
+                    ]
+                  }
+                },
+                "limits": [
+                  "Counts at DockQ >=0.6 describe reference recovery, not calibrated physical acceptance.",
+                  "BMP7 covers typeII only; BMP4 covers homologous C/E only. Uncovered interfaces remain unassessed.",
+                  "FK descendants are correlated. Best model selected by weakest covered DockQ, not by reward.",
+                  "Severe C/N/O interchain overlaps >1 A were checked on the best covered-DockQ model per condition only."
+                ]
+              }
             },
             {
               "job_id": "58121759",
@@ -16749,7 +17361,7 @@
               "campaign": "bmp90-paid-wave7-20261013",
               "arm": "bmp4_off_beta4",
               "submitted_at": "2026-10-14T06:29:56.894794+00:00",
-              "status": "submitted",
+              "status": "completed_evaluated",
               "runtime_revision": "5af05542f43f0af1b2b1f16c249996b3ddc8e730",
               "scoring_sha256": "8e01cd2322785ce9c5d6a4384388e43cdaf532d6d14073bb340453b3cc7c11cd",
               "sampling": {
@@ -16790,7 +17402,88 @@
               },
               "cpu_preflight_job_id": "58121360",
               "manifest_sha256": "cd9d378d8faa1f3f64aca39e56b6a3b6690d6112487e1cc9541045d016a2c7ec",
-              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121759"
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121759",
+              "completed_evaluation_readout": {
+                "recorded_at": "2026-10-14T14:31:31.077902+00:00",
+                "report_path": "artifacts/bmp90/evaluation/followup_status_20261014/results.json",
+                "report_sha256": "bb529039a6305d41a358286653624b0092d86cb6f5fc95fde240c1621728d3c5",
+                "conditions": {
+                  "baseline": {
+                    "covered_ge06": 2,
+                    "covered_gt05": 2,
+                    "median_weakest": 0.018137678765866076,
+                    "best_by_weakest_covered": {
+                      "sample": 6,
+                      "dockq": {
+                        "C": 0.8633859582130635,
+                        "D": null,
+                        "E": 0.8596874228558463,
+                        "F": null
+                      },
+                      "weakest_covered": 0.8596874228558463,
+                      "reward": 0.2508239653269964,
+                      "ancestor": 6,
+                      "pdb": "artifacts/remote-runs/58121759/baseline/predictions_simplefold_3B/BMP4_BMPR1A_ACVR2B_full_ecd_sampled_6.pdb",
+                      "guidance_min": 4.6694488312485274e-06,
+                      "severe_interchain_CNO_overlaps_gt1A": 62
+                    },
+                    "all_guidance_ge05": 0,
+                    "resamplings": 0,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "fk": {
+                    "covered_ge06": 2,
+                    "covered_gt05": 2,
+                    "median_weakest": 0.018137678765866076,
+                    "best_by_weakest_covered": {
+                      "sample": 6,
+                      "dockq": {
+                        "C": 0.8633859582130635,
+                        "D": null,
+                        "E": 0.8596874228558463,
+                        "F": null
+                      },
+                      "weakest_covered": 0.8596874228558463,
+                      "reward": 0.2508239653269964,
+                      "ancestor": 6,
+                      "pdb": "artifacts/remote-runs/58121759/fk/predictions_simplefold_3B/BMP4_BMPR1A_ACVR2B_full_ecd_sampled_6.pdb",
+                      "guidance_min": 4.6694488312485274e-06,
+                      "severe_interchain_CNO_overlaps_gt1A": 62
+                    },
+                    "all_guidance_ge05": 0,
+                    "resamplings": 0,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  }
+                },
+                "limits": [
+                  "Counts at DockQ >=0.6 describe reference recovery, not calibrated physical acceptance.",
+                  "BMP7 covers typeII only; BMP4 covers homologous C/E only. Uncovered interfaces remain unassessed.",
+                  "FK descendants are correlated. Best model selected by weakest covered DockQ, not by reward.",
+                  "Severe C/N/O interchain overlaps >1 A were checked on the best covered-DockQ model per condition only."
+                ]
+              }
             }
           ]
         },
@@ -18990,7 +19683,7 @@
               "campaign": "bmp90-paid-wave7-20261013",
               "arm": "bmp4_on_beta12",
               "submitted_at": "2026-10-14T06:29:57.034468+00:00",
-              "status": "submitted",
+              "status": "completed_evaluated",
               "runtime_revision": "5af05542f43f0af1b2b1f16c249996b3ddc8e730",
               "scoring_sha256": "cd7753128fa9ffd070453c7e612d89f03d8cba4299ac8fbef364a83a05384566",
               "sampling": {
@@ -19031,7 +19724,88 @@
               },
               "cpu_preflight_job_id": "58121360",
               "manifest_sha256": "367733c80a8caf4b75ccdec0839e39a638fa038946992099ac8b272eacaf32c3",
-              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121760"
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121760",
+              "completed_evaluation_readout": {
+                "recorded_at": "2026-10-14T14:31:31.077902+00:00",
+                "report_path": "artifacts/bmp90/evaluation/followup_status_20261014/results.json",
+                "report_sha256": "bb529039a6305d41a358286653624b0092d86cb6f5fc95fde240c1621728d3c5",
+                "conditions": {
+                  "baseline": {
+                    "covered_ge06": 2,
+                    "covered_gt05": 2,
+                    "median_weakest": 0.018137678765866076,
+                    "best_by_weakest_covered": {
+                      "sample": 6,
+                      "dockq": {
+                        "C": 0.8633859582130635,
+                        "D": null,
+                        "E": 0.8596874228558463,
+                        "F": null
+                      },
+                      "weakest_covered": 0.8596874228558463,
+                      "reward": 0.130676853871868,
+                      "ancestor": 6,
+                      "pdb": "artifacts/remote-runs/58121760/baseline/predictions_simplefold_3B/BMP4_BMPR1A_ACVR2B_full_ecd_sampled_6.pdb",
+                      "guidance_min": 4.6694488312485274e-06,
+                      "severe_interchain_CNO_overlaps_gt1A": 62
+                    },
+                    "all_guidance_ge05": 0,
+                    "resamplings": 0,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "fk": {
+                    "covered_ge06": 2,
+                    "covered_gt05": 2,
+                    "median_weakest": 0.018137678765866076,
+                    "best_by_weakest_covered": {
+                      "sample": 6,
+                      "dockq": {
+                        "C": 0.8633859582130635,
+                        "D": null,
+                        "E": 0.8596874228558463,
+                        "F": null
+                      },
+                      "weakest_covered": 0.8596874228558463,
+                      "reward": 0.130676853871868,
+                      "ancestor": 6,
+                      "pdb": "artifacts/remote-runs/58121760/fk/predictions_simplefold_3B/BMP4_BMPR1A_ACVR2B_full_ecd_sampled_6.pdb",
+                      "guidance_min": 4.6694488312485274e-06,
+                      "severe_interchain_CNO_overlaps_gt1A": 62
+                    },
+                    "all_guidance_ge05": 0,
+                    "resamplings": 0,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  }
+                },
+                "limits": [
+                  "Counts at DockQ >=0.6 describe reference recovery, not calibrated physical acceptance.",
+                  "BMP7 covers typeII only; BMP4 covers homologous C/E only. Uncovered interfaces remain unassessed.",
+                  "FK descendants are correlated. Best model selected by weakest covered DockQ, not by reward.",
+                  "Severe C/N/O interchain overlaps >1 A were checked on the best covered-DockQ model per condition only."
+                ]
+              }
             },
             {
               "job_id": "58121761",
@@ -19040,7 +19814,7 @@
               "campaign": "bmp90-paid-wave7-20261013",
               "arm": "bmp4_on_beta4",
               "submitted_at": "2026-10-14T06:29:57.169084+00:00",
-              "status": "submitted",
+              "status": "completed_evaluated",
               "runtime_revision": "5af05542f43f0af1b2b1f16c249996b3ddc8e730",
               "scoring_sha256": "cd7753128fa9ffd070453c7e612d89f03d8cba4299ac8fbef364a83a05384566",
               "sampling": {
@@ -19081,7 +19855,88 @@
               },
               "cpu_preflight_job_id": "58121360",
               "manifest_sha256": "a3dea7cba9f5f71533d53f2682f6ce84f9ec6fb9a96893cc33107de25b0b4d8e",
-              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121761"
+              "output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58121761",
+              "completed_evaluation_readout": {
+                "recorded_at": "2026-10-14T14:31:31.077902+00:00",
+                "report_path": "artifacts/bmp90/evaluation/followup_status_20261014/results.json",
+                "report_sha256": "bb529039a6305d41a358286653624b0092d86cb6f5fc95fde240c1621728d3c5",
+                "conditions": {
+                  "baseline": {
+                    "covered_ge06": 2,
+                    "covered_gt05": 2,
+                    "median_weakest": 0.018137678765866076,
+                    "best_by_weakest_covered": {
+                      "sample": 6,
+                      "dockq": {
+                        "C": 0.8633859582130635,
+                        "D": null,
+                        "E": 0.8596874228558463,
+                        "F": null
+                      },
+                      "weakest_covered": 0.8596874228558463,
+                      "reward": 0.130676853871868,
+                      "ancestor": 6,
+                      "pdb": "artifacts/remote-runs/58121761/baseline/predictions_simplefold_3B/BMP4_BMPR1A_ACVR2B_full_ecd_sampled_6.pdb",
+                      "guidance_min": 4.6694488312485274e-06,
+                      "severe_interchain_CNO_overlaps_gt1A": 62
+                    },
+                    "all_guidance_ge05": 0,
+                    "resamplings": 0,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "fk": {
+                    "covered_ge06": 2,
+                    "covered_gt05": 2,
+                    "median_weakest": 0.018137678765866076,
+                    "best_by_weakest_covered": {
+                      "sample": 6,
+                      "dockq": {
+                        "C": 0.8633859582130635,
+                        "D": null,
+                        "E": 0.8596874228558463,
+                        "F": null
+                      },
+                      "weakest_covered": 0.8596874228558463,
+                      "reward": 0.130676853871868,
+                      "ancestor": 6,
+                      "pdb": "artifacts/remote-runs/58121761/fk/predictions_simplefold_3B/BMP4_BMPR1A_ACVR2B_full_ecd_sampled_6.pdb",
+                      "guidance_min": 4.6694488312485274e-06,
+                      "severe_interchain_CNO_overlaps_gt1A": 62
+                    },
+                    "all_guidance_ge05": 0,
+                    "resamplings": 0,
+                    "ancestors": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  }
+                },
+                "limits": [
+                  "Counts at DockQ >=0.6 describe reference recovery, not calibrated physical acceptance.",
+                  "BMP7 covers typeII only; BMP4 covers homologous C/E only. Uncovered interfaces remain unassessed.",
+                  "FK descendants are correlated. Best model selected by weakest covered DockQ, not by reward.",
+                  "Severe C/N/O interchain overlaps >1 A were checked on the best covered-DockQ model per condition only."
+                ]
+              }
             }
           ]
         }
@@ -20750,7 +21605,7 @@
       "historical_snapshot_note": "common_preparation_snapshot and optional_l61_geometry_snapshot preserve preimplementation proposal state. Current executabledefinitions and newruntime are in appended mapped recipes."
     }
   },
-  "updated_at": "2026-10-14T06:30:48.380004+00:00",
+  "updated_at": "2026-10-14T14:31:31.077902+00:00",
   "interface_evidence_registry": "configs/bmp90/interface_evidence_registry.json",
   "failure_registry": "configs/bmp90/failure_registry.json",
   "construct_policy": {
