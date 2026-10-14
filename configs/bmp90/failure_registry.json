@@ -1059,12 +1059,33 @@
             "path": "artifacts/bmp90/operations/paid_wave11/submission_receipt.json",
             "sha256": "31036f8699ef73135be7da08094ba415939bf52a94127c99a24dffe838bd85cc"
           }
+        },
+        {
+          "recorded_at": "2026-10-14T22:45:45.853296+00:00",
+          "status": "beta12_sweep_completed_beta24_running",
+          "job_ids": [
+            "58139952",
+            "58139986",
+            "58139987"
+          ],
+          "result": "Keep v1 tau0.8 job58121329 suffix8 as provisional overall leader. The v3 beta12 sweep made no changes to its paired baseline structures at any tau. Tau0.8 suffix1 recovers both typeII interfaces but is exactly an already available historical baseline model, with substantially worse interchain CNO overlaps and unresolved typeI placement. The stronger beta24 follow-up is already running; evaluate its actual outputs before another revision.",
+          "reports": [
+            {
+              "path": "artifacts/bmp90/evaluation/paid_wave9_status_20261014T2242/collection.json",
+              "sha256": "954a9b73feef139e5ad57bf6a68f101901c62a40ab369f1742962185f6330122"
+            },
+            {
+              "path": "artifacts/bmp90/evaluation/bmp7_alk2_v3_complete_20261014/scientific_summary.json",
+              "sha256": "e91d06322408c7659057f3788255bed90669dcba24859f4a76f1ad90ce20416a"
+            }
+          ],
+          "scope": "All three beta12 taus lacked a guidance effect; typeII-only baseline recovery does not establish whole-assembly improvement."
         }
       ],
-      "status": "documented_tau01_failure_other_taus_pending",
+      "status": "documented_beta12_sweep_no_guidance_effect_beta24_running",
       "transfer_limits": "One noise setting. Do not reject a recipe because one tau regresses; do not claim absent binding or an invalid transferred contact from this result."
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-14T22:19:16.408218+00:00"
+  "updated_at": "2026-10-14T22:45:45.853296+00:00"
 }
