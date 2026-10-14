@@ -71,6 +71,37 @@ class GeometryEvaluationTests(unittest.TestCase):
         self.assertEqual(copy['status'],'unassessed_missing_reference_atoms')
         self.assertTrue(all(m['value'] is None for m in copy['measurements']))
 
+    def test_partial_reference_as_model_skips_absent_receptor_copy_assignments(self):
+        f = self.fixture
+        atoms = {k: xyz for k, xyz in f.atoms.items() if k[0] not in 'DF'}
+        f.write_atoms(atoms)
+        reference, _ = ev.read_atoms(f.pdb)
+        result = ev.evaluate_model(f.pdb, reference, self.chains,
+                                   dict(zip('ABCDEF', 'ABCDEF')), ['A', 'B'], f.spec,
+                                   allow_partial=True)
+        self.assertEqual(len(result['assignment_alternatives']), 2)
+        for candidate in result['assignment_alternatives']:
+            assignment = candidate['reference_to_model_input_chain']
+            self.assertEqual((assignment['C'], assignment['E']), ('C', 'E'))
+        self.assertLess(result['coherent_assignment']['objective_A_squared'], 1e-20)
+        self.assertEqual(result['reference_uncovered_chains'], ['D', 'F'])
+        self.assertEqual(result['native_contact_recovery_summary'], {'mean': None, 'weakest': None})
+        module = result['local_geometry_under_reference_assignment'][0]
+        self.assertEqual(module['copies'][0]['geometry_error'], 0)
+        self.assertIsNone(module['copies'][1]['geometry_error'])
+        with self.assertRaisesRegex(ValueError, 'missing .* expected CA'):
+            ev.evaluate_model(f.pdb, reference, self.chains,
+                              dict(zip('ABCDEF', 'ABCDEF')), ['A', 'B'], f.spec)
+
+    def test_no_covered_copy_match_fails_after_considering_all_assignments(self):
+        partial = {k: a for k, a in self.reference.items() if k[0] not in 'DF'}
+        no_type_two = {k: a for k, a in partial.items() if k[0] != 'E'}
+        with self.assertRaisesRegex(ValueError, 'No valid coherent assignment'):
+            ev.coherent_assignment(partial, no_type_two, self.chains, ['A', 'B'])
+        too_short = {k: a for k, a in partial.items() if k[0] != 'E' or k[1] < 3}
+        with self.assertRaisesRegex(ValueError, 'No valid coherent assignment'):
+            ev.coherent_assignment(partial, too_short, self.chains, ['A', 'B'])
+
     def test_explicit_homologous_label_and_preserved_species_label(self):
         value=ev.reference_comparison_scope({'reference_surrogate_kind':'homologous_ligand'},True,[])
         self.assertEqual(value[:2],(True,'homologous_surrogate_agreement'))

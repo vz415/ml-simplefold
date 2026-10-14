@@ -213,19 +213,27 @@ def coherent_assignment(reference, model, chains, ligand_chains):
     alternatives = []
     for perm_groups in itertools.product(*permutations):
         assignment = dict(x for group, perm in zip(groups, perm_groups) for x in zip(group, perm))
+        # A partial diagnostic may contain only one copy of an identical
+        # receptor. Its swapped assignment can be impossible even though the
+        # identity assignment is valid. Reject that candidate, not the model.
+        # Every covered chain must still support its part of the same fit.
+        chain_matches = {chain: matched(reference, model, assignment, [chain])
+                         for chain in list(ligand_chains) + receptor_chains}
+        if any(len(row[0]) < 3 for row in chain_matches.values()):
+            continue
         _, ref, mod = matched(reference, model, assignment, ligand_chains)
         rotation, translation, ligand_rmsd = fit(mod, ref)
         receptor_rmsd = {}
         for chain in receptor_chains:
-            _, ref, mod = matched(reference, model, assignment, [chain])
-            if len(ref) < 3:
-                raise ValueError(f"Insufficient shared CA atoms in receptor {chain}")
+            _, ref, mod = chain_matches[chain]
             receptor_rmsd[chain] = float(np.sqrt(np.mean(np.sum((mod @ rotation+translation-ref)**2, axis=1))))
         objective = ligand_rmsd**2 + sum(x*x for x in receptor_rmsd.values())
         alternatives.append({"reference_to_model_input_chain": assignment,
                              "ligand_CA_fit_rmsd_A": ligand_rmsd,
                              "receptor_CA_rmsd_in_ligand_frame_A": receptor_rmsd,
                              "objective_A_squared": objective})
+    if not alternatives:
+        raise ValueError("No valid coherent assignment: every covered ligand and receptor chain requires at least three shared CA atoms")
     alternatives.sort(key=lambda a: (a["objective_A_squared"], tuple(a["reference_to_model_input_chain"].values())))
     return alternatives[0], alternatives
 
