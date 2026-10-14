@@ -1200,6 +1200,38 @@
       "finding": "Focused ACVR1 N60 / BMP6 S446 local distance and approach-angle guidance measured from 9N4K for both receptor copies.",
       "evidence_allocation": "guidance_and_tuning_after_observed_loop_defect",
       "limits": "Geometric proxy from engineered glycosylated receptor trap; does not assert hydrogen bond, energy, or independent validation."
+    },
+    {
+      "evidence_id": "BMP7_ACVR1_BRIDGE_COPY_REVISION_20261014",
+      "target_id": "BMP7_ACVR1_ACVR2A",
+      "evidence_class": "observed_prediction_failure_informing_constraint_design",
+      "source": {
+        "path": "artifacts/bmp90/preparation/bmp7_alk2_revision_v3_20261014/validation.json",
+        "sha256": "20f6b30f8eeec330cfa79fcd269d306244d54a59dc698e11a497f12fb65c5650"
+      },
+      "specification": {
+        "path": "artifacts/bmp90/preparation/bmp7_alk2_revision_v3_20261014/bmp7_alk2_bridge_cauchy_v3.json",
+        "sha256": "b7fcffcfc89cfa2591518984d6c35411db00e6faecb8dbc869135756a6838da1"
+      },
+      "finding": "Keep successful typeII and fullconstruct integrity. Retain the expanded transferred typeI endpoints fromv2 but require both the five-anchor ligand face and single T83-L342 other-protomer bridge for each receptor; Cauchy distance response and75% weakest-copy contribution target missing/incorrect typeI copies.",
+      "evidence_allocation": "guidance_and_tuning",
+      "limits": "No new experimental BMP7 typeI interface evidence. Native topology annotations only support covalent exclusions. Counterfactual fixtures test implementation/design behavior and do not validate a sampled structure."
+    },
+    {
+      "evidence_id": "BMP7_BMPR1A_SEVERE_OVERLAP_GUARD_20261014",
+      "target_id": "BMP7_BMPR1A_ACVR2A",
+      "evidence_class": "generic_chemistry_with_native_topology_annotations",
+      "source": {
+        "path": "artifacts/bmp90/preparation/bmp7_alk3_steric_v2_20261014/validation.json",
+        "sha256": "e5c6713b4d1bd94f59ebe8a77763c4a1249faa352d3da9017bd23d37a6188c76"
+      },
+      "specification": {
+        "path": "artifacts/bmp90/preparation/bmp7_alk3_steric_v2_20261014/bmp7_alk3_steric_v2.json",
+        "sha256": "0934dad1656120e8e6a9120841c788bad530672bc72fe74248e7a0a7a6a67e53"
+      },
+      "finding": "Preserve every v1 contact and integrity rule. Add a bounded C/N/O interchain severe-overlap factor including full terminal regions; annotated native disulfides and standard connectivity define covalent exclusions. Maximum penalty20%; generic chemistry is not new target-specific contact evidence.",
+      "evidence_allocation": "guidance_and_tuning",
+      "limits": "No new experimental BMP7 typeI interface evidence. Native topology annotations only support covalent exclusions. Counterfactual fixtures test implementation/design behavior and do not validate a sampled structure."
     }
   ],
   "generic_inspection_priors": {
@@ -1411,5 +1443,5 @@
       "evidence_label_scope": "Vocabulary for future observations; no existing evidence_class is reclassified by this import. R8 instructs evaluation of energetic evidence; it does not establish a hotspot for any target."
     }
   },
-  "updated_at": "2026-10-14T15:17:51.985529+00:00"
+  "updated_at": "2026-10-14T19:02:26.165194+00:00"
 }

@@ -275,9 +275,22 @@
               "sha256": "32a6d07ad7b4d69124d998b5eaedcc76c444464e77609e68df2544e847a0faf8"
             }
           ]
+        },
+        {
+          "recorded_at": "2026-10-14T19:15:06.300554+00:00",
+          "status": "paired_relaxation_completed_evaluated",
+          "job_ids": [
+            "58139634",
+            "58139638"
+          ],
+          "result": "Restrained relaxation resolves severe overlaps for both selected models but does not repair v1 N60. Refined v1 remains provisional overall best; refined v3 preserves better N60 but has lower DockQ and a residual short disulfide with minimizer nonconvergence.",
+          "artifact_reference": {
+            "path": "artifacts/bmp90/evaluation/bmp6_refinement_20261014/results.json",
+            "sha256": "c8c6c1c094580c0a830465dc564cc2f65535a1b914321ea9650f28deaac99632"
+          }
         }
       ],
-      "status": "documented_residual_defects_revision_submitted",
+      "status": "postprocessing_completed_N60_defect_remains",
       "transfer_limits": "One correlated recovered lineage; source reference is an engineered glycosylated trap. Geometric overlap counts are not calibrated acceptance thresholds or MolProbity clashscores. Tail coordinates lack experimental coverage; no nonbinding inference."
     },
     {
@@ -401,6 +414,26 @@
             }
           ],
           "qualification": "Experimental reference covers only conserved type-II species-surrogate interfaces. Type-I common-score dissatisfaction is not experimental evidence against binding."
+        },
+        {
+          "recorded_at": "2026-10-14T19:13:24.900538+00:00",
+          "status": "submitted",
+          "recipe_id": "bmp7_alk2_bridge_cauchy_v3",
+          "job_ids": [
+            "58139952",
+            "58139986",
+            "58139987"
+          ],
+          "evaluation_job_ids": [
+            "58139992",
+            "58139993",
+            "58139994"
+          ],
+          "result": "Defect-targeted joint revision submitted across tau0.1/0.3/0.8 after local tests, actual cluster score fixtures and reference self-DockQ; outcomes pending.",
+          "submission_receipt": {
+            "path": "artifacts/bmp90/operations/paid_wave9/submission_receipt.json",
+            "sha256": "f9f2faa9cc9cdb2eefdf7856dad6211836fd7ccc1922ede72c24cbd48e05102e"
+          }
         }
       ],
       "artifact_references": [
@@ -439,6 +472,26 @@
             "58121331"
           ],
           "result": "Matched original versus uncertain D69-K331 weight0.1 sensitivity, A100 tau0.3 beta4. Results pending; automatic afterok CPU evaluations attached."
+        },
+        {
+          "recorded_at": "2026-10-14T19:13:24.900538+00:00",
+          "status": "submitted",
+          "recipe_id": "bmp7_alk3_steric_v2",
+          "job_ids": [
+            "58139988",
+            "58139989",
+            "58139990"
+          ],
+          "evaluation_job_ids": [
+            "58139995",
+            "58139996",
+            "58139997"
+          ],
+          "result": "Defect-targeted joint revision submitted across tau0.1/0.3/0.8 after local tests, actual cluster score fixtures and reference self-DockQ; outcomes pending.",
+          "submission_receipt": {
+            "path": "artifacts/bmp90/operations/paid_wave9/submission_receipt.json",
+            "sha256": "f9f2faa9cc9cdb2eefdf7856dad6211836fd7ccc1922ede72c24cbd48e05102e"
+          }
         }
       ],
       "artifact_references": [
@@ -757,12 +810,74 @@
         {
           "job_id": "58139638",
           "observation": "Paired corrected-protocol retry submitted"
+        },
+        {
+          "recorded_at": "2026-10-14T19:15:06.300554+00:00",
+          "job_ids": [
+            "58139634",
+            "58139638"
+          ],
+          "status": "completed_exit0",
+          "result": "Corrected XML runs completed; scientific limitations recorded separately.",
+          "artifact_reference": {
+            "path": "artifacts/bmp90/evaluation/bmp6_refinement_20261014/results.json",
+            "sha256": "c8c6c1c094580c0a830465dc564cc2f65535a1b914321ea9650f28deaac99632"
+          }
         }
       ],
-      "status": "schema_failure_resolved_refinement_results_pending",
+      "status": "compatibility_failure_resolved_corrected_runs_completed",
       "transfer_limits": "Execution failure only; no evidence against either scoring recipe or structural hypothesis."
+    },
+    {
+      "failure_id": "BMP6_ROSETTA_V3_RESIDUAL_DISULFIDE_NONCONVERGENCE_20261014",
+      "complex_id": "BMP6_ACVR1_ACVR2B",
+      "recipe_id": "bmp6_joint_n60_local_v3",
+      "parent_failure_id": null,
+      "failure_category": "postprocessing_residual_geometry_and_nonconvergence",
+      "run_ids": [
+        "58139634"
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/evaluation/bmp6_refinement_20261014/results.json",
+          "sha256": "c8c6c1c094580c0a830465dc564cc2f65535a1b914321ea9650f28deaac99632"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/bmp6_rosetta_20261014/independent_validity_58139634.json",
+          "sha256": "77d351e3c1edab5d9a263f5c68f88d3b71ecf7694fd378a2e55735edb7ff92ff"
+        }
+      ],
+      "code_revision": "7adb822",
+      "sequence_hashes": {},
+      "construct_description": "Full 716 residues; 552 core backbone residues restrained to the starting pose, 164 tail residues flexible, 27 fixed native disulfides.",
+      "sampling_settings": {
+        "tau": null,
+        "checkpoint_times": [],
+        "seeds": {},
+        "particle_count": null
+      },
+      "expected_behavior": "Improve atom packing while retaining interface placement and valid native covalent geometry.",
+      "observed_symptoms": [
+        "Severe interchain CNO overlaps 102 to 0, but 124 ordinary overlaps remain.",
+        "Final full repulsion minimization reached the 2000-cycle limit.",
+        "Native BMP6 C477-C477 / interchain A103-B103 SG distance remains short at 1.765 Angstrom.",
+        "Type-I DockQ 0.610/0.623 to 0.569/0.604 despite approximately 0.159 Angstrom core backbone drift."
+      ],
+      "interface_evaluation": {
+        "type_I": null,
+        "type_II": null,
+        "copy_specific_findings": [],
+        "assembly_geometry": null
+      },
+      "suspected_causes": [],
+      "supporting_evidence_ids": [],
+      "contradicting_evidence_ids": [],
+      "attempted_changes": [],
+      "followups": [],
+      "status": "documented_residual_postprocessing_limitation",
+      "transfer_limits": "One selected v3 candidate and fixed restraint protocol. Does not show Rosetta cannot repair the geometry or invalidate BMP6 binding. Zero CNO overlaps exclude sulfur covalent bond quality and do not establish physical acceptance."
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-14T18:28:11.955597+00:00"
+  "updated_at": "2026-10-14T19:15:06.300554+00:00"
 }
