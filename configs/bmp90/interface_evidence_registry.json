@@ -1148,6 +1148,34 @@
         "independence": "Both copies come from one crystal asymmetric unit via symmetry and are not independent evidence.",
         "chemistry": "Protein-only contact geometry; missing atoms, unresolved tails and glycans are not rebuilt."
       }
+    },
+    {
+      "evidence_id": "BMP6_ACVR1_9N4K_V2_CONTACT_SHAPE_TUNING",
+      "ligand": "BMP6",
+      "receptor": "ACVR1",
+      "evidence_class": "experimental_reference_geometry_plus_posthoc_prediction_diagnosis",
+      "observation": "Observed9N4K S58\u2013F447, N60\u2013L467 and Q89\u2013L424 contacts motivate three added CA proxies per receptor copy; N60\u2013T83 and S58\u2013I103 intrareceptor distances constrain local shape. Parent guided models retain N60-region errors after receptor-only fitting.",
+      "sources": [
+        {
+          "path": "artifacts/bmp90/preparation/bmp6_revision_v2/build.json",
+          "sha256": "6575ccf2ee4b8a388c72549e8c7b7c85c5eba3d8c64d740f7b15d945178052f0"
+        },
+        {
+          "path": "artifacts/bmp90/preparation/bmp6_revision_v2/diagnosis.json",
+          "sha256": "69ea12dc077babf81448bca9870ea0f8267e4fb7102c23cc9038d43ddede72d4"
+        },
+        {
+          "path": "artifacts/bmp90/preparation/bmp6_revision_v2/validation.json",
+          "sha256": "dd5c0a1154ac6c01c2b5fd5b2d53f9215b1f5da7a74102507d257b0ad4b61b8e"
+        }
+      ],
+      "allocation": "guidance and posthoc tuning; previously inspected source contacts are not independent held-out support",
+      "interpretation_limits": {
+        "chemistry": "Contact minima3.3\u20134.9A are geometric observations, not measured energies or asserted hydrogen bonds. New widths are engineering choices.",
+        "construct": "Engineered glycosylated9N4K receptor trap; modeled protein-only full native sequences omit tether and glycans.",
+        "independence": "Two symmetry-related copies and seven descendants of one lineage do not provide independent replication.",
+        "generic_vs_specific": "This record concerns target-specific reference geometry; generic chemistry inspection priors remain separately classified."
+      }
     }
   ],
   "generic_inspection_priors": {
@@ -1359,5 +1387,5 @@
       "evidence_label_scope": "Vocabulary for future observations; no existing evidence_class is reclassified by this import. R8 instructs evaluation of energetic evidence; it does not establish a hotspot for any target."
     }
   },
-  "updated_at": "2026-10-13T18:51:02.647523+00:00"
+  "updated_at": "2026-10-14T00:53:39.862485+00:00"
 }

@@ -211,8 +211,84 @@
         }
       ],
       "transfer_limits": "Tooling failure before run registration; zero GPU attempts and no biological failure inferred. Original failed campaign and logs preserved."
+    },
+    {
+      "failure_id": "BMP6_ACVR1_V1_RESIDUAL_SHAPE_AND_TAIL_COLLISIONS_58107636",
+      "complex_id": "BMP6_ACVR1_ACVR2B",
+      "recipe_id": "bmp6_joint_v1",
+      "failure_category": "residual_defect_in_reference_recovered_population",
+      "job_id": "58107636",
+      "observed_symptoms": [
+        "Recovered FK lineage retains approximately 4 Angstrom N60 displacement after receptor-only fitting; receptor shape and docking pose both require attention.",
+        "Best-reward FK sample 9 has 18 interchain overlaps above 1 Angstrom under the stated geometric assay; 16 involve unresolved tails.",
+        "ACVR1 input C1 MET N and ACVR2B input E29 GLU OE2 are 1.043 Angstrom apart; a severe modeled tail collision persists despite high reference agreement."
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/preparation/bmp6_revision_v2/independent_diagnosis.json",
+          "sha256": "7c47d6736b5f2fda244c47af7ca2066091a9fff5f94f422e0517150208478704"
+        },
+        {
+          "path": "artifacts/bmp90/preparation/bmp6_revision_v2/independent_recommendation.json",
+          "sha256": "91b6a741e70fdce5ca75d1a303d06ba58a927381a403f2b457597a7535343dde"
+        }
+      ],
+      "suspected_causes": [
+        {
+          "mechanism": "Three sparse CA anchors per type-I copy plus one fold span permit a locally incorrect receptor shape.",
+          "status": "Coordinate-supported hypothesis; scoring revision not yet sampled."
+        },
+        {
+          "mechanism": "CA-only overlap safeguards do not see terminal-atom and side-chain clashes.",
+          "status": "Directly demonstrated limitation; total raw overlap counts also contain topology-sensitive cysteine pairs."
+        }
+      ],
+      "followups": [
+        {
+          "recipe_id": "bmp6_joint_v2",
+          "result": "Frozen joint type-I contact-and-shape revision passed CPU score and official reference self-checks; awaiting checkpoint registration before three authorized A30 submissions. Type-II restraints and untrimmed constructs preserved."
+        },
+        {
+          "result": "Optional bounded atom-overlap guard retained as a separate unimplemented proposal; no raw clash-count penalty activated."
+        }
+      ],
+      "status": "documented_residual_defects_revision_frozen_awaiting_registration",
+      "transfer_limits": "One correlated recovered lineage; source reference is an engineered glycosylated trap. Geometric overlap counts are not calibrated acceptance thresholds or MolProbity clashscores. Tail coordinates lack experimental coverage; no nonbinding inference."
+    },
+    {
+      "failure_id": "BMP6_V2_DRAFT_SHAPE_PENALTY_RANKING_REVERSAL",
+      "complex_id": "BMP6_ACVR1_ACVR2B",
+      "failure_category": "preflight_score_ranking_tradeoff",
+      "recipe_id": "bmp6_joint_v2",
+      "run_ids": [],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/preparation/bmp6_revision_v2/rejected_shape_sigma2p5/bmp6_joint_v2.json",
+          "sha256": "68c173bb0f12b992c83a641ebc615020624b9987b4a77188cf24b5da158510f3"
+        },
+        {
+          "path": "artifacts/bmp90/preparation/bmp6_revision_v2/shape_pose_tradeoff_review.json",
+          "sha256": "409a45b16c9616e94c18d11382c743f83099b57b1930c377e43777b8ea37280f"
+        }
+      ],
+      "observed_symptoms": [
+        "Initial new-shape sigma2.5A draft gave recovered FK9 core0.442 versus approximately0.522 to rigidly displaced type-I decoys, despite substantially better observed-contact recovery in FK9."
+      ],
+      "suspected_causes": [
+        {
+          "mechanism": "Global minimum integrity factor gave new local-shape spans too much influence relative to receptor placement.",
+          "status": "Demonstrated on inspected diagnostic fixtures."
+        }
+      ],
+      "followups": [
+        {
+          "result": "Broaden only the four new shape-distance widths to4A; preserve new contact widths2.5A and existing global safeguards. FK9 core0.556 versus original wrong-pose fixtures about0.522; additional transform0.428. No GPU jobs used the rejected draft."
+        }
+      ],
+      "status": "revised_before_sampling_with_remaining_limitations",
+      "transfer_limits": "Targeted fixture tuning, not benchmark calibration. Margin remains modest; some full recovered descendants still score below wrong-pose fixtures. Monitor actual sampling rather than treating the score as an acceptance metric."
     }
   ],
-  "initialization_note": "The first entry records a preflight geometry finding. No sampled-run failure has yet been adjudicated.",
-  "updated_at": "2026-10-14T00:33:35.526064+00:00"
+  "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
+  "updated_at": "2026-10-14T01:08:54.001098+00:00"
 }
