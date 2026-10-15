@@ -308,6 +308,42 @@
             "path": "artifacts/bmp90/operations/paid_wave10/submission_receipt.json",
             "sha256": "0b1bd336dea8f04821a726d4fdd4a01c930527eee231ea33697d169949920604"
           }
+        },
+        {
+          "recording_id": "BMP6_V4_COMPLETED_58142162_58142164_20261014",
+          "recorded_at": "2026-10-15T01:37:03.372015+00:00",
+          "recipe_id": "bmp6_joint_n60_surround_v4",
+          "job_ids": [
+            "58142162",
+            "58142163",
+            "58142164"
+          ],
+          "evaluation_job_ids": [
+            "58142171",
+            "58142172",
+            "58142173"
+          ],
+          "status": "completed_evaluated_N60_defect_remains",
+          "failure_id": "BMP6_V4_PERSISTENT_N60_NO_PROMOTION_58142162_58142164",
+          "result": "V4 produced no material improvement over the existing v1-like best overall basin and did not recover the intended N60 local interface. Retain rawv1 as preferred sampled structure and refinedv1 as preferred cleanup derivative.",
+          "artifact_references": [
+            {
+              "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/scientific_summary.json",
+              "sha256": "2a81d493e512238a9a02b81045d1a85e1287d1d08d0579249ad65938e99c5a6d"
+            },
+            {
+              "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/hash_audit.json",
+              "sha256": "518a8dbdeed2db6ca514107875040b23d70d9943f3588d1a6b9b68d174e64f62"
+            },
+            {
+              "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/diagnosis.json",
+              "sha256": "02d67f2e2dd517edd2720a56e6eaeadc85b1fca70e582a7fb7814053e3ecbe81"
+            },
+            {
+              "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/next_constraint_evidence.json",
+              "sha256": "9412dd483b77295d0b882102d1a7ac16d3eea46e31751536582c8169bdf039ee"
+            }
+          ]
         }
       ],
       "status": "postprocessing_completed_N60_defect_remains",
@@ -939,6 +975,42 @@
             "path": "artifacts/bmp90/operations/paid_wave10/submission_receipt.json",
             "sha256": "0b1bd336dea8f04821a726d4fdd4a01c930527eee231ea33697d169949920604"
           }
+        },
+        {
+          "recording_id": "BMP6_V4_COMPLETED_58142162_58142164_20261014",
+          "recorded_at": "2026-10-15T01:37:03.372015+00:00",
+          "recipe_id": "bmp6_joint_n60_surround_v4",
+          "job_ids": [
+            "58142162",
+            "58142163",
+            "58142164"
+          ],
+          "evaluation_job_ids": [
+            "58142171",
+            "58142172",
+            "58142173"
+          ],
+          "status": "completed_evaluated_N60_defect_remains",
+          "failure_id": "BMP6_V4_PERSISTENT_N60_NO_PROMOTION_58142162_58142164",
+          "result": "V4 produced no material improvement over the existing v1-like best overall basin and did not recover the intended N60 local interface. Retain rawv1 as preferred sampled structure and refinedv1 as preferred cleanup derivative.",
+          "artifact_references": [
+            {
+              "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/scientific_summary.json",
+              "sha256": "2a81d493e512238a9a02b81045d1a85e1287d1d08d0579249ad65938e99c5a6d"
+            },
+            {
+              "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/hash_audit.json",
+              "sha256": "518a8dbdeed2db6ca514107875040b23d70d9943f3588d1a6b9b68d174e64f62"
+            },
+            {
+              "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/diagnosis.json",
+              "sha256": "02d67f2e2dd517edd2720a56e6eaeadc85b1fca70e582a7fb7814053e3ecbe81"
+            },
+            {
+              "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/next_constraint_evidence.json",
+              "sha256": "9412dd483b77295d0b882102d1a7ac16d3eea46e31751536582c8169bdf039ee"
+            }
+          ]
         }
       ],
       "transfer_limits": "Posthoc comparison of two selected candidates. Do not rank overall structures by this scalar alone; test the finite hypothesis and select by per-copy DockQ/physical quality across tau."
@@ -1159,8 +1231,81 @@
         "execution_status": "Proposal only in this report; no new recipe preparation, sampling or submission performed."
       },
       "transfer_limits": "Do not infer nonbinding or invalidate a transferred contact. TypeI experimental evidence remains absent; fewer whole-model clashes alone do not establish better overall structure."
+    },
+    {
+      "failure_id": "BMP6_V4_PERSISTENT_N60_NO_PROMOTION_58142162_58142164",
+      "recording_id": "BMP6_V4_COMPLETED_58142162_58142164_20261014",
+      "recorded_at": "2026-10-15T01:37:03.372015+00:00",
+      "complex_id": "BMP6_ACVR1_ACVR2B",
+      "recipe_id": "bmp6_joint_n60_surround_v4",
+      "parent_failure_ids": [
+        "BMP6_ACVR1_V1_RESIDUAL_SHAPE_AND_TAIL_COLLISIONS_58107636",
+        "BMP6_V4_PREFLIGHT_LOCAL_VS_OVERALL_REWARD_ORDER_20261014"
+      ],
+      "failure_category": "selection_active_targeted_N60_geometry_unrepaired",
+      "run_ids": [
+        "58142162",
+        "58142163",
+        "58142164"
+      ],
+      "evaluation_job_ids": [
+        "58142171",
+        "58142172",
+        "58142173"
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/scientific_summary.json",
+          "sha256": "2a81d493e512238a9a02b81045d1a85e1287d1d08d0579249ad65938e99c5a6d"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/hash_audit.json",
+          "sha256": "518a8dbdeed2db6ca514107875040b23d70d9943f3588d1a6b9b68d174e64f62"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/diagnosis.json",
+          "sha256": "02d67f2e2dd517edd2720a56e6eaeadc85b1fca70e582a7fb7814053e3ecbe81"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/next_constraint_evidence.json",
+          "sha256": "9412dd483b77295d0b882102d1a7ac16d3eea46e31751536582c8169bdf039ee"
+        }
+      ],
+      "sampling_settings": {
+        "beta": 4,
+        "tau": [
+          0.1,
+          0.3,
+          0.8
+        ],
+        "gpu": "A30",
+        "fresh_paired_controls": true
+      },
+      "expected_behavior": "Additional surrounding ACVR1 contacts repair N60 geometry while preserving useful type-I/type-II placement.",
+      "observed_symptoms": [
+        "In the useful v4tau0.1 basin N60-S446 minimum heavy distances7.93/7.48A remain outside contact, while newly added K78-Y490 andV91-P448 contacts already recover in bothcopies just as in rawv1. The extra surrounding terms did not repair the loop.",
+        "Selection occurred once per run. All-four DockQ>=0.6 counts were4/0/0 for FK versus1/0/0 for baseline; these are descriptive bins, not acceptance thresholds.",
+        "Among8 models with all-four DockQ>0.5, none had both receptor-fitted N60 CA errors below2A.",
+        "Best useful tau0.1 candidate has N60 errors4.06/3.95A and15 severe interchain CNO overlaps; it is numerically near-identical to an earlier v3tau0.1 model (heavy-atom RMSD0.000548A)."
+      ],
+      "status": "documented_completed_not_promoted",
+      "suspected_causes": [],
+      "attempted_changes": [
+        "Retained v1 global/type-II objective and N60 module; added gentle K78-Y490 andV91-P448 local factors."
+      ],
+      "followups": [],
+      "proposed_next_change": {
+        "decision": "Stop adding already-satisfied surrounding contacts. Test a localized type-I-copy limiting N60 loop+interface requirement after deterministic preflight.",
+        "retain": "V1 successful globalplacement,typeII,full716construct,clash andbackbone safeguards; keep earlier physical cleanup separate.",
+        "concrete_geometry": "For each ACVR1copy, require N60-T83 andN60-C53 internalCA spans together with N60-S446 cross-interface approach under one coherentassignment. Measure targets separately forC/D as recorded. Reject I103as the stable anchor because it is itself displaced.",
+        "aggregation_change": "Place local loop/contact requirements inside the corresponding type-I-copy objective as a limiting subgroup, so good existing docking anchors cannot compensate a failed N60loop. Do not reintroduce v2 whole-assembly global-min shape factor or merely multiply another near-one surrounding factor.",
+        "why_internal_geometry": "Bestv4 N60-T83\u224820.02/20.08A vs reference16.85/16.85A; N60-C53\u224822.22/22.17A vs20.815/20.814A. C53itself fits within.35/.33A andT83within1.36/1.35A; the local loop is much more displaced. Improvedv3 N60-C53\u224820.52/20.66A supports this discrimination.",
+        "preflight_required": "Before any launch: source-compatible repair at the same receptor pose must improve; actualv1 docking must outrank rotated/translated source-fold decoys; samecopy/symmetry/missingatom and physical safeguards must hold. Avoid tuning exclusively to two selected models.",
+        "not_yet_implemented_or_preflighted_here": true
+      },
+      "transfer_limits": "This is failed targeted recovery in the tested populations, not evidence of nonbinding or invalid contact chemistry. Same-reference selected evidence is nonblind; no physical/native acceptance or new launch is implied."
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-14T23:24:37.237209+00:00"
+  "updated_at": "2026-10-15T01:37:03.372015+00:00"
 }

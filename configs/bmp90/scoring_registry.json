@@ -962,7 +962,7 @@
       "reference_structure": "9N4K",
       "best_recipe_id": "bmp6_joint_v1",
       "previous_best_recipe_ids": [],
-      "ranking_status": "Provisional overall preference: v1 at tau 0.1. V3 at tau 0.8 supplies an improved N60-loop candidate with worse whole-assembly sterics; retain it as a targeted-repair alternative.",
+      "ranking_status": "Provisional overall preference remains v1 tau0.1 and its refined derivative58139638. The completed v4 sweep did not materially improve the best overall basin or repair N60; retain v3 as a local-loop alternative.",
       "ranking_history": [
         {
           "recorded_at": "2026-10-14T17:57:48.100993+00:00",
@@ -987,6 +987,33 @@
             {
               "path": "artifacts/bmp90/evaluation/bmp6_v3_diagnosis_20261014/identity_and_core_overlap_check.json",
               "sha256": "32a6d07ad7b4d69124d998b5eaedcc76c444464e77609e68df2544e847a0faf8"
+            }
+          ]
+        },
+        {
+          "recording_id": "BMP6_V4_COMPLETED_58142162_58142164_20261014",
+          "recorded_at": "2026-10-15T01:37:03.372015+00:00",
+          "previous_best_recipe_id": "bmp6_joint_v1",
+          "best_recipe_id": "bmp6_joint_v1",
+          "assessed_recipe_id": "bmp6_joint_n60_surround_v4",
+          "preferred_refined_job": "58139638",
+          "reason": "V4 produced no material improvement over the existing v1-like best overall basin and did not recover the intended N60 local interface. Retain rawv1 as preferred sampled structure and refinedv1 as preferred cleanup derivative.",
+          "reports": [
+            {
+              "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/scientific_summary.json",
+              "sha256": "2a81d493e512238a9a02b81045d1a85e1287d1d08d0579249ad65938e99c5a6d"
+            },
+            {
+              "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/hash_audit.json",
+              "sha256": "518a8dbdeed2db6ca514107875040b23d70d9943f3588d1a6b9b68d174e64f62"
+            },
+            {
+              "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/diagnosis.json",
+              "sha256": "02d67f2e2dd517edd2720a56e6eaeadc85b1fca70e582a7fb7814053e3ecbe81"
+            },
+            {
+              "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/next_constraint_evidence.json",
+              "sha256": "9412dd483b77295d0b882102d1a7ac16d3eea46e31751536582c8169bdf039ee"
             }
           ]
         }
@@ -6347,7 +6374,7 @@
         {
           "recipe_id": "bmp6_joint_n60_surround_v4",
           "rank": null,
-          "status": "running_pending_evaluation",
+          "status": "completed_evaluated_not_preferred",
           "comparison_group": "deposited_native_no_tags_716",
           "parent_relationships": [
             {
@@ -8030,14 +8057,128 @@
               "seed": 74101,
               "brownian_seed": 75101,
               "resampling_seed": 76101,
-              "status": "running_evaluation_dependency_pending",
+              "status": "completed_evaluated_not_promoted",
               "canonical_output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58142162",
               "runtime_revision": "4dbba9dd4f369037ba431095535a230ddc904754",
               "scoring_sha256": "4aa7610b6ab6d4d2c73e7032408fe2fac377f77c65f54449a4369ad6892b00c4",
               "fasta_sha256": "2c0a4ef599163ba9fac732636c5132ae2598d912809dff3a1ceb4b894d0228fc",
               "paired_baseline": true,
               "independent_population_id": "BMP6_ACVR1_ACVR2B_bmp6_joint_n60_surround_v4_bmp6_acvr1_v4_tau01_r1",
-              "reference_scope": "Exact 9N4K receptor-trap reference recovery over 552 observed residues of the full 716-residue protein-only input, with all four C/D/E/F interfaces covered. Engineered trap and glycosylation qualifications remain; this is not native signaling or independent validation."
+              "reference_scope": "Exact 9N4K receptor-trap reference recovery over 552 observed residues of the full 716-residue protein-only input, with all four C/D/E/F interfaces covered. Engineered trap and glycosylation qualifications remain; this is not native signaling or independent validation.",
+              "scheduler_state": "COMPLETED",
+              "scheduler_exit_code": "0:0",
+              "evaluation_scheduler_state": "COMPLETED",
+              "evaluation_scheduler_exit_code": "0:0",
+              "elapsed": "01:47:19",
+              "elapsed_seconds": 6439,
+              "evaluation": [
+                {
+                  "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/scientific_summary.json",
+                  "sha256": "2a81d493e512238a9a02b81045d1a85e1287d1d08d0579249ad65938e99c5a6d"
+                },
+                {
+                  "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/hash_audit.json",
+                  "sha256": "518a8dbdeed2db6ca514107875040b23d70d9943f3588d1a6b9b68d174e64f62"
+                },
+                {
+                  "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/diagnosis.json",
+                  "sha256": "02d67f2e2dd517edd2720a56e6eaeadc85b1fca70e582a7fb7814053e3ecbe81"
+                },
+                {
+                  "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/next_constraint_evidence.json",
+                  "sha256": "9412dd483b77295d0b882102d1a7ac16d3eea46e31751536582c8169bdf039ee"
+                }
+              ],
+              "completed_evaluation": {
+                "job_id": "58142162",
+                "evaluation_job_id": "58142171",
+                "run_id": "20261014T220233875721Z_BMP6_ACVR1_ACVR2B_bmp6_joint_n60_surround_v4_601c148e",
+                "tau": 0.1,
+                "beta": 4,
+                "gpu": "A30",
+                "seed": 74101,
+                "brownian_seed": 75101,
+                "resampling_seed": 76101,
+                "paired_baseline": true,
+                "scheduler_state": "COMPLETED",
+                "scheduler_exit_code": "0:0",
+                "evaluation_scheduler_state": "COMPLETED",
+                "evaluation_scheduler_exit_code": "0:0",
+                "elapsed": "01:47:19",
+                "elapsed_seconds": 6439,
+                "scheduler_provenance": "Parent-confirmed sacct supplied for this recording; no remote query by recorder",
+                "resampling_count": 1,
+                "ancestry_counts": {
+                  "2": 4,
+                  "0": 1,
+                  "4": 1,
+                  "1": 1,
+                  "7": 2,
+                  "8": 1
+                },
+                "all4_ge0p6_descriptive_counts": {
+                  "baseline": 1,
+                  "fk": 4
+                },
+                "best_by_weakest_DockQ_zero_based_sample": 0,
+                "best_candidate_model": {
+                  "path": "artifacts/remote-runs/58142162/fk/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_0.pdb",
+                  "sha256": "0c4db169d19dcde2c5da99b5b070c9bad8063e596caaa4d5980c7219c2bc50e3"
+                },
+                "per_copy_DockQ": {
+                  "C": 0.6621363881905002,
+                  "D": 0.654308414095927,
+                  "E": 0.8886007062810002,
+                  "F": 0.8820156121661046
+                },
+                "N60_receptor_fitted_CA_error_A": {
+                  "C": 4.0551913762849425,
+                  "D": 3.9522779975184177
+                },
+                "module_factors_under_reference_assignment": {
+                  "ALK2_N60_S446_local_approach": 0.8295088483524364,
+                  "ALK2_K78_Y490_local_approach": 0.9934705790005277,
+                  "ALK2_V91_P448_local_approach": 0.9997877436523723
+                },
+                "local_contacts": [
+                  {
+                    "id": "N60_S446_C",
+                    "minimum_heavy_distance_A": 7.930572551840125,
+                    "contact_below5A": false
+                  },
+                  {
+                    "id": "N60_S446_D",
+                    "minimum_heavy_distance_A": 7.477465078487495,
+                    "contact_below5A": false
+                  },
+                  {
+                    "id": "K78_Y490_C",
+                    "minimum_heavy_distance_A": 3.6465387698473726,
+                    "contact_below5A": true
+                  },
+                  {
+                    "id": "K78_Y490_D",
+                    "minimum_heavy_distance_A": 3.6983417905866944,
+                    "contact_below5A": true
+                  },
+                  {
+                    "id": "V91_P448_C",
+                    "minimum_heavy_distance_A": 4.8606737187348825,
+                    "contact_below5A": true
+                  },
+                  {
+                    "id": "V91_P448_D",
+                    "minimum_heavy_distance_A": 4.859012862711931,
+                    "contact_below5A": true
+                  }
+                ],
+                "severe_interchain_CNO_overlaps_gt1A": 15,
+                "severe_overlap_scope": {
+                  "tail_involving": 14,
+                  "core_core": 1
+                },
+                "ordinary_heavy_overlaps_gt0p4A": 147
+              }
             },
             {
               "job_id": "58142163",
@@ -8049,14 +8190,127 @@
               "seed": 74102,
               "brownian_seed": 75102,
               "resampling_seed": 76102,
-              "status": "running_evaluation_dependency_pending",
+              "status": "completed_evaluated_not_promoted",
               "canonical_output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58142163",
               "runtime_revision": "4dbba9dd4f369037ba431095535a230ddc904754",
               "scoring_sha256": "4aa7610b6ab6d4d2c73e7032408fe2fac377f77c65f54449a4369ad6892b00c4",
               "fasta_sha256": "2c0a4ef599163ba9fac732636c5132ae2598d912809dff3a1ceb4b894d0228fc",
               "paired_baseline": true,
               "independent_population_id": "BMP6_ACVR1_ACVR2B_bmp6_joint_n60_surround_v4_bmp6_acvr1_v4_tau03_r2",
-              "reference_scope": "Exact 9N4K receptor-trap reference recovery over 552 observed residues of the full 716-residue protein-only input, with all four C/D/E/F interfaces covered. Engineered trap and glycosylation qualifications remain; this is not native signaling or independent validation."
+              "reference_scope": "Exact 9N4K receptor-trap reference recovery over 552 observed residues of the full 716-residue protein-only input, with all four C/D/E/F interfaces covered. Engineered trap and glycosylation qualifications remain; this is not native signaling or independent validation.",
+              "scheduler_state": "COMPLETED",
+              "scheduler_exit_code": "0:0",
+              "evaluation_scheduler_state": "COMPLETED",
+              "evaluation_scheduler_exit_code": "0:0",
+              "elapsed": "01:45:23",
+              "elapsed_seconds": 6323,
+              "evaluation": [
+                {
+                  "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/scientific_summary.json",
+                  "sha256": "2a81d493e512238a9a02b81045d1a85e1287d1d08d0579249ad65938e99c5a6d"
+                },
+                {
+                  "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/hash_audit.json",
+                  "sha256": "518a8dbdeed2db6ca514107875040b23d70d9943f3588d1a6b9b68d174e64f62"
+                },
+                {
+                  "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/diagnosis.json",
+                  "sha256": "02d67f2e2dd517edd2720a56e6eaeadc85b1fca70e582a7fb7814053e3ecbe81"
+                },
+                {
+                  "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/next_constraint_evidence.json",
+                  "sha256": "9412dd483b77295d0b882102d1a7ac16d3eea46e31751536582c8169bdf039ee"
+                }
+              ],
+              "completed_evaluation": {
+                "job_id": "58142163",
+                "evaluation_job_id": "58142172",
+                "run_id": "20261014T220309390370Z_BMP6_ACVR1_ACVR2B_bmp6_joint_n60_surround_v4_a76d1b41",
+                "tau": 0.3,
+                "beta": 4,
+                "gpu": "A30",
+                "seed": 74102,
+                "brownian_seed": 75102,
+                "resampling_seed": 76102,
+                "paired_baseline": true,
+                "scheduler_state": "COMPLETED",
+                "scheduler_exit_code": "0:0",
+                "evaluation_scheduler_state": "COMPLETED",
+                "evaluation_scheduler_exit_code": "0:0",
+                "elapsed": "01:45:23",
+                "elapsed_seconds": 6323,
+                "scheduler_provenance": "Parent-confirmed sacct supplied for this recording; no remote query by recorder",
+                "resampling_count": 1,
+                "ancestry_counts": {
+                  "4": 4,
+                  "3": 2,
+                  "5": 1,
+                  "8": 1,
+                  "6": 2
+                },
+                "all4_ge0p6_descriptive_counts": {
+                  "baseline": 0,
+                  "fk": 0
+                },
+                "best_by_weakest_DockQ_zero_based_sample": 9,
+                "best_candidate_model": {
+                  "path": "artifacts/remote-runs/58142163/fk/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_9.pdb",
+                  "sha256": "15fc3b798dd51d5db8b8cee00b5348fee8d56de84c9057de5cd71b3c4ed01148"
+                },
+                "per_copy_DockQ": {
+                  "C": 0.5568922121701266,
+                  "D": 0.5552948356147464,
+                  "E": 0.897141571711806,
+                  "F": 0.886557890637369
+                },
+                "N60_receptor_fitted_CA_error_A": {
+                  "C": 5.005171287618432,
+                  "D": 4.535241776648157
+                },
+                "module_factors_under_reference_assignment": {
+                  "ALK2_N60_S446_local_approach": 0.7843706894583078,
+                  "ALK2_K78_Y490_local_approach": 0.9917426941607322,
+                  "ALK2_V91_P448_local_approach": 0.9955057103635895
+                },
+                "local_contacts": [
+                  {
+                    "id": "N60_S446_C",
+                    "minimum_heavy_distance_A": 9.54552633436208,
+                    "contact_below5A": false
+                  },
+                  {
+                    "id": "N60_S446_D",
+                    "minimum_heavy_distance_A": 9.141060496463199,
+                    "contact_below5A": false
+                  },
+                  {
+                    "id": "K78_Y490_C",
+                    "minimum_heavy_distance_A": 4.195956505970958,
+                    "contact_below5A": true
+                  },
+                  {
+                    "id": "K78_Y490_D",
+                    "minimum_heavy_distance_A": 4.472340215144639,
+                    "contact_below5A": true
+                  },
+                  {
+                    "id": "V91_P448_C",
+                    "minimum_heavy_distance_A": 5.181547355761597,
+                    "contact_below5A": false
+                  },
+                  {
+                    "id": "V91_P448_D",
+                    "minimum_heavy_distance_A": 4.870070636038046,
+                    "contact_below5A": true
+                  }
+                ],
+                "severe_interchain_CNO_overlaps_gt1A": 17,
+                "severe_overlap_scope": {
+                  "tail_involving": 16,
+                  "core_core": 1
+                },
+                "ordinary_heavy_overlaps_gt0p4A": 161
+              }
             },
             {
               "job_id": "58142164",
@@ -8068,14 +8322,127 @@
               "seed": 74103,
               "brownian_seed": 75103,
               "resampling_seed": 76103,
-              "status": "running_evaluation_dependency_pending",
+              "status": "completed_evaluated_not_promoted",
               "canonical_output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58142164",
               "runtime_revision": "4dbba9dd4f369037ba431095535a230ddc904754",
               "scoring_sha256": "4aa7610b6ab6d4d2c73e7032408fe2fac377f77c65f54449a4369ad6892b00c4",
               "fasta_sha256": "2c0a4ef599163ba9fac732636c5132ae2598d912809dff3a1ceb4b894d0228fc",
               "paired_baseline": true,
               "independent_population_id": "BMP6_ACVR1_ACVR2B_bmp6_joint_n60_surround_v4_bmp6_acvr1_v4_tau08_r3",
-              "reference_scope": "Exact 9N4K receptor-trap reference recovery over 552 observed residues of the full 716-residue protein-only input, with all four C/D/E/F interfaces covered. Engineered trap and glycosylation qualifications remain; this is not native signaling or independent validation."
+              "reference_scope": "Exact 9N4K receptor-trap reference recovery over 552 observed residues of the full 716-residue protein-only input, with all four C/D/E/F interfaces covered. Engineered trap and glycosylation qualifications remain; this is not native signaling or independent validation.",
+              "scheduler_state": "COMPLETED",
+              "scheduler_exit_code": "0:0",
+              "evaluation_scheduler_state": "COMPLETED",
+              "evaluation_scheduler_exit_code": "0:0",
+              "elapsed": "01:38:49",
+              "elapsed_seconds": 5929,
+              "evaluation": [
+                {
+                  "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/scientific_summary.json",
+                  "sha256": "2a81d493e512238a9a02b81045d1a85e1287d1d08d0579249ad65938e99c5a6d"
+                },
+                {
+                  "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/hash_audit.json",
+                  "sha256": "518a8dbdeed2db6ca514107875040b23d70d9943f3588d1a6b9b68d174e64f62"
+                },
+                {
+                  "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/diagnosis.json",
+                  "sha256": "02d67f2e2dd517edd2720a56e6eaeadc85b1fca70e582a7fb7814053e3ecbe81"
+                },
+                {
+                  "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/next_constraint_evidence.json",
+                  "sha256": "9412dd483b77295d0b882102d1a7ac16d3eea46e31751536582c8169bdf039ee"
+                }
+              ],
+              "completed_evaluation": {
+                "job_id": "58142164",
+                "evaluation_job_id": "58142173",
+                "run_id": "20261014T220344925753Z_BMP6_ACVR1_ACVR2B_bmp6_joint_n60_surround_v4_8aff0ca0",
+                "tau": 0.8,
+                "beta": 4,
+                "gpu": "A30",
+                "seed": 74103,
+                "brownian_seed": 75103,
+                "resampling_seed": 76103,
+                "paired_baseline": true,
+                "scheduler_state": "COMPLETED",
+                "scheduler_exit_code": "0:0",
+                "evaluation_scheduler_state": "COMPLETED",
+                "evaluation_scheduler_exit_code": "0:0",
+                "elapsed": "01:38:49",
+                "elapsed_seconds": 5929,
+                "scheduler_provenance": "Parent-confirmed sacct supplied for this recording; no remote query by recorder",
+                "resampling_count": 1,
+                "ancestry_counts": {
+                  "8": 3,
+                  "1": 1,
+                  "5": 4,
+                  "3": 1,
+                  "6": 1
+                },
+                "all4_ge0p6_descriptive_counts": {
+                  "baseline": 0,
+                  "fk": 0
+                },
+                "best_by_weakest_DockQ_zero_based_sample": 1,
+                "best_candidate_model": {
+                  "path": "artifacts/remote-runs/58142164/fk/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_1.pdb",
+                  "sha256": "b35a092b9b4c0f399ecbc442431b9fb12879466a7414f081f5cf7b9f1c9efd6c"
+                },
+                "per_copy_DockQ": {
+                  "C": 0.5534789133126502,
+                  "D": 0.4701562576597255,
+                  "E": 0.8313227558252129,
+                  "F": 0.8146604931054515
+                },
+                "N60_receptor_fitted_CA_error_A": {
+                  "C": 5.519873279499691,
+                  "D": 5.318002444349078
+                },
+                "module_factors_under_reference_assignment": {
+                  "ALK2_N60_S446_local_approach": 0.7655011982722372,
+                  "ALK2_K78_Y490_local_approach": 0.9948234312731643,
+                  "ALK2_V91_P448_local_approach": 0.9234517167921908
+                },
+                "local_contacts": [
+                  {
+                    "id": "N60_S446_C",
+                    "minimum_heavy_distance_A": 9.915373215366126,
+                    "contact_below5A": false
+                  },
+                  {
+                    "id": "N60_S446_D",
+                    "minimum_heavy_distance_A": 11.873376520602722,
+                    "contact_below5A": false
+                  },
+                  {
+                    "id": "K78_Y490_C",
+                    "minimum_heavy_distance_A": 3.8469728358801807,
+                    "contact_below5A": true
+                  },
+                  {
+                    "id": "K78_Y490_D",
+                    "minimum_heavy_distance_A": 4.084764497495541,
+                    "contact_below5A": true
+                  },
+                  {
+                    "id": "V91_P448_C",
+                    "minimum_heavy_distance_A": 6.204538177817911,
+                    "contact_below5A": false
+                  },
+                  {
+                    "id": "V91_P448_D",
+                    "minimum_heavy_distance_A": 6.827898285709885,
+                    "contact_below5A": false
+                  }
+                ],
+                "severe_interchain_CNO_overlaps_gt1A": 166,
+                "severe_overlap_scope": {
+                  "tail_involving": 154,
+                  "core_core": 12
+                },
+                "ordinary_heavy_overlaps_gt0p4A": 970
+              }
             }
           ],
           "sampling_settings": {
@@ -8118,13 +8485,357 @@
             "Both new factors are gentle and may not be strong enough to preserve the whole type-I interface while N60 changes.",
             "No new allatom guard or sulfur topology penalty; post-sampling sterics, native disulfides and restrained refinement remain separate assessments.",
             "9N4K is an engineered glycosylated trap reference represented here as protein only; reference recovery does not establish native affinity or function.",
-            "Compare best overall candidate across tau and all four receptor interfaces; no requirement every tau improve. Three tau jobs submitted; sampled performance and promotion pending.",
+            "Compare best overall candidate across tau and all four receptor interfaces; no requirement every tau improve. All three tau jobs completed and evaluated; best-overall v4 candidate did not materially improve the existing basin or repair N60. No promotion.",
             "A30 changes hardware from previous A100 BMP6 populations; same seed labels do not imply identical trajectories. Fresh paired controls are required."
           ],
           "prepared_at": "2026-10-14T21:59:36.305301+00:00",
           "campaign_receipt": {
             "path": "artifacts/bmp90/operations/paid_wave10/submission_receipt.json",
             "sha256": "0b1bd336dea8f04821a726d4fdd4a01c930527eee231ea33697d169949920604"
+          },
+          "completed_v4_sweep_evaluation": {
+            "recording_id": "BMP6_V4_COMPLETED_58142162_58142164_20261014",
+            "recorded_at": "2026-10-15T01:37:03.372015+00:00",
+            "scientific_report_sha256": "2a81d493e512238a9a02b81045d1a85e1287d1d08d0579249ad65938e99c5a6d",
+            "status": "completed_analyzed_not_promoted",
+            "reports": [
+              {
+                "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/scientific_summary.json",
+                "sha256": "2a81d493e512238a9a02b81045d1a85e1287d1d08d0579249ad65938e99c5a6d"
+              },
+              {
+                "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/hash_audit.json",
+                "sha256": "518a8dbdeed2db6ca514107875040b23d70d9943f3588d1a6b9b68d174e64f62"
+              },
+              {
+                "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/diagnosis.json",
+                "sha256": "02d67f2e2dd517edd2720a56e6eaeadc85b1fca70e582a7fb7814053e3ecbe81"
+              },
+              {
+                "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v4_20261014/next_constraint_evidence.json",
+                "sha256": "9412dd483b77295d0b882102d1a7ac16d3eea46e31751536582c8169bdf039ee"
+              }
+            ],
+            "per_tau": [
+              {
+                "job_id": "58142162",
+                "evaluation_job_id": "58142171",
+                "run_id": "20261014T220233875721Z_BMP6_ACVR1_ACVR2B_bmp6_joint_n60_surround_v4_601c148e",
+                "tau": 0.1,
+                "beta": 4,
+                "gpu": "A30",
+                "seed": 74101,
+                "brownian_seed": 75101,
+                "resampling_seed": 76101,
+                "paired_baseline": true,
+                "scheduler_state": "COMPLETED",
+                "scheduler_exit_code": "0:0",
+                "evaluation_scheduler_state": "COMPLETED",
+                "evaluation_scheduler_exit_code": "0:0",
+                "elapsed": "01:47:19",
+                "elapsed_seconds": 6439,
+                "scheduler_provenance": "Parent-confirmed sacct supplied for this recording; no remote query by recorder",
+                "resampling_count": 1,
+                "ancestry_counts": {
+                  "2": 4,
+                  "0": 1,
+                  "4": 1,
+                  "1": 1,
+                  "7": 2,
+                  "8": 1
+                },
+                "all4_ge0p6_descriptive_counts": {
+                  "baseline": 1,
+                  "fk": 4
+                },
+                "best_by_weakest_DockQ_zero_based_sample": 0,
+                "best_candidate_model": {
+                  "path": "artifacts/remote-runs/58142162/fk/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_0.pdb",
+                  "sha256": "0c4db169d19dcde2c5da99b5b070c9bad8063e596caaa4d5980c7219c2bc50e3"
+                },
+                "per_copy_DockQ": {
+                  "C": 0.6621363881905002,
+                  "D": 0.654308414095927,
+                  "E": 0.8886007062810002,
+                  "F": 0.8820156121661046
+                },
+                "N60_receptor_fitted_CA_error_A": {
+                  "C": 4.0551913762849425,
+                  "D": 3.9522779975184177
+                },
+                "module_factors_under_reference_assignment": {
+                  "ALK2_N60_S446_local_approach": 0.8295088483524364,
+                  "ALK2_K78_Y490_local_approach": 0.9934705790005277,
+                  "ALK2_V91_P448_local_approach": 0.9997877436523723
+                },
+                "local_contacts": [
+                  {
+                    "id": "N60_S446_C",
+                    "minimum_heavy_distance_A": 7.930572551840125,
+                    "contact_below5A": false
+                  },
+                  {
+                    "id": "N60_S446_D",
+                    "minimum_heavy_distance_A": 7.477465078487495,
+                    "contact_below5A": false
+                  },
+                  {
+                    "id": "K78_Y490_C",
+                    "minimum_heavy_distance_A": 3.6465387698473726,
+                    "contact_below5A": true
+                  },
+                  {
+                    "id": "K78_Y490_D",
+                    "minimum_heavy_distance_A": 3.6983417905866944,
+                    "contact_below5A": true
+                  },
+                  {
+                    "id": "V91_P448_C",
+                    "minimum_heavy_distance_A": 4.8606737187348825,
+                    "contact_below5A": true
+                  },
+                  {
+                    "id": "V91_P448_D",
+                    "minimum_heavy_distance_A": 4.859012862711931,
+                    "contact_below5A": true
+                  }
+                ],
+                "severe_interchain_CNO_overlaps_gt1A": 15,
+                "severe_overlap_scope": {
+                  "tail_involving": 14,
+                  "core_core": 1
+                },
+                "ordinary_heavy_overlaps_gt0p4A": 147
+              },
+              {
+                "job_id": "58142163",
+                "evaluation_job_id": "58142172",
+                "run_id": "20261014T220309390370Z_BMP6_ACVR1_ACVR2B_bmp6_joint_n60_surround_v4_a76d1b41",
+                "tau": 0.3,
+                "beta": 4,
+                "gpu": "A30",
+                "seed": 74102,
+                "brownian_seed": 75102,
+                "resampling_seed": 76102,
+                "paired_baseline": true,
+                "scheduler_state": "COMPLETED",
+                "scheduler_exit_code": "0:0",
+                "evaluation_scheduler_state": "COMPLETED",
+                "evaluation_scheduler_exit_code": "0:0",
+                "elapsed": "01:45:23",
+                "elapsed_seconds": 6323,
+                "scheduler_provenance": "Parent-confirmed sacct supplied for this recording; no remote query by recorder",
+                "resampling_count": 1,
+                "ancestry_counts": {
+                  "4": 4,
+                  "3": 2,
+                  "5": 1,
+                  "8": 1,
+                  "6": 2
+                },
+                "all4_ge0p6_descriptive_counts": {
+                  "baseline": 0,
+                  "fk": 0
+                },
+                "best_by_weakest_DockQ_zero_based_sample": 9,
+                "best_candidate_model": {
+                  "path": "artifacts/remote-runs/58142163/fk/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_9.pdb",
+                  "sha256": "15fc3b798dd51d5db8b8cee00b5348fee8d56de84c9057de5cd71b3c4ed01148"
+                },
+                "per_copy_DockQ": {
+                  "C": 0.5568922121701266,
+                  "D": 0.5552948356147464,
+                  "E": 0.897141571711806,
+                  "F": 0.886557890637369
+                },
+                "N60_receptor_fitted_CA_error_A": {
+                  "C": 5.005171287618432,
+                  "D": 4.535241776648157
+                },
+                "module_factors_under_reference_assignment": {
+                  "ALK2_N60_S446_local_approach": 0.7843706894583078,
+                  "ALK2_K78_Y490_local_approach": 0.9917426941607322,
+                  "ALK2_V91_P448_local_approach": 0.9955057103635895
+                },
+                "local_contacts": [
+                  {
+                    "id": "N60_S446_C",
+                    "minimum_heavy_distance_A": 9.54552633436208,
+                    "contact_below5A": false
+                  },
+                  {
+                    "id": "N60_S446_D",
+                    "minimum_heavy_distance_A": 9.141060496463199,
+                    "contact_below5A": false
+                  },
+                  {
+                    "id": "K78_Y490_C",
+                    "minimum_heavy_distance_A": 4.195956505970958,
+                    "contact_below5A": true
+                  },
+                  {
+                    "id": "K78_Y490_D",
+                    "minimum_heavy_distance_A": 4.472340215144639,
+                    "contact_below5A": true
+                  },
+                  {
+                    "id": "V91_P448_C",
+                    "minimum_heavy_distance_A": 5.181547355761597,
+                    "contact_below5A": false
+                  },
+                  {
+                    "id": "V91_P448_D",
+                    "minimum_heavy_distance_A": 4.870070636038046,
+                    "contact_below5A": true
+                  }
+                ],
+                "severe_interchain_CNO_overlaps_gt1A": 17,
+                "severe_overlap_scope": {
+                  "tail_involving": 16,
+                  "core_core": 1
+                },
+                "ordinary_heavy_overlaps_gt0p4A": 161
+              },
+              {
+                "job_id": "58142164",
+                "evaluation_job_id": "58142173",
+                "run_id": "20261014T220344925753Z_BMP6_ACVR1_ACVR2B_bmp6_joint_n60_surround_v4_8aff0ca0",
+                "tau": 0.8,
+                "beta": 4,
+                "gpu": "A30",
+                "seed": 74103,
+                "brownian_seed": 75103,
+                "resampling_seed": 76103,
+                "paired_baseline": true,
+                "scheduler_state": "COMPLETED",
+                "scheduler_exit_code": "0:0",
+                "evaluation_scheduler_state": "COMPLETED",
+                "evaluation_scheduler_exit_code": "0:0",
+                "elapsed": "01:38:49",
+                "elapsed_seconds": 5929,
+                "scheduler_provenance": "Parent-confirmed sacct supplied for this recording; no remote query by recorder",
+                "resampling_count": 1,
+                "ancestry_counts": {
+                  "8": 3,
+                  "1": 1,
+                  "5": 4,
+                  "3": 1,
+                  "6": 1
+                },
+                "all4_ge0p6_descriptive_counts": {
+                  "baseline": 0,
+                  "fk": 0
+                },
+                "best_by_weakest_DockQ_zero_based_sample": 1,
+                "best_candidate_model": {
+                  "path": "artifacts/remote-runs/58142164/fk/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_1.pdb",
+                  "sha256": "b35a092b9b4c0f399ecbc442431b9fb12879466a7414f081f5cf7b9f1c9efd6c"
+                },
+                "per_copy_DockQ": {
+                  "C": 0.5534789133126502,
+                  "D": 0.4701562576597255,
+                  "E": 0.8313227558252129,
+                  "F": 0.8146604931054515
+                },
+                "N60_receptor_fitted_CA_error_A": {
+                  "C": 5.519873279499691,
+                  "D": 5.318002444349078
+                },
+                "module_factors_under_reference_assignment": {
+                  "ALK2_N60_S446_local_approach": 0.7655011982722372,
+                  "ALK2_K78_Y490_local_approach": 0.9948234312731643,
+                  "ALK2_V91_P448_local_approach": 0.9234517167921908
+                },
+                "local_contacts": [
+                  {
+                    "id": "N60_S446_C",
+                    "minimum_heavy_distance_A": 9.915373215366126,
+                    "contact_below5A": false
+                  },
+                  {
+                    "id": "N60_S446_D",
+                    "minimum_heavy_distance_A": 11.873376520602722,
+                    "contact_below5A": false
+                  },
+                  {
+                    "id": "K78_Y490_C",
+                    "minimum_heavy_distance_A": 3.8469728358801807,
+                    "contact_below5A": true
+                  },
+                  {
+                    "id": "K78_Y490_D",
+                    "minimum_heavy_distance_A": 4.084764497495541,
+                    "contact_below5A": true
+                  },
+                  {
+                    "id": "V91_P448_C",
+                    "minimum_heavy_distance_A": 6.204538177817911,
+                    "contact_below5A": false
+                  },
+                  {
+                    "id": "V91_P448_D",
+                    "minimum_heavy_distance_A": 6.827898285709885,
+                    "contact_below5A": false
+                  }
+                ],
+                "severe_interchain_CNO_overlaps_gt1A": 166,
+                "severe_overlap_scope": {
+                  "tail_involving": 154,
+                  "core_core": 12
+                },
+                "ordinary_heavy_overlaps_gt0p4A": 970
+              }
+            ],
+            "actual_sampling_gpu_hours": 5.191944444444444,
+            "requested_sampling_gpu_hours": 9,
+            "timing_scope": "Three one-GPU sampling jobs; CPU evaluation time excluded",
+            "decision": "V4 produced no material improvement over the existing v1-like best overall basin and did not recover the intended N60 local interface. Retain rawv1 as preferred sampled structure and refinedv1 as preferred cleanup derivative.",
+            "comparison_classes": {
+              "raw_vs_raw": "V4tau0.1sample0 essentially reproduces earlier v3tau0.1sample0; per-copyDockQ and N60 defect remain near rawv1, with15vs17 severeCNO overlaps. No meaningful promotion.",
+              "refined_vs_raw": "Refinedv1 has0 severeCNO and stronger typeIDockQ .663/.659, but slightly lower typeII .880/.865 than newrawv4 .889/.882. Its cleanup advantage is postprocessing, not proof of a better sampler.",
+              "v3_local_alternate": "V3tau0.8/refinedv3 preserve betterN60 fitted errors1.16/1.74 and1.02/1.87A respectively, but weaker overall interfaces and residual strained disulfide after refinement. Keep as alternate, not overall preferred."
+            },
+            "qualified_N60_count": {
+              "models_with_all4_DockQ_gt0p5": 8,
+              "models_in_that_subset_with_both_N60_CA_error_lt2A": 0,
+              "threshold_scope": "Descriptive diagnostic bins only; not acceptance criteria."
+            },
+            "near_duplicate_check": {
+              "new": {
+                "path": "artifacts/remote-runs/58142162/fk/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_0.pdb",
+                "sha256": "0c4db169d19dcde2c5da99b5b070c9bad8063e596caaa4d5980c7219c2bc50e3"
+              },
+              "old": {
+                "path": "artifacts/remote-runs/58134296/fk/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_0.pdb",
+                "sha256": "9bfb17ef6680972bf969cc87a564afe6258cfdee534d172bb60ccca700999068"
+              },
+              "same_PDB_hash": false,
+              "same_heavy_atom_keys": true,
+              "heavy_atom_count": 5646,
+              "coordinate_RMSD_A": 0.0005480781480719055,
+              "maximum_atom_displacement_A": 0.003605551275463469,
+              "interpretation": "Numerically almost identical earlier tau0.1 recovered basin; no substantive new structure."
+            },
+            "next_constraint_proposal": {
+              "decision": "Stop adding already-satisfied surrounding contacts. Test a localized type-I-copy limiting N60 loop+interface requirement after deterministic preflight.",
+              "retain": "V1 successful globalplacement,typeII,full716construct,clash andbackbone safeguards; keep earlier physical cleanup separate.",
+              "concrete_geometry": "For each ACVR1copy, require N60-T83 andN60-C53 internalCA spans together with N60-S446 cross-interface approach under one coherentassignment. Measure targets separately forC/D as recorded. Reject I103as the stable anchor because it is itself displaced.",
+              "aggregation_change": "Place local loop/contact requirements inside the corresponding type-I-copy objective as a limiting subgroup, so good existing docking anchors cannot compensate a failed N60loop. Do not reintroduce v2 whole-assembly global-min shape factor or merely multiply another near-one surrounding factor.",
+              "why_internal_geometry": "Bestv4 N60-T83\u224820.02/20.08A vs reference16.85/16.85A; N60-C53\u224822.22/22.17A vs20.815/20.814A. C53itself fits within.35/.33A andT83within1.36/1.35A; the local loop is much more displaced. Improvedv3 N60-C53\u224820.52/20.66A supports this discrimination.",
+              "preflight_required": "Before any launch: source-compatible repair at the same receptor pose must improve; actualv1 docking must outrank rotated/translated source-fold decoys; samecopy/symmetry/missingatom and physical safeguards must hold. Avoid tuning exclusively to two selected models.",
+              "not_yet_implemented_or_preflighted_here": true
+            },
+            "limitations": [
+              "All four interfaces compare with engineered glycosylated9N4K protein-only reference; native affinity/function not established.",
+              "N60/K78/V91 local geometry is actively guided and selected evidence; same-reference DockQ is nonblind.",
+              "SevereCNO overlaps are geometric diagnostics, not MolProbity clashscore or calibrated acceptance.",
+              "Shared ancestry and common_start imply correlated particles, not independent replicates.",
+              "No inference, local refinement or remote action performed by this analysis.",
+              "113scoring-withheld9N4K contacts remain same-reference features; differenthistoricalguidance ledgers are not interchangeable. Use allnativecontact/DockQ for recipe comparisons.",
+              "No physical acceptance or nativefunction claim; allmodels retain thefull716protein-onlyconstruct."
+            ],
+            "hardware_qualification": "A30 versus prior A100 populations; matched seed labels do not imply identical trajectories. Fresh paired controls were generated.",
+            "ranking_scope": "Best overall evaluated structure across all three tau values; weak performance at one tau alone does not disqualify a recipe."
           }
         }
       ],
@@ -39311,7 +40022,7 @@
       }
     }
   },
-  "updated_at": "2026-10-14T23:28:40.959011+00:00",
+  "updated_at": "2026-10-15T01:37:03.372015+00:00",
   "interface_evidence_registry": "configs/bmp90/interface_evidence_registry.json",
   "failure_registry": "configs/bmp90/failure_registry.json",
   "construct_policy": {
