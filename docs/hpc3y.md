@@ -3,7 +3,7 @@
 The local `simplefold` conda environment is for editing, imports, and result
 analysis. Sampling runs only on HPC3y (`ynkim4`) through Slurm.
 
-Remote model weights, trained checkpoints, synthetic datasets, and run outputs
+Remote model weights, trained checkpoints, synthetic datasets, and canonical run outputs
 use `/pub/ynkim4/ml-simplefold/artifacts`, the default `SIMPLEFOLD_ARTIFACT_DIR`.
 `SIMPLEFOLD_CACHE_DIR` defaults to the same root for checkpoint, Torch, and CCD
 caches; set it explicitly to override those caches. Installation/pip caches and
@@ -12,7 +12,9 @@ environment locks stay in the home checkout's `artifacts/pip-cache/` and
 `/data/homezvol2/ynkim4/ml-simplefold`, and the conda prefix remains at
 `/data/homezvol2/ynkim4/.conda/envs/simplefold`. Use explicit storage paths
 without home-to-DFS artifact symlinks. Local downloaded results still go under
-the laptop checkout's `artifacts/remote-runs/`.
+the laptop checkout's `artifacts/remote-runs/`. Temporary result copies live in
+the experiment checkout's `artifacts/transfer-stage/runs/JOB_ID/` in home
+storage; this keeps recovery files together with their experiment.
 
 Within the `/pub` artifact root, use this layout for current and future work:
 
@@ -115,8 +117,15 @@ The supplied crambin sequence has 46 residues (PDB 1CRN). Default sampling is
 requires an additional 1.6B model; its absence means the PDB B-factors are
 placeholders, not confidence scores.
 
-Results go to
-`/pub/ynkim4/ml-simplefold/artifacts/runs/JOB_ID/predictions_simplefold_100M/`.
+New launches write results first to
+`EXPERIMENT_CHECKOUT/artifacts/transfer-stage/runs/JOB_ID/`, then mirror them to
+`/pub/ynkim4/ml-simplefold/artifacts/runs/JOB_ID/`. Predictions are in
+`predictions_simplefold_100M/` for the toy example. The launcher uses
+`run_cached_sampling.py`; its output-directory override leaves model-weight
+and reference caches at their configured locations. Set the absolute
+`SIMPLEFOLD_RESULT_CACHE_ROOT` to change the temporary root. A failed archive
+copy retains the completed home results for recovery; it does not trigger a
+sampling retry. The original sampling exit code is in `RESULT_STORAGE.json`.
 Hydra saves `.hydra/config.yaml` (composed task settings), `.hydra/hydra.yaml`
 (Hydra runtime settings), and `.hydra/overrides.yaml` (explicit overrides) in
 the run directory. `resolved-config.yaml` additionally saves the task settings
@@ -196,17 +205,44 @@ sbatch scripts/hpc_cpu_smoke.slurm
 
 ## Retrieve outputs
 
-Use the dedicated RCIC transfer host; keep Git/Slurm commands on the login host.
+Use the temporary home run for downloads so completed results remain available
+if `/pub` stalls. The retrieval helper uses the direct login host for Slurm and
+small checksum/cache operations and RCIC's transfer host for `rsync`. It checks
+the sampling job and every supplied evaluation job are `COMPLETED/0:0` before
+sealing a run. Include **all** downstream writers; do not seal a live run.
 
 ```bash
-mkdir -p artifacts/remote-runs/JOB_ID/predictions_simplefold_100M
-scp -o HostName=access-hpc3.rcic.uci.edu \
-  hpc3y:/pub/ynkim4/ml-simplefold/artifacts/runs/JOB_ID/predictions_simplefold_100M/crambin_sampled_0.pdb \
-  artifacts/remote-runs/JOB_ID/predictions_simplefold_100M/
-scp -o HostName=access-hpc3.rcic.uci.edu \
-  hpc3y:/pub/ynkim4/ml-simplefold/artifacts/runs/JOB_ID/validation.json \
-  artifacts/remote-runs/JOB_ID/
+python scripts/retrieve_results.py JOB_ID \
+  --remote-repo /data/homezvol2/ynkim4/EXPERIMENT_CHECKOUT \
+  --evaluation-job EVALUATION_JOB_ID
 ```
+
+Omit `--evaluation-job` for a sampling-only run; repeat it for multiple analyses.
+The default local destination is `artifacts/remote-runs/JOB_ID/`. Existing local
+bytes are preserved; any conflict fails verification instead of overwriting.
+The helper copies a completed historical `/pub` run into a new temporary cache
+when no home run exists. This historical recovery still needs working `/pub`
+once; frozen queued campaigns keep their recorded code and output locations.
+
+The final workflow is: seal the completed payload with a SHA-256 inventory,
+download and verify it, verify/publish the same payload to `/pub`, then remove
+only the exact temporary `runs/JOB_ID/` directory. Local `CACHE_*.json` receipts
+and `artifacts/transfer-receipts/` retain the verification record. Canonical
+results and legacy cache directories are preserved. Any incomplete download,
+changed file, missing publication, or storage timeout retains the home copy.
+If publication is temporarily unavailable, the downloaded payload is usable
+after its inventory check; rerun retrieval later to finish archival verification
+and cleanup. Do not replace these checks with a broad directory deletion.
+
+For new multi-stage BMP campaigns, sampling and CPU evaluation must share the
+home run. Set the evaluator's `source_run` to
+`EXPERIMENT_CHECKOUT/artifacts/transfer-stage/runs/SAMPLING_JOB_ID` when present,
+otherwise use the canonical `/pub` run for historical campaigns. Write evaluation
+outputs into that run and leave it unsealed until evaluation finishes. The final
+retrieval publishes sampling and evaluation together. Keep original paths and
+configuration receipts intact; never rewrite scientific metadata to disguise a
+storage move. Model weights remain on `/pub`; this policy protects result
+recovery, not weight availability during a storage outage.
 
 Inspect the result and accompanying validation report locally. Do not launch
 `simplefold` inference on the laptop. Git changes go to the `experiments`

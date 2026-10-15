@@ -31,12 +31,22 @@
   validated transfer hypotheses instead of waiting for every predecessor tau
   result. Keep one submission owner, bounded batch receipts, and periodic
   findings/resource-efficiency recaps; stop after BMP4 for review.
-- Store remote model weights, trained checkpoints, synthetic datasets, and run
-  outputs under `/pub/ynkim4/ml-simplefold/artifacts`. Launchers default
+- Store remote model weights, trained checkpoints, synthetic datasets, and
+  canonical run outputs under `/pub/ynkim4/ml-simplefold/artifacts`. Launchers default
   `SIMPLEFOLD_ARTIFACT_DIR` to that path; `SIMPLEFOLD_CACHE_DIR` defaults to the
   same root for checkpoint, Torch, and CCD caches. Keep pretrained checkpoints
   in `checkpoints/`, future trained checkpoints in `checkpoints/trained/`, and
   future synthetic datasets in `datasets/synthetic/`. Run outputs use `runs/`.
+- Vincent requested temporary result copies in the experiment checkout's home
+  storage on 2026-10-14. New sampling launches write to
+  `artifacts/transfer-stage/runs/JOB_ID/`, then mirror to canonical `/pub` storage.
+  New campaign evaluators must read/write this home run first, falling back to
+  canonical storage for historical runs. Keep it unsealed until all evaluation
+  writers finish. Retrieve with `scripts/retrieve_results.py`, passing every
+  evaluation job ID; it verifies SHA-256 on the download and canonical copy
+  before removing only that temporary run. Keep the cache on failure. Do not
+  cache model weights or delete canonical results. See `docs/hpc3y.md`.
+  Preserve frozen queued campaigns; cache their completed results separately.
 - Keep installation/pip caches and environment locks in the home checkout's
   `artifacts/pip-cache/` and `artifacts/environment/`. The checkout and conda
   prefix stay in home storage. Use explicit paths without artifact symlinks.

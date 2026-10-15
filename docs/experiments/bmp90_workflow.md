@@ -45,6 +45,14 @@ revisions; do not impose a full-wave completion barrier on useful parallel work.
 A failed job is not an automatic reason to launch a duplicate. Keep one submission
 owner and declare the job count and requested GPU-hours for each bounded batch.
 
+Keep temporary results within each experiment checkout's
+`artifacts/transfer-stage/runs/JOB_ID/` in HPC home storage, with canonical copies
+on `/pub`. New sampling and evaluation stages share the temporary run; seal it
+only after every writer completes. Use the checksum-verified retrieval and
+cleanup procedure in [HPC operations](../hpc3y.md#retrieve-outputs). Remove only
+verified temporary copies after local download and canonical publication, so
+home storage stays bounded. Frozen historical jobs retain their original paths.
+
 ## Sources of truth
 
 | Resource | What belongs there |

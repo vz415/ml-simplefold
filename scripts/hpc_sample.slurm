@@ -16,4 +16,4 @@ source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate "${SIMPLEFOLD_ENV_PREFIX:-/data/homezvol2/ynkim4/.conda/envs/simplefold}"
 export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-4}"
 export PYTHONUNBUFFERED=1
-exec python scripts/run_sampling.py "$@"
+exec python scripts/run_cached_sampling.py "$@"
