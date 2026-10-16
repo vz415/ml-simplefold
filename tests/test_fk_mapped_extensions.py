@@ -94,6 +94,102 @@ class InterfaceExtensionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "distance_feature"):
             self.f.reward(spec)
 
+    def with_internal_spans(self):
+        spec = self.f.joint_spec()
+        for group in spec["interface_groups"][:2]:
+            receptor = group["receptor_chain"]
+            span = {"id": f"{receptor}_internal_span", "scope": "intra_receptor",
+                    "left": {"chain": receptor, "position": 1, "residue": "N", "atom": "CA"},
+                    "right": {"chain": receptor, "position": 2, "residue": "T", "atom": "CA"},
+                    "distance_angstrom": 6., "sigma_angstrom": .5, "weight": 1.,
+                    "evidence_labels": ["synthetic_shape_span"]}
+            spec["pairs"].append(span)
+            group["required_subgroups"] = [{"id": "docking", "pair_ids": list(group["pair_ids"])},
+                                            {"id": "shape", "pair_ids": [span["id"]]}]
+            group["pair_ids"].append(span["id"])
+        return spec
+
+    def test_internal_shape_is_an_explicit_required_copy_cap(self):
+        spec = self.with_internal_spans()
+        result = self.f.reward(spec).score(self.f.write_pdb())
+        self.assertEqual(result["reward"], 1.)
+        spans = [pair for pair in result["pairs"] if "scope" in pair]
+        self.assertEqual({p["id"] for p in spans}, {"C_internal_span", "D_internal_span"})
+        self.assertTrue(all(p["scope"] == "intra_receptor" for p in spans))
+        coords = dict(self.f.coords)
+        coords["C", 2] = (0, 8, 4)
+        changed = self.f.reward(spec).score(self.f.write_pdb(coords))
+        interface = next(g for g in changed["interfaces"] if g["id"] == "C")
+        self.assertAlmostEqual(interface["score"], math.exp(-8.))
+        self.assertGreater(interface["subgroup_scores"][0]["score"], .8)
+        self.assertGreater(interface["unpartitioned_weighted_mean"], interface["score"])
+
+    def test_internal_missing_atom_keeps_denominator_and_zero_copy_cap(self):
+        spec = self.with_internal_spans()
+        spec["equivalent_chain_groups"] = []
+        coords = dict(self.f.coords)
+        del coords["C", 2]
+        result = self.f.reward(spec).score(self.f.write_pdb(coords))
+        group = next(g for g in result["interfaces"] if g["id"] == "C")
+        self.assertEqual(group["score"], 0.)
+        self.assertEqual(group["subgroup_scores"][1]["total_pairs"], 1)
+        self.assertEqual(group["subgroup_scores"][1]["present_pairs"], 0)
+        self.assertGreater(group["subgroup_scores"][0]["score"], 0.)
+
+    def test_internal_spans_follow_same_eight_bijections_and_rigid_motion(self):
+        spec = self.with_internal_spans()
+        base_coords = dict(self.f.coords)
+        base_coords["C", 2] = (0, 8, 4)
+        reward = self.f.reward(spec)
+        base = reward.score(self.f.write_pdb(base_coords))
+        for swap in itertools.product((False, True), repeat=3):
+            mapping = dict(zip("ABCDEF", "ABCDEF"))
+            for flag, group in zip(swap, ("AB", "CD", "EF")):
+                if flag:
+                    mapping.update(zip(group, reversed(group)))
+            coords = {(mapping[c], p): (-y+3, x+4, z-9) for (c, p), (x, y, z) in base_coords.items()}
+            result = reward.score(self.f.write_pdb(coords))
+            self.assertAlmostEqual(result["reward"], base["reward"])
+            # A simultaneous ligand/receptor swap can exchange otherwise tied
+            # logical copies; the invariant multiset and coherent distances matter.
+            self.assertEqual(sorted(result["features"].values()), sorted(base["features"].values()))
+            assignment = result["assignment"]["role_to_input_chain"]
+            self.assertEqual(len(set(assignment.values())), 6)
+            rows = {p["id"]: p for p in result["pairs"]}
+            for pair in spec["pairs"]:
+                endpoints = [(assignment[pair[end]["chain"]], pair[end]["position"]) for end in ("left", "right")]
+                self.assertAlmostEqual(rows[pair["id"]]["distance_angstrom"], math.dist(*(coords[key] for key in endpoints)))
+
+    def test_internal_scope_validation_rejects_wrong_chain_or_cross_mislabel(self):
+        for change in ("omit", "cross", "other_receptor", "between_receptors"):
+            spec = self.with_internal_spans()
+            pair = next(p for p in spec["pairs"] if p["id"] == "C_internal_span")
+            if change == "omit":
+                del pair["scope"]
+            if change == "cross":
+                pair["right"].update(chain="A", residue="S")
+            if change == "other_receptor":
+                pair["left"]["chain"] = pair["right"]["chain"] = "D"
+            if change == "between_receptors":
+                pair["right"]["chain"] = "D"
+            with self.subTest(change=change), self.assertRaisesRegex(ValueError, "receptor"):
+                self.f.reward(spec)
+
+    def test_invalid_scope_and_scope_outside_interface_groups_are_rejected(self):
+        for value in (None, "", "intra", "cross_interface", 1, {}, []):
+            spec = self.with_internal_spans()
+            spec["pairs"][-1]["scope"] = value
+            with self.subTest(scope=value), self.assertRaisesRegex(ValueError, "Pair scope"):
+                self.f.reward(spec)
+        spec = self.f.joint_spec()
+        spec["integrity_pairs"][0]["scope"] = "intra_receptor"
+        with self.assertRaisesRegex(ValueError, "interface-group pair"):
+            self.f.reward(spec)
+        spec = copy.deepcopy(self.f.spec)
+        spec["pairs"][0]["scope"] = "intra_receptor"
+        with self.assertRaisesRegex(ValueError, "version-2/3"):
+            self.f.reward(spec)
+
     def complete_atoms(self):
         atoms = {}
         for (c, p), xyz in self.f.coords.items():

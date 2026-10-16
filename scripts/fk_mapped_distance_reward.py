@@ -48,6 +48,11 @@ disjoint, complete partition of its pair_ids into {id, pair_ids} objects; the
 interface is the minimum of their independently normalized weighted means.
 Every subgroup uses the same assembly assignment and fixed missing-atom
 denominators. These are engineering objectives, not additional contact evidence.
+An interface-group pair may explicitly declare ``scope: "intra_receptor"``:
+both endpoints must then belong to that group's receptor. Omitted scope keeps
+the default requirement of exactly one receptor endpoint. This version-2/3
+extension uses the same distance features and subgroup aggregation; internal
+spans describe receptor shape, not intermolecular contacts.
 
 ``heavy_atom_safeguard`` optionally multiplies the final reward by a bounded
 interchain-overlap factor. It requires explicit symmetric native disulfides,
@@ -623,13 +628,16 @@ class MappedDistanceReward:
         if not isinstance(integrity_pairs, list):
             raise ValueError("integrity_pairs must be a list")
         pairs = pairs + integrity_pairs
-        for pair in pairs:
+        for pair_index, pair in enumerate(pairs):
             if not isinstance(pair, dict):
                 raise ValueError("Each distance pair must be an object")
             name = pair.get("id")
             if not isinstance(name, str) or not name.strip() or name in ids:
                 raise ValueError("Pair IDs must be nonempty and unique")
             ids.add(name)
+            if "scope" in pair and (pair["scope"] != "intra_receptor"
+                                    or self._version < 2 or pair_index >= self._interface_count):
+                raise ValueError("Pair scope must be intra_receptor on a version-2/3 interface-group pair")
             endpoints = []
             for field in ("left", "right"):
                 point = pair.get(field, {})
@@ -654,6 +662,7 @@ class MappedDistanceReward:
                                 "sigma": _positive(pair.get("sigma_angstrom"), "sigma"),
                                 "weight": _positive(pair.get("weight"), "weight"),
                                 "distance_feature": feature,
+                                **({"scope": pair["scope"]} if "scope" in pair else {}),
                                 "evidence_labels": _labels(pair.get("evidence_labels"))})
         try:
             self._total_weight = math.fsum(p["weight"] for p in self._pairs)
@@ -707,6 +716,8 @@ class MappedDistanceReward:
                 "cauchy": "1/(1+((distance-target)/sigma)^2); sigma is the half-maximum distance error"}
         if self._version >= 2 and any("required_subgroups" in g for g in self._interfaces):
             self.metadata["required_subgroup_definition"] = "Each interface is the minimum of its complete, disjoint subgroups' fixed-denominator weighted means under one assignment"
+        if any(p.get("scope") == "intra_receptor" for p in self._pairs):
+            self.metadata["intra_receptor_pair_definition"] = "Explicit intra_receptor pairs require both endpoints in their interface group's receptor and share its coherent assignment; internal shape spans are not intermolecular contacts"
         if self._heavy_guard is not None:
             self.metadata.update({
                 "score_definition": self.metadata["score_definition"]+" * heavy_atom_safeguard_factor",
@@ -731,8 +742,14 @@ class MappedDistanceReward:
                     or any(not isinstance(m, str) or m not in expected for m in members)
                     or len(set(members)) != len(members) or seen.intersection(members)):
                 raise ValueError("Invalid interface group or repeated/unknown pair")
-            if any(sum(c == receptor for c, _ in expected[m]["endpoints"]) != 1 for m in members):
-                raise ValueError("Each interface pair must touch its receptor exactly once")
+            for member in members:
+                pair = expected[member]
+                receptor_endpoints = sum(c == receptor for c, _ in pair["endpoints"])
+                if pair.get("scope") == "intra_receptor":
+                    if receptor_endpoints != 2:
+                        raise ValueError("An intra_receptor pair must have both endpoints in its group's receptor")
+                elif receptor_endpoints != 1:
+                    raise ValueError("Each interface pair must touch its receptor exactly once")
             seen.update(members)
             group_ids.add(name)
             configured = dict(id=name, receptor_chain=receptor, type=group["type"],
@@ -947,6 +964,7 @@ class MappedDistanceReward:
                 rows.append({"id": pair["id"], "feature": value,
                              "distance_angstrom": distance, "present": present,
                              "weight": pair["weight"],
+                             **({"scope": pair["scope"]} if "scope" in pair else {}),
                              "missing_atoms": [{"input_chain": chain, "saved_chain": self._saved[chain],
                                                 "position": pos, "atom": "CA"}
                                                for chain, pos in keys if (chain, pos) not in atoms]})
