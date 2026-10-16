@@ -126,7 +126,9 @@ def main(argv=None):
     # Existing local bytes are never replaced. A conflict fails verification.
     subprocess.run(["rsync", "-a", "--checksum", "--ignore-existing", f"--timeout={args.timeout}",
                     "-e", shlex.join(transfer_ssh), source, str(destination) + "/"],
-                   check=True, timeout=args.timeout + 25)
+                   # rsync bounds inactivity itself. A fixed wall-clock cap
+                   # interrupts healthy transfers of larger sampling states.
+                   check=True)
     cache.verify_payload(destination, expected_manifest_sha256=manifest_sha)
     print(f"Downloaded and SHA-256 verified: {destination}", flush=True)
     # Publication can be retried later if /pub is unavailable. Downloaded data
