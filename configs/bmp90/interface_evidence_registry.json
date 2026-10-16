@@ -1302,6 +1302,82 @@
         }
       },
       "qualification": "Internal CA spans are receptor-shape evidence, and the CA approach is a geometry proxy. Neither establishes an atom-specific hydrogen bond, affinity, native signaling or a transferable generic chemistry rule."
+    },
+    {
+      "evidence_id": "BMP7_ACVR1_BOUNDED_CNO_STERIC_20261016",
+      "target_id": "BMP7_ACVR1_ACVR2A",
+      "evidence_class": "generic_steric_guard_with_explicit_native_covalent_exclusions",
+      "source": {
+        "path": "artifacts/bmp90/preparation/bmp7_alk2_steric_v4_20261016/native_topology.json",
+        "sha256": "68cc010093dc7fcf7bd57a3ffebf3bbf72b118e94c8fef41f4d1a264483bfba7"
+      },
+      "specification": {
+        "path": "artifacts/bmp90/preparation/bmp7_alk2_steric_v4_20261016/bmp7_alk2_bridge_cauchy_steric_v4.json",
+        "sha256": "bb5a2ee4fd7a9d9a378da752f8ab17725906d86483849b00712dff092892b393"
+      },
+      "scientific_summary": {
+        "path": "artifacts/bmp90/preparation/bmp7_alk2_steric_v4_20261016/scientific_summary.json",
+        "sha256": "29680ff6b3cfc87c07f2a81417ebfe0a8689a615c528dbcb203c305bbd4295f6"
+      },
+      "observed_defect_report": {
+        "path": "artifacts/bmp90/evaluation/bmp7_alk2_beta24_20261014/scientific_summary.json",
+        "sha256": "8ccaa7322faed4a7ce324290fc3da8ee03b7938bafa09d9c70ea4a9cff43cabe"
+      },
+      "finding": "Keep the exact beta24 face/bridge objective and favor lower severe full-construct CNO overlap with one existing bounded factor. No added contact endpoints or weakened bridge.",
+      "definition": {
+        "factor": "0.8+0.2*exp(-sum(1-exp(-0.5*(max(overlap-1A,0)/0.5A)^2))/20)",
+        "eligible": "Unique interchain C/N/O pairs outside explicit covalent1-2/1-3/1-4 neighborhoods.",
+        "missing": "Any missing standard heavy atom ->0.8factor; partial experimental reference unassessed, not sterile/clean.",
+        "symmetry": "One assignment-independent factor; original contact optimum and chain assignment remain exact."
+      },
+      "evidence_separation": {
+        "generic_chemistry": "Element radii and severe overlap threshold are generic engineering priors, not measured target contacts or energies.",
+        "native_topology": {
+          "disulfides": 27,
+          "cysteines": 54,
+          "ACVR1_source": "Ten explicit9N4K struct_conn bonds; Q04771 used for exact sequence verification only.",
+          "ACVR1_canonical_pairs_per_copy": [
+            [
+              35,
+              53
+            ],
+            [
+              37,
+              42
+            ],
+            [
+              48,
+              70
+            ],
+            [
+              81,
+              93
+            ],
+            [
+              94,
+              99
+            ]
+          ],
+          "BMP7_source": "Seven mapped UniProt P18075 bonds, including sole interchainA103-B103.",
+          "ACVR2A_source": "Ten P27037 UniProt features annotated by homology from mouseP27038; no direct human-topology claim.",
+          "no_proximity_inference": true,
+          "no_BMPR1A_index_transfer": true
+        },
+        "homologous_pose_transfer": "All existing9N4K-derived typeI pose constraints remain hypotheses; 1LX5 conserved mouse-to-human typeII reference remains partial.",
+        "posthoc_diagnostics": "Completed candidates and finite sidechain/pose controls are tuning/implementation evidence, never blind validation."
+      },
+      "evidence_allocation": "No target-specific contact endpoints added; original52 scoring-withheld same1LX5 contacts unchanged and previously inspected, not independent. Generic sterics, native covalent annotation and homologous pose transfer are separate evidence classes.",
+      "limits": [
+        "Partial1LX5 and composite lack full heavy atoms and receive factor-floor/unassessed status; no native typeI validation.",
+        "The two fixedchi1 choices were defined before scoring; +120relieves and -120worsens overlap. Neither is optimized or accepted; intrachain strain remains unassessed.",
+        "All tested displacements lose actual total score, but CD50 lacks a factor-independent escape bound; no universal escape guarantee.",
+        "20%maximum reduction intentionally cannot fix every reward/globalquality ordering; severe highcontact models can remain preferred.",
+        "CNO screening excludes sulfur, hydrogens and intrachain clashes; explicit topology is used only for exclusions.",
+        "Guard does not fix the persistently distant ACVR1 copy and cannot validate a transferred BMP7 typeI pose.",
+        "The guard may approach its0.8floor for hundreds of tail collisions; final packing improvement must be observed, not inferred from implementation tests.",
+        "The highest raw contact-reward candidate remains potentially preferred by the new objective even when it is not the best joint structural candidate; no recipe promotion follows these rescoring tests."
+      ],
+      "status": "submitted_outcome_pending_unranked"
     }
   ],
   "generic_inspection_priors": {
@@ -1513,5 +1589,5 @@
       "evidence_label_scope": "Vocabulary for future observations; no existing evidence_class is reclassified by this import. R8 instructs evaluation of energetic evidence; it does not establish a hotspot for any target."
     }
   },
-  "updated_at": "2026-10-16T18:34:41.441099+00:00"
+  "updated_at": "2026-10-16T19:11:48.940172+00:00"
 }

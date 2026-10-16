@@ -1220,7 +1220,67 @@
       "status": "documented_completed_no_promotion",
       "suspected_causes": [],
       "attempted_changes": [],
-      "followups": [],
+      "followups": [
+        {
+          "followup_id": "BMP7_ACVR1_STERIC_V4_WAVE16_SUBMITTED_20261016",
+          "recipe_id": "bmp7_alk2_bridge_cauchy_steric_v4",
+          "campaign_id": "bmp90-paid-wave16-20261016",
+          "status": "submitted_outcome_pending",
+          "recorded_at": "2026-10-16T19:11:48.940172+00:00",
+          "sampling_job_ids": [
+            "58185778",
+            "58185779",
+            "58185780"
+          ],
+          "evaluation_job_ids": [
+            "58185785",
+            "58185786",
+            "58185787"
+          ],
+          "specification": {
+            "path": "artifacts/bmp90/preparation/bmp7_alk2_steric_v4_20261016/bmp7_alk2_bridge_cauchy_steric_v4.json",
+            "sha256": "bb5a2ee4fd7a9d9a378da752f8ab17725906d86483849b00712dff092892b393"
+          },
+          "scientific_summary": {
+            "path": "artifacts/bmp90/preparation/bmp7_alk2_steric_v4_20261016/scientific_summary.json",
+            "sha256": "29680ff6b3cfc87c07f2a81417ebfe0a8689a615c528dbcb203c305bbd4295f6"
+          },
+          "actual_sources": {
+            "cpu": {
+              "path": "artifacts/bmp90/operations/paid_wave15_16_records_20261016/wave16_cpu_parent_response.json",
+              "sha256": "fcb4f59e8e08631a9abe6fa5603cce222ef0adc6e4f0bebf8b2dd0cd40fd225d"
+            },
+            "gpu": {
+              "path": "artifacts/bmp90/operations/paid_wave15_16_records_20261016/wave16_gpu_parent_response.json",
+              "sha256": "322f3304036b2096e8001156191d91745788aa86b00dc3244f765884a3f36f56"
+            },
+            "evaluation": {
+              "path": "artifacts/bmp90/operations/paid_wave15_16_records_20261016/wave16_evaluation_parent_response.json",
+              "sha256": "4df1d9a84575c54d111d2d10a9d19184c07605363ce9d5ffa07f9f57c83c7f6c"
+            },
+            "cpu_status": {
+              "path": "artifacts/bmp90/operations/paid_wave15_16_records_20261016/wave16_cpu_status.txt",
+              "sha256": "2e9a67a7927bd137f6d350c3cbc3b072d5ad24abfa98dafc0e2fca0381f7ca58"
+            },
+            "transfer": {
+              "path": "artifacts/bmp90/operations/paid_wave16/transfer_receipt.json",
+              "sha256": "b01fbd26ef3f8e0321bd9593c59e3a046fd8790f52d3f5a3095e1a4a2a939434"
+            },
+            "campaign": {
+              "path": "artifacts/bmp90/operations/paid_wave16/campaign.json",
+              "sha256": "5401d920c833d77209da461587ecb907c78256db551f26c12fca5c07011470be"
+            },
+            "local_validation": {
+              "path": "artifacts/bmp90/operations/paid_wave16/local_validation.json",
+              "sha256": "737ad59c5da7d9067be8ebecd372d8f06925041a7370b401428d8319a233dea6"
+            }
+          },
+          "actual_cpu_registration_job_id": "58185754",
+          "change": "Retain the exact v3 face/bridge/contact/integrity/full716 objective at beta24; add the existing bounded generic CNO overlap guard with independently checked ACVR1-native covalent exclusions.",
+          "qualification": "New A30 populations use fresh paired baselines. Deterministic fixtures are tuning/implementation evidence; efficacy and overall improvement remain pending. The guard does not itself place the distant ACVR1 copy or validate type-I geometry.",
+          "outcome": "Pending evaluated sampled structures across tau0.1/0.3/0.8; no recipe promotion or biological failure claim."
+        }
+      ],
       "proposed_next_change": {
         "proposal": "Add the already implemented gentle bounded severe interchain C/N/O overlap guard to the unchanged v3 contact geometry at beta24, using all716residues.",
         "scientific_basis": "Repeated subangstrom heavy-atom separations are concrete physical defects missed by CA-only safeguards. The existing BMP7-BMPR1A guard offers an available implementation; it is not yet evidence of efficacy for ACVR1.",
@@ -1387,5 +1447,5 @@
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-16T18:34:41.441099+00:00"
+  "updated_at": "2026-10-16T19:11:48.940172+00:00"
 }
