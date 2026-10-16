@@ -8837,6 +8837,1320 @@
             "hardware_qualification": "A30 versus prior A100 populations; matched seed labels do not imply identical trajectories. Fresh paired controls were generated.",
             "ranking_scope": "Best overall evaluated structure across all three tau values; weak performance at one tau alone does not disqualify a recipe."
           }
+        },
+        {
+          "recipe_id": "bmp6_joint_n60_loop_v5",
+          "rank": null,
+          "status": "submitted_not_evaluated",
+          "comparison_group": "deposited_native_no_tags_716",
+          "parent_relationships": [
+            {
+              "recipe_id": "bmp6_joint_v1",
+              "relationship": "retained_successful_global_and_typeII_parent",
+              "retained": "All12 original interface pairs, both type-II groups,9 integrity pairs, all physical safeguards, sequence hashes and equivalent-copy definitions exactly match v1. Old type-I3-anchor mean remains a required subgroup. No new K78/V91 factors or global loop penalty."
+            },
+            {
+              "recipe_id": "bmp6_joint_n60_surround_v4",
+              "relationship": "documented_failure_informs_local_revision",
+              "failure_id": "BMP6_V4_PERSISTENT_N60_NO_PROMOTION_58142162_58142164",
+              "changed": "Best v4 repeats the successful v1-like global placement with ~4A receptor-fitted N60 displacement and failed N60-S446 approach. Previously gentle N60/surrounding global factors did not enforce local repair. Limit each type-I copy directly instead of reusing the failed v2 whole-assembly fold penalty."
+            }
+          ],
+          "source": {
+            "path": "artifacts/bmp90/preparation/bmp6_acvr1_v5_20261016/bmp6_joint_n60_loop_v5.json",
+            "sha256": "75c2b215b3f8a05532e4091c678abf9656ab31f5ebf1944266033af327a6ac86"
+          },
+          "reward_specification_snapshot": {
+            "schema_version": 2,
+            "active": true,
+            "mapping_status": "verified",
+            "recipe_id": "bmp6_joint_n60_loop_v5",
+            "target_id": "BMP6_ACVR1_ACVR2B",
+            "fasta_sha256": "2c0a4ef599163ba9fac732636c5132ae2598d912809dff3a1ceb4b894d0228fc",
+            "scope": "Joint-interface protein-only reconstruction using full deposited native sequences without engineered tags. 9N4K glycan and receptor tether omitted; no native affinity or signaling claim.",
+            "evidence_labels": [
+              "https://www.pnas.org/doi/10.1073/pnas.2502788122",
+              "https://www.rcsb.org/structure/9N4K"
+            ],
+            "chains": [
+              {
+                "input_chain": "A",
+                "saved_chain": "A",
+                "length": 139,
+                "sequence_sha256": "080d5d9a4b67d36ce8bca2ebc877bc4bd38c0b93d430b4ac08c598a7c178b233"
+              },
+              {
+                "input_chain": "B",
+                "saved_chain": "B",
+                "length": 139,
+                "sequence_sha256": "080d5d9a4b67d36ce8bca2ebc877bc4bd38c0b93d430b4ac08c598a7c178b233"
+              },
+              {
+                "input_chain": "C",
+                "saved_chain": "C",
+                "length": 103,
+                "sequence_sha256": "c5f5ff9055e0fd2b5a7692f684504e3e636c7f5c54485b8fb188869b1651b65a"
+              },
+              {
+                "input_chain": "D",
+                "saved_chain": "D",
+                "length": 103,
+                "sequence_sha256": "c5f5ff9055e0fd2b5a7692f684504e3e636c7f5c54485b8fb188869b1651b65a"
+              },
+              {
+                "input_chain": "E",
+                "saved_chain": "E",
+                "length": 116,
+                "sequence_sha256": "2bc8dc9b24530ee625934d7a11de2a7e00b42cdb19aac6c5ead0d2aeccbcf867"
+              },
+              {
+                "input_chain": "F",
+                "saved_chain": "F",
+                "length": 116,
+                "sequence_sha256": "2bc8dc9b24530ee625934d7a11de2a7e00b42cdb19aac6c5ead0d2aeccbcf867"
+              }
+            ],
+            "equivalent_chain_groups": [
+              [
+                "A",
+                "B"
+              ],
+              [
+                "C",
+                "D"
+              ],
+              [
+                "E",
+                "F"
+              ]
+            ],
+            "pairs": [
+              {
+                "id": "ALK2_C_S41_N450",
+                "left": {
+                  "chain": "C",
+                  "position": 21,
+                  "residue": "S",
+                  "atom": "CA",
+                  "canonical_position": 41,
+                  "uniprot": "Q04771"
+                },
+                "right": {
+                  "chain": "A",
+                  "position": 76,
+                  "residue": "N",
+                  "atom": "CA",
+                  "canonical_position": 450,
+                  "uniprot": "P22004"
+                },
+                "distance_angstrom": 8.043787,
+                "sigma_angstrom": 3.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "experimental_contact",
+                  "9N4K",
+                  "engineered_glycosylated_reference"
+                ],
+                "evidence_allocation": "guidance"
+              },
+              {
+                "id": "ALK2_C_N60_E444",
+                "left": {
+                  "chain": "C",
+                  "position": 40,
+                  "residue": "N",
+                  "atom": "CA",
+                  "canonical_position": 60,
+                  "uniprot": "Q04771"
+                },
+                "right": {
+                  "chain": "A",
+                  "position": 70,
+                  "residue": "E",
+                  "atom": "CA",
+                  "canonical_position": 444,
+                  "uniprot": "P22004"
+                },
+                "distance_angstrom": 11.090624,
+                "sigma_angstrom": 3.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "experimental_contact",
+                  "9N4K",
+                  "engineered_glycosylated_reference"
+                ],
+                "evidence_allocation": "guidance"
+              },
+              {
+                "id": "ALK2_C_T83_L424",
+                "left": {
+                  "chain": "C",
+                  "position": 63,
+                  "residue": "T",
+                  "atom": "CA",
+                  "canonical_position": 83,
+                  "uniprot": "Q04771"
+                },
+                "right": {
+                  "chain": "B",
+                  "position": 50,
+                  "residue": "L",
+                  "atom": "CA",
+                  "canonical_position": 424,
+                  "uniprot": "P22004"
+                },
+                "distance_angstrom": 7.24554,
+                "sigma_angstrom": 3.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "experimental_contact",
+                  "9N4K",
+                  "engineered_glycosylated_reference"
+                ],
+                "evidence_allocation": "guidance"
+              },
+              {
+                "id": "ALK2_D_S41_N450",
+                "left": {
+                  "chain": "D",
+                  "position": 21,
+                  "residue": "S",
+                  "atom": "CA",
+                  "canonical_position": 41,
+                  "uniprot": "Q04771"
+                },
+                "right": {
+                  "chain": "B",
+                  "position": 76,
+                  "residue": "N",
+                  "atom": "CA",
+                  "canonical_position": 450,
+                  "uniprot": "P22004"
+                },
+                "distance_angstrom": 8.112344,
+                "sigma_angstrom": 3.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "experimental_contact",
+                  "9N4K",
+                  "engineered_glycosylated_reference"
+                ],
+                "evidence_allocation": "guidance"
+              },
+              {
+                "id": "ALK2_D_N60_E444",
+                "left": {
+                  "chain": "D",
+                  "position": 40,
+                  "residue": "N",
+                  "atom": "CA",
+                  "canonical_position": 60,
+                  "uniprot": "Q04771"
+                },
+                "right": {
+                  "chain": "B",
+                  "position": 70,
+                  "residue": "E",
+                  "atom": "CA",
+                  "canonical_position": 444,
+                  "uniprot": "P22004"
+                },
+                "distance_angstrom": 11.397939,
+                "sigma_angstrom": 3.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "experimental_contact",
+                  "9N4K",
+                  "engineered_glycosylated_reference"
+                ],
+                "evidence_allocation": "guidance"
+              },
+              {
+                "id": "ALK2_D_T83_L424",
+                "left": {
+                  "chain": "D",
+                  "position": 63,
+                  "residue": "T",
+                  "atom": "CA",
+                  "canonical_position": 83,
+                  "uniprot": "Q04771"
+                },
+                "right": {
+                  "chain": "A",
+                  "position": 50,
+                  "residue": "L",
+                  "atom": "CA",
+                  "canonical_position": 424,
+                  "uniprot": "P22004"
+                },
+                "distance_angstrom": 7.258393,
+                "sigma_angstrom": 3.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "experimental_contact",
+                  "9N4K",
+                  "engineered_glycosylated_reference"
+                ],
+                "evidence_allocation": "guidance"
+              },
+              {
+                "id": "ActRIIB_E_Y60_L499",
+                "left": {
+                  "chain": "E",
+                  "position": 42,
+                  "residue": "Y",
+                  "atom": "CA",
+                  "canonical_position": 60,
+                  "uniprot": "Q13705"
+                },
+                "right": {
+                  "chain": "B",
+                  "position": 125,
+                  "residue": "L",
+                  "atom": "CA",
+                  "canonical_position": 499,
+                  "uniprot": "P22004"
+                },
+                "distance_angstrom": 10.469805,
+                "sigma_angstrom": 3.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "experimental_contact",
+                  "9N4K",
+                  "engineered_glycosylated_reference"
+                ],
+                "evidence_allocation": "guidance"
+              },
+              {
+                "id": "ActRIIB_E_W78_S487",
+                "left": {
+                  "chain": "E",
+                  "position": 60,
+                  "residue": "W",
+                  "atom": "CA",
+                  "canonical_position": 78,
+                  "uniprot": "Q13705"
+                },
+                "right": {
+                  "chain": "B",
+                  "position": 113,
+                  "residue": "S",
+                  "atom": "CA",
+                  "canonical_position": 487,
+                  "uniprot": "P22004"
+                },
+                "distance_angstrom": 6.209166,
+                "sigma_angstrom": 3.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "experimental_contact",
+                  "9N4K",
+                  "engineered_glycosylated_reference"
+                ],
+                "evidence_allocation": "guidance"
+              },
+              {
+                "id": "ActRIIB_E_F101_I431",
+                "left": {
+                  "chain": "E",
+                  "position": 83,
+                  "residue": "F",
+                  "atom": "CA",
+                  "canonical_position": 101,
+                  "uniprot": "Q13705"
+                },
+                "right": {
+                  "chain": "B",
+                  "position": 57,
+                  "residue": "I",
+                  "atom": "CA",
+                  "canonical_position": 431,
+                  "uniprot": "P22004"
+                },
+                "distance_angstrom": 7.595281,
+                "sigma_angstrom": 3.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "experimental_contact",
+                  "9N4K",
+                  "engineered_glycosylated_reference"
+                ],
+                "evidence_allocation": "guidance"
+              },
+              {
+                "id": "ActRIIB_F_Y60_L499",
+                "left": {
+                  "chain": "F",
+                  "position": 42,
+                  "residue": "Y",
+                  "atom": "CA",
+                  "canonical_position": 60,
+                  "uniprot": "Q13705"
+                },
+                "right": {
+                  "chain": "A",
+                  "position": 125,
+                  "residue": "L",
+                  "atom": "CA",
+                  "canonical_position": 499,
+                  "uniprot": "P22004"
+                },
+                "distance_angstrom": 10.503144,
+                "sigma_angstrom": 3.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "experimental_contact",
+                  "9N4K",
+                  "engineered_glycosylated_reference"
+                ],
+                "evidence_allocation": "guidance"
+              },
+              {
+                "id": "ActRIIB_F_W78_S487",
+                "left": {
+                  "chain": "F",
+                  "position": 60,
+                  "residue": "W",
+                  "atom": "CA",
+                  "canonical_position": 78,
+                  "uniprot": "Q13705"
+                },
+                "right": {
+                  "chain": "A",
+                  "position": 113,
+                  "residue": "S",
+                  "atom": "CA",
+                  "canonical_position": 487,
+                  "uniprot": "P22004"
+                },
+                "distance_angstrom": 6.231064,
+                "sigma_angstrom": 3.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "experimental_contact",
+                  "9N4K",
+                  "engineered_glycosylated_reference"
+                ],
+                "evidence_allocation": "guidance"
+              },
+              {
+                "id": "ActRIIB_F_F101_I431",
+                "left": {
+                  "chain": "F",
+                  "position": 83,
+                  "residue": "F",
+                  "atom": "CA",
+                  "canonical_position": 101,
+                  "uniprot": "Q13705"
+                },
+                "right": {
+                  "chain": "A",
+                  "position": 57,
+                  "residue": "I",
+                  "atom": "CA",
+                  "canonical_position": 431,
+                  "uniprot": "P22004"
+                },
+                "distance_angstrom": 7.663997,
+                "sigma_angstrom": 3.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "experimental_contact",
+                  "9N4K",
+                  "engineered_glycosylated_reference"
+                ],
+                "evidence_allocation": "guidance"
+              },
+              {
+                "id": "ALK2_C_N60_C53",
+                "left": {
+                  "chain": "C",
+                  "position": 40,
+                  "residue": "N",
+                  "atom": "CA",
+                  "canonical_position": 60,
+                  "uniprot": "Q04771"
+                },
+                "right": {
+                  "chain": "C",
+                  "position": 33,
+                  "residue": "C",
+                  "atom": "CA",
+                  "canonical_position": 53,
+                  "uniprot": "Q04771"
+                },
+                "distance_angstrom": 20.814764807703227,
+                "sigma_angstrom": 3.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "9N4K_observed_coordinates",
+                  "type_I",
+                  "reference_local_fold_prior",
+                  "posthoc_selection_not_independent_validation"
+                ],
+                "evidence_allocation": "guidance",
+                "scope": "intra_receptor"
+              },
+              {
+                "id": "ALK2_C_N60_T83",
+                "left": {
+                  "chain": "C",
+                  "position": 40,
+                  "residue": "N",
+                  "atom": "CA",
+                  "canonical_position": 60,
+                  "uniprot": "Q04771"
+                },
+                "right": {
+                  "chain": "C",
+                  "position": 63,
+                  "residue": "T",
+                  "atom": "CA",
+                  "canonical_position": 83,
+                  "uniprot": "Q04771"
+                },
+                "distance_angstrom": 16.849994658752856,
+                "sigma_angstrom": 3.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "9N4K_observed_coordinates",
+                  "type_I",
+                  "reference_local_fold_prior",
+                  "posthoc_selection_not_independent_validation"
+                ],
+                "evidence_allocation": "guidance",
+                "scope": "intra_receptor"
+              },
+              {
+                "id": "ALK2_C_N60_S446",
+                "left": {
+                  "chain": "C",
+                  "position": 40,
+                  "residue": "N",
+                  "atom": "CA",
+                  "canonical_position": 60,
+                  "uniprot": "Q04771"
+                },
+                "right": {
+                  "chain": "A",
+                  "position": 72,
+                  "residue": "S",
+                  "atom": "CA",
+                  "canonical_position": 446,
+                  "uniprot": "P22004"
+                },
+                "distance_angstrom": 7.256646746259606,
+                "sigma_angstrom": 4.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "9N4K_observed_coordinates",
+                  "type_I",
+                  "reference_CA_approach_proxy",
+                  "posthoc_selection_not_independent_validation"
+                ],
+                "evidence_allocation": "guidance"
+              },
+              {
+                "id": "ALK2_D_N60_C53",
+                "left": {
+                  "chain": "D",
+                  "position": 40,
+                  "residue": "N",
+                  "atom": "CA",
+                  "canonical_position": 60,
+                  "uniprot": "Q04771"
+                },
+                "right": {
+                  "chain": "D",
+                  "position": 33,
+                  "residue": "C",
+                  "atom": "CA",
+                  "canonical_position": 53,
+                  "uniprot": "Q04771"
+                },
+                "distance_angstrom": 20.814214974387085,
+                "sigma_angstrom": 3.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "9N4K_observed_coordinates",
+                  "type_I",
+                  "reference_local_fold_prior",
+                  "posthoc_selection_not_independent_validation"
+                ],
+                "evidence_allocation": "guidance",
+                "scope": "intra_receptor"
+              },
+              {
+                "id": "ALK2_D_N60_T83",
+                "left": {
+                  "chain": "D",
+                  "position": 40,
+                  "residue": "N",
+                  "atom": "CA",
+                  "canonical_position": 60,
+                  "uniprot": "Q04771"
+                },
+                "right": {
+                  "chain": "D",
+                  "position": 63,
+                  "residue": "T",
+                  "atom": "CA",
+                  "canonical_position": 83,
+                  "uniprot": "Q04771"
+                },
+                "distance_angstrom": 16.84929428789228,
+                "sigma_angstrom": 3.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "9N4K_observed_coordinates",
+                  "type_I",
+                  "reference_local_fold_prior",
+                  "posthoc_selection_not_independent_validation"
+                ],
+                "evidence_allocation": "guidance",
+                "scope": "intra_receptor"
+              },
+              {
+                "id": "ALK2_D_N60_S446",
+                "left": {
+                  "chain": "D",
+                  "position": 40,
+                  "residue": "N",
+                  "atom": "CA",
+                  "canonical_position": 60,
+                  "uniprot": "Q04771"
+                },
+                "right": {
+                  "chain": "B",
+                  "position": 72,
+                  "residue": "S",
+                  "atom": "CA",
+                  "canonical_position": 446,
+                  "uniprot": "P22004"
+                },
+                "distance_angstrom": 7.500908278335375,
+                "sigma_angstrom": 4.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "9N4K_observed_coordinates",
+                  "type_I",
+                  "reference_CA_approach_proxy",
+                  "posthoc_selection_not_independent_validation"
+                ],
+                "evidence_allocation": "guidance"
+              }
+            ],
+            "interface_groups": [
+              {
+                "id": "ACVR1_C",
+                "receptor_chain": "C",
+                "type": "type_I",
+                "weight": 1.0,
+                "pair_ids": [
+                  "ALK2_C_S41_N450",
+                  "ALK2_C_N60_E444",
+                  "ALK2_C_T83_L424",
+                  "ALK2_C_N60_C53",
+                  "ALK2_C_N60_T83",
+                  "ALK2_C_N60_S446"
+                ],
+                "required_subgroups": [
+                  {
+                    "id": "v1_docking",
+                    "pair_ids": [
+                      "ALK2_C_S41_N450",
+                      "ALK2_C_N60_E444",
+                      "ALK2_C_T83_L424"
+                    ]
+                  },
+                  {
+                    "id": "N60_C53",
+                    "pair_ids": [
+                      "ALK2_C_N60_C53"
+                    ]
+                  },
+                  {
+                    "id": "N60_T83",
+                    "pair_ids": [
+                      "ALK2_C_N60_T83"
+                    ]
+                  },
+                  {
+                    "id": "N60_S446",
+                    "pair_ids": [
+                      "ALK2_C_N60_S446"
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "ACVR1_D",
+                "receptor_chain": "D",
+                "type": "type_I",
+                "weight": 1.0,
+                "pair_ids": [
+                  "ALK2_D_S41_N450",
+                  "ALK2_D_N60_E444",
+                  "ALK2_D_T83_L424",
+                  "ALK2_D_N60_C53",
+                  "ALK2_D_N60_T83",
+                  "ALK2_D_N60_S446"
+                ],
+                "required_subgroups": [
+                  {
+                    "id": "v1_docking",
+                    "pair_ids": [
+                      "ALK2_D_S41_N450",
+                      "ALK2_D_N60_E444",
+                      "ALK2_D_T83_L424"
+                    ]
+                  },
+                  {
+                    "id": "N60_C53",
+                    "pair_ids": [
+                      "ALK2_D_N60_C53"
+                    ]
+                  },
+                  {
+                    "id": "N60_T83",
+                    "pair_ids": [
+                      "ALK2_D_N60_T83"
+                    ]
+                  },
+                  {
+                    "id": "N60_S446",
+                    "pair_ids": [
+                      "ALK2_D_N60_S446"
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "ACVR2B_E",
+                "receptor_chain": "E",
+                "type": "type_II",
+                "weight": 1.0,
+                "pair_ids": [
+                  "ActRIIB_E_Y60_L499",
+                  "ActRIIB_E_W78_S487",
+                  "ActRIIB_E_F101_I431"
+                ]
+              },
+              {
+                "id": "ACVR2B_F",
+                "receptor_chain": "F",
+                "type": "type_II",
+                "weight": 1.0,
+                "pair_ids": [
+                  "ActRIIB_F_Y60_L499",
+                  "ActRIIB_F_W78_S487",
+                  "ActRIIB_F_F101_I431"
+                ]
+              }
+            ],
+            "aggregation": {
+              "minimum_fraction": 0.5
+            },
+            "integrity_pairs": [
+              {
+                "id": "BMP6_dimer_C477_C477",
+                "left": {
+                  "chain": "A",
+                  "position": 103,
+                  "residue": "C",
+                  "atom": "CA",
+                  "canonical_position": 477,
+                  "uniprot": "P22004"
+                },
+                "right": {
+                  "chain": "B",
+                  "position": 103,
+                  "residue": "C",
+                  "atom": "CA",
+                  "canonical_position": 477,
+                  "uniprot": "P22004"
+                },
+                "distance_angstrom": 6.046314,
+                "sigma_angstrom": 3.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "reference_geometry_prior",
+                  "9N4K",
+                  "engineered_glycosylated_reference"
+                ],
+                "evidence_allocation": "guidance"
+              },
+              {
+                "id": "BMP6_dimer_N450_Y490",
+                "left": {
+                  "chain": "A",
+                  "position": 76,
+                  "residue": "N",
+                  "atom": "CA",
+                  "canonical_position": 450,
+                  "uniprot": "P22004"
+                },
+                "right": {
+                  "chain": "B",
+                  "position": 116,
+                  "residue": "Y",
+                  "atom": "CA",
+                  "canonical_position": 490,
+                  "uniprot": "P22004"
+                },
+                "distance_angstrom": 22.877603,
+                "sigma_angstrom": 4.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "reference_geometry_prior",
+                  "9N4K",
+                  "engineered_glycosylated_reference"
+                ],
+                "evidence_allocation": "guidance"
+              },
+              {
+                "id": "BMP6_dimer_Y490_N450",
+                "left": {
+                  "chain": "A",
+                  "position": 116,
+                  "residue": "Y",
+                  "atom": "CA",
+                  "canonical_position": 490,
+                  "uniprot": "P22004"
+                },
+                "right": {
+                  "chain": "B",
+                  "position": 76,
+                  "residue": "N",
+                  "atom": "CA",
+                  "canonical_position": 450,
+                  "uniprot": "P22004"
+                },
+                "distance_angstrom": 22.95728,
+                "sigma_angstrom": 4.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "reference_geometry_prior",
+                  "9N4K",
+                  "engineered_glycosylated_reference"
+                ],
+                "evidence_allocation": "guidance"
+              },
+              {
+                "id": "fold_span_A",
+                "left": {
+                  "chain": "A",
+                  "position": 38,
+                  "residue": "C",
+                  "atom": "CA",
+                  "canonical_position": 412,
+                  "uniprot": "P22004"
+                },
+                "right": {
+                  "chain": "A",
+                  "position": 138,
+                  "residue": "C",
+                  "atom": "CA",
+                  "canonical_position": 512,
+                  "uniprot": "P22004"
+                },
+                "distance_angstrom": 6.863697,
+                "sigma_angstrom": 3.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "reference_geometry_prior",
+                  "9N4K",
+                  "engineered_glycosylated_reference"
+                ],
+                "evidence_allocation": "guidance"
+              },
+              {
+                "id": "fold_span_B",
+                "left": {
+                  "chain": "B",
+                  "position": 38,
+                  "residue": "C",
+                  "atom": "CA",
+                  "canonical_position": 412,
+                  "uniprot": "P22004"
+                },
+                "right": {
+                  "chain": "B",
+                  "position": 138,
+                  "residue": "C",
+                  "atom": "CA",
+                  "canonical_position": 512,
+                  "uniprot": "P22004"
+                },
+                "distance_angstrom": 6.863103,
+                "sigma_angstrom": 3.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "reference_geometry_prior",
+                  "9N4K",
+                  "engineered_glycosylated_reference"
+                ],
+                "evidence_allocation": "guidance"
+              },
+              {
+                "id": "fold_span_C",
+                "left": {
+                  "chain": "C",
+                  "position": 15,
+                  "residue": "C",
+                  "atom": "CA",
+                  "canonical_position": 35,
+                  "uniprot": "Q04771"
+                },
+                "right": {
+                  "chain": "C",
+                  "position": 79,
+                  "residue": "C",
+                  "atom": "CA",
+                  "canonical_position": 99,
+                  "uniprot": "Q04771"
+                },
+                "distance_angstrom": 6.619765,
+                "sigma_angstrom": 3.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "reference_geometry_prior",
+                  "9N4K",
+                  "engineered_glycosylated_reference"
+                ],
+                "evidence_allocation": "guidance"
+              },
+              {
+                "id": "fold_span_D",
+                "left": {
+                  "chain": "D",
+                  "position": 15,
+                  "residue": "C",
+                  "atom": "CA",
+                  "canonical_position": 35,
+                  "uniprot": "Q04771"
+                },
+                "right": {
+                  "chain": "D",
+                  "position": 79,
+                  "residue": "C",
+                  "atom": "CA",
+                  "canonical_position": 99,
+                  "uniprot": "Q04771"
+                },
+                "distance_angstrom": 6.619656,
+                "sigma_angstrom": 3.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "reference_geometry_prior",
+                  "9N4K",
+                  "engineered_glycosylated_reference"
+                ],
+                "evidence_allocation": "guidance"
+              },
+              {
+                "id": "fold_span_E",
+                "left": {
+                  "chain": "E",
+                  "position": 11,
+                  "residue": "C",
+                  "atom": "CA",
+                  "canonical_position": 29,
+                  "uniprot": "Q13705"
+                },
+                "right": {
+                  "chain": "E",
+                  "position": 91,
+                  "residue": "C",
+                  "atom": "CA",
+                  "canonical_position": 109,
+                  "uniprot": "Q13705"
+                },
+                "distance_angstrom": 7.212155,
+                "sigma_angstrom": 3.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "reference_geometry_prior",
+                  "9N4K",
+                  "engineered_glycosylated_reference"
+                ],
+                "evidence_allocation": "guidance"
+              },
+              {
+                "id": "fold_span_F",
+                "left": {
+                  "chain": "F",
+                  "position": 11,
+                  "residue": "C",
+                  "atom": "CA",
+                  "canonical_position": 29,
+                  "uniprot": "Q13705"
+                },
+                "right": {
+                  "chain": "F",
+                  "position": 91,
+                  "residue": "C",
+                  "atom": "CA",
+                  "canonical_position": 109,
+                  "uniprot": "Q13705"
+                },
+                "distance_angstrom": 7.212332,
+                "sigma_angstrom": 3.0,
+                "weight": 1.0,
+                "evidence_labels": [
+                  "reference_geometry_prior",
+                  "9N4K",
+                  "engineered_glycosylated_reference"
+                ],
+                "evidence_allocation": "guidance"
+              }
+            ],
+            "safeguards": {
+              "ca_clash_distance_angstrom": 3.0,
+              "ca_clash_weight": 1.0,
+              "backbone_min_angstrom": 2.8,
+              "backbone_max_angstrom": 4.2,
+              "backbone_sigma_angstrom": 0.5,
+              "backbone_weight": 0.2,
+              "missing_core_weight": 2.0,
+              "maximum_penalty_exponent": 6.0,
+              "integrity_factor_floor": 0.5,
+              "required_ca_ranges": [
+                {
+                  "chain": "A",
+                  "start": 36,
+                  "end": 139
+                },
+                {
+                  "chain": "B",
+                  "start": 36,
+                  "end": 139
+                },
+                {
+                  "chain": "C",
+                  "start": 11,
+                  "end": 89
+                },
+                {
+                  "chain": "D",
+                  "start": 11,
+                  "end": 89
+                },
+                {
+                  "chain": "E",
+                  "start": 8,
+                  "end": 100
+                },
+                {
+                  "chain": "F",
+                  "start": 8,
+                  "end": 100
+                }
+              ]
+            },
+            "calibration": {
+              "status": "single_posthoc_engineering_candidate_not_accuracy_calibrated",
+              "interface_sigma_angstrom": 3.0,
+              "rationale": "Each type-I copy is min(v1 three-anchor mean, N60-C53 Gaussian, N60-T83 Gaussian, N60-S446 Gaussian). Span widths3A and approach width4A are broad engineering tolerances chosen before scoring this panel; no extra whole-assembly shape multiplier.",
+              "heldout_path": "artifacts/bmp90/preparation/bmp6_acvr1_v5_20261016/bmp6_joint_n60_loop_v5.heldout.json",
+              "heldout_sha256": "8989378cc8f09760aed6313b09420702184b130a3ec16f62b9b4d84b0c38dea0",
+              "heldout_contact_count": 113,
+              "score_never_estimates": [
+                "DockQ",
+                "binding energy",
+                "affinity",
+                "probability of correctness"
+              ],
+              "parameter_selection": "One initial candidate; no broad parameter sweep.",
+              "proposed_beta": 4.0
+            },
+            "parent_relationships": {
+              "parent_v1": {
+                "path": "artifacts/bmp90/specifications/bmp6_joint_v1.json",
+                "sha256": "24c64d29fefebd29ba2f8aa6541bf76cd291ca33e031a8da85b23f20b170c338"
+              },
+              "informed_by_failed_v4": {
+                "path": "artifacts/bmp90/preparation/bmp6_acvr1_v4_20261014/bmp6_joint_n60_surround_v4.json",
+                "sha256": "4aa7610b6ab6d4d2c73e7032408fe2fac377f77c65f54449a4369ad6892b00c4"
+              },
+              "preserved_exact": [
+                "chains",
+                "fasta_sha256",
+                "equivalent_chain_groups",
+                "aggregation",
+                "integrity_pairs",
+                "safeguards"
+              ],
+              "all_original_interface_pairs_exact": true,
+              "type_II_groups_exact": true,
+              "removed_v3_v4_modules": "No global atom/angle multipliers or satisfied K78/Y490,V91/P448 modules; no failed v2 global shape addition."
+            },
+            "evidence_allocation": {
+              "guidance": "Exact v1 docking/integrity plus six new per-copy CA constraints; each copy requires all four subgroups.",
+              "context": "9N4K engineered receptor tethering, glycosylated BMP6, distinct ALK2/ALK3 mechanism",
+              "tuning": "Previous selected v1/v3/v4 raw/relaxed models, inspected N60 loop and source-compatible/wrong-pose diagnostics; not blind.",
+              "heldout": "Conservative cumulative endpoint exclusion; same-reference residual feature recovery only."
+            },
+            "construct_manifest": "examples/bmp90/BMP6_ACVR1_ACVR2B_deposited_native_no_tags.mapping.json",
+            "construct_manifest_sha256": "aab6477bd1af791e850a6da340bbbb3bdd417bf2133e1fc1d8d631a59e1a8257",
+            "reference_source": {
+              "path": "artifacts/bmp90/preparation/bmp6/9N4K_deposited_native_reference.pdb",
+              "sha256": "b00134800a16d1bb300b96ebf87eb0ddfcb0eaed25e507b35cd1f5520afb77f5",
+              "coordinate_coverage": "552 observed residues of716 total; missing tails are not modeled in the reference",
+              "source_url": "https://files.rcsb.org/download/9N4K.cif"
+            },
+            "physical_limits": [
+              "Sparse CA distances do not resolve loop chirality, peptide geometry, rotamers, backbone angles, glycan/tether dependence, or all-atom packing.",
+              "A better local score can still outrank a globally better candidate; evaluate per-copy DockQ and physical quality separately.",
+              "Original v1 CA safeguards preserved; no new all-atom guard or relaxation implied."
+            ],
+            "expected_improvement": "Select N60 loop/approach repair without allowing old satisfied docking anchors to compensate either failed receptor copy, while retaining exact type-II and original placement constraints.",
+            "falsification": "Failure to improve the best overall candidate across taus, type-II or placement deterioration, residual N60 deficit, or worse physical defects argues against promotion.",
+            "activation_scope": "Prepared candidate for parent-owned bounded three-tau A30 sweep; full716, beta4. No submission is performed by this builder.",
+            "constraint_provenance": {
+              "path": "artifacts/bmp90/preparation/bmp6_acvr1_v5_20261016/constraint_evidence.json",
+              "sha256": "7974924609fd95f8c9450b02b8b13bfbcff3648a6d4d7e494b7b08e09a53a29a"
+            }
+          },
+          "evidence_ids": [
+            "BMP6_ACVR1_N60_LOOP_CA_APPROACH_20261016"
+          ],
+          "successful_tau_values": [],
+          "evidence_runs": [
+            {
+              "job_id": "58185219",
+              "run_id": "20261016T183040527942Z_BMP6_ACVR1_ACVR2B_bmp6_joint_n60_loop_v5_0d5ca6a4",
+              "slot": "bmp6_acvr1_v5_tau01_r1",
+              "working_output": "/data/homezvol2/ynkim4/ml-simplefold-bmp90-paid-wave14-20261016/artifacts/transfer-stage/runs/58185219",
+              "canonical_output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58185219",
+              "evaluation_job_id": "58185231",
+              "tau": 0.1,
+              "seed": 78101,
+              "brownian_seed": 79101,
+              "resampling_seed": 80101,
+              "beta": 4.0,
+              "gpu": "A30",
+              "status": "submitted_not_evaluated",
+              "runtime_revision": "2d642b4f8cd50311d248ffabafb5e79a47b1cdd1",
+              "scoring_sha256": "75c2b215b3f8a05532e4091c678abf9656ab31f5ebf1944266033af327a6ac86",
+              "fasta_sha256": "2c0a4ef599163ba9fac732636c5132ae2598d912809dff3a1ceb4b894d0228fc",
+              "paired_baseline": true,
+              "independent_population_id": "BMP6_ACVR1_ACVR2B_bmp6_joint_n60_loop_v5_bmp6_acvr1_v5_tau01_r1",
+              "reference_scope": "Exact 9N4K receptor-trap reference recovery over 552 observed residues of the full 716-residue protein-only input, with all four C/D/E/F interfaces covered. Engineered trap and glycosylation qualifications remain; this is not native signaling or independent validation.",
+              "prepared_specification": {
+                "path": "artifacts/bmp90/operations/paid_wave14/arms/bmp6_acvr1_v5/tau01_r1.registry.json",
+                "sha256": "7f6859e5529816698ae0701e406313980320077220565b7d6c274df9b2b3dd2c"
+              },
+              "submission_receipt": {
+                "path": "artifacts/bmp90/operations/paid_wave13_records_20261016/submission_receipt.json",
+                "sha256": "277341ea9256e124c0966b14366bef9365841c2ebfb4963a4fc351aadb94dc95"
+              },
+              "scheduler_provenance": "Actual IDs supplied by parent after submission; recorder does not query Slurm or infer running/completed state."
+            },
+            {
+              "job_id": "58185220",
+              "run_id": "20261016T183126456787Z_BMP6_ACVR1_ACVR2B_bmp6_joint_n60_loop_v5_fae0791d",
+              "slot": "bmp6_acvr1_v5_tau03_r2",
+              "working_output": "/data/homezvol2/ynkim4/ml-simplefold-bmp90-paid-wave14-20261016/artifacts/transfer-stage/runs/58185220",
+              "canonical_output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58185220",
+              "evaluation_job_id": "58185232",
+              "tau": 0.3,
+              "seed": 78102,
+              "brownian_seed": 79102,
+              "resampling_seed": 80102,
+              "beta": 4.0,
+              "gpu": "A30",
+              "status": "submitted_not_evaluated",
+              "runtime_revision": "2d642b4f8cd50311d248ffabafb5e79a47b1cdd1",
+              "scoring_sha256": "75c2b215b3f8a05532e4091c678abf9656ab31f5ebf1944266033af327a6ac86",
+              "fasta_sha256": "2c0a4ef599163ba9fac732636c5132ae2598d912809dff3a1ceb4b894d0228fc",
+              "paired_baseline": true,
+              "independent_population_id": "BMP6_ACVR1_ACVR2B_bmp6_joint_n60_loop_v5_bmp6_acvr1_v5_tau03_r2",
+              "reference_scope": "Exact 9N4K receptor-trap reference recovery over 552 observed residues of the full 716-residue protein-only input, with all four C/D/E/F interfaces covered. Engineered trap and glycosylation qualifications remain; this is not native signaling or independent validation.",
+              "prepared_specification": {
+                "path": "artifacts/bmp90/operations/paid_wave14/arms/bmp6_acvr1_v5/tau03_r2.registry.json",
+                "sha256": "c8977f89d8c15c9153aa0925d4ad672defcff8bc615ffcfeca3f9917b4b73229"
+              },
+              "submission_receipt": {
+                "path": "artifacts/bmp90/operations/paid_wave13_records_20261016/submission_receipt.json",
+                "sha256": "277341ea9256e124c0966b14366bef9365841c2ebfb4963a4fc351aadb94dc95"
+              },
+              "scheduler_provenance": "Actual IDs supplied by parent after submission; recorder does not query Slurm or infer running/completed state."
+            },
+            {
+              "job_id": "58185221",
+              "run_id": "20261016T183159295431Z_BMP6_ACVR1_ACVR2B_bmp6_joint_n60_loop_v5_5c70d87f",
+              "slot": "bmp6_acvr1_v5_tau08_r3",
+              "working_output": "/data/homezvol2/ynkim4/ml-simplefold-bmp90-paid-wave14-20261016/artifacts/transfer-stage/runs/58185221",
+              "canonical_output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58185221",
+              "evaluation_job_id": "58185233",
+              "tau": 0.8,
+              "seed": 78103,
+              "brownian_seed": 79103,
+              "resampling_seed": 80103,
+              "beta": 4.0,
+              "gpu": "A30",
+              "status": "submitted_not_evaluated",
+              "runtime_revision": "2d642b4f8cd50311d248ffabafb5e79a47b1cdd1",
+              "scoring_sha256": "75c2b215b3f8a05532e4091c678abf9656ab31f5ebf1944266033af327a6ac86",
+              "fasta_sha256": "2c0a4ef599163ba9fac732636c5132ae2598d912809dff3a1ceb4b894d0228fc",
+              "paired_baseline": true,
+              "independent_population_id": "BMP6_ACVR1_ACVR2B_bmp6_joint_n60_loop_v5_bmp6_acvr1_v5_tau08_r3",
+              "reference_scope": "Exact 9N4K receptor-trap reference recovery over 552 observed residues of the full 716-residue protein-only input, with all four C/D/E/F interfaces covered. Engineered trap and glycosylation qualifications remain; this is not native signaling or independent validation.",
+              "prepared_specification": {
+                "path": "artifacts/bmp90/operations/paid_wave14/arms/bmp6_acvr1_v5/tau08_r3.registry.json",
+                "sha256": "9338518c77bfa60a082fc201c62a69ad3fa0b3c506eedebcdbd503a0b2d619d9"
+              },
+              "submission_receipt": {
+                "path": "artifacts/bmp90/operations/paid_wave13_records_20261016/submission_receipt.json",
+                "sha256": "277341ea9256e124c0966b14366bef9365841c2ebfb4963a4fc351aadb94dc95"
+              },
+              "scheduler_provenance": "Actual IDs supplied by parent after submission; recorder does not query Slurm or infer running/completed state."
+            }
+          ],
+          "sampling_settings": {
+            "beta": 4,
+            "tau": [
+              0.1,
+              0.3,
+              0.8
+            ],
+            "particles": 10,
+            "steps": 500,
+            "checkpoint_times": [
+              0.1,
+              0.3,
+              0.6,
+              0.75,
+              0.9
+            ],
+            "model_batch_size": 2,
+            "full_construct": true,
+            "full_input_residues": 716,
+            "planned_gpu": "A30",
+            "paired_fresh_baseline": true,
+            "sampling_jobs_cap": 3,
+            "requested_gpu_hours_cap": 9
+          },
+          "preflight": {
+            "scientific_summary": {
+              "path": "artifacts/bmp90/preparation/bmp6_acvr1_v5_20261016/scientific_summary.json",
+              "sha256": "0f78c7e513b13a615990216d84d664f873d27f718509a60a48d2055db6b35707"
+            },
+            "validation": {
+              "path": "artifacts/bmp90/preparation/bmp6_acvr1_v5_20261016/validation.json",
+              "sha256": "a402ed46fbbb4f4900493ac8f3ae8c9125d4273b7e21828ebbb1920ac7add849"
+            },
+            "cpu_fixture_manifest": {
+              "path": "artifacts/bmp90/preparation/bmp6_acvr1_v5_20261016/cpu_gate_manifest.json",
+              "sha256": "f5cdb47060900a1c24272e411bab195744529da378e75bf7f6a41c21c25d3935"
+            },
+            "constraint_evidence": {
+              "path": "artifacts/bmp90/preparation/bmp6_acvr1_v5_20261016/constraint_evidence.json",
+              "sha256": "7974924609fd95f8c9450b02b8b13bfbcff3648a6d4d7e494b7b08e09a53a29a"
+            },
+            "local_actual_score_gate": {
+              "path": "artifacts/bmp90/operations/paid_wave14/local_score_gate.json",
+              "sha256": "2c32108743629321435d132496de226b6a283f628b6cf6954540e306fd7813bc"
+            },
+            "local_launch_validation": {
+              "path": "artifacts/bmp90/operations/paid_wave14/local_validation.json",
+              "sha256": "d26f6dacb78ad2ee2ca1038c88bac58d21b9b10aca4143979121bd79c35d201a"
+            },
+            "local_registry_metadata_regression": {
+              "path": "artifacts/bmp90/operations/paid_wave14/local_registry_preflight.json",
+              "sha256": "5c5d85869090a047c7659bfafdec472fe091ab77a1723cd110ebe9830ce05fcd"
+            },
+            "validation_summary": {
+              "checks_passed": 226,
+              "fixture_count": 28,
+              "gate_comparisons": 22,
+              "all8_symmetries": true,
+              "rigid_invariance": true,
+              "strict_rejections": 6,
+              "missing_endpoint_caps_affected_copy": true,
+              "exact_typeII_same_assignment": true,
+              "original_physical_guards_exact": true,
+              "source_optimum": true,
+              "source_shape_at_same_pose_improves": true,
+              "one_copy_repairs_improve": true,
+              "parameter_sweep": false,
+              "metadata_only_after_validation": true
+            },
+            "unresolved_ranking_tradeoff": {
+              "status": "unresolved_preflight_local_vs_global_ranking_tradeoff",
+              "refined_v3_v5_reward": 0.8513492038887491,
+              "refined_v1_v5_reward": 0.6275411287606973,
+              "interpretation": "The objective favors refined v3 despite its worse historical overall DockQ. This is a known ranking limitation, not a validation success or a biological conclusion. Preserve the prior overall preferred candidate.",
+              "source": {
+                "path": "artifacts/bmp90/preparation/bmp6_acvr1_v5_20261016/scientific_summary.json",
+                "sha256": "0f78c7e513b13a615990216d84d664f873d27f718509a60a48d2055db6b35707"
+              }
+            },
+            "actual_cpu_registration_job_id": "58185156",
+            "actual_cpu_registration_state": "COMPLETED",
+            "actual_cpu_provenance": {
+              "path": "artifacts/bmp90/operations/paid_wave13_records_20261016/submission_receipt.json",
+              "sha256": "277341ea9256e124c0966b14366bef9365841c2ebfb4963a4fc351aadb94dc95"
+            },
+            "preparation_history": [
+              {
+                "campaign_id": "bmp90-paid-wave13-20261016",
+                "cpu_job_id": "58185123",
+                "scheduler_state": "FAILED",
+                "exit_code": "1:0",
+                "elapsed": "00:00:46",
+                "gpu_submissions": 0,
+                "source": {
+                  "path": "artifacts/bmp90/operations/paid_wave13_records_20261016/wave13_preflight_failure.json",
+                  "sha256": "e2c769eec8a075e701d1a875576be19df1d3f7b052536c938b2bce436f216144"
+                },
+                "passed_science_reference_gate": {
+                  "path": "artifacts/bmp90/operations/paid_wave13_records_20261016/failed_wave13_runtime_state/arms/bmp6_acvr1_v5/reference_selfcheck/receipt.json",
+                  "sha256": "87b6e8ee2625d092feb388857a2b57cfa3ae40b18d26baba5b270af3f779639b"
+                },
+                "checkpoint_sha256": "88d4c7a240bf3815cb35342b4ddc1128ac243a2ea0256eb8a4df1209125868b5",
+                "scientific_spec_unchanged": true,
+                "classification": "operational_registry_metadata_failure_no_sampling",
+                "cause": "Four intra-receptor rows had residue_geometry kind but type_I interface metadata, incorrectly triggering ligand-crossing validation.",
+                "corrective_action": "New frozen wave14 package classifies intra-receptor rows as both kind=residue_geometry and interface=geometry; original interface_group retains type-I copy ownership. Preserve wave13 failed manifest and claims.",
+                "qualification": "No sampled hypothesis failed and no biological conclusion follows. The exact scientific objective, seeds and runtime are retained."
+              }
+            ]
+          },
+          "expected_improvement": "Best v4 repeats the successful v1-like global placement with ~4A receptor-fitted N60 displacement and failed N60-S446 approach. Previously gentle N60/surrounding global factors did not enforce local repair. Limit each type-I copy directly instead of reusing the failed v2 whole-assembly fold penalty.",
+          "falsification": "Failure to improve the best overall candidate across taus, type-II or placement deterioration, residual N60 deficit, or worse physical defects argues against promotion.",
+          "evidence_allocation": {
+            "scoring_withheld_contact_count": 113,
+            "cumulative_parent_ledger": {
+              "path": "artifacts/bmp90/preparation/bmp6_acvr1_v4_20261014/bmp6_joint_n60_surround_v4.heldout.json",
+              "sha256": "75e2331bd0a39e53f4a710e91438f590a842635ede916eb1ea7b2973dbb2c800"
+            },
+            "additional_inspected_endpoints": [
+              "ACVR1 C53",
+              "ACVR1 N60",
+              "ACVR1 T83",
+              "ACVR1 I103 rejected",
+              "BMP6 S446"
+            ],
+            "newly_removed_surviving_contacts": 0,
+            "explanation": "New C53 has no surviving source contact in the prior ledger; other inspected endpoints were already consumed. Endpoint masks explicitly include all inspected positions across identical copies."
+          },
+          "evaluation_limits": [
+            "The CA approach is weaker evidence than an atom/angle/amide contact specification and cannot establish a hydrogen bond or proper sidechain geometry.",
+            "Refined v3 scores0.851 vs refined v1 0.628 despite lower historical overall DockQ: unresolved local/global ranking tradeoff. This failed ordering is not counted as a validation success.",
+            "Best actual v1/raw v4 remain above source-fold wrong translation by only0.030/0.018. Several correlated v1 descendants (0.523\u20130.623) still fall below that wrong translation0.593; this is not uniform ordering or calibrated accuracy.",
+            "Original CA guards do not guarantee all-atom packing; the per-copy minimum can hide improvements in a nonlimiting span and gives no chirality/peptide-angle guarantee.",
+            "Source-fold repair counterfactuals restore observed receptor shape at sampled rigid pose and are diagnostic constructs, not accepted physically relaxed predictions.",
+            "Full716 sampled inputs are preserved; experimental reference has only552 observed residues and omits tether/glycans. Engineered/glycosylated9N4K recovery is not native affinity or signaling validation.",
+            "All selected models, failed recipes, new inspected endpoints and deterministic fixtures are tuning evidence. Residual113 contacts are scoring-withheld same-reference checks, not independent validation."
+          ],
+          "selection_rule": "Evaluate the best overall candidate across three taus with per-copy C/D/E/F DockQ, N60 local geometry and physical packing. Reward alone cannot promote a recipe; raw-vs-raw and relaxed-vs-raw remain separate.",
+          "prepared_at": "2026-10-16T18:34:41.441099+00:00",
+          "campaign_receipt": {
+            "path": "artifacts/bmp90/operations/paid_wave13_records_20261016/submission_receipt.json",
+            "sha256": "277341ea9256e124c0966b14366bef9365841c2ebfb4963a4fc351aadb94dc95"
+          }
         }
       ],
       "current_iteration_parent": {
@@ -40022,7 +41336,7 @@
       }
     }
   },
-  "updated_at": "2026-10-15T01:37:03.372015+00:00",
+  "updated_at": "2026-10-16T18:34:41.441099+00:00",
   "interface_evidence_registry": "configs/bmp90/interface_evidence_registry.json",
   "failure_registry": "configs/bmp90/failure_registry.json",
   "construct_policy": {
@@ -40031,28 +41345,83 @@
     "recipe_transfer": "Transfer supported scoring modules separately from construct choices. The preferred historical trimmed recipe does not imply trimming is necessary."
   },
   "latest_authorized_campaign": {
-    "id": "bmp90-paid-wave11-20261014",
-    "runtime_revision": "4dbba9dd4f369037ba431095535a230ddc904754",
+    "id": "bmp90-paid-wave14-20261016",
+    "runtime_revision": "2d642b4f8cd50311d248ffabafb5e79a47b1cdd1",
+    "runtime_root": "/data/homezvol2/ynkim4/ml-simplefold-bmp90-paid-wave14-20261016",
     "jobs": [
-      "58142372",
-      "58142373",
-      "58142374"
+      "58185219",
+      "58185220",
+      "58185221"
     ],
-    "gpu_hours_cap": 4.5,
+    "evaluation_jobs": [
+      "58185231",
+      "58185232",
+      "58185233"
+    ],
+    "gpu_hours_cap": 9,
     "submissions": {
-      "path": "artifacts/bmp90/operations/paid_wave11/submission_receipt.json",
-      "sha256": "31036f8699ef73135be7da08094ba415939bf52a94127c99a24dffe838bd85cc"
+      "path": "artifacts/bmp90/operations/paid_wave13_records_20261016/submission_receipt.json",
+      "sha256": "277341ea9256e124c0966b14366bef9365841c2ebfb4963a4fc351aadb94dc95"
     },
-    "qualification": "Completed beta24 sweep evaluated; prior overall leader retained. No automatic retries.",
-    "evaluation": [
+    "status": "submitted_not_evaluated",
+    "cpu_registration_job_id": "58185156",
+    "checkpoint_sha256": "88d4c7a240bf3815cb35342b4ddc1128ac243a2ea0256eb8a4df1209125868b5",
+    "preserved_A100_jobs": [
+      "58139988",
+      "58139989",
+      "58139990"
+    ],
+    "preparation_history": [
       {
-        "path": "artifacts/bmp90/evaluation/paid_wave11_status_20261014T2319/collection.json",
-        "sha256": "509f96bfe778b5190ded2f6068f685560c57aef935c24ac6acf95378a79dfea6"
-      },
-      {
-        "path": "artifacts/bmp90/evaluation/bmp7_alk2_beta24_20261014/scientific_summary.json",
-        "sha256": "8ccaa7322faed4a7ce324290fc3da8ee03b7938bafa09d9c70ea4a9cff43cabe"
+        "campaign_id": "bmp90-paid-wave13-20261016",
+        "cpu_job_id": "58185123",
+        "scheduler_state": "FAILED",
+        "exit_code": "1:0",
+        "elapsed": "00:00:46",
+        "gpu_submissions": 0,
+        "source": {
+          "path": "artifacts/bmp90/operations/paid_wave13_records_20261016/wave13_preflight_failure.json",
+          "sha256": "e2c769eec8a075e701d1a875576be19df1d3f7b052536c938b2bce436f216144"
+        },
+        "passed_science_reference_gate": {
+          "path": "artifacts/bmp90/operations/paid_wave13_records_20261016/failed_wave13_runtime_state/arms/bmp6_acvr1_v5/reference_selfcheck/receipt.json",
+          "sha256": "87b6e8ee2625d092feb388857a2b57cfa3ae40b18d26baba5b270af3f779639b"
+        },
+        "checkpoint_sha256": "88d4c7a240bf3815cb35342b4ddc1128ac243a2ea0256eb8a4df1209125868b5",
+        "scientific_spec_unchanged": true,
+        "classification": "operational_registry_metadata_failure_no_sampling",
+        "cause": "Four intra-receptor rows had residue_geometry kind but type_I interface metadata, incorrectly triggering ligand-crossing validation.",
+        "corrective_action": "New frozen wave14 package classifies intra-receptor rows as both kind=residue_geometry and interface=geometry; original interface_group retains type-I copy ownership. Preserve wave13 failed manifest and claims.",
+        "qualification": "No sampled hypothesis failed and no biological conclusion follows. The exact scientific objective, seeds and runtime are retained."
       }
-    ]
-  }
+    ],
+    "qualification": "Three fresh paired A30 jobs at beta4/tau0.1,0.3,0.8. No automatic retries; all outcomes pending. Existing preferred choices unchanged."
+  },
+  "authorized_campaign_history": [
+    {
+      "id": "bmp90-paid-wave11-20261014",
+      "runtime_revision": "4dbba9dd4f369037ba431095535a230ddc904754",
+      "jobs": [
+        "58142372",
+        "58142373",
+        "58142374"
+      ],
+      "gpu_hours_cap": 4.5,
+      "submissions": {
+        "path": "artifacts/bmp90/operations/paid_wave11/submission_receipt.json",
+        "sha256": "31036f8699ef73135be7da08094ba415939bf52a94127c99a24dffe838bd85cc"
+      },
+      "qualification": "Completed beta24 sweep evaluated; prior overall leader retained. No automatic retries.",
+      "evaluation": [
+        {
+          "path": "artifacts/bmp90/evaluation/paid_wave11_status_20261014T2319/collection.json",
+          "sha256": "509f96bfe778b5190ded2f6068f685560c57aef935c24ac6acf95378a79dfea6"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/bmp7_alk2_beta24_20261014/scientific_summary.json",
+          "sha256": "8ccaa7322faed4a7ce324290fc3da8ee03b7938bafa09d9c70ea4a9cff43cabe"
+        }
+      ]
+    }
+  ]
 }

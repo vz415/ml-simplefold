@@ -1293,7 +1293,87 @@
       "attempted_changes": [
         "Retained v1 global/type-II objective and N60 module; added gentle K78-Y490 andV91-P448 local factors."
       ],
-      "followups": [],
+      "followups": [
+        {
+          "followup_id": "BMP6_N60_LOOP_V5_SUBMITTED_20261016",
+          "recipe_id": "bmp6_joint_n60_loop_v5",
+          "status": "submitted_outcome_pending",
+          "recorded_at": "2026-10-16T18:34:41.441099+00:00",
+          "campaign_id": "bmp90-paid-wave14-20261016",
+          "sampling_job_ids": [
+            "58185219",
+            "58185220",
+            "58185221"
+          ],
+          "evaluation_job_ids": [
+            "58185231",
+            "58185232",
+            "58185233"
+          ],
+          "source": {
+            "path": "artifacts/bmp90/preparation/bmp6_acvr1_v5_20261016/bmp6_joint_n60_loop_v5.json",
+            "sha256": "75c2b215b3f8a05532e4091c678abf9656ab31f5ebf1944266033af327a6ac86"
+          },
+          "scientific_summary": {
+            "path": "artifacts/bmp90/preparation/bmp6_acvr1_v5_20261016/scientific_summary.json",
+            "sha256": "0f78c7e513b13a615990216d84d664f873d27f718509a60a48d2055db6b35707"
+          },
+          "submission_receipt": {
+            "path": "artifacts/bmp90/operations/paid_wave13_records_20261016/submission_receipt.json",
+            "sha256": "277341ea9256e124c0966b14366bef9365841c2ebfb4963a4fc351aadb94dc95"
+          },
+          "change": {
+            "type_I_copy": "min(mean(original3 docking Gaussians), Gaussian(N60-C53), Gaussian(N60-T83), Gaussian(N60-S446))",
+            "internal_span_sigma_A": 3.0,
+            "approach_sigma_A": 4.0,
+            "global_aggregation": "Exact parent v1 half mean + half weakest interface",
+            "shape_pair_scope": "Explicit intra_receptor; both endpoints must belong to that group receptor.",
+            "coherent_assignment": "All pair distances, old integrity and type-II share one globally maximizing bijection across A/B,C/D,E/F.",
+            "full_input_residues": 716,
+            "proposed_beta": 4.0,
+            "taus": [
+              0.1,
+              0.3,
+              0.8
+            ]
+          },
+          "unresolved_preflight_ranking_tradeoff": {
+            "status": "unresolved_preflight_local_vs_global_ranking_tradeoff",
+            "refined_v3_v5_reward": 0.8513492038887491,
+            "refined_v1_v5_reward": 0.6275411287606973,
+            "interpretation": "The objective favors refined v3 despite its worse historical overall DockQ. This is a known ranking limitation, not a validation success or a biological conclusion. Preserve the prior overall preferred candidate.",
+            "source": {
+              "path": "artifacts/bmp90/preparation/bmp6_acvr1_v5_20261016/scientific_summary.json",
+              "sha256": "0f78c7e513b13a615990216d84d664f873d27f718509a60a48d2055db6b35707"
+            }
+          },
+          "preparation_history": [
+            {
+              "campaign_id": "bmp90-paid-wave13-20261016",
+              "cpu_job_id": "58185123",
+              "scheduler_state": "FAILED",
+              "exit_code": "1:0",
+              "elapsed": "00:00:46",
+              "gpu_submissions": 0,
+              "source": {
+                "path": "artifacts/bmp90/operations/paid_wave13_records_20261016/wave13_preflight_failure.json",
+                "sha256": "e2c769eec8a075e701d1a875576be19df1d3f7b052536c938b2bce436f216144"
+              },
+              "passed_science_reference_gate": {
+                "path": "artifacts/bmp90/operations/paid_wave13_records_20261016/failed_wave13_runtime_state/arms/bmp6_acvr1_v5/reference_selfcheck/receipt.json",
+                "sha256": "87b6e8ee2625d092feb388857a2b57cfa3ae40b18d26baba5b270af3f779639b"
+              },
+              "checkpoint_sha256": "88d4c7a240bf3815cb35342b4ddc1128ac243a2ea0256eb8a4df1209125868b5",
+              "scientific_spec_unchanged": true,
+              "classification": "operational_registry_metadata_failure_no_sampling",
+              "cause": "Four intra-receptor rows had residue_geometry kind but type_I interface metadata, incorrectly triggering ligand-crossing validation.",
+              "corrective_action": "New frozen wave14 package classifies intra-receptor rows as both kind=residue_geometry and interface=geometry; original interface_group retains type-I copy ownership. Preserve wave13 failed manifest and claims.",
+              "qualification": "No sampled hypothesis failed and no biological conclusion follows. The exact scientific objective, seeds and runtime are retained."
+            }
+          ],
+          "outcome": "Pending actual sampled structures and evaluation. No promotion or fixed biological claim from deterministic preflight."
+        }
+      ],
       "proposed_next_change": {
         "decision": "Stop adding already-satisfied surrounding contacts. Test a localized type-I-copy limiting N60 loop+interface requirement after deterministic preflight.",
         "retain": "V1 successful globalplacement,typeII,full716construct,clash andbackbone safeguards; keep earlier physical cleanup separate.",
@@ -1307,5 +1387,5 @@
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-15T01:37:03.372015+00:00"
+  "updated_at": "2026-10-16T18:34:41.441099+00:00"
 }

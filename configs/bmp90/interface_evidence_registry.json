@@ -1248,6 +1248,60 @@
       "finding": "9N4K shows ACVR1 K78 contacting opposite-protomer BMP6 Y490 and V91 contacting same-protomer P448. Selected v3/relaxedv3 contact losses motivate CB/backbone approach proxies around retained N60. F71/L449 was inspected but already matched and was not added.",
       "evidence_allocation": "guidance_and_posthoc_selection_not_independent_validation",
       "limits": "Engineered glycosylated trap represented protein-only; contact geometry is not terminal sidechain energy or proof of affinity. Generic chemistry motivates plausible geometry but supplies no extra target-specific observation.113 scoring-withheld same-reference contacts remain descriptive."
+    },
+    {
+      "evidence_id": "BMP6_ACVR1_N60_LOOP_CA_APPROACH_20261016",
+      "target_id": "BMP6_ACVR1_ACVR2B",
+      "evidence_class": "target_specific_observed_CA_geometry_and_posthoc_loop_failure",
+      "source": {
+        "path": "artifacts/bmp90/preparation/bmp6_acvr1_v5_20261016/constraint_evidence.json",
+        "sha256": "7974924609fd95f8c9450b02b8b13bfbcff3648a6d4d7e494b7b08e09a53a29a"
+      },
+      "specification": {
+        "path": "artifacts/bmp90/preparation/bmp6_acvr1_v5_20261016/bmp6_joint_n60_loop_v5.json",
+        "sha256": "75c2b215b3f8a05532e4091c678abf9656ab31f5ebf1944266033af327a6ac86"
+      },
+      "reference_provenance": {
+        "path": "artifacts/bmp90/preparation/bmp6/9N4K_deposited_native_reference.provenance.json",
+        "sha256": "4ead280d5ccf439aa0f5b2f4651af950abfefae788b1d741ceae54b0b970313b"
+      },
+      "finding": "For each ACVR1 copy, 9N4K-measured N60-C53 and N60-T83 internal CA spans and N60-BMP6 S446 cross-interface CA approach become separate required subgroups alongside the original three-anchor docking mean. All terms share one coherent assignment; original type-II, integrity, safeguards and full716 sequence are retained.",
+      "definition": {
+        "type_I_copy": "min(mean(original3 docking Gaussians), Gaussian(N60-C53), Gaussian(N60-T83), Gaussian(N60-S446))",
+        "internal_span_sigma_A": 3.0,
+        "approach_sigma_A": 4.0,
+        "global_aggregation": "Exact parent v1 half mean + half weakest interface",
+        "shape_pair_scope": "Explicit intra_receptor; both endpoints must belong to that group receptor.",
+        "coherent_assignment": "All pair distances, old integrity and type-II share one globally maximizing bijection across A/B,C/D,E/F.",
+        "full_input_residues": 716,
+        "proposed_beta": 4.0,
+        "taus": [
+          0.1,
+          0.3,
+          0.8
+        ]
+      },
+      "evidence_allocation": "guidance_and_posthoc_selection_not_independent_validation",
+      "limits": [
+        "The CA approach is weaker evidence than an atom/angle/amide contact specification and cannot establish a hydrogen bond or proper sidechain geometry.",
+        "Refined v3 scores0.851 vs refined v1 0.628 despite lower historical overall DockQ: unresolved local/global ranking tradeoff. This failed ordering is not counted as a validation success.",
+        "Best actual v1/raw v4 remain above source-fold wrong translation by only0.030/0.018. Several correlated v1 descendants (0.523\u20130.623) still fall below that wrong translation0.593; this is not uniform ordering or calibrated accuracy.",
+        "Original CA guards do not guarantee all-atom packing; the per-copy minimum can hide improvements in a nonlimiting span and gives no chirality/peptide-angle guarantee.",
+        "Source-fold repair counterfactuals restore observed receptor shape at sampled rigid pose and are diagnostic constructs, not accepted physically relaxed predictions.",
+        "Full716 sampled inputs are preserved; experimental reference has only552 observed residues and omits tether/glycans. Engineered/glycosylated9N4K recovery is not native affinity or signaling validation.",
+        "All selected models, failed recipes, new inspected endpoints and deterministic fixtures are tuning evidence. Residual113 contacts are scoring-withheld same-reference checks, not independent validation."
+      ],
+      "unresolved_ranking_tradeoff": {
+        "status": "unresolved_preflight_local_vs_global_ranking_tradeoff",
+        "refined_v3_v5_reward": 0.8513492038887491,
+        "refined_v1_v5_reward": 0.6275411287606973,
+        "interpretation": "The objective favors refined v3 despite its worse historical overall DockQ. This is a known ranking limitation, not a validation success or a biological conclusion. Preserve the prior overall preferred candidate.",
+        "source": {
+          "path": "artifacts/bmp90/preparation/bmp6_acvr1_v5_20261016/scientific_summary.json",
+          "sha256": "0f78c7e513b13a615990216d84d664f873d27f718509a60a48d2055db6b35707"
+        }
+      },
+      "qualification": "Internal CA spans are receptor-shape evidence, and the CA approach is a geometry proxy. Neither establishes an atom-specific hydrogen bond, affinity, native signaling or a transferable generic chemistry rule."
     }
   ],
   "generic_inspection_priors": {
@@ -1459,5 +1513,5 @@
       "evidence_label_scope": "Vocabulary for future observations; no existing evidence_class is reclassified by this import. R8 instructs evaluation of energetic evidence; it does not establish a hotspot for any target."
     }
   },
-  "updated_at": "2026-10-14T21:59:36.305301+00:00"
+  "updated_at": "2026-10-16T18:34:41.441099+00:00"
 }
