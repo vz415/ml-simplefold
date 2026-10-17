@@ -30,7 +30,12 @@
   proactive informative experiments within the five-target milestone. Overlap
   validated transfer hypotheses instead of waiting for every predecessor tau
   result. Keep one submission owner, bounded batch receipts, and periodic
-  findings/resource-efficiency recaps; stop after BMP4 for review.
+  findings/resource-efficiency recaps. Following the BMP4 review, Vincent
+  approved the 2026-10-16 expansion to BMP4–BMPR1A–ACVR2A,
+  GDF5–BMPR1A–ACVR2A, and GDF5–BMPR1A–ACVR2B: nine paired sampling jobs
+  across tau 0.1/0.3/0.8, followed by restrained relaxation of the three
+  selected BMP7 candidates. Submit sampling first, then cleanup; keep the
+  type-I GDF5 mutant-reference qualification explicit.
 - Store remote model weights, trained checkpoints, synthetic datasets, and
   canonical run outputs under `/pub/ynkim4/ml-simplefold/artifacts`. Launchers default
   `SIMPLEFOLD_ARTIFACT_DIR` to that path; `SIMPLEFOLD_CACHE_DIR` defaults to the

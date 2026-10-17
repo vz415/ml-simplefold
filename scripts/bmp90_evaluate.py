@@ -153,11 +153,17 @@ def reference_comparison_scope(mapping, partial, species_excluded):
     kind = mapping.get("reference_kind", "").lower()
     homologous = (mapping.get("reference_surrogate_kind") == "homologous_ligand"
                   or "homologous" in kind)
+    mutant = mapping.get("reference_surrogate_kind") == "mutant_ligand"
     surrogate = homologous or bool(species_excluded) or "surrogate" in kind
     if homologous:
         return True, "homologous_surrogate_agreement", (
             "Agreement with conserved, observed portions of a homologous-ligand surrogate; "
             "this is not exact target-ligand accuracy. Uncovered/inferred receptor sites remain unassessed.")
+    if mutant:
+        return True, "mutant_surrogate_agreement", (
+            "Agreement with observed, sequence-compatible portions of a mutant-ligand surrogate; "
+            "this is not wild-type target accuracy. Mutation-associated conformational effects and "
+            "uncovered interfaces remain unassessed.")
     if surrogate:
         return True, "species_surrogate_agreement", (
             "Agreement with conserved, observed portions of the species surrogate; "

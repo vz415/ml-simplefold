@@ -111,6 +111,13 @@ class GeometryEvaluationTests(unittest.TestCase):
         self.assertEqual(ev.reference_comparison_scope({},True,[])[1],'partial_reference_recovery')
         self.assertEqual(ev.reference_comparison_scope({},False,[])[1],'reference_recovery')
 
+    def test_mutant_surrogate_is_not_species_or_wild_type_accuracy(self):
+        value = ev.reference_comparison_scope(
+            {'reference_surrogate_kind': 'mutant_ligand', 'reference_kind': 'GDF5 R57A surrogate'}, True, [])
+        self.assertEqual(value[:2], (True, 'mutant_surrogate_agreement'))
+        self.assertIn('not wild-type target accuracy', value[2])
+        self.assertIn('conformational effects', value[2])
+
 
 if __name__=='__main__':
     unittest.main()

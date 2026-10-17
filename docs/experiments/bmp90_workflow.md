@@ -22,7 +22,7 @@ at submission. The first paid expansion is three tau jobs each for
 BMP6–BMPR1A–ACVR2B and BMP7–BMPR1A–ACVR2A. Additional informative jobs are
 authorized; no further routine permission question is needed within this scope.
 
-## Current five-target milestone
+## Initial five-target milestone and approved expansion
 
 1. BMP6–ACVR1–ACVR2B: recover the interfaces covered by 9N4K.
 2. BMP6–BMPR1A–ACVR2B: transfer the type-II module and evaluate against 9MIR.
@@ -31,8 +31,23 @@ authorized; no further routine permission question is needed within this scope.
 4. BMP7–ACVR1–ACVR2A: preserve a useful type-II module and test ACVR1 transfer.
 5. BMP4–BMPR1A–ACVR2B: combine mapped successes with BMP4-specific evidence.
 
-Stop after BMP4 to review recovery, failures, transferable rules, and unresolved
-alternatives with Vincent. Do not expand to the remaining inventory automatically.
+The initial milestone stopped after BMP4 for review with Vincent. On 2026-10-16,
+after reviewing those results, Vincent approved the next bounded expansion:
+BMP4–BMPR1A–ACVR2A, GDF5–BMPR1A–ACVR2A, and GDF5–BMPR1A–ACVR2B, in that
+order. Each starts with a joint transferred recipe at tau 0.1, 0.3, and 0.8,
+with fresh paired baseline/FK populations (nine sampling jobs). Favor A30s and
+retain one sweep on A100. Submit this batch first, then launch restrained
+Rosetta cleanup of BMP7–ACVR1–ACVR2A job58185779 FK sample2 and
+BMP7–BMPR1A–ACVR2A job58139988 FK sample6 and baseline sample9. Keep the
+baseline candidate labeled separately. This does not expand automatically to
+the remaining inventory.
+
+For GDF5, the BMPR1A structure 3QB4 contains the R57A ligand mutation. Sample
+the wild-type sequence, exclude the mutated residue from reference comparisons,
+and avoid imposing its locally incompatible contact geometry. Label comparison
+as mutant-surrogate agreement; masking the residue does not establish that the
+surrounding wild-type conformation matches the mutant. Transferred type-II
+interfaces remain hypotheses, with separate physical and evidence assessments.
 The sequence starts with new targets; reproducing old BMP2 successes is not a
 prerequisite. Reference qualifications below still apply, including receptor-trap
 constructs and the species mapping needed for 1LX5.
