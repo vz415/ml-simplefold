@@ -1833,6 +1833,82 @@
       },
       "archival_scope": "Verified analysis/metadata/PDB subset only. Parent handles complete archival publication, local verification and temporary-cache cleanup separately.",
       "measurement_scope": "Report-defined severe interchain C/N/O radius overlap >1 Angstrom; separate from evaluator heavy-atom overlap >0.4 Angstrom. Core/outside classification uses source coordinate coverage, not proven disorder; no calibrated physical acceptance."
+    },
+    {
+      "evidence_id": "BMP4_BMPR1A_ACVR2A_TRANSFER_WAVE17_20261016",
+      "target_id": "BMP4_BMPR1A_ACVR2A",
+      "recorded_at": "2026-10-17T02:54:45.837651+00:00",
+      "evidence_class": "qualified_experimental_template_and_transferred_interface_hypothesis",
+      "status": "mapped_and_submitted_not_target_validated",
+      "source": {
+        "path": "artifacts/bmp90/preparation/bmp4_alk3_actr2a_20261016/2GOO_conserved_homolog_partial_reference.provenance.json",
+        "sha256": "5a9822b0059c81f4aa18102be3db06f2000136cf7783f42e8c87fb10112ff8fe"
+      },
+      "mapping": {
+        "path": "artifacts/bmp90/preparation/bmp4_alk3_actr2a_20261016/BMP4_BMPR1A_ACVR2A.execution.mapping.json",
+        "sha256": "29d41d7a962e8cbcd178c4bfb0c188b6c3fce2701e3bd1e8e50332f8135b087a"
+      },
+      "scoring_gate": {
+        "path": "artifacts/bmp90/preparation/bmp4_alk3_actr2a_20261016/cpu_gate_manifest.json",
+        "sha256": "5b57941cf6f5e1fc941370f80156e12a4ef3829094299d756ee252f97c45e97a"
+      },
+      "scope": "BMP2 homologous-ligand and mouse-to-human ACVR2A surrogate2GOO,361observed of722input residues; covered C/E only, D/F uncovered. Source symmetry and construct qualifications apply. No native BMP4 accuracy or whole-assembly DockQ. Tuning/transfer evidence is not independent validation.",
+      "generic_chemistry": "CA geometry and backbone integrity are engineering safeguards, not observed target binding evidence; full atom/SS geometry requires separate evaluation.",
+      "target_specific_qualification": "Retains useful BMP4\u2013BMPR1A coarse/fine terms; maps 2GOO ACVR2A aromatic-cluster sites with BMP2/BMP4 and mouse/human masks. Symmetry reconstruction is diagnostic; only observed C/E copies enter reference comparison."
+    },
+    {
+      "evidence_id": "GDF5_BMPR1A_ACVR2A_TRANSFER_WAVE17_20261016",
+      "target_id": "GDF5_BMPR1A_ACVR2A",
+      "recorded_at": "2026-10-17T02:54:45.837651+00:00",
+      "evidence_class": "qualified_experimental_template_and_transferred_interface_hypothesis",
+      "status": "mapped_and_submitted_not_target_validated",
+      "source": {
+        "path": "artifacts/bmp90/preparation/gdf5_alk3_20261016/3QB4_WT_identity_conserved_typeI_reference.provenance.json",
+        "sha256": "77cc4ce35b4ee658f9d4407e4449df4c79e5c2a97d59ad156f65517780bf2e56"
+      },
+      "mapping": {
+        "path": "artifacts/bmp90/preparation/gdf5_alk3_20261016/acvr2a/GDF5_BMPR1A_ACVR2A.execution.mapping.json",
+        "sha256": "b5cce3d5016133e7033082d13f6ef0d461e52fd6202dfebabedc65cc2e4f8b61"
+      },
+      "scoring_gate": {
+        "path": "artifacts/bmp90/preparation/gdf5_alk3_20261016/acvr2a/cpu_gate_manifest.json",
+        "sha256": "8d168eea3597f047d77a8758e537f7b61e2fac27ff093923ec2f41e2a51e3803"
+      },
+      "scope": "3QB4 GDF5 R57A mutant type-I surrogate,386observed residues; C/D covered, E/F type-II uncovered. WT Arg57 whole residue is masked in comparison, and incompatible local latch contacts excluded from guidance. Full WT input sequences retained. No wild-type accuracy, type-II native DockQ or whole-assembly DockQ; tuning/transfer evidence is not independent validation.",
+      "generic_chemistry": "CA geometry and backbone integrity are engineering safeguards, not observed target binding evidence; full atom/SS geometry requires separate evaluation.",
+      "mutation_compatibility": {
+        "path": "artifacts/bmp90/preparation/gdf5_alk3_20261016/mutation_compatibility.json",
+        "sha256": "7d238cddaa27dd08937e216c02865ed914ba77156d301b4befb8899888a0fa6c"
+      },
+      "target_specific_qualification": "3QB4 R57A improves BMPR1A binding relative to WT in the source assay. WT Arg57 requires local accommodation; mutation/prehelix and receptor-loop contact restraints omitted. This is not proof of WT nonbinding.",
+      "typeII_qualification": "ACVR2A/B geometry is transferred. Rigid diagnostic has Tyr106\u2013Trp60 side-chain overlap; broad CA restraints permit side-chain rearrangement. No native type-II reference or accepted physical assembly."
+    },
+    {
+      "evidence_id": "GDF5_BMPR1A_ACVR2B_TRANSFER_WAVE17_20261016",
+      "target_id": "GDF5_BMPR1A_ACVR2B",
+      "recorded_at": "2026-10-17T02:54:45.837651+00:00",
+      "evidence_class": "qualified_experimental_template_and_transferred_interface_hypothesis",
+      "status": "mapped_and_submitted_not_target_validated",
+      "source": {
+        "path": "artifacts/bmp90/preparation/gdf5_alk3_20261016/3QB4_WT_identity_conserved_typeI_reference.provenance.json",
+        "sha256": "77cc4ce35b4ee658f9d4407e4449df4c79e5c2a97d59ad156f65517780bf2e56"
+      },
+      "mapping": {
+        "path": "artifacts/bmp90/preparation/gdf5_alk3_20261016/acvr2b/GDF5_BMPR1A_ACVR2B.execution.mapping.json",
+        "sha256": "f6cb4fdf7bc9d86269459a49c13c07f949282065099c7424f2faa8f739576373"
+      },
+      "scoring_gate": {
+        "path": "artifacts/bmp90/preparation/gdf5_alk3_20261016/acvr2b/cpu_gate_manifest.json",
+        "sha256": "6134e25d3a23eaac6bb024299751fb2962527c97391f74798967f53797ee05b4"
+      },
+      "scope": "3QB4 GDF5 R57A mutant type-I surrogate,386observed residues; C/D covered, E/F type-II uncovered. WT Arg57 whole residue is masked in comparison, and incompatible local latch contacts excluded from guidance. Full WT input sequences retained. No wild-type accuracy, type-II native DockQ or whole-assembly DockQ; tuning/transfer evidence is not independent validation.",
+      "generic_chemistry": "CA geometry and backbone integrity are engineering safeguards, not observed target binding evidence; full atom/SS geometry requires separate evaluation.",
+      "mutation_compatibility": {
+        "path": "artifacts/bmp90/preparation/gdf5_alk3_20261016/mutation_compatibility.json",
+        "sha256": "7d238cddaa27dd08937e216c02865ed914ba77156d301b4befb8899888a0fa6c"
+      },
+      "target_specific_qualification": "3QB4 R57A improves BMPR1A binding relative to WT in the source assay. WT Arg57 requires local accommodation; mutation/prehelix and receptor-loop contact restraints omitted. This is not proof of WT nonbinding.",
+      "typeII_qualification": "ACVR2A/B geometry is transferred. Rigid diagnostic has Tyr106\u2013Trp60 side-chain overlap; broad CA restraints permit side-chain rearrangement. No native type-II reference or accepted physical assembly."
     }
   ],
   "generic_inspection_priors": {
@@ -2044,5 +2120,5 @@
       "evidence_label_scope": "Vocabulary for future observations; no existing evidence_class is reclassified by this import. R8 instructs evaluation of energetic evidence; it does not establish a hotspot for any target."
     }
   },
-  "updated_at": "2026-10-17T00:00:40.684769+00:00"
+  "updated_at": "2026-10-17T02:54:45.837651+00:00"
 }
