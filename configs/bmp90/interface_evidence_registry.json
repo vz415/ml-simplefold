@@ -1909,6 +1909,87 @@
       },
       "target_specific_qualification": "3QB4 R57A improves BMPR1A binding relative to WT in the source assay. WT Arg57 requires local accommodation; mutation/prehelix and receptor-loop contact restraints omitted. This is not proof of WT nonbinding.",
       "typeII_qualification": "ACVR2A/B geometry is transferred. Rigid diagnostic has Tyr106\u2013Trp60 side-chain overlap; broad CA restraints permit side-chain rearrangement. No native type-II reference or accepted physical assembly."
+    },
+    {
+      "evidence_id": "BMP4_BMPR1A_ACVR2A_WAVE17_OBSERVATIONS_20261017",
+      "target_id": "BMP4_BMPR1A_ACVR2A",
+      "recorded_at": "2026-10-17T22:03:30.760136+00:00",
+      "evidence_class": "post_sampling_model_observation_and_transferred_hypothesis",
+      "status": "tuning_evidence_not_experimental_or_independent_validation",
+      "source": {
+        "path": "artifacts/bmp90/evaluation/wave17_status_20261017T2150/bmp4_analysis/scientific_summary.json",
+        "sha256": "f2699611444bc28197caa940a74574219ab0feb5780ff3e399a4ada55b576245"
+      },
+      "observations": [
+        "Logical F ACVR2A pose differs from the transferred hypothesis by about21.05A despite a well-preserved receptor fold; W79-S382 CA anchor is13.41A versus5.87A target. Mean per-copy contact support conceals the missing anchor.",
+        "Selected FK3 retains9 severe interchain CNO overlaps,5in the source core. High-reward FK4 retains25 and has worse surrogate agreement.",
+        "All10tau0.8 FK descendants share ancestor7; enrichment is not ten independent confirmations."
+      ],
+      "scope": "BMP2 homologous-ligand and mouse-to-human ACVR2A surrogate2GOO,361observed of722input residues; covered C/E only, D/F uncovered. Source symmetry and construct qualifications apply. No native BMP4 accuracy or whole-assembly DockQ. Tuning/transfer evidence is not independent validation.",
+      "proposed_use": "Preserve recovered type-I and type-II contacts; validate a separate per-copy aromatic/W79 requirement so a missing contact cannot be averaged away.",
+      "sequence_nomenclature_correction": null
+    },
+    {
+      "evidence_id": "GDF5_BMPR1A_ACVR2A_WAVE17_OBSERVATIONS_20261017",
+      "target_id": "GDF5_BMPR1A_ACVR2A",
+      "recorded_at": "2026-10-17T22:03:30.760136+00:00",
+      "evidence_class": "post_sampling_model_observation_and_transferred_hypothesis",
+      "status": "tuning_evidence_not_experimental_or_independent_validation",
+      "source": {
+        "path": "artifacts/bmp90/evaluation/wave17_status_20261017T2150/gdf5a_analysis/scientific_summary.json",
+        "sha256": "b9e651a8b37ed4336441053d7f88ea27b8777f4baf42f4e4caed14cbfdf00407"
+      },
+      "observations": [
+        "Overall candidate retains7 severe interchain CNO overlaps and distorted intended disulfide distances1.670-2.480A. A marginal Tyr106-ACVR2A contact overlaps by1.015A.",
+        "The maximum covered-DockQ FK0 candidate has21 severe CNO overlaps and compressed WT Arg57-His43 contacts; it is not the overall preferred structure.",
+        "All10tau0.1 FK descendants share ancestor8. C/D DockQ uses3QB4 R57A mutant; E/F restraints remain transferred hypotheses."
+      ],
+      "scope": "3QB4 GDF5 R57A mutant type-I surrogate,386observed residues; C/D covered, E/F type-II uncovered. WT Arg57 whole residue is masked in comparison, and incompatible local latch contacts excluded from guidance. Full WT input sequences retained. No wild-type accuracy, type-II native DockQ or whole-assembly DockQ; tuning/transfer evidence is not independent validation.",
+      "proposed_use": "Prioritize restrained full-construct cleanup of the selected candidate and FK7 alternative; retain fixed interface comparisons and verify WT Arg57, Tyr106/Gln108 and disulfide geometry.",
+      "sequence_nomenclature_correction": "GDF5 input108/canonical489 is Gln/Q, not Glu/E. Earlier preparation prose was mislabeled; pinned sequence/specification bytes are correct."
+    },
+    {
+      "evidence_id": "GDF5_BMPR1A_ACVR2B_WAVE17_OBSERVATIONS_20261017",
+      "target_id": "GDF5_BMPR1A_ACVR2B",
+      "recorded_at": "2026-10-17T22:03:30.760136+00:00",
+      "evidence_class": "post_sampling_model_observation_and_transferred_hypothesis",
+      "status": "tuning_evidence_not_experimental_or_independent_validation",
+      "source": {
+        "path": "artifacts/bmp90/evaluation/wave17_status_20261017T2150/gdf5b_analysis/scientific_summary.json",
+        "sha256": "f1d8e209f8115e5d06f824eb906dd3f851ea123017a15469157e4e052f47bf7a"
+      },
+      "observations": [
+        "Logical F W78-GDF5S475 CA anchor is16.605A versus6.402A transferred target; its near-zero fine feature is hidden by interface averaging.",
+        "Selected FK0 retains15 severe CNO overlaps,1core and14outside the source mask; WT Arg57-His43 still has a tight2.346A nitrogen contact despite no>1A overlap.",
+        "Intended disulfide distances1.688-2.443A are distorted. Tau0.8 recovered candidates have61-142 severe overlaps; their higher recovered count does not make them preferable."
+      ],
+      "scope": "3QB4 GDF5 R57A mutant type-I surrogate,386observed residues; C/D covered, E/F type-II uncovered. WT Arg57 whole residue is masked in comparison, and incompatible local latch contacts excluded from guidance. Full WT input sequences retained. No wild-type accuracy, type-II native DockQ or whole-assembly DockQ; tuning/transfer evidence is not independent validation.",
+      "proposed_use": "Preserve distal BMPR1A constraints and validate a bounded per-copy required W78 anchor. Do not impose the mutant-source local Arg57 latch on the wild-type sequence.",
+      "sequence_nomenclature_correction": "GDF5 input108/canonical489 is Gln/Q, not Glu/E. Earlier preparation prose was mislabeled; pinned sequence/specification bytes are correct."
+    },
+    {
+      "evidence_id": "BMP7_ACVR1_ACVR2A_ROSETTA_CLEANUP_20261017",
+      "target_id": "BMP7_ACVR1_ACVR2A",
+      "recorded_at": "2026-10-17T22:03:30.760136+00:00",
+      "evidence_class": "postprocessing_model_observation",
+      "source": {
+        "path": "artifacts/bmp90/evaluation/wave17_status_20261017T2150/relaxation_summary.json",
+        "sha256": "57e55042dfbfabd36d3a426d7920fe622c1713c38bb8b38fa515125ba7bde71d"
+      },
+      "scope": "Partial1LX5 E/F conserved species-surrogate only; C/D reference-free. Original candidate restrained; no independent evidence introduced.",
+      "observation": "Zero measured severe interchain CNO overlaps;27intended disulfides around2.02-2.10A;core CA drift~0.10A. TypeII surrogate agreement retained. Minimizer iteration-limit warnings remain; no native typeI or whole-assembly acceptance."
+    },
+    {
+      "evidence_id": "BMP7_BMPR1A_ACVR2A_ROSETTA_CLEANUP_20261017",
+      "target_id": "BMP7_BMPR1A_ACVR2A",
+      "recorded_at": "2026-10-17T22:03:30.760136+00:00",
+      "evidence_class": "postprocessing_model_observation",
+      "source": {
+        "path": "artifacts/bmp90/evaluation/wave17_status_20261017T2150/relaxation_summary.json",
+        "sha256": "57e55042dfbfabd36d3a426d7920fe622c1713c38bb8b38fa515125ba7bde71d"
+      },
+      "scope": "Partial1LX5 E/F conserved species-surrogate only; C/D reference-free. Original candidate restrained; no independent evidence introduced.",
+      "observation": "Zero measured severe interchain CNO overlaps;27intended disulfides around2.02-2.10A;core CA drift~0.10A. TypeII surrogate agreement retained. Minimizer iteration-limit warnings remain; no native typeI or whole-assembly acceptance."
     }
   ],
   "generic_inspection_priors": {
@@ -2120,5 +2201,5 @@
       "evidence_label_scope": "Vocabulary for future observations; no existing evidence_class is reclassified by this import. R8 instructs evaluation of energetic evidence; it does not establish a hotspot for any target."
     }
   },
-  "updated_at": "2026-10-17T02:54:45.837651+00:00"
+  "updated_at": "2026-10-17T22:03:30.760136+00:00"
 }

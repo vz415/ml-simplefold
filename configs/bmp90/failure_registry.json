@@ -1654,7 +1654,20 @@
         "BMP7_ACVR1_STERIC_V4_RECOVERY_AND_Q89_GAP_20261016"
       ],
       "attempted_changes": [],
-      "followups": [],
+      "followups": [
+        {
+          "recorded_at": "2026-10-17T22:03:30.760136+00:00",
+          "action": "restrained_full_construct_Rosetta_cleanup_completed",
+          "job_ids": [
+            "58197169"
+          ],
+          "source": {
+            "path": "artifacts/bmp90/evaluation/wave17_status_20261017T2150/relaxation_summary.json",
+            "sha256": "57e55042dfbfabd36d3a426d7920fe622c1713c38bb8b38fa515125ba7bde71d"
+          },
+          "outcome": "Zero measured severe interchain CNO overlaps;27intended disulfides around2.02-2.10A;core CA drift~0.10A. TypeII surrogate agreement retained. Minimizer iteration-limit warnings remain; no native typeI or whole-assembly acceptance."
+        }
+      ],
       "status": "provisional_improvement_with_remaining_face_and_tail_defects",
       "proposed_next_change": {
         "status": "proposal_only_not_implemented_preflighted_or_submitted",
@@ -1732,7 +1745,21 @@
         "BMP7_BMPR1A_STERIC_V2_LOW_CLASH_CANDIDATES_20261016"
       ],
       "attempted_changes": [],
-      "followups": [],
+      "followups": [
+        {
+          "recorded_at": "2026-10-17T22:03:30.760136+00:00",
+          "action": "restrained_full_construct_Rosetta_cleanup_completed",
+          "job_ids": [
+            "58197170",
+            "58197171"
+          ],
+          "source": {
+            "path": "artifacts/bmp90/evaluation/wave17_status_20261017T2150/relaxation_summary.json",
+            "sha256": "57e55042dfbfabd36d3a426d7920fe622c1713c38bb8b38fa515125ba7bde71d"
+          },
+          "outcome": "Zero measured severe interchain CNO overlaps;27intended disulfides around2.02-2.10A;core CA drift~0.10A. TypeII surrogate agreement retained. Minimizer iteration-limit warnings remain; no native typeI or whole-assembly acceptance."
+        }
+      ],
       "status": "provisional_improvement_with_remaining_atomic_geometry",
       "proposed_next_change": {
         "status": "proposal_only_not_implemented_preflighted_or_submitted",
@@ -1747,8 +1774,113 @@
       "transfer_limits": "These observations do not establish nonbinding or invalidate a receptor-ligand pairing. Proposed constraints/cleanup are unsubmitted and do not change existing scientific history.",
       "reference_scope": "Only392conserved1LX5 residues of full768 support E/F species-surrogate agreement; C/D experimental and whole-assembly DockQ remain null. Source-core576residue mask includes transferred9MIR geometry; glycans omitted.",
       "evidence_allocation": "Generic CNO sterics and explicit covalent exclusions are separate from transferred contact hypotheses. Inspected same-reference contacts and selected models are tuning evidence, not independent validation."
+    },
+    {
+      "failure_id": "BMP4_BMPR1A_ACVR2A_WAVE17_RESIDUAL_DEFECTS_20261017",
+      "complex_id": "BMP4_BMPR1A_ACVR2A",
+      "recipe_id": "bmp4_alk3_actr2a_coarse_fine_v1",
+      "recorded_at": "2026-10-17T22:03:30.760136+00:00",
+      "failure_category": "residual_structural_defects_in_provisionally_improved_candidates",
+      "run_ids": [
+        "58197148",
+        "58197149",
+        "58197150"
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/evaluation/wave17_status_20261017T2150/bmp4_analysis/scientific_summary.json",
+          "sha256": "f2699611444bc28197caa940a74574219ab0feb5780ff3e399a4ada55b576245"
+        }
+      ],
+      "observed_symptoms": [
+        "Logical F ACVR2A pose differs from the transferred hypothesis by about21.05A despite a well-preserved receptor fold; W79-S382 CA anchor is13.41A versus5.87A target. Mean per-copy contact support conceals the missing anchor.",
+        "Selected FK3 retains9 severe interchain CNO overlaps,5in the source core. High-reward FK4 retains25 and has worse surrogate agreement.",
+        "All10tau0.8 FK descendants share ancestor7; enrichment is not ten independent confirmations."
+      ],
+      "suspected_causes": [],
+      "status": "provisional_improvement_with_remaining_defects",
+      "proposed_next_change": {
+        "status": "proposal_only_not_implemented_or_submitted",
+        "change": "Preserve recovered type-I and type-II contacts; validate a separate per-copy aromatic/W79 requirement so a missing contact cannot be averaged away.",
+        "source": {
+          "path": "artifacts/bmp90/evaluation/wave17_status_20261017T2150/bmp4_analysis/scientific_summary.json",
+          "sha256": "f2699611444bc28197caa940a74574219ab0feb5780ff3e399a4ada55b576245"
+        },
+        "new_job_ids": []
+      },
+      "transfer_limits": "BMP2 homologous-ligand and mouse-to-human ACVR2A surrogate2GOO,361observed of722input residues; covered C/E only, D/F uncovered. Source symmetry and construct qualifications apply. No native BMP4 accuracy or whole-assembly DockQ. Tuning/transfer evidence is not independent validation."
+    },
+    {
+      "failure_id": "GDF5_BMPR1A_ACVR2A_WAVE17_RESIDUAL_DEFECTS_20261017",
+      "complex_id": "GDF5_BMPR1A_ACVR2A",
+      "recipe_id": "gdf5_alk3_acvr2a_joint_v1",
+      "recorded_at": "2026-10-17T22:03:30.760136+00:00",
+      "failure_category": "residual_structural_defects_in_provisionally_improved_candidates",
+      "run_ids": [
+        "58197152",
+        "58197153",
+        "58197154"
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/evaluation/wave17_status_20261017T2150/gdf5a_analysis/scientific_summary.json",
+          "sha256": "b9e651a8b37ed4336441053d7f88ea27b8777f4baf42f4e4caed14cbfdf00407"
+        }
+      ],
+      "observed_symptoms": [
+        "Overall candidate retains7 severe interchain CNO overlaps and distorted intended disulfide distances1.670-2.480A. A marginal Tyr106-ACVR2A contact overlaps by1.015A.",
+        "The maximum covered-DockQ FK0 candidate has21 severe CNO overlaps and compressed WT Arg57-His43 contacts; it is not the overall preferred structure.",
+        "All10tau0.1 FK descendants share ancestor8. C/D DockQ uses3QB4 R57A mutant; E/F restraints remain transferred hypotheses."
+      ],
+      "suspected_causes": [],
+      "status": "provisional_improvement_with_remaining_defects",
+      "proposed_next_change": {
+        "status": "proposal_only_not_implemented_or_submitted",
+        "change": "Prioritize restrained full-construct cleanup of the selected candidate and FK7 alternative; retain fixed interface comparisons and verify WT Arg57, Tyr106/Gln108 and disulfide geometry.",
+        "source": {
+          "path": "artifacts/bmp90/evaluation/wave17_status_20261017T2150/gdf5a_analysis/scientific_summary.json",
+          "sha256": "b9e651a8b37ed4336441053d7f88ea27b8777f4baf42f4e4caed14cbfdf00407"
+        },
+        "new_job_ids": []
+      },
+      "transfer_limits": "3QB4 GDF5 R57A mutant type-I surrogate,386observed residues; C/D covered, E/F type-II uncovered. WT Arg57 whole residue is masked in comparison, and incompatible local latch contacts excluded from guidance. Full WT input sequences retained. No wild-type accuracy, type-II native DockQ or whole-assembly DockQ; tuning/transfer evidence is not independent validation."
+    },
+    {
+      "failure_id": "GDF5_BMPR1A_ACVR2B_WAVE17_RESIDUAL_DEFECTS_20261017",
+      "complex_id": "GDF5_BMPR1A_ACVR2B",
+      "recipe_id": "gdf5_alk3_acvr2b_joint_v1",
+      "recorded_at": "2026-10-17T22:03:30.760136+00:00",
+      "failure_category": "residual_structural_defects_in_provisionally_improved_candidates",
+      "run_ids": [
+        "58197155",
+        "58197156",
+        "58197157"
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/evaluation/wave17_status_20261017T2150/gdf5b_analysis/scientific_summary.json",
+          "sha256": "f1d8e209f8115e5d06f824eb906dd3f851ea123017a15469157e4e052f47bf7a"
+        }
+      ],
+      "observed_symptoms": [
+        "Logical F W78-GDF5S475 CA anchor is16.605A versus6.402A transferred target; its near-zero fine feature is hidden by interface averaging.",
+        "Selected FK0 retains15 severe CNO overlaps,1core and14outside the source mask; WT Arg57-His43 still has a tight2.346A nitrogen contact despite no>1A overlap.",
+        "Intended disulfide distances1.688-2.443A are distorted. Tau0.8 recovered candidates have61-142 severe overlaps; their higher recovered count does not make them preferable."
+      ],
+      "suspected_causes": [],
+      "status": "provisional_improvement_with_remaining_defects",
+      "proposed_next_change": {
+        "status": "proposal_only_not_implemented_or_submitted",
+        "change": "Preserve distal BMPR1A constraints and validate a bounded per-copy required W78 anchor. Do not impose the mutant-source local Arg57 latch on the wild-type sequence.",
+        "source": {
+          "path": "artifacts/bmp90/evaluation/wave17_status_20261017T2150/gdf5b_analysis/scientific_summary.json",
+          "sha256": "f1d8e209f8115e5d06f824eb906dd3f851ea123017a15469157e4e052f47bf7a"
+        },
+        "new_job_ids": []
+      },
+      "transfer_limits": "3QB4 GDF5 R57A mutant type-I surrogate,386observed residues; C/D covered, E/F type-II uncovered. WT Arg57 whole residue is masked in comparison, and incompatible local latch contacts excluded from guidance. Full WT input sequences retained. No wild-type accuracy, type-II native DockQ or whole-assembly DockQ; tuning/transfer evidence is not independent validation."
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-17T00:00:40.684769+00:00"
+  "updated_at": "2026-10-17T22:03:30.760136+00:00"
 }
