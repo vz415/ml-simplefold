@@ -962,7 +962,7 @@
       "reference_structure": "9N4K",
       "best_recipe_id": "bmp6_joint_v1",
       "previous_best_recipe_ids": [],
-      "ranking_status": "Provisional overall preference remains v1 tau0.1 and its refined derivative58139638. The completed v4 sweep did not materially improve the best overall basin or repair N60; retain v3 as a local-loop alternative.",
+      "ranking_status": "V5 evaluated across all three taus; retain bmp6_joint_v1 as provisional overall leader and refined58139638 as preferred cleaned derivative. V5 tau0.3sample8 is a type-II/balanced-DockQ alternative, with weaker type-I, N60 and packing.",
       "ranking_history": [
         {
           "recorded_at": "2026-10-14T17:57:48.100993+00:00",
@@ -1016,6 +1016,46 @@
               "sha256": "9412dd483b77295d0b882102d1a7ac16d3eea46e31751536582c8169bdf039ee"
             }
           ]
+        },
+        {
+          "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+          "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+          "previous_best_recipe_id": "bmp6_joint_v1",
+          "assessed_recipe_id": "bmp6_joint_n60_loop_v5",
+          "prior_recipe_ranks_and_statuses": [
+            {
+              "recipe_id": "bmp6_joint_v1",
+              "rank": 1,
+              "status": "provisional_preferred_overall_with_residual_defects"
+            },
+            {
+              "recipe_id": "bmp6_joint_v2",
+              "rank": null,
+              "status": "evaluated_provisional_unranked"
+            },
+            {
+              "recipe_id": "bmp6_joint_n60_local_v3",
+              "rank": 2,
+              "status": "evaluated_local_geometry_alternative_not_overall_preferred"
+            },
+            {
+              "recipe_id": "bmp6_joint_n60_surround_v4",
+              "rank": null,
+              "status": "completed_evaluated_not_preferred"
+            },
+            {
+              "recipe_id": "bmp6_joint_n60_loop_v5",
+              "rank": null,
+              "status": "submitted_not_evaluated"
+            }
+          ],
+          "source": {
+            "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v5_20261016_completed/scientific_summary.json",
+            "sha256": "5016e0df22fc839f5b388dd8c97169ecbe5334310086b4aaa2d39455a2fa6941"
+          },
+          "decision": "retain_previous_best",
+          "best_recipe_id": "bmp6_joint_v1",
+          "reason": "Best overall across tau, not uniform per-tau improvement. V5 improves some local/contact or typeII metrics but no new candidate improves the overall typeI+typeII+packing tradeoff."
         }
       ],
       "recipes": [
@@ -8841,7 +8881,7 @@
         {
           "recipe_id": "bmp6_joint_n60_loop_v5",
           "rank": null,
-          "status": "submitted_not_evaluated",
+          "status": "completed_evaluated_not_preferred",
           "comparison_group": "deposited_native_no_tags_716",
           "parent_relationships": [
             {
@@ -9930,7 +9970,7 @@
               "resampling_seed": 80101,
               "beta": 4.0,
               "gpu": "A30",
-              "status": "submitted_not_evaluated",
+              "status": "completed_evaluated",
               "runtime_revision": "2d642b4f8cd50311d248ffabafb5e79a47b1cdd1",
               "scoring_sha256": "75c2b215b3f8a05532e4091c678abf9656ab31f5ebf1944266033af327a6ac86",
               "fasta_sha256": "2c0a4ef599163ba9fac732636c5132ae2598d912809dff3a1ceb4b894d0228fc",
@@ -9945,7 +9985,76 @@
                 "path": "artifacts/bmp90/operations/paid_wave13_records_20261016/submission_receipt.json",
                 "sha256": "277341ea9256e124c0966b14366bef9365841c2ebfb4963a4fc351aadb94dc95"
               },
-              "scheduler_provenance": "Actual IDs supplied by parent after submission; recorder does not query Slurm or infer running/completed state."
+              "scheduler_provenance": "Actual IDs supplied by parent after submission; recorder does not query Slurm or infer running/completed state.",
+              "status_before_completion": "submitted_not_evaluated",
+              "completed_evaluation": {
+                "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+                "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+                "sampling": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 5818
+                },
+                "evaluation": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 48
+                },
+                "sources": {
+                  "receipt": {
+                    "path": "artifacts/remote-runs/58185219/evaluation/paid_analysis_58185231/receipt.json",
+                    "sha256": "60020b92074ceed9b87ecc3b94d2e1b4e84ee351649686295da030937a78fad0"
+                  },
+                  "baseline": {
+                    "path": "artifacts/remote-runs/58185219/evaluation/paid_analysis_58185231/baseline.json",
+                    "sha256": "d30efb84a2178ea02238ca3a2db647ab1b3029f010878f462eaa77a2871b308d"
+                  },
+                  "fk": {
+                    "path": "artifacts/remote-runs/58185219/evaluation/paid_analysis_58185231/fk.json",
+                    "sha256": "a93d7eb5d6ff78109c56979c37fc4468de3ab718f0183c14826f156ee81f30dc"
+                  },
+                  "guidance_diagnostics": {
+                    "path": "artifacts/remote-runs/58185219/evaluation/paid_analysis_58185231/guidance_diagnostics.json",
+                    "sha256": "4c42f38a142eaddfc758c93da4c3cfc72b710d2e9f10f45d2a200fb2219911a8"
+                  }
+                },
+                "metrics": {
+                  "all4_DockQ_ge0p6_descriptive_counts": {
+                    "baseline": 0,
+                    "FK": 0
+                  },
+                  "resampling_count": 2,
+                  "ancestry_counts": {
+                    "3": 3,
+                    "6": 4,
+                    "2": 1,
+                    "0": 2
+                  },
+                  "same_index_baseline_FK_byte_identity_count": 0,
+                  "best_by_weakest_DockQ": {
+                    "sample": 4,
+                    "model": {
+                      "path": "artifacts/remote-runs/58185219/fk/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_4.pdb",
+                      "sha256": "41930de1afb7b2282e774ae57b98775a4d8af18e32586e33745934c86232ac76"
+                    },
+                    "DockQ": {
+                      "C": 0.5773754291397034,
+                      "D": 0.6336192442505361,
+                      "E": 0.8945130836560408,
+                      "F": 0.8642211870808817
+                    },
+                    "N60_receptor_fitted_CA_error_A": {
+                      "C": 4.228338916572415,
+                      "D": 4.06562565335383
+                    },
+                    "severe_interchain_CNO_overlaps_gt1A": 19,
+                    "CNO_by_scope": {
+                      "tail_involving": 14,
+                      "core_core": 5
+                    }
+                  }
+                }
+              }
             },
             {
               "job_id": "58185220",
@@ -9960,7 +10069,7 @@
               "resampling_seed": 80102,
               "beta": 4.0,
               "gpu": "A30",
-              "status": "submitted_not_evaluated",
+              "status": "completed_evaluated",
               "runtime_revision": "2d642b4f8cd50311d248ffabafb5e79a47b1cdd1",
               "scoring_sha256": "75c2b215b3f8a05532e4091c678abf9656ab31f5ebf1944266033af327a6ac86",
               "fasta_sha256": "2c0a4ef599163ba9fac732636c5132ae2598d912809dff3a1ceb4b894d0228fc",
@@ -9975,7 +10084,79 @@
                 "path": "artifacts/bmp90/operations/paid_wave13_records_20261016/submission_receipt.json",
                 "sha256": "277341ea9256e124c0966b14366bef9365841c2ebfb4963a4fc351aadb94dc95"
               },
-              "scheduler_provenance": "Actual IDs supplied by parent after submission; recorder does not query Slurm or infer running/completed state."
+              "scheduler_provenance": "Actual IDs supplied by parent after submission; recorder does not query Slurm or infer running/completed state.",
+              "status_before_completion": "submitted_not_evaluated",
+              "completed_evaluation": {
+                "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+                "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+                "sampling": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 5590
+                },
+                "evaluation": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 49
+                },
+                "sources": {
+                  "receipt": {
+                    "path": "artifacts/remote-runs/58185220/evaluation/paid_analysis_58185232/receipt.json",
+                    "sha256": "a6ef5eb6bf1428c3410491bccf3bb77694c4a95585655847ba59e68018049388"
+                  },
+                  "baseline": {
+                    "path": "artifacts/remote-runs/58185220/evaluation/paid_analysis_58185232/baseline.json",
+                    "sha256": "f189f2f1e3ce03570668a03302a147bfa235d2cf0ba61ac7d49315112f5461c8"
+                  },
+                  "fk": {
+                    "path": "artifacts/remote-runs/58185220/evaluation/paid_analysis_58185232/fk.json",
+                    "sha256": "5aa1515ca20432586666f3041f7514ccc113cf2dde1c2a7f81582bd0ae6067d2"
+                  },
+                  "guidance_diagnostics": {
+                    "path": "artifacts/remote-runs/58185220/evaluation/paid_analysis_58185232/guidance_diagnostics.json",
+                    "sha256": "98afc706b9a2bf19002ed95c84c49c9d8de7d2109beef92022a68d2ea66222cc"
+                  }
+                },
+                "metrics": {
+                  "all4_DockQ_ge0p6_descriptive_counts": {
+                    "baseline": 1,
+                    "FK": 2
+                  },
+                  "resampling_count": 1,
+                  "ancestry_counts": {
+                    "9": 1,
+                    "4": 1,
+                    "7": 1,
+                    "1": 3,
+                    "0": 1,
+                    "6": 1,
+                    "3": 2
+                  },
+                  "same_index_baseline_FK_byte_identity_count": 0,
+                  "best_by_weakest_DockQ": {
+                    "sample": 8,
+                    "model": {
+                      "path": "artifacts/remote-runs/58185220/fk/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_8.pdb",
+                      "sha256": "a44506b94f2584b726d397f1fc2c3e7ee9ddb3b5b6dd8f2f32161a4e743c2bb3"
+                    },
+                    "DockQ": {
+                      "C": 0.642127238728181,
+                      "D": 0.6422522903237381,
+                      "E": 0.8991530639396489,
+                      "F": 0.9033424027195341
+                    },
+                    "N60_receptor_fitted_CA_error_A": {
+                      "C": 4.429893874396396,
+                      "D": 4.544874421789914
+                    },
+                    "severe_interchain_CNO_overlaps_gt1A": 26,
+                    "CNO_by_scope": {
+                      "tail_involving": 18,
+                      "core_core": 8
+                    }
+                  }
+                }
+              }
             },
             {
               "job_id": "58185221",
@@ -9990,7 +10171,7 @@
               "resampling_seed": 80103,
               "beta": 4.0,
               "gpu": "A30",
-              "status": "submitted_not_evaluated",
+              "status": "completed_evaluated",
               "runtime_revision": "2d642b4f8cd50311d248ffabafb5e79a47b1cdd1",
               "scoring_sha256": "75c2b215b3f8a05532e4091c678abf9656ab31f5ebf1944266033af327a6ac86",
               "fasta_sha256": "2c0a4ef599163ba9fac732636c5132ae2598d912809dff3a1ceb4b894d0228fc",
@@ -10005,7 +10186,82 @@
                 "path": "artifacts/bmp90/operations/paid_wave13_records_20261016/submission_receipt.json",
                 "sha256": "277341ea9256e124c0966b14366bef9365841c2ebfb4963a4fc351aadb94dc95"
               },
-              "scheduler_provenance": "Actual IDs supplied by parent after submission; recorder does not query Slurm or infer running/completed state."
+              "scheduler_provenance": "Actual IDs supplied by parent after submission; recorder does not query Slurm or infer running/completed state.",
+              "status_before_completion": "submitted_not_evaluated",
+              "completed_evaluation": {
+                "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+                "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+                "sampling": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 5727
+                },
+                "evaluation": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 52
+                },
+                "sources": {
+                  "receipt": {
+                    "path": "artifacts/remote-runs/58185221/evaluation/paid_analysis_58185233/receipt.json",
+                    "sha256": "70f623c56cab388968929c9ae4439bcb5335bd83d3066c0221b06d101b66fd54"
+                  },
+                  "baseline": {
+                    "path": "artifacts/remote-runs/58185221/evaluation/paid_analysis_58185233/baseline.json",
+                    "sha256": "36681a6c912b000ef675c6dc3846d1303bdaba107869adb14982e72fe1072792"
+                  },
+                  "fk": {
+                    "path": "artifacts/remote-runs/58185221/evaluation/paid_analysis_58185233/fk.json",
+                    "sha256": "d4e79d35f46ac95315a0c857824dbbc82ea2512e671bf957704584d8ee1d6057"
+                  },
+                  "guidance_diagnostics": {
+                    "path": "artifacts/remote-runs/58185221/evaluation/paid_analysis_58185233/guidance_diagnostics.json",
+                    "sha256": "9f126b496a0b8c7996c7165dde44751021aefc3e00bfed5fcffb23f338f419dc"
+                  }
+                },
+                "metrics": {
+                  "all4_DockQ_ge0p6_descriptive_counts": {
+                    "baseline": 0,
+                    "FK": 0
+                  },
+                  "resampling_count": 0,
+                  "ancestry_counts": {
+                    "0": 1,
+                    "1": 1,
+                    "2": 1,
+                    "3": 1,
+                    "4": 1,
+                    "5": 1,
+                    "6": 1,
+                    "7": 1,
+                    "8": 1,
+                    "9": 1
+                  },
+                  "same_index_baseline_FK_byte_identity_count": 10,
+                  "best_by_weakest_DockQ": {
+                    "sample": 8,
+                    "model": {
+                      "path": "artifacts/remote-runs/58185221/fk/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_8.pdb",
+                      "sha256": "cbe064ca52272cdf592ef50aa7347fd80373d6711c093cfe1ec3aab99871f258"
+                    },
+                    "DockQ": {
+                      "C": 0.5368328317924936,
+                      "D": 0.5494342741004266,
+                      "E": 0.785144788296535,
+                      "F": 0.8410501027231557
+                    },
+                    "N60_receptor_fitted_CA_error_A": {
+                      "C": 4.994320513576467,
+                      "D": 4.742083379518497
+                    },
+                    "severe_interchain_CNO_overlaps_gt1A": 336,
+                    "CNO_by_scope": {
+                      "tail_involving": 300,
+                      "core_core": 36
+                    }
+                  }
+                }
+              }
             }
           ],
           "sampling_settings": {
@@ -10150,14 +10406,59 @@
           "campaign_receipt": {
             "path": "artifacts/bmp90/operations/paid_wave13_records_20261016/submission_receipt.json",
             "sha256": "277341ea9256e124c0966b14366bef9365841c2ebfb4963a4fc351aadb94dc95"
+          },
+          "status_before_completion": "submitted_not_evaluated",
+          "completed_sweep_evaluation": {
+            "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+            "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+            "report": {
+              "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v5_20261016_completed/scientific_summary.json",
+              "sha256": "5016e0df22fc839f5b388dd8c97169ecbe5334310086b4aaa2d39455a2fa6941"
+            },
+            "scheduler": {
+              "path": "artifacts/bmp90/evaluation/status_20261016T2350/scheduler.txt",
+              "sha256": "6d6b76264d49fe549c83d012e2fe1ee845e08164633cbf168199fb1502ff49c8"
+            },
+            "verified_evaluation_status": {
+              "path": "artifacts/bmp90/evaluation/status_20261016T2350/scientific_status.json",
+              "sha256": "7b3002ae0940be8b747300c854507cc4db48b2e296b2f35931cd1708a7ff89d6"
+            },
+            "evaluated_tau_values": [
+              0.1,
+              0.3,
+              0.8
+            ],
+            "reference_scope": "All4DockQ compare with engineered glycosylated9N4K protein-only reconstruction. Full716sequences retained; only552experimentalresidues observed. No native affinity/signaling or physical acceptance.",
+            "physical_acceptance": "unassessed_pending_calibration",
+            "archive_scope": "Scientific subset and model hashes verified; full archival retrieval is tracked separately and is not asserted complete here.",
+            "actual_sampling_GPU_hours": 4.759722222222222,
+            "decision": {
+              "promote": false,
+              "best_overall_retained_recipe": "bmp6_joint_v1",
+              "retained_raw_job": "58107636",
+              "retained_raw_sample": 9,
+              "preferred_cleaned_derivative_job": "58139638",
+              "new_metric_alternative": {
+                "job": "58185220",
+                "tau": 0.3,
+                "sample": 8,
+                "reason": "Best new balanced DockQ and higher typeII agreement than prior rawv1, but weaker typeI,N60 andpacking; retain alternative without promotion."
+              },
+              "basis": "Best overall across tau, not uniform per-tau improvement. V5 improves some local/contact or typeII metrics but no new candidate improves the overall typeI+typeII+packing tradeoff."
+            },
+            "scheduler_timestamp_timezone": "America/Los_Angeles (Slurm start/end in source receipt); elapsed_seconds are durations."
           }
         }
       ],
       "current_iteration_parent": {
         "recipe_id": "bmp6_joint_v1",
-        "recorded_at": "2026-10-14T15:17:51.985529+00:00",
-        "purpose": "Practical parent for this bounded revision; not calibrated full-assembly acceptance.",
-        "revision_recipe_id": "bmp6_joint_n60_local_v3"
+        "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+        "last_evaluated_revision": "bmp6_joint_n60_loop_v5",
+        "purpose": "Retained practical overall leader after v5 review; future N60/wrist proposal is unimplemented and does not promote v5.",
+        "source": {
+          "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v5_20261016_completed/scientific_summary.json",
+          "sha256": "5016e0df22fc839f5b388dd8c97169ecbe5334310086b4aaa2d39455a2fa6941"
+        }
       },
       "metric_specific_leaders": {
         "provisional_overall": {
@@ -10172,6 +10473,32 @@
           "tau": 0.8,
           "zero_based_sample": 1,
           "qualification": "N60 improved; severe whole-assembly clashes remain."
+        },
+        "v5_typeII_alternative_not_promoted": {
+          "recipe_id": "bmp6_joint_n60_loop_v5",
+          "job_id": "58185220",
+          "tau": 0.3,
+          "sample": 8,
+          "model": {
+            "path": "artifacts/remote-runs/58185220/fk/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_8.pdb",
+            "sha256": "a44506b94f2584b726d397f1fc2c3e7ee9ddb3b5b6dd8f2f32161a4e743c2bb3"
+          },
+          "DockQ": {
+            "C": 0.642127238728181,
+            "D": 0.6422522903237381,
+            "E": 0.8991530639396489,
+            "F": 0.9033424027195341
+          },
+          "N60_receptor_fitted_CA_error_A": {
+            "C": 4.429893874396396,
+            "D": 4.544874421789914
+          },
+          "severe_interchain_CNO_overlaps_gt1A": 26,
+          "CNO_by_scope": {
+            "tail_involving": 18,
+            "core_core": 8
+          },
+          "qualification": "Alternative only; overall v1 and refined58139638 remain preferred."
         }
       },
       "refinement_comparisons": [
@@ -10354,6 +10681,32 @@
           "D": 1.8687459113360672
         },
         "qualification": "Inferior overall DockQ and packing; final minimizer nonconvergence and a 1.765 Angstrom native ligand disulfide require further repair."
+      },
+      "iteration_parent_history": [
+        {
+          "superseded_at": "2026-10-17T00:02:47.519441+00:00",
+          "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+          "value": {
+            "recipe_id": "bmp6_joint_v1",
+            "recorded_at": "2026-10-14T15:17:51.985529+00:00",
+            "purpose": "Practical parent for this bounded revision; not calibrated full-assembly acceptance.",
+            "revision_recipe_id": "bmp6_joint_n60_local_v3"
+          }
+        }
+      ],
+      "proposed_next_step": {
+        "status": "PROPOSED_ONLY_NOT_IMPLEMENTED_OR_SUBMITTED",
+        "action": "Keep v5 loop spans/approach and all v1/typeII/full716 terms; require the9N4K K78–opposite-ligandY490 wrist distance-and-three-angle geometry inside EACH typeI copy as a limiting requirement, replacing the former weak global-floor treatment for that geometry.",
+        "qualification": "Source-defined per-copy K78/Y490 approach proxy; requires finite geometry validation. No recipe, job or acceptance claim created.",
+        "source": {
+          "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v5_20261016_completed/scientific_summary.json",
+          "sha256": "5016e0df22fc839f5b388dd8c97169ecbe5334310086b4aaa2d39455a2fa6941"
+        },
+        "details": {
+          "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v5_20261016_completed/next_constraint_proposal.json",
+          "sha256": "942b3e57af981cb60e90f35d180f659ae95888f011dabb1bca1761de72f188ae"
+        },
+        "jobs_submitted": false
       }
     },
     "BMP6_BMPR1A_ACVR2B": {
@@ -11400,10 +11753,53 @@
     },
     "BMP7_BMPR1A_ACVR2A": {
       "reference_structure": "1LX5 (partial mouse-receptor surrogate; no type-I coordinates)",
-      "best_recipe_id": null,
+      "best_recipe_id": "bmp7_alk3_steric_v2",
       "previous_best_recipe_ids": [],
-      "ranking_history": [],
-      "ranking_status": "Paid three-tau paired wave submitted; no empirical ranking until evaluation.",
+      "ranking_history": [
+        {
+          "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+          "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+          "previous_best_recipe_id": null,
+          "assessed_recipe_id": "bmp7_alk3_steric_v2",
+          "prior_recipe_ranks_and_statuses": [
+            {
+              "recipe_id": "bmp7_bmpr1a_acvr2a_joint_transfer_v1",
+              "rank": null,
+              "status": "inactive_transfer_hypothesis"
+            },
+            {
+              "recipe_id": "bmp7_alk3_joint_v1",
+              "rank": null,
+              "status": "submitted_unranked"
+            },
+            {
+              "recipe_id": "bmp7_alk3_D69_K331_low01_v1",
+              "rank": null,
+              "status": "submitted_unranked"
+            },
+            {
+              "recipe_id": "bmp7_alk3_steric_v2",
+              "rank": null,
+              "status": "submitted_pending_evaluation"
+            }
+          ],
+          "source": {
+            "path": "artifacts/bmp90/evaluation/bmp7_alk3_steric_v2_20261016_completed/scientific_summary.json",
+            "sha256": "e267c31934c379f8e3b346162b50c7190d8a4d23d0c173692f4fb4b09c83df80"
+          },
+          "decision": "provisional_promotion_from_unranked",
+          "best_recipe_id": "bmp7_alk3_steric_v2",
+          "winning_settings": {
+            "job_id": "58139988",
+            "tau": 0.1,
+            "beta": 4,
+            "gpu": "A100",
+            "sample_index_0based": 6
+          },
+          "reason": "The best guided candidate preserves high two-copy covered-reference recovery and transferred type-I support while markedly reducing severe overlap magnitude and outside-core collisions versus prior v1 examples. A still-cleaner matched baseline candidate is retained separately."
+        }
+      ],
+      "ranking_status": "Provisional steric-v2 preference from best overall across six A100/A30 runs. Guided58139988sample6 and cleaner matched baseline9 are separate leaders; C/D native accuracy remains unassessed and both require physical cleanup.",
       "reference_context": {
         "created_utc": "2026-10-13T18:50:07.419204+00:00",
         "active": false,
@@ -17017,8 +17413,8 @@
         },
         {
           "recipe_id": "bmp7_alk3_steric_v2",
-          "rank": null,
-          "status": "submitted_pending_evaluation",
+          "rank": 1,
+          "status": "provisional_preferred_evaluated_with_residual_defects",
           "parent_relationships": [
             {
               "recipe_id": "bmp7_alk3_joint_v1",
@@ -19610,14 +20006,78 @@
               "seed": 74600,
               "brownian_seed": 75600,
               "resampling_seed": 76600,
-              "status": "submitted_pending_evaluation",
+              "status": "completed_evaluated",
               "canonical_output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58139988",
               "runtime_revision": "134bf1549ff0d1acf601c1a4812d2a07b64c289b",
               "scoring_sha256": "0934dad1656120e8e6a9120841c788bad530672bc72fe74248e7a0a7a6a67e53",
               "fasta_sha256": "8be664946ed0a33aa9bca53ea95bdfb36c0d158570e1da9810a330219f37ac4f",
               "paired_baseline": true,
               "independent_population_id": "BMP7_BMPR1A_ACVR2A_bmp7_alk3_steric_v2_bmp7_alk3_steric_v2_tau01_r1",
-              "reference_scope": "Partial 1LX5 conserved mouse-to-human type-II surrogate only: E/F covered, C/D experimentally unassessed. Composite diagnostics never establish type-I accuracy."
+              "reference_scope": "Partial 1LX5 conserved mouse-to-human type-II surrogate only: E/F covered, C/D experimentally unassessed. Composite diagnostics never establish type-I accuracy.",
+              "status_before_completion": "submitted_pending_evaluation",
+              "completed_evaluation": {
+                "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+                "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+                "sampling": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 3325
+                },
+                "evaluation": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 35
+                },
+                "sources": {
+                  "receipt": {
+                    "path": "artifacts/remote-runs/58139988/evaluation/paid_analysis_58139995/receipt.json",
+                    "sha256": "ffac3ca31a05db3971483a8aeb4103dd25d2247c6562fc37873a9c41764d4a5e"
+                  },
+                  "baseline": {
+                    "path": "artifacts/remote-runs/58139988/evaluation/paid_analysis_58139995/baseline.json",
+                    "sha256": "0b5615b98392758dced786932a623b6eae0f18e92dd67df5b11783f276579fb0"
+                  },
+                  "fk": {
+                    "path": "artifacts/remote-runs/58139988/evaluation/paid_analysis_58139995/fk.json",
+                    "sha256": "d1ef77eb8aa548ea629baa885dcd3852f8af9508ba346d5f4d41d7e4e7d058b4"
+                  },
+                  "guidance_diagnostics": {
+                    "path": "artifacts/remote-runs/58139988/evaluation/paid_analysis_58139995/guidance_diagnostics.json",
+                    "sha256": "fdac4523ce17ce6ff4029c4e0d54f5ab11793b2ccae3593c2aff8c6c64bc871b"
+                  }
+                },
+                "metrics": {
+                  "baseline": {
+                    "both_typeII_ge0p6": 2,
+                    "both_typeI_guidance_ge0p5": 4,
+                    "both_typeII_ge0p6_and_typeI_ge0p5": 2,
+                    "severe_CNO_min_median_max": [
+                      4,
+                      107.5,
+                      475
+                    ]
+                  },
+                  "fk": {
+                    "both_typeII_ge0p6": 6,
+                    "both_typeI_guidance_ge0p5": 7,
+                    "both_typeII_ge0p6_and_typeI_ge0p5": 6,
+                    "severe_CNO_min_median_max": [
+                      7,
+                      16.0,
+                      491
+                    ]
+                  },
+                  "resampling_count": 1,
+                  "ancestry": {
+                    "1": 2,
+                    "9": 5,
+                    "5": 1,
+                    "2": 1,
+                    "0": 1
+                  },
+                  "same_index_baseline_FK_byte_identity_count": 0
+                }
+              }
             },
             {
               "job_id": "58139989",
@@ -19629,14 +20089,79 @@
               "seed": 74601,
               "brownian_seed": 75601,
               "resampling_seed": 76601,
-              "status": "submitted_pending_evaluation",
+              "status": "completed_evaluated",
               "canonical_output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58139989",
               "runtime_revision": "134bf1549ff0d1acf601c1a4812d2a07b64c289b",
               "scoring_sha256": "0934dad1656120e8e6a9120841c788bad530672bc72fe74248e7a0a7a6a67e53",
               "fasta_sha256": "8be664946ed0a33aa9bca53ea95bdfb36c0d158570e1da9810a330219f37ac4f",
               "paired_baseline": true,
               "independent_population_id": "BMP7_BMPR1A_ACVR2A_bmp7_alk3_steric_v2_bmp7_alk3_steric_v2_tau03_r2",
-              "reference_scope": "Partial 1LX5 conserved mouse-to-human type-II surrogate only: E/F covered, C/D experimentally unassessed. Composite diagnostics never establish type-I accuracy."
+              "reference_scope": "Partial 1LX5 conserved mouse-to-human type-II surrogate only: E/F covered, C/D experimentally unassessed. Composite diagnostics never establish type-I accuracy.",
+              "status_before_completion": "submitted_pending_evaluation",
+              "completed_evaluation": {
+                "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+                "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+                "sampling": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 3325
+                },
+                "evaluation": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 35
+                },
+                "sources": {
+                  "receipt": {
+                    "path": "artifacts/remote-runs/58139989/evaluation/paid_analysis_58139996/receipt.json",
+                    "sha256": "5bbdb5753f36da3875d9b83047df20d1a48067ddb66d3e482fb81a402bf250ac"
+                  },
+                  "baseline": {
+                    "path": "artifacts/remote-runs/58139989/evaluation/paid_analysis_58139996/baseline.json",
+                    "sha256": "7be08c392442fb22a8e3b8058053acdf0cdc3f152e576ce00beba09b553678db"
+                  },
+                  "fk": {
+                    "path": "artifacts/remote-runs/58139989/evaluation/paid_analysis_58139996/fk.json",
+                    "sha256": "d199e3a5c00fcede9194f0f5d0edb4715f11692cb6ebc2da2005574ce0177ba3"
+                  },
+                  "guidance_diagnostics": {
+                    "path": "artifacts/remote-runs/58139989/evaluation/paid_analysis_58139996/guidance_diagnostics.json",
+                    "sha256": "14dee028456d84b72ffe6fd0e3fc3233f8dd77e9d1542b3caf0f441755c8e321"
+                  }
+                },
+                "metrics": {
+                  "baseline": {
+                    "both_typeII_ge0p6": 1,
+                    "both_typeI_guidance_ge0p5": 1,
+                    "both_typeII_ge0p6_and_typeI_ge0p5": 1,
+                    "severe_CNO_min_median_max": [
+                      52,
+                      145.5,
+                      3145
+                    ]
+                  },
+                  "fk": {
+                    "both_typeII_ge0p6": 4,
+                    "both_typeI_guidance_ge0p5": 4,
+                    "both_typeII_ge0p6_and_typeI_ge0p5": 4,
+                    "severe_CNO_min_median_max": [
+                      40,
+                      86.0,
+                      3246
+                    ]
+                  },
+                  "resampling_count": 1,
+                  "ancestry": {
+                    "5": 1,
+                    "3": 2,
+                    "4": 1,
+                    "9": 4,
+                    "6": 1,
+                    "7": 1
+                  },
+                  "same_index_baseline_FK_byte_identity_count": 0
+                }
+              }
             },
             {
               "job_id": "58139990",
@@ -19648,14 +20173,76 @@
               "seed": 74602,
               "brownian_seed": 75602,
               "resampling_seed": 76602,
-              "status": "submitted_pending_evaluation",
+              "status": "completed_evaluated",
               "canonical_output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58139990",
               "runtime_revision": "134bf1549ff0d1acf601c1a4812d2a07b64c289b",
               "scoring_sha256": "0934dad1656120e8e6a9120841c788bad530672bc72fe74248e7a0a7a6a67e53",
               "fasta_sha256": "8be664946ed0a33aa9bca53ea95bdfb36c0d158570e1da9810a330219f37ac4f",
               "paired_baseline": true,
               "independent_population_id": "BMP7_BMPR1A_ACVR2A_bmp7_alk3_steric_v2_bmp7_alk3_steric_v2_tau08_r3",
-              "reference_scope": "Partial 1LX5 conserved mouse-to-human type-II surrogate only: E/F covered, C/D experimentally unassessed. Composite diagnostics never establish type-I accuracy."
+              "reference_scope": "Partial 1LX5 conserved mouse-to-human type-II surrogate only: E/F covered, C/D experimentally unassessed. Composite diagnostics never establish type-I accuracy.",
+              "status_before_completion": "submitted_pending_evaluation",
+              "completed_evaluation": {
+                "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+                "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+                "sampling": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 3325
+                },
+                "evaluation": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 36
+                },
+                "sources": {
+                  "receipt": {
+                    "path": "artifacts/remote-runs/58139990/evaluation/paid_analysis_58139997/receipt.json",
+                    "sha256": "0ae0384b7f3e933f38b14ec597fa9517546bc633a94344a8434c190c8a3b4046"
+                  },
+                  "baseline": {
+                    "path": "artifacts/remote-runs/58139990/evaluation/paid_analysis_58139997/baseline.json",
+                    "sha256": "c2040a4ec0c81cf17f06c6929c2b2b8a807398669ce5f83d6c3259166b06e282"
+                  },
+                  "fk": {
+                    "path": "artifacts/remote-runs/58139990/evaluation/paid_analysis_58139997/fk.json",
+                    "sha256": "55d2ad28423702c245e4432a423c5cc74cc4c068faab623a9e5488756f9a7ce8"
+                  },
+                  "guidance_diagnostics": {
+                    "path": "artifacts/remote-runs/58139990/evaluation/paid_analysis_58139997/guidance_diagnostics.json",
+                    "sha256": "1680bf1f76d32602759ab46e36d4bc1f03740e76e6999afefd0b24bf2e21c11e"
+                  }
+                },
+                "metrics": {
+                  "baseline": {
+                    "both_typeII_ge0p6": 2,
+                    "both_typeI_guidance_ge0p5": 4,
+                    "both_typeII_ge0p6_and_typeI_ge0p5": 2,
+                    "severe_CNO_min_median_max": [
+                      125,
+                      411.0,
+                      588
+                    ]
+                  },
+                  "fk": {
+                    "both_typeII_ge0p6": 9,
+                    "both_typeI_guidance_ge0p5": 9,
+                    "both_typeII_ge0p6_and_typeI_ge0p5": 9,
+                    "severe_CNO_min_median_max": [
+                      71,
+                      104.5,
+                      420
+                    ]
+                  },
+                  "resampling_count": 3,
+                  "ancestry": {
+                    "7": 3,
+                    "4": 1,
+                    "2": 6
+                  },
+                  "same_index_baseline_FK_byte_identity_count": 0
+                }
+              }
             },
             {
               "job_id": "58185726",
@@ -19668,7 +20255,7 @@
               "resampling_seed": 80201,
               "beta": 4.0,
               "gpu": "A30",
-              "status": "submitted_not_evaluated",
+              "status": "completed_evaluated",
               "submitted_at": "2026-10-16T19:06:42.688820+00:00",
               "working_output": "/data/homezvol2/ynkim4/ml-simplefold-bmp90-paid-wave15-20261016/artifacts/transfer-stage/runs/58185726",
               "canonical_output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58185726",
@@ -19708,6 +20295,71 @@
                   "path": "artifacts/bmp90/operations/paid_wave15_16_records_20261016/wave15_runtime_state/arms/bmp7_alk3_steric_v2/reference_selfcheck/receipt.json",
                   "sha256": "94907bc28c1fd4b3ca4f3e7122d71febc3e5fa973735901455b7a54d3821077b"
                 }
+              },
+              "status_before_completion": "submitted_not_evaluated",
+              "completed_evaluation": {
+                "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+                "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+                "sampling": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 5970
+                },
+                "evaluation": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 32
+                },
+                "sources": {
+                  "receipt": {
+                    "path": "artifacts/remote-runs/58185726/evaluation/paid_analysis_58185731/receipt.json",
+                    "sha256": "22300147cc8e7cae3bba4257eb6ca8997efe5b3cca7b70214e717561bb8389bd"
+                  },
+                  "baseline": {
+                    "path": "artifacts/remote-runs/58185726/evaluation/paid_analysis_58185731/baseline.json",
+                    "sha256": "edfa5bd318724731d46cb5bd04a760746431718da1b226b4753a58553f0a5059"
+                  },
+                  "fk": {
+                    "path": "artifacts/remote-runs/58185726/evaluation/paid_analysis_58185731/fk.json",
+                    "sha256": "4e7ab8039e69f463fad1bbbc5616e482a3f474585914ff9a7cd011f39cb3eb5a"
+                  },
+                  "guidance_diagnostics": {
+                    "path": "artifacts/remote-runs/58185726/evaluation/paid_analysis_58185731/guidance_diagnostics.json",
+                    "sha256": "f5984c93f27a9c97c10190dac0ef7859d556b92d22ee59c5a4e52b7132841e50"
+                  }
+                },
+                "metrics": {
+                  "baseline": {
+                    "both_typeII_ge0p6": 3,
+                    "both_typeI_guidance_ge0p5": 4,
+                    "both_typeII_ge0p6_and_typeI_ge0p5": 3,
+                    "severe_CNO_min_median_max": [
+                      26,
+                      83.0,
+                      1150
+                    ]
+                  },
+                  "fk": {
+                    "both_typeII_ge0p6": 7,
+                    "both_typeI_guidance_ge0p5": 7,
+                    "both_typeII_ge0p6_and_typeI_ge0p5": 7,
+                    "severe_CNO_min_median_max": [
+                      27,
+                      46.0,
+                      1077
+                    ]
+                  },
+                  "resampling_count": 1,
+                  "ancestry": {
+                    "8": 1,
+                    "9": 4,
+                    "2": 1,
+                    "1": 1,
+                    "0": 2,
+                    "7": 1
+                  },
+                  "same_index_baseline_FK_byte_identity_count": 1
+                }
               }
             },
             {
@@ -19721,7 +20373,7 @@
               "resampling_seed": 80202,
               "beta": 4.0,
               "gpu": "A30",
-              "status": "submitted_not_evaluated",
+              "status": "completed_evaluated",
               "submitted_at": "2026-10-16T19:06:42.770650+00:00",
               "working_output": "/data/homezvol2/ynkim4/ml-simplefold-bmp90-paid-wave15-20261016/artifacts/transfer-stage/runs/58185727",
               "canonical_output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58185727",
@@ -19761,6 +20413,70 @@
                   "path": "artifacts/bmp90/operations/paid_wave15_16_records_20261016/wave15_runtime_state/arms/bmp7_alk3_steric_v2/reference_selfcheck/receipt.json",
                   "sha256": "94907bc28c1fd4b3ca4f3e7122d71febc3e5fa973735901455b7a54d3821077b"
                 }
+              },
+              "status_before_completion": "submitted_not_evaluated",
+              "completed_evaluation": {
+                "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+                "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+                "sampling": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 5974
+                },
+                "evaluation": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 38
+                },
+                "sources": {
+                  "receipt": {
+                    "path": "artifacts/remote-runs/58185727/evaluation/paid_analysis_58185732/receipt.json",
+                    "sha256": "3f485911c469e7ca873b7a546eaf24ec07734a1bfe271aaa1c334892d35dd9e5"
+                  },
+                  "baseline": {
+                    "path": "artifacts/remote-runs/58185727/evaluation/paid_analysis_58185732/baseline.json",
+                    "sha256": "a25d5f2793486ba7d98a957fd6954a2f0e66fa9cd4d04e13872b56ff4489060d"
+                  },
+                  "fk": {
+                    "path": "artifacts/remote-runs/58185727/evaluation/paid_analysis_58185732/fk.json",
+                    "sha256": "600384cdff1a5c4eef9403146ab482429639fad8e5d6781b57e8e1f1be07829b"
+                  },
+                  "guidance_diagnostics": {
+                    "path": "artifacts/remote-runs/58185727/evaluation/paid_analysis_58185732/guidance_diagnostics.json",
+                    "sha256": "14e77598b2796e5bbf0d8178f36aa81ef6f319e5878a0f3bd91eec1cb13478a2"
+                  }
+                },
+                "metrics": {
+                  "baseline": {
+                    "both_typeII_ge0p6": 1,
+                    "both_typeI_guidance_ge0p5": 1,
+                    "both_typeII_ge0p6_and_typeI_ge0p5": 1,
+                    "severe_CNO_min_median_max": [
+                      43,
+                      246.0,
+                      460
+                    ]
+                  },
+                  "fk": {
+                    "both_typeII_ge0p6": 4,
+                    "both_typeI_guidance_ge0p5": 4,
+                    "both_typeII_ge0p6_and_typeI_ge0p5": 4,
+                    "severe_CNO_min_median_max": [
+                      44,
+                      213.5,
+                      419
+                    ]
+                  },
+                  "resampling_count": 1,
+                  "ancestry": {
+                    "8": 2,
+                    "7": 4,
+                    "6": 1,
+                    "9": 1,
+                    "2": 2
+                  },
+                  "same_index_baseline_FK_byte_identity_count": 1
+                }
               }
             },
             {
@@ -19774,7 +20490,7 @@
               "resampling_seed": 80203,
               "beta": 4.0,
               "gpu": "A30",
-              "status": "submitted_not_evaluated",
+              "status": "completed_evaluated",
               "submitted_at": "2026-10-16T19:06:42.848156+00:00",
               "working_output": "/data/homezvol2/ynkim4/ml-simplefold-bmp90-paid-wave15-20261016/artifacts/transfer-stage/runs/58185728",
               "canonical_output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58185728",
@@ -19813,6 +20529,69 @@
                 "reference_selfcheck": {
                   "path": "artifacts/bmp90/operations/paid_wave15_16_records_20261016/wave15_runtime_state/arms/bmp7_alk3_steric_v2/reference_selfcheck/receipt.json",
                   "sha256": "94907bc28c1fd4b3ca4f3e7122d71febc3e5fa973735901455b7a54d3821077b"
+                }
+              },
+              "status_before_completion": "submitted_not_evaluated",
+              "completed_evaluation": {
+                "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+                "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+                "sampling": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 6049
+                },
+                "evaluation": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 35
+                },
+                "sources": {
+                  "receipt": {
+                    "path": "artifacts/remote-runs/58185728/evaluation/paid_analysis_58185733/receipt.json",
+                    "sha256": "4be277990818a48c9421c3c38a3be506a258410d6d0da7043e0abe3d0dd73927"
+                  },
+                  "baseline": {
+                    "path": "artifacts/remote-runs/58185728/evaluation/paid_analysis_58185733/baseline.json",
+                    "sha256": "cd21bd8d0db33aede814d440d5b9ea87b3ad341750e4ab15649eca28db3aaa4b"
+                  },
+                  "fk": {
+                    "path": "artifacts/remote-runs/58185728/evaluation/paid_analysis_58185733/fk.json",
+                    "sha256": "5e1ecbd5f2bfacca71d17da2299c4fdaf12a03012c8afa91b14cfa6356fcf03c"
+                  },
+                  "guidance_diagnostics": {
+                    "path": "artifacts/remote-runs/58185728/evaluation/paid_analysis_58185733/guidance_diagnostics.json",
+                    "sha256": "928742fe1e965a9790129f92d0f27509bf40a7511fd2f6a22e112a11aec727da"
+                  }
+                },
+                "metrics": {
+                  "baseline": {
+                    "both_typeII_ge0p6": 5,
+                    "both_typeI_guidance_ge0p5": 4,
+                    "both_typeII_ge0p6_and_typeI_ge0p5": 4,
+                    "severe_CNO_min_median_max": [
+                      59,
+                      202.0,
+                      503
+                    ]
+                  },
+                  "fk": {
+                    "both_typeII_ge0p6": 9,
+                    "both_typeI_guidance_ge0p5": 9,
+                    "both_typeII_ge0p6_and_typeI_ge0p5": 9,
+                    "severe_CNO_min_median_max": [
+                      38,
+                      143.5,
+                      270
+                    ]
+                  },
+                  "resampling_count": 2,
+                  "ancestry": {
+                    "2": 6,
+                    "7": 1,
+                    "9": 2,
+                    "5": 1
+                  },
+                  "same_index_baseline_FK_byte_identity_count": 0
                 }
               }
             }
@@ -19869,7 +20648,16 @@
                 "path": "artifacts/bmp90/operations/paid_wave12_scheduler_review_20261014.json",
                 "sha256": "9410e6c95b357bd0e5eb73195f00a6e47f483f80b82dab5fe95ead30ea3302cf"
               },
-              "decision": "Keep original A100 jobs: current new-A30 scheduler estimate is later. No CPU registration, cancellation or replacement GPU job submitted. Reassess scheduling before using prepared replacement."
+              "decision": "Keep original A100 jobs: current new-A30 scheduler estimate is later. No CPU registration, cancellation or replacement GPU job submitted. Reassess scheduling before using prepared replacement.",
+              "completion_followup": {
+                "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+                "status": "not_submitted_original_A100_jobs_now_completed",
+                "qualification": "This dated fallback remains unused; its original queue estimates and pending-state observations are historical. Original A100 jobs completed without replacement.",
+                "scheduler": {
+                  "path": "artifacts/bmp90/evaluation/status_20261016T2350/scheduler.txt",
+                  "sha256": "6d6b76264d49fe549c83d012e2fe1ee845e08164633cbf168199fb1502ff49c8"
+                }
+              }
             }
           ],
           "submission_campaigns": [
@@ -19887,7 +20675,7 @@
                 "58185732",
                 "58185733"
               ],
-              "status": "submitted_not_evaluated",
+              "status": "completed_evaluated",
               "cpu_registration_job_id": "58185689",
               "cpu_registration_state": "COMPLETED",
               "checkpoint_sha256": "88d4c7a240bf3815cb35342b4ddc1128ac243a2ea0256eb8a4df1209125868b5",
@@ -19930,22 +20718,206 @@
                 "58139990"
               ],
               "selection_rule": "Judge best overall evaluated structures across tau; submission and deterministic gates do not promote a recipe.",
-              "qualification": "Fresh paired A30 populations; prior A100 work and preferred choices retained. Full constructs; partial species-surrogate1LX5 E/F only, type-I C/D experimentally unassessed. No automatic retries."
+              "qualification": "Fresh paired A30 populations; prior A100 work and preferred choices retained. Full constructs; partial species-surrogate1LX5 E/F only, type-I C/D experimentally unassessed. No automatic retries.",
+              "status_before_completion": "submitted_not_evaluated",
+              "completed_outcome": {
+                "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+                "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+                "sampling_and_evaluation_state": "COMPLETED 0:0",
+                "report": {
+                  "path": "artifacts/bmp90/evaluation/bmp7_alk3_steric_v2_20261016_completed/scientific_summary.json",
+                  "sha256": "e267c31934c379f8e3b346162b50c7190d8a4d23d0c173692f4fb4b09c83df80"
+                },
+                "scheduler": {
+                  "path": "artifacts/bmp90/evaluation/status_20261016T2350/scheduler.txt",
+                  "sha256": "6d6b76264d49fe549c83d012e2fe1ee845e08164633cbf168199fb1502ff49c8"
+                },
+                "actual_sampling_GPU_hours": 4.998055555555555,
+                "ranking_decision": "Provisional steric-v2 preference from best overall across six A100/A30 runs. Guided58139988sample6 and cleaner matched baseline9 are separate leaders; C/D native accuracy remains unassessed and both require physical cleanup.",
+                "scope": "Scientific outputs verified; full archival completion is tracked separately. Submission-time provenance and hardware remain unchanged."
+              },
+              "qualification_scope": "Historical submission-time qualification; current completed outcome and ranking decision are recorded in completed_outcome."
             }
-          ]
+          ],
+          "status_before_completion": "submitted_pending_evaluation",
+          "completed_sweep_evaluation": {
+            "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+            "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+            "report": {
+              "path": "artifacts/bmp90/evaluation/bmp7_alk3_steric_v2_20261016_completed/scientific_summary.json",
+              "sha256": "e267c31934c379f8e3b346162b50c7190d8a4d23d0c173692f4fb4b09c83df80"
+            },
+            "scheduler": {
+              "path": "artifacts/bmp90/evaluation/status_20261016T2350/scheduler.txt",
+              "sha256": "6d6b76264d49fe549c83d012e2fe1ee845e08164633cbf168199fb1502ff49c8"
+            },
+            "verified_evaluation_status": {
+              "path": "artifacts/bmp90/evaluation/status_20261016T2350/scientific_status.json",
+              "sha256": "7b3002ae0940be8b747300c854507cc4db48b2e296b2f35931cd1708a7ff89d6"
+            },
+            "evaluated_tau_values": [
+              0.1,
+              0.3,
+              0.8
+            ],
+            "reference_scope": {
+              "experimental_comparison": "1LX5 conserved mouse-to-human type-II surrogate only;392observed residues of full768.",
+              "covered_interfaces": [
+                "E",
+                "F"
+              ],
+              "uncovered_interfaces": [
+                "C",
+                "D"
+              ],
+              "whole_assembly_experimental_DockQ": null,
+              "typeI_metrics": "Transferred9MIR composite geometry and separately fitted source folds measure the hypothesis only, not nativeBMP7 accuracy.",
+              "source_core_definition": "576source-observed/composite residues; outside-core classification is a coverage mask, not a claim of disorder.",
+              "glycans": "Omitted",
+              "same_reference_holdout": "Previously inspected same1LX5 contacts; not independent validation.",
+              "acceptance": "Provisional useful candidates requiring cleanup and broader physical review; no calibrated full-assembly acceptance."
+            },
+            "physical_acceptance": "unassessed_pending_calibration",
+            "archive_scope": "Scientific subset and model hashes verified; full archival retrieval is tracked separately and is not asserted complete here.",
+            "actual_sampling_GPU_hours": 7.768888888888889,
+            "decision": {
+              "provisional_promotion": true,
+              "winning_guided_settings": {
+                "job_id": "58139988",
+                "tau": 0.1,
+                "beta": 4,
+                "gpu": "A100",
+                "sample_index_0based": 6
+              },
+              "best_guided_candidate": {
+                "registry_path": "complexes.BMP7_BMPR1A_ACVR2A.metric_specific_leaders.provisional_overall_guided",
+                "job_id": "58139988",
+                "zero_based_sample": 6
+              },
+              "cleaner_baseline_candidate": {
+                "registry_path": "complexes.BMP7_BMPR1A_ACVR2A.metric_specific_leaders.cleaner_baseline_cleanup_start",
+                "job_id": "58139988",
+                "zero_based_sample": 9,
+                "condition": "baseline"
+              },
+              "qualification": "Provisional practical recipe/candidate preference from the best overall across six completed runs; no claim that adding the guard caused the better initial population or validates type-I geometry."
+            },
+            "scheduler_timestamp_timezone": "America/Los_Angeles (Slurm start/end in source receipt); elapsed_seconds are durations."
+          }
         }
       ],
       "current_iteration_parent": {
-        "recipe_id": "bmp7_alk3_joint_v1",
-        "recorded_at": "2026-10-14T19:02:26.165194+00:00",
-        "revision_recipe_id": "bmp7_alk3_steric_v2",
-        "purpose": "Defect-targeted finite iteration; source recipe remains preferred pending evaluated outcomes."
+        "recipe_id": "bmp7_alk3_steric_v2",
+        "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+        "purpose": "Provisional practical recipe after six-run review. Next proposed action is restrained atomistic cleanup of separately retained guided and baseline candidates, not a new scoring revision.",
+        "source": {
+          "path": "artifacts/bmp90/evaluation/bmp7_alk3_steric_v2_20261016_completed/scientific_summary.json",
+          "sha256": "e267c31934c379f8e3b346162b50c7190d8a4d23d0c173692f4fb4b09c83df80"
+        }
+      },
+      "iteration_parent_history": [
+        {
+          "superseded_at": "2026-10-17T00:02:47.519441+00:00",
+          "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+          "value": {
+            "recipe_id": "bmp7_alk3_joint_v1",
+            "recorded_at": "2026-10-14T19:02:26.165194+00:00",
+            "revision_recipe_id": "bmp7_alk3_steric_v2",
+            "purpose": "Defect-targeted finite iteration; source recipe remains preferred pending evaluated outcomes."
+          }
+        }
+      ],
+      "metric_specific_leaders": {
+        "provisional_overall_guided": {
+          "job_id": "58139988",
+          "condition": "fk",
+          "sample_index_0based": 6,
+          "tau": 0.1,
+          "beta": 4,
+          "gpu": "NVIDIA A100 80GB PCIe",
+          "path": "artifacts/remote-runs/58139988/fk/predictions_simplefold_3B/BMP7_BMPR1A_ACVR2A_sampled_6.pdb",
+          "sha256": "001657ba1c1b6ce09f7bfa891c017081eab07dbc0183878f58b662d7c7f09f2f",
+          "typeII_surrogate_DockQ": {
+            "E": 0.880987444504242,
+            "F": 0.9173375668662594
+          },
+          "typeI_experimental_DockQ": {
+            "C": null,
+            "D": null
+          },
+          "typeI_transferred_guidance": {
+            "C": 0.966524122073654,
+            "D": 0.9671233448369059
+          },
+          "severe_CNO_fixed_topology": 7,
+          "severe_source_core_only": 3,
+          "severe_outside_source_core": 4,
+          "native_disulfide_distance_range_A": [
+            1.6675410039936043,
+            2.3819456333006426
+          ],
+          "initial_ancestor": 9
+        },
+        "cleaner_baseline_cleanup_start": {
+          "job_id": "58139988",
+          "condition": "baseline",
+          "sample_index_0based": 9,
+          "tau": 0.1,
+          "beta": 4,
+          "gpu": "NVIDIA A100 80GB PCIe",
+          "path": "artifacts/remote-runs/58139988/baseline/predictions_simplefold_3B/BMP7_BMPR1A_ACVR2A_sampled_9.pdb",
+          "sha256": "446021e02f37878c3fcdb2ba3d403755d6315098e2f241a71553cd42561ba1e8",
+          "typeII_surrogate_DockQ": {
+            "E": 0.8987359480744629,
+            "F": 0.9148836346949553
+          },
+          "typeI_experimental_DockQ": {
+            "C": null,
+            "D": null
+          },
+          "typeI_transferred_guidance": {
+            "C": 0.9668107429085403,
+            "D": 0.9674446611573035
+          },
+          "severe_CNO_fixed_topology": 4,
+          "severe_source_core_only": 3,
+          "severe_outside_source_core": 1,
+          "native_disulfide_distance_range_A": [
+            1.6689313946355013,
+            2.317940680863081
+          ],
+          "initial_ancestor": 9
+        },
+        "qualification": "Baseline9 is unguided and is not credited as a guidance improvement. Both type-I metrics are transferred-hypothesis agreement only; E/F DockQ uses the partial1LX5 species surrogate."
+      },
+      "proposed_next_step": {
+        "status": "PROPOSED_ONLY_NOT_IMPLEMENTED_OR_SUBMITTED",
+        "action": "restrained_full_construct_atomistic_cleanup",
+        "candidates": [
+          {
+            "path": "artifacts/remote-runs/58139988/baseline/predictions_simplefold_3B/BMP7_BMPR1A_ACVR2A_sampled_9.pdb",
+            "sha256": "446021e02f37878c3fcdb2ba3d403755d6315098e2f241a71553cd42561ba1e8"
+          },
+          {
+            "path": "artifacts/remote-runs/58139988/fk/predictions_simplefold_3B/BMP7_BMPR1A_ACVR2A_sampled_6.pdb",
+            "sha256": "001657ba1c1b6ce09f7bfa891c017081eab07dbc0183878f58b662d7c7f09f2f"
+          }
+        ],
+        "rationale": "Preserve recovered docking/contact geometry and full768 sequences; address residual sidechain overlaps and native disulfide distortions with explicit topology, fixed sequence and no docking jumps. No new contact or scoring revision is justified by these best candidates yet.",
+        "remaining_defects": "Guided6 has7 severe CNO overlaps (3core); baseline9 has4 (3core). E72SG-E84SG is about1.668Angstrom in both. Fixed topology does not validate bond geometry.",
+        "source": {
+          "path": "artifacts/bmp90/evaluation/bmp7_alk3_steric_v2_20261016_completed/scientific_summary.json",
+          "sha256": "e267c31934c379f8e3b346162b50c7190d8a4d23d0c173692f4fb4b09c83df80"
+        },
+        "jobs_submitted": false
       }
     },
     "BMP7_ACVR1_ACVR2A": {
       "reference_structure": "1LX5 (partial mouse-receptor surrogate; no type-I coordinates)",
-      "best_recipe_id": "bmp7_alk2_joint_v1",
-      "previous_best_recipe_ids": [],
+      "best_recipe_id": "bmp7_alk2_bridge_cauchy_steric_v4",
+      "previous_best_recipe_ids": [
+        "bmp7_alk2_joint_v1"
+      ],
       "ranking_history": [
         {
           "recorded_at": "2026-10-14T17:57:48.100993+00:00",
@@ -19968,9 +20940,56 @@
               "sha256": "a138b234b0ce77b4c6017f8f7a4f2e38f6c569182e1e6369dee88d1e4cd36d98"
             }
           ]
+        },
+        {
+          "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+          "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+          "previous_best_recipe_id": "bmp7_alk2_joint_v1",
+          "assessed_recipe_id": "bmp7_alk2_bridge_cauchy_steric_v4",
+          "prior_recipe_ranks_and_statuses": [
+            {
+              "recipe_id": "bmp7_acvr1_acvr2a_joint_transfer_v1",
+              "rank": null,
+              "status": "inactive_transfer_hypothesis"
+            },
+            {
+              "recipe_id": "bmp7_alk2_joint_v1",
+              "rank": 1,
+              "status": "provisional_preferred_partial_recovery_typeI_unresolved"
+            },
+            {
+              "recipe_id": "bmp7_alk2_joint_v2",
+              "rank": 2,
+              "status": "completed_evaluated_not_preferred"
+            },
+            {
+              "recipe_id": "bmp7_alk2_bridge_cauchy_v3",
+              "rank": null,
+              "status": "completed_beta12_beta24_evaluated_not_preferred"
+            },
+            {
+              "recipe_id": "bmp7_alk2_bridge_cauchy_steric_v4",
+              "rank": null,
+              "status": "submitted_not_evaluated"
+            }
+          ],
+          "source": {
+            "path": "artifacts/bmp90/evaluation/bmp7_alk2_steric_v4_20261016_completed/scientific_summary.json",
+            "sha256": "17b5ee6205842c365244d15619f4eb96a9c3affd1015b1d50e5d63781cae870a"
+          },
+          "decision": "provisional_promotion",
+          "best_recipe_id": "bmp7_alk2_bridge_cauchy_steric_v4",
+          "winning_settings": {
+            "tau": 0.3,
+            "beta": 24,
+            "gpu": "A30",
+            "job_id": "58185779",
+            "zero_based_sample": 2
+          },
+          "reason": "Across all three taus, tau0.3sample2 combines stronger E/F surrogate agreement than the previous overall leader, much better jointly assigned type-I face/bridge satisfaction, and lower full-model severe overlaps with zero core-band severe pairs. Tau0.8 weakness does not disqualify this best overall outcome."
         }
       ],
-      "ranking_status": "V1 beta 12, tau 0.8 remains provisional best observed candidate. Neither v1 nor v2 recovers both type-I copies; no accepted full assembly.",
+      "ranking_status": "Provisional v4 preference from tau0.3sample2: stronger E/F surrogate agreement, both-copy transferred face/bridge support and improved packing. C/D native accuracy and calibrated physical acceptance remain unassessed.",
       "reference_context": {
         "created_utc": "2026-10-13T18:50:07.419204+00:00",
         "active": false,
@@ -21080,8 +22099,8 @@
         },
         {
           "recipe_id": "bmp7_alk2_joint_v1",
-          "rank": 1,
-          "status": "provisional_preferred_partial_recovery_typeI_unresolved",
+          "rank": 2,
+          "status": "historical_preferred_partial_recovery_superseded_by_v4",
           "executable": true,
           "comparison_group": "human_native_untrimmed_716",
           "parent_relationships": [
@@ -23593,7 +24612,7 @@
         },
         {
           "recipe_id": "bmp7_alk2_joint_v2",
-          "rank": 2,
+          "rank": 3,
           "status": "completed_evaluated_not_preferred",
           "parent_relationships": [
             {
@@ -30831,8 +31850,8 @@
         {
           "recipe_id": "bmp7_alk2_bridge_cauchy_steric_v4",
           "target_id": "BMP7_ACVR1_ACVR2A",
-          "rank": null,
-          "status": "submitted_not_evaluated",
+          "rank": 1,
+          "status": "provisional_preferred_evaluated_with_residual_defects",
           "parent_relationships": [
             {
               "recipe_id": "bmp6_joint_v1",
@@ -34006,7 +35025,7 @@
               "resampling_seed": 80301,
               "beta": 24.0,
               "gpu": "A30",
-              "status": "submitted_not_evaluated",
+              "status": "completed_evaluated",
               "submitted_at": "2026-10-16T19:11:28.844071+00:00",
               "working_output": "/data/homezvol2/ynkim4/ml-simplefold-bmp90-paid-wave16-20261016/artifacts/transfer-stage/runs/58185778",
               "canonical_output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58185778",
@@ -34046,6 +35065,59 @@
                   "path": "artifacts/bmp90/operations/paid_wave15_16_records_20261016/wave16_runtime_state/arms/bmp7_alk2_steric_v4/reference_selfcheck/receipt.json",
                   "sha256": "d240b420c3fd9f8ddf283a7b7afc734e5ae91dd0c60327543674aef9a82b91b2"
                 }
+              },
+              "status_before_completion": "submitted_not_evaluated",
+              "completed_evaluation": {
+                "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+                "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+                "sampling": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 5721
+                },
+                "evaluation": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 36
+                },
+                "sources": {
+                  "receipt": {
+                    "path": "artifacts/remote-runs/58185778/evaluation/paid_analysis_58185785/receipt.json",
+                    "sha256": "ac7bbf9f2f8799518a438068836fa771f7faa477ee4541410446616b97b7b997"
+                  },
+                  "baseline": {
+                    "path": "artifacts/remote-runs/58185778/evaluation/paid_analysis_58185785/baseline.json",
+                    "sha256": "f7f74f4a2c934942cd6057f56062ad9b0bc913f1295268f47464c1b8a2d0e759"
+                  },
+                  "fk": {
+                    "path": "artifacts/remote-runs/58185778/evaluation/paid_analysis_58185785/fk.json",
+                    "sha256": "ee92c9178ce0ab58a4b29aeca7bca8c134bef470eef8968ffc2fed288a8afa21"
+                  },
+                  "guidance_diagnostics": {
+                    "path": "artifacts/remote-runs/58185778/evaluation/paid_analysis_58185785/guidance_diagnostics.json",
+                    "sha256": "d9726ac0bb6b1f5f1b93153042707befc098acc416f316b7acbe292c74630825"
+                  }
+                },
+                "metrics": {
+                  "FK_both_typeII_DockQ_ge0p6": 8,
+                  "baseline_both_typeII_DockQ_ge0p6": 2,
+                  "FK_both_common_typeI_fine_ge0p5": 8,
+                  "baseline_both_common_typeI_fine_ge0p5": 2,
+                  "FK_best_typeII_min": 0.9213599643101386,
+                  "FK_best_common_typeI_min": 0.6071282735123932,
+                  "FK_severe_CNO_min_median_max": [
+                    29,
+                    34.0,
+                    112
+                  ],
+                  "initial_ancestor_counts": {
+                    "8": 2,
+                    "1": 7,
+                    "6": 1
+                  },
+                  "same_index_baseline_FK_PDB_hashes": 0,
+                  "resampling_count": 3
+                }
               }
             },
             {
@@ -34059,7 +35131,7 @@
               "resampling_seed": 80302,
               "beta": 24.0,
               "gpu": "A30",
-              "status": "submitted_not_evaluated",
+              "status": "completed_evaluated",
               "submitted_at": "2026-10-16T19:11:28.923112+00:00",
               "working_output": "/data/homezvol2/ynkim4/ml-simplefold-bmp90-paid-wave16-20261016/artifacts/transfer-stage/runs/58185779",
               "canonical_output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58185779",
@@ -34099,6 +35171,57 @@
                   "path": "artifacts/bmp90/operations/paid_wave15_16_records_20261016/wave16_runtime_state/arms/bmp7_alk2_steric_v4/reference_selfcheck/receipt.json",
                   "sha256": "d240b420c3fd9f8ddf283a7b7afc734e5ae91dd0c60327543674aef9a82b91b2"
                 }
+              },
+              "status_before_completion": "submitted_not_evaluated",
+              "completed_evaluation": {
+                "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+                "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+                "sampling": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 5746
+                },
+                "evaluation": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 33
+                },
+                "sources": {
+                  "receipt": {
+                    "path": "artifacts/remote-runs/58185779/evaluation/paid_analysis_58185786/receipt.json",
+                    "sha256": "165b2945d7fc581e88e072003ead7d61a80af62164489202c528580e968ee8d7"
+                  },
+                  "baseline": {
+                    "path": "artifacts/remote-runs/58185779/evaluation/paid_analysis_58185786/baseline.json",
+                    "sha256": "3a6cfbd8c61b6e2f10faf6ccbb0d1bffc73948abea086e80c32cfeb328887785"
+                  },
+                  "fk": {
+                    "path": "artifacts/remote-runs/58185779/evaluation/paid_analysis_58185786/fk.json",
+                    "sha256": "039a32791dcc1c9a80c1e13a38df5a768f75c679f703b8cf569f31c36faba399"
+                  },
+                  "guidance_diagnostics": {
+                    "path": "artifacts/remote-runs/58185779/evaluation/paid_analysis_58185786/guidance_diagnostics.json",
+                    "sha256": "8be45dddfef5181f262760c45564fa48b53925164752d59e6c846232df8de423"
+                  }
+                },
+                "metrics": {
+                  "FK_both_typeII_DockQ_ge0p6": 10,
+                  "baseline_both_typeII_DockQ_ge0p6": 1,
+                  "FK_both_common_typeI_fine_ge0p5": 10,
+                  "baseline_both_common_typeI_fine_ge0p5": 1,
+                  "FK_best_typeII_min": 0.8636565442784986,
+                  "FK_best_common_typeI_min": 0.881844684022445,
+                  "FK_severe_CNO_min_median_max": [
+                    22,
+                    29.5,
+                    39
+                  ],
+                  "initial_ancestor_counts": {
+                    "8": 10
+                  },
+                  "same_index_baseline_FK_PDB_hashes": 0,
+                  "resampling_count": 4
+                }
               }
             },
             {
@@ -34112,7 +35235,7 @@
               "resampling_seed": 80303,
               "beta": 24.0,
               "gpu": "A30",
-              "status": "submitted_not_evaluated",
+              "status": "completed_evaluated",
               "submitted_at": "2026-10-16T19:11:29.004776+00:00",
               "working_output": "/data/homezvol2/ynkim4/ml-simplefold-bmp90-paid-wave16-20261016/artifacts/transfer-stage/runs/58185780",
               "canonical_output": "/pub/ynkim4/ml-simplefold/artifacts/runs/58185780",
@@ -34151,6 +35274,60 @@
                 "reference_selfcheck": {
                   "path": "artifacts/bmp90/operations/paid_wave15_16_records_20261016/wave16_runtime_state/arms/bmp7_alk2_steric_v4/reference_selfcheck/receipt.json",
                   "sha256": "d240b420c3fd9f8ddf283a7b7afc734e5ae91dd0c60327543674aef9a82b91b2"
+                }
+              },
+              "status_before_completion": "submitted_not_evaluated",
+              "completed_evaluation": {
+                "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+                "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+                "sampling": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 5669
+                },
+                "evaluation": {
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed_seconds": 34
+                },
+                "sources": {
+                  "receipt": {
+                    "path": "artifacts/remote-runs/58185780/evaluation/paid_analysis_58185787/receipt.json",
+                    "sha256": "50063622850ac28a6e459a354d8002550234efc1c981d16cf44160b574920e75"
+                  },
+                  "baseline": {
+                    "path": "artifacts/remote-runs/58185780/evaluation/paid_analysis_58185787/baseline.json",
+                    "sha256": "874fcfad127adf8ee95d37a0cc27428e025d52d371b3ac01d8e38015708ecf64"
+                  },
+                  "fk": {
+                    "path": "artifacts/remote-runs/58185780/evaluation/paid_analysis_58185787/fk.json",
+                    "sha256": "cf1ac088171716121f7a86fac8569c6a52467028c5a195fbc0152eef0920bcc4"
+                  },
+                  "guidance_diagnostics": {
+                    "path": "artifacts/remote-runs/58185780/evaluation/paid_analysis_58185787/guidance_diagnostics.json",
+                    "sha256": "bcb1838c027f5aca7f4f73eef2d0d70bac7b78d33360ff83f6c6d265fd6d2710"
+                  }
+                },
+                "metrics": {
+                  "FK_both_typeII_DockQ_ge0p6": 3,
+                  "baseline_both_typeII_DockQ_ge0p6": 1,
+                  "FK_both_common_typeI_fine_ge0p5": 0,
+                  "baseline_both_common_typeI_fine_ge0p5": 0,
+                  "FK_best_typeII_min": 0.7841510171128444,
+                  "FK_best_common_typeI_min": 0.07235136262915955,
+                  "FK_severe_CNO_min_median_max": [
+                    39,
+                    83.5,
+                    740
+                  ],
+                  "initial_ancestor_counts": {
+                    "3": 3,
+                    "2": 5,
+                    "4": 1,
+                    "7": 1
+                  },
+                  "same_index_baseline_FK_PDB_hashes": 1,
+                  "resampling_count": 2
                 }
               }
             }
@@ -34203,7 +35380,7 @@
             "The guard may approach its0.8floor for hundreds of tail collisions; final packing improvement must be observed, not inferred from implementation tests.",
             "The highest raw contact-reward candidate remains potentially preferred by the new objective even when it is not the best joint structural candidate; no recipe promotion follows these rescoring tests."
           ],
-          "ranking_qualification": "Retain provisional v1 beta12 tau.8 sample8 leader until best overall across tau improves common per-copy contact/bridge geometry, E/F species-surrogate DockQ and full/core/tail packing. C/D experimental accuracy remains null; do not promote from reward or total-clash count alone.",
+          "ranking_qualification": "V4 tau0.3sample2 now provisionally preferred over the retained historical v1 beta12 tau0.8sample8 leader, using common per-copy face/bridge geometry, E/F surrogate DockQ and packing together. Fresh seeds prevent causal attribution solely to the guard. C/D experimental accuracy and calibrated physical acceptance remain unassessed.",
           "submission_campaigns": [
             {
               "id": "bmp90-paid-wave16-20261016",
@@ -34219,7 +35396,7 @@
                 "58185786",
                 "58185787"
               ],
-              "status": "submitted_not_evaluated",
+              "status": "completed_evaluated",
               "cpu_registration_job_id": "58185754",
               "cpu_registration_state": "COMPLETED",
               "checkpoint_sha256": "88d4c7a240bf3815cb35342b4ddc1128ac243a2ea0256eb8a4df1209125868b5",
@@ -34262,26 +35439,175 @@
                 "58139990"
               ],
               "selection_rule": "Judge best overall evaluated structures across tau; submission and deterministic gates do not promote a recipe.",
-              "qualification": "Fresh paired A30 populations; prior A100 work and preferred choices retained. Full constructs; partial species-surrogate1LX5 E/F only, type-I C/D experimentally unassessed. No automatic retries."
+              "qualification": "Fresh paired A30 populations; prior A100 work and preferred choices retained. Full constructs; partial species-surrogate1LX5 E/F only, type-I C/D experimentally unassessed. No automatic retries.",
+              "status_before_completion": "submitted_not_evaluated",
+              "completed_outcome": {
+                "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+                "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+                "sampling_and_evaluation_state": "COMPLETED 0:0",
+                "report": {
+                  "path": "artifacts/bmp90/evaluation/bmp7_alk2_steric_v4_20261016_completed/scientific_summary.json",
+                  "sha256": "17b5ee6205842c365244d15619f4eb96a9c3affd1015b1d50e5d63781cae870a"
+                },
+                "scheduler": {
+                  "path": "artifacts/bmp90/evaluation/status_20261016T2350/scheduler.txt",
+                  "sha256": "6d6b76264d49fe549c83d012e2fe1ee845e08164633cbf168199fb1502ff49c8"
+                },
+                "actual_sampling_GPU_hours": 4.76,
+                "ranking_decision": "Provisional v4 preference from tau0.3sample2: stronger E/F surrogate agreement, both-copy transferred face/bridge support and improved packing. C/D native accuracy and calibrated physical acceptance remain unassessed.",
+                "scope": "Scientific outputs verified; full archival completion is tracked separately. Submission-time provenance and hardware remain unchanged."
+              },
+              "qualification_scope": "Historical submission-time qualification; current completed outcome and ranking decision are recorded in completed_outcome."
+            }
+          ],
+          "status_before_completion": "submitted_not_evaluated",
+          "completed_sweep_evaluation": {
+            "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+            "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+            "report": {
+              "path": "artifacts/bmp90/evaluation/bmp7_alk2_steric_v4_20261016_completed/scientific_summary.json",
+              "sha256": "17b5ee6205842c365244d15619f4eb96a9c3affd1015b1d50e5d63781cae870a"
+            },
+            "scheduler": {
+              "path": "artifacts/bmp90/evaluation/status_20261016T2350/scheduler.txt",
+              "sha256": "6d6b76264d49fe549c83d012e2fe1ee845e08164633cbf168199fb1502ff49c8"
+            },
+            "verified_evaluation_status": {
+              "path": "artifacts/bmp90/evaluation/status_20261016T2350/scientific_status.json",
+              "sha256": "7b3002ae0940be8b747300c854507cc4db48b2e296b2f35931cd1708a7ff89d6"
+            },
+            "evaluated_tau_values": [
+              0.1,
+              0.3,
+              0.8
+            ],
+            "reference_scope": "1LX5 species-surrogate DockQ covers E/F only. C/D common fine and face/bridge scores measure transferred restraints; experimental type-I native accuracy remains unknown.",
+            "physical_acceptance": "unassessed_pending_calibration",
+            "archive_scope": "Scientific subset and model hashes verified; full archival retrieval is tracked separately and is not asserted complete here.",
+            "actual_sampling_GPU_hours": 4.76,
+            "decision": {
+              "provisional_promotion": true,
+              "winning_tau": 0.3,
+              "best_guided_candidate": {
+                "registry_path": "complexes.BMP7_ACVR1_ACVR2A.metric_specific_leaders.provisional_overall_guided",
+                "job_id": "58185779",
+                "zero_based_sample": 2
+              },
+              "qualification": "All10 tau0.3 FK models descend from ancestor8; paired baseline already contains a useful basin. Fresh seeds prevent causal attribution solely to the steric safeguard; no calibrated acceptance."
+            },
+            "scheduler_timestamp_timezone": "America/Los_Angeles (Slurm start/end in source receipt); elapsed_seconds are durations."
+          },
+          "ranking_qualification_history": [
+            {
+              "superseded_at": "2026-10-17T00:02:47.519441+00:00",
+              "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+              "value": "Retain provisional v1 beta12 tau.8 sample8 leader until best overall across tau improves common per-copy contact/bridge geometry, E/F species-surrogate DockQ and full/core/tail packing. C/D experimental accuracy remains null; do not promote from reward or total-clash count alone."
             }
           ]
         }
       ],
       "current_iteration_parent": {
-        "recipe_id": "bmp7_alk2_joint_v1",
-        "recorded_at": "2026-10-14T19:02:26.165194+00:00",
-        "revision_recipe_id": "bmp7_alk2_bridge_cauchy_v3",
-        "purpose": "Defect-targeted finite iteration; source recipe remains preferred pending evaluated outcomes."
+        "recipe_id": "bmp7_alk2_bridge_cauchy_steric_v4",
+        "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+        "purpose": "Provisional practical parent after completed three-tau review; preserve recovered bridge/type-II geometry while validating the proposed Q89 face requirement.",
+        "source": {
+          "path": "artifacts/bmp90/evaluation/bmp7_alk2_steric_v4_20261016_completed/scientific_summary.json",
+          "sha256": "17b5ee6205842c365244d15619f4eb96a9c3affd1015b1d50e5d63781cae870a"
+        }
       },
       "metric_specific_leaders": {
-        "provisional_partial_recovery_candidate": {
-          "recipe_id": "bmp7_alk2_joint_v1",
-          "job_id": "58121329",
-          "tau": 0.8,
-          "beta": 12,
-          "zero_based_sample": 8
+        "provisional_overall_guided": {
+          "recipe_id": "bmp7_alk2_bridge_cauchy_steric_v4",
+          "job_id": "58185779",
+          "zero_based_sample": 2,
+          "tau": 0.3,
+          "beta": 24,
+          "gpu": "A30",
+          "model": {
+            "path": "artifacts/remote-runs/58185779/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_2.pdb",
+            "sha256": "9a35abe45fb15e97d7f39be1be186ba1215ca9391e624fd4c358e78e0fa0d72b"
+          },
+          "typeII_surrogate_DockQ": {
+            "E": 0.8452835474223831,
+            "F": 0.8562913843347518
+          },
+          "typeI_transferred_common_fine": {
+            "C": 0.881844684022445,
+            "D": 0.8951485315999154
+          },
+          "typeI_experimental_DockQ": {
+            "C": null,
+            "D": null
+          },
+          "T83_bridge_error_A": {
+            "C": 0.42009611189573803,
+            "D": -0.22742656571800968
+          },
+          "severe_CNO": {
+            "severe_interchain_CNO_gt1A": 22,
+            "core_only_count": 0,
+            "outside_source_core_count": 22
+          }
         },
-        "qualification": "Type-I placement remains unresolved and severe overlaps remain; no accepted full assembly."
+        "covered_typeII_only": {
+          "recipe_id": "bmp7_alk2_bridge_cauchy_steric_v4",
+          "job_id": "58185778",
+          "tau": 0.1,
+          "zero_based_sample": 3,
+          "model": {
+            "path": "artifacts/remote-runs/58185778/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_3.pdb",
+            "sha256": "39fa0a0debc74656ec1aaae73c6e0c9a1b68fcc20cfe5f74057902d65900d62a"
+          },
+          "typeII_surrogate_DockQ": {
+            "E": 0.9275237216372766,
+            "F": 0.9213599643101386
+          },
+          "T83_bridge_error_A": {
+            "C": 7.742593506210838,
+            "D": 7.6708463309237285
+          },
+          "qualification": "Higher E/F-only agreement does not define best overall; both bridges remain about7.7Angstrom too long."
+        },
+        "qualification": "Transferred type-I support is not experimental native accuracy;22 severe overlaps remain in the selected full716 model, all outside the historical source-core bands."
+      },
+      "iteration_parent_history": [
+        {
+          "superseded_at": "2026-10-17T00:02:47.519441+00:00",
+          "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+          "value": {
+            "recipe_id": "bmp7_alk2_joint_v1",
+            "recorded_at": "2026-10-14T19:02:26.165194+00:00",
+            "revision_recipe_id": "bmp7_alk2_bridge_cauchy_v3",
+            "purpose": "Defect-targeted finite iteration; source recipe remains preferred pending evaluated outcomes."
+          }
+        }
+      ],
+      "metric_specific_leader_history": [
+        {
+          "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+          "superseded_at": "2026-10-17T00:02:47.519441+00:00",
+          "leaders": {
+            "provisional_partial_recovery_candidate": {
+              "recipe_id": "bmp7_alk2_joint_v1",
+              "job_id": "58121329",
+              "tau": 0.8,
+              "beta": 12,
+              "zero_based_sample": 8
+            },
+            "qualification": "Type-I placement remains unresolved and severe overlaps remain; no accepted full assembly."
+          }
+        }
+      ],
+      "proposed_next_step": {
+        "status": "PROPOSED_ONLY_NOT_IMPLEMENTED_OR_SUBMITTED",
+        "action": "Preserve the recovered v4 tau0.3 arrangement and validate a separate per-copy Q89–BMP7L382 face requirement, retaining the recovered T83 bridge, type-II terms and full construct.",
+        "trigger": "Both Q89 distances are still about4.1Angstrom too long and their Cauchy features~.34 are diluted by the five-anchor face mean.",
+        "qualification": "A proposed transferred-geometry hypothesis only: check realistic competing poses and preserve E/F agreement/packing before any sampling. No new job or spec created by this analysis.",
+        "source": {
+          "path": "artifacts/bmp90/evaluation/bmp7_alk2_steric_v4_20261016_completed/scientific_summary.json",
+          "sha256": "17b5ee6205842c365244d15619f4eb96a9c3affd1015b1d50e5d63781cae870a"
+        },
+        "jobs_submitted": false
       }
     },
     "BMP4_BMPR1A_ACVR2B": {
@@ -44994,7 +46320,7 @@
       }
     }
   },
-  "updated_at": "2026-10-16T19:11:48.940172+00:00",
+  "updated_at": "2026-10-17T00:02:47.519441+00:00",
   "interface_evidence_registry": "configs/bmp90/interface_evidence_registry.json",
   "failure_registry": "configs/bmp90/failure_registry.json",
   "construct_policy": {
@@ -45016,7 +46342,7 @@
       "58185786",
       "58185787"
     ],
-    "status": "submitted_not_evaluated",
+    "status": "completed_evaluated",
     "cpu_registration_job_id": "58185754",
     "cpu_registration_state": "COMPLETED",
     "checkpoint_sha256": "88d4c7a240bf3815cb35342b4ddc1128ac243a2ea0256eb8a4df1209125868b5",
@@ -45059,7 +46385,25 @@
       "58139990"
     ],
     "selection_rule": "Judge best overall evaluated structures across tau; submission and deterministic gates do not promote a recipe.",
-    "qualification": "Fresh paired A30 populations; prior A100 work and preferred choices retained. Full constructs; partial species-surrogate1LX5 E/F only, type-I C/D experimentally unassessed. No automatic retries."
+    "qualification": "Fresh paired A30 populations; prior A100 work and preferred choices retained. Full constructs; partial species-surrogate1LX5 E/F only, type-I C/D experimentally unassessed. No automatic retries.",
+    "status_before_completion": "submitted_not_evaluated",
+    "completed_outcome": {
+      "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+      "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+      "sampling_and_evaluation_state": "COMPLETED 0:0",
+      "report": {
+        "path": "artifacts/bmp90/evaluation/bmp7_alk2_steric_v4_20261016_completed/scientific_summary.json",
+        "sha256": "17b5ee6205842c365244d15619f4eb96a9c3affd1015b1d50e5d63781cae870a"
+      },
+      "scheduler": {
+        "path": "artifacts/bmp90/evaluation/status_20261016T2350/scheduler.txt",
+        "sha256": "6d6b76264d49fe549c83d012e2fe1ee845e08164633cbf168199fb1502ff49c8"
+      },
+      "actual_sampling_GPU_hours": 4.76,
+      "ranking_decision": "Provisional v4 preference from tau0.3sample2: stronger E/F surrogate agreement, both-copy transferred face/bridge support and improved packing. C/D native accuracy and calibrated physical acceptance remain unassessed.",
+      "scope": "Scientific outputs verified; full archival completion is tracked separately. Submission-time provenance and hardware remain unchanged."
+    },
+    "qualification_scope": "Historical submission-time qualification; current completed outcome and ranking decision are recorded in completed_outcome."
   },
   "authorized_campaign_history": [
     {
@@ -45106,7 +46450,7 @@
         "path": "artifacts/bmp90/operations/paid_wave13_records_20261016/submission_receipt.json",
         "sha256": "277341ea9256e124c0966b14366bef9365841c2ebfb4963a4fc351aadb94dc95"
       },
-      "status": "submitted_not_evaluated",
+      "status": "completed_evaluated",
       "cpu_registration_job_id": "58185156",
       "checkpoint_sha256": "88d4c7a240bf3815cb35342b4ddc1128ac243a2ea0256eb8a4df1209125868b5",
       "preserved_A100_jobs": [
@@ -45138,7 +46482,25 @@
           "qualification": "No sampled hypothesis failed and no biological conclusion follows. The exact scientific objective, seeds and runtime are retained."
         }
       ],
-      "qualification": "Three fresh paired A30 jobs at beta4/tau0.1,0.3,0.8. No automatic retries; all outcomes pending. Existing preferred choices unchanged."
+      "qualification": "Three fresh paired A30 jobs at beta4/tau0.1,0.3,0.8. No automatic retries; all outcomes pending. Existing preferred choices unchanged.",
+      "status_before_completion": "submitted_not_evaluated",
+      "completed_outcome": {
+        "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+        "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+        "sampling_and_evaluation_state": "COMPLETED 0:0",
+        "report": {
+          "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v5_20261016_completed/scientific_summary.json",
+          "sha256": "5016e0df22fc839f5b388dd8c97169ecbe5334310086b4aaa2d39455a2fa6941"
+        },
+        "scheduler": {
+          "path": "artifacts/bmp90/evaluation/status_20261016T2350/scheduler.txt",
+          "sha256": "6d6b76264d49fe549c83d012e2fe1ee845e08164633cbf168199fb1502ff49c8"
+        },
+        "actual_sampling_GPU_hours": 4.759722222222222,
+        "ranking_decision": "V5 evaluated across all three taus; retain bmp6_joint_v1 as provisional overall leader and refined58139638 as preferred cleaned derivative. V5 tau0.3sample8 is a type-II/balanced-DockQ alternative, with weaker type-I, N60 and packing.",
+        "scope": "Scientific outputs verified; full archival completion is tracked separately. Submission-time provenance and hardware remain unchanged."
+      },
+      "qualification_scope": "Historical submission-time qualification; current completed outcome and ranking decision are recorded in completed_outcome."
     },
     {
       "id": "bmp90-paid-wave15-20261016",
@@ -45154,7 +46516,7 @@
         "58185732",
         "58185733"
       ],
-      "status": "submitted_not_evaluated",
+      "status": "completed_evaluated",
       "cpu_registration_job_id": "58185689",
       "cpu_registration_state": "COMPLETED",
       "checkpoint_sha256": "88d4c7a240bf3815cb35342b4ddc1128ac243a2ea0256eb8a4df1209125868b5",
@@ -45197,7 +46559,25 @@
         "58139990"
       ],
       "selection_rule": "Judge best overall evaluated structures across tau; submission and deterministic gates do not promote a recipe.",
-      "qualification": "Fresh paired A30 populations; prior A100 work and preferred choices retained. Full constructs; partial species-surrogate1LX5 E/F only, type-I C/D experimentally unassessed. No automatic retries."
+      "qualification": "Fresh paired A30 populations; prior A100 work and preferred choices retained. Full constructs; partial species-surrogate1LX5 E/F only, type-I C/D experimentally unassessed. No automatic retries.",
+      "status_before_completion": "submitted_not_evaluated",
+      "completed_outcome": {
+        "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
+        "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+        "sampling_and_evaluation_state": "COMPLETED 0:0",
+        "report": {
+          "path": "artifacts/bmp90/evaluation/bmp7_alk3_steric_v2_20261016_completed/scientific_summary.json",
+          "sha256": "e267c31934c379f8e3b346162b50c7190d8a4d23d0c173692f4fb4b09c83df80"
+        },
+        "scheduler": {
+          "path": "artifacts/bmp90/evaluation/status_20261016T2350/scheduler.txt",
+          "sha256": "6d6b76264d49fe549c83d012e2fe1ee845e08164633cbf168199fb1502ff49c8"
+        },
+        "actual_sampling_GPU_hours": 4.998055555555555,
+        "ranking_decision": "Provisional steric-v2 preference from best overall across six A100/A30 runs. Guided58139988sample6 and cleaner matched baseline9 are separate leaders; C/D native accuracy remains unassessed and both require physical cleanup.",
+        "scope": "Scientific outputs verified; full archival completion is tracked separately. Submission-time provenance and hardware remain unchanged."
+      },
+      "qualification_scope": "Historical submission-time qualification; current completed outcome and ranking decision are recorded in completed_outcome."
     }
   ]
 }

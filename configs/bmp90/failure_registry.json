@@ -548,6 +548,37 @@
             "path": "artifacts/bmp90/operations/paid_wave9/submission_receipt.json",
             "sha256": "f9f2faa9cc9cdb2eefdf7856dad6211836fd7ccc1922ede72c24cbd48e05102e"
           }
+        },
+        {
+          "followup_id": "BMP7_BMPR1A_STERIC_V2_COMPLETED_20261016",
+          "recipe_id": "bmp7_alk3_steric_v2",
+          "recorded_at": "2026-10-17T00:00:40.684769+00:00",
+          "status": "provisional_improvement_with_remaining_atomic_geometry",
+          "completes_submitted_followup_id": null,
+          "sampling_job_ids": [
+            "58139988",
+            "58139989",
+            "58139990",
+            "58185726",
+            "58185727",
+            "58185728"
+          ],
+          "evaluation_job_ids": [
+            "58139995",
+            "58139996",
+            "58139997",
+            "58185731",
+            "58185732",
+            "58185733"
+          ],
+          "scientific_summary": {
+            "path": "artifacts/bmp90/evaluation/bmp7_alk3_steric_v2_20261016_completed/scientific_summary.json",
+            "sha256": "e267c31934c379f8e3b346162b50c7190d8a4d23d0c173692f4fb4b09c83df80"
+          },
+          "evidence_id": "BMP7_BMPR1A_STERIC_V2_LOW_CLASH_CANDIDATES_20261016",
+          "remaining_defect_record": "BMP7_BMPR1A_STERIC_V2_RESIDUAL_ATOM_GEOMETRY_20261016",
+          "outcome": "Provisional steric-v2 guided candidate58139988FK6 improves packing while cleaner baseline9 is retained separately. Restrained topology-aware cleanup is proposed; not performed or submitted.",
+          "qualification": "Append-only completed outcome; original submission, prior proposals and source evidence preserved. No native binding/accuracy or calibrated physical acceptance claim."
         }
       ],
       "artifact_references": [
@@ -1279,6 +1310,31 @@
           "change": "Retain the exact v3 face/bridge/contact/integrity/full716 objective at beta24; add the existing bounded generic CNO overlap guard with independently checked ACVR1-native covalent exclusions.",
           "qualification": "New A30 populations use fresh paired baselines. Deterministic fixtures are tuning/implementation evidence; efficacy and overall improvement remain pending. The guard does not itself place the distant ACVR1 copy or validate type-I geometry.",
           "outcome": "Pending evaluated sampled structures across tau0.1/0.3/0.8; no recipe promotion or biological failure claim."
+        },
+        {
+          "followup_id": "BMP7_ACVR1_STERIC_V4_COMPLETED_20261016",
+          "recipe_id": "bmp7_alk2_bridge_cauchy_steric_v4",
+          "recorded_at": "2026-10-17T00:00:40.684769+00:00",
+          "status": "provisional_improvement_with_remaining_face_and_tail_defects",
+          "completes_submitted_followup_id": "BMP7_ACVR1_STERIC_V4_WAVE16_SUBMITTED_20261016",
+          "sampling_job_ids": [
+            "58185778",
+            "58185779",
+            "58185780"
+          ],
+          "evaluation_job_ids": [
+            "58185785",
+            "58185786",
+            "58185787"
+          ],
+          "scientific_summary": {
+            "path": "artifacts/bmp90/evaluation/bmp7_alk2_steric_v4_20261016_completed/scientific_summary.json",
+            "sha256": "17b5ee6205842c365244d15619f4eb96a9c3affd1015b1d50e5d63781cae870a"
+          },
+          "evidence_id": "BMP7_ACVR1_STERIC_V4_RECOVERY_AND_Q89_GAP_20261016",
+          "remaining_defect_record": "BMP7_ACVR1_STERIC_V4_Q89_AND_TAIL_DEFECTS_58185778_58185780",
+          "outcome": "Provisional preference shifts to steric-v4tau0.3job58185779sample2 based on best overall outcome. BothQ89approaches remain about4.1A too long and22outside-core severe overlaps remain; separate Q89 requirement is a proposal only.",
+          "qualification": "Append-only completed outcome; original submission, prior proposals and source evidence preserved. No native binding/accuracy or calibrated physical acceptance claim."
         }
       ],
       "proposed_next_change": {
@@ -1432,6 +1488,31 @@
             }
           ],
           "outcome": "Pending actual sampled structures and evaluation. No promotion or fixed biological claim from deterministic preflight."
+        },
+        {
+          "followup_id": "BMP6_N60_LOOP_V5_COMPLETED_20261016",
+          "recipe_id": "bmp6_joint_n60_loop_v5",
+          "recorded_at": "2026-10-17T00:00:40.684769+00:00",
+          "status": "completed_not_promoted_local_contact_global_pose_tradeoff",
+          "completes_submitted_followup_id": "BMP6_N60_LOOP_V5_SUBMITTED_20261016",
+          "sampling_job_ids": [
+            "58185219",
+            "58185220",
+            "58185221"
+          ],
+          "evaluation_job_ids": [
+            "58185231",
+            "58185232",
+            "58185233"
+          ],
+          "scientific_summary": {
+            "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v5_20261016_completed/scientific_summary.json",
+            "sha256": "5016e0df22fc839f5b388dd8c97169ecbe5334310086b4aaa2d39455a2fa6941"
+          },
+          "evidence_id": "BMP6_ACVR1_V5_N60_WRIST_TRADEOFF_COMPLETED_20261016",
+          "remaining_defect_record": "BMP6_V5_N60_WRIST_TRADEOFF_NO_PROMOTION_58185219_58185221",
+          "outcome": "No promotion. Preserve rawv1job58107636sample9 and cleaned derivative58139638; tau0.1sample1 improves N60contact but sacrifices wrist/interface geometry. Mandatory per-copy wrist geometry is a proposal only.",
+          "qualification": "Append-only completed outcome; original submission, prior proposals and source evidence preserved. No native binding/accuracy or calibrated physical acceptance claim."
         }
       ],
       "proposed_next_change": {
@@ -1444,8 +1525,230 @@
         "not_yet_implemented_or_preflighted_here": true
       },
       "transfer_limits": "This is failed targeted recovery in the tested populations, not evidence of nonbinding or invalid contact chemistry. Same-reference selected evidence is nonblind; no physical/native acceptance or new launch is implied."
+    },
+    {
+      "failure_id": "BMP6_V5_N60_WRIST_TRADEOFF_NO_PROMOTION_58185219_58185221",
+      "complex_id": "BMP6_ACVR1_ACVR2B",
+      "recipe_id": "bmp6_joint_n60_loop_v5",
+      "parent_failure_id": "BMP6_V4_PERSISTENT_N60_NO_PROMOTION_58142162_58142164",
+      "recorded_at": "2026-10-17T00:00:40.684769+00:00",
+      "failure_category": "local_contact_recovery_without_overall_interface_improvement",
+      "run_ids": [
+        "58185219",
+        "58185220",
+        "58185221"
+      ],
+      "evaluation_job_ids": [
+        "58185231",
+        "58185232",
+        "58185233"
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v5_20261016_completed/scientific_summary.json",
+          "sha256": "5016e0df22fc839f5b388dd8c97169ecbe5334310086b4aaa2d39455a2fa6941"
+        }
+      ],
+      "construct_description": "Full untrimmed716residues",
+      "sampling_settings": {
+        "beta": 4,
+        "tau": [
+          0.1,
+          0.3,
+          0.8
+        ],
+        "particle_count": 10,
+        "steps": 500,
+        "checkpoint_times": [
+          0.1,
+          0.3,
+          0.6,
+          0.75,
+          0.9
+        ],
+        "exact_settings_and_receipts": {
+          "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v5_20261016_completed/scientific_summary.json",
+          "sha256": "5016e0df22fc839f5b388dd8c97169ecbe5334310086b4aaa2d39455a2fa6941"
+        }
+      },
+      "observed_symptoms": [
+        "Best newtau.3sample8 has C/D DockQ.642/.642 vs rawv1.663/.656, N60fit errors4.43/4.54A vs4.12/3.89A, N60S446heavy9.99/9.67A vs8.11/7.48A, and26severeCNO overlaps vs17. TypeII improves.899/.903 vs.888/.890. Highest newrewardtau.1sample1 recovers N60contact but loses K78wrist and typeI DockQ; no overall promotion.",
+        "Do not describe v5 as never improving N60contact: tau.1highreward model recovers both contacts but sacrifices surrounding interface; receptor-fitted N60still3.71/3.48A.",
+        "In best overall v5sample8, N60S446 feature.282/.298 is below internal span features.574\u2013.858, so four-way minimum masks internal-span progress until approach improves. This is objective behavior, not proof of the sampling cause.",
+        "Tau0.8 has zero resampling and all10 FK PDBs byte-identical to matched baselines; this does not disqualify the sweep by itself. No candidate improves the overall tradeoff across tau."
+      ],
+      "suspected_causes": [],
+      "supporting_evidence_ids": [
+        "BMP6_ACVR1_V5_N60_WRIST_TRADEOFF_COMPLETED_20261016"
+      ],
+      "attempted_changes": [],
+      "followups": [],
+      "status": "completed_not_promoted_local_contact_global_pose_tradeoff",
+      "proposed_next_change": {
+        "status": "proposal_only_not_implemented_preflighted_or_submitted",
+        "change": "Keep v5 loop spans/approach and all v1/typeII/full716 terms; require the9N4K K78\u2013opposite-ligandY490 wrist distance-and-three-angle geometry inside EACH typeI copy as a limiting requirement, replacing the former weak global-floor treatment for that geometry.",
+        "details_evidence_id": "BMP6_ACVR1_V5_N60_WRIST_TRADEOFF_COMPLETED_20261016",
+        "source": {
+          "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v5_20261016_completed/scientific_summary.json",
+          "sha256": "5016e0df22fc839f5b388dd8c97169ecbe5334310086b4aaa2d39455a2fa6941"
+        },
+        "new_job_ids": []
+      },
+      "transfer_limits": "These observations do not establish nonbinding or invalidate a receptor-ligand pairing. Proposed constraints/cleanup are unsubmitted and do not change existing scientific history.",
+      "reference_scope": "All4DockQ compare with engineered glycosylated9N4K protein-only reconstruction. Full716sequences retained; only552experimentalresidues observed. No native affinity/signaling or physical acceptance.",
+      "evidence_allocation": "113scoring-withheld same-reference contacts are not independent; all inspected models/N60/wrist evidence is posthoc. Historical ledgers differ; use common DockQ/allnativecontact/packing metrics."
+    },
+    {
+      "failure_id": "BMP7_ACVR1_STERIC_V4_Q89_AND_TAIL_DEFECTS_58185778_58185780",
+      "complex_id": "BMP7_ACVR1_ACVR2A",
+      "recipe_id": "bmp7_alk2_bridge_cauchy_steric_v4",
+      "parent_failure_id": "BMP7_ACVR1_V3_BETA24_UNRESOLVED_PLACEMENT_58142372_58142374",
+      "recorded_at": "2026-10-17T00:00:40.684769+00:00",
+      "failure_category": "remaining_transferred_face_gap_and_full_construct_packing",
+      "run_ids": [
+        "58185778",
+        "58185779",
+        "58185780"
+      ],
+      "evaluation_job_ids": [
+        "58185785",
+        "58185786",
+        "58185787"
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/evaluation/bmp7_alk2_steric_v4_20261016_completed/scientific_summary.json",
+          "sha256": "17b5ee6205842c365244d15619f4eb96a9c3affd1015b1d50e5d63781cae870a"
+        }
+      ],
+      "construct_description": "Full untrimmed716residues",
+      "sampling_settings": {
+        "beta": 24,
+        "tau": [
+          0.1,
+          0.3,
+          0.8
+        ],
+        "particle_count": 10,
+        "steps": 500,
+        "checkpoint_times": [
+          0.1,
+          0.3,
+          0.6,
+          0.75,
+          0.9
+        ],
+        "exact_settings_and_receipts": {
+          "path": "artifacts/bmp90/evaluation/bmp7_alk2_steric_v4_20261016_completed/scientific_summary.json",
+          "sha256": "17b5ee6205842c365244d15619f4eb96a9c3affd1015b1d50e5d63781cae870a"
+        }
+      },
+      "observed_symptoms": [
+        "Best provisional candidate58185779FKsample2 has22 severe interchain CNO overlaps, all outside source core; worst A6GLN:CG\u2013F46LYS:CE separation1.001A. Zero core-band severe pairs does not establish full physical acceptance.",
+        "Q89\u2013BMP7L382 distances remain13.437/13.374Angstrom versus transferred targets9.245/9.253: +4.192/+4.121Angstrom. Face means allow these weak individual contacts while other anchors and bridges fit.",
+        "Ligand-aligned ACVR1 template RMSD5.35/4.84Angstrom and separately fitted source-fold RMSD2.59/2.59Angstrom remain hypothesis comparisons, not experimental native accuracy.",
+        "All10tau0.3FK descendants share Brownian ancestor8; the improved arrangement is one enriched basin, not10independent confirmations."
+      ],
+      "suspected_causes": [],
+      "supporting_evidence_ids": [
+        "BMP7_ACVR1_STERIC_V4_RECOVERY_AND_Q89_GAP_20261016"
+      ],
+      "attempted_changes": [],
+      "followups": [],
+      "status": "provisional_improvement_with_remaining_face_and_tail_defects",
+      "proposed_next_change": {
+        "status": "proposal_only_not_implemented_preflighted_or_submitted",
+        "change": "Preserve the recovered v4 tau0.3 arrangement and validate a separate per-copy Q89\u2013BMP7L382 face requirement, retaining the recovered T83 bridge, type-II terms and full construct.",
+        "details_evidence_id": "BMP7_ACVR1_STERIC_V4_RECOVERY_AND_Q89_GAP_20261016",
+        "source": {
+          "path": "artifacts/bmp90/evaluation/bmp7_alk2_steric_v4_20261016_completed/scientific_summary.json",
+          "sha256": "17b5ee6205842c365244d15619f4eb96a9c3affd1015b1d50e5d63781cae870a"
+        },
+        "new_job_ids": []
+      },
+      "transfer_limits": "These observations do not establish nonbinding or invalidate a receptor-ligand pairing. Proposed constraints/cleanup are unsubmitted and do not change existing scientific history.",
+      "reference_scope": "Partial1LX5 conserved mouse-to-human type-II surrogate: E/F only,392observed residues of full716. C/D experimental DockQ and full-assembly experimental accuracy remain unassessed.",
+      "evidence_allocation": "Generic overlap guard and native covalent exclusions are distinct from transferred9N4K type-I pose geometry. All inspected models, Q89 gap and same-reference contacts are posthoc/tuning evidence, not independent validation."
+    },
+    {
+      "failure_id": "BMP7_BMPR1A_STERIC_V2_RESIDUAL_ATOM_GEOMETRY_20261016",
+      "complex_id": "BMP7_BMPR1A_ACVR2A",
+      "recipe_id": "bmp7_alk3_steric_v2",
+      "parent_failure_id": "BMP7_BMPR1A_RECOVERY_WITH_PHYSICAL_DEFECTS_20261013",
+      "recorded_at": "2026-10-17T00:00:40.684769+00:00",
+      "failure_category": "residual_atomic_and_disulfide_geometry_after_candidate_improvement",
+      "run_ids": [
+        "58139988",
+        "58139989",
+        "58139990",
+        "58185726",
+        "58185727",
+        "58185728"
+      ],
+      "evaluation_job_ids": [
+        "58139995",
+        "58139996",
+        "58139997",
+        "58185731",
+        "58185732",
+        "58185733"
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/evaluation/bmp7_alk3_steric_v2_20261016_completed/scientific_summary.json",
+          "sha256": "e267c31934c379f8e3b346162b50c7190d8a4d23d0c173692f4fb4b09c83df80"
+        }
+      ],
+      "construct_description": "Full untrimmed768residues",
+      "sampling_settings": {
+        "beta": 4,
+        "tau": [
+          0.1,
+          0.3,
+          0.8
+        ],
+        "particle_count": 10,
+        "steps": 500,
+        "checkpoint_times": [
+          0.1,
+          0.3,
+          0.6,
+          0.75,
+          0.9
+        ],
+        "exact_settings_and_receipts": {
+          "path": "artifacts/bmp90/evaluation/bmp7_alk3_steric_v2_20261016_completed/scientific_summary.json",
+          "sha256": "e267c31934c379f8e3b346162b50c7190d8a4d23d0c173692f4fb4b09c83df80"
+        }
+      },
+      "observed_symptoms": [
+        "Guided58139988FKsample6 retains7 severe CNO pairs (3source-core/4outside); the cleaner same-run baseline9 retains4 (3/1). Both retain high E/F surrogate agreement and transferred C/D support.",
+        "Native disulfide geometry remains distorted: E72SG\u2013E84SG is1.668A in FK6 and1.669A in baseline9. The native graph supplies exclusions but does not enforce correct bond geometry.",
+        "A100tau.1 already contains the best low-clash baseline candidate. Distinct seeds/hardware prevent assigning its quality solely to the guard. The matched A100tau.3 retains all four recovered FK candidates byte-identical to prior v1job58121330, plus one other identical model.",
+        "Low optimized overlap severity and successful contact guidance do not establish native type-I geometry or calibrated physical acceptance."
+      ],
+      "suspected_causes": [],
+      "supporting_evidence_ids": [
+        "BMP7_BMPR1A_STERIC_V2_LOW_CLASH_CANDIDATES_20261016"
+      ],
+      "attempted_changes": [],
+      "followups": [],
+      "status": "provisional_improvement_with_remaining_atomic_geometry",
+      "proposed_next_change": {
+        "status": "proposal_only_not_implemented_preflighted_or_submitted",
+        "change": "restrained_full_construct_atomistic_cleanup",
+        "details_evidence_id": "BMP7_BMPR1A_STERIC_V2_LOW_CLASH_CANDIDATES_20261016",
+        "source": {
+          "path": "artifacts/bmp90/evaluation/bmp7_alk3_steric_v2_20261016_completed/scientific_summary.json",
+          "sha256": "e267c31934c379f8e3b346162b50c7190d8a4d23d0c173692f4fb4b09c83df80"
+        },
+        "new_job_ids": []
+      },
+      "transfer_limits": "These observations do not establish nonbinding or invalidate a receptor-ligand pairing. Proposed constraints/cleanup are unsubmitted and do not change existing scientific history.",
+      "reference_scope": "Only392conserved1LX5 residues of full768 support E/F species-surrogate agreement; C/D experimental and whole-assembly DockQ remain null. Source-core576residue mask includes transferred9MIR geometry; glycans omitted.",
+      "evidence_allocation": "Generic CNO sterics and explicit covalent exclusions are separate from transferred contact hypotheses. Inspected same-reference contacts and selected models are tuning evidence, not independent validation."
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-16T19:11:48.940172+00:00"
+  "updated_at": "2026-10-17T00:00:40.684769+00:00"
 }

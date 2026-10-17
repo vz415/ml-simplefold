@@ -1231,7 +1231,19 @@
       },
       "finding": "Preserve every v1 contact and integrity rule. Add a bounded C/N/O interchain severe-overlap factor including full terminal regions; annotated native disulfides and standard connectivity define covalent exclusions. Maximum penalty20%; generic chemistry is not new target-specific contact evidence.",
       "evidence_allocation": "guidance_and_tuning",
-      "limits": "No new experimental BMP7 typeI interface evidence. Native topology annotations only support covalent exclusions. Counterfactual fixtures test implementation/design behavior and do not validate a sampled structure."
+      "limits": "No new experimental BMP7 typeI interface evidence. Native topology annotations only support covalent exclusions. Counterfactual fixtures test implementation/design behavior and do not validate a sampled structure.",
+      "completed_followups": [
+        {
+          "evidence_id": "BMP7_BMPR1A_STERIC_V2_LOW_CLASH_CANDIDATES_20261016",
+          "scientific_summary": {
+            "path": "artifacts/bmp90/evaluation/bmp7_alk3_steric_v2_20261016_completed/scientific_summary.json",
+            "sha256": "e267c31934c379f8e3b346162b50c7190d8a4d23d0c173692f4fb4b09c83df80"
+          },
+          "recorded_at": "2026-10-17T00:00:40.684769+00:00",
+          "status": "completed_outcome_recorded",
+          "qualification": "See the completed observations and remaining defects; proposed next steps are unsubmitted and native/physical acceptance remains unassessed."
+        }
+      ]
     },
     {
       "evidence_id": "BMP6_ACVR1_N60_SURROUNDING_CONTACTS_20261014",
@@ -1301,7 +1313,19 @@
           "sha256": "0f78c7e513b13a615990216d84d664f873d27f718509a60a48d2055db6b35707"
         }
       },
-      "qualification": "Internal CA spans are receptor-shape evidence, and the CA approach is a geometry proxy. Neither establishes an atom-specific hydrogen bond, affinity, native signaling or a transferable generic chemistry rule."
+      "qualification": "Internal CA spans are receptor-shape evidence, and the CA approach is a geometry proxy. Neither establishes an atom-specific hydrogen bond, affinity, native signaling or a transferable generic chemistry rule.",
+      "completed_followups": [
+        {
+          "evidence_id": "BMP6_ACVR1_V5_N60_WRIST_TRADEOFF_COMPLETED_20261016",
+          "scientific_summary": {
+            "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v5_20261016_completed/scientific_summary.json",
+            "sha256": "5016e0df22fc839f5b388dd8c97169ecbe5334310086b4aaa2d39455a2fa6941"
+          },
+          "recorded_at": "2026-10-17T00:00:40.684769+00:00",
+          "status": "completed_outcome_recorded",
+          "qualification": "See the completed observations and remaining defects; proposed next steps are unsubmitted and native/physical acceptance remains unassessed."
+        }
+      ]
     },
     {
       "evidence_id": "BMP7_ACVR1_BOUNDED_CNO_STERIC_20261016",
@@ -1377,7 +1401,438 @@
         "The guard may approach its0.8floor for hundreds of tail collisions; final packing improvement must be observed, not inferred from implementation tests.",
         "The highest raw contact-reward candidate remains potentially preferred by the new objective even when it is not the best joint structural candidate; no recipe promotion follows these rescoring tests."
       ],
-      "status": "submitted_outcome_pending_unranked"
+      "status": "completed_outcome_recorded_provisional_not_native_validated",
+      "completed_followups": [
+        {
+          "evidence_id": "BMP7_ACVR1_STERIC_V4_RECOVERY_AND_Q89_GAP_20261016",
+          "scientific_summary": {
+            "path": "artifacts/bmp90/evaluation/bmp7_alk2_steric_v4_20261016_completed/scientific_summary.json",
+            "sha256": "17b5ee6205842c365244d15619f4eb96a9c3affd1015b1d50e5d63781cae870a"
+          },
+          "recorded_at": "2026-10-17T00:00:40.684769+00:00",
+          "status": "completed_outcome_recorded",
+          "qualification": "See the completed observations and remaining defects; proposed next steps are unsubmitted and native/physical acceptance remains unassessed."
+        }
+      ],
+      "status_history": [
+        {
+          "status": "submitted_outcome_pending_unranked",
+          "preserved_at": "2026-10-17T00:00:40.684769+00:00",
+          "reason": "Literal prior submission state retained when completed outcomes became available."
+        }
+      ]
+    },
+    {
+      "evidence_id": "BMP6_ACVR1_V5_N60_WRIST_TRADEOFF_COMPLETED_20261016",
+      "target_id": "BMP6_ACVR1_ACVR2B",
+      "recipe_id": "bmp6_joint_n60_loop_v5",
+      "recorded_at": "2026-10-17T00:00:40.684769+00:00",
+      "evidence_class": "completed_model_evaluation_and_posthoc_structural_diagnosis",
+      "status": "completed_observed_with_unsubmitted_next_step",
+      "parent_evidence_ids": [
+        "BMP6_ACVR1_N60_LOOP_CA_APPROACH_20261016"
+      ],
+      "source": {
+        "path": "artifacts/bmp90/evaluation/bmp6_acvr1_v5_20261016_completed/scientific_summary.json",
+        "sha256": "5016e0df22fc839f5b388dd8c97169ecbe5334310086b4aaa2d39455a2fa6941"
+      },
+      "associated_failure_id": "BMP6_V5_N60_WRIST_TRADEOFF_NO_PROMOTION_58185219_58185221",
+      "finding": "Best newtau.3sample8 has C/D DockQ.642/.642 vs rawv1.663/.656, N60fit errors4.43/4.54A vs4.12/3.89A, N60S446heavy9.99/9.67A vs8.11/7.48A, and26severeCNO overlaps vs17. TypeII improves.899/.903 vs.888/.890. Highest newrewardtau.1sample1 recovers N60contact but loses K78wrist and typeI DockQ; no overall promotion.",
+      "completion_verification": {
+        "path": "artifacts/bmp90/evaluation/status_20261016T2350/scientific_status.json",
+        "sha256": "7b3002ae0940be8b747300c854507cc4db48b2e296b2f35931cd1708a7ff89d6"
+      },
+      "per_run_outcomes": [
+        {
+          "job_id": "58185219",
+          "evaluation_job_id": "58185231",
+          "tau": 0.1,
+          "beta": 4.0,
+          "all_four_DockQ_ge0p6_counts": {
+            "baseline": 0,
+            "FK": 0
+          },
+          "resampling_count": 2,
+          "best_weakest_DockQ_sample": 4,
+          "best_weakest_DockQ": 0.5773754291397034,
+          "highest_reward_sample": 1
+        },
+        {
+          "job_id": "58185220",
+          "evaluation_job_id": "58185232",
+          "tau": 0.3,
+          "beta": 4.0,
+          "all_four_DockQ_ge0p6_counts": {
+            "baseline": 1,
+            "FK": 2
+          },
+          "resampling_count": 1,
+          "best_weakest_DockQ_sample": 8,
+          "best_weakest_DockQ": 0.642127238728181,
+          "highest_reward_sample": 8
+        },
+        {
+          "job_id": "58185221",
+          "evaluation_job_id": "58185233",
+          "tau": 0.8,
+          "beta": 4.0,
+          "all_four_DockQ_ge0p6_counts": {
+            "baseline": 0,
+            "FK": 0
+          },
+          "resampling_count": 0,
+          "best_weakest_DockQ_sample": 8,
+          "best_weakest_DockQ": 0.5368328317924936,
+          "highest_reward_sample": 8
+        }
+      ],
+      "selected_models": [
+        {
+          "job_id": "58185220",
+          "condition": "fk",
+          "sample": 8,
+          "model": {
+            "path": "artifacts/remote-runs/58185220/fk/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_8.pdb",
+            "sha256": "a44506b94f2584b726d397f1fc2c3e7ee9ddb3b5b6dd8f2f32161a4e743c2bb3"
+          },
+          "DockQ": {
+            "C": 0.642127238728181,
+            "D": 0.6422522903237381,
+            "E": 0.8991530639396489,
+            "F": 0.9033424027195341
+          },
+          "N60_receptor_fitted_CA_error_A": {
+            "C": 4.429893874396396,
+            "D": 4.544874421789914
+          },
+          "severe_interchain_CNO_overlaps_gt1A": 26
+        },
+        {
+          "job_id": "58185219",
+          "condition": "fk",
+          "sample": 1,
+          "model": {
+            "path": "artifacts/remote-runs/58185219/fk/predictions_simplefold_3B/BMP6_ACVR1_ACVR2B_deposited_native_no_tags_sampled_1.pdb",
+            "sha256": "73f391d73bc87b0be9cc69c7bc9442dc53e6d6a13c7f4c097fa0c062bedb748e"
+          },
+          "DockQ": {
+            "C": 0.4527693961827137,
+            "D": 0.4710377330899691,
+            "E": 0.8776717850426635,
+            "F": 0.8975550135648355
+          },
+          "N60_receptor_fitted_CA_error_A": {
+            "C": 3.7115893425464823,
+            "D": 3.479027614781032
+          },
+          "severe_interchain_CNO_overlaps_gt1A": 6,
+          "minimum_heavy_contact_distances_A": {
+            "N60_S446": {
+              "C": 4.540979850208544,
+              "D": 4.102586988718215
+            },
+            "K78_Y490": {
+              "C": 6.270913569807832,
+              "D": 5.71240623555433
+            }
+          }
+        }
+      ],
+      "interpretation": [
+        "Do not describe v5 as never improving N60contact: tau.1highreward model recovers both contacts but sacrifices surrounding interface; receptor-fitted N60still3.71/3.48A.",
+        "In best overall v5sample8, N60S446 feature.282/.298 is below internal span features.574\u2013.858, so four-way minimum masks internal-span progress until approach improves. This is objective behavior, not proof of the sampling cause.",
+        "No promotion: retain v1raw58107636sample9 and cleaned58139638; v5tau0.3sample8 improves typeII but worsens typeI,N60 andpacking."
+      ],
+      "reference_scope": "All4DockQ compare with engineered glycosylated9N4K protein-only reconstruction. Full716sequences retained; only552experimentalresidues observed. No native affinity/signaling or physical acceptance.",
+      "evidence_allocation": "113scoring-withheld same-reference contacts are not independent; all inspected models/N60/wrist evidence is posthoc. Historical ledgers differ; use common DockQ/allnativecontact/packing metrics.",
+      "proposed_next_step": {
+        "status": "proposal_only_not_implemented_or_preflighted",
+        "change": "Keep v5 loop spans/approach and all v1/typeII/full716 terms; require the9N4K K78\u2013opposite-ligandY490 wrist distance-and-three-angle geometry inside EACH typeI copy as a limiting requirement, replacing the former weak global-floor treatment for that geometry.",
+        "mapping": {
+          "C_copy": "ACVR1 C input58=K78, opposite BMP6 B input116=Y490",
+          "D_copy": "ACVR1 D input58=K78, opposite BMP6 A input116=Y490"
+        },
+        "exact_existing_geometry_source": {
+          "path": "artifacts/bmp90/preparation/bmp6_acvr1_v4_20261014/bmp6_joint_n60_surround_v4.json",
+          "sha256": "4aa7610b6ab6d4d2c73e7032408fe2fac377f77c65f54449a4369ad6892b00c4"
+        },
+        "geometry_definition": "Reuse verified CB\u2013CB source distance and ordered approach angles N\u2013CA\u2013ligandCB, C\u2013CA\u2013ligandCB, ligandCA\u2013ligandCB\u2013receptorCB; require per-copy satisfaction under one chain assignment. These are approach proxies, not terminal Lys/Tyr binding energy.",
+        "required_preflight": "Same-pose joint N60+wrist source-compatible repair must outrank actual contact-tradeoff model; preserve practical v1 over realistic wrongposes, reject missing atoms/duplicate sites and keep typeII exact. Choose bounded per-copy normalization only after this finite check, not a new beta-only or academic sampling study.",
+        "limitation": "A per-copy cap may further compress rewards or still admit alternate orientations; no launch-ready claim or guarantee of native correctness.",
+        "new_sampling_or_cleanup_jobs": []
+      },
+      "archival_scope": "Verified analysis/metadata/PDB subset only. Parent handles complete archival publication, local verification and temporary-cache cleanup separately.",
+      "measurement_scope": "Report-defined severe interchain C/N/O radius overlap >1 Angstrom; separate from evaluator heavy-atom overlap >0.4 Angstrom. Core/outside classification uses source coordinate coverage, not proven disorder; no calibrated physical acceptance."
+    },
+    {
+      "evidence_id": "BMP7_ACVR1_STERIC_V4_RECOVERY_AND_Q89_GAP_20261016",
+      "target_id": "BMP7_ACVR1_ACVR2A",
+      "recipe_id": "bmp7_alk2_bridge_cauchy_steric_v4",
+      "recorded_at": "2026-10-17T00:00:40.684769+00:00",
+      "evidence_class": "completed_model_evaluation_and_posthoc_structural_diagnosis",
+      "status": "completed_observed_with_unsubmitted_next_step",
+      "parent_evidence_ids": [
+        "BMP7_ACVR1_BOUNDED_CNO_STERIC_20261016"
+      ],
+      "source": {
+        "path": "artifacts/bmp90/evaluation/bmp7_alk2_steric_v4_20261016_completed/scientific_summary.json",
+        "sha256": "17b5ee6205842c365244d15619f4eb96a9c3affd1015b1d50e5d63781cae870a"
+      },
+      "associated_failure_id": "BMP7_ACVR1_STERIC_V4_Q89_AND_TAIL_DEFECTS_58185778_58185780",
+      "finding": "Steric-v4 tau0.3 yields a provisional overall improvement in both covered type-II copies, joint transferred type-I face/bridge support and packing; Q89 approach and tail collisions remain unresolved.",
+      "completion_verification": {
+        "path": "artifacts/bmp90/evaluation/status_20261016T2350/scientific_status.json",
+        "sha256": "7b3002ae0940be8b747300c854507cc4db48b2e296b2f35931cd1708a7ff89d6"
+      },
+      "per_run_outcomes": [
+        {
+          "job_id": "58185778",
+          "evaluation_job_id": "58185785",
+          "tau": 0.1,
+          "beta": 24.0,
+          "baseline_both_typeII_ge0p6": 2,
+          "FK_both_typeII_ge0p6": 8,
+          "FK_both_common_typeI_ge0p5": 8,
+          "resampling_count": 3
+        },
+        {
+          "job_id": "58185779",
+          "evaluation_job_id": "58185786",
+          "tau": 0.3,
+          "beta": 24.0,
+          "baseline_both_typeII_ge0p6": 1,
+          "FK_both_typeII_ge0p6": 10,
+          "FK_both_common_typeI_ge0p5": 10,
+          "resampling_count": 4
+        },
+        {
+          "job_id": "58185780",
+          "evaluation_job_id": "58185787",
+          "tau": 0.8,
+          "beta": 24.0,
+          "baseline_both_typeII_ge0p6": 1,
+          "FK_both_typeII_ge0p6": 3,
+          "FK_both_common_typeI_ge0p5": 0,
+          "resampling_count": 2
+        }
+      ],
+      "selected_models": [
+        {
+          "job_id": "58185779",
+          "condition": "fk",
+          "sample": 2,
+          "path": "artifacts/remote-runs/58185779/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_2.pdb",
+          "sha256": "9a35abe45fb15e97d7f39be1be186ba1215ca9391e624fd4c358e78e0fa0d72b",
+          "typeII_DockQ": {
+            "E": 0.8452835474223831,
+            "F": 0.8562913843347518
+          },
+          "typeI_common_fine": {
+            "C": 0.881844684022445,
+            "D": 0.8951485315999154
+          },
+          "typeI_expanded_fine": {
+            "C": 0.8331388117062153,
+            "D": 0.8434256346094102
+          },
+          "severe_CNO": 22,
+          "source_core_only": 0,
+          "outside_source_core": 22
+        }
+      ],
+      "remaining_defects": {
+        "typeI_face": "Q89\u2013BMP7L382 distances remain13.437/13.374Angstrom versus transferred targets9.245/9.253: +4.192/+4.121Angstrom. Face means allow these weak individual contacts while other anchors and bridges fit.",
+        "N60_E362_errors_A": {
+          "C": 2.305961423159138,
+          "D": 2.184007878117292
+        },
+        "tail_packing": "Largest overlaps involve BMP7 N-terminal residues2-6 against type-II receptor sidechains, e.g A6GLN\u2013F46LYS. Full-model packing remains imperfect despite no core-band severe pairs."
+      },
+      "interpretation": [
+        "All10tau0.3guided structures descend from initial Brownian trajectory ancestor8 after4resampling events; report one enriched basin, not10independent confirmations. Different fresh seeds prevent attributing improvement uniquely to the steric safeguard.",
+        "Provisional preferred v4tau0.3 improves the overall candidate tradeoff; transferred C/D metrics remain hypothesis agreement and full physical acceptance remains unassessed."
+      ],
+      "reference_scope": "Partial1LX5 conserved mouse-to-human type-II surrogate: E/F only,392observed residues of full716. C/D experimental DockQ and full-assembly experimental accuracy remain unassessed.",
+      "evidence_allocation": "Generic overlap guard and native covalent exclusions are distinct from transferred9N4K type-I pose geometry. All inspected models, Q89 gap and same-reference contacts are posthoc/tuning evidence, not independent validation.",
+      "proposed_next_step": {
+        "status": "proposal_only_not_implemented_or_preflighted",
+        "action": "Preserve the recovered v4 tau0.3 arrangement and validate a separate per-copy Q89\u2013BMP7L382 face requirement, retaining the recovered T83 bridge, type-II terms and full construct.",
+        "trigger": "Both Q89 distances are still about4.1Angstrom too long and their Cauchy features~.34 are diluted by the five-anchor face mean.",
+        "qualification": "A proposed transferred-geometry hypothesis only: check realistic competing poses and preserve E/F agreement/packing before any sampling. No new job or spec created by this analysis.",
+        "new_sampling_or_cleanup_jobs": []
+      },
+      "archival_scope": "Verified analysis/metadata/PDB subset only. Parent handles complete archival publication, local verification and temporary-cache cleanup separately.",
+      "measurement_scope": "Report-defined severe interchain C/N/O radius overlap >1 Angstrom; separate from evaluator heavy-atom overlap >0.4 Angstrom. Core/outside classification uses source coordinate coverage, not proven disorder; no calibrated physical acceptance."
+    },
+    {
+      "evidence_id": "BMP7_BMPR1A_STERIC_V2_LOW_CLASH_CANDIDATES_20261016",
+      "target_id": "BMP7_BMPR1A_ACVR2A",
+      "recipe_id": "bmp7_alk3_steric_v2",
+      "recorded_at": "2026-10-17T00:00:40.684769+00:00",
+      "evidence_class": "completed_model_evaluation_and_posthoc_structural_diagnosis",
+      "status": "completed_observed_with_unsubmitted_next_step",
+      "parent_evidence_ids": [
+        "BMP7_BMPR1A_SEVERE_OVERLAP_GUARD_20261014"
+      ],
+      "source": {
+        "path": "artifacts/bmp90/evaluation/bmp7_alk3_steric_v2_20261016_completed/scientific_summary.json",
+        "sha256": "e267c31934c379f8e3b346162b50c7190d8a4d23d0c173692f4fb4b09c83df80"
+      },
+      "associated_failure_id": "BMP7_BMPR1A_STERIC_V2_RESIDUAL_ATOM_GEOMETRY_20261016",
+      "finding": "Steric-v2 has lower-clash high-interface-support candidates, with a cleaner unguided baseline retained separately. Residual native disulfide and atomic geometry require cleanup; guard efficacy is not isolated from initial population quality.",
+      "completion_verification": {
+        "path": "artifacts/bmp90/evaluation/status_20261016T2350/scientific_status.json",
+        "sha256": "7b3002ae0940be8b747300c854507cc4db48b2e296b2f35931cd1708a7ff89d6"
+      },
+      "per_run_outcomes": [
+        {
+          "job_id": "58139988",
+          "evaluation_job_id": "58139995",
+          "tau": 0.1,
+          "beta": 4.0,
+          "gpu": "NVIDIA A100 80GB PCIe",
+          "baseline_both_typeII_ge0p6": 2,
+          "FK_both_typeII_ge0p6": 6,
+          "FK_supported_severe_CNO_median": 9.0,
+          "resampling_count": 1
+        },
+        {
+          "job_id": "58139989",
+          "evaluation_job_id": "58139996",
+          "tau": 0.3,
+          "beta": 4.0,
+          "gpu": "NVIDIA A100 80GB PCIe",
+          "baseline_both_typeII_ge0p6": 1,
+          "FK_both_typeII_ge0p6": 4,
+          "FK_supported_severe_CNO_median": 79.0,
+          "resampling_count": 1
+        },
+        {
+          "job_id": "58139990",
+          "evaluation_job_id": "58139997",
+          "tau": 0.8,
+          "beta": 4.0,
+          "gpu": "NVIDIA A100 80GB PCIe",
+          "baseline_both_typeII_ge0p6": 2,
+          "FK_both_typeII_ge0p6": 9,
+          "FK_supported_severe_CNO_median": 102,
+          "resampling_count": 3
+        },
+        {
+          "job_id": "58185726",
+          "evaluation_job_id": "58185731",
+          "tau": 0.1,
+          "beta": 4.0,
+          "gpu": "NVIDIA A30",
+          "baseline_both_typeII_ge0p6": 3,
+          "FK_both_typeII_ge0p6": 7,
+          "FK_supported_severe_CNO_median": 39,
+          "resampling_count": 1
+        },
+        {
+          "job_id": "58185727",
+          "evaluation_job_id": "58185732",
+          "tau": 0.3,
+          "beta": 4.0,
+          "gpu": "NVIDIA A30",
+          "baseline_both_typeII_ge0p6": 1,
+          "FK_both_typeII_ge0p6": 4,
+          "FK_supported_severe_CNO_median": 48.5,
+          "resampling_count": 1
+        },
+        {
+          "job_id": "58185728",
+          "evaluation_job_id": "58185733",
+          "tau": 0.8,
+          "beta": 4.0,
+          "gpu": "NVIDIA A30",
+          "baseline_both_typeII_ge0p6": 5,
+          "FK_both_typeII_ge0p6": 9,
+          "FK_supported_severe_CNO_median": 141,
+          "resampling_count": 2
+        }
+      ],
+      "selected_models": [
+        {
+          "job_id": "58139988",
+          "condition": "fk",
+          "sample_index_0based": 6,
+          "path": "artifacts/remote-runs/58139988/fk/predictions_simplefold_3B/BMP7_BMPR1A_ACVR2A_sampled_6.pdb",
+          "sha256": "001657ba1c1b6ce09f7bfa891c017081eab07dbc0183878f58b662d7c7f09f2f",
+          "typeII_surrogate_DockQ": {
+            "E": 0.880987444504242,
+            "F": 0.9173375668662594
+          },
+          "typeI_transferred_guidance": {
+            "C": 0.966524122073654,
+            "D": 0.9671233448369059
+          },
+          "common_parent_reward": 0.9397886377191335,
+          "severe_CNO_fixed_topology": 7,
+          "severe_source_core_only": 3,
+          "severe_outside_source_core": 4,
+          "severe_overlap_severity_sum": 0.07820414934746774,
+          "native_disulfide_distance_range_A": [
+            1.6675410039936043,
+            2.3819456333006426
+          ]
+        },
+        {
+          "job_id": "58139988",
+          "condition": "baseline",
+          "sample_index_0based": 9,
+          "path": "artifacts/remote-runs/58139988/baseline/predictions_simplefold_3B/BMP7_BMPR1A_ACVR2A_sampled_9.pdb",
+          "sha256": "446021e02f37878c3fcdb2ba3d403755d6315098e2f241a71553cd42561ba1e8",
+          "typeII_surrogate_DockQ": {
+            "E": 0.8987359480744629,
+            "F": 0.9148836346949553
+          },
+          "typeI_transferred_guidance": {
+            "C": 0.9668107429085403,
+            "D": 0.9674446611573035
+          },
+          "common_parent_reward": 0.9358089214987083,
+          "severe_CNO_fixed_topology": 4,
+          "severe_source_core_only": 3,
+          "severe_outside_source_core": 1,
+          "severe_overlap_severity_sum": 0.02280072149526307,
+          "native_disulfide_distance_range_A": [
+            1.6689313946355013,
+            2.317940680863081
+          ]
+        }
+      ],
+      "interpretation": [
+        "A100tau.1 already contains the best low-clash baseline candidate. Distinct seeds/hardware prevent assigning its quality solely to the guard. The matched A100tau.3 retains all four recovered FK candidates byte-identical to prior v1job58121330, plus one other identical model.",
+        "Against useful v1job58114313FK3: severeCNO27(2core/25outside)\u21927(3core/4outside) in newFK6; E/F.887/.901\u2192.881/.917 and C/Dguidance.974/.986\u2192.967/.967. The cleaner baseline9 remains a separate cleanup starting point.",
+        "Five strong descendants share the promising ancestor9 that also yields baseline9. Common-start trajectory ancestry is not independent initialization replication; terminal ESS does not restore genealogical diversity."
+      ],
+      "reference_scope": "Only392conserved1LX5 residues of full768 support E/F species-surrogate agreement; C/D experimental and whole-assembly DockQ remain null. Source-core576residue mask includes transferred9MIR geometry; glycans omitted.",
+      "evidence_allocation": "Generic CNO sterics and explicit covalent exclusions are separate from transferred contact hypotheses. Inspected same-reference contacts and selected models are tuning evidence, not independent validation.",
+      "proposed_next_step": {
+        "status": "proposal_only_cleanup_not_executed",
+        "action": "restrained_full_construct_atomistic_cleanup",
+        "candidates": [
+          {
+            "path": "artifacts/remote-runs/58139988/baseline/predictions_simplefold_3B/BMP7_BMPR1A_ACVR2A_sampled_9.pdb",
+            "sha256": "446021e02f37878c3fcdb2ba3d403755d6315098e2f241a71553cd42561ba1e8"
+          },
+          {
+            "path": "artifacts/remote-runs/58139988/fk/predictions_simplefold_3B/BMP7_BMPR1A_ACVR2A_sampled_6.pdb",
+            "sha256": "001657ba1c1b6ce09f7bfa891c017081eab07dbc0183878f58b662d7c7f09f2f"
+          }
+        ],
+        "rationale": "Preserve recovered docking/contact geometry and full768 sequences; address residual sidechain overlaps and native disulfide distortions with explicit topology, fixed sequence and no docking jumps. No new contact or scoring revision is justified by these best candidates yet.",
+        "specific_remaining_defects": [
+          "Baseline9 has four mild-threshold severe CNO pairs, three within source-covered core; worst is B110OD1\u2013E37CE at2.142A (1.078A overlap).",
+          "Guided6 has seven pairs, three core/four outside; worst A13NZ\u2013D84OD1 at1.939A (1.131A overlap).",
+          "Native disulfides remain distorted: E72SG\u2013E84SG is1.669A in baseline9 and1.668A in guided6; fixed topology must not be mistaken for correct geometry."
+        ],
+        "evaluate_before_after": "Use fixed coherent mappings; compare both E/F surrogate DockQ, all original contact features, source-core fold/pose drift, full/core/tail CNO overlaps, nativeSS geometry and missing-heavy completeness. Preserve raw models and avoid docking/contact escape.",
+        "new_sampling_or_cleanup_jobs": []
+      },
+      "archival_scope": "Verified analysis/metadata/PDB subset only. Parent handles complete archival publication, local verification and temporary-cache cleanup separately.",
+      "measurement_scope": "Report-defined severe interchain C/N/O radius overlap >1 Angstrom; separate from evaluator heavy-atom overlap >0.4 Angstrom. Core/outside classification uses source coordinate coverage, not proven disorder; no calibrated physical acceptance."
     }
   ],
   "generic_inspection_priors": {
@@ -1589,5 +2044,5 @@
       "evidence_label_scope": "Vocabulary for future observations; no existing evidence_class is reclassified by this import. R8 instructs evaluation of energetic evidence; it does not establish a hotspot for any target."
     }
   },
-  "updated_at": "2026-10-16T19:11:48.940172+00:00"
+  "updated_at": "2026-10-17T00:00:40.684769+00:00"
 }
