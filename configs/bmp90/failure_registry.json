@@ -1966,8 +1966,126 @@
       "status": "limitations_retained_bounded_test_submitted_outcome_pending",
       "transfer_limits": "3QB4 GDF5 R57A mutant type-I surrogate,386observed residues; C/D covered, E/F type-II uncovered. WT Arg57 whole residue is masked in comparison, and incompatible local latch contacts excluded from guidance. Full WT input sequences retained. No wild-type accuracy, type-II native DockQ or whole-assembly DockQ; tuning/transfer evidence is not independent validation.",
       "qualification": "These are preflight/scalar limitations, not failed sampling, biological nonbinding or failure of newly submitted jobs."
+    },
+    {
+      "failure_id": "BMP4_BMPR1A_ACVR2A_WAVE18_RESIDUAL_ORIENTATION_20261018",
+      "complex_id": "BMP4_BMPR1A_ACVR2A",
+      "recipe_id": "bmp4_alk3_actr2a_required_approach_steric_v2",
+      "recorded_at": "2026-10-18T03:44:30.443152+00:00",
+      "run_ids": [
+        "58209920",
+        "58209921",
+        "58209922"
+      ],
+      "status": "completed_screen_revision_proposed",
+      "observed_symptoms": [
+        "Completed tau sweep screened from verified CPU reports; no overall improvement over practical v1. Covered C/E agreement can coexist with a misplaced uncovered type-II copy; tau0.8 also retains incorrect covered type-II orientation. Previous best/ranks retained.",
+        "Restrained cleanup58209934 removes severe overlaps while the weak W79 approach error remains7.472angstrom; relaxation did not fix receptor placement."
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/evaluation/wave18_next_batch_review_20261018T033534Z/bmp4_evaluation_screen.json",
+          "sha256": "dace190d67645a9d5ac3a3f457c952bc6e39c3f9ffae175eb2507fdf9c2e2644"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave18_next_batch_review_20261018T033534Z/relaxation_report_screen.json",
+          "sha256": "d45a14119b019eb42e80b1803043105cbb9bc05b807d4ebada31d4e48474720e"
+        }
+      ],
+      "qualification": "Best overall evaluation across noise settings governs choice; one weaker tau is not itself a recipe failure. These are modeled geometry defects, not evidence of nonbinding."
+    },
+    {
+      "failure_id": "BMP4_BMPR1A_ACVR2A_WAVE19_PREPARED_SCORE_LIMITATIONS_20261017",
+      "complex_id": "BMP4_BMPR1A_ACVR2A",
+      "recipe_id": "bmp4_alk3_actr2a_orientation_v3",
+      "recorded_at": "2026-10-18T03:56:27.948127+00:00",
+      "failure_category": "documented_pre_sampling_scoring_limitations",
+      "run_ids": [],
+      "followup_sampling_job_ids": [
+        "58215223",
+        "58215224",
+        "58215225"
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/preparation/bmp4_alk3_actr2a_orientation_v3_20261017/scientific_summary.json",
+          "sha256": "ecb489eff6d4401ae2ea76a559c17550439769eb7ac19bec79b0ac66f2bf812b"
+        }
+      ],
+      "observed_symptoms": [
+        "No current fullactualmodel is a nativeBMP4 groundtruth; v1FK3 retains one misplacedtypeIIcopy and is only practicalbaseline.",
+        "Unsigned CAangles leave azimuth/chirality ambiguity; separatelyrequired flankingdistances constrain the testedrotation but donotproveuniqueorientation.",
+        "FixedW79tilt60 has415severeCNO and is an easy physicalnegative; the separate90degreetwist has3 and supplies the more useful orientationcontrast.",
+        "Geometrywithfloor0 may suppress earlyselection whenallparticlesremainwrong; beta12efficacy remainsprospective. No newbeta optimization was performed.",
+        "ExistingCNOguard remainsbounded; scalarreward cannotcertify clash-free, correctdisulfidegeometry, glycancompatibility or atomisticenergy.",
+        "No improvement in practicalrecipe rank until completedbestoverallmodels across tau are jointlyevaluated.",
+        "The tiny E/Fdistance/angle differences arise from3decimalserialization of mapped symmetrycoordinates; originalCArestraintvalues remainexactlyunchanged."
+      ],
+      "status": "limitations_retained_bounded_test_submitted_outcome_pending",
+      "transfer_limits": "BMP2 homologous-ligand and mouse-to-human ACVR2A surrogate2GOO,361observed of722input residues; covered C/E only, D/F uncovered. Source symmetry and construct qualifications apply. No native BMP4 accuracy or whole-assembly DockQ. Tuning/transfer evidence is not independent validation.",
+      "qualification": "Preflight/scalar limitations, not failed sampling, biological nonbinding or outcomes of the submitted jobs."
+    },
+    {
+      "failure_id": "BMP6_ACVR1_ACVR2B_WAVE19_PREPARED_SCORE_LIMITATIONS_20261017",
+      "complex_id": "BMP6_ACVR1_ACVR2B",
+      "recipe_id": "bmp6_joint_n60_wrist_v6",
+      "recorded_at": "2026-10-18T03:56:27.948127+00:00",
+      "failure_category": "documented_pre_sampling_scoring_limitations",
+      "run_ids": [],
+      "followup_sampling_job_ids": [
+        "58215227",
+        "58215228",
+        "58215229"
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/preparation/bmp6_acvr1_joint_wrist_v6_20261017/scientific_summary.json",
+          "sha256": "764f6b42188212c06d7e4e4451ee6458612f5933177632a1f0a5a2b7058b7214"
+        }
+      ],
+      "observed_symptoms": [
+        "The D-only source-fold repair gains only0.00785, below the initial0.01 assertion. Final gate uses0.005 to document the observed positive margin; no reward parameter or coordinate was changed.",
+        "Both-copy source-fold counterfactual gains0.23487 but is synthetic and does not demonstrate a physically attainable repair.",
+        "The preferred relaxedv1 model exceeds relaxedv3 by only0.01714; this selected-pair ranking is not a general guarantee of DockQ ordering.",
+        "Floorzero can suppress early distant poses and reduce selection contrasts. Finite parent scores remain0.41-0.57 for chosen plausible historical candidates, but actual checkpoint dynamics remain unmeasured forv6.",
+        "Worst-copy wrist error can mask further improvement to the already better wrist copy. Its factor scales the whole assembly, including numerically unchanged typeII terms.",
+        "N60 is still CA-span/approach guidance and wristCB/backbone is a pose proxy. Sidechain rotamers, nativeSS geometry, tails and all-atom packing are not validated by this score.",
+        "All selected sampled/relaxed structures, source distances, and finite diagnostic poses are posthoc tuning evidence; no independent accuracy or affinity claim."
+      ],
+      "status": "limitations_retained_bounded_test_submitted_outcome_pending",
+      "transfer_limits": "Exact 9N4K receptor-trap reference recovery over 552 observed residues of the full 716-residue protein-only input, with all four C/D/E/F interfaces covered. Engineered trap and glycosylation qualifications remain; this is not native signaling or independent validation.",
+      "qualification": "Preflight/scalar limitations, not failed sampling, biological nonbinding or outcomes of the submitted jobs."
+    },
+    {
+      "failure_id": "BMP7_ACVR1_ACVR2A_WAVE19_PREPARED_SCORE_LIMITATIONS_20261017",
+      "complex_id": "BMP7_ACVR1_ACVR2A",
+      "recipe_id": "bmp7_alk2_required_q89_bridge_cauchy_steric_v5",
+      "recorded_at": "2026-10-18T03:56:27.948127+00:00",
+      "failure_category": "documented_pre_sampling_scoring_limitations",
+      "run_ids": [],
+      "followup_sampling_job_ids": [
+        "58215263",
+        "58215264",
+        "58215265"
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/preparation/bmp7_alk2_required_q89_v5_20261017/scientific_summary.json",
+          "sha256": "bed2dd07127b614d295c49bcf691c79f72594b70bcf8620e1389e812bbf46f71"
+        }
+      ],
+      "observed_symptoms": [
+        "No experimental BMP7-ACVR1 complex or clean full native positive is available here; partial source-compatible composite is a geometry diagnostic with missing-heavy factor floor, not physical validation.",
+        "The analytic Q89-restoring rotation keeps T83 and receptor fold fixed but creates697 severe nonbonded CNO pairs; it is rejected by existing guards, not a successful repair.",
+        "Required Q89 alone does not determine a unique pose or chemical contact, and stronger scalar preference may not yield a better overall sampled assembly.",
+        "The existing floor0.8 steric factor does not guarantee physical acceptance; compare per-copy geometry and packing after sampling.",
+        "Previously successful typeII kernel/targets are exact under a fixed assignment, but optimizing the complete score can select another coherent symmetry assignment."
+      ],
+      "status": "limitations_retained_bounded_test_submitted_outcome_pending",
+      "transfer_limits": "Partial species-surrogate 1LX5 protein reference: only E/F type-II interfaces covered (392 observed residues of full716 input); ACVR1 C/D experimental geometry is uncovered. No whole-assembly or type-I experimental DockQ. Composite diagnostics are not reference truth; evidence is reused for tuning, not independent validation.",
+      "qualification": "Preflight/scalar limitations, not failed sampling, biological nonbinding or outcomes of the submitted jobs."
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-18T00:14:00.181059+00:00"
+  "updated_at": "2026-10-18T03:56:27.948127+00:00"
 }

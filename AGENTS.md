@@ -43,6 +43,13 @@
   CPU relaxations: BMP4 job58197150 FK3, GDF5–ACVR2A job58197152 baseline8
   and FK7, and GDF5–ACVR2B job58197156 FK0. Preserve the unguided origin of
   baseline8, which is identical to FK8. This does not authorize new targets.
+- Vincent approved wave19 on 2026-10-17: nine A30 paired sampling jobs across
+  tau 0.1/0.3/0.8 for BMP4–BMPR1A–ACVR2A type-II orientation,
+  BMP6–ACVR1–ACVR2B joint N60/wrist requirements, and
+  BMP7–ACVR1–ACVR2A required Q89 face contacts. Cap this batch at 27 requested
+  GPU-hours; preserve the queued GDF5 A100 jobs 58209925/26/27. No additional
+  targets or relaxation jobs are part of this batch. Keep previous best recipes
+  until new outcomes support a ranking change.
 - Store remote model weights, trained checkpoints, synthetic datasets, and
   canonical run outputs under `/pub/ynkim4/ml-simplefold/artifacts`. Launchers default
   `SIMPLEFOLD_ARTIFACT_DIR` to that path; `SIMPLEFOLD_CACHE_DIR` defaults to the

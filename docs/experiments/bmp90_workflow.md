@@ -53,6 +53,16 @@ Keep baseline8 labeled unguided despite its byte-identical FK8 counterpart.
 Relaxation evaluates local packing and covalent geometry; retaining a misplaced
 receptor under restraints does not establish a correct interface.
 
+Vincent approved wave19 on 2026-10-17: three A30 jobs each for
+BMP4–BMPR1A–ACVR2A, BMP6–ACVR1–ACVR2B, and BMP7–ACVR1–ACVR2A at the
+agreed tau values, with a total cap of 27 requested GPU-hours. Require the BMP4
+type-II aromatic flanks and approach orientation together; require the BMP6 N60
+loop and K78–Y490 wrist geometry together; and require the BMP7 Q89–L382 face
+contact separately from its recovered T83 bridge. Preserve the other interface
+modules and full constructs. The existing GDF5 A100 sweep remains queued.
+Keep the previous best recipes while evaluating these revisions; no new targets
+or relaxation jobs are included in this batch.
+
 For GDF5, the BMPR1A structure 3QB4 contains the R57A ligand mutation. Sample
 the wild-type sequence, exclude the mutated residue from reference comparisons,
 and avoid imposing its locally incompatible contact geometry. Label comparison
