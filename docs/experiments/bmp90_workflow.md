@@ -42,6 +42,17 @@ BMP7–BMPR1A–ACVR2A job58139988 FK sample6 and baseline sample9. Keep the
 baseline candidate labeled separately. This does not expand automatically to
 the remaining inventory.
 
+On 2026-10-17 Vincent requested a further iteration on those results: require
+the missing type-II approach contact separately on each receptor copy for
+BMP4–BMPR1A–ACVR2A and GDF5–BMPR1A–ACVR2B, and relax the selected recent
+candidates. Wave18 contains six paired sampling jobs across the three agreed
+tau values (three A30 and three A100; an 18 requested GPU-hour cap). Four
+restrained CPU cleanups follow submission: BMP4 job58197150 FK3,
+GDF5–ACVR2A job58197152 baseline8 and FK7, and GDF5–ACVR2B job58197156 FK0.
+Keep baseline8 labeled unguided despite its byte-identical FK8 counterpart.
+Relaxation evaluates local packing and covalent geometry; retaining a misplaced
+receptor under restraints does not establish a correct interface.
+
 For GDF5, the BMPR1A structure 3QB4 contains the R57A ligand mutation. Sample
 the wild-type sequence, exclude the mutated residue from reference comparisons,
 and avoid imposing its locally incompatible contact geometry. Label comparison

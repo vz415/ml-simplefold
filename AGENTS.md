@@ -36,6 +36,13 @@
   across tau 0.1/0.3/0.8, followed by restrained relaxation of the three
   selected BMP7 candidates. Submit sampling first, then cleanup; keep the
   type-I GDF5 mutant-reference qualification explicit.
+- On 2026-10-17 Vincent requested stronger per-copy type-II constraints for
+  BMP4–BMPR1A–ACVR2A and GDF5–BMPR1A–ACVR2B, plus relaxation of the recent
+  candidates. Wave18 is bounded to six paired sampling jobs at tau 0.1/0.3/0.8
+  (three A30, three A100; at most 18 requested GPU-hours), followed by four
+  CPU relaxations: BMP4 job58197150 FK3, GDF5–ACVR2A job58197152 baseline8
+  and FK7, and GDF5–ACVR2B job58197156 FK0. Preserve the unguided origin of
+  baseline8, which is identical to FK8. This does not authorize new targets.
 - Store remote model weights, trained checkpoints, synthetic datasets, and
   canonical run outputs under `/pub/ynkim4/ml-simplefold/artifacts`. Launchers default
   `SIMPLEFOLD_ARTIFACT_DIR` to that path; `SIMPLEFOLD_CACHE_DIR` defaults to the

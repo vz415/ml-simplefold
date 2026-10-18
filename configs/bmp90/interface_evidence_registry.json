@@ -1990,6 +1990,77 @@
       },
       "scope": "Partial1LX5 E/F conserved species-surrogate only; C/D reference-free. Original candidate restrained; no independent evidence introduced.",
       "observation": "Zero measured severe interchain CNO overlaps;27intended disulfides around2.02-2.10A;core CA drift~0.10A. TypeII surrogate agreement retained. Minimizer iteration-limit warnings remain; no native typeI or whole-assembly acceptance."
+    },
+    {
+      "evidence_id": "BMP4_BMPR1A_ACVR2A_REQUIRED_ANCHOR_STERIC_WAVE18_20261017",
+      "target_id": "BMP4_BMPR1A_ACVR2A",
+      "recorded_at": "2026-10-18T00:12:30.833726+00:00",
+      "evidence_class": "engineering_revision_from_observed_model_defects",
+      "status": "submitted_target_quality_unassessed",
+      "source": {
+        "path": "artifacts/bmp90/preparation/bmp4_alk3_actr2a_required_anchor_v2_20261017/scientific_summary.json",
+        "sha256": "0e34b67465c7b6e645b70e000b07618015ed3602125f4ff78ece13100a74e27f"
+      },
+      "specification": {
+        "path": "artifacts/bmp90/preparation/bmp4_alk3_actr2a_required_anchor_v2_20261017/bmp4_alk3_actr2a_required_approach_steric_v2.json",
+        "sha256": "1577c9c95fa456ecf17efa86abab522814ca8063a319691344f2a7a7dce53b1e"
+      },
+      "mapping": {
+        "path": "artifacts/bmp90/preparation/bmp4_alk3_actr2a_20261016/BMP4_BMPR1A_ACVR2A.execution.mapping.json",
+        "sha256": "29d41d7a962e8cbcd178c4bfb0c188b6c3fce2701e3bd1e8e50332f8135b087a"
+      },
+      "scoring_gate": {
+        "path": "artifacts/bmp90/preparation/bmp4_alk3_actr2a_required_anchor_v2_20261017/cpu_gate_manifest.json",
+        "sha256": "0993ccc5265ab7c2599d2d8ce1662a67aa2d1a81f416f005fc04f1797786c6a5"
+      },
+      "scope": "BMP2 homologous-ligand and mouse-to-human ACVR2A surrogate2GOO,361observed of722input residues; covered C/E only, D/F uncovered. Source symmetry and construct qualifications apply. No native BMP4 accuracy or whole-assembly DockQ. Tuning/transfer evidence is not independent validation.",
+      "observation": "Per-copy required typeII aromatic approach and bounded explicit-native-topology CNO factor; previous distaltypeI terms retained. No independent target evidence or outcome introduced.",
+      "run_ids": [
+        "58209920",
+        "58209921",
+        "58209922"
+      ],
+      "known_limitations": [
+        "FK4 still outscores cleaner FK3 (0.43648/0.41835;25/9 severe CNO), so the scalar is not overall physical ranking.",
+        "Conditional source-pose full-tail transplant scores0.779 despite79 overlaps; it is not an accepted model.",
+        "Generic bounded steric factor is not calibrated physical acceptance; required typeII approach is an engineering hypothesis.",
+        "Only2GOO homologous C/E covered; D/F reference-free. Source/evaluation evidence reused for tuning; no nativeBMP4 accuracy."
+      ]
+    },
+    {
+      "evidence_id": "GDF5_BMPR1A_ACVR2B_REQUIRED_ANCHOR_STERIC_WAVE18_20261017",
+      "target_id": "GDF5_BMPR1A_ACVR2B",
+      "recorded_at": "2026-10-18T00:12:30.833726+00:00",
+      "evidence_class": "engineering_revision_from_observed_model_defects",
+      "status": "submitted_target_quality_unassessed",
+      "source": {
+        "path": "artifacts/bmp90/preparation/gdf5_alk3_acvr2b_required_anchor_v2_20261017/scientific_summary.json",
+        "sha256": "2280454a29f8c804330eefab387ad9b8b0b07a624c2e012ca813271868b4b178"
+      },
+      "specification": {
+        "path": "artifacts/bmp90/preparation/gdf5_alk3_acvr2b_required_anchor_v2_20261017/gdf5_alk3_acvr2b_required_anchor_v2.json",
+        "sha256": "58eb9d1b99dc1c5802f5f50f0156ad39abdfa25ca8dfdb8f511ffd1c1722490e"
+      },
+      "mapping": {
+        "path": "artifacts/bmp90/preparation/gdf5_alk3_20261016/acvr2b/GDF5_BMPR1A_ACVR2B.execution.mapping.json",
+        "sha256": "f6cb4fdf7bc9d86269459a49c13c07f949282065099c7424f2faa8f739576373"
+      },
+      "scoring_gate": {
+        "path": "artifacts/bmp90/preparation/gdf5_alk3_acvr2b_required_anchor_v2_20261017/cpu_gate_manifest.json",
+        "sha256": "e551d9af9e8002c3c1cbccdafba602546eefe4045beba36c308cb74dbd7aba95"
+      },
+      "scope": "3QB4 GDF5 R57A mutant type-I surrogate,386observed residues; C/D covered, E/F type-II uncovered. WT Arg57 whole residue is masked in comparison, and incompatible local latch contacts excluded from guidance. Full WT input sequences retained. No wild-type accuracy, type-II native DockQ or whole-assembly DockQ; tuning/transfer evidence is not independent validation.",
+      "observation": "Per-copy required typeII aromatic approach and bounded explicit-native-topology CNO factor; previous distaltypeI terms retained. No independent target evidence or outcome introduced.",
+      "run_ids": [
+        "58209925",
+        "58209926",
+        "58209927"
+      ],
+      "known_limitations": [
+        "Cleaner tau0.3FK0 score0.3341 remains below clashing tau0.8FK8 score0.3644; bounded floor0.8 sterics is not whole-structure ranking.",
+        "Fixed-flanking-anchor30degree rotations retain high scores; required W78 approach does not determine a unique pose.",
+        "3QB4R57A C/D only; WTArg57 latch unforced, E/F inferred, Tyr106/Gln108 nomenclature correct."
+      ]
     }
   ],
   "generic_inspection_priors": {
@@ -2201,5 +2272,5 @@
       "evidence_label_scope": "Vocabulary for future observations; no existing evidence_class is reclassified by this import. R8 instructs evaluation of energetic evidence; it does not establish a hotspot for any target."
     }
   },
-  "updated_at": "2026-10-17T22:03:30.760136+00:00"
+  "updated_at": "2026-10-18T00:14:00.181051+00:00"
 }

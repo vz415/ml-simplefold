@@ -1808,7 +1808,23 @@
         },
         "new_job_ids": []
       },
-      "transfer_limits": "BMP2 homologous-ligand and mouse-to-human ACVR2A surrogate2GOO,361observed of722input residues; covered C/E only, D/F uncovered. Source symmetry and construct qualifications apply. No native BMP4 accuracy or whole-assembly DockQ. Tuning/transfer evidence is not independent validation."
+      "transfer_limits": "BMP2 homologous-ligand and mouse-to-human ACVR2A surrogate2GOO,361observed of722input residues; covered C/E only, D/F uncovered. Source symmetry and construct qualifications apply. No native BMP4 accuracy or whole-assembly DockQ. Tuning/transfer evidence is not independent validation.",
+      "followups": [
+        {
+          "followup_id": "bmp90-paid-wave18-20261017_BMP4_BMPR1A_ACVR2A",
+          "status": "submitted_not_evaluated",
+          "recipe_id": "bmp4_alk3_actr2a_required_approach_steric_v2",
+          "job_ids": [
+            "58209920",
+            "58209921",
+            "58209922"
+          ],
+          "source": {
+            "path": "artifacts/bmp90/preparation/bmp4_alk3_actr2a_required_anchor_v2_20261017/scientific_summary.json",
+            "sha256": "0e34b67465c7b6e645b70e000b07618015ed3602125f4ff78ece13100a74e27f"
+          }
+        }
+      ]
     },
     {
       "failure_id": "GDF5_BMPR1A_ACVR2A_WAVE17_RESIDUAL_DEFECTS_20261017",
@@ -1878,9 +1894,80 @@
         },
         "new_job_ids": []
       },
-      "transfer_limits": "3QB4 GDF5 R57A mutant type-I surrogate,386observed residues; C/D covered, E/F type-II uncovered. WT Arg57 whole residue is masked in comparison, and incompatible local latch contacts excluded from guidance. Full WT input sequences retained. No wild-type accuracy, type-II native DockQ or whole-assembly DockQ; tuning/transfer evidence is not independent validation."
+      "transfer_limits": "3QB4 GDF5 R57A mutant type-I surrogate,386observed residues; C/D covered, E/F type-II uncovered. WT Arg57 whole residue is masked in comparison, and incompatible local latch contacts excluded from guidance. Full WT input sequences retained. No wild-type accuracy, type-II native DockQ or whole-assembly DockQ; tuning/transfer evidence is not independent validation.",
+      "followups": [
+        {
+          "followup_id": "bmp90-paid-wave18-20261017_GDF5_BMPR1A_ACVR2B",
+          "status": "submitted_not_evaluated",
+          "recipe_id": "gdf5_alk3_acvr2b_required_anchor_steric_v2",
+          "job_ids": [
+            "58209925",
+            "58209926",
+            "58209927"
+          ],
+          "source": {
+            "path": "artifacts/bmp90/preparation/gdf5_alk3_acvr2b_required_anchor_v2_20261017/scientific_summary.json",
+            "sha256": "2280454a29f8c804330eefab387ad9b8b0b07a624c2e012ca813271868b4b178"
+          }
+        }
+      ]
+    },
+    {
+      "failure_id": "BMP4_BMPR1A_ACVR2A_WAVE18_PREPARED_SCORE_LIMITATIONS_20261017",
+      "complex_id": "BMP4_BMPR1A_ACVR2A",
+      "recipe_id": "bmp4_alk3_actr2a_required_approach_steric_v2",
+      "recorded_at": "2026-10-18T00:12:30.833726+00:00",
+      "failure_category": "documented_pre_sampling_scoring_limitations",
+      "run_ids": [],
+      "followup_sampling_job_ids": [
+        "58209920",
+        "58209921",
+        "58209922"
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/preparation/bmp4_alk3_actr2a_required_anchor_v2_20261017/scientific_summary.json",
+          "sha256": "0e34b67465c7b6e645b70e000b07618015ed3602125f4ff78ece13100a74e27f"
+        }
+      ],
+      "observed_symptoms": [
+        "FK4 still outscores cleaner FK3 (0.43648/0.41835;25/9 severe CNO), so the scalar is not overall physical ranking.",
+        "Conditional source-pose full-tail transplant scores0.779 despite79 overlaps; it is not an accepted model.",
+        "Generic bounded steric factor is not calibrated physical acceptance; required typeII approach is an engineering hypothesis.",
+        "Only2GOO homologous C/E covered; D/F reference-free. Source/evaluation evidence reused for tuning; no nativeBMP4 accuracy."
+      ],
+      "status": "limitations_retained_bounded_test_submitted_outcome_pending",
+      "transfer_limits": "BMP2 homologous-ligand and mouse-to-human ACVR2A surrogate2GOO,361observed of722input residues; covered C/E only, D/F uncovered. Source symmetry and construct qualifications apply. No native BMP4 accuracy or whole-assembly DockQ. Tuning/transfer evidence is not independent validation.",
+      "qualification": "These are preflight/scalar limitations, not failed sampling, biological nonbinding or failure of newly submitted jobs."
+    },
+    {
+      "failure_id": "GDF5_BMPR1A_ACVR2B_WAVE18_PREPARED_SCORE_LIMITATIONS_20261017",
+      "complex_id": "GDF5_BMPR1A_ACVR2B",
+      "recipe_id": "gdf5_alk3_acvr2b_required_anchor_steric_v2",
+      "recorded_at": "2026-10-18T00:12:30.833726+00:00",
+      "failure_category": "documented_pre_sampling_scoring_limitations",
+      "run_ids": [],
+      "followup_sampling_job_ids": [
+        "58209925",
+        "58209926",
+        "58209927"
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/preparation/gdf5_alk3_acvr2b_required_anchor_v2_20261017/scientific_summary.json",
+          "sha256": "2280454a29f8c804330eefab387ad9b8b0b07a624c2e012ca813271868b4b178"
+        }
+      ],
+      "observed_symptoms": [
+        "Cleaner tau0.3FK0 score0.3341 remains below clashing tau0.8FK8 score0.3644; bounded floor0.8 sterics is not whole-structure ranking.",
+        "Fixed-flanking-anchor30degree rotations retain high scores; required W78 approach does not determine a unique pose.",
+        "3QB4R57A C/D only; WTArg57 latch unforced, E/F inferred, Tyr106/Gln108 nomenclature correct."
+      ],
+      "status": "limitations_retained_bounded_test_submitted_outcome_pending",
+      "transfer_limits": "3QB4 GDF5 R57A mutant type-I surrogate,386observed residues; C/D covered, E/F type-II uncovered. WT Arg57 whole residue is masked in comparison, and incompatible local latch contacts excluded from guidance. Full WT input sequences retained. No wild-type accuracy, type-II native DockQ or whole-assembly DockQ; tuning/transfer evidence is not independent validation.",
+      "qualification": "These are preflight/scalar limitations, not failed sampling, biological nonbinding or failure of newly submitted jobs."
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-17T22:03:30.760136+00:00"
+  "updated_at": "2026-10-18T00:14:00.181059+00:00"
 }
