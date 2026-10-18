@@ -2331,6 +2331,153 @@
         }
       ],
       "scope": "Verified completed report screen; no calibrated acceptance, formal ranking promotion, new submission, or relaxation. Compare best overall across tau; a weaker tau does not disqualify a recipe. Preserve partial/mutant/species reference qualifications and inferred-interface status."
+    },
+    {
+      "evidence_id": "BMP4_BMPR1A_ACVR2A_WAVE20_CONSTRAINT_REVISION_20261018",
+      "target_id": "BMP4_BMPR1A_ACVR2A",
+      "recorded_at": "2026-10-18T22:29:10.823860+00:00",
+      "evidence_class": "engineering_revision_from_observed_model_defects",
+      "status": "submitted_target_quality_unassessed",
+      "source": {
+        "path": "artifacts/bmp90/preparation/bmp4_alk3_actr2a_v4_20261018/scientific_summary.json",
+        "sha256": "9699ac45772f1b3c939acb25b143afc9db51f66dfaa5280e41eeec4fc5a18b92"
+      },
+      "specification": {
+        "path": "artifacts/bmp90/preparation/bmp4_alk3_actr2a_v4_20261018/bmp4_alk3_actr2a_frame_bounded_v4.json",
+        "sha256": "bcba6da67fc6a734a977cb31ea43ac087c240ef7bd79e9a6e1e43f67ad5d3991"
+      },
+      "mapping": {
+        "path": "artifacts/bmp90/preparation/bmp4_alk3_actr2a_20261016/BMP4_BMPR1A_ACVR2A.execution.mapping.json",
+        "sha256": "29d41d7a962e8cbcd178c4bfb0c188b6c3fce2701e3bd1e8e50332f8135b087a"
+      },
+      "scoring_gate": {
+        "path": "artifacts/bmp90/preparation/bmp4_alk3_actr2a_v4_20261018/cpu_gate_manifest.json",
+        "sha256": "40b0db4e14090fe818864eb66f5e7e42b571e200c97925cc0240faadf310a2f5"
+      },
+      "scope": "BMP2 homologous-ligand and mouse-to-human ACVR2A surrogate2GOO,361observed of722input residues; covered C/E only, D/F uncovered. Source symmetry and construct qualifications apply. No native BMP4 accuracy or whole-assembly DockQ. Tuning/transfer evidence is not independent validation.",
+      "observation": "Add per-copy source-derived long-range typeII orientation distances and restore a bounded angular factor, preserving required aromatic/approach contacts and typeI rules.",
+      "qualification": "Implementation-parent lineage is distinct from retained practical best; no new independent structural evidence or sampled outcome. Required geometry remains one coherent assembly hypothesis, not experimental native accuracy.",
+      "run_ids": [
+        "58228414",
+        "58228415",
+        "58228416"
+      ],
+      "known_limitations": [
+        "The source is conserved BMP2/mouse-ACVR2A homolog geometry, not native BMP4 truth. D/F have no experimental reference coverage.",
+        "The source-compatible diagnostic is a symmetry construction; it is not an independent experimental hexamer.",
+        "The fixed W79 tilt60 fixture has415 severe CNO overlaps and is an easy physical negative. The W79-axis twist90 has3 and is restrained by the existing aromatic flanks; the new frame terms do not further reduce its score. Unique orientation is not validated.",
+        "The conditional source-pose transplant retains79 severe CNO overlaps despite v4 reward approximately0.769. Bounded guards and CA restraints cannot certify packing or disulfide geometry.",
+        "The raw practical v1FK3 still has a misplaced type-II copy and nine severe CNO overlaps; it remains a provisional comparison, not accepted truth.",
+        "CNO overlaps use fixed explicit covalent topology and heavy atoms only; glycans, protonation, hydrogen-dependent packing, backbone/rotamer energetics and membrane context remain outside this score.",
+        "The newly added distances are correlated same-source geometry, not independent evidence."
+      ]
+    },
+    {
+      "evidence_id": "BMP6_ACVR1_ACVR2B_WAVE20_CONSTRAINT_REVISION_20261018",
+      "target_id": "BMP6_ACVR1_ACVR2B",
+      "recorded_at": "2026-10-18T22:29:10.823860+00:00",
+      "evidence_class": "engineering_revision_from_observed_model_defects",
+      "status": "submitted_target_quality_unassessed",
+      "source": {
+        "path": "artifacts/bmp90/preparation/bmp6_acvr1_v7_20261018/scientific_summary.json",
+        "sha256": "76d48b9ab1541ec5c5e0f1ab94faf5937a0def77051aee80dd0f7929b0a1bcda"
+      },
+      "specification": {
+        "path": "artifacts/bmp90/preparation/bmp6_acvr1_v7_20261018/bmp6_joint_n60_approach_wrist_v7.json",
+        "sha256": "35d4dfdf628376b7d16784bec20778962dabbeb1691bc05101879bd15082f774"
+      },
+      "mapping": {
+        "path": "examples/bmp90/BMP6_ACVR1_ACVR2B_deposited_native_no_tags.mapping.json",
+        "sha256": "aab6477bd1af791e850a6da340bbbb3bdd417bf2133e1fc1d8d631a59e1a8257"
+      },
+      "scoring_gate": {
+        "path": "artifacts/bmp90/preparation/bmp6_acvr1_v7_20261018/cpu_gate_manifest.json",
+        "sha256": "c65f0cd56f5e3dad4475a1a93f4f2d4b04ba67265ae01ec117c8f6eb35ff6d2b"
+      },
+      "scope": "Exact 9N4K receptor-trap reference recovery over 552 observed residues of the full 716-residue protein-only input, with all four C/D/E/F interfaces covered. Engineered trap and glycosylation qualifications remain; this is not native signaling or independent validation.",
+      "observation": "Improve source-supported N60-S446 approach geometry on both ACVR1 copies while preserving recovered wrist and typeII constraints.",
+      "qualification": "Implementation-parent lineage is distinct from retained practical best; no new independent structural evidence or sampled outcome. BMP6 adds a half-strength N60 approach multiplier while retaining the existing wrist multiplier; both act on global worst-copy error, not per-interface caps.",
+      "run_ids": [
+        "58228454",
+        "58228455",
+        "58228456"
+      ],
+      "known_limitations": [
+        "CB/backbone approach is a pose proxy; no explicit Asn terminal-amide rotamer or hydrogen-bond energy.",
+        "CA N60 and atom geometry describe the same local evidence; added resolution is intentionally coupled, not independent corroboration.",
+        "The new global factor scales the whole reward, including unchanged typeII contributions; distant early poses may have small contrasts.",
+        "Source-neighborhood graft improves local factor but has invalid peptide junctions; crankshaft preserves junction lengths but fails to repair the approach. Neither demonstrates an attainable physical repair.",
+        "No allatom/topology safeguard was added. The12tail-involving severeCNO overlaps in v6FK1 remain a separate packing issue.",
+        "Improved finite reward ordering is not a guarantee of better overall DockQ or packing. Preserve previous candidates and compare best outcomes across alltaus, without requiring uniform improvement."
+      ]
+    },
+    {
+      "evidence_id": "BMP7_ACVR1_ACVR2A_WAVE20_CONSTRAINT_REVISION_20261018",
+      "target_id": "BMP7_ACVR1_ACVR2A",
+      "recorded_at": "2026-10-18T22:29:10.823860+00:00",
+      "evidence_class": "engineering_revision_from_observed_model_defects",
+      "status": "submitted_target_quality_unassessed",
+      "source": {
+        "path": "artifacts/bmp90/preparation/bmp7_alk2_v6_20261018/scientific_summary.json",
+        "sha256": "4e5458655a40dfe416721d3c4938fb3e2661455e76c3f9519ce8b779c0a9188e"
+      },
+      "specification": {
+        "path": "artifacts/bmp90/preparation/bmp7_alk2_v6_20261018/bmp7_alk2_q89_typeII_orientation_v6.json",
+        "sha256": "c0c6b3bf0bfe79a5a0fcb22e593bf7950b08a41aeec4ee6a82dac9ca41dfdebc"
+      },
+      "mapping": {
+        "path": "artifacts/bmp90/preparation/bmp7/BMP7_ACVR1_ACVR2A.execution.mapping.json",
+        "sha256": "c3d9061af9a0003a82f70b22483436009da5f498cfec6f25b3694b167405d0cf"
+      },
+      "scoring_gate": {
+        "path": "artifacts/bmp90/preparation/bmp7_alk2_v6_20261018/cpu_gate_manifest.json",
+        "sha256": "3df04e31f37b7b583e671ab6c4cf39a9a6b6b93998b36a460ab21bd43a498f75"
+      },
+      "scope": "Partial species-surrogate 1LX5 protein reference: only E/F type-II interfaces covered (392 observed residues of full716 input); ACVR1 C/D experimental geometry is uncovered. No whole-assembly or type-I experimental DockQ. Composite diagnostics are not reference truth; evidence is reused for tuning, not independent validation.",
+      "observation": "Preserve Q89/T83 typeI gains and constrain the typeII approach orientation that existing distances fail to distinguish.",
+      "qualification": "Implementation-parent lineage is distinct from retained practical best; no new independent structural evidence or sampled outcome. Required geometry remains one coherent assembly hypothesis, not experimental native accuracy.",
+      "run_ids": [
+        "58228460",
+        "58228461",
+        "58228462"
+      ],
+      "known_limitations": [
+        "The angle frame is invariant to twisting a receptor around the W79-S405 approach axis. Original flank distances and packing penalize tested twists, but no unique orientation or chirality proof is claimed.",
+        "The three tested approach twists retain orientationfactor1 and totalreward.253-.311 with55-208 severeCNO pairs. They remain below retained relaxedv4.4075, yet are not clean hard negatives.",
+        "Retained relaxedv4 only narrowly outscores actual v5FK7 (.407507 versus.406644). Rawv4 remains below both v5FK7/FK9 under v6; scalar ordering is not general overall-structure quality.",
+        "The ten-degree near miss retains factor1;20degree tilts retain.829-.898, while60degrees loses more. These are finite engineering diagnostics, not calibrated angular uncertainties or proven sampling performance.",
+        "Global zero-floor orientation can suppress early distant states and scales the whole assembly, including unchanged typeI terms. Actual trajectories must be checked after sampling.",
+        "Source-compatible composite has missing heavy atoms and28 severeCNO overlaps; factor-floor/unassessed status is preserved. It is a geometry positive, not a clean full native structure.",
+        "Heavy guard remains a gentle bounded interchain CNO metric, not energy, complete physical acceptance, disulfide validation or glycan compatibility.",
+        "All selected observations are tuning evidence; no nativeBMP7-ACVR1 accuracy or binding claim."
+      ]
+    },
+    {
+      "evidence_id": "GDF5_ACVR2B_WAVE20_RESTRAINED_CLEANUP_SUBMITTED_20261018",
+      "recorded_at": "2026-10-18T22:31:37.989697+00:00",
+      "target_id": "GDF5_BMPR1A_ACVR2B",
+      "evidence_class": "computed_model_cleanup_preparation_not_experimental",
+      "status": "submitted_outcome_pending",
+      "sources": [
+        {
+          "path": "artifacts/bmp90/preparation/wave20_gdf5_rosetta_20261018/input_bundle/config.json",
+          "sha256": "a344e812fb9d315ca396bcfb81bbf20e471c46532873647f77f59eaaaf442b5f"
+        },
+        {
+          "path": "artifacts/bmp90/preparation/wave20_gdf5_rosetta_20261018/local_validation.json",
+          "sha256": "e5d37b57af7eef75f7ebae1e77d0164802c4f2300b4059e4e579af0beeca74ce"
+        },
+        {
+          "path": "artifacts/bmp90/preparation/wave20_gdf5_rosetta_20261018/independent_review_run_registry_20261018.json",
+          "sha256": "f7b6d0f096542a58687ec563413905331659bc67a7930f2f37c866a45401867c"
+        }
+      ],
+      "job_ids": [
+        "58228478",
+        "58228479"
+      ],
+      "observation": "Two selected tau0.1 candidates bound to fixed-sequence27-disulfide cleanup after nine GPU submissions. Same covered-reference assignment and conditional inferred E/F assignment frozen before/after. Original candidate coordinates supply restraints.",
+      "qualification": "3QB4 mutant C/D only; E/F inferred. Baseline7 remains unguided. Submission and local no-op validation establish neither improved packing nor biological accuracy."
     }
   ],
   "generic_inspection_priors": {
@@ -2542,5 +2689,5 @@
       "evidence_label_scope": "Vocabulary for future observations; no existing evidence_class is reclassified by this import. R8 instructs evaluation of energetic evidence; it does not establish a hotspot for any target."
     }
   },
-  "updated_at": "2026-10-18T20:51:59.568354+00:00"
+  "updated_at": "2026-10-18T22:31:37.989697+00:00"
 }

@@ -2128,8 +2128,101 @@
         }
       ],
       "qualification": "Verified completed report screen; no calibrated acceptance, formal ranking promotion, new submission, or relaxation. Compare best overall across tau; a weaker tau does not disqualify a recipe. Preserve partial/mutant/species reference qualifications and inferred-interface status. Modeled placement defects, not evidence of nonbinding."
+    },
+    {
+      "failure_id": "BMP4_BMPR1A_ACVR2A_WAVE20_PREPARED_SCORE_LIMITATIONS_20261018",
+      "complex_id": "BMP4_BMPR1A_ACVR2A",
+      "recipe_id": "bmp4_alk3_actr2a_frame_bounded_v4",
+      "recorded_at": "2026-10-18T22:29:10.823860+00:00",
+      "failure_category": "documented_pre_sampling_scoring_limitations",
+      "run_ids": [],
+      "followup_sampling_job_ids": [
+        "58228414",
+        "58228415",
+        "58228416"
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/preparation/bmp4_alk3_actr2a_v4_20261018/scientific_summary.json",
+          "sha256": "9699ac45772f1b3c939acb25b143afc9db51f66dfaa5280e41eeec4fc5a18b92"
+        }
+      ],
+      "observed_symptoms": [
+        "The source is conserved BMP2/mouse-ACVR2A homolog geometry, not native BMP4 truth. D/F have no experimental reference coverage.",
+        "The source-compatible diagnostic is a symmetry construction; it is not an independent experimental hexamer.",
+        "The fixed W79 tilt60 fixture has415 severe CNO overlaps and is an easy physical negative. The W79-axis twist90 has3 and is restrained by the existing aromatic flanks; the new frame terms do not further reduce its score. Unique orientation is not validated.",
+        "The conditional source-pose transplant retains79 severe CNO overlaps despite v4 reward approximately0.769. Bounded guards and CA restraints cannot certify packing or disulfide geometry.",
+        "The raw practical v1FK3 still has a misplaced type-II copy and nine severe CNO overlaps; it remains a provisional comparison, not accepted truth.",
+        "CNO overlaps use fixed explicit covalent topology and heavy atoms only; glycans, protonation, hydrogen-dependent packing, backbone/rotamer energetics and membrane context remain outside this score.",
+        "The newly added distances are correlated same-source geometry, not independent evidence."
+      ],
+      "status": "limitations_retained_bounded_test_submitted_outcome_pending",
+      "transfer_limits": "BMP2 homologous-ligand and mouse-to-human ACVR2A surrogate2GOO,361observed of722input residues; covered C/E only, D/F uncovered. Source symmetry and construct qualifications apply. No native BMP4 accuracy or whole-assembly DockQ. Tuning/transfer evidence is not independent validation.",
+      "qualification": "Preflight/scalar limitations, not failed sampling, biological nonbinding or outcomes of the submitted jobs."
+    },
+    {
+      "failure_id": "BMP6_ACVR1_ACVR2B_WAVE20_PREPARED_SCORE_LIMITATIONS_20261018",
+      "complex_id": "BMP6_ACVR1_ACVR2B",
+      "recipe_id": "bmp6_joint_n60_approach_wrist_v7",
+      "recorded_at": "2026-10-18T22:29:10.823860+00:00",
+      "failure_category": "documented_pre_sampling_scoring_limitations",
+      "run_ids": [],
+      "followup_sampling_job_ids": [
+        "58228454",
+        "58228455",
+        "58228456"
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/preparation/bmp6_acvr1_v7_20261018/scientific_summary.json",
+          "sha256": "76d48b9ab1541ec5c5e0f1ab94faf5937a0def77051aee80dd0f7929b0a1bcda"
+        }
+      ],
+      "observed_symptoms": [
+        "CB/backbone approach is a pose proxy; no explicit Asn terminal-amide rotamer or hydrogen-bond energy.",
+        "CA N60 and atom geometry describe the same local evidence; added resolution is intentionally coupled, not independent corroboration.",
+        "The new global factor scales the whole reward, including unchanged typeII contributions; distant early poses may have small contrasts.",
+        "Source-neighborhood graft improves local factor but has invalid peptide junctions; crankshaft preserves junction lengths but fails to repair the approach. Neither demonstrates an attainable physical repair.",
+        "No allatom/topology safeguard was added. The12tail-involving severeCNO overlaps in v6FK1 remain a separate packing issue.",
+        "Improved finite reward ordering is not a guarantee of better overall DockQ or packing. Preserve previous candidates and compare best outcomes across alltaus, without requiring uniform improvement."
+      ],
+      "status": "limitations_retained_bounded_test_submitted_outcome_pending",
+      "transfer_limits": "Exact 9N4K receptor-trap reference recovery over 552 observed residues of the full 716-residue protein-only input, with all four C/D/E/F interfaces covered. Engineered trap and glycosylation qualifications remain; this is not native signaling or independent validation.",
+      "qualification": "Preflight/scalar limitations, not failed sampling, biological nonbinding or outcomes of the submitted jobs."
+    },
+    {
+      "failure_id": "BMP7_ACVR1_ACVR2A_WAVE20_PREPARED_SCORE_LIMITATIONS_20261018",
+      "complex_id": "BMP7_ACVR1_ACVR2A",
+      "recipe_id": "bmp7_alk2_q89_typeII_orientation_v6",
+      "recorded_at": "2026-10-18T22:29:10.823860+00:00",
+      "failure_category": "documented_pre_sampling_scoring_limitations",
+      "run_ids": [],
+      "followup_sampling_job_ids": [
+        "58228460",
+        "58228461",
+        "58228462"
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/preparation/bmp7_alk2_v6_20261018/scientific_summary.json",
+          "sha256": "4e5458655a40dfe416721d3c4938fb3e2661455e76c3f9519ce8b779c0a9188e"
+        }
+      ],
+      "observed_symptoms": [
+        "The angle frame is invariant to twisting a receptor around the W79-S405 approach axis. Original flank distances and packing penalize tested twists, but no unique orientation or chirality proof is claimed.",
+        "The three tested approach twists retain orientationfactor1 and totalreward.253-.311 with55-208 severeCNO pairs. They remain below retained relaxedv4.4075, yet are not clean hard negatives.",
+        "Retained relaxedv4 only narrowly outscores actual v5FK7 (.407507 versus.406644). Rawv4 remains below both v5FK7/FK9 under v6; scalar ordering is not general overall-structure quality.",
+        "The ten-degree near miss retains factor1;20degree tilts retain.829-.898, while60degrees loses more. These are finite engineering diagnostics, not calibrated angular uncertainties or proven sampling performance.",
+        "Global zero-floor orientation can suppress early distant states and scales the whole assembly, including unchanged typeI terms. Actual trajectories must be checked after sampling.",
+        "Source-compatible composite has missing heavy atoms and28 severeCNO overlaps; factor-floor/unassessed status is preserved. It is a geometry positive, not a clean full native structure.",
+        "Heavy guard remains a gentle bounded interchain CNO metric, not energy, complete physical acceptance, disulfide validation or glycan compatibility.",
+        "All selected observations are tuning evidence; no nativeBMP7-ACVR1 accuracy or binding claim."
+      ],
+      "status": "limitations_retained_bounded_test_submitted_outcome_pending",
+      "transfer_limits": "Partial species-surrogate 1LX5 protein reference: only E/F type-II interfaces covered (392 observed residues of full716 input); ACVR1 C/D experimental geometry is uncovered. No whole-assembly or type-I experimental DockQ. Composite diagnostics are not reference truth; evidence is reused for tuning, not independent validation.",
+      "qualification": "Preflight/scalar limitations, not failed sampling, biological nonbinding or outcomes of the submitted jobs."
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-18T20:51:59.568354+00:00"
+  "updated_at": "2026-10-18T22:29:10.823860+00:00"
 }
