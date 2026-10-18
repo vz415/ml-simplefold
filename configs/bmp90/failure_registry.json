@@ -2221,8 +2221,32 @@
       "status": "limitations_retained_bounded_test_submitted_outcome_pending",
       "transfer_limits": "Partial species-surrogate 1LX5 protein reference: only E/F type-II interfaces covered (392 observed residues of full716 input); ACVR1 C/D experimental geometry is uncovered. No whole-assembly or type-I experimental DockQ. Composite diagnostics are not reference truth; evidence is reused for tuning, not independent validation.",
       "qualification": "Preflight/scalar limitations, not failed sampling, biological nonbinding or outcomes of the submitted jobs."
+    },
+    {
+      "failure_id": "GDF5_ACVR2B_WAVE20_CLEANUP_RESIDUAL_DISULFIDE_20261018",
+      "complex_id": "GDF5_BMPR1A_ACVR2B",
+      "recorded_at": "2026-10-18T23:17:19.748039+00:00",
+      "run_ids": [
+        "58228478",
+        "58228479"
+      ],
+      "failure_category": "residual_covalent_geometry_after_packing_cleanup",
+      "sources": [
+        {
+          "path": "artifacts/bmp90/evaluation/wave20_gdf5_cleanup_20261018/summary.json",
+          "sha256": "a9ea3477e56bf6cad8d313b4adb5081ffdd07537324e97f29cc34616f6c3a04c"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave20_gdf5_cleanup_20261018/review.json",
+          "sha256": "8a5136c3d3a61d59d8a65ffa9d89c2099491a8cc33a5aa7d279f0b7e9e7bbdb3"
+        }
+      ],
+      "observed_symptoms": "Guided FK2 input-chain C102-C107 SG distance decreased from1.938A to1.622A; native connectivity is preserved but its geometry is compressed. Baseline7 has all27 SG distances2.020-2.068A. Ordinary overlaps remain4/8 interchain and59/68 total under the specified heavy-atom diagnostic.",
+      "resolved_symptoms": "Both cleanups remove counted severe interchain CNO overlaps and backbone bond outliers; baseline severe intrachain CNO count3 to0.",
+      "next_action": "Prefer baseline7 for inspection; preserve FK2 and flag its disulfide geometry for any future repair. No new job submitted.",
+      "qualification": "Observed model geometry, not biological nonbinding, complete all-atom acceptance or experimental pose validation."
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-18T22:29:10.823860+00:00"
+  "updated_at": "2026-10-18T23:17:19.748039+00:00"
 }

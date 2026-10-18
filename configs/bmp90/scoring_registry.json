@@ -82492,7 +82492,7 @@
         },
         {
           "job_id": "58228478",
-          "status": "submitted_not_evaluated",
+          "status": "completed_evaluated",
           "recorded_at": "2026-10-18T22:31:37.989697+00:00",
           "source_sampling_job": "58209925",
           "source_condition": "fk",
@@ -82544,11 +82544,175 @@
           "sampling_first_proof": {
             "path": "artifacts/bmp90/preparation/wave20_gdf5_rosetta_20261018/runtime_state/attempts/gdf5b_fk2.json",
             "sha256": "abe32706701baffa79bb7606579598c033ea38affd0539678e37dbeb528e9244"
+          },
+          "status_history": [
+            {
+              "status": "submitted_not_evaluated",
+              "recorded_at": "2026-10-18T22:31:37.989697+00:00"
+            }
+          ],
+          "outcome_recorded_at": "2026-10-18T23:17:19.748039+00:00",
+          "outcome": {
+            "job_id": "58228478",
+            "source_job": "58209925",
+            "source_condition": "fk",
+            "source_sample": 2,
+            "baseline_origin": false,
+            "status": "completed_evaluated",
+            "references": {
+              "comparison": {
+                "path": "artifacts/remote-runs/58228478/comparison.json",
+                "sha256": "c52a2ca08b2539f610597de87230202c5957a1a26cc14b0b336ab3979fe1b807"
+              },
+              "refined_structure": {
+                "path": "artifacts/remote-runs/58228478/refined.pdb",
+                "sha256": "6b99764b59d771b13e44f83eef0a15625552f12bb0a968e98d4c4ebbb9449c6d"
+              },
+              "completion": {
+                "path": "artifacts/remote-runs/58228478/refinement-experiment.json",
+                "sha256": "5e1d5780e8f711179b0a0c712f235f4f6ce3d191d7ae5c21e8386e3133928206"
+              },
+              "raw_disulfides": {
+                "path": "artifacts/remote-runs/58228478/raw_disulfide_verification.json",
+                "sha256": "9860e5be6f2623ace73e562f0e01e3426784e552d392f91ac1de428d6049a8dc"
+              },
+              "manifest": {
+                "path": "artifacts/remote-runs/58228478/CACHE_MANIFEST.json",
+                "sha256": "3456d37d7c7f5038eff5cfef5cb36024adb6c863c3797e5b6882f3f831116c97"
+              }
+            },
+            "reference_scope": {
+              "covered": [
+                "C",
+                "D"
+              ],
+              "uncovered": [
+                "E",
+                "F"
+              ],
+              "label": "mutant_surrogate_agreement",
+              "qualification": "3QB4 GDF5 R57A mutant type-I surrogate,386observed residues; C/D covered, E/F type-II uncovered. WT Arg57 whole residue is masked in comparison, and incompatible local latch contacts excluded from guidance. Full WT input sequences retained. No wild-type accuracy, type-II native DockQ or whole-assembly DockQ; tuning/transfer evidence is not independent validation.",
+              "observed_residues": 386,
+              "full_construct_residues": 736,
+              "whole_assembly_experimental_DockQ": null
+            },
+            "fixed_reference_assignment": {
+              "A": "A",
+              "B": "B",
+              "C": "D",
+              "D": "C",
+              "E": "E",
+              "F": "F"
+            },
+            "stages": {
+              "original": {
+                "mutant_surrogate_DockQ": {
+                  "C": 0.8449995275563599,
+                  "D": 0.8532603962726646
+                },
+                "severe_interchain_CNO_overlaps": 16,
+                "severe_intrachain_nonbonded_CNO_overlaps": 0,
+                "ordinary_interchain_heavy_atom_overlaps": 96,
+                "ordinary_total_heavy_atom_overlaps": 168,
+                "backbone_bond_outliers": 9,
+                "native_disulfide_SG_range_A": [
+                  1.6669220137726912,
+                  2.43496776159357
+                ],
+                "unexpected_close_SG_pairs": [],
+                "common_guidance_per_interface": {
+                  "BMPR1A_C": 0.9860683966037366,
+                  "BMPR1A_D": 0.9922551115869057,
+                  "ACVR2B_E": 0.974716837190405,
+                  "ACVR2B_F": 0.9921269027212208
+                }
+              },
+              "refined": {
+                "mutant_surrogate_DockQ": {
+                  "C": 0.8220631019043351,
+                  "D": 0.8063703468847777
+                },
+                "severe_interchain_CNO_overlaps": 0,
+                "severe_intrachain_nonbonded_CNO_overlaps": 0,
+                "ordinary_interchain_heavy_atom_overlaps": 4,
+                "ordinary_total_heavy_atom_overlaps": 59,
+                "backbone_bond_outliers": 0,
+                "native_disulfide_SG_range_A": [
+                  1.6223516881366977,
+                  2.0635026047960294
+                ],
+                "unexpected_close_SG_pairs": [],
+                "common_guidance_per_interface": {
+                  "BMPR1A_C": 0.9866530728311597,
+                  "BMPR1A_D": 0.9900417434155029,
+                  "ACVR2B_E": 0.9754348728432727,
+                  "ACVR2B_F": 0.9910350602678357
+                }
+              }
+            },
+            "core_backbone_drift_A": 0.09716264712584996,
+            "heavy_atoms_lost": [],
+            "heavy_atoms_added": [
+              [
+                "A",
+                120,
+                "OXT"
+              ],
+              [
+                "B",
+                120,
+                "OXT"
+              ],
+              [
+                "C",
+                129,
+                "OXT"
+              ],
+              [
+                "D",
+                129,
+                "OXT"
+              ],
+              [
+                "E",
+                119,
+                "OXT"
+              ],
+              [
+                "F",
+                119,
+                "OXT"
+              ]
+            ],
+            "canonical_refined_path": "/pub/ynkim4/ml-simplefold/artifacts/runs/58228478/refined.pdb",
+            "home_refined_path": "/data/homezvol2/ynkim4/ml-simplefold-bmp90-paid-wave20-20261018/artifacts/transfer-stage/runs/58228478/refined.pdb",
+            "limitations": [
+              "No native-target whole-assembly accuracy or calibrated physical acceptance; reference gaps remain uncovered.",
+              "Raw CNO overlaps and fixed-topology nonbonded overlaps are distinct; no MolProbity claim.",
+              "Glycans, protonation, membrane compatibility, binding and biological activity remain unassessed.",
+              "Source restraints/template comparisons reuse guidance evidence; no independent validation."
+            ]
+          },
+          "review": {
+            "path": "artifacts/bmp90/evaluation/wave20_gdf5_cleanup_20261018/review.json",
+            "sha256": "8a5136c3d3a61d59d8a65ffa9d89c2099491a8cc33a5aa7d279f0b7e9e7bbdb3"
+          },
+          "acceptance": "unassessed_pending_calibration",
+          "retrieval_status": {
+            "job_id": "58228478",
+            "recorded_at": "2026-10-18T23:17:42.279614+00:00",
+            "local_payload_SHA256_verified": true,
+            "canonical_publication_verification": "timed_out_unconfirmed",
+            "temporary_home_copy_retained": true,
+            "receipt": {
+              "path": "artifacts/bmp90/operations/paid_wave20/parent_records/gdf5_retrieve_58228478_20261018T231313Z.json",
+              "sha256": "a97242c769677b55ff6ec8a7ea3305406f5664eabbaa58a4c3844e355d0c0b84"
+            }
           }
         },
         {
           "job_id": "58228479",
-          "status": "submitted_not_evaluated",
+          "status": "completed_evaluated",
           "recorded_at": "2026-10-18T22:31:37.989697+00:00",
           "source_sampling_job": "58209925",
           "source_condition": "baseline",
@@ -82600,6 +82764,170 @@
           "sampling_first_proof": {
             "path": "artifacts/bmp90/preparation/wave20_gdf5_rosetta_20261018/runtime_state/attempts/gdf5b_baseline7.json",
             "sha256": "4aad387ecf1234a60814688a9cbdd3ae0efe0a0e360ed0404c6423a1cae45754"
+          },
+          "status_history": [
+            {
+              "status": "submitted_not_evaluated",
+              "recorded_at": "2026-10-18T22:31:37.989697+00:00"
+            }
+          ],
+          "outcome_recorded_at": "2026-10-18T23:17:19.748039+00:00",
+          "outcome": {
+            "job_id": "58228479",
+            "source_job": "58209925",
+            "source_condition": "baseline",
+            "source_sample": 7,
+            "baseline_origin": true,
+            "status": "completed_evaluated",
+            "references": {
+              "comparison": {
+                "path": "artifacts/remote-runs/58228479/comparison.json",
+                "sha256": "8e644526020eec17c023d5bfa5b29a9a718829aa59c060916ec783ac28a7d570"
+              },
+              "refined_structure": {
+                "path": "artifacts/remote-runs/58228479/refined.pdb",
+                "sha256": "520bde3da72a0323d66e2ca844640b8ff437438bc0e5649f43111aa1b7abe190"
+              },
+              "completion": {
+                "path": "artifacts/remote-runs/58228479/refinement-experiment.json",
+                "sha256": "a30752003b454670d3b23c119def51b039de95d8f5ce69678e277f32a2de5b8f"
+              },
+              "raw_disulfides": {
+                "path": "artifacts/remote-runs/58228479/raw_disulfide_verification.json",
+                "sha256": "4ceb28cfa60d7f74ddaa771f8fd7b2bfa78b87f4f21736865de0353c052721a1"
+              },
+              "manifest": {
+                "path": "artifacts/remote-runs/58228479/CACHE_MANIFEST.json",
+                "sha256": "bbbc881b493a2ec30f07a4ae839787850f06c2c32154e31c6e47584b3ccdbdd2"
+              }
+            },
+            "reference_scope": {
+              "covered": [
+                "C",
+                "D"
+              ],
+              "uncovered": [
+                "E",
+                "F"
+              ],
+              "label": "mutant_surrogate_agreement",
+              "qualification": "3QB4 GDF5 R57A mutant type-I surrogate,386observed residues; C/D covered, E/F type-II uncovered. WT Arg57 whole residue is masked in comparison, and incompatible local latch contacts excluded from guidance. Full WT input sequences retained. No wild-type accuracy, type-II native DockQ or whole-assembly DockQ; tuning/transfer evidence is not independent validation.",
+              "observed_residues": 386,
+              "full_construct_residues": 736,
+              "whole_assembly_experimental_DockQ": null
+            },
+            "fixed_reference_assignment": {
+              "A": "A",
+              "B": "B",
+              "C": "D",
+              "D": "C",
+              "E": "E",
+              "F": "F"
+            },
+            "stages": {
+              "original": {
+                "mutant_surrogate_DockQ": {
+                  "C": 0.8429732144908804,
+                  "D": 0.8477483853381623
+                },
+                "severe_interchain_CNO_overlaps": 12,
+                "severe_intrachain_nonbonded_CNO_overlaps": 3,
+                "ordinary_interchain_heavy_atom_overlaps": 95,
+                "ordinary_total_heavy_atom_overlaps": 165,
+                "backbone_bond_outliers": 6,
+                "native_disulfide_SG_range_A": [
+                  1.408234355496272,
+                  2.481281523729218
+                ],
+                "unexpected_close_SG_pairs": [],
+                "common_guidance_per_interface": {
+                  "BMPR1A_C": 0.9828872191166524,
+                  "BMPR1A_D": 0.9913803091227965,
+                  "ACVR2B_E": 0.9750784807042346,
+                  "ACVR2B_F": 0.9935186799979668
+                }
+              },
+              "refined": {
+                "mutant_surrogate_DockQ": {
+                  "C": 0.8111136174085519,
+                  "D": 0.8190115229839353
+                },
+                "severe_interchain_CNO_overlaps": 0,
+                "severe_intrachain_nonbonded_CNO_overlaps": 0,
+                "ordinary_interchain_heavy_atom_overlaps": 8,
+                "ordinary_total_heavy_atom_overlaps": 68,
+                "backbone_bond_outliers": 0,
+                "native_disulfide_SG_range_A": [
+                  2.0202324123723985,
+                  2.0681208862153104
+                ],
+                "unexpected_close_SG_pairs": [],
+                "common_guidance_per_interface": {
+                  "BMPR1A_C": 0.9843105160732076,
+                  "BMPR1A_D": 0.9877755170949705,
+                  "ACVR2B_E": 0.9746679444719346,
+                  "ACVR2B_F": 0.9925019621165125
+                }
+              }
+            },
+            "core_backbone_drift_A": 0.0992802006425825,
+            "heavy_atoms_lost": [],
+            "heavy_atoms_added": [
+              [
+                "A",
+                120,
+                "OXT"
+              ],
+              [
+                "B",
+                120,
+                "OXT"
+              ],
+              [
+                "C",
+                129,
+                "OXT"
+              ],
+              [
+                "D",
+                129,
+                "OXT"
+              ],
+              [
+                "E",
+                119,
+                "OXT"
+              ],
+              [
+                "F",
+                119,
+                "OXT"
+              ]
+            ],
+            "canonical_refined_path": "/pub/ynkim4/ml-simplefold/artifacts/runs/58228479/refined.pdb",
+            "home_refined_path": "/data/homezvol2/ynkim4/ml-simplefold-bmp90-paid-wave20-20261018/artifacts/transfer-stage/runs/58228479/refined.pdb",
+            "limitations": [
+              "No native-target whole-assembly accuracy or calibrated physical acceptance; reference gaps remain uncovered.",
+              "Raw CNO overlaps and fixed-topology nonbonded overlaps are distinct; no MolProbity claim.",
+              "Glycans, protonation, membrane compatibility, binding and biological activity remain unassessed.",
+              "Source restraints/template comparisons reuse guidance evidence; no independent validation."
+            ]
+          },
+          "review": {
+            "path": "artifacts/bmp90/evaluation/wave20_gdf5_cleanup_20261018/review.json",
+            "sha256": "8a5136c3d3a61d59d8a65ffa9d89c2099491a8cc33a5aa7d279f0b7e9e7bbdb3"
+          },
+          "acceptance": "unassessed_pending_calibration",
+          "retrieval_status": {
+            "job_id": "58228479",
+            "recorded_at": "2026-10-18T23:17:42.281084+00:00",
+            "local_payload_SHA256_verified": true,
+            "canonical_publication_verification": "timed_out_unconfirmed",
+            "temporary_home_copy_retained": true,
+            "receipt": {
+              "path": "artifacts/bmp90/operations/paid_wave20/parent_records/gdf5_retrieve_58228479_20261018T231313Z.json",
+              "sha256": "880777368e7aa96c25b46bc81a6c7cb1a9fa2b309cd1e349274afb9c921667fa"
+            }
           }
         }
       ],
@@ -82613,10 +82941,30 @@
           },
           "new_job_ids": []
         }
+      ],
+      "refinement_comparisons": [
+        {
+          "comparison_id": "GDF5_ACVR2B_WAVE20_CLEANUP_20261018",
+          "recorded_at": "2026-10-18T23:17:19.748039+00:00",
+          "source": {
+            "path": "artifacts/bmp90/evaluation/wave20_gdf5_cleanup_20261018/summary.json",
+            "sha256": "a9ea3477e56bf6cad8d313b4adb5081ffdd07537324e97f29cc34616f6c3a04c"
+          },
+          "review": {
+            "path": "artifacts/bmp90/evaluation/wave20_gdf5_cleanup_20261018/review.json",
+            "sha256": "8a5136c3d3a61d59d8a65ffa9d89c2099491a8cc33a5aa7d279f0b7e9e7bbdb3"
+          },
+          "preferred_cleanup_for_inspection": "58228479",
+          "candidate_job_ids": [
+            "58228478",
+            "58228479"
+          ],
+          "qualification": "Provisional preference between these two cleanups only; no recipe promotion, independent validation, native type-II DockQ or calibrated acceptance. Baseline7 remains unguided."
+        }
       ]
     }
   },
-  "updated_at": "2026-10-18T22:31:37.989697+00:00",
+  "updated_at": "2026-10-18T23:17:19.748039+00:00",
   "interface_evidence_registry": "configs/bmp90/interface_evidence_registry.json",
   "failure_registry": "configs/bmp90/failure_registry.json",
   "construct_policy": {
@@ -82681,7 +83029,7 @@
       "58228479"
     ],
     "cleanup_requested_CPU_hours_cap": 3.0,
-    "cleanup_status": "submitted_after_all_nine_sampling_jobs",
+    "cleanup_status": "both_completed_evaluated; guided_disulfide_defect_retained",
     "startup_observation": {
       "observed_at": "2026-10-18T22:33:14.441150+00:00",
       "source": {
@@ -82783,6 +83131,10 @@
         }
       ],
       "scope": "Scheduler startup snapshot only. GPU58228414 just allocated; sampling metadata not yet available at this observation. Both cleanups passed mandatory preparation analysis and entered Rosetta on the frozen revision. No results or promotion."
+    },
+    "cleanup_result_source": {
+      "path": "artifacts/bmp90/evaluation/wave20_gdf5_cleanup_20261018/summary.json",
+      "sha256": "a9ea3477e56bf6cad8d313b4adb5081ffdd07537324e97f29cc34616f6c3a04c"
     }
   },
   "authorized_campaign_history": [

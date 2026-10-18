@@ -2478,6 +2478,24 @@
       ],
       "observation": "Two selected tau0.1 candidates bound to fixed-sequence27-disulfide cleanup after nine GPU submissions. Same covered-reference assignment and conditional inferred E/F assignment frozen before/after. Original candidate coordinates supply restraints.",
       "qualification": "3QB4 mutant C/D only; E/F inferred. Baseline7 remains unguided. Submission and local no-op validation establish neither improved packing nor biological accuracy."
+    },
+    {
+      "evidence_id": "GDF5_ACVR2B_WAVE20_CLEANUP_RESULTS_20261018",
+      "target_id": "GDF5_BMPR1A_ACVR2B",
+      "recorded_at": "2026-10-18T23:17:19.748039+00:00",
+      "evidence_class": "computed_relaxation_diagnostic_not_experimental",
+      "sources": [
+        {
+          "path": "artifacts/bmp90/evaluation/wave20_gdf5_cleanup_20261018/summary.json",
+          "sha256": "a9ea3477e56bf6cad8d313b4adb5081ffdd07537324e97f29cc34616f6c3a04c"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave20_gdf5_cleanup_20261018/review.json",
+          "sha256": "8a5136c3d3a61d59d8a65ffa9d89c2099491a8cc33a5aa7d279f0b7e9e7bbdb3"
+        }
+      ],
+      "observation": "Severe interchain CNO overlaps16/12 to0/0 and backbone bond outliers9/6 to0/0. BMPR1A mutant-surrogate DockQ becomes0.822/0.806 for FK2 and0.811/0.819 for baseline7; modestly lower than before. Core backbone drift0.097/0.099A. Type-II common guidance remains high under fixed coherent assignments, but no experimental type-II reference was available for this comparison.",
+      "qualification": "Provisional preference between these two cleanups only; no recipe promotion, independent validation, native type-II DockQ or calibrated acceptance. Baseline7 remains unguided."
     }
   ],
   "generic_inspection_priors": {
@@ -2689,5 +2707,5 @@
       "evidence_label_scope": "Vocabulary for future observations; no existing evidence_class is reclassified by this import. R8 instructs evaluation of energetic evidence; it does not establish a hotspot for any target."
     }
   },
-  "updated_at": "2026-10-18T22:31:37.989697+00:00"
+  "updated_at": "2026-10-18T23:17:19.748039+00:00"
 }
