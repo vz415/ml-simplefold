@@ -2231,6 +2231,106 @@
         "The existing floor0.8 steric factor does not guarantee physical acceptance; compare per-copy geometry and packing after sampling.",
         "Previously successful typeII kernel/targets are exact under a fixed assignment, but optimizing the complete score can select another coherent symmetry assignment."
       ]
+    },
+    {
+      "evidence_id": "WAVE19_AND_GDF5_WAVE18_COMPLETED_SCREEN_20261018",
+      "recorded_at": "2026-10-18T20:51:59.568354+00:00",
+      "evidence_class": "computed_model_report_screen_not_experimental",
+      "target_ids": [
+        "BMP4_BMPR1A_ACVR2A",
+        "BMP6_ACVR1_ACVR2B",
+        "BMP7_ACVR1_ACVR2A",
+        "GDF5_BMPR1A_ACVR2B"
+      ],
+      "sources": [
+        {
+          "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_summary.json",
+          "sha256": "fa99d36c5cffdf53a3cd1f45278982cb1ebaa3dc07bbea9eb1b871f1a16cd1aa"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/analysis_subsets/58209925/SUBSET_VERIFIED.json",
+          "sha256": "7e5ade3cec4ed1e513eb25967510058cc84c9a0cf1829f167e4aae5e030b4237"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/analysis_subsets/58209926/SUBSET_VERIFIED.json",
+          "sha256": "a8ad197cadb81c3d8bd6b3a9cfe1052ced8925a2ba604fcd6b9c2ff2377e5ac1"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/analysis_subsets/58209927/SUBSET_VERIFIED.json",
+          "sha256": "00b9dd2312f636951f29ddfa42a1f7a1597d075172e146d13052571c85829c41"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/analysis_subsets/58215223/SUBSET_VERIFIED.json",
+          "sha256": "be161e2f03dcbc11c8e78305a6bf54f3ea3ca6aff279ca6923b0ac499b39dff1"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/analysis_subsets/58215224/SUBSET_VERIFIED.json",
+          "sha256": "3aac34b057102fd2796416f89434079a47d8b914f278cc3a44767ec84634e00c"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/analysis_subsets/58215225/SUBSET_VERIFIED.json",
+          "sha256": "9c2b2b400b7af280288ff3fe92163c936cb040e6211f29127a13b04390229938"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/analysis_subsets/58215227/SUBSET_VERIFIED.json",
+          "sha256": "6cbd5152a8e1ee84059ac7ffc146630ed827aede3e710a2cd8f06cab4a49fc24"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/analysis_subsets/58215228/SUBSET_VERIFIED.json",
+          "sha256": "65f8761b871ddfd5b38756eea6439b2a3f31ee2f6cab657d801e1ee8d988f3cd"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/analysis_subsets/58215229/SUBSET_VERIFIED.json",
+          "sha256": "65dd0a86cc63115a8ce73b9e27accfb13211477e68c1218d169822b3b3854fbb"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/analysis_subsets/58215263/SUBSET_VERIFIED.json",
+          "sha256": "bdbd1e806c92ff0afc127408d9da7d20de45f0d8fec05c12eba6ef881d994b55"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/analysis_subsets/58215264/SUBSET_VERIFIED.json",
+          "sha256": "b8eafb177a76a330e5e5cc4271bd3a254cd0ad8bd53d1fa0929cf803f41eafd5"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/analysis_subsets/58215265/SUBSET_VERIFIED.json",
+          "sha256": "8263d52524deff6abc6611804154306101d6aa3298ca2777a9488743569f087b"
+        }
+      ],
+      "observations": [
+        {
+          "target_id": "BMP4_BMPR1A_ACVR2A",
+          "assessment": "Retain v1. Best changed v3 candidate58215225 tau0.8 FK6 has covered homolog C/E DockQ0.896665/0.822140 and35 severe interchain CNO versus retained v1 0.925802/0.819156 and9. Weak-copy W79 approach remains8.42989angstrom too long; no model satisfies all four required copy groups. Highest covered agreement FK9 is baseline-identical and has46 severe CNO.",
+          "source": {
+            "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_screen_bmp4.json",
+            "sha256": "1af92610a5c6a3c4196cfa0cdde1bfda2d923b6072c7baad537b851a4f8816ff"
+          }
+        },
+        {
+          "target_id": "BMP6_ACVR1_ACVR2B",
+          "assessment": "Provisional raw candidate58215227 tau0.1 FK1: C/D/E/F DockQ0.670208/0.664867/0.897672/0.904154 against matching 9N4K observed interfaces;12 severe interchain CNO, all involving tails, versus prior raw v1 17. N60 fitted errors2.63/2.37angstrom improve with wrist retained; N60 heavy approach5.72/5.35angstrom remains incomplete. Eight recovered FK descendants share ancestor7; not independent replicates. Refined v1 remains cleaner; no formal promotion or native signaling claim.",
+          "source": {
+            "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_screen_bmp6.json",
+            "sha256": "b8f73c4defc030f4ed743b326d448976c0921436f45330ddc5edb5da4485d815"
+          }
+        },
+        {
+          "target_id": "BMP7_ACVR1_ACVR2A",
+          "assessment": "Retain v4. Tau0.3 job58215264 FK7 improves Q89 errors to2.25/2.80angstrom from4.19/4.12, but species-surrogate E/F DockQ0.8987/0.3758 and33 severe CNO remain worse overall. High F restraint score0.9176 coexists with low F DockQ0.3758 under the same assignment: sparse typeII contacts permit misorientation. Tau0.8 recovers both covered typeII interfaces in3/10FK but has poor inferred typeI placement.",
+          "source": {
+            "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_screen_bmp7.json",
+            "sha256": "2a5863dfb99fc01238490f830c6fb16c4e70e8fc1462209fa6db441e66e11727"
+          }
+        },
+        {
+          "target_id": "GDF5_BMPR1A_ACVR2B",
+          "assessment": "Promising tau0.1 job58209925 shortlist: guided FK2 mutant-surrogate C/D DockQ0.845000/0.853260,16 severe interchain CNO, weak typeII common-fine0.952173 versus prior v1 0.807585/0.771681,15 severe CNO and0.482181. Baseline7=FK7 is already strong at0.842973/0.847748,12 severe CNO and0.955679; retain unguided origin. FK6 is metric leader0.849531/0.848476 but has29 severe CNO. Six high-guidance tau0.1 descendants share ancestor7. E/F are unreferenced and require orientation/physical assessment; 3QB4 mutant distal agreement is not WT or whole-complex validation.",
+          "source": {
+            "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_screen_gdf5_models.json",
+            "sha256": "1111acf35ee676aedb610b3526a0032d9579b6c504b17ab7ae36756da6df6d73"
+          }
+        }
+      ],
+      "scope": "Verified completed report screen; no calibrated acceptance, formal ranking promotion, new submission, or relaxation. Compare best overall across tau; a weaker tau does not disqualify a recipe. Preserve partial/mutant/species reference qualifications and inferred-interface status."
     }
   ],
   "generic_inspection_priors": {
@@ -2442,5 +2542,5 @@
       "evidence_label_scope": "Vocabulary for future observations; no existing evidence_class is reclassified by this import. R8 instructs evaluation of energetic evidence; it does not establish a hotspot for any target."
     }
   },
-  "updated_at": "2026-10-18T03:56:27.948127+00:00"
+  "updated_at": "2026-10-18T20:51:59.568354+00:00"
 }

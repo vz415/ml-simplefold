@@ -10457,7 +10457,7 @@
         {
           "recipe_id": "bmp6_joint_n60_wrist_v6",
           "rank": null,
-          "status": "submitted_not_evaluated",
+          "status": "completed_report_screened_promising_candidate",
           "executable": true,
           "comparison_group": "human_full_native_716",
           "parent_recipe_ids": [
@@ -11834,7 +11834,7 @@
             {
               "job_id": "58215227",
               "evaluation_job_id": "58215271",
-              "status": "submitted_not_evaluated",
+              "status": "completed_report_screened",
               "run_id": "20261018T035309228646Z_BMP6_ACVR1_ACVR2B_bmp6_joint_n60_wrist_v6_a232b02f",
               "tau": 0.1,
               "beta": 4.0,
@@ -11868,12 +11868,41 @@
                   "path": "artifacts/bmp90/operations/paid_wave19/arms/bmp6_acvr1_joint_wrist_v6/tau01_r1.registry.json",
                   "sha256": "16a140fa0b00f4a8c00230ba529d96eca826da23d514023521723b1917d64f48"
                 }
+              },
+              "evaluation_screen": {
+                "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_screen_bmp6.json",
+                "sha256": "b8f73c4defc030f4ed743b326d448976c0921436f45330ddc5edb5da4485d815"
+              },
+              "completion_observation": {
+                "observed_at": "2026-10-18T20:46:21.888358+00:00",
+                "sampling": {
+                  "job_id": "58215227",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "01:34:28",
+                  "start": "2026-10-17T20:57:57",
+                  "end": "2026-10-17T22:32:25",
+                  "allocation": "billing=38,cpu=6,gres/gpu=1,mem=48G,node=1"
+                },
+                "evaluation": {
+                  "job_id": "58215271",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:00:51",
+                  "start": "2026-10-17T22:32:26",
+                  "end": "2026-10-17T22:33:17",
+                  "allocation": "billing=4,cpu=4,mem=12G,node=1"
+                },
+                "source": {
+                  "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/scheduler.json",
+                  "sha256": "dc556c008c98e485398639b0951583f60a3b62f54097fc75bc51855b5901bd6e"
+                }
               }
             },
             {
               "job_id": "58215228",
               "evaluation_job_id": "58215272",
-              "status": "submitted_not_evaluated",
+              "status": "completed_report_screened",
               "run_id": "20261018T035343205929Z_BMP6_ACVR1_ACVR2B_bmp6_joint_n60_wrist_v6_2072d0e8",
               "tau": 0.3,
               "beta": 4.0,
@@ -11907,12 +11936,41 @@
                   "path": "artifacts/bmp90/operations/paid_wave19/arms/bmp6_acvr1_joint_wrist_v6/tau03_r2.registry.json",
                   "sha256": "5f130d1046d27a0fc38ff1b46dba062410693ef832f41ca987675278f4baf204"
                 }
+              },
+              "evaluation_screen": {
+                "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_screen_bmp6.json",
+                "sha256": "b8f73c4defc030f4ed743b326d448976c0921436f45330ddc5edb5da4485d815"
+              },
+              "completion_observation": {
+                "observed_at": "2026-10-18T20:46:21.888358+00:00",
+                "sampling": {
+                  "job_id": "58215228",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "01:37:16",
+                  "start": "2026-10-17T20:57:57",
+                  "end": "2026-10-17T22:35:13",
+                  "allocation": "billing=38,cpu=6,gres/gpu=1,mem=48G,node=1"
+                },
+                "evaluation": {
+                  "job_id": "58215272",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:00:51",
+                  "start": "2026-10-17T22:35:16",
+                  "end": "2026-10-17T22:36:07",
+                  "allocation": "billing=4,cpu=4,mem=12G,node=1"
+                },
+                "source": {
+                  "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/scheduler.json",
+                  "sha256": "dc556c008c98e485398639b0951583f60a3b62f54097fc75bc51855b5901bd6e"
+                }
               }
             },
             {
               "job_id": "58215229",
               "evaluation_job_id": "58215273",
-              "status": "submitted_not_evaluated",
+              "status": "completed_report_screened",
               "run_id": "20261018T035417273354Z_BMP6_ACVR1_ACVR2B_bmp6_joint_n60_wrist_v6_a915bb6b",
               "tau": 0.8,
               "beta": 4.0,
@@ -11946,6 +12004,35 @@
                   "path": "artifacts/bmp90/operations/paid_wave19/arms/bmp6_acvr1_joint_wrist_v6/tau08_r3.registry.json",
                   "sha256": "19310de766d06d02c1287a30832013acfbcf282dfd8775b945bfd80a8bc62032"
                 }
+              },
+              "evaluation_screen": {
+                "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_screen_bmp6.json",
+                "sha256": "b8f73c4defc030f4ed743b326d448976c0921436f45330ddc5edb5da4485d815"
+              },
+              "completion_observation": {
+                "observed_at": "2026-10-18T20:46:21.888358+00:00",
+                "sampling": {
+                  "job_id": "58215229",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "01:34:58",
+                  "start": "2026-10-17T20:58:29",
+                  "end": "2026-10-17T22:33:27",
+                  "allocation": "billing=38,cpu=6,gres/gpu=1,mem=48G,node=1"
+                },
+                "evaluation": {
+                  "job_id": "58215273",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:00:52",
+                  "start": "2026-10-17T22:33:28",
+                  "end": "2026-10-17T22:34:20",
+                  "allocation": "billing=4,cpu=4,mem=12G,node=1"
+                },
+                "source": {
+                  "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/scheduler.json",
+                  "sha256": "dc556c008c98e485398639b0951583f60a3b62f54097fc75bc51855b5901bd6e"
+                }
               }
             }
           ],
@@ -11954,7 +12041,7 @@
             "BMP6_ACVR1_ACVR2B_WAVE19_PREPARED_SCORE_LIMITATIONS_20261017"
           ],
           "evaluation_scope": "Exact 9N4K receptor-trap reference recovery over 552 observed residues of the full 716-residue protein-only input, with all four C/D/E/F interfaces covered. Engineered trap and glycosylation qualifications remain; this is not native signaling or independent validation.",
-          "calibration_status": "Implementation/CPU scoring and qualified reference gates passed; sampled outcome pending. Known limitations are not biological validation.",
+          "calibration_status": "Completed report screen recorded; biological acceptance remains uncalibrated. See latest evaluation record for outcomes and reference qualifications.",
           "implementation_qualification": "BMP6 wrist is the existing global worst-copy geometry multiplier with floor0, not a per-interface cap; prior proposed implementation wording is retained only in history.",
           "known_scientific_limitations": [
             "The D-only source-fold repair gains only0.00785, below the initial0.01 assertion. Final gate uses0.005 to document the observed positive margin; no reward parameter or coordinate was changed.",
@@ -11964,6 +12051,20 @@
             "Worst-copy wrist error can mask further improvement to the already better wrist copy. Its factor scales the whole assembly, including numerically unchanged typeII terms.",
             "N60 is still CA-span/approach guidance and wristCB/backbone is a pose proxy. Sidechain rotamers, nativeSS geometry, tails and all-atom packing are not validated by this score.",
             "All selected sampled/relaxed structures, source distances, and finite diagnostic poses are posthoc tuning evidence; no independent accuracy or affinity claim."
+          ],
+          "evaluation_records": [
+            {
+              "record_id": "WAVE19_AND_GDF5_WAVE18_COMPLETED_SCREEN_20261018",
+              "recorded_at": "2026-10-18T20:51:59.568354+00:00",
+              "source": {
+                "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_screen_bmp6.json",
+                "sha256": "b8f73c4defc030f4ed743b326d448976c0921436f45330ddc5edb5da4485d815"
+              },
+              "assessment": "Provisional raw candidate58215227 tau0.1 FK1: C/D/E/F DockQ0.670208/0.664867/0.897672/0.904154 against matching 9N4K observed interfaces;12 severe interchain CNO, all involving tails, versus prior raw v1 17. N60 fitted errors2.63/2.37angstrom improve with wrist retained; N60 heavy approach5.72/5.35angstrom remains incomplete. Eight recovered FK descendants share ancestor7; not independent replicates. Refined v1 remains cleaner; no formal promotion or native signaling claim.",
+              "scope": "Verified completed report screen; no calibrated acceptance, formal ranking promotion, new submission, or relaxation. Compare best overall across tau; a weaker tau does not disqualify a recipe. Preserve partial/mutant/species reference qualifications and inferred-interface status.",
+              "storage": "Verified analysis/PDB subsets only; full tensor bundles not retrieved, canonical archive verification/cleanup not claimed, temporary home copies retained.",
+              "acceptance": "unassessed"
+            }
           ]
         }
       ],
@@ -37415,7 +37516,7 @@
         {
           "recipe_id": "bmp7_alk2_required_q89_bridge_cauchy_steric_v5",
           "rank": null,
-          "status": "submitted_not_evaluated",
+          "status": "completed_report_screened_not_preferred",
           "executable": true,
           "comparison_group": "human_full_native_716",
           "parent_recipe_ids": [
@@ -40611,7 +40712,7 @@
             {
               "job_id": "58215263",
               "evaluation_job_id": "58215274",
-              "status": "submitted_not_evaluated",
+              "status": "completed_report_screened",
               "run_id": "20261018T035457480782Z_BMP7_ACVR1_ACVR2A_bmp7_alk2_required_q89_bridge_cauchy_steric_v5_023eb84f",
               "tau": 0.1,
               "beta": 24.0,
@@ -40645,12 +40746,41 @@
                   "path": "artifacts/bmp90/operations/paid_wave19/arms/bmp7_alk2_required_q89_v5/tau01_r1.registry.json",
                   "sha256": "25290f9bf53d943a36d1d3d8894cead65574d98df972c1bd835a373396666ee5"
                 }
+              },
+              "evaluation_screen": {
+                "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_screen_bmp7.json",
+                "sha256": "2a5863dfb99fc01238490f830c6fb16c4e70e8fc1462209fa6db441e66e11727"
+              },
+              "completion_observation": {
+                "observed_at": "2026-10-18T20:46:21.888358+00:00",
+                "sampling": {
+                  "job_id": "58215263",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "01:36:58",
+                  "start": "2026-10-17T20:59:00",
+                  "end": "2026-10-17T22:35:58",
+                  "allocation": "billing=38,cpu=6,gres/gpu=1,mem=48G,node=1"
+                },
+                "evaluation": {
+                  "job_id": "58215274",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:00:35",
+                  "start": "2026-10-17T22:35:58",
+                  "end": "2026-10-17T22:36:33",
+                  "allocation": "billing=4,cpu=4,mem=12G,node=1"
+                },
+                "source": {
+                  "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/scheduler.json",
+                  "sha256": "dc556c008c98e485398639b0951583f60a3b62f54097fc75bc51855b5901bd6e"
+                }
               }
             },
             {
               "job_id": "58215264",
               "evaluation_job_id": "58215275",
-              "status": "submitted_not_evaluated",
+              "status": "completed_report_screened",
               "run_id": "20261018T035531360008Z_BMP7_ACVR1_ACVR2A_bmp7_alk2_required_q89_bridge_cauchy_steric_v5_b892e894",
               "tau": 0.3,
               "beta": 24.0,
@@ -40684,12 +40814,41 @@
                   "path": "artifacts/bmp90/operations/paid_wave19/arms/bmp7_alk2_required_q89_v5/tau03_r2.registry.json",
                   "sha256": "58d9885c4efff3c4ff91f1bd3e51e58eb8387f3ce819850be269198acf278415"
                 }
+              },
+              "evaluation_screen": {
+                "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_screen_bmp7.json",
+                "sha256": "2a5863dfb99fc01238490f830c6fb16c4e70e8fc1462209fa6db441e66e11727"
+              },
+              "completion_observation": {
+                "observed_at": "2026-10-18T20:46:21.888358+00:00",
+                "sampling": {
+                  "job_id": "58215264",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "01:37:46",
+                  "start": "2026-10-17T20:59:32",
+                  "end": "2026-10-17T22:37:18",
+                  "allocation": "billing=38,cpu=6,gres/gpu=1,mem=48G,node=1"
+                },
+                "evaluation": {
+                  "job_id": "58215275",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:00:36",
+                  "start": "2026-10-17T22:37:18",
+                  "end": "2026-10-17T22:37:54",
+                  "allocation": "billing=4,cpu=4,mem=12G,node=1"
+                },
+                "source": {
+                  "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/scheduler.json",
+                  "sha256": "dc556c008c98e485398639b0951583f60a3b62f54097fc75bc51855b5901bd6e"
+                }
               }
             },
             {
               "job_id": "58215265",
               "evaluation_job_id": "58215276",
-              "status": "submitted_not_evaluated",
+              "status": "completed_report_screened",
               "run_id": "20261018T035605120362Z_BMP7_ACVR1_ACVR2A_bmp7_alk2_required_q89_bridge_cauchy_steric_v5_f162f01e",
               "tau": 0.8,
               "beta": 24.0,
@@ -40723,15 +40882,45 @@
                   "path": "artifacts/bmp90/operations/paid_wave19/arms/bmp7_alk2_required_q89_v5/tau08_r3.registry.json",
                   "sha256": "7ba7e06b3987587c5c121eea836324aa856662fa53fb7a2a9daa05876e42eca2"
                 }
+              },
+              "evaluation_screen": {
+                "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_screen_bmp7.json",
+                "sha256": "2a5863dfb99fc01238490f830c6fb16c4e70e8fc1462209fa6db441e66e11727"
+              },
+              "completion_observation": {
+                "observed_at": "2026-10-18T20:46:21.888358+00:00",
+                "sampling": {
+                  "job_id": "58215265",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "01:34:42",
+                  "start": "2026-10-17T21:00:03",
+                  "end": "2026-10-17T22:34:45",
+                  "allocation": "billing=38,cpu=6,gres/gpu=1,mem=48G,node=1"
+                },
+                "evaluation": {
+                  "job_id": "58215276",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:00:36",
+                  "start": "2026-10-17T22:34:45",
+                  "end": "2026-10-17T22:35:21",
+                  "allocation": "billing=4,cpu=4,mem=12G,node=1"
+                },
+                "source": {
+                  "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/scheduler.json",
+                  "sha256": "dc556c008c98e485398639b0951583f60a3b62f54097fc75bc51855b5901bd6e"
+                }
               }
             }
           ],
           "successful_tau": [],
           "failure_ids": [
-            "BMP7_ACVR1_ACVR2A_WAVE19_PREPARED_SCORE_LIMITATIONS_20261017"
+            "BMP7_ACVR1_ACVR2A_WAVE19_PREPARED_SCORE_LIMITATIONS_20261017",
+            "BMP7_ACVR1_ACVR2A_WAVE19_RESIDUAL_PLACEMENT_20261018"
           ],
           "evaluation_scope": "Partial species-surrogate 1LX5 protein reference: only E/F type-II interfaces covered (392 observed residues of full716 input); ACVR1 C/D experimental geometry is uncovered. No whole-assembly or type-I experimental DockQ. Composite diagnostics are not reference truth; evidence is reused for tuning, not independent validation.",
-          "calibration_status": "Implementation/CPU scoring and qualified reference gates passed; sampled outcome pending. Known limitations are not biological validation.",
+          "calibration_status": "Completed report screen recorded; biological acceptance remains uncalibrated. See latest evaluation record for outcomes and reference qualifications.",
           "implementation_qualification": "Required geometry remains one coherent assembly hypothesis, not experimental native accuracy.",
           "known_scientific_limitations": [
             "No experimental BMP7-ACVR1 complex or clean full native positive is available here; partial source-compatible composite is a geometry diagnostic with missing-heavy factor floor, not physical validation.",
@@ -40739,6 +40928,20 @@
             "Required Q89 alone does not determine a unique pose or chemical contact, and stronger scalar preference may not yield a better overall sampled assembly.",
             "The existing floor0.8 steric factor does not guarantee physical acceptance; compare per-copy geometry and packing after sampling.",
             "Previously successful typeII kernel/targets are exact under a fixed assignment, but optimizing the complete score can select another coherent symmetry assignment."
+          ],
+          "evaluation_records": [
+            {
+              "record_id": "WAVE19_AND_GDF5_WAVE18_COMPLETED_SCREEN_20261018",
+              "recorded_at": "2026-10-18T20:51:59.568354+00:00",
+              "source": {
+                "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_screen_bmp7.json",
+                "sha256": "2a5863dfb99fc01238490f830c6fb16c4e70e8fc1462209fa6db441e66e11727"
+              },
+              "assessment": "Retain v4. Tau0.3 job58215264 FK7 improves Q89 errors to2.25/2.80angstrom from4.19/4.12, but species-surrogate E/F DockQ0.8987/0.3758 and33 severe CNO remain worse overall. High F restraint score0.9176 coexists with low F DockQ0.3758 under the same assignment: sparse typeII contacts permit misorientation. Tau0.8 recovers both covered typeII interfaces in3/10FK but has poor inferred typeI placement.",
+              "scope": "Verified completed report screen; no calibrated acceptance, formal ranking promotion, new submission, or relaxation. Compare best overall across tau; a weaker tau does not disqualify a recipe. Preserve partial/mutant/species reference qualifications and inferred-interface status.",
+              "storage": "Verified analysis/PDB subsets only; full tensor bundles not retrieved, canonical archive verification/cleanup not claimed, temporary home copies retained.",
+              "acceptance": "unassessed"
+            }
           ]
         }
       ],
@@ -59669,7 +59872,7 @@
         {
           "recipe_id": "bmp4_alk3_actr2a_orientation_v3",
           "rank": null,
-          "status": "submitted_not_evaluated",
+          "status": "completed_report_screened_not_preferred",
           "executable": true,
           "comparison_group": "human_full_native_722",
           "parent_recipe_ids": [
@@ -63894,7 +64097,7 @@
             {
               "job_id": "58215223",
               "evaluation_job_id": "58215268",
-              "status": "submitted_not_evaluated",
+              "status": "completed_report_screened",
               "run_id": "20261018T035121946928Z_BMP4_BMPR1A_ACVR2A_bmp4_alk3_actr2a_orientation_v3_e752b7a0",
               "tau": 0.1,
               "beta": 12.0,
@@ -63928,12 +64131,41 @@
                   "path": "artifacts/bmp90/operations/paid_wave19/arms/bmp4_alk3_actr2a_orientation_v3/tau01_r1.registry.json",
                   "sha256": "9c0fc25c7b5d7c50a396445059670ee0cd1146d5b25f67547c59c2cd2c74e186"
                 }
+              },
+              "evaluation_screen": {
+                "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_screen_bmp4.json",
+                "sha256": "1af92610a5c6a3c4196cfa0cdde1bfda2d923b6072c7baad537b851a4f8816ff"
+              },
+              "completion_observation": {
+                "observed_at": "2026-10-18T20:46:21.888358+00:00",
+                "sampling": {
+                  "job_id": "58215223",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "01:37:04",
+                  "start": "2026-10-17T20:56:54",
+                  "end": "2026-10-17T22:33:58",
+                  "allocation": "billing=38,cpu=6,gres/gpu=1,mem=48G,node=1"
+                },
+                "evaluation": {
+                  "job_id": "58215268",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:00:37",
+                  "start": "2026-10-17T22:33:58",
+                  "end": "2026-10-17T22:34:35",
+                  "allocation": "billing=4,cpu=4,mem=12G,node=1"
+                },
+                "source": {
+                  "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/scheduler.json",
+                  "sha256": "dc556c008c98e485398639b0951583f60a3b62f54097fc75bc51855b5901bd6e"
+                }
               }
             },
             {
               "job_id": "58215224",
               "evaluation_job_id": "58215269",
-              "status": "submitted_not_evaluated",
+              "status": "completed_report_screened",
               "run_id": "20261018T035155706504Z_BMP4_BMPR1A_ACVR2A_bmp4_alk3_actr2a_orientation_v3_2fdc158e",
               "tau": 0.3,
               "beta": 12.0,
@@ -63967,12 +64199,41 @@
                   "path": "artifacts/bmp90/operations/paid_wave19/arms/bmp4_alk3_actr2a_orientation_v3/tau03_r2.registry.json",
                   "sha256": "23115c17177939ca78c4132eff5fd0d52fa8a246c4fd9293ca033d95fce85d1c"
                 }
+              },
+              "evaluation_screen": {
+                "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_screen_bmp4.json",
+                "sha256": "1af92610a5c6a3c4196cfa0cdde1bfda2d923b6072c7baad537b851a4f8816ff"
+              },
+              "completion_observation": {
+                "observed_at": "2026-10-18T20:46:21.888358+00:00",
+                "sampling": {
+                  "job_id": "58215224",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "01:34:59",
+                  "start": "2026-10-17T20:57:25",
+                  "end": "2026-10-17T22:32:24",
+                  "allocation": "billing=38,cpu=6,gres/gpu=1,mem=48G,node=1"
+                },
+                "evaluation": {
+                  "job_id": "58215269",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:00:36",
+                  "start": "2026-10-17T22:32:24",
+                  "end": "2026-10-17T22:33:00",
+                  "allocation": "billing=4,cpu=4,mem=12G,node=1"
+                },
+                "source": {
+                  "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/scheduler.json",
+                  "sha256": "dc556c008c98e485398639b0951583f60a3b62f54097fc75bc51855b5901bd6e"
+                }
               }
             },
             {
               "job_id": "58215225",
               "evaluation_job_id": "58215270",
-              "status": "submitted_not_evaluated",
+              "status": "completed_report_screened",
               "run_id": "20261018T035229532610Z_BMP4_BMPR1A_ACVR2A_bmp4_alk3_actr2a_orientation_v3_f0ca2d4f",
               "tau": 0.8,
               "beta": 12.0,
@@ -64006,15 +64267,45 @@
                   "path": "artifacts/bmp90/operations/paid_wave19/arms/bmp4_alk3_actr2a_orientation_v3/tau08_r3.registry.json",
                   "sha256": "232256c8fc6c8592d66d84e8679b0154291dea17fa5f91f0cc80767fd1fd3c3a"
                 }
+              },
+              "evaluation_screen": {
+                "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_screen_bmp4.json",
+                "sha256": "1af92610a5c6a3c4196cfa0cdde1bfda2d923b6072c7baad537b851a4f8816ff"
+              },
+              "completion_observation": {
+                "observed_at": "2026-10-18T20:46:21.888358+00:00",
+                "sampling": {
+                  "job_id": "58215225",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "01:35:40",
+                  "start": "2026-10-17T20:57:57",
+                  "end": "2026-10-17T22:33:37",
+                  "allocation": "billing=38,cpu=6,gres/gpu=1,mem=48G,node=1"
+                },
+                "evaluation": {
+                  "job_id": "58215270",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:00:35",
+                  "start": "2026-10-17T22:33:39",
+                  "end": "2026-10-17T22:34:14",
+                  "allocation": "billing=4,cpu=4,mem=12G,node=1"
+                },
+                "source": {
+                  "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/scheduler.json",
+                  "sha256": "dc556c008c98e485398639b0951583f60a3b62f54097fc75bc51855b5901bd6e"
+                }
               }
             }
           ],
           "successful_tau": [],
           "failure_ids": [
-            "BMP4_BMPR1A_ACVR2A_WAVE19_PREPARED_SCORE_LIMITATIONS_20261017"
+            "BMP4_BMPR1A_ACVR2A_WAVE19_PREPARED_SCORE_LIMITATIONS_20261017",
+            "BMP4_BMPR1A_ACVR2A_WAVE19_RESIDUAL_PLACEMENT_20261018"
           ],
           "evaluation_scope": "BMP2 homologous-ligand and mouse-to-human ACVR2A surrogate2GOO,361observed of722input residues; covered C/E only, D/F uncovered. Source symmetry and construct qualifications apply. No native BMP4 accuracy or whole-assembly DockQ. Tuning/transfer evidence is not independent validation.",
-          "calibration_status": "Implementation/CPU scoring and qualified reference gates passed; sampled outcome pending. Known limitations are not biological validation.",
+          "calibration_status": "Completed report screen recorded; biological acceptance remains uncalibrated. See latest evaluation record for outcomes and reference qualifications.",
           "implementation_qualification": "Required geometry remains one coherent assembly hypothesis, not experimental native accuracy.",
           "known_scientific_limitations": [
             "No current fullactualmodel is a nativeBMP4 groundtruth; v1FK3 retains one misplacedtypeIIcopy and is only practicalbaseline.",
@@ -64024,6 +64315,20 @@
             "ExistingCNOguard remainsbounded; scalarreward cannotcertify clash-free, correctdisulfidegeometry, glycancompatibility or atomisticenergy.",
             "No improvement in practicalrecipe rank until completedbestoverallmodels across tau are jointlyevaluated.",
             "The tiny E/Fdistance/angle differences arise from3decimalserialization of mapped symmetrycoordinates; originalCArestraintvalues remainexactlyunchanged."
+          ],
+          "evaluation_records": [
+            {
+              "record_id": "WAVE19_AND_GDF5_WAVE18_COMPLETED_SCREEN_20261018",
+              "recorded_at": "2026-10-18T20:51:59.568354+00:00",
+              "source": {
+                "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_screen_bmp4.json",
+                "sha256": "1af92610a5c6a3c4196cfa0cdde1bfda2d923b6072c7baad537b851a4f8816ff"
+              },
+              "assessment": "Retain v1. Best changed v3 candidate58215225 tau0.8 FK6 has covered homolog C/E DockQ0.896665/0.822140 and35 severe interchain CNO versus retained v1 0.925802/0.819156 and9. Weak-copy W79 approach remains8.42989angstrom too long; no model satisfies all four required copy groups. Highest covered agreement FK9 is baseline-identical and has46 severe CNO.",
+              "scope": "Verified completed report screen; no calibrated acceptance, formal ranking promotion, new submission, or relaxation. Compare best overall across tau; a weaker tau does not disqualify a recipe. Preserve partial/mutant/species reference qualifications and inferred-interface status.",
+              "storage": "Verified analysis/PDB subsets only; full tensor bundles not retrieved, canonical archive verification/cleanup not claimed, temporary home copies retained.",
+              "acceptance": "unassessed"
+            }
           ]
         }
       ],
@@ -68678,7 +68983,7 @@
         {
           "recipe_id": "gdf5_alk3_acvr2b_required_anchor_steric_v2",
           "rank": null,
-          "status": "submitted_not_evaluated",
+          "status": "completed_report_screened_promising_candidate",
           "executable": true,
           "comparison_group": "human_full_native_736",
           "parent_recipe_ids": [
@@ -71800,7 +72105,7 @@
             {
               "job_id": "58209925",
               "evaluation_job_id": "58209931",
-              "status": "submitted_not_evaluated",
+              "status": "completed_report_screened",
               "run_id": "20261018T001015869619Z_GDF5_BMPR1A_ACVR2B_gdf5_alk3_acvr2b_required_anchor_steric_v2_f2ba24ce",
               "tau": 0.1,
               "beta": 4.0,
@@ -71834,12 +72139,41 @@
                   "path": "artifacts/bmp90/operations/paid_wave18/arms/gdf5_alk3_acvr2b_required_v2/tau01_r1.registry.json",
                   "sha256": "1b52c3b2d714e8bc61d48a6608ed6dd617e1e2ef2be9f0b601c8acf31d6f503c"
                 }
+              },
+              "evaluation_screen": {
+                "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_screen_gdf5_models.json",
+                "sha256": "1111acf35ee676aedb610b3526a0032d9579b6c504b17ab7ae36756da6df6d73"
+              },
+              "completion_observation": {
+                "observed_at": "2026-10-18T20:46:21.888358+00:00",
+                "sampling": {
+                  "job_id": "58209925",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:57:57",
+                  "start": "2026-10-17T23:28:22",
+                  "end": "2026-10-18T00:26:19",
+                  "allocation": "billing=38,cpu=6,gres/gpu=1,mem=48G,node=1"
+                },
+                "evaluation": {
+                  "job_id": "58209931",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:00:36",
+                  "start": "2026-10-18T00:26:21",
+                  "end": "2026-10-18T00:26:57",
+                  "allocation": "billing=4,cpu=4,mem=12G,node=1"
+                },
+                "source": {
+                  "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/scheduler.json",
+                  "sha256": "dc556c008c98e485398639b0951583f60a3b62f54097fc75bc51855b5901bd6e"
+                }
               }
             },
             {
               "job_id": "58209926",
               "evaluation_job_id": "58209932",
-              "status": "submitted_not_evaluated",
+              "status": "completed_report_screened",
               "run_id": "20261018T001106957036Z_GDF5_BMPR1A_ACVR2B_gdf5_alk3_acvr2b_required_anchor_steric_v2_b9d1cfcb",
               "tau": 0.3,
               "beta": 4.0,
@@ -71873,12 +72207,41 @@
                   "path": "artifacts/bmp90/operations/paid_wave18/arms/gdf5_alk3_acvr2b_required_v2/tau03_r2.registry.json",
                   "sha256": "68bec6af5f343001f83a01660cb1c62cf1c3ef948ce426cefa40efca088593c3"
                 }
+              },
+              "evaluation_screen": {
+                "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_screen_gdf5_models.json",
+                "sha256": "1111acf35ee676aedb610b3526a0032d9579b6c504b17ab7ae36756da6df6d73"
+              },
+              "completion_observation": {
+                "observed_at": "2026-10-18T20:46:21.888358+00:00",
+                "sampling": {
+                  "job_id": "58209926",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:57:15",
+                  "start": "2026-10-17T23:28:22",
+                  "end": "2026-10-18T00:25:37",
+                  "allocation": "billing=38,cpu=6,gres/gpu=1,mem=48G,node=1"
+                },
+                "evaluation": {
+                  "job_id": "58209932",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:00:37",
+                  "start": "2026-10-18T00:25:38",
+                  "end": "2026-10-18T00:26:15",
+                  "allocation": "billing=4,cpu=4,mem=12G,node=1"
+                },
+                "source": {
+                  "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/scheduler.json",
+                  "sha256": "dc556c008c98e485398639b0951583f60a3b62f54097fc75bc51855b5901bd6e"
+                }
               }
             },
             {
               "job_id": "58209927",
               "evaluation_job_id": "58209933",
-              "status": "submitted_not_evaluated",
+              "status": "completed_report_screened",
               "run_id": "20261018T001153246038Z_GDF5_BMPR1A_ACVR2B_gdf5_alk3_acvr2b_required_anchor_steric_v2_066f9bba",
               "tau": 0.8,
               "beta": 4.0,
@@ -71912,6 +72275,35 @@
                   "path": "artifacts/bmp90/operations/paid_wave18/arms/gdf5_alk3_acvr2b_required_v2/tau08_r3.registry.json",
                   "sha256": "00e9a5c39ff56fd4ca09f843be6a36152fc7cfe61e40ebd39d47a2a767ef3250"
                 }
+              },
+              "evaluation_screen": {
+                "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_screen_gdf5_models.json",
+                "sha256": "1111acf35ee676aedb610b3526a0032d9579b6c504b17ab7ae36756da6df6d73"
+              },
+              "completion_observation": {
+                "observed_at": "2026-10-18T20:46:21.888358+00:00",
+                "sampling": {
+                  "job_id": "58209927",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:53:48",
+                  "start": "2026-10-18T00:26:04",
+                  "end": "2026-10-18T01:19:52",
+                  "allocation": "billing=38,cpu=6,gres/gpu=1,mem=48G,node=1"
+                },
+                "evaluation": {
+                  "job_id": "58209933",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:02:47",
+                  "start": "2026-10-18T01:19:52",
+                  "end": "2026-10-18T01:22:39",
+                  "allocation": "billing=4,cpu=4,mem=12G,node=1"
+                },
+                "source": {
+                  "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/scheduler.json",
+                  "sha256": "dc556c008c98e485398639b0951583f60a3b62f54097fc75bc51855b5901bd6e"
+                }
               }
             }
           ],
@@ -71920,11 +72312,25 @@
             "GDF5_BMPR1A_ACVR2B_WAVE18_PREPARED_SCORE_LIMITATIONS_20261017"
           ],
           "evaluation_scope": "3QB4 GDF5 R57A mutant type-I surrogate,386observed residues; C/D covered, E/F type-II uncovered. WT Arg57 whole residue is masked in comparison, and incompatible local latch contacts excluded from guidance. Full WT input sequences retained. No wild-type accuracy, type-II native DockQ or whole-assembly DockQ; tuning/transfer evidence is not independent validation.",
-          "calibration_status": "Implementation/CPU scoring and reference gates only; sampled outcome pending. Known scalar/packing limitations are not validation.",
+          "calibration_status": "Completed report screen recorded; biological acceptance remains uncalibrated. See latest evaluation record for outcomes and reference qualifications.",
           "known_scientific_limitations": [
             "Cleaner tau0.3FK0 score0.3341 remains below clashing tau0.8FK8 score0.3644; bounded floor0.8 sterics is not whole-structure ranking.",
             "Fixed-flanking-anchor30degree rotations retain high scores; required W78 approach does not determine a unique pose.",
             "3QB4R57A C/D only; WTArg57 latch unforced, E/F inferred, Tyr106/Gln108 nomenclature correct."
+          ],
+          "evaluation_records": [
+            {
+              "record_id": "WAVE19_AND_GDF5_WAVE18_COMPLETED_SCREEN_20261018",
+              "recorded_at": "2026-10-18T20:51:59.568354+00:00",
+              "source": {
+                "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_screen_gdf5_models.json",
+                "sha256": "1111acf35ee676aedb610b3526a0032d9579b6c504b17ab7ae36756da6df6d73"
+              },
+              "assessment": "Promising tau0.1 job58209925 shortlist: guided FK2 mutant-surrogate C/D DockQ0.845000/0.853260,16 severe interchain CNO, weak typeII common-fine0.952173 versus prior v1 0.807585/0.771681,15 severe CNO and0.482181. Baseline7=FK7 is already strong at0.842973/0.847748,12 severe CNO and0.955679; retain unguided origin. FK6 is metric leader0.849531/0.848476 but has29 severe CNO. Six high-guidance tau0.1 descendants share ancestor7. E/F are unreferenced and require orientation/physical assessment; 3QB4 mutant distal agreement is not WT or whole-complex validation.",
+              "scope": "Verified completed report screen; no calibrated acceptance, formal ranking promotion, new submission, or relaxation. Compare best overall across tau; a weaker tau does not disqualify a recipe. Preserve partial/mutant/species reference qualifications and inferred-interface status.",
+              "storage": "Verified analysis/PDB subsets only; full tensor bundles not retrieved, canonical archive verification/cleanup not claimed, temporary home copies retained.",
+              "acceptance": "unassessed"
+            }
           ]
         }
       ],
@@ -72084,7 +72490,7 @@
       ]
     }
   },
-  "updated_at": "2026-10-18T03:56:27.948127+00:00",
+  "updated_at": "2026-10-18T20:51:59.568354+00:00",
   "interface_evidence_registry": "configs/bmp90/interface_evidence_registry.json",
   "failure_registry": "configs/bmp90/failure_registry.json",
   "construct_policy": {
@@ -72118,7 +72524,7 @@
       "58215275",
       "58215276"
     ],
-    "status": "submitted_not_evaluated",
+    "status": "completed_report_screened",
     "cpu_registration_jobs": [
       "58215026"
     ],
@@ -72219,7 +72625,18 @@
         "58215223"
       ],
       "startup_metadata_scope": "First running job matches A30, frozen revision/FASTA, seed/tau,500steps and10samples; other initial allocations reported by Slurm, scientific results pending."
-    }
+    },
+    "observations": [
+      {
+        "record_id": "WAVE19_AND_GDF5_WAVE18_COMPLETED_SCREEN_20261018",
+        "recorded_at": "2026-10-18T20:51:59.568354+00:00",
+        "source": {
+          "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_summary.json",
+          "sha256": "fa99d36c5cffdf53a3cd1f45278982cb1ebaa3dc07bbea9eb1b871f1a16cd1aa"
+        },
+        "scope": "Verified completed report screen; no calibrated acceptance, formal ranking promotion, new submission, or relaxation. Compare best overall across tau; a weaker tau does not disqualify a recipe. Preserve partial/mutant/species reference qualifications and inferred-interface status."
+      }
+    ]
   },
   "authorized_campaign_history": [
     {
@@ -72621,7 +73038,7 @@
         "58209932",
         "58209933"
       ],
-      "status": "BMP4_and_cleanup_completed_report_screened_GDF5_A100_queued",
+      "status": "completed_report_screened",
       "cpu_registration_jobs": [
         "58209882"
       ],
@@ -72744,6 +73161,15 @@
               "sha256": "c0dfefa634d75058f4e45253c62d9994a013ef706eda2f3dd38ec778dbe31869"
             }
           ]
+        },
+        {
+          "record_id": "WAVE19_AND_GDF5_WAVE18_COMPLETED_SCREEN_20261018",
+          "recorded_at": "2026-10-18T20:51:59.568354+00:00",
+          "source": {
+            "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_summary.json",
+            "sha256": "fa99d36c5cffdf53a3cd1f45278982cb1ebaa3dc07bbea9eb1b871f1a16cd1aa"
+          },
+          "scope": "Verified completed report screen; no calibrated acceptance, formal ranking promotion, new submission, or relaxation. Compare best overall across tau; a weaker tau does not disqualify a recipe. Preserve partial/mutant/species reference qualifications and inferred-interface status."
         }
       ]
     }

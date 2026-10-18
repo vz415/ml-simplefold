@@ -2084,8 +2084,52 @@
       "status": "limitations_retained_bounded_test_submitted_outcome_pending",
       "transfer_limits": "Partial species-surrogate 1LX5 protein reference: only E/F type-II interfaces covered (392 observed residues of full716 input); ACVR1 C/D experimental geometry is uncovered. No whole-assembly or type-I experimental DockQ. Composite diagnostics are not reference truth; evidence is reused for tuning, not independent validation.",
       "qualification": "Preflight/scalar limitations, not failed sampling, biological nonbinding or outcomes of the submitted jobs."
+    },
+    {
+      "failure_id": "BMP4_BMPR1A_ACVR2A_WAVE19_RESIDUAL_PLACEMENT_20261018",
+      "complex_id": "BMP4_BMPR1A_ACVR2A",
+      "recipe_id": "bmp4_alk3_actr2a_orientation_v3",
+      "recorded_at": "2026-10-18T20:51:59.568354+00:00",
+      "status": "completed_screen_not_preferred",
+      "run_ids": [
+        "58215223",
+        "58215224",
+        "58215225"
+      ],
+      "observed_symptoms": [
+        "Retain v1. Best changed v3 candidate58215225 tau0.8 FK6 has covered homolog C/E DockQ0.896665/0.822140 and35 severe interchain CNO versus retained v1 0.925802/0.819156 and9. Weak-copy W79 approach remains8.42989angstrom too long; no model satisfies all four required copy groups. Highest covered agreement FK9 is baseline-identical and has46 severe CNO."
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_screen_bmp4.json",
+          "sha256": "1af92610a5c6a3c4196cfa0cdde1bfda2d923b6072c7baad537b851a4f8816ff"
+        }
+      ],
+      "qualification": "Verified completed report screen; no calibrated acceptance, formal ranking promotion, new submission, or relaxation. Compare best overall across tau; a weaker tau does not disqualify a recipe. Preserve partial/mutant/species reference qualifications and inferred-interface status. Modeled placement defects, not evidence of nonbinding."
+    },
+    {
+      "failure_id": "BMP7_ACVR1_ACVR2A_WAVE19_RESIDUAL_PLACEMENT_20261018",
+      "complex_id": "BMP7_ACVR1_ACVR2A",
+      "recipe_id": "bmp7_alk2_required_q89_bridge_cauchy_steric_v5",
+      "recorded_at": "2026-10-18T20:51:59.568354+00:00",
+      "status": "completed_screen_not_preferred",
+      "run_ids": [
+        "58215263",
+        "58215264",
+        "58215265"
+      ],
+      "observed_symptoms": [
+        "Retain v4. Tau0.3 job58215264 FK7 improves Q89 errors to2.25/2.80angstrom from4.19/4.12, but species-surrogate E/F DockQ0.8987/0.3758 and33 severe CNO remain worse overall. High F restraint score0.9176 coexists with low F DockQ0.3758 under the same assignment: sparse typeII contacts permit misorientation. Tau0.8 recovers both covered typeII interfaces in3/10FK but has poor inferred typeI placement."
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/evaluation/wave19_status_review_20261018T204648Z/status_screen_bmp7.json",
+          "sha256": "2a5863dfb99fc01238490f830c6fb16c4e70e8fc1462209fa6db441e66e11727"
+        }
+      ],
+      "qualification": "Verified completed report screen; no calibrated acceptance, formal ranking promotion, new submission, or relaxation. Compare best overall across tau; a weaker tau does not disqualify a recipe. Preserve partial/mutant/species reference qualifications and inferred-interface status. Modeled placement defects, not evidence of nonbinding."
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-18T03:56:27.948127+00:00"
+  "updated_at": "2026-10-18T20:51:59.568354+00:00"
 }
