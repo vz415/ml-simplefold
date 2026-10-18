@@ -63,6 +63,17 @@ modules and full constructs. The existing GDF5 A100 sweep remains queued.
 Keep the previous best recipes while evaluating these revisions; no new targets
 or relaxation jobs are included in this batch.
 
+On 2026-10-18 Vincent requested another scoring iteration for BMP6 ACVR1
+interactions and for BMP4 and BMP7, with all sampling submitted before GDF5
+relaxation. Wave20 keeps the three-target, nine-A30-job tau sweep and a cap of
+27 requested GPU-hours. Address the remaining BMP6 N60 approach while retaining
+the wrist and type-II interfaces; improve BMP4 type-II placement and BMP7
+type-II orientation alongside its improved Q89 contact. Then perform two
+restrained CPU cleanups of GDF5–BMPR1A–ACVR2B job58209925 FK2 and baseline7.
+The latter is unguided and byte-identical to FK7. Compare both candidates before
+and after cleanup, retaining mutant-reference and inferred-interface limits.
+This iteration introduces no new targets or automatic retries.
+
 For GDF5, the BMPR1A structure 3QB4 contains the R57A ligand mutation. Sample
 the wild-type sequence, exclude the mutated residue from reference comparisons,
 and avoid imposing its locally incompatible contact geometry. Label comparison

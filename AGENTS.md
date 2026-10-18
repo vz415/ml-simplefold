@@ -50,6 +50,13 @@
   GPU-hours; preserve the queued GDF5 A100 jobs 58209925/26/27. No additional
   targets or relaxation jobs are part of this batch. Keep previous best recipes
   until new outcomes support a ranking change.
+- On 2026-10-18 Vincent requested another BMP6 ACVR1 scoring iteration and
+  further BMP4/BMP7 iterations, submitted before GDF5 relaxation. Wave20 is
+  nine A30 paired sampling jobs across tau 0.1/0.3/0.8, capped at 27 requested
+  GPU-hours, followed by two restrained CPU cleanups of GDF5–BMPR1A–ACVR2B
+  job58209925 FK2 and baseline7. Preserve baseline7's unguided origin (equal
+  to FK7), mutant-reference qualifications, and the distinction between local
+  packing cleanup and validating inferred type-II placement. No new targets.
 - Store remote model weights, trained checkpoints, synthetic datasets, and
   canonical run outputs under `/pub/ynkim4/ml-simplefold/artifacts`. Launchers default
   `SIMPLEFOLD_ARTIFACT_DIR` to that path; `SIMPLEFOLD_CACHE_DIR` defaults to the
