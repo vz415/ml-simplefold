@@ -74,6 +74,17 @@ The latter is unguided and byte-identical to FK7. Compare both candidates before
 and after cleanup, retaining mutant-reference and inferred-interface limits.
 This iteration introduces no new targets or automatic retries.
 
+After reviewing all wave20 outcomes, Vincent requested the next batch on
+2026-10-18 Pacific (2026-10-19 UTC). Wave21 contains nine A30 paired sampling
+jobs at tau 0.1/0.3/0.8, with a cap of 27 requested GPU-hours and nine dependent
+CPU evaluations. Build from retained successful modules and the recorded
+failures: improve BMP4 second-copy type-II placement; improve BMP6 N60 geometry
+while preserving wrist and type-II interfaces; and require BMP7 T83, Q89, and
+type-II placement together. Verify that the proposed objectives distinguish
+the actual previous defects and plausible alternative poses before sampling.
+Retain full constructs and previous best recipes while results are pending.
+This batch adds no targets, relaxation jobs, or automatic retries.
+
 For GDF5, the BMPR1A structure 3QB4 contains the R57A ligand mutation. Sample
 the wild-type sequence, exclude the mutated residue from reference comparisons,
 and avoid imposing its locally incompatible contact geometry. Label comparison

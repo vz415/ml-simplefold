@@ -57,6 +57,13 @@
   job58209925 FK2 and baseline7. Preserve baseline7's unguided origin (equal
   to FK7), mutant-reference qualifications, and the distinction between local
   packing cleanup and validating inferred type-II placement. No new targets.
+- After the wave20 review, Vincent requested the next experiment batch on
+  2026-10-18 Pacific (2026-10-19 UTC). Wave21 is nine A30 paired sampling jobs
+  across tau 0.1/0.3/0.8, capped at 27 requested GPU-hours, plus nine dependent
+  CPU evaluations. Revise BMP4 second-copy type-II placement, BMP6 N60/wrist
+  geometry, and BMP7 joint T83/Q89/type-II placement using retained successes
+  and recorded failures. No new targets, relaxation jobs, or automatic retries.
+  Preserve previous best recipes until the new outcomes support a change.
 - Store remote model weights, trained checkpoints, synthetic datasets, and
   canonical run outputs under `/pub/ynkim4/ml-simplefold/artifacts`. Launchers default
   `SIMPLEFOLD_ARTIFACT_DIR` to that path; `SIMPLEFOLD_CACHE_DIR` defaults to the
