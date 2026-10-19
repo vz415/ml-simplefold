@@ -1,0 +1,46 @@
+{
+  "target": "Activin A\u2013ACVR1 (ALK2)\u2013ACVR2B",
+  "stoichiometry": "2:2:2",
+  "mode": "sequence-only baseline; no coordinate conditioning or guidance",
+  "total_residues": 676,
+  "chain_groups": {
+    "A": "INHBA mature activin A",
+    "B": "INHBA mature activin A",
+    "C": "ACVR1/ALK2 ECD",
+    "D": "ACVR1/ALK2 ECD",
+    "E": "ACVR2B ECD",
+    "F": "ACVR2B ECD"
+  },
+  "constructs": [
+    {
+      "chains": [
+        "A",
+        "B"
+      ],
+      "length": 116,
+      "source": "7OLY entity 1 deposited polymer sequence; excludes receptor trap and Fabs",
+      "source_sha256": "237fd78f5b48adf51a4d146d4a44491a38f8fe8f795da179413dbccc4cbe8000",
+      "source_url": "https://www.rcsb.org/structure/7OLY"
+    },
+    {
+      "chains": [
+        "C",
+        "D"
+      ],
+      "length": 103,
+      "source": "Previously used ALK2 ECD from source prediction 58197169/original.pdb chain C",
+      "source_sha256": "9a35abe45fb15e97d7f39be1be186ba1215ca9391e624fd4c358e78e0fa0d72b"
+    },
+    {
+      "chains": [
+        "E",
+        "F"
+      ],
+      "length": 119,
+      "source": "Previously used ACVR2B ECD from source prediction 58228478/original.pdb chain E; no Fc/hinge appended",
+      "source_sha256": "c54508a81449d699aecef59f9f6d1e04ed10da25ebeb369744adc24e6f7124f6"
+    }
+  ],
+  "fasta_sha256": "f051e9ae71aac67ad059bc4d0836f251675e578915c9e9f9f014b84bb53abe62",
+  "interpretation": "WT ALK2 extracellular binding candidate. Non-signaling versus signaling cannot be inferred from ECD geometry; no FOP intracellular mutation is modeled."
+}

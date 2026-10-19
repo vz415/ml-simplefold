@@ -1,0 +1,8 @@
+# @package _global_
+name: activin-a-acvr1-acvr2b
+model: simplefold_3B
+fasta: examples/activin-a-acvr1-acvr2b.fasta
+num_steps: 500
+samples: 10
+tau: 0.3
+seed: 82101
