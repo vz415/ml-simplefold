@@ -106,6 +106,7 @@ def main(cfg: DictConfig):
         'num_steps': cfg.num_steps, 'nsample_per_protein': cfg.samples,
         'tau': cfg.tau, 'seed': cfg.seed, 'log_timesteps': True,
         'compute_plddt': False, 'output_format': 'pdb', 'output_dir': str(output),
+        'model_batch_size': cfg.sampling.get('model_batch_size'),
         'source_commit': commit, 'cuda_device': torch.cuda.get_device_name(0),
         'slurm_environment': {key: os.environ[key] for key in (
             'SLURM_JOB_NAME', 'SLURM_JOB_ACCOUNT', 'SLURM_JOB_PARTITION',
@@ -127,6 +128,10 @@ def main(cfg: DictConfig):
             reference_cif=paths.get('reference_cif'), reference_pdb=paths.get('reference_pdb'),
             output_dir=output)
         conditions = run_fk(args, OmegaConf.to_container(cfg.sampling, resolve=True))
+    elif cfg.sampling.get('model_batch_size') is not None:
+        from sample_chunked_baseline import run_baseline
+        run_baseline(cfg, paths, fasta, output)
+        conditions = [output]
     else:
         subprocess.run([
             'simplefold', '--backend', 'torch', '--simplefold_model', cfg.model,
