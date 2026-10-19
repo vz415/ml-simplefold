@@ -2245,8 +2245,74 @@
       "resolved_symptoms": "Both cleanups remove counted severe interchain CNO overlaps and backbone bond outliers; baseline severe intrachain CNO count3 to0.",
       "next_action": "Prefer baseline7 for inspection; preserve FK2 and flag its disulfide geometry for any future repair. No new job submitted.",
       "qualification": "Observed model geometry, not biological nonbinding, complete all-atom acceptance or experimental pose validation."
+    },
+    {
+      "failure_id": "BMP4_BMPR1A_ACVR2A_WAVE20_RESIDUAL_PLACEMENT_20261019",
+      "complex_id": "BMP4_BMPR1A_ACVR2A",
+      "recipe_id": "bmp4_alk3_actr2a_frame_bounded_v4",
+      "recorded_at": "2026-10-19T04:57:43.739955+00:00",
+      "status": "completed_screen_not_preferred",
+      "run_ids": [
+        "58228414",
+        "58228415",
+        "58228416"
+      ],
+      "observed_symptoms": [
+        "Retain BMP4 v1. Best balanced v4 candidate58228415 tau0.3 sample2 is byte-identical to baseline2: covered C/E homolog DockQ0.835/0.775,11 severe CNO and weak type-II W79 gap+10.682A. Changed FK8 has0.845/0.801 but47 severe CNO and gap+10.607A. Retained v1 FK3 has0.926/0.819,9 severe CNO and gap+7.533A. No new candidate repairs the second type-II copy. C/E homolog agreement does not validate uncovered D/F or native BMP4 assembly."
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/evaluation/wave20_status_review_20261019T0452/bmp4_analysis/scientific_summary.json",
+          "sha256": "4e5b0cd17385ab8b5a58a6fc5a5b63760419c4c39580776a7ba417b0cb869948"
+        }
+      ],
+      "qualification": "Completed report and coordinate screen; compare best overall across tau. Preserve partial, homolog and receptor-trap qualifications. No calibrated acceptance, formal ranking promotion or new submission. Observed model defects; no inference of biological nonbinding."
+    },
+    {
+      "failure_id": "BMP6_ACVR1_ACVR2B_WAVE20_RESIDUAL_PLACEMENT_20261019",
+      "complex_id": "BMP6_ACVR1_ACVR2B",
+      "recipe_id": "bmp6_joint_n60_approach_wrist_v7",
+      "recorded_at": "2026-10-19T04:57:43.739955+00:00",
+      "status": "completed_screen_not_preferred",
+      "run_ids": [
+        "58228454",
+        "58228455",
+        "58228456"
+      ],
+      "observed_symptoms": [
+        "BMP6 v7 does not improve v6. Cleaner new guided58228454 tau0.1 FK3 has C/D/E/F DockQ0.617406/0.636918/0.845414/0.867952 and16 severe CNO, all tail-involving. N60 fitted errors3.96/3.89A and heavy approach7.09/7.02A are worse than v6 FK1 errors2.63/2.37A, approach5.72/5.35A,12 severe CNO and DockQ0.670208/0.664867/0.897672/0.904154. Wrist remains3.58/3.56A. Metric leader FK7 has43 severe CNO and a1.294A annotated F31-F59 SG distance. Retain v6 as stronger raw candidate and separately relaxed v1 as cleaner retained structure. Matching9N4K trap reference recovery is not native signaling validation."
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/evaluation/wave20_status_review_20261019T0452/bmp6_analysis/scientific_summary.json",
+          "sha256": "e65ac1d868c36f4a4974ab66bb5d10b536b510da7d8bef9585a0a0e66fa2898f"
+        }
+      ],
+      "qualification": "Completed report and coordinate screen; compare best overall across tau. Preserve partial, homolog and receptor-trap qualifications. No calibrated acceptance, formal ranking promotion or new submission. Observed model defects; no inference of biological nonbinding."
+    },
+    {
+      "failure_id": "BMP7_ACVR1_ACVR2A_WAVE20_RESIDUAL_PLACEMENT_20261019",
+      "complex_id": "BMP7_ACVR1_ACVR2A",
+      "recipe_id": "bmp7_alk2_q89_typeII_orientation_v6",
+      "recorded_at": "2026-10-19T04:57:43.739955+00:00",
+      "status": "completed_screen_not_preferred",
+      "run_ids": [
+        "58228460",
+        "58228461",
+        "58228462"
+      ],
+      "observed_symptoms": [
+        "Retain BMP7 v4 raw/relaxed overall. V6 yields both E/F surrogate DockQ>=0.6 in9/0/8 guided outputs across tau0.1/0.3/0.8 versus2/0/2 baseline outputs, but these are correlated outputs and a descriptive screen. Tau0.1 job58228460 FK2 has E/F0.729/0.634, Q89 errors+0.49/+0.69A, but T83 errors+5.98/+6.26A and31 severe CNO. Tau0.8 job58228462 FK8 keeps T83 but Q89 remains+3.08/+4.25A, E/F0.772/0.617 and332 severe CNO. V4 retains E/F0.845/0.856 with22 raw or0 relaxed severe CNO. All30 guided outputs miss the combined descriptive type-I/contact and covered type-II screen; inferred ACVR1 C/D has no experimental DockQ in this comparison."
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/evaluation/wave20_status_review_20261019T0452/bmp7_analysis/scientific_summary.json",
+          "sha256": "97c06234c3c2a832675252026b9610c2823095f8aa55a9422153e4453dcda7dc"
+        }
+      ],
+      "qualification": "Completed report and coordinate screen; compare best overall across tau. Preserve partial, homolog and receptor-trap qualifications. No calibrated acceptance, formal ranking promotion or new submission. Observed model defects; no inference of biological nonbinding."
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-18T23:17:19.748039+00:00"
+  "updated_at": "2026-10-19T04:57:43.739955+00:00"
 }
