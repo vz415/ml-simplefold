@@ -2575,6 +2575,129 @@
         }
       ],
       "scope": "Completed report and coordinate screen; compare best overall across tau. Preserve partial, homolog and receptor-trap qualifications. No calibrated acceptance, formal ranking promotion or new submission."
+    },
+    {
+      "evidence_id": "BMP4_BMPR1A_ACVR2A_WAVE21_CONSTRAINT_REVISION_20261019",
+      "target_id": "BMP4_BMPR1A_ACVR2A",
+      "recorded_at": "2026-10-19T05:20:56.752240+00:00",
+      "evidence_class": "engineering_revision_from_observed_model_defects",
+      "status": "submitted_target_quality_unassessed",
+      "source": {
+        "path": "artifacts/bmp90/preparation/bmp4_alk3_actr2a_v5_20261019/scientific_summary.json",
+        "sha256": "bc80c06451fdf3a42d1581dfe416236066dbfa7df94fea9957981cc0739a3002"
+      },
+      "specification": {
+        "path": "artifacts/bmp90/preparation/bmp4_alk3_actr2a_v5_20261019/bmp4_alk3_actr2a_joint_minimum_steric_v5.json",
+        "sha256": "8c3dd2d22463b8fa17cb61b50ffea499e0cf8df664339ed3827e487fadf30aa5"
+      },
+      "mapping": {
+        "path": "artifacts/bmp90/preparation/bmp4_alk3_actr2a_20261016/BMP4_BMPR1A_ACVR2A.execution.mapping.json",
+        "sha256": "29d41d7a962e8cbcd178c4bfb0c188b6c3fce2701e3bd1e8e50332f8135b087a"
+      },
+      "scoring_gate": {
+        "path": "artifacts/bmp90/preparation/bmp4_alk3_actr2a_v5_20261019/cpu_gate_manifest.json",
+        "sha256": "662b2ec969470fa06f80af70c056c58e2f725200fa07855c68ab469b46182d00"
+      },
+      "scope": "BMP2 homologous-ligand and mouse-to-human ACVR2A surrogate2GOO,361observed of722input residues; covered C/E only, D/F uncovered. Source symmetry and construct qualifications apply. No native BMP4 accuracy or whole-assembly DockQ. Tuning/transfer evidence is not independent validation.",
+      "observation": "Require the weakest complete receptor interface and strengthen the bounded overlap penalty, retaining mapped aromatic, approach, frame and typeI constraints to improve the second typeII copy.",
+      "qualification": "Implementation-parent lineage is distinct from retained practical best; no new independent structural evidence or sampled outcome. Required interface groups and geometry use one coherent assembly assignment; exact specification governs. This is an engineering hypothesis, not experimental native accuracy.",
+      "run_ids": [
+        "58234658",
+        "58234680",
+        "58234682"
+      ],
+      "known_limitations": [
+        "No exact native BMP4 experimental assembly is available in the recorded source assessment. C/E DockQ measures conserved BMP2/mouse-ACVR2A homolog agreement; D/F and whole assembly remain unassessed experimentally.",
+        "A pure joint minimum may suppress early populations if every particle retains a failed interface. Final-model score ranges do not establish successful checkpoint selection or guarantee resampling.",
+        "The source-only fixture lacks full tails/heavy atoms and receives missing-heavy floor0.5. Its reward cannot be compared as a fully assessed physical gold standard to a complete model.",
+        "The conditional source-pose full-tail transplant still has79 severe CNO overlaps and scores0.560681; it is a known physical failure. The bounded guard is not a clash-free certificate or an absolute veto, and this high scalar is not acceptance.",
+        "The 90-degree W79-axis twist has3 severe overlaps; its remaining ambiguity is constrained only by existing flanks/frame. Passing this finite test does not prove a unique pose.",
+        "CNO overlap checks do not assess or repair disulfide bond lengths, rotamers, backbone strain, hydrogens/protonation, glycans, energetics or membrane context. Those remain separate selection checks.",
+        "The retained practical v1FK3 is itself provisional with a misplaced copy. It is a useful comparator, not experimental truth.",
+        "All actual models and constructed alternatives used for preparation are tuning evidence. Same-source unrewarded contacts and sibling implementation audits are not independent biological validation."
+      ]
+    },
+    {
+      "evidence_id": "BMP6_ACVR1_ACVR2B_WAVE21_CONSTRAINT_REVISION_20261019",
+      "target_id": "BMP6_ACVR1_ACVR2B",
+      "recorded_at": "2026-10-19T05:20:56.752240+00:00",
+      "evidence_class": "engineering_revision_from_observed_model_defects",
+      "status": "submitted_target_quality_unassessed",
+      "source": {
+        "path": "artifacts/bmp90/preparation/bmp6_acvr1_v8_20261019/scientific_summary.json",
+        "sha256": "b16272f3a33ab2251a9ee9b997c2a4d58f0f705e43402eb453cfa3ec540e42da"
+      },
+      "specification": {
+        "path": "artifacts/bmp90/preparation/bmp6_acvr1_v8_20261019/bmp6_joint_n60_tight_approach_steric_v8.json",
+        "sha256": "3f8709c2f59115a4370611131af5543e0934b866cedd5bf1f4aee79047cbceb3"
+      },
+      "mapping": {
+        "path": "examples/bmp90/BMP6_ACVR1_ACVR2B_deposited_native_no_tags.mapping.json",
+        "sha256": "aab6477bd1af791e850a6da340bbbb3bdd417bf2133e1fc1d8d631a59e1a8257"
+      },
+      "scoring_gate": {
+        "path": "artifacts/bmp90/preparation/bmp6_acvr1_v8_20261019/cpu_gate_manifest.json",
+        "sha256": "d5f7f0c7d5f6c5326b442b73a9345c24476e3346b27eefe4af2d49a684fd7510"
+      },
+      "scope": "Exact 9N4K receptor-trap reference recovery over 552 observed residues of the full 716-residue protein-only input, with all four C/D/E/F interfaces covered. Engineered trap and glycosylation qualifications remain; this is not native signaling or independent validation.",
+      "observation": "Tighten the existing required N60-S446 CA approach from v6 while retaining the N60 loop, wrist and typeII rules; add a bounded native-topology overlap penalty without the unsuccessful v7 N60 angular multiplier.",
+      "qualification": "Implementation-parent lineage is distinct from retained practical best; no new independent structural evidence or sampled outcome. Required interface groups and geometry use one coherent assembly assignment; exact specification governs. This is an engineering hypothesis, not experimental native accuracy.",
+      "run_ids": [
+        "58234685",
+        "58234688",
+        "58234692"
+      ],
+      "known_limitations": [
+        "9N4K is an engineered glycosylated receptor trap: full716protein-only untethered input,552observedCA with allfourCDEF interfaces covered; no surrogate/native signaling/affinity claim.",
+        "N60 CA distance is a pose proxy. It does not specify Asn terminalamide rotamer, orientation or a hydrogen bond; sourceND2-OG distances4.10/4.38A are not a hydrogen-bond latch.",
+        "Tighter distance can favor closure by internal distortion. ExistingCA guards and direct covalent assessment remain necessary; no bond-length guard was implemented.",
+        "Native topology is annotation-derived, but the CNO factor measures only nonbonded interchain overlap; intrachain clashes, sulfur stereochemistry, glycan interactions and general physical energies remain outside it.",
+        "Partial experimental reference lacks unobserved-terminal heavy atoms, correctly scores0.8guardfloor withunassessed status, and is not padded with fake coordinates.",
+        "The modest loop crankshaft preserves internal/junction distances, but junction angles and physical attainability are unvalidated. Reference-shape-at-sampled-pose is synthetic, not a sampled repair.",
+        "The source-likeN60 but poorer-globalv3relaxed candidate still outranks historicalv1 under this objective(.455vs.353). V6FK1/FK8 outrankboth, but scalarreward is not an overallDockQ ranking.",
+        "Generic guard can discount tails without correcting receptor placement; final selection must inspect every interface, observedcore/tails, nativebonds and packing across alltaus. No formal acceptance thresholds calibrated."
+      ]
+    },
+    {
+      "evidence_id": "BMP7_ACVR1_ACVR2A_WAVE21_CONSTRAINT_REVISION_20261019",
+      "target_id": "BMP7_ACVR1_ACVR2A",
+      "recorded_at": "2026-10-19T05:20:56.752240+00:00",
+      "evidence_class": "engineering_revision_from_observed_model_defects",
+      "status": "submitted_target_quality_unassessed",
+      "source": {
+        "path": "artifacts/bmp90/preparation/bmp7_alk2_v7_20261019/scientific_summary.json",
+        "sha256": "7a27fcdf28a8d65122bc74d96e2d44729922bb673197237c4d3e6d1cae7230fc"
+      },
+      "specification": {
+        "path": "artifacts/bmp90/preparation/bmp7_alk2_v7_20261019/bmp7_alk2_joint_required_placement_v7.json",
+        "sha256": "bc95b8985347b0edfd6f5f2214d4b52a05e037aa98470ff0c1b0f67e9b383df0"
+      },
+      "mapping": {
+        "path": "artifacts/bmp90/preparation/bmp7/BMP7_ACVR1_ACVR2A.execution.mapping.json",
+        "sha256": "c3d9061af9a0003a82f70b22483436009da5f498cfec6f25b3694b167405d0cf"
+      },
+      "scoring_gate": {
+        "path": "artifacts/bmp90/preparation/bmp7_alk2_v7_20261019/cpu_gate_manifest.json",
+        "sha256": "f2e74da6fe50cf1b06aa5245a3120f0d636d1d7a4d8dd77d4c2e8cec9bee8ec7"
+      },
+      "scope": "Partial species-surrogate 1LX5 protein reference: only E/F type-II interfaces covered (392 observed residues of full716 input); ACVR1 C/D experimental geometry is uncovered. No whole-assembly or type-I experimental DockQ. Composite diagnostics are not reference truth; evidence is reused for tuning, not independent validation.",
+      "observation": "Require each typeI Q89 and T83 contact together with the remaining face, add conserved typeII I83-A355 and K56-N402 approach distances, use the weakest complete interface, and strengthen the bounded overlap penalty.",
+      "qualification": "Implementation-parent lineage is distinct from retained practical best; no new independent structural evidence or sampled outcome. Required interface groups and geometry use one coherent assembly assignment; exact specification governs. This is an engineering hypothesis, not experimental native accuracy.",
+      "run_ids": [
+        "58234694",
+        "58234698",
+        "58234702"
+      ],
+      "known_limitations": [
+        "This is a new hypothesis from retained v4, with integrated v5 grouping and v6 failure evidence. No sampling outcome, structural acceptance or recipe promotion exists yet.",
+        "Strict global minimum may suppress early states when one typeII Gaussian feature is near zero. Retained-model score separation does not guarantee useful selection in every population.",
+        "K56-N402 has4.19A minimum source heavy separation; it is a measured proximity/orientation restraint, not an asserted salt bridge or independently proven chemical interaction.",
+        "C/D transfer geometry and per-residue targets are not native BMP7-ACVR1 observations. Favoring a transferred template or reducing clashes does not establish biological binding.",
+        "The physical factor remains bounded below by0.3 and is neither an energy nor full acceptance check. Severe clashes can remain in highly rewarded structures; native disulfide annotation is used only for fixed exclusions.",
+        "Source-compatible composite has missing full heavy atoms and28 severe CNO pairs; its.286 score is a geometry diagnostic with missing-data floor, not a clean full native positive. Exact partialreference scores0 because C/D requirements are absent, and remains finite-only.",
+        "The 10degree folded near miss remains.235 versus relaxed.327; this tolerance is uncalibrated. Two extra contacts do not prove a unique complete receptor orientation.",
+        "This panel contains reused models and constructed coordinate controls. New sequence seeds differ from prior sweeps; outcome attribution must retain that qualification."
+      ]
     }
   ],
   "generic_inspection_priors": {
@@ -2786,5 +2909,5 @@
       "evidence_label_scope": "Vocabulary for future observations; no existing evidence_class is reclassified by this import. R8 instructs evaluation of energetic evidence; it does not establish a hotspot for any target."
     }
   },
-  "updated_at": "2026-10-19T04:57:43.739955+00:00"
+  "updated_at": "2026-10-19T05:20:56.752240+00:00"
 }

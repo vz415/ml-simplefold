@@ -103,6 +103,14 @@ revisions; do not impose a full-wave completion barrier on useful parallel work.
 A failed job is not an automatic reason to launch a duplicate. Keep one submission
 owner and declare the job count and requested GPU-hours for each bounded batch.
 
+The current campaign controller shares one lock between CPU registration and
+submission. Wait for the registration job to complete and verify all planned
+registration receipts before invoking submissions. Starting a submission while
+registration holds this lock can outlast the local SSH timeout even when the
+remote submission later succeeds. Reconcile the remote attempt, scheduler
+response, submitted receipt, and remaining controller process before continuing;
+never resubmit a slot whose successful job ID is already recorded.
+
 Keep temporary results within each experiment checkout's
 `artifacts/transfer-stage/runs/JOB_ID/` in HPC home storage, with canonical copies
 on `/pub`. New sampling and evaluation stages share the temporary run; seal it
