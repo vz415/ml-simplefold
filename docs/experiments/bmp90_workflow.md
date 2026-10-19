@@ -85,6 +85,18 @@ the actual previous defects and plausible alternative poses before sampling.
 Retain full constructs and previous best recipes while results are pending.
 This batch adds no targets, relaxation jobs, or automatic retries.
 
+On 2026-10-19 Vincent requested the next BMP6 and BMP7 scoring refinements,
+with their sampling submitted before restrained relaxation of BMP4. Wave22
+contains six A30 paired sampling jobs across tau 0.1/0.3/0.8, capped at 18
+requested GPU-hours, six dependent CPU evaluations, and then one CPU cleanup
+of BMP4 v5 job58234682 FK5. Build BMP6 from its stronger retained N60/wrist
+geometry; for BMP7 preserve the improved Q89/T83/type-II contacts and require
+N60 separately so an average cannot hide its failure. BMP4 cleanup must compare
+packing, covalent geometry, and both receptor copies before and after relaxation;
+its partial homolog reference does not establish native BMP4 accuracy. Keep
+full constructs, prior alternatives, and exact parent provenance. No new targets
+or automatic retries are included.
+
 For GDF5, the BMPR1A structure 3QB4 contains the R57A ligand mutation. Sample
 the wild-type sequence, exclude the mutated residue from reference comparisons,
 and avoid imposing its locally incompatible contact geometry. Label comparison

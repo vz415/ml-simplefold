@@ -64,6 +64,14 @@
   geometry, and BMP7 joint T83/Q89/type-II placement using retained successes
   and recorded failures. No new targets, relaxation jobs, or automatic retries.
   Preserve previous best recipes until the new outcomes support a change.
+- On 2026-10-19 Vincent requested BMP6 and BMP7 scoring refinements and
+  sampling before relaxing the new BMP4 candidate. Wave22 is six A30 paired
+  sampling jobs at tau 0.1/0.3/0.8 (at most 18 requested GPU-hours), six
+  dependent CPU evaluations, then one restrained CPU relaxation of BMP4
+  job58234682 FK5. Address BMP6 N60 geometry while retaining wrist/type-II
+  support, and require BMP7 N60 separately from its improved Q89/T83/type-II
+  constraints. Preserve full constructs and prior practical bests until reviewed
+  outcomes support changes. No new targets or automatic retries.
 - Store remote model weights, trained checkpoints, synthetic datasets, and
   canonical run outputs under `/pub/ynkim4/ml-simplefold/artifacts`. Launchers default
   `SIMPLEFOLD_ARTIFACT_DIR` to that path; `SIMPLEFOLD_CACHE_DIR` defaults to the
