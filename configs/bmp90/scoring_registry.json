@@ -13957,7 +13957,7 @@
         {
           "recipe_id": "bmp6_joint_n60_tight_approach_steric_v8",
           "rank": null,
-          "status": "submitted_not_evaluated",
+          "status": "completed_evaluated_not_preferred",
           "executable": true,
           "comparison_group": "human_full_native_716",
           "parent_recipe_ids": [
@@ -15947,7 +15947,7 @@
             {
               "job_id": "58234685",
               "evaluation_job_id": "58234686",
-              "status": "submitted_not_evaluated",
+              "status": "completed_coordinate_and_report_reviewed",
               "run_id": "20261019T051614823288Z_BMP6_ACVR1_ACVR2B_bmp6_joint_n60_tight_approach_steric_v8_e0cd7ceb",
               "tau": 0.1,
               "beta": 4.0,
@@ -15981,12 +15981,41 @@
                   "path": "artifacts/bmp90/operations/paid_wave21/arms/bmp6_acvr1_v8/tau01_r1.registry.json",
                   "sha256": "6f512523bd5f6867304331c8395417d02850cc03588f48b61ed2f47f8e7f00ad"
                 }
+              },
+              "evaluation_screen": {
+                "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp6_analysis/scientific_summary.json",
+                "sha256": "92771d6f7fb93cbf32b6d3850b67a92feb20e07a71b7bc348fdad61ef474fd5f"
+              },
+              "completion_observation": {
+                "observed_at": "2026-10-19T15:22:50.570963+00:00",
+                "sampling": {
+                  "job_id": "58234685",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "01:36:46",
+                  "start": "2026-10-18T22:32:33",
+                  "end": "2026-10-19T00:09:19",
+                  "allocation": "billing=38,cpu=6,gres/gpu=1,mem=48G,node=1"
+                },
+                "evaluation": {
+                  "job_id": "58234686",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:00:47",
+                  "start": "2026-10-19T00:09:20",
+                  "end": "2026-10-19T00:10:07",
+                  "allocation": "billing=4,cpu=4,mem=12G,node=1"
+                },
+                "source": {
+                  "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/scheduler.json",
+                  "sha256": "285187481892a40f6dfa449bb16d656f49fcb4b4c5fbdda2e08cc165c3ec1d2d"
+                }
               }
             },
             {
               "job_id": "58234688",
               "evaluation_job_id": "58234691",
-              "status": "submitted_not_evaluated",
+              "status": "completed_coordinate_and_report_reviewed",
               "run_id": "20261019T051649834332Z_BMP6_ACVR1_ACVR2B_bmp6_joint_n60_tight_approach_steric_v8_ba1da857",
               "tau": 0.3,
               "beta": 4.0,
@@ -16020,12 +16049,41 @@
                   "path": "artifacts/bmp90/operations/paid_wave21/arms/bmp6_acvr1_v8/tau03_r2.registry.json",
                   "sha256": "52294eeb828b1e93ca98e638dfbc4c4c338c437213bc260fbf7b3faa76f33607"
                 }
+              },
+              "evaluation_screen": {
+                "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp6_analysis/scientific_summary.json",
+                "sha256": "92771d6f7fb93cbf32b6d3850b67a92feb20e07a71b7bc348fdad61ef474fd5f"
+              },
+              "completion_observation": {
+                "observed_at": "2026-10-19T15:22:50.570963+00:00",
+                "sampling": {
+                  "job_id": "58234688",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "01:36:06",
+                  "start": "2026-10-18T22:32:33",
+                  "end": "2026-10-19T00:08:39",
+                  "allocation": "billing=38,cpu=6,gres/gpu=1,mem=48G,node=1"
+                },
+                "evaluation": {
+                  "job_id": "58234691",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:00:55",
+                  "start": "2026-10-19T00:08:40",
+                  "end": "2026-10-19T00:09:35",
+                  "allocation": "billing=4,cpu=4,mem=12G,node=1"
+                },
+                "source": {
+                  "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/scheduler.json",
+                  "sha256": "285187481892a40f6dfa449bb16d656f49fcb4b4c5fbdda2e08cc165c3ec1d2d"
+                }
               }
             },
             {
               "job_id": "58234692",
               "evaluation_job_id": "58234693",
-              "status": "submitted_not_evaluated",
+              "status": "completed_coordinate_and_report_reviewed",
               "run_id": "20261019T051724920699Z_BMP6_ACVR1_ACVR2B_bmp6_joint_n60_tight_approach_steric_v8_ad7c389b",
               "tau": 0.8,
               "beta": 4.0,
@@ -16059,15 +16117,45 @@
                   "path": "artifacts/bmp90/operations/paid_wave21/arms/bmp6_acvr1_v8/tau08_r3.registry.json",
                   "sha256": "ef0a6bca9ee657e3acd1d642efa368e54cba89ec90b5196c0ddf389a37b7150d"
                 }
+              },
+              "evaluation_screen": {
+                "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp6_analysis/scientific_summary.json",
+                "sha256": "92771d6f7fb93cbf32b6d3850b67a92feb20e07a71b7bc348fdad61ef474fd5f"
+              },
+              "completion_observation": {
+                "observed_at": "2026-10-19T15:22:50.570963+00:00",
+                "sampling": {
+                  "job_id": "58234692",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "01:38:41",
+                  "start": "2026-10-18T22:33:35",
+                  "end": "2026-10-19T00:12:16",
+                  "allocation": "billing=38,cpu=6,gres/gpu=1,mem=48G,node=1"
+                },
+                "evaluation": {
+                  "job_id": "58234693",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:00:57",
+                  "start": "2026-10-19T00:12:17",
+                  "end": "2026-10-19T00:13:14",
+                  "allocation": "billing=4,cpu=4,mem=12G,node=1"
+                },
+                "source": {
+                  "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/scheduler.json",
+                  "sha256": "285187481892a40f6dfa449bb16d656f49fcb4b4c5fbdda2e08cc165c3ec1d2d"
+                }
               }
             }
           ],
           "successful_tau": [],
           "failure_ids": [
-            "BMP6_ACVR1_ACVR2B_WAVE21_PREPARED_SCORE_LIMITATIONS_20261019"
+            "BMP6_ACVR1_ACVR2B_WAVE21_PREPARED_SCORE_LIMITATIONS_20261019",
+            "BMP6_ACVR1_ACVR2B_WAVE21_RESIDUAL_DEFECTS_20261019"
           ],
           "evaluation_scope": "Exact 9N4K receptor-trap reference recovery over 552 observed residues of the full 716-residue protein-only input, with all four C/D/E/F interfaces covered. Engineered trap and glycosylation qualifications remain; this is not native signaling or independent validation.",
-          "calibration_status": "Implementation/CPU scoring and qualified reference gates passed; sampled outcome pending. Known limitations are not biological validation.",
+          "calibration_status": "Completed coordinate/report evaluation; practical comparative ranking only. Calibrated physical and native-assembly acceptance remain unassessed.",
           "implementation_qualification": "Required interface groups and geometry use one coherent assembly assignment; exact specification governs. This is an engineering hypothesis, not experimental native accuracy.",
           "known_scientific_limitations": [
             "9N4K is an engineered glycosylated receptor trap: full716protein-only untethered input,552observedCA with allfourCDEF interfaces covered; no surrogate/native signaling/affinity claim.",
@@ -16078,6 +16166,34 @@
             "The modest loop crankshaft preserves internal/junction distances, but junction angles and physical attainability are unvalidated. Reference-shape-at-sampled-pose is synthetic, not a sampled repair.",
             "The source-likeN60 but poorer-globalv3relaxed candidate still outranks historicalv1 under this objective(.455vs.353). V6FK1/FK8 outrankboth, but scalarreward is not an overallDockQ ranking.",
             "Generic guard can discount tails without correcting receptor placement; final selection must inspect every interface, observedcore/tails, nativebonds and packing across alltaus. No formal acceptance thresholds calibrated."
+          ],
+          "status_history": [
+            {
+              "status": "submitted_not_evaluated",
+              "recorded_at": "2026-10-19T15:31:48.803190+00:00",
+              "event": "before_wave21_review"
+            }
+          ],
+          "calibration_status_history": [
+            {
+              "recorded_at": "2026-10-19T15:31:48.803190+00:00",
+              "value": "Implementation/CPU scoring and qualified reference gates passed; sampled outcome pending. Known limitations are not biological validation."
+            }
+          ],
+          "evaluation_records": [
+            {
+              "record_id": "WAVE21_COMPLETED_SCREEN_20261019",
+              "recorded_at": "2026-10-19T15:31:48.803190+00:00",
+              "source": {
+                "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp6_analysis/scientific_summary.json",
+                "sha256": "92771d6f7fb93cbf32b6d3850b67a92feb20e07a71b7bc348fdad61ef474fd5f"
+              },
+              "assessment": "Do not promote v8. Best new job58234685 tau0.1 baseline8 is byte-identical to FK8; C/D/E/F DockQ0.564/0.550/0.859/0.870 is worse than useful v6 FK1 at0.670/0.665/0.898/0.904. N60 geometry worsens and150 severe interchain CNO overlaps plus covalent defects remain. All30 paired baseline/FK models are byte-identical with zero resampling, although score evaluation and reweighting occurred. Retain preferred v1/refined58139638 and useful raw v6 FK1. Agreement is with the engineered/glycosylated9N4K receptor-trap reference (552/716 observed residues), not native signaling or independent validation.",
+              "scope": "Completed coordinate/report review across tau0.1/0.3/0.8; provisional practical recipe preference is distinct from calibrated physical or native-assembly acceptance. Retain partial, homolog/species and engineered receptor-trap reference qualifications. No jobs submitted or cancelled in this review.",
+              "storage": "All180 PDBs and associated report subsets downloaded with verified SHA256. Full tensor bundles and final canonical publication not retrieved or verified; temporary home copies retained.",
+              "physical_acceptance": null,
+              "native_assembly_acceptance": null
+            }
           ]
         }
       ],
@@ -16326,7 +16442,7 @@
         }
       ],
       "proposed_next_step": {
-        "status": "implemented_and_submitted_awaiting_evaluation",
+        "status": "completed_evaluated_not_preferred",
         "action": "Tighten the existing required N60-S446 CA approach from v6 while retaining the N60 loop, wrist and typeII rules; add a bounded native-topology overlap penalty without the unsuccessful v7 N60 angular multiplier.",
         "qualification": "Actual implemented specification governs; prior proposal preserved verbatim in history. Submission is not scientific promotion.",
         "source": {
@@ -16350,7 +16466,12 @@
           "58234693"
         ],
         "jobs_submitted": true,
-        "updated_at": "2026-10-19T05:20:56.752240+00:00"
+        "updated_at": "2026-10-19T15:31:48.803190+00:00",
+        "evaluation_source": {
+          "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp6_analysis/scientific_summary.json",
+          "sha256": "92771d6f7fb93cbf32b6d3850b67a92feb20e07a71b7bc348fdad61ef474fd5f"
+        },
+        "assessment": "Do not promote v8. Best new job58234685 tau0.1 baseline8 is byte-identical to FK8; C/D/E/F DockQ0.564/0.550/0.859/0.870 is worse than useful v6 FK1 at0.670/0.665/0.898/0.904. N60 geometry worsens and150 severe interchain CNO overlaps plus covalent defects remain. All30 paired baseline/FK models are byte-identical with zero resampling, although score evaluation and reweighting occurred. Retain preferred v1/refined58139638 and useful raw v6 FK1. Agreement is with the engineered/glycosylated9N4K receptor-trap reference (552/716 observed residues), not native signaling or independent validation."
       },
       "proposed_next_step_history": [
         {
@@ -16452,6 +16573,33 @@
             "sha256": "e65ac1d868c36f4a4974ab66bb5d10b536b510da7d8bef9585a0a0e66fa2898f"
           },
           "assessment": "BMP6 v7 does not improve v6. Cleaner new guided58228454 tau0.1 FK3 has C/D/E/F DockQ0.617406/0.636918/0.845414/0.867952 and16 severe CNO, all tail-involving. N60 fitted errors3.96/3.89A and heavy approach7.09/7.02A are worse than v6 FK1 errors2.63/2.37A, approach5.72/5.35A,12 severe CNO and DockQ0.670208/0.664867/0.897672/0.904154. Wrist remains3.58/3.56A. Metric leader FK7 has43 severe CNO and a1.294A annotated F31-F59 SG distance. Retain v6 as stronger raw candidate and separately relaxed v1 as cleaner retained structure. Matching9N4K trap reference recovery is not native signaling validation."
+        },
+        {
+          "status": "implemented_and_submitted_awaiting_evaluation",
+          "action": "Tighten the existing required N60-S446 CA approach from v6 while retaining the N60 loop, wrist and typeII rules; add a bounded native-topology overlap penalty without the unsuccessful v7 N60 angular multiplier.",
+          "qualification": "Actual implemented specification governs; prior proposal preserved verbatim in history. Submission is not scientific promotion.",
+          "source": {
+            "path": "artifacts/bmp90/preparation/bmp6_acvr1_v8_20261019/scientific_summary.json",
+            "sha256": "b16272f3a33ab2251a9ee9b997c2a4d58f0f705e43402eb453cfa3ec540e42da"
+          },
+          "specification": {
+            "path": "artifacts/bmp90/preparation/bmp6_acvr1_v8_20261019/bmp6_joint_n60_tight_approach_steric_v8.json",
+            "sha256": "3f8709c2f59115a4370611131af5543e0934b866cedd5bf1f4aee79047cbceb3"
+          },
+          "implemented_recipe_id": "bmp6_joint_n60_tight_approach_steric_v8",
+          "campaign_id": "bmp90-paid-wave21-20261019",
+          "new_job_ids": [
+            "58234685",
+            "58234688",
+            "58234692"
+          ],
+          "evaluation_job_ids": [
+            "58234686",
+            "58234691",
+            "58234693"
+          ],
+          "jobs_submitted": true,
+          "updated_at": "2026-10-19T05:20:56.752240+00:00"
         }
       ]
     },
@@ -27021,9 +27169,10 @@
     },
     "BMP7_ACVR1_ACVR2A": {
       "reference_structure": "1LX5 (partial mouse-receptor surrogate; no type-I coordinates)",
-      "best_recipe_id": "bmp7_alk2_bridge_cauchy_steric_v4",
+      "best_recipe_id": "bmp7_alk2_joint_required_placement_v7",
       "previous_best_recipe_ids": [
-        "bmp7_alk2_joint_v1"
+        "bmp7_alk2_joint_v1",
+        "bmp7_alk2_bridge_cauchy_steric_v4"
       ],
       "ranking_history": [
         {
@@ -27094,9 +27243,30 @@
             "zero_based_sample": 2
           },
           "reason": "Across all three taus, tau0.3sample2 combines stronger E/F surrogate agreement than the previous overall leader, much better jointly assigned type-I face/bridge satisfaction, and lower full-model severe overlaps with zero core-band severe pairs. Tau0.8 weakness does not disqualify this best overall outcome."
+        },
+        {
+          "recorded_at": "2026-10-19T15:31:48.803190+00:00",
+          "previous_best_recipe_id": "bmp7_alk2_bridge_cauchy_steric_v4",
+          "best_recipe_id": "bmp7_alk2_joint_required_placement_v7",
+          "previous_ranks": {
+            "bmp7_acvr1_acvr2a_joint_transfer_v1": null,
+            "bmp7_alk2_joint_v1": 2,
+            "bmp7_alk2_joint_v2": 3,
+            "bmp7_alk2_bridge_cauchy_v3": null,
+            "bmp7_alk2_bridge_cauchy_steric_v4": 1,
+            "bmp7_alk2_required_q89_bridge_cauchy_steric_v5": null,
+            "bmp7_alk2_q89_typeII_orientation_v6": null,
+            "bmp7_alk2_joint_required_placement_v7": null
+          },
+          "rationale": "Promote v7 as the provisional preferred raw recipe, job58234698 tau0.3 FK2, while retaining relaxed v4 job58197169 as the cleaner physical alternative. E/F species-surrogate DockQ improves from v4raw0.845/0.856 to0.935/0.920; Q89 errors improve from about4.1A to1.45/1.47A, T83 errors are0.46/0.50A, and severe interchain CNO falls22 to7. N60-E362 worsens to+6.36/+5.63A and must remain explicit. FK2 also has3 severe intrachain CNO,10 backbone length outliers and6/27 native SS distances outside the diagnostic1.8-2.3A window (one borderline). All10 winning FK descendants have ancestor6; baseline6 already has a useful basin. Conserved1LX5 species-surrogate agreement covers typeII E/F,392/716 residues; ACVR1 C/D and native full-assembly accuracy remain unvalidated.",
+          "source": {
+            "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp7_analysis/scientific_summary.json",
+            "sha256": "00d40c9a833a1a251ac92fab655c2886d96d68f9424e17a103f5a607abe2577e"
+          },
+          "qualification": "Completed coordinate/report review across tau0.1/0.3/0.8; provisional practical recipe preference is distinct from calibrated physical or native-assembly acceptance. Retain partial, homolog/species and engineered receptor-trap reference qualifications. No jobs submitted or cancelled in this review."
         }
       ],
-      "ranking_status": "Provisional v4 preference from tau0.3sample2: stronger E/F surrogate agreement, both-copy transferred face/bridge support and improved packing. C/D native accuracy and calibrated physical acceptance remain unassessed.",
+      "ranking_status": "Provisional preference for raw recipe across all taus; older alternatives and refined derivatives retained. Residual contact and physical defects remain; native full-assembly accuracy and calibrated acceptance unassessed.",
       "reference_context": {
         "created_utc": "2026-10-13T18:50:07.419204+00:00",
         "active": false,
@@ -28206,7 +28376,7 @@
         },
         {
           "recipe_id": "bmp7_alk2_joint_v1",
-          "rank": 2,
+          "rank": 3,
           "status": "historical_preferred_partial_recovery_superseded_by_v4",
           "executable": true,
           "comparison_group": "human_native_untrimmed_716",
@@ -30719,7 +30889,7 @@
         },
         {
           "recipe_id": "bmp7_alk2_joint_v2",
-          "rank": 3,
+          "rank": 4,
           "status": "completed_evaluated_not_preferred",
           "parent_relationships": [
             {
@@ -37957,8 +38127,8 @@
         {
           "recipe_id": "bmp7_alk2_bridge_cauchy_steric_v4",
           "target_id": "BMP7_ACVR1_ACVR2A",
-          "rank": 1,
-          "status": "provisional_preferred_evaluated_with_residual_defects",
+          "rank": 2,
+          "status": "previous_preferred_retained_as_alternative",
           "parent_relationships": [
             {
               "recipe_id": "bmp6_joint_v1",
@@ -41609,6 +41779,13 @@
               "superseded_at": "2026-10-17T00:02:47.519441+00:00",
               "recording_id": "COMPLETED_BMP6V5_BMP7ALK2V4_ALK3V2_20261016T2350",
               "value": "Retain provisional v1 beta12 tau.8 sample8 leader until best overall across tau improves common per-copy contact/bridge geometry, E/F species-surrogate DockQ and full/core/tail packing. C/D experimental accuracy remains null; do not promote from reward or total-clash count alone."
+            }
+          ],
+          "status_history": [
+            {
+              "status": "provisional_preferred_evaluated_with_residual_defects",
+              "recorded_at": "2026-10-19T15:31:48.803190+00:00",
+              "event": "before_wave21_practical_preference"
             }
           ]
         },
@@ -48774,8 +48951,8 @@
         },
         {
           "recipe_id": "bmp7_alk2_joint_required_placement_v7",
-          "rank": null,
-          "status": "submitted_not_evaluated",
+          "rank": 1,
+          "status": "provisional_preferred_raw_with_residual_defects",
           "executable": true,
           "comparison_group": "human_full_native_716",
           "parent_recipe_ids": [
@@ -52162,7 +52339,7 @@
             {
               "job_id": "58234694",
               "evaluation_job_id": "58234695",
-              "status": "submitted_not_evaluated",
+              "status": "completed_coordinate_and_report_reviewed",
               "run_id": "20261019T051807127651Z_BMP7_ACVR1_ACVR2A_bmp7_alk2_joint_required_placement_v7_e04041a6",
               "tau": 0.1,
               "beta": 24.0,
@@ -52196,12 +52373,41 @@
                   "path": "artifacts/bmp90/operations/paid_wave21/arms/bmp7_alk2_v7/tau01_r1.registry.json",
                   "sha256": "1e33f76f68c6a885397f16f38cb9d2c8f922ba0cda0bb51d69e2bde55c369ef9"
                 }
+              },
+              "evaluation_screen": {
+                "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp7_analysis/scientific_summary.json",
+                "sha256": "00d40c9a833a1a251ac92fab655c2886d96d68f9424e17a103f5a607abe2577e"
+              },
+              "completion_observation": {
+                "observed_at": "2026-10-19T15:22:50.570963+00:00",
+                "sampling": {
+                  "job_id": "58234694",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "01:38:51",
+                  "start": "2026-10-18T22:36:09",
+                  "end": "2026-10-19T00:15:00",
+                  "allocation": "billing=38,cpu=6,gres/gpu=1,mem=48G,node=1"
+                },
+                "evaluation": {
+                  "job_id": "58234695",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:00:36",
+                  "start": "2026-10-19T00:15:00",
+                  "end": "2026-10-19T00:15:36",
+                  "allocation": "billing=4,cpu=4,mem=12G,node=1"
+                },
+                "source": {
+                  "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/scheduler.json",
+                  "sha256": "285187481892a40f6dfa449bb16d656f49fcb4b4c5fbdda2e08cc165c3ec1d2d"
+                }
               }
             },
             {
               "job_id": "58234698",
               "evaluation_job_id": "58234699",
-              "status": "submitted_not_evaluated",
+              "status": "completed_coordinate_and_report_reviewed",
               "run_id": "20261019T051842164757Z_BMP7_ACVR1_ACVR2A_bmp7_alk2_joint_required_placement_v7_b51e41c2",
               "tau": 0.3,
               "beta": 24.0,
@@ -52235,12 +52441,41 @@
                   "path": "artifacts/bmp90/operations/paid_wave21/arms/bmp7_alk2_v7/tau03_r2.registry.json",
                   "sha256": "12e6317b738dc7ec9dd1df7a1b73c05124d0dc71a0b3ddebe71d041a60af3115"
                 }
+              },
+              "evaluation_screen": {
+                "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp7_analysis/scientific_summary.json",
+                "sha256": "00d40c9a833a1a251ac92fab655c2886d96d68f9424e17a103f5a607abe2577e"
+              },
+              "completion_observation": {
+                "observed_at": "2026-10-19T15:22:50.570963+00:00",
+                "sampling": {
+                  "job_id": "58234698",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "01:36:38",
+                  "start": "2026-10-18T22:40:47",
+                  "end": "2026-10-19T00:17:25",
+                  "allocation": "billing=38,cpu=6,gres/gpu=1,mem=48G,node=1"
+                },
+                "evaluation": {
+                  "job_id": "58234699",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:00:36",
+                  "start": "2026-10-19T00:17:25",
+                  "end": "2026-10-19T00:18:01",
+                  "allocation": "billing=4,cpu=4,mem=12G,node=1"
+                },
+                "source": {
+                  "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/scheduler.json",
+                  "sha256": "285187481892a40f6dfa449bb16d656f49fcb4b4c5fbdda2e08cc165c3ec1d2d"
+                }
               }
             },
             {
               "job_id": "58234702",
               "evaluation_job_id": "58234703",
-              "status": "submitted_not_evaluated",
+              "status": "completed_coordinate_and_report_reviewed",
               "run_id": "20261019T051917190326Z_BMP7_ACVR1_ACVR2A_bmp7_alk2_joint_required_placement_v7_d6602575",
               "tau": 0.8,
               "beta": 24.0,
@@ -52274,15 +52509,45 @@
                   "path": "artifacts/bmp90/operations/paid_wave21/arms/bmp7_alk2_v7/tau08_r3.registry.json",
                   "sha256": "2df8425227fecca4691a093e49db7afc16e4b75f7950cf36d3be90dee4d6473c"
                 }
+              },
+              "evaluation_screen": {
+                "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp7_analysis/scientific_summary.json",
+                "sha256": "00d40c9a833a1a251ac92fab655c2886d96d68f9424e17a103f5a607abe2577e"
+              },
+              "completion_observation": {
+                "observed_at": "2026-10-19T15:22:50.570963+00:00",
+                "sampling": {
+                  "job_id": "58234702",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "01:34:36",
+                  "start": "2026-10-18T22:42:20",
+                  "end": "2026-10-19T00:16:56",
+                  "allocation": "billing=38,cpu=6,gres/gpu=1,mem=48G,node=1"
+                },
+                "evaluation": {
+                  "job_id": "58234703",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:00:37",
+                  "start": "2026-10-19T00:16:56",
+                  "end": "2026-10-19T00:17:33",
+                  "allocation": "billing=4,cpu=4,mem=12G,node=1"
+                },
+                "source": {
+                  "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/scheduler.json",
+                  "sha256": "285187481892a40f6dfa449bb16d656f49fcb4b4c5fbdda2e08cc165c3ec1d2d"
+                }
               }
             }
           ],
           "successful_tau": [],
           "failure_ids": [
-            "BMP7_ACVR1_ACVR2A_WAVE21_PREPARED_SCORE_LIMITATIONS_20261019"
+            "BMP7_ACVR1_ACVR2A_WAVE21_PREPARED_SCORE_LIMITATIONS_20261019",
+            "BMP7_ACVR1_ACVR2A_WAVE21_RESIDUAL_DEFECTS_20261019"
           ],
           "evaluation_scope": "Partial species-surrogate 1LX5 protein reference: only E/F type-II interfaces covered (392 observed residues of full716 input); ACVR1 C/D experimental geometry is uncovered. No whole-assembly or type-I experimental DockQ. Composite diagnostics are not reference truth; evidence is reused for tuning, not independent validation.",
-          "calibration_status": "Implementation/CPU scoring and qualified reference gates passed; sampled outcome pending. Known limitations are not biological validation.",
+          "calibration_status": "Completed coordinate/report evaluation; practical comparative ranking only. Calibrated physical and native-assembly acceptance remain unassessed.",
           "implementation_qualification": "Required interface groups and geometry use one coherent assembly assignment; exact specification governs. This is an engineering hypothesis, not experimental native accuracy.",
           "known_scientific_limitations": [
             "This is a new hypothesis from retained v4, with integrated v5 grouping and v6 failure evidence. No sampling outcome, structural acceptance or recipe promotion exists yet.",
@@ -52293,17 +52558,224 @@
             "Source-compatible composite has missing full heavy atoms and28 severe CNO pairs; its.286 score is a geometry diagnostic with missing-data floor, not a clean full native positive. Exact partialreference scores0 because C/D requirements are absent, and remains finite-only.",
             "The 10degree folded near miss remains.235 versus relaxed.327; this tolerance is uncalibrated. Two extra contacts do not prove a unique complete receptor orientation.",
             "This panel contains reused models and constructed coordinate controls. New sequence seeds differ from prior sweeps; outcome attribution must retain that qualification."
-          ]
+          ],
+          "status_history": [
+            {
+              "status": "submitted_not_evaluated",
+              "recorded_at": "2026-10-19T15:31:48.803190+00:00",
+              "event": "before_wave21_review"
+            }
+          ],
+          "calibration_status_history": [
+            {
+              "recorded_at": "2026-10-19T15:31:48.803190+00:00",
+              "value": "Implementation/CPU scoring and qualified reference gates passed; sampled outcome pending. Known limitations are not biological validation."
+            }
+          ],
+          "evaluation_records": [
+            {
+              "record_id": "WAVE21_COMPLETED_SCREEN_20261019",
+              "recorded_at": "2026-10-19T15:31:48.803190+00:00",
+              "source": {
+                "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp7_analysis/scientific_summary.json",
+                "sha256": "00d40c9a833a1a251ac92fab655c2886d96d68f9424e17a103f5a607abe2577e"
+              },
+              "assessment": "Promote v7 as the provisional preferred raw recipe, job58234698 tau0.3 FK2, while retaining relaxed v4 job58197169 as the cleaner physical alternative. E/F species-surrogate DockQ improves from v4raw0.845/0.856 to0.935/0.920; Q89 errors improve from about4.1A to1.45/1.47A, T83 errors are0.46/0.50A, and severe interchain CNO falls22 to7. N60-E362 worsens to+6.36/+5.63A and must remain explicit. FK2 also has3 severe intrachain CNO,10 backbone length outliers and6/27 native SS distances outside the diagnostic1.8-2.3A window (one borderline). All10 winning FK descendants have ancestor6; baseline6 already has a useful basin. Conserved1LX5 species-surrogate agreement covers typeII E/F,392/716 residues; ACVR1 C/D and native full-assembly accuracy remain unvalidated.",
+              "scope": "Completed coordinate/report review across tau0.1/0.3/0.8; provisional practical recipe preference is distinct from calibrated physical or native-assembly acceptance. Retain partial, homolog/species and engineered receptor-trap reference qualifications. No jobs submitted or cancelled in this review.",
+              "storage": "All180 PDBs and associated report subsets downloaded with verified SHA256. Full tensor bundles and final canonical publication not retrieved or verified; temporary home copies retained.",
+              "physical_acceptance": null,
+              "native_assembly_acceptance": null
+            }
+          ],
+          "preferred_tau": 0.3,
+          "winning_settings": {
+            "job_id": "58234698",
+            "run_id": "20261019T051842164757Z_BMP7_ACVR1_ACVR2A_bmp7_alk2_joint_required_placement_v7_b51e41c2",
+            "tau": 0.3,
+            "beta": 24.0,
+            "gpu": "A30",
+            "seed_triplet": {
+              "initial_seed": 980302,
+              "brownian_seed": 981302,
+              "resampling_seed": 982302
+            },
+            "condition": "fk",
+            "sample_index": 2,
+            "qualification": "Best practical raw candidate across tested taus; not calibrated acceptance or independent replication."
+          },
+          "preferred_raw_candidate": {
+            "job_id": "58234698",
+            "condition": "fk",
+            "sample_index": 2,
+            "tau": 0.3,
+            "pdb": {
+              "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/analysis_subsets/58234698/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_2.pdb",
+              "sha256": "9f0bea810f1268823d3fae46e26d7f0da5590610af4d93dc4fbee50fe1b661e7"
+            },
+            "typeII_species_surrogate_DockQ": {
+              "E": 0.9349923499076991,
+              "F": 0.9202853961989867
+            },
+            "weakest_typeII_DockQ": 0.9202853961989867,
+            "same_coherent_assignment": {
+              "A": "A",
+              "B": "B",
+              "C": "D",
+              "D": "C",
+              "E": "F",
+              "F": "E"
+            },
+            "Q89_CA_error_A": {
+              "C": 1.4522252141316194,
+              "D": 1.471653483158173
+            },
+            "T83_CA_error_A": {
+              "C": 0.45835388556202705,
+              "D": 0.4993776204811189
+            },
+            "N60_E362_CA_error_A": {
+              "C": 6.358374538598143,
+              "D": 5.6295551491694535
+            },
+            "remaining_four_face_Cauchy_mean": {
+              "C": 0.7338918676248598,
+              "D": 0.7535755973239086
+            },
+            "typeII_required_approaches": {
+              "E": [
+                {
+                  "id": "placement_EI83_A355_B",
+                  "distance_A": 7.070265270836731,
+                  "target_A": 6.338306792827243,
+                  "error_A": 0.7319584780094877,
+                  "feature": 0.9352228819427388
+                },
+                {
+                  "id": "placement_EK56_N402_B",
+                  "distance_A": 8.28940492435977,
+                  "target_A": 8.501314368966723,
+                  "error_A": -0.2119094446069525,
+                  "feature": 0.9944025229913329
+                }
+              ],
+              "F": [
+                {
+                  "id": "placement_FI83_A355_A",
+                  "distance_A": 7.068317904565413,
+                  "target_A": 6.338306792827246,
+                  "error_A": 0.7300111117381674,
+                  "feature": 0.935555762476456
+                },
+                {
+                  "id": "placement_FK56_N402_A",
+                  "distance_A": 8.467046061053406,
+                  "target_A": 8.501314368966714,
+                  "error_A": -0.03426830791330815,
+                  "feature": 0.9998532211571634
+                }
+              ]
+            },
+            "required_interface_scores_same_assignment": {
+              "C": 0.7338918676248598,
+              "D": 0.7535755973239087,
+              "E": 0.9352228819427388,
+              "F": 0.935555762476456
+            },
+            "joint_required_min": 0.7338918676248598,
+            "raw_severe_interchain_CNO": 7,
+            "historical_source_core_only_severe_CNO": 1,
+            "outside_source_core_involved": 6,
+            "standard_heavy_missing_count": 0,
+            "residue_count": 716,
+            "sampling_reward": 0.6455348311860108,
+            "v7_reward_same_reference_compatible_assignment": 0.642965703762326,
+            "sampling_selected_assignment": {
+              "A": "B",
+              "B": "A",
+              "C": "C",
+              "D": "D",
+              "E": "E",
+              "F": "F"
+            },
+            "initial_ancestor": 6,
+            "fixed_native_topology_physical": {
+              "severe_raw_interchain_CNO": 7,
+              "severe_intrachain_nonbonded_CNO": 3,
+              "ordinary_nonbonded_heavy_overlap_gt0p4_interchain": 93,
+              "ordinary_nonbonded_heavy_overlap_gt0p4_intrachain": 85,
+              "backbone_bond_deviation_gt0p2A": 10,
+              "native_disulfide_count": 27,
+              "native_SS_distance_min_max_A": [
+                1.678663754299829,
+                2.6618636328707743
+              ],
+              "native_SS_outside1p8to2p3A": 6,
+              "unexpected_SG_pairs_below2p3A": 0
+            },
+            "inferred_typeI_template_pose_diagnostic": {
+              "C": {
+                "sampled_input_chain": "D",
+                "source_core_CA_count": 79,
+                "ligand_frame_hypothesis_CA_RMSD_A": 3.853722841699354,
+                "hypothesis_centroid_displacement_A": 0.3979126592794769,
+                "separately_fitted_9N4K_fold_CA_RMSD_A": 2.657963415814861
+              },
+              "D": {
+                "sampled_input_chain": "C",
+                "source_core_CA_count": 79,
+                "ligand_frame_hypothesis_CA_RMSD_A": 4.048564662725517,
+                "hypothesis_centroid_displacement_A": 1.118582797136421,
+                "separately_fitted_9N4K_fold_CA_RMSD_A": 2.587348391185074
+              }
+            }
+          }
         }
       ],
       "current_iteration_parent": {
-        "recipe_id": "bmp7_alk2_bridge_cauchy_steric_v4",
-        "recorded_at": "2026-10-17T00:02:47.519441+00:00",
-        "purpose": "Provisional practical parent after completed three-tau review; preserve recovered bridge/type-II geometry while validating the proposed Q89 face requirement.",
-        "source": {
-          "path": "artifacts/bmp90/evaluation/bmp7_alk2_steric_v4_20261016_completed/scientific_summary.json",
-          "sha256": "17b5ee6205842c365244d15619f4eb96a9c3affd1015b1d50e5d63781cae870a"
-        }
+        "job_id": "58234698",
+        "condition": "fk",
+        "sample_index": 2,
+        "tau": 0.3,
+        "recipe_id": "bmp7_alk2_joint_required_placement_v7",
+        "model": {
+          "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/analysis_subsets/58234698/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_2.pdb",
+          "sha256": "9f0bea810f1268823d3fae46e26d7f0da5590610af4d93dc4fbee50fe1b661e7"
+        },
+        "canonical_PDB": "/pub/ynkim4/ml-simplefold/artifacts/runs/58234698/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_2.pdb",
+        "home_PDB": "/data/homezvol2/ynkim4/ml-simplefold-bmp90-paid-wave21-20261019/artifacts/transfer-stage/runs/58234698/fk/predictions_simplefold_3B/BMP7_ACVR1_ACVR2A_sampled_2.pdb",
+        "canonical_publication_verified": false,
+        "recorded_at": "2026-10-19T15:31:48.803190+00:00",
+        "status": "provisional_raw_iteration_candidate_needs_cleanup_not_native_accepted",
+        "evaluation_source": {
+          "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp7_analysis/scientific_summary.json",
+          "sha256": "00d40c9a833a1a251ac92fab655c2886d96d68f9424e17a103f5a607abe2577e"
+        },
+        "whole_assembly_experimental_DockQ": null,
+        "assessment": "Promote v7 as the provisional preferred raw recipe, job58234698 tau0.3 FK2, while retaining relaxed v4 job58197169 as the cleaner physical alternative. E/F species-surrogate DockQ improves from v4raw0.845/0.856 to0.935/0.920; Q89 errors improve from about4.1A to1.45/1.47A, T83 errors are0.46/0.50A, and severe interchain CNO falls22 to7. N60-E362 worsens to+6.36/+5.63A and must remain explicit. FK2 also has3 severe intrachain CNO,10 backbone length outliers and6/27 native SS distances outside the diagnostic1.8-2.3A window (one borderline). All10 winning FK descendants have ancestor6; baseline6 already has a useful basin. Conserved1LX5 species-surrogate agreement covers typeII E/F,392/716 residues; ACVR1 C/D and native full-assembly accuracy remain unvalidated.",
+        "typeII_species_surrogate_DockQ": {
+          "E": 0.9349923499076991,
+          "F": 0.9202853961989867
+        },
+        "coherent_assignment": {
+          "A": "A",
+          "B": "B",
+          "C": "D",
+          "D": "C",
+          "E": "F",
+          "F": "E"
+        },
+        "N60_E362_CA_error_A": {
+          "C": 6.358374538598143,
+          "D": 5.6295551491694535
+        },
+        "severe_CNO": 7,
+        "reference_scope": [
+          "E/F DockQ is conserved1LX5 species-surrogate agreement, not native human affinity or full-assembly validation; ACVR1 C/D is experimentally unassessed.",
+          "Covered A/B/E/F evaluator mapping is fixed. Uncovered C/D are jointly assigned once using unchanged original three-anchor fine objective; every Q89/T83/N60/face/new typeII metric then uses that same coherent bijection. Sampling-selected score maps are retained separately, never combined with a different copywise DockQ.",
+          "Severe raw interchain CNO is the historical unique pair metric: radii sum-distance>1A. Fixed-topology intrachain/all-heavy checks exclude1-2/1-3/1-4 using standard atom names and all27 declared native disulfides; no coordinate-inferred topology or arbitrary CONECT.",
+          "Historical core bands A/B36-139,C/D11-89,E/F7-100 are comparison masks, not a disorder assignment. Partialreference coverage and template-derived C/D core are distinct.",
+          "All source geometry and selected models were reused for tuning; scores and thresholds are engineering diagnostics, not independent structural validation."
+        ]
       },
       "metric_specific_leaders": {
         "provisional_overall_guided": {
@@ -52389,7 +52861,7 @@
         }
       ],
       "proposed_next_step": {
-        "status": "implemented_and_submitted_awaiting_evaluation",
+        "status": "completed_evaluated_provisionally_preferred",
         "action": "Require each typeI Q89 and T83 contact together with the remaining face, add conserved typeII I83-A355 and K56-N402 approach distances, use the weakest complete interface, and strengthen the bounded overlap penalty.",
         "qualification": "Actual implemented specification governs; prior proposal preserved verbatim in history. Submission is not scientific promotion.",
         "source": {
@@ -52413,7 +52885,12 @@
           "58234703"
         ],
         "jobs_submitted": true,
-        "updated_at": "2026-10-19T05:20:56.752240+00:00"
+        "updated_at": "2026-10-19T15:31:48.803190+00:00",
+        "evaluation_source": {
+          "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp7_analysis/scientific_summary.json",
+          "sha256": "00d40c9a833a1a251ac92fab655c2886d96d68f9424e17a103f5a607abe2577e"
+        },
+        "assessment": "Promote v7 as the provisional preferred raw recipe, job58234698 tau0.3 FK2, while retaining relaxed v4 job58197169 as the cleaner physical alternative. E/F species-surrogate DockQ improves from v4raw0.845/0.856 to0.935/0.920; Q89 errors improve from about4.1A to1.45/1.47A, T83 errors are0.46/0.50A, and severe interchain CNO falls22 to7. N60-E362 worsens to+6.36/+5.63A and must remain explicit. FK2 also has3 severe intrachain CNO,10 backbone length outliers and6/27 native SS distances outside the diagnostic1.8-2.3A window (one borderline). All10 winning FK descendants have ancestor6; baseline6 already has a useful basin. Conserved1LX5 species-surrogate agreement covers typeII E/F,392/716 residues; ACVR1 C/D and native full-assembly accuracy remain unvalidated."
       },
       "refinements": [
         {
@@ -52690,6 +53167,47 @@
             "sha256": "97c06234c3c2a832675252026b9610c2823095f8aa55a9422153e4453dcda7dc"
           },
           "assessment": "Retain BMP7 v4 raw/relaxed overall. V6 yields both E/F surrogate DockQ>=0.6 in9/0/8 guided outputs across tau0.1/0.3/0.8 versus2/0/2 baseline outputs, but these are correlated outputs and a descriptive screen. Tau0.1 job58228460 FK2 has E/F0.729/0.634, Q89 errors+0.49/+0.69A, but T83 errors+5.98/+6.26A and31 severe CNO. Tau0.8 job58228462 FK8 keeps T83 but Q89 remains+3.08/+4.25A, E/F0.772/0.617 and332 severe CNO. V4 retains E/F0.845/0.856 with22 raw or0 relaxed severe CNO. All30 guided outputs miss the combined descriptive type-I/contact and covered type-II screen; inferred ACVR1 C/D has no experimental DockQ in this comparison."
+        },
+        {
+          "status": "implemented_and_submitted_awaiting_evaluation",
+          "action": "Require each typeI Q89 and T83 contact together with the remaining face, add conserved typeII I83-A355 and K56-N402 approach distances, use the weakest complete interface, and strengthen the bounded overlap penalty.",
+          "qualification": "Actual implemented specification governs; prior proposal preserved verbatim in history. Submission is not scientific promotion.",
+          "source": {
+            "path": "artifacts/bmp90/preparation/bmp7_alk2_v7_20261019/scientific_summary.json",
+            "sha256": "7a27fcdf28a8d65122bc74d96e2d44729922bb673197237c4d3e6d1cae7230fc"
+          },
+          "specification": {
+            "path": "artifacts/bmp90/preparation/bmp7_alk2_v7_20261019/bmp7_alk2_joint_required_placement_v7.json",
+            "sha256": "bc95b8985347b0edfd6f5f2214d4b52a05e037aa98470ff0c1b0f67e9b383df0"
+          },
+          "implemented_recipe_id": "bmp7_alk2_joint_required_placement_v7",
+          "campaign_id": "bmp90-paid-wave21-20261019",
+          "new_job_ids": [
+            "58234694",
+            "58234698",
+            "58234702"
+          ],
+          "evaluation_job_ids": [
+            "58234695",
+            "58234699",
+            "58234703"
+          ],
+          "jobs_submitted": true,
+          "updated_at": "2026-10-19T05:20:56.752240+00:00"
+        }
+      ],
+      "current_iteration_parent_history": [
+        {
+          "recorded_at": "2026-10-19T15:31:48.803190+00:00",
+          "value": {
+            "recipe_id": "bmp7_alk2_bridge_cauchy_steric_v4",
+            "recorded_at": "2026-10-17T00:02:47.519441+00:00",
+            "purpose": "Provisional practical parent after completed three-tau review; preserve recovered bridge/type-II geometry while validating the proposed Q89 face requirement.",
+            "source": {
+              "path": "artifacts/bmp90/evaluation/bmp7_alk2_steric_v4_20261016_completed/scientific_summary.json",
+              "sha256": "17b5ee6205842c365244d15619f4eb96a9c3affd1015b1d50e5d63781cae870a"
+            }
+          }
         }
       ]
     },
@@ -63405,8 +63923,10 @@
     "BMP4_BMPR1A_ACVR2A": {
       "reference_structure": null,
       "surrogate_reference_structure": "2GOO",
-      "best_recipe_id": "bmp4_alk3_actr2a_coarse_fine_v1",
-      "previous_best_recipe_ids": [],
+      "best_recipe_id": "bmp4_alk3_actr2a_joint_minimum_steric_v5",
+      "previous_best_recipe_ids": [
+        "bmp4_alk3_actr2a_coarse_fine_v1"
+      ],
       "ranking_history": [
         {
           "recorded_at": "2026-10-17T22:03:30.760136+00:00",
@@ -63418,14 +63938,32 @@
             "path": "artifacts/bmp90/evaluation/wave17_status_20261017T2150/bmp4_analysis/scientific_summary.json",
             "sha256": "f2699611444bc28197caa940a74574219ab0feb5780ff3e399a4ada55b576245"
           }
+        },
+        {
+          "recorded_at": "2026-10-19T15:31:48.803190+00:00",
+          "previous_best_recipe_id": "bmp4_alk3_actr2a_coarse_fine_v1",
+          "best_recipe_id": "bmp4_alk3_actr2a_joint_minimum_steric_v5",
+          "previous_ranks": {
+            "bmp4_alk3_actr2a_coarse_fine_v1": 1,
+            "bmp4_alk3_actr2a_required_approach_steric_v2": null,
+            "bmp4_alk3_actr2a_orientation_v3": null,
+            "bmp4_alk3_actr2a_frame_bounded_v4": null,
+            "bmp4_alk3_actr2a_joint_minimum_steric_v5": null
+          },
+          "rationale": "Promote v5 provisionally for overall raw placement, job58234682 tau0.8 FK5. Both W79 approach gaps are within0.46A versus the retained v1 weak-copy gap7.53A; the weakest common contact score improves0.571 to0.909. Covered C/E homolog DockQ0.894/0.738 is lower than v1, but the formerly misplaced second type-II copy improves. Remaining16 severe interchain CNO overlaps (1 source-core),28 backbone length outliers and native SS range1.783-2.491A require physical cleanup. Retain v1 as a source-metric alternative. This is conserved2GOO homolog agreement on361/722 residues, not native BMP4 or whole-assembly validation. All10 winning FK descendants have ancestor2; no independent replication claim.",
+          "source": {
+            "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp4_analysis/scientific_summary.json",
+            "sha256": "f2ad068a1cdc6af7abb6a7ce0418f72c724daf041c7c540e0c9833336f8cac50"
+          },
+          "qualification": "Completed coordinate/report review across tau0.1/0.3/0.8; provisional practical recipe preference is distinct from calibrated physical or native-assembly acceptance. Retain partial, homolog/species and engineered receptor-trap reference qualifications. No jobs submitted or cancelled in this review."
         }
       ],
-      "ranking_status": "Provisional best available tested recipe across tau; unresolved interface/atomic defects retained explicitly; native full-assembly accuracy unassessed.",
+      "ranking_status": "Provisional preference for raw recipe across all taus; older alternatives and refined derivatives retained. Residual contact and physical defects remain; native full-assembly accuracy and calibrated acceptance unassessed.",
       "recipes": [
         {
           "recipe_id": "bmp4_alk3_actr2a_coarse_fine_v1",
-          "rank": 1,
-          "status": "provisional_preferred_evaluated_with_residual_defects",
+          "rank": 2,
+          "status": "previous_preferred_retained_as_alternative",
           "executable": true,
           "comparison_group": "human_full_native_722",
           "parent_recipe_ids": [
@@ -67176,7 +67714,14 @@
             "reference_scope": "BMP2 homologous-ligand and mouse-to-human ACVR2A surrogate2GOO,361observed of722input residues; covered C/E only, D/F uncovered. Source symmetry and construct qualifications apply. No native BMP4 accuracy or whole-assembly DockQ. Tuning/transfer evidence is not independent validation.",
             "calibrated_acceptance": null
           },
-          "best_observed_tau": 0.8
+          "best_observed_tau": 0.8,
+          "status_history": [
+            {
+              "status": "provisional_preferred_evaluated_with_residual_defects",
+              "recorded_at": "2026-10-19T15:31:48.803190+00:00",
+              "event": "before_wave21_practical_preference"
+            }
+          ]
         },
         {
           "recipe_id": "bmp4_alk3_actr2a_required_approach_steric_v2",
@@ -80435,8 +80980,8 @@
         },
         {
           "recipe_id": "bmp4_alk3_actr2a_joint_minimum_steric_v5",
-          "rank": null,
-          "status": "submitted_not_evaluated",
+          "rank": 1,
+          "status": "provisional_preferred_raw_with_residual_defects",
           "executable": true,
           "comparison_group": "human_full_native_722",
           "parent_recipe_ids": [
@@ -84860,7 +85405,7 @@
             {
               "job_id": "58234658",
               "evaluation_job_id": "58234679",
-              "status": "submitted_not_evaluated",
+              "status": "completed_coordinate_and_report_reviewed",
               "run_id": "20261019T051418079243Z_BMP4_BMPR1A_ACVR2A_bmp4_alk3_actr2a_joint_minimum_steric_v5_c96977c0",
               "tau": 0.1,
               "beta": 12.0,
@@ -84894,12 +85439,41 @@
                   "path": "artifacts/bmp90/operations/paid_wave21/arms/bmp4_alk3_actr2a_v5/tau01_r1.registry.json",
                   "sha256": "6edcb88b6316f6d09cb63d266d512bfd3cc18f006468512711f0a0d319f3be57"
                 }
+              },
+              "evaluation_screen": {
+                "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp4_analysis/scientific_summary.json",
+                "sha256": "f2ad068a1cdc6af7abb6a7ce0418f72c724daf041c7c540e0c9833336f8cac50"
+              },
+              "completion_observation": {
+                "observed_at": "2026-10-19T15:22:50.570963+00:00",
+                "sampling": {
+                  "job_id": "58234658",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "01:37:02",
+                  "start": "2026-10-19T01:23:22",
+                  "end": "2026-10-19T03:00:24",
+                  "allocation": "billing=38,cpu=6,gres/gpu=1,mem=48G,node=1"
+                },
+                "evaluation": {
+                  "job_id": "58234679",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:00:35",
+                  "start": "2026-10-19T03:00:24",
+                  "end": "2026-10-19T03:00:59",
+                  "allocation": "billing=4,cpu=4,mem=12G,node=1"
+                },
+                "source": {
+                  "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/scheduler.json",
+                  "sha256": "285187481892a40f6dfa449bb16d656f49fcb4b4c5fbdda2e08cc165c3ec1d2d"
+                }
               }
             },
             {
               "job_id": "58234680",
               "evaluation_job_id": "58234681",
-              "status": "submitted_not_evaluated",
+              "status": "completed_coordinate_and_report_reviewed",
               "run_id": "20261019T051453859812Z_BMP4_BMPR1A_ACVR2A_bmp4_alk3_actr2a_joint_minimum_steric_v5_0ded6c16",
               "tau": 0.3,
               "beta": 12.0,
@@ -84933,12 +85507,41 @@
                   "path": "artifacts/bmp90/operations/paid_wave21/arms/bmp4_alk3_actr2a_v5/tau03_r2.registry.json",
                   "sha256": "f23140dbf61e07a988eaa69f33fc17df53f883ecb078ed46a0576bf01f062eb6"
                 }
+              },
+              "evaluation_screen": {
+                "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp4_analysis/scientific_summary.json",
+                "sha256": "f2ad068a1cdc6af7abb6a7ce0418f72c724daf041c7c540e0c9833336f8cac50"
+              },
+              "completion_observation": {
+                "observed_at": "2026-10-19T15:22:50.570963+00:00",
+                "sampling": {
+                  "job_id": "58234680",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "01:35:34",
+                  "start": "2026-10-18T22:31:31",
+                  "end": "2026-10-19T00:07:05",
+                  "allocation": "billing=38,cpu=6,gres/gpu=1,mem=48G,node=1"
+                },
+                "evaluation": {
+                  "job_id": "58234681",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:00:37",
+                  "start": "2026-10-19T00:07:05",
+                  "end": "2026-10-19T00:07:42",
+                  "allocation": "billing=4,cpu=4,mem=12G,node=1"
+                },
+                "source": {
+                  "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/scheduler.json",
+                  "sha256": "285187481892a40f6dfa449bb16d656f49fcb4b4c5fbdda2e08cc165c3ec1d2d"
+                }
               }
             },
             {
               "job_id": "58234682",
               "evaluation_job_id": "58234683",
-              "status": "submitted_not_evaluated",
+              "status": "completed_coordinate_and_report_reviewed",
               "run_id": "20261019T051529465660Z_BMP4_BMPR1A_ACVR2A_bmp4_alk3_actr2a_joint_minimum_steric_v5_cddbbd20",
               "tau": 0.8,
               "beta": 12.0,
@@ -84972,15 +85575,45 @@
                   "path": "artifacts/bmp90/operations/paid_wave21/arms/bmp4_alk3_actr2a_v5/tau08_r3.registry.json",
                   "sha256": "8c2d79cd7bef53fca677ef4c0231b20604be35d14fe1e08d87b4f8268deff430"
                 }
+              },
+              "evaluation_screen": {
+                "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp4_analysis/scientific_summary.json",
+                "sha256": "f2ad068a1cdc6af7abb6a7ce0418f72c724daf041c7c540e0c9833336f8cac50"
+              },
+              "completion_observation": {
+                "observed_at": "2026-10-19T15:22:50.570963+00:00",
+                "sampling": {
+                  "job_id": "58234682",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "01:36:11",
+                  "start": "2026-10-18T22:32:33",
+                  "end": "2026-10-19T00:08:44",
+                  "allocation": "billing=38,cpu=6,gres/gpu=1,mem=48G,node=1"
+                },
+                "evaluation": {
+                  "job_id": "58234683",
+                  "state": "COMPLETED",
+                  "exit_code": "0:0",
+                  "elapsed": "00:00:32",
+                  "start": "2026-10-19T00:08:44",
+                  "end": "2026-10-19T00:09:16",
+                  "allocation": "billing=4,cpu=4,mem=12G,node=1"
+                },
+                "source": {
+                  "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/scheduler.json",
+                  "sha256": "285187481892a40f6dfa449bb16d656f49fcb4b4c5fbdda2e08cc165c3ec1d2d"
+                }
               }
             }
           ],
           "successful_tau": [],
           "failure_ids": [
-            "BMP4_BMPR1A_ACVR2A_WAVE21_PREPARED_SCORE_LIMITATIONS_20261019"
+            "BMP4_BMPR1A_ACVR2A_WAVE21_PREPARED_SCORE_LIMITATIONS_20261019",
+            "BMP4_BMPR1A_ACVR2A_WAVE21_RESIDUAL_DEFECTS_20261019"
           ],
           "evaluation_scope": "BMP2 homologous-ligand and mouse-to-human ACVR2A surrogate2GOO,361observed of722input residues; covered C/E only, D/F uncovered. Source symmetry and construct qualifications apply. No native BMP4 accuracy or whole-assembly DockQ. Tuning/transfer evidence is not independent validation.",
-          "calibration_status": "Implementation/CPU scoring and qualified reference gates passed; sampled outcome pending. Known limitations are not biological validation.",
+          "calibration_status": "Completed coordinate/report evaluation; practical comparative ranking only. Calibrated physical and native-assembly acceptance remain unassessed.",
           "implementation_qualification": "Required interface groups and geometry use one coherent assembly assignment; exact specification governs. This is an engineering hypothesis, not experimental native accuracy.",
           "known_scientific_limitations": [
             "No exact native BMP4 experimental assembly is available in the recorded source assessment. C/E DockQ measures conserved BMP2/mouse-ACVR2A homolog agreement; D/F and whole assembly remain unassessed experimentally.",
@@ -84991,37 +85624,175 @@
             "CNO overlap checks do not assess or repair disulfide bond lengths, rotamers, backbone strain, hydrogens/protonation, glycans, energetics or membrane context. Those remain separate selection checks.",
             "The retained practical v1FK3 is itself provisional with a misplaced copy. It is a useful comparator, not experimental truth.",
             "All actual models and constructed alternatives used for preparation are tuning evidence. Same-source unrewarded contacts and sibling implementation audits are not independent biological validation."
-          ]
+          ],
+          "status_history": [
+            {
+              "status": "submitted_not_evaluated",
+              "recorded_at": "2026-10-19T15:31:48.803190+00:00",
+              "event": "before_wave21_review"
+            }
+          ],
+          "calibration_status_history": [
+            {
+              "recorded_at": "2026-10-19T15:31:48.803190+00:00",
+              "value": "Implementation/CPU scoring and qualified reference gates passed; sampled outcome pending. Known limitations are not biological validation."
+            }
+          ],
+          "evaluation_records": [
+            {
+              "record_id": "WAVE21_COMPLETED_SCREEN_20261019",
+              "recorded_at": "2026-10-19T15:31:48.803190+00:00",
+              "source": {
+                "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp4_analysis/scientific_summary.json",
+                "sha256": "f2ad068a1cdc6af7abb6a7ce0418f72c724daf041c7c540e0c9833336f8cac50"
+              },
+              "assessment": "Promote v5 provisionally for overall raw placement, job58234682 tau0.8 FK5. Both W79 approach gaps are within0.46A versus the retained v1 weak-copy gap7.53A; the weakest common contact score improves0.571 to0.909. Covered C/E homolog DockQ0.894/0.738 is lower than v1, but the formerly misplaced second type-II copy improves. Remaining16 severe interchain CNO overlaps (1 source-core),28 backbone length outliers and native SS range1.783-2.491A require physical cleanup. Retain v1 as a source-metric alternative. This is conserved2GOO homolog agreement on361/722 residues, not native BMP4 or whole-assembly validation. All10 winning FK descendants have ancestor2; no independent replication claim.",
+              "scope": "Completed coordinate/report review across tau0.1/0.3/0.8; provisional practical recipe preference is distinct from calibrated physical or native-assembly acceptance. Retain partial, homolog/species and engineered receptor-trap reference qualifications. No jobs submitted or cancelled in this review.",
+              "storage": "All180 PDBs and associated report subsets downloaded with verified SHA256. Full tensor bundles and final canonical publication not retrieved or verified; temporary home copies retained.",
+              "physical_acceptance": null,
+              "native_assembly_acceptance": null
+            }
+          ],
+          "preferred_tau": 0.8,
+          "winning_settings": {
+            "job_id": "58234682",
+            "run_id": "20261019T051529465660Z_BMP4_BMPR1A_ACVR2A_bmp4_alk3_actr2a_joint_minimum_steric_v5_cddbbd20",
+            "tau": 0.8,
+            "beta": 12.0,
+            "gpu": "A30",
+            "seed_triplet": {
+              "initial_seed": 974303,
+              "brownian_seed": 975303,
+              "resampling_seed": 976303
+            },
+            "condition": "fk",
+            "sample_index": 5,
+            "qualification": "Best practical raw candidate across tested taus; not calibrated acceptance or independent replication."
+          },
+          "preferred_raw_candidate": {
+            "job_id": "58234682",
+            "condition": "fk",
+            "sample_index": 5,
+            "tau": 0.8,
+            "recipe_id": "bmp4_alk3_actr2a_joint_minimum_steric_v5",
+            "local_PDB": "/Users/vincent_zaballa/Development/ml-simplefold/artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/analysis_subsets/58234682/fk/predictions_simplefold_3B/BMP4_BMPR1A_ACVR2A_sampled_5.pdb",
+            "repository_relative_PDB": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/analysis_subsets/58234682/fk/predictions_simplefold_3B/BMP4_BMPR1A_ACVR2A_sampled_5.pdb",
+            "PDB_sha256": "0356852faebb57b6740b71e4e6f9cd0baad6d26a6f46d6c052ec5655b9e151c4",
+            "coherent_guidance_assignment": {
+              "A": "A",
+              "B": "B",
+              "C": "C",
+              "D": "D",
+              "E": "F",
+              "F": "E"
+            },
+            "coherent_common_metric_assignment": {
+              "A": "A",
+              "B": "B",
+              "C": "C",
+              "D": "D",
+              "E": "F",
+              "F": "E"
+            },
+            "coherent_reference_assignment": {
+              "reference_to_model_input_chain": {
+                "A": "B",
+                "B": "A",
+                "C": "D",
+                "D": "C",
+                "E": "E",
+                "F": "F"
+              },
+              "ligand_CA_fit_rmsd_A": 0.9017958711768663,
+              "receptor_CA_rmsd_in_ligand_frame_A": {
+                "C": 1.4982109908106371,
+                "E": 4.359985373340657
+              },
+              "objective_A_squared": 22.067344422001902,
+              "reference_to_model_saved_chain": {
+                "A": "B",
+                "B": "A",
+                "C": "D",
+                "D": "C",
+                "E": "E",
+                "F": "F"
+              }
+            },
+            "covered_CE_homolog_DockQ": {
+              "C": 0.894272344900433,
+              "E": 0.7378759369728932
+            },
+            "common_fine_per_copy": {
+              "C": 0.9945419486708855,
+              "D": 0.9909316628178245,
+              "E": 0.9093136506427756,
+              "F": 0.9843654038667559
+            },
+            "required_per_copy": {
+              "C": 0.9962796947237071,
+              "D": 0.9938178977001739,
+              "E": 0.8262305356646409,
+              "F": 0.9844062560723782
+            },
+            "physical": {
+              "severe_CNO_fixed_topology": 16,
+              "core_only": 1,
+              "outside_source_core": 15,
+              "expected_standard_heavy_atoms": 5674,
+              "present_standard_heavy_atoms": 5674,
+              "native_SS_distance_A": {
+                "n": 27,
+                "min": 1.783006730217248,
+                "median": 2.044012720116976,
+                "mean": 2.092816730444824,
+                "max": 2.4908938154807
+              }
+            },
+            "backbone_bond_diagnostic": {
+              "backbone_bonds": 2882,
+              "diagnostic_deviation_cutoff_A": 0.2,
+              "count_outside_cutoff": 28,
+              "source_core_outside_cutoff": 7,
+              "maximum_absolute_deviation_A": 0.5516323699682664,
+              "interpretation": "Same simple N-CA/CA-C/C-O/peptide C-N length diagnostic as scripts/analyze_bmp6_refinement.py; not calibrated stereochemical acceptance."
+            },
+            "status": "practical_preferred_candidate_needs_physical_cleanup_not_native_validated"
+          }
         }
       ],
       "current_iteration_parent": {
-        "job_id": "58197150",
+        "job_id": "58234682",
         "condition": "fk",
-        "sample_index": 3,
+        "sample_index": 5,
         "tau": 0.8,
+        "recipe_id": "bmp4_alk3_actr2a_joint_minimum_steric_v5",
         "model": {
-          "path": "artifacts/remote-runs/58197150/fk/predictions_simplefold_3B/BMP4_BMPR1A_ACVR2A_sampled_3.pdb",
-          "sha256": "59b1c4b759f43908839eb9e84f08251c87ab3bee7518af74629f7975786b6d93"
+          "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/analysis_subsets/58234682/fk/predictions_simplefold_3B/BMP4_BMPR1A_ACVR2A_sampled_5.pdb",
+          "sha256": "0356852faebb57b6740b71e4e6f9cd0baad6d26a6f46d6c052ec5655b9e151c4"
         },
-        "canonical_pdb_path": "/pub/ynkim4/ml-simplefold/artifacts/runs/58197150/fk/predictions_simplefold_3B/BMP4_BMPR1A_ACVR2A_sampled_3.pdb",
-        "status": "provisional_iteration_candidate_not_accepted_native_assembly",
-        "rationale": "Best joint inspected candidate across the tau sweep, with highest covered-interface agreement and fewer severe overlaps; one inferred ACVR2A copy remains misoriented.",
-        "scientific_summary": {
-          "path": "artifacts/bmp90/evaluation/wave17_status_20261017T2150/bmp4_analysis/scientific_summary.json",
-          "sha256": "f2699611444bc28197caa940a74574219ab0feb5780ff3e399a4ada55b576245"
+        "canonical_PDB": "/pub/ynkim4/ml-simplefold/artifacts/runs/58234682/fk/predictions_simplefold_3B/BMP4_BMPR1A_ACVR2A_sampled_5.pdb",
+        "home_PDB": "/data/homezvol2/ynkim4/ml-simplefold-bmp90-paid-wave21-20261019/artifacts/transfer-stage/runs/58234682/fk/predictions_simplefold_3B/BMP4_BMPR1A_ACVR2A_sampled_5.pdb",
+        "canonical_publication_verified": false,
+        "recorded_at": "2026-10-19T15:31:48.803190+00:00",
+        "status": "provisional_raw_iteration_candidate_needs_cleanup_not_native_accepted",
+        "evaluation_source": {
+          "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp4_analysis/scientific_summary.json",
+          "sha256": "f2ad068a1cdc6af7abb6a7ce0418f72c724daf041c7c540e0c9833336f8cac50"
         },
-        "qualified_interface_DockQ": {
-          "C": 0.9258017220009157,
-          "E": 0.8191559489002714
+        "whole_assembly_experimental_DockQ": null,
+        "assessment": "Promote v5 provisionally for overall raw placement, job58234682 tau0.8 FK5. Both W79 approach gaps are within0.46A versus the retained v1 weak-copy gap7.53A; the weakest common contact score improves0.571 to0.909. Covered C/E homolog DockQ0.894/0.738 is lower than v1, but the formerly misplaced second type-II copy improves. Remaining16 severe interchain CNO overlaps (1 source-core),28 backbone length outliers and native SS range1.783-2.491A require physical cleanup. Retain v1 as a source-metric alternative. This is conserved2GOO homolog agreement on361/722 residues, not native BMP4 or whole-assembly validation. All10 winning FK descendants have ancestor2; no independent replication claim.",
+        "covered_CE_homolog_DockQ": {
+          "C": 0.894272344900433,
+          "E": 0.7378759369728932
         },
-        "all_copy_fine_contact_support": {
-          "C": 0.9981705908640921,
-          "D": 0.9931119337658864,
-          "E": 0.981094150073896,
-          "F": 0.5707183226839762
+        "common_fine_per_copy": {
+          "C": 0.9945419486708855,
+          "D": 0.9909316628178245,
+          "E": 0.9093136506427756,
+          "F": 0.9843654038667559
         },
-        "severe_interchain_CNO": 9,
-        "coherent_assignment": {
+        "severe_CNO": 16,
+        "coherent_common_metric_assignment": {
           "A": "A",
           "B": "B",
           "C": "C",
@@ -85029,11 +85800,30 @@
           "E": "F",
           "F": "E"
         },
-        "metric_scope": "BMP2 homologous-ligand and mouse-to-human ACVR2A surrogate2GOO,361observed of722input residues; covered C/E only, D/F uncovered. Source symmetry and construct qualifications apply. No native BMP4 accuracy or whole-assembly DockQ. Tuning/transfer evidence is not independent validation.",
-        "whole_assembly_experimental_DockQ": null
+        "reference_scope": {
+          "comparison_label": "homologous_surrogate_agreement",
+          "reference": "Conserved 2GOO BMP2/BMPR1A/mouse-ACVR2A mapped to human BMP4/BMPR1A/ACVR2A",
+          "covered_receptors": [
+            "C",
+            "E"
+          ],
+          "uncovered_receptors": [
+            "D",
+            "F"
+          ],
+          "reference_CA_count": 361,
+          "full_input_CA_count": 722,
+          "native_BMP4_accuracy": null,
+          "whole_assembly_DockQ": null,
+          "qualifications": [
+            "C/E describe one type-I and one type-II source interface, not both type-II copies.",
+            "The BMP2\u2192BMP4 substitutions and mouse\u2192human ACVR2A differences are masked whole-residue as in the frozen mapping.",
+            "D/F source-frame comparisons use the symmetry-derived homolog hypothesis; improvement is not experimental validation of the target assembly."
+          ]
+        }
       },
       "proposed_next_step": {
-        "status": "implemented_and_submitted_awaiting_evaluation",
+        "status": "completed_evaluated_provisionally_preferred",
         "action": "Require the weakest complete receptor interface and strengthen the bounded overlap penalty, retaining mapped aromatic, approach, frame and typeI constraints to improve the second typeII copy.",
         "qualification": "Actual implemented specification governs; prior proposal preserved verbatim in history. Submission is not scientific promotion.",
         "source": {
@@ -85057,7 +85847,12 @@
           "58234683"
         ],
         "jobs_submitted": true,
-        "updated_at": "2026-10-19T05:20:56.752240+00:00"
+        "updated_at": "2026-10-19T15:31:48.803190+00:00",
+        "evaluation_source": {
+          "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp4_analysis/scientific_summary.json",
+          "sha256": "f2ad068a1cdc6af7abb6a7ce0418f72c724daf041c7c540e0c9833336f8cac50"
+        },
+        "assessment": "Promote v5 provisionally for overall raw placement, job58234682 tau0.8 FK5. Both W79 approach gaps are within0.46A versus the retained v1 weak-copy gap7.53A; the weakest common contact score improves0.571 to0.909. Covered C/E homolog DockQ0.894/0.738 is lower than v1, but the formerly misplaced second type-II copy improves. Remaining16 severe interchain CNO overlaps (1 source-core),28 backbone length outliers and native SS range1.783-2.491A require physical cleanup. Retain v1 as a source-metric alternative. This is conserved2GOO homolog agreement on361/722 residues, not native BMP4 or whole-assembly validation. All10 winning FK descendants have ancestor2; no independent replication claim."
       },
       "refinements": [
         {
@@ -85267,6 +86062,76 @@
             "sha256": "4e5b0cd17385ab8b5a58a6fc5a5b63760419c4c39580776a7ba417b0cb869948"
           },
           "assessment": "Retain BMP4 v1. Best balanced v4 candidate58228415 tau0.3 sample2 is byte-identical to baseline2: covered C/E homolog DockQ0.835/0.775,11 severe CNO and weak type-II W79 gap+10.682A. Changed FK8 has0.845/0.801 but47 severe CNO and gap+10.607A. Retained v1 FK3 has0.926/0.819,9 severe CNO and gap+7.533A. No new candidate repairs the second type-II copy. C/E homolog agreement does not validate uncovered D/F or native BMP4 assembly."
+        },
+        {
+          "status": "implemented_and_submitted_awaiting_evaluation",
+          "action": "Require the weakest complete receptor interface and strengthen the bounded overlap penalty, retaining mapped aromatic, approach, frame and typeI constraints to improve the second typeII copy.",
+          "qualification": "Actual implemented specification governs; prior proposal preserved verbatim in history. Submission is not scientific promotion.",
+          "source": {
+            "path": "artifacts/bmp90/preparation/bmp4_alk3_actr2a_v5_20261019/scientific_summary.json",
+            "sha256": "bc80c06451fdf3a42d1581dfe416236066dbfa7df94fea9957981cc0739a3002"
+          },
+          "specification": {
+            "path": "artifacts/bmp90/preparation/bmp4_alk3_actr2a_v5_20261019/bmp4_alk3_actr2a_joint_minimum_steric_v5.json",
+            "sha256": "8c3dd2d22463b8fa17cb61b50ffea499e0cf8df664339ed3827e487fadf30aa5"
+          },
+          "implemented_recipe_id": "bmp4_alk3_actr2a_joint_minimum_steric_v5",
+          "campaign_id": "bmp90-paid-wave21-20261019",
+          "new_job_ids": [
+            "58234658",
+            "58234680",
+            "58234682"
+          ],
+          "evaluation_job_ids": [
+            "58234679",
+            "58234681",
+            "58234683"
+          ],
+          "jobs_submitted": true,
+          "updated_at": "2026-10-19T05:20:56.752240+00:00"
+        }
+      ],
+      "current_iteration_parent_history": [
+        {
+          "recorded_at": "2026-10-19T15:31:48.803190+00:00",
+          "value": {
+            "job_id": "58197150",
+            "condition": "fk",
+            "sample_index": 3,
+            "tau": 0.8,
+            "model": {
+              "path": "artifacts/remote-runs/58197150/fk/predictions_simplefold_3B/BMP4_BMPR1A_ACVR2A_sampled_3.pdb",
+              "sha256": "59b1c4b759f43908839eb9e84f08251c87ab3bee7518af74629f7975786b6d93"
+            },
+            "canonical_pdb_path": "/pub/ynkim4/ml-simplefold/artifacts/runs/58197150/fk/predictions_simplefold_3B/BMP4_BMPR1A_ACVR2A_sampled_3.pdb",
+            "status": "provisional_iteration_candidate_not_accepted_native_assembly",
+            "rationale": "Best joint inspected candidate across the tau sweep, with highest covered-interface agreement and fewer severe overlaps; one inferred ACVR2A copy remains misoriented.",
+            "scientific_summary": {
+              "path": "artifacts/bmp90/evaluation/wave17_status_20261017T2150/bmp4_analysis/scientific_summary.json",
+              "sha256": "f2699611444bc28197caa940a74574219ab0feb5780ff3e399a4ada55b576245"
+            },
+            "qualified_interface_DockQ": {
+              "C": 0.9258017220009157,
+              "E": 0.8191559489002714
+            },
+            "all_copy_fine_contact_support": {
+              "C": 0.9981705908640921,
+              "D": 0.9931119337658864,
+              "E": 0.981094150073896,
+              "F": 0.5707183226839762
+            },
+            "severe_interchain_CNO": 9,
+            "coherent_assignment": {
+              "A": "A",
+              "B": "B",
+              "C": "C",
+              "D": "D",
+              "E": "F",
+              "F": "E"
+            },
+            "metric_scope": "BMP2 homologous-ligand and mouse-to-human ACVR2A surrogate2GOO,361observed of722input residues; covered C/E only, D/F uncovered. Source symmetry and construct qualifications apply. No native BMP4 accuracy or whole-assembly DockQ. Tuning/transfer evidence is not independent validation.",
+            "whole_assembly_experimental_DockQ": null
+          }
         }
       ]
     },
@@ -93698,7 +94563,7 @@
       ]
     }
   },
-  "updated_at": "2026-10-19T05:23:12.823098+00:00",
+  "updated_at": "2026-10-19T15:31:48.803190+00:00",
   "interface_evidence_registry": "configs/bmp90/interface_evidence_registry.json",
   "failure_registry": "configs/bmp90/failure_registry.json",
   "construct_policy": {
@@ -93732,7 +94597,7 @@
       "58234699",
       "58234703"
     ],
-    "status": "submitted_not_evaluated",
+    "status": "completed_coordinate_and_report_reviewed",
     "cpu_registration_jobs": [
       "58234639"
     ],
@@ -93757,7 +94622,7 @@
         "sha256": "3e2c41499d6e41ed9031c0a1c1ef9920f05b65c21094a00a07cf86780594ca64"
       }
     },
-    "qualification": "Submission only; new recipes unranked, prior practical best/current iteration pointers retained, no relaxation jobs in this batch; no native-accuracy claim.",
+    "qualification": "Completed coordinate/report review across tau0.1/0.3/0.8; provisional practical recipe preference is distinct from calibrated physical or native-assembly acceptance. Retain partial, homolog/species and engineered receptor-trap reference qualifications. No jobs submitted or cancelled in this review.",
     "observations": [
       {
         "observed_at": "2026-10-19T05:21:15.133353+00:00",
@@ -93774,6 +94639,15 @@
           "path": "artifacts/bmp90/operations/paid_wave21/parent_records/startup_status_01.json",
           "sha256": "9048be57cdd1872fee93332f3d76a0e6dc75dd9c424789fed7e9a94184724d5a"
         }
+      },
+      {
+        "record_id": "WAVE21_COMPLETED_SCREEN_20261019",
+        "recorded_at": "2026-10-19T15:31:48.803190+00:00",
+        "source": {
+          "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/status_summary.json",
+          "sha256": "9bd84156989b5505ab407de2784cfea48f124d5cca8945b43163b480dcaeef90"
+        },
+        "scope": "Completed coordinate/report review across tau0.1/0.3/0.8; provisional practical recipe preference is distinct from calibrated physical or native-assembly acceptance. Retain partial, homolog/species and engineered receptor-trap reference qualifications. No jobs submitted or cancelled in this review."
       }
     ],
     "submission_reconciliation": {
@@ -93784,7 +94658,15 @@
         "sha256": "bc66e786ffc53c34daea998654194e84ffcf109894c78a5ef9f30933d97064e8"
       },
       "description": "Initial local SSH timed out while waiting for the shared registration lock. Remote successful sbatch response and submitted receipt confirmed the original job; eight remaining slots were submitted after CPU registration completed."
-    }
+    },
+    "status_history": [
+      {
+        "status": "submitted_not_evaluated",
+        "qualification": "Submission only; new recipes unranked, prior practical best/current iteration pointers retained, no relaxation jobs in this batch; no native-accuracy claim.",
+        "recorded_at": "2026-10-19T15:31:48.803190+00:00"
+      }
+    ],
+    "actual_A30_gpu_hours": 14.506944444444443
   },
   "authorized_campaign_history": [
     {

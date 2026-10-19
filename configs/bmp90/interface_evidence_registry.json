@@ -2698,6 +2698,91 @@
         "The 10degree folded near miss remains.235 versus relaxed.327; this tolerance is uncalibrated. Two extra contacts do not prove a unique complete receptor orientation.",
         "This panel contains reused models and constructed coordinate controls. New sequence seeds differ from prior sweeps; outcome attribution must retain that qualification."
       ]
+    },
+    {
+      "evidence_id": "WAVE21_COMPLETED_SCREEN_20261019",
+      "recorded_at": "2026-10-19T15:31:48.803190+00:00",
+      "evidence_class": "computed_model_comparison_not_experimental",
+      "target_ids": [
+        "BMP4_BMPR1A_ACVR2A",
+        "BMP6_ACVR1_ACVR2B",
+        "BMP7_ACVR1_ACVR2A"
+      ],
+      "sources": [
+        {
+          "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/status_summary.json",
+          "sha256": "9bd84156989b5505ab407de2784cfea48f124d5cca8945b43163b480dcaeef90"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/analysis_subsets/58234658/SUBSET_VERIFIED.json",
+          "sha256": "0ebc38d0e0bcdffe708d1fa42cb0ec7623e75ac8f84b81b9c52127656e60505f"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/analysis_subsets/58234680/SUBSET_VERIFIED.json",
+          "sha256": "7788c3ceb83dd214189726e5262551e944e849c31bf4a17f1e0c5059c68c96b8"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/analysis_subsets/58234682/SUBSET_VERIFIED.json",
+          "sha256": "ca14058d032fdf0a8eca536af6a64f11482cb0a2eb1324413bffdd529f561f6a"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/analysis_subsets/58234685/SUBSET_VERIFIED.json",
+          "sha256": "c62ea1ba5750c1855b91b63cc4b566a50f0c55b1a4cd3b2de91406e81ca6a669"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/analysis_subsets/58234688/SUBSET_VERIFIED.json",
+          "sha256": "bfbfcd7658eaddfc3d647f77f77ee680e5b62f4aab9fa2f4d2708de21cc94be1"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/analysis_subsets/58234692/SUBSET_VERIFIED.json",
+          "sha256": "cc626b36fd86ef1271ac9f11b31d1e85738c8a5cde00ca645e02da6a4c863c6b"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/analysis_subsets/58234694/SUBSET_VERIFIED.json",
+          "sha256": "d31874ef26c2b7fe623f8742306f42644f9781f76c5ad6c0faf6db71938f0a37"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/analysis_subsets/58234698/SUBSET_VERIFIED.json",
+          "sha256": "59fc50ae1d6bb97e8ebc09c4b8084900de42a226cc1bd1d6ca3f9b649e99ce5b"
+        },
+        {
+          "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/analysis_subsets/58234702/SUBSET_VERIFIED.json",
+          "sha256": "91961cd531762be731bca4d12644f6c6da0ef015ee741efb5bb3ddd76f5c6933"
+        }
+      ],
+      "observations": [
+        {
+          "target_id": "BMP4_BMPR1A_ACVR2A",
+          "recipe_id": "bmp4_alk3_actr2a_joint_minimum_steric_v5",
+          "practical_preferred": true,
+          "assessment": "Promote v5 provisionally for overall raw placement, job58234682 tau0.8 FK5. Both W79 approach gaps are within0.46A versus the retained v1 weak-copy gap7.53A; the weakest common contact score improves0.571 to0.909. Covered C/E homolog DockQ0.894/0.738 is lower than v1, but the formerly misplaced second type-II copy improves. Remaining16 severe interchain CNO overlaps (1 source-core),28 backbone length outliers and native SS range1.783-2.491A require physical cleanup. Retain v1 as a source-metric alternative. This is conserved2GOO homolog agreement on361/722 residues, not native BMP4 or whole-assembly validation. All10 winning FK descendants have ancestor2; no independent replication claim.",
+          "source": {
+            "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp4_analysis/scientific_summary.json",
+            "sha256": "f2ad068a1cdc6af7abb6a7ce0418f72c724daf041c7c540e0c9833336f8cac50"
+          }
+        },
+        {
+          "target_id": "BMP6_ACVR1_ACVR2B",
+          "recipe_id": "bmp6_joint_n60_tight_approach_steric_v8",
+          "practical_preferred": false,
+          "assessment": "Do not promote v8. Best new job58234685 tau0.1 baseline8 is byte-identical to FK8; C/D/E/F DockQ0.564/0.550/0.859/0.870 is worse than useful v6 FK1 at0.670/0.665/0.898/0.904. N60 geometry worsens and150 severe interchain CNO overlaps plus covalent defects remain. All30 paired baseline/FK models are byte-identical with zero resampling, although score evaluation and reweighting occurred. Retain preferred v1/refined58139638 and useful raw v6 FK1. Agreement is with the engineered/glycosylated9N4K receptor-trap reference (552/716 observed residues), not native signaling or independent validation.",
+          "source": {
+            "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp6_analysis/scientific_summary.json",
+            "sha256": "92771d6f7fb93cbf32b6d3850b67a92feb20e07a71b7bc348fdad61ef474fd5f"
+          }
+        },
+        {
+          "target_id": "BMP7_ACVR1_ACVR2A",
+          "recipe_id": "bmp7_alk2_joint_required_placement_v7",
+          "practical_preferred": true,
+          "assessment": "Promote v7 as the provisional preferred raw recipe, job58234698 tau0.3 FK2, while retaining relaxed v4 job58197169 as the cleaner physical alternative. E/F species-surrogate DockQ improves from v4raw0.845/0.856 to0.935/0.920; Q89 errors improve from about4.1A to1.45/1.47A, T83 errors are0.46/0.50A, and severe interchain CNO falls22 to7. N60-E362 worsens to+6.36/+5.63A and must remain explicit. FK2 also has3 severe intrachain CNO,10 backbone length outliers and6/27 native SS distances outside the diagnostic1.8-2.3A window (one borderline). All10 winning FK descendants have ancestor6; baseline6 already has a useful basin. Conserved1LX5 species-surrogate agreement covers typeII E/F,392/716 residues; ACVR1 C/D and native full-assembly accuracy remain unvalidated.",
+          "source": {
+            "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp7_analysis/scientific_summary.json",
+            "sha256": "00d40c9a833a1a251ac92fab655c2886d96d68f9424e17a103f5a607abe2577e"
+          }
+        }
+      ],
+      "scope": "Completed coordinate/report review across tau0.1/0.3/0.8; provisional practical recipe preference is distinct from calibrated physical or native-assembly acceptance. Retain partial, homolog/species and engineered receptor-trap reference qualifications. No jobs submitted or cancelled in this review."
     }
   ],
   "generic_inspection_priors": {
@@ -2909,5 +2994,5 @@
       "evidence_label_scope": "Vocabulary for future observations; no existing evidence_class is reclassified by this import. R8 instructs evaluation of energetic evidence; it does not establish a hotspot for any target."
     }
   },
-  "updated_at": "2026-10-19T05:20:56.752240+00:00"
+  "updated_at": "2026-10-19T15:31:48.803190+00:00"
 }

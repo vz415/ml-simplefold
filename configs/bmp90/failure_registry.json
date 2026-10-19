@@ -2407,8 +2407,74 @@
       "status": "limitations_retained_bounded_test_submitted_outcome_pending",
       "transfer_limits": "Partial species-surrogate 1LX5 protein reference: only E/F type-II interfaces covered (392 observed residues of full716 input); ACVR1 C/D experimental geometry is uncovered. No whole-assembly or type-I experimental DockQ. Composite diagnostics are not reference truth; evidence is reused for tuning, not independent validation.",
       "qualification": "Preflight/scalar limitations, not failed sampling, biological nonbinding or outcomes of the submitted jobs."
+    },
+    {
+      "failure_id": "BMP4_BMPR1A_ACVR2A_WAVE21_RESIDUAL_DEFECTS_20261019",
+      "complex_id": "BMP4_BMPR1A_ACVR2A",
+      "recipe_id": "bmp4_alk3_actr2a_joint_minimum_steric_v5",
+      "recorded_at": "2026-10-19T15:31:48.803190+00:00",
+      "status": "residual_defects_in_preferred_raw_candidate",
+      "run_ids": [
+        "58234658",
+        "58234680",
+        "58234682"
+      ],
+      "observed_symptoms": [
+        "Promote v5 provisionally for overall raw placement, job58234682 tau0.8 FK5. Both W79 approach gaps are within0.46A versus the retained v1 weak-copy gap7.53A; the weakest common contact score improves0.571 to0.909. Covered C/E homolog DockQ0.894/0.738 is lower than v1, but the formerly misplaced second type-II copy improves. Remaining16 severe interchain CNO overlaps (1 source-core),28 backbone length outliers and native SS range1.783-2.491A require physical cleanup. Retain v1 as a source-metric alternative. This is conserved2GOO homolog agreement on361/722 residues, not native BMP4 or whole-assembly validation. All10 winning FK descendants have ancestor2; no independent replication claim."
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp4_analysis/scientific_summary.json",
+          "sha256": "f2ad068a1cdc6af7abb6a7ce0418f72c724daf041c7c540e0c9833336f8cac50"
+        }
+      ],
+      "qualification": "Completed coordinate/report review across tau0.1/0.3/0.8; provisional practical recipe preference is distinct from calibrated physical or native-assembly acceptance. Retain partial, homolog/species and engineered receptor-trap reference qualifications. No jobs submitted or cancelled in this review. These are model defects, not evidence of biological nonbinding; a residual-defect record does not negate comparative improvements."
+    },
+    {
+      "failure_id": "BMP6_ACVR1_ACVR2B_WAVE21_RESIDUAL_DEFECTS_20261019",
+      "complex_id": "BMP6_ACVR1_ACVR2B",
+      "recipe_id": "bmp6_joint_n60_tight_approach_steric_v8",
+      "recorded_at": "2026-10-19T15:31:48.803190+00:00",
+      "status": "completed_not_preferred",
+      "run_ids": [
+        "58234685",
+        "58234688",
+        "58234692"
+      ],
+      "observed_symptoms": [
+        "Do not promote v8. Best new job58234685 tau0.1 baseline8 is byte-identical to FK8; C/D/E/F DockQ0.564/0.550/0.859/0.870 is worse than useful v6 FK1 at0.670/0.665/0.898/0.904. N60 geometry worsens and150 severe interchain CNO overlaps plus covalent defects remain. All30 paired baseline/FK models are byte-identical with zero resampling, although score evaluation and reweighting occurred. Retain preferred v1/refined58139638 and useful raw v6 FK1. Agreement is with the engineered/glycosylated9N4K receptor-trap reference (552/716 observed residues), not native signaling or independent validation."
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp6_analysis/scientific_summary.json",
+          "sha256": "92771d6f7fb93cbf32b6d3850b67a92feb20e07a71b7bc348fdad61ef474fd5f"
+        }
+      ],
+      "qualification": "Completed coordinate/report review across tau0.1/0.3/0.8; provisional practical recipe preference is distinct from calibrated physical or native-assembly acceptance. Retain partial, homolog/species and engineered receptor-trap reference qualifications. No jobs submitted or cancelled in this review. These are model defects, not evidence of biological nonbinding; a residual-defect record does not negate comparative improvements."
+    },
+    {
+      "failure_id": "BMP7_ACVR1_ACVR2A_WAVE21_RESIDUAL_DEFECTS_20261019",
+      "complex_id": "BMP7_ACVR1_ACVR2A",
+      "recipe_id": "bmp7_alk2_joint_required_placement_v7",
+      "recorded_at": "2026-10-19T15:31:48.803190+00:00",
+      "status": "residual_defects_in_preferred_raw_candidate",
+      "run_ids": [
+        "58234694",
+        "58234698",
+        "58234702"
+      ],
+      "observed_symptoms": [
+        "Promote v7 as the provisional preferred raw recipe, job58234698 tau0.3 FK2, while retaining relaxed v4 job58197169 as the cleaner physical alternative. E/F species-surrogate DockQ improves from v4raw0.845/0.856 to0.935/0.920; Q89 errors improve from about4.1A to1.45/1.47A, T83 errors are0.46/0.50A, and severe interchain CNO falls22 to7. N60-E362 worsens to+6.36/+5.63A and must remain explicit. FK2 also has3 severe intrachain CNO,10 backbone length outliers and6/27 native SS distances outside the diagnostic1.8-2.3A window (one borderline). All10 winning FK descendants have ancestor6; baseline6 already has a useful basin. Conserved1LX5 species-surrogate agreement covers typeII E/F,392/716 residues; ACVR1 C/D and native full-assembly accuracy remain unvalidated."
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/evaluation/wave21_status_review_20261019T1523/bmp7_analysis/scientific_summary.json",
+          "sha256": "00d40c9a833a1a251ac92fab655c2886d96d68f9424e17a103f5a607abe2577e"
+        }
+      ],
+      "qualification": "Completed coordinate/report review across tau0.1/0.3/0.8; provisional practical recipe preference is distinct from calibrated physical or native-assembly acceptance. Retain partial, homolog/species and engineered receptor-trap reference qualifications. No jobs submitted or cancelled in this review. These are model defects, not evidence of biological nonbinding; a residual-defect record does not negate comparative improvements."
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-19T05:20:56.752240+00:00"
+  "updated_at": "2026-10-19T15:31:48.803190+00:00"
 }
