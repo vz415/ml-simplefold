@@ -2473,8 +2473,75 @@
         }
       ],
       "qualification": "Completed coordinate/report review across tau0.1/0.3/0.8; provisional practical recipe preference is distinct from calibrated physical or native-assembly acceptance. Retain partial, homolog/species and engineered receptor-trap reference qualifications. No jobs submitted or cancelled in this review. These are model defects, not evidence of biological nonbinding; a residual-defect record does not negate comparative improvements."
+    },
+    {
+      "failure_id": "BMP6_ACVR1_ACVR2B_WAVE22_PREPARED_SCORE_LIMITATIONS_20261019",
+      "complex_id": "BMP6_ACVR1_ACVR2B",
+      "recipe_id": "bmp6_joint_n60_spatial_anchor_steric_v9",
+      "recorded_at": "2026-10-19T15:48:27.437073+00:00",
+      "failure_category": "documented_pre_sampling_scoring_limitations",
+      "run_ids": [],
+      "followup_sampling_job_ids": [
+        "58245401",
+        "58245403",
+        "58245405"
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/preparation/bmp6_acvr1_v9_20261019/scientific_summary.json",
+          "sha256": "2eae262bf1dcf55be978bf727bcda512f947f3b3547b2e66f5a0769e646d2ea0"
+        }
+      ],
+      "observed_symptoms": [
+        "9N4K is an engineered glycosylated receptortrap with552observedCA/allCDEFinterfaces over full716protein-onlyinput; no surrogate/native signaling/affinity or independentvalidation claim.",
+        "N60-K475 heavyproximity informs a broadCAdistance hypothesis, not a terminalatom hydrogenbond/saltbridge or Asn/Lys rotamer energy.",
+        "Allsourcegeometry and selectedmodels are guidance/tuning. A separately requiredanchor adds spatialinformation but is not independent biological evidence.",
+        "A Cauchy distance retains a longtail, but exactwristgeometry and otherguards can still compress farpose scores. No resampling or improvement guarantee.",
+        "The additional requirement may encourage localdistortion. Native27topology excludes bondedneighbors but does not penalize covalent lengths; forced1.30ASG compression remains exactly unpenalized. Direct nativebond/backbone/packing inspection remains necessary.",
+        "Reference is missing terminalheavyatoms, giving explicitunassessed CNOguardfloor.8; no fakecoordinates are supplied.",
+        "Source-shape-at-sampled-pose and localcrankshaft are synthetic diagnosticcoordinates, not demonstrated attainable physicalrepairs. K475-onlyCA probes deliberatelybreakbondgeometry and are softwaretests only.",
+        "Poorer-globalv3relaxed still outranks historicalv1 in scalarreward(.404vs.377), though usefulv6FK1/FK8 outrankboth. Do not promote by optimizedreward alone.",
+        "Fulltails remain included; boundedCNOguard is not complete physicalenergy or universal rejection. Compare everyinterface and covalentgeometry across alltaus."
+      ],
+      "status": "limitations_retained_bounded_test_submitted_outcome_pending",
+      "transfer_limits": "Exact 9N4K receptor-trap reference recovery over 552 observed residues of the full 716-residue protein-only input, with all four C/D/E/F interfaces covered. Engineered trap and glycosylation qualifications remain; this is not native signaling or independent validation.",
+      "qualification": "Preflight/scalar limitations, not failed sampling, biological nonbinding or outcomes of the submitted jobs."
+    },
+    {
+      "failure_id": "BMP7_ACVR1_ACVR2A_WAVE22_PREPARED_SCORE_LIMITATIONS_20261019",
+      "complex_id": "BMP7_ACVR1_ACVR2A",
+      "recipe_id": "bmp7_alk2_joint_required_n60_v8",
+      "recorded_at": "2026-10-19T15:48:27.437073+00:00",
+      "failure_category": "documented_pre_sampling_scoring_limitations",
+      "run_ids": [],
+      "followup_sampling_job_ids": [
+        "58245407",
+        "58245409",
+        "58245411"
+      ],
+      "artifact_references": [
+        {
+          "path": "artifacts/bmp90/preparation/bmp7_alk2_v8_20261019/scientific_summary.json",
+          "sha256": "eaa4b44e89f5328e1d7902595007c7e7e44a76a3935c52f3378e74644b543226"
+        }
+      ],
+      "observed_symptoms": [
+        "N60-E362 is transferred BMP6 CA geometry, not a native BMP7-ACVR1 contact observation or atom-specific hydrogen bond.",
+        "C/D native accuracy remains experimentally unassessed;1LX5 E/F is a partial species surrogate.",
+        "No new folding, native disulfide geometry or intrachain quality constraint is introduced; these remain explicit post-sampling checks.",
+        "Strict per-copy minima can suppress reward early; bounded severe interchain CNO factor is not physical acceptance.",
+        "Prior models and source-compatible diagnostics are reused for tuning, not independent validation.",
+        "CA approach alone cannot establish N60 side-chain chemistry, correct local fold or source-matched hydrogen bonding. Native SG/backbone defects from v7 are not corrected by changing a score.",
+        "Old relaxed v4 is a tradeoff comparator, not a fully successful joint-interface target. No full physically clean model in this finite panel demonstrates all new constraints at once.",
+        "The incomplete source-compatible diagnostic has28 severe CNO pairs and receives the missing-heavy factor floor; it is not a physical positive. Partial experimental reference has no C/D and scores0, used finite-only.",
+        "The minimum objective may suppress early populations; parent v7 had no resampling at tau.1/.8. No additional beta tuning or claim of uniform tau improvement.",
+        "Full-construct tail and interchain overlap penalty remains bounded below by.3 and can leave substantial clashes. Intrachain and covalent checks remain post-sampling requirements."
+      ],
+      "status": "limitations_retained_bounded_test_submitted_outcome_pending",
+      "transfer_limits": "Partial species-surrogate 1LX5 protein reference: only E/F type-II interfaces covered (392 observed residues of full716 input); ACVR1 C/D experimental geometry is uncovered. No whole-assembly or type-I experimental DockQ. Composite diagnostics are not reference truth; evidence is reused for tuning, not independent validation.",
+      "qualification": "Preflight/scalar limitations, not failed sampling, biological nonbinding or outcomes of the submitted jobs."
     }
   ],
   "initialization_note": "Originally initialized with preflight findings; later entries include observed sampled residual defects without calibrated acceptance classification.",
-  "updated_at": "2026-10-19T15:31:48.803190+00:00"
+  "updated_at": "2026-10-19T15:48:27.437073+00:00"
 }
