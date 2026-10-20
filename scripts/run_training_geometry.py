@@ -8,6 +8,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import shutil
 import sys
 
 import hydra
@@ -146,11 +147,13 @@ def summarize(rows):
 def main(cfg):
     if cfg.backend == 'molprobity':
         assert os.environ.get('SLURM_JOB_ID'), 'Use CPU Slurm for remote MolProbity validation'
-    output = Path(cfg.output_dir)
+    output = (Path(cfg.staging_root) / os.environ['SLURM_JOB_ID']
+              if cfg.staging_root else Path(cfg.output_dir))
     output.mkdir(parents=True, exist_ok=True)
     (output / 'resolved-config.yaml').write_text(OmegaConf.to_yaml(cfg, resolve=True))
     (output / 'git-commit.txt').write_text(subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True))
-    rows = inputs(cfg)
+    rows = (json.loads(Path(cfg.input_manifest).read_text())
+            if cfg.input_manifest else inputs(cfg))
     if cfg.max_structures is not None:
         rows = rows[:cfg.max_structures]
     save(output / 'input-manifest.json', rows)
@@ -173,6 +176,10 @@ def main(cfg):
         writer = csv.DictWriter(stream, fieldnames=flattened[0])
         writer.writeheader(); writer.writerows(flattened)
     save(output / 'completion.json', dict(state='completed', structures=len(results), backend=cfg.backend, method_hash=method_hash))
+    if output.resolve() != Path(cfg.output_dir).resolve():
+        print(f'Validation complete in {output}; publishing to {cfg.output_dir}', flush=True)
+        shutil.copytree(output, cfg.output_dir, dirs_exist_ok=True)
+        print('Published validation outputs', flush=True)
 
 
 if __name__ == '__main__':
