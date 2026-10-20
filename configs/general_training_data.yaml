@@ -1,0 +1,27 @@
+# Complete candidate catalogs; only examples used by the frozen training plan are downloaded.
+schema_version: 1
+pdb:
+  search_url: https://search.rcsb.org/rcsbsearch/v2/query
+  structure_url: https://files.rcsb.org/download/{id}.cif
+  released_before: '2020-05-01'
+  max_resolution: 5.0
+  max_chains: 300
+  biological_assembly: true
+swissprot:
+  catalog_url: https://ml-site.cdn-apple.com/models/simplefold/swissprot_list.csv
+  structure_url: https://alphafold.ebi.ac.uk/files/{id}.cif
+  # Keep the authors' model_v4 filenames; unavailable versions are explicitly rejected.
+cameo:
+  provenance: configs/datasets/cameo22_retention_24_v1.json
+  targets: 183
+  identity: 0.30
+  shorter_coverage: 0.70
+  open_gap_score: -10.0
+  extend_gap_score: -0.5
+# null samples uniformly over the pooled PDB/SwissProt candidate catalog.
+# An explicit fraction instead changes the conditional PDB probability among general draws.
+pdb_probability: null
+download_workers: 4
+timeout_seconds: 90
+download_attempts: 3
+max_candidate_attempts: 100
