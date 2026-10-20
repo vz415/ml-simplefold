@@ -45,3 +45,26 @@ needed; all conversion, ESM encoding, training and inference occur in Slurm.
 The isolated worktree/branch is `ml-simplefold-multimer-train` /
 `experiments/multimer-100m-finetune`. Existing sampling experiments and the
 upstream training implementation are retained.
+
+## Submitted jobs
+
+- A100 training + matched evaluation: **58274048**.
+- CPU-only conversion/featurization preflight: **58274101**. Training depends on
+  its successful completion, avoiding consumption of a GPU on malformed data.
+- Source PDB hashes were verified after the transfer to `/pub`.
+- The DockQ reconstruction benchmark passed identity and equivalent-chain-swap
+  controls (~1.0); displacing one receptor by 100 Å reduced its score to .0028.
+  The four-interface mean fell to .7507, as expected for three intact interfaces.
+
+Analyze downloaded outputs with DockQ 2.1.3 available:
+
+```bash
+python scripts/benchmark_multimer_learning.py \
+  --run /path/to/downloaded/JOB_ID \
+  --source /path/to/multimer-refined-v1/source \
+  --selection configs/datasets/multimer_refined_v1.json \
+  --output /path/to/analysis
+```
+
+Scores explicitly refer to **synthetic training targets**. They must not be
+labeled DockQ to an experimental reference or held-out validation performance.

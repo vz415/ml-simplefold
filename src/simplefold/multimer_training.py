@@ -34,6 +34,10 @@ class MultimerFineTune(SimpleFold):
         self.training_gpus = 1
         self._ema_step = 0
 
+    def on_load_checkpoint(self, checkpoint):
+        # Lightning restores its own loops; the upstream hook requires absent FLOP metadata.
+        self._ema_step = checkpoint.get('global_step', 0)
+
     def configure_optimizers(self):
         optimizer = self.hparams.optimizer(params=self.model.parameters())
         scheduler = self.hparams.scheduler(optimizer=optimizer)

@@ -19,6 +19,7 @@ export PYTHONUNBUFFERED=1
 # The approved project launcher also supports the explicitly requested training pilot.
 if [[ "${1:-}" == --train-multimers ]]; then
     shift
+    export PIP_CACHE_DIR="$SLURM_SUBMIT_DIR/artifacts/pip-cache"
     python -m pip install --no-deps fairscale==0.4.13
     exec python scripts/train_multimers.py "$@"
 fi
