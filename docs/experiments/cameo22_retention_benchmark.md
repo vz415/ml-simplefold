@@ -37,8 +37,8 @@ reference coordinates.
 - Fixed ESM2-3B; no Rosetta relaxation or pLDDT selection.
 
 Use official OpenStructure **2.12.0** `compare-structures`, using the upstream
-scoring family: TM-score, GDT-TS (`oligo_gdtts`), all-atom lDDT, backbone lDDT,
-and RMSD. Backbone lDDT is not labeled Cα-only lDDT. Run a reference-vs-itself
+scoring family: TM-score, GDT-TS (`oligo_gdtts`), all-atom lDDT, Cα lDDT,
+and RMSD. OpenStructure `bb_lddt` uses Cα atoms for proteins. Run a reference-vs-itself
 control before inference. Report mean/median and paired per-target differences
 with a target-level bootstrap interval. These subset scores must not be
 presented as reproduction of the full published183-target means.

@@ -198,7 +198,7 @@ def score(cfg,selection,output):
         pairs=np.array(pairs);boot=np.mean(rng.choice(pairs,size=(10000,len(pairs)),replace=True),axis=1)
         delta[key]=dict(mean_fine_tuned_minus_pretrained=float(pairs.mean()),bootstrap_95_percent_CI=[float(x) for x in np.quantile(boot,[.025,.975])])
     write_json(output/'benchmark-summary.json',dict(targets=len(targets),samples=len(predictions),means_and_medians=summary,paired_differences=delta,
-        scope='Fixed CAMEO22 subset held out from the six-complex fine-tuning set; not the full published benchmark. No best-of-sample selection.',metrics=dict(tm_score='TM-score ↑',oligo_gdtts='GDT-TS ↑',lddt='all-atom lDDT ↑',bb_lddt='backbone lDDT ↑ (not Cα-only lDDT)',rmsd='RMSD Å ↓')))
+        scope='Fixed CAMEO22 subset held out from the six-complex fine-tuning set; not the full published benchmark. No best-of-sample selection.',metrics=dict(tm_score='TM-score ↑',oligo_gdtts='GDT-TS ↑',lddt='all-atom lDDT ↑',bb_lddt='Cα lDDT ↑',rmsd='RMSD Å ↓')))
     with (output/'benchmark-results.csv').open('w') as f:
         w=csv.DictWriter(f,fieldnames=rows[0]);w.writeheader();w.writerows(rows)
     print(json.dumps(summary,indent=2),flush=True)
