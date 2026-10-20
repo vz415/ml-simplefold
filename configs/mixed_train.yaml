@@ -11,7 +11,7 @@ artifact_root: ${oc.env:SIMPLEFOLD_ARTIFACT_DIR,/pub/ynkim4/ml-simplefold/artifa
 job_id: ${oc.env:SLURM_JOB_ID}
 output_dir: ${artifact_root}/runs/${job_id}
 dataset_dir: ${artifact_root}/datasets/synthetic/multimer-refined-v1
-general_dataset_dir: ${artifact_root}/datasets/general-finetuning-v1/mixed-600-seed82301
+general_dataset_dir: ${artifact_root}/datasets/general-finetuning-v1/pdb-mixed-600-seed82301
 general_data_config: configs/general_training_data.yaml
 selection: configs/datasets/multimer_refined_v1.json
 pretrained_checkpoint: ${artifact_root}/checkpoints/simplefold_100M.ckpt

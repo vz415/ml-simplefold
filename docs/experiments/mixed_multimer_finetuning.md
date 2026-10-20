@@ -8,21 +8,23 @@ complexes, and train on HPC3y with data and results under `/pub`.
 
 At each of 600 updates, choose synthetic with probability 0.1 and general data
 with probability 0.9. Synthetic examples are sampled uniformly over the six
-complexes. General examples are sampled uniformly from the pooled eligible PDB
-and author-filtered SwissProt catalogs. The mixture is a random source/record
+complexes. For the first mixed run, the user chose **experimental PDB data
+only** for general examples (`pdb_probability: 1.0`). Sampling the pooled PDB
+and author-filtered SwissProt catalogs remains configurable for future runs.
+The mixture is a random source/record
 schedule generated before training and saved as `training-plan.json`; the
 loader replays that schedule without shuffling. Expected counts are 540 general
 and 60 synthetic, with realized counts logged. These are update probabilities,
 not percentages of disk space, atom counts, or elapsed GPU time.
 
-Only general entries drawn for this finite run are prepared. PDB files are
-downloaded on demand. The exact SwissProt version4 CIF archive (39.47 GB) is
-cached from the official EBI archive, because individual website v4 URLs have
-been retired; only the selected members are extracted and processed. This
-samples from the full eligible catalogs without preparing the complete corpus
+Only general entries drawn for this finite run are downloaded and prepared.
+PDB files are downloaded on demand. No SwissProt structures are used in this
+first run. Optional future SwissProt replay can cache the exact version4 CIF
+archive (39.47 GB) from EBI and extract only selected members. This
+samples from the eligible catalogs without preparing the complete corpus
 or choosing examples by prediction quality. Raw and processed structures stay
 in `/pub/ynkim4/ml-simplefold/artifacts/datasets/general-finetuning-v1/`.
-The plan-specific directory is `mixed-600-seed82301`. The existing synthetic
+The plan-specific directory is `pdb-mixed-600-seed82301`. The existing synthetic
 dataset remains in `datasets/synthetic/multimer-refined-v1`.
 
 The PDB catalog uses a 2020-05-01 release cutoff and resolution no worse than

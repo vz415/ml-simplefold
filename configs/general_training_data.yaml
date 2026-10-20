@@ -18,9 +18,9 @@ cameo:
   shorter_coverage: 0.70
   open_gap_score: -10.0
   extend_gap_score: -0.5
-# null samples uniformly over the pooled PDB/SwissProt candidate catalog.
-# An explicit fraction instead changes the conditional PDB probability among general draws.
-pdb_probability: null
+# First mixed run: experimental PDB general data only, per user choice.
+# Set null for uniform sampling over pooled PDB/SwissProt catalogs in a future run.
+pdb_probability: 1.0
 download_workers: 4
 timeout_seconds: 90
 download_attempts: 3
