@@ -110,7 +110,7 @@ def main(cfg):
         ema_decay=cfg.model.ema_decay,encoder_trainable=False,training_only=True))
 
     # Common initial noise and Brownian draws, without guidance, for both weight sets.
-    model.eval(); model.processor = hydra.utils.instantiate(cfg.model.processor)(device='cuda')
+    model.to('cuda').eval(); model.processor = hydra.utils.instantiate(cfg.model.processor)(device='cuda')
     data._train_set.rotation_augment_coords = False
     sampler = hydra.utils.instantiate(cfg.model.sampler, num_timesteps=cfg.evaluation.steps,
         tau=cfg.evaluation.tau,log_timesteps=True)

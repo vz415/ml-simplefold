@@ -1,6 +1,5 @@
 """Small-dataset adaptation using the upstream SimpleFold flow-matching loss."""
 from pathlib import Path
-import copy
 import torch
 from processor.protein_processor import ProteinDataProcessor
 from model.simplefold import SimpleFold
