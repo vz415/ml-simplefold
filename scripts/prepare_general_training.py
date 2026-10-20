@@ -30,7 +30,7 @@ from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src/simplefold"))
-PREPARATION_VERSION = 1
+PREPARATION_VERSION = 2
 
 
 def digest(path):
@@ -107,6 +107,7 @@ def rcsb_query(cfg):
 def build_catalog(cfg, cache):
     """Cache the complete metadata candidate pool before any finite-plan selection."""
     require_slurm()
+    print("Reading complete PDB and authors' SwissProt candidate catalogs", flush=True)
     cache = Path(cache)
     metadata = cache / "catalog"
     query = rcsb_query(cfg)
@@ -128,6 +129,7 @@ def build_catalog(cfg, cache):
                    scope="Complete metadata candidate catalogs; sequence/structure eligibility is checked on demand. "
                          "Current PDB revisions and exact authors' AFDB v4 IDs; not a historical corpus mirror.")
     write_json(metadata / "catalog.json", catalog)
+    print(f"Catalog ready: {len(pdb_ids):,} PDB and {len(swiss_ids):,} SwissProt candidates", flush=True)
     return catalog
 
 
@@ -224,6 +226,24 @@ def download_candidate(source, catalog_id, cache, cfg):
                     raw_path(source, catalog_id, cache), cfg)
 
 
+def get_resolution(block):
+    """Read scalar resolution values; upstream incorrectly casts a whole CIF row."""
+    import math
+    for key in ("_refine.ls_d_res_high", "_em_3d_reconstruction.resolution", "_reflns.d_resolution_high"):
+        values = []
+        for value in block.find_values(key):
+            try:
+                number = float(value)
+            except ValueError:
+                continue
+            if math.isfinite(number) and number > 0:
+                values.append(number)
+        if values:
+            return min(values)
+    # Preserve the upstream unknown-resolution convention, chiefly for AFDB.
+    return 0.0
+
+
 def protein_cif(raw, destination, cfg):
     """Keep protein polymers and their full SEQRES while expanding the first assembly."""
     import gemmi
@@ -312,7 +332,7 @@ def prepare_candidate(source, catalog_id, cache, cfg, components, screen, screen
     original = gemmi.cif.read(str(raw))[0]
     deposited, released, revised = mmcif_utils.get_dates(original)
     info = replace(parsed.info, deposited=deposited, released=released, revised=revised,
-                   resolution=mmcif_utils.get_resolution(original), method=mmcif_utils.get_method(original))
+                   resolution=get_resolution(original), method=mmcif_utils.get_method(original))
     if source == "pdb" and released and released > cfg["pdb"]["released_before"]:
         raise ExcludedCandidate(f"Release date {released} exceeds cutoff")
     if source == "pdb" and info.resolution > cfg["pdb"]["max_resolution"]:
@@ -479,10 +499,17 @@ def prepare(config_path, dataset_dir, ccd_path, synthetic_selection, steps=600,
         return candidate, None
 
     # Network concurrency only; scoped parser overrides remain strictly sequential.
-    with ThreadPoolExecutor(max_workers=max(1, min(4, int(cfg["download_workers"])))) as executor:
-        for candidate, error in executor.map(prefetch, candidates):
+    workers = max(1, min(4, int(cfg["download_workers"])))
+    print(f"Prefetching {len(candidates)} unique requested general examples with {workers} download workers", flush=True)
+    failed_downloads = 0
+    with ThreadPoolExecutor(max_workers=workers) as executor:
+        for index, (candidate, error) in enumerate(executor.map(prefetch, candidates), start=1):
             if error:
+                failed_downloads += 1
                 exclusions["/".join(candidate)] = dict(source=candidate[0], catalog_id=candidate[1], reason=error)
+            if index % 25 == 0:
+                print(f"Prefetched {index}/{len(candidates)} candidates ({failed_downloads} unavailable)", flush=True)
+    print(f"Prefetch complete: {len(candidates)-failed_downloads} ready, {failed_downloads} unavailable; parsing and screening", flush=True)
     write_json(exclusions_path, exclusions)
     for row in plan["draws"]:
         if row["source"] == "synthetic":

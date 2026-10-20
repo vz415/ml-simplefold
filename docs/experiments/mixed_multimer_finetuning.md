@@ -67,3 +67,5 @@ retention separately on the frozen24-target CAMEO22 subset with its existing
 sampling and OpenStructure settings. Do not use the benchmark references as
 general training data. Improvements on the six complexes do not establish
 generalization to unseen complexes.
+
+The fixed600-update budget also reduces expected synthetic exposures from600 in the six-only pilot to about60 here. Any comparison must account for that change in exposure; aggregate training losses across the two different data mixtures are not directly comparable.
