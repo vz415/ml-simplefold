@@ -1,0 +1,23 @@
+artifact_root: ${oc.env:SIMPLEFOLD_ARTIFACT_DIR,/pub/ynkim4/ml-simplefold/artifacts}
+output_dir: ${artifact_root}/runs/${oc.env:SLURM_JOB_ID}
+geometry_env: /data/homezvol2/ynkim4/.conda/envs/simplefold-geometry
+cctbx_version: '2026.9'
+python_version: '3.11'
+chem_data_url: https://github.com/cctbx/cctbx_project/releases/download/v2026.9/chem_data-2026.9-pyhf50f6f0_0.conda
+chem_data_sha256: 4d5f67a7e2ae1c411e976d023e413aeff3ec310985aebf05ba3a093e5ca1acf1
+workers: 4
+selection: configs/datasets/multimer_refined_v1.json
+complex_dataset: ${artifact_root}/datasets/synthetic/multimer-refined-v1/source
+complex_runs:
+  original: '58274048'
+  six_only: '58274048'
+  mixed: '58313695'
+cameo_runs:
+  original: '58310979'
+  six_only: '58310979'
+  mixed: '58313695/retention'
+hydra:
+  run:
+    dir: ${output_dir}
+  job:
+    chdir: false
