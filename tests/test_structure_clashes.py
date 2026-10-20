@@ -112,6 +112,23 @@ class TestStructureClashes(unittest.TestCase):
         self.assertEqual(result['heavy_atom_count'], 1)
         self.assertEqual(result['omitted_atoms']['zero_occupancy'], 1)
 
+    def test_geometry_summary_separates_packing_and_residue_coverage(self):
+        result = self.analyze([
+            atom(1, 'CA', 'ALA', 'A', 1, (0, 0, 0)),
+            atom(2, 'CA', 'ALA', 'B', 1, (1, 0, 0)),
+            atom(3, 'CB', 'ALA', 'B', 1, (0, 1, 0)),
+            atom(4, 'CA', 'GLY', 'C', 1, (20, 0, 0)),
+        ])
+        self.assertEqual(result['clash_count'], 2)
+        self.assertEqual(result['clashes_by_atom_class']['backbone_backbone'], 1)
+        self.assertEqual(result['clashes_by_atom_class']['backbone_sidechain'], 1)
+        self.assertEqual(result['chain_pairs'], {'A / B': 2})
+        self.assertEqual(result['clashing_residue_count'], 2)
+        self.assertEqual(result['residue_count'], 3)
+        self.assertAlmostEqual(result['clashing_residue_percent'], 200 / 3)
+        self.assertAlmostEqual(result['overlap_p95_angstrom'], 2.4)
+        self.assertEqual(result['overlaps_at_least_1_angstrom'], 2)
+
 
 if __name__ == '__main__':
     unittest.main()

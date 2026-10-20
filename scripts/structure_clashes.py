@@ -230,6 +230,10 @@ def analyze_clashes(path, chain_components=None, overlap_threshold=0.4, include_
     component_counts = defaultdict(lambda: {'clash_count': 0, 'intrachain_clash_count': 0,
                                           'interchain_clash_count': 0, 'max_overlap_angstrom': 0.0})
     component_pairs = Counter()
+    chain_pairs = Counter()
+    backbone_classes = Counter()
+    clashing_residues = set()
+    backbone_atoms = {'N', 'CA', 'C', 'O', 'OXT'}
     ca_clashes = 0
     candidates = cKDTree(xyz).query_pairs(2 * max(RADII.values()) - overlap_threshold) if len(atoms) else []
     for i, j in candidates:
@@ -246,6 +250,11 @@ def analyze_clashes(path, chain_components=None, overlap_threshold=0.4, include_
             continue
         same_chain = a.chain == b.chain
         intrachain += same_chain
+        clashing_residues.update((a.residue_key, b.residue_key))
+        chain_pairs[' / '.join(sorted((a.chain, b.chain)))] += 1
+        n_backbone = int(a.name in backbone_atoms) + int(b.name in backbone_atoms)
+        kind = {0: 'sidechain_sidechain', 1: 'backbone_sidechain', 2: 'backbone_backbone'}[n_backbone]
+        backbone_classes[kind] += 1
         component_a = components.get(a.chain, a.chain or '(blank chain)')
         component_b = components.get(b.chain, b.chain or '(blank chain)')
         component_pairs[' / '.join(sorted((component_a, component_b)))] += 1
@@ -256,12 +265,15 @@ def analyze_clashes(path, chain_components=None, overlap_threshold=0.4, include_
             counts['max_overlap_angstrom'] = max(counts['max_overlap_angstrom'], overlap)
         clashes.append({'first': a.label, 'second': b.label, 'distance_angstrom': distance,
                         'overlap_angstrom': overlap, 'interchain': not same_chain,
+                        'atom_class': kind,
                         'components': [component_a, component_b]})
     clashes.sort(key=lambda item: (-item['overlap_angstrom'], item['first'], item['second']))
     heavy_atoms_by_component = Counter(components.get(a.chain, a.chain or '(blank chain)') for a in atoms)
     for component, count in heavy_atoms_by_component.items():
         component_counts[component]['heavy_atom_count'] = count
         component_counts[component]['worst_clashes'] = [c for c in clashes if component in c['components']][:5]
+    depths = np.array([c['overlap_angstrom'] for c in clashes])
+    residues = {a.residue_key for a in atoms}
     return {
         'method': ('Nonbonded protein heavy-atom geometric vdW overlaps; excludes '
                    + ('1–2/1–3' if include_1_4 else '1–2/1–3/1–4')
@@ -274,6 +286,15 @@ def analyze_clashes(path, chain_components=None, overlap_threshold=0.4, include_
         'max_overlap_angstrom': clashes[0]['overlap_angstrom'] if clashes else 0.0,
         'worst_clashes': clashes[:20], 'by_component': dict(sorted(component_counts.items())),
         'component_pairs': dict(sorted(component_pairs.items())),
+        'chain_pairs': dict(sorted(chain_pairs.items())),
+        'clashes_by_atom_class': {key: backbone_classes[key] for key in
+                                 ('backbone_backbone', 'backbone_sidechain', 'sidechain_sidechain')},
+        'residue_count': len(residues), 'clashing_residue_count': len(clashing_residues),
+        'clashing_residue_percent': 100 * len(clashing_residues) / len(residues) if residues else None,
+        'overlap_mean_angstrom': float(depths.mean()) if len(depths) else 0.0,
+        'overlap_p95_angstrom': float(np.quantile(depths, .95)) if len(depths) else 0.0,
+        'overlap_sum_squared_angstrom2': float(np.sum(depths ** 2)),
+        'overlaps_at_least_1_angstrom': int(np.sum(depths >= 1.0)),
         'CA_nonadjacent_clash_count': ca_clashes, 'omitted_atoms': omitted,
         'assumptions': {'radii_angstrom': RADII, 'excluded_bond_orders': [1, 2] if include_1_4 else [1, 2, 3],
                         'protein_ATOM_only': True, 'first_model_only': True,

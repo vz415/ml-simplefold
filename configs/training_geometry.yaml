@@ -6,6 +6,10 @@ python_version: '3.11'
 chem_data_url: https://github.com/cctbx/cctbx_project/releases/download/v2026.9/chem_data-2026.9-pyhf50f6f0_0.conda
 chem_data_sha256: 4d5f67a7e2ae1c411e976d023e413aeff3ec310985aebf05ba3a093e5ca1acf1
 workers: 4
+max_structures: null
+backend: molprobity
+run_root: ${artifact_root}/runs
+cache_dir: ${artifact_root}/analysis-cache/training-geometry-v1
 selection: configs/datasets/multimer_refined_v1.json
 complex_dataset: ${artifact_root}/datasets/synthetic/multimer-refined-v1/source
 complex_runs:

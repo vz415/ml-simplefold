@@ -20,6 +20,14 @@ if [[ "${1:-}" == --geometry-setup ]]; then
     shift
     exec python scripts/setup_geometry_validation.py "$@"
 fi
+if [[ "${1:-}" == --validate-geometry ]]; then
+    shift
+    export PYTHONNOUSERSITE=1
+    export OPENBLAS_NUM_THREADS=1
+    export OMP_NUM_THREADS=1
+    export PATH="/data/homezvol2/ynkim4/.conda/envs/simplefold-geometry/bin:$PATH"
+    exec /data/homezvol2/ynkim4/.conda/envs/simplefold-geometry/bin/python scripts/run_training_geometry.py "$@"
+fi
 if [[ "${1:-}" == --train-mixed ]]; then
     shift
     module load apptainer/1.4.5

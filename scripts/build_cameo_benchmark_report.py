@@ -28,7 +28,9 @@ def aligned_pdb(path, reference):
 
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--run',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--library',type=Path,required=True);a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--run',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--library',type=Path,required=True)
+    p.add_argument('--geometry', type=Path, help='Saved three-checkpoint geometry-summary.json')
+    a=p.parse_args()
     summary=json.loads((a.run/'benchmark-summary.json').read_text());rows=json.loads((a.run/'benchmark-results.json').read_text());receipt=json.loads((a.run/'dataset-receipt.json').read_text())
     # OpenStructure bb_lddt uses representative backbone atoms: CA for proteins.
     # Normalize display metadata from older receipts without changing raw results.
@@ -53,6 +55,11 @@ function render(reset=false){const t=data.targets.find(t=>t.id===target.value),o
 target.onchange=()=>render(true);for(const id of ['reference','pretrained','fine_tuned'])document.getElementById(id).onchange=()=>render();document.getElementById('reset').onclick=()=>{viewer.setView(startView);viewer.render();};
 document.getElementById('results').innerHTML='<table><tr><th>Target</th><th>Residues</th>'+metrics.map(m=>'<th>'+m[1]+'</th>').join('')+'</tr>'+data.targets.map(t=>'<tr data-id="'+esc(t.id)+'"><td>'+esc(t.id)+'</td><td>'+t.length+'</td>'+metrics.map(m=>'<td>'+fmt(t.pretrained.scores[m[0]])+' → '+fmt(t.fine_tuned.scores[m[0]])+'</td>').join('')+'</tr>').join('')+'</table>';for(const row of document.querySelectorAll('tr[data-id]'))row.onclick=()=>{target.value=row.dataset.id;render(true);document.getElementById('viewer').scrollIntoView({behavior:'smooth',block:'center'});};render(true);window.viewerReady=true;
 </script></body></html>'''
+    geometry = ''
+    if a.geometry:
+        from build_training_geometry_report import summary_table
+        geometry = '<h2>Geometry · all three checkpoints</h2><p>Mean ± SD across the24 CAMEO predictions per checkpoint. Overlap counts use our heavy-atom method; MolProbity clashscore includes hydrogens. Lower is better for outlier and overlap measures.</p>' + summary_table(json.loads(a.geometry.read_text()), 'cameo')
+    template = template.replace('<h2>Structure examples</h2>', geometry+'<h2>Structure examples</h2>')
     (a.output/'index.html').write_text(template.replace('__DATA__',json.dumps(data).replace('</','<\\/')))
     (a.output/'report-data.json').write_text(json.dumps(data))
     print(a.output/'index.html')
