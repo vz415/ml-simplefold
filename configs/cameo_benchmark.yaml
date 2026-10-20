@@ -1,0 +1,29 @@
+defaults:
+  - model/architecture: foldingdit_100M
+  - _self_
+phase: all
+artifact_root: ${oc.env:SIMPLEFOLD_ARTIFACT_DIR,/pub/ynkim4/ml-simplefold/artifacts}
+job_id: ${oc.env:SLURM_JOB_ID}
+output_dir: ${artifact_root}/runs/${job_id}
+dataset_dir: ${artifact_root}/datasets/benchmarks/cameo22-retention-24-v1
+selection: configs/datasets/cameo22_retention_24_v1.json
+openstructure:
+  image: docker://registry.scicore.unibas.ch/schwede/openstructure:2.9.1
+  path: ${artifact_root}/tools/openstructure/openstructure-2.9.1.sif
+sampling:
+  steps: 500
+  tau: 0.01
+  seed: 83001
+  samples: 1
+checkpoints:
+  pretrained:
+    path: ${artifact_root}/checkpoints/simplefold_100M.ckpt
+    sha256: 4cd0b8a0b317a6ab8634444fffd78ce84cfd49c20fe927b83c76c36fda5f54bd
+  fine_tuned:
+    path: ${artifact_root}/checkpoints/trained/58274048/simplefold_100M_ema.ckpt
+    sha256: 45557f3125befe0e8d27845288cd4255d6b020903cda87a9bba16575aced3f9b
+hydra:
+  run:
+    dir: ${output_dir}
+  job:
+    chdir: false

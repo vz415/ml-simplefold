@@ -1,0 +1,288 @@
+{
+  "name": "cameo22-retention-24-v1",
+  "purpose": "General folding retention after multimer fine-tuning; fixed held-out target subset",
+  "source_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/splits/cameo2022.csv",
+  "source_commit": "87911791549ae46c7d48b24108a5e0e9e758aa94",
+  "source_sha256": "8a278a2dc7d2e6024c1d6412b662907894f813545e5eeabdb1ed2781d449a80d",
+  "source_targets": 183,
+  "eligible_targets": 180,
+  "selection": "24 evenly spaced length ranks including endpoints, ties sorted by target name; no performance-based selection",
+  "excluded": [
+    {
+      "name": "7v5f.A.pdb",
+      "reason": ">=30% identity including gaps over >=70% shorter-chain coverage (local alignment)",
+      "matches": [
+        {
+          "identity": 0.32,
+          "shorter_coverage": 0.7741935483870968
+        },
+        {
+          "identity": 0.32,
+          "shorter_coverage": 0.7741935483870968
+        },
+        {
+          "identity": 0.32,
+          "shorter_coverage": 0.7741935483870968
+        }
+      ]
+    },
+    {
+      "name": "7lx4.A.pdb",
+      "reason": ">=30% identity including gaps over >=70% shorter-chain coverage (local alignment)",
+      "matches": [
+        {
+          "identity": 0.3157894736842105,
+          "shorter_coverage": 0.7804878048780488
+        }
+      ]
+    },
+    {
+      "name": "8ahp.A.pdb",
+      "reason": "obsolete target replaced by8QCW in SimpleFold paper; excluded from initial subset"
+    }
+  ],
+  "homology_screen": "Heuristic local BLOSUM62 alignment, open=-10 extend=-0.5; exclude >=30% identity (including gap columns) over >=70% shorter-chain coverage against any of six fine-tuning targets",
+  "records": [
+    {
+      "id": "7pl4_A",
+      "pdb_id": "7pl4",
+      "chain": "A",
+      "sequence": "GGLHVLLTATPVGLTLLIVLAALGFFYGKKR",
+      "length": 31,
+      "resolved_length": 31,
+      "method": "solution nmr",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/7p/7pl4.A.pdb"
+    },
+    {
+      "id": "7wj0_A",
+      "pdb_id": "7wj0",
+      "chain": "A",
+      "sequence": "SGSMKTAISLPDETFDRVSRRASELGMSRSEFFTKAAQRYLHELDAQLLTGQ",
+      "length": 52,
+      "resolved_length": 49,
+      "method": "solution nmr",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/7w/7wj0.A.pdb"
+    },
+    {
+      "id": "8d03_A",
+      "pdb_id": "8d03",
+      "chain": "A",
+      "sequence": "MSGMIKVPEDLERIGRELRARGLDTKRLLEEGPKLYPELSIPDLMAIALYDHLNLDPEFLYRLLQQSRGS",
+      "length": 70,
+      "resolved_length": 65,
+      "method": "x-ray diffraction",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/8d/8d03.A.pdb"
+    },
+    {
+      "id": "7x1k_A",
+      "pdb_id": "7x1k",
+      "chain": "A",
+      "sequence": "GSAKDPKMPLHILTHRECEVLQLLTDGKSNRGIGETLFISEKTVKNHVSSILQKMKVNDRTQAVVTAIKHGWVYIR",
+      "length": 76,
+      "resolved_length": 69,
+      "method": "x-ray diffraction",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/7x/7x1k.A.pdb"
+    },
+    {
+      "id": "7soo_A",
+      "pdb_id": "7soo",
+      "chain": "A",
+      "sequence": "MGSSHHHHHHSQELLKDYIKRQIEYYFSVDNLERDFFLRRKMDADGFLPITLIASFHRVQALTTDISLIFAALKDSKVVEIVDEKVRRREEPEKWPLPP",
+      "length": 99,
+      "resolved_length": 89,
+      "method": "x-ray diffraction",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/7s/7soo.A.pdb"
+    },
+    {
+      "id": "7ux0_A",
+      "pdb_id": "7ux0",
+      "chain": "A",
+      "sequence": "CVFCRLPAHDLSGRLARLCSQMEARQKECGASPDFSAFALDEVSMNKVTEKTHRVLRVMEIKEAVSSLPSYWSWLRKTKLPEYTREALCPPACRGSTTLYNCSTCKGTEVSCWPRKRCFPGS",
+      "length": 122,
+      "resolved_length": 115,
+      "method": "x-ray diffraction",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/7u/7ux0.A.pdb"
+    },
+    {
+      "id": "7w89_A",
+      "pdb_id": "7w89",
+      "chain": "A",
+      "sequence": "MLARMSGPDPAPAALPTVLALDVSKSRIGFAVSAGRLAFGRGSVDRKRLPLDLKAVRLKVEETGAERLVLGLPLRTDGKPSPTADRVRAFGRVLMDKGYTVEYQDERFTTQRARALGAADEDEAAAVQILELWLMR",
+      "length": 136,
+      "resolved_length": 123,
+      "method": "x-ray diffraction",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/7w/7w89.A.pdb"
+    },
+    {
+      "id": "7yta_B",
+      "pdb_id": "7yta",
+      "chain": "B",
+      "sequence": "SMRGGRHQKYSHIAKGSIVEVTSDEEGFKGVWFEATVLGASSPGSKSKEVWVEYKSIVAEENGSEPLKEVLHVSFIRPVPPVEKIERFELYDVVDAFHKDGWWTGVVTRVMEDSRYQVTFDNPPDELEFGVSELRFHQKWVKGKWVRPGKQ",
+      "length": 151,
+      "resolved_length": 140,
+      "method": "x-ray diffraction",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/7y/7yta.B.pdb"
+    },
+    {
+      "id": "8gxf_B",
+      "pdb_id": "8gxf",
+      "chain": "B",
+      "sequence": "MFKPQPVTLRRGALCLEPLAEADLVELLSLAEANRQSLIYMNGPLRPDWYRQGLAEQREGQAVIYAVRQDHALVGTTRFFDFMPGLPAVEIGGTWLAEDRHGSGLNAAIKFLMLRQAFEQWEMVRVQLKTAASNLRAQRAIEKLGARREGQLRNHRRLADGRLDDSILYSITDRDWPEIRRTLETELSAAARP",
+      "length": 193,
+      "resolved_length": 187,
+      "method": "x-ray diffraction",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/8g/8gxf.B.pdb"
+    },
+    {
+      "id": "7y79_B",
+      "pdb_id": "7y79",
+      "chain": "B",
+      "sequence": "AHMFERVKTFQVPSPSIGTLPPAPDFKNDINEQLPDKTNPVITHFSTIPYIMANDATFNSHQQIQYSPYYKLVRIQYWEKVTQRILGPRDDYEYNKTKGISKTDQVSMTETVSMSVGADFGFMFKGFSASLSAQITKELSVTKSTSTTEMTEETYKEKYTNPFNYELARAQYMLVNEFYVTRMDGTRITANWTLRDNTQTVTRIFPKS",
+      "length": 208,
+      "resolved_length": 195,
+      "method": "x-ray diffraction",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/7y/7y79.B.pdb"
+    },
+    {
+      "id": "7skh_B",
+      "pdb_id": "7skh",
+      "chain": "B",
+      "sequence": "MNAPVFQQPHYEVVLDEGPDTINTSLITVQALDLDEGPNGTVTYAIVAGNIINTFRINKHTGVITAAKELDYEISHGRYTLIVTATDQCPILSHRLTSTTTVLVNVNDINDNVPTFPRDYEGPFDVTEGQPGPRVWTFLAHDRDSGPNGQVEYSVVDGDPLGEFVISPVEGVLRVRKDVELDRETIAFYNLTICARDRGVPPLSSTMLVGIRVLDINDNLEHHHHHH",
+      "length": 227,
+      "resolved_length": 220,
+      "method": "x-ray diffraction",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/7s/7skh.B.pdb"
+    },
+    {
+      "id": "8b55_A",
+      "pdb_id": "8b55",
+      "chain": "A",
+      "sequence": "LSLKGKKLDFFGRGDTYVSLIDTIPELSRFTACIDLVFMDDNSRYWMAFSYITNNALLGREDIDLGLAGDHQQLILYRLGKTFSIRHHLASFQWHTICLIWDGVKGKLELFLNKERILEVTDQPHNLTPHGTLFLGHFLKNESSEVKSMMRSFPGSLYYFQLWDHILENEEFMKCLDGNIVSWEEDVWLVNKIIPTVDRTLRCFVPENMTIQEKSGGGGAGGGGGTDDDDKWSHPQFEK",
+      "length": 239,
+      "resolved_length": 193,
+      "method": "x-ray diffraction",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/8b/8b55.A.pdb"
+    },
+    {
+      "id": "7x15_A",
+      "pdb_id": "7x15",
+      "chain": "A",
+      "sequence": "AGSLKPAALYEEALSLVKDGDVACRSLRTELLECYSDQDFLAKLHCVRQAFQVLLLDETHRMFFMETGKQMISGLLVKANKSPKAFLESYEDMLQYTQREETWPVSKMELEGRGVVCMNFFDIVLDFILMDAFEDLESPPSSVVAVLRNRWLSDSFKETALATACWSVLKAKRRLLMVPDGFIAHFYVISEHVSPVLAFGFLGPHQHLSEVCTIFKQQIVQYLKDMFDHDKVRFTSVPSLAEDILRLSHRRADILMGYLGIE",
+      "length": 262,
+      "resolved_length": 251,
+      "method": "x-ray diffraction",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/7x/7x15.A.pdb"
+    },
+    {
+      "id": "7tvw_A",
+      "pdb_id": "7tvw",
+      "chain": "A",
+      "sequence": "GPMVVNQKISGLASAMNAKIIGSGERSMVLAHGFGGDQSVWDKIIPVLSQSFKVLVFDWLFSGAIKDQTLYDPSKYNSLDVFSDDLIALMEELKFGPVVFVGHSMSGVIGCAASIKRPDLFTNLLLIAASPRYINSEDYKGGFESKDIDTIITSIGSNYEAWAVDFSSFVVDSRDSLSVQRFEKSLKKMKPETALALAKIVFGSDEREILGQVSVPCHVIQPGNDVVVPVSVAYFMQEKIKGKSTVEIIEDAIGHFPQMTSHLELLGVMRRLLEF",
+      "length": 275,
+      "resolved_length": 265,
+      "method": "x-ray diffraction",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/7t/7tvw.A.pdb"
+    },
+    {
+      "id": "7x7w_A",
+      "pdb_id": "7x7w",
+      "chain": "A",
+      "sequence": "MKHGIYYAYWEKQWQADYIPYIEKAAQLGFDILEIAASPLPFYSEQQMKDIKACAEANGITLTCGHGPSPDQNLASSDPAVRAHAKSFFTDLLSRLEKMDIHVIGGGIYSYWPVDYSMPIDKPGDWARSVEGVAEMAKVAESCGVDYCLEVLNRFEGYLLNTAEEAVQFVQEVNHPRVKIMLDTFHMNIEEDSIGGAIRRAGQHLGHFHTGECNRRVPGRGRTPWREIGEALRDIGYTGAVVMEPFVRMGGQVGSDIKIWREMNPGADDAQLDLDAKNAVTFQRYMLD",
+      "length": 288,
+      "resolved_length": 288,
+      "method": "x-ray diffraction",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/7x/7x7w.A.pdb"
+    },
+    {
+      "id": "7vpu_A",
+      "pdb_id": "7vpu",
+      "chain": "A",
+      "sequence": "MSYYHHHHHHDYDIPTLVPRGSAMGSSNQGTLNLIDLKLFHHYCTEVWPTITSAGISGERIWSDEIPQLAFDYPFLMHALLAFSATHLARKEPGLEQYVASHRLDALRLLRKAVLEISEDNTDALVASALILIMDSLANASSVDSPSAWIFHVKGAATILTAVWPLTEKSRFHNLISVDLSDLGDIINQDSGTVSELVCFDESIADLYPVEIDSPYLITLAYLDKLHREKNQSDFILRVFAFPALLDKTFLALLMTGDLGAMRIMRCYYQLLRGFATEVKDKVWFLEGITQVLPQDVDDYSGGGMHMMLDFLGGGLPSMTTTNLQPGLSDFM",
+      "length": 332,
+      "resolved_length": 275,
+      "method": "x-ray diffraction",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/7v/7vpu.A.pdb"
+    },
+    {
+      "id": "7pce_A",
+      "pdb_id": "7pce",
+      "chain": "A",
+      "sequence": "GSHMASNDLIYQDEHASLQPLEGRTVAVIGYGIQGRAFAANLRDSGVAVRVGNIDDRYFELARAEGHRVTNIAEAVAHADIVLLLIPDEAHGAVFDVDIAPNLRDGALLCVAHGHSLVQGDVRPLPGRDLAMLAPRMYGDPIRRYYLAGQGAPAYFDIVADHTGRARDRVLAIARAVGFTRAGVMALGYRQETFLDLFQEQFLAPALVDLVETGFQVLVERGFNPKAALLEVYGSGEMGKMMLDGADIGLDEVVALQGSPTCQVGYHRWRGRTLPTAVRELAARVLDQIEGGDFSAYLKEQASNDYASLDDARRAALKRPLNVAHAQVRAAFRFPTEAAGGLYQAAQAPADVEPEAAR",
+      "length": 358,
+      "resolved_length": 325,
+      "method": "x-ray diffraction",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/7p/7pce.A.pdb"
+    },
+    {
+      "id": "8a28_A",
+      "pdb_id": "8a28",
+      "chain": "A",
+      "sequence": "ENLGDLPLYHSNLFEGDIAGVSPYADKNAIVDHTLLWPGGIVYYELAPAAASIRNQILEGMKEYHEKTCIQFKERTAGVKDYIRINRYDGCWSMVGRQGGMQELSLGYGCEWKGLVVHALGHAVGFWHEQNRADRDDYIEVIWDNILQSMQYNFNKMEPWENNYLNERFDYKSVMLYGETAFSKDGTSPTVRPKQPGVVIGPVWKKPGFSESDVRRVNRLYECFGEVRPPPPKIPDFICDFESNDCGLENQVGMRGEFQRKYDTLGGRTGYFMVLSVTSSGTYADSRLITPYFGAYGNQDVCMSVDVYMSGPAVRDVEISRQDSNTESIGKYTEVSNSWVTRNFNLKAGREDMRFFIFAALDPYYGDGVVAVDNLKFKRKPC",
+      "length": 382,
+      "resolved_length": 382,
+      "method": "x-ray diffraction",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/8a/8a28.A.pdb"
+    },
+    {
+      "id": "7q6d_A",
+      "pdb_id": "7q6d",
+      "chain": "A",
+      "sequence": "MIKATDRKLVVGLEIGTAKVAALVGEVLPDGMVNIIGVGSCPSRGMDKGGVNDLESVVKCVQRAIDQAELMADCQISSVYLALSGKHISCQNEIGMVPISEEEVTQEDVENVVHTAKSVRVRDEHRVLHVIPQEYAIDYQEGIKNPVGLSGVRMQAKVHLITCHNDMAKNIVKAVERCGLKVDQLIFAGLASSYSVLTEDERELGVCVVDIGGGTMDIAVYTGGALRHTKVIPYAGNVVTSDIAYAFGTPPSDAEAIKVRHGCALGSIVGKDESVEVPSVGGRPPRSLQRQTLAEVIEPRYTELLNLVNEEILQLQEKLRQQGVKHHLAAGIVLTGGAAQIEGLAACAQRVFHTQVRIGAPLNITGLTDYAQEPYYSTAVGLLHYGKESHLNGEAEVEKRVTASV",
+      "length": 405,
+      "resolved_length": 383,
+      "method": "x-ray diffraction",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/7q/7q6d.A.pdb"
+    },
+    {
+      "id": "7m1z_B",
+      "pdb_id": "7m1z",
+      "chain": "B",
+      "sequence": "LVPRGSHMLLERPQQKKNSRFYQMSPEERLASLLNEGQISADTKKEFENTALSSQIANHMIENQISETEVPMGVGLHLTVDETDYLVPMATEEPSVIAALSNGAKIAQGFKTVNQQRLMRGQIVFYDVADPESLIDKLQVREAEIFQQAELSYPSIVKRGGGLRDLQYRAFDESFVSVDFLVDVKDAMGANIVNAMLEGVAELFREWFAEQKILFSILSNYATESVVTMKTAIPVSRLSKGSNGREIAEKIVLASRYASLDPYRAVTHNKGIMNGIEAVVLATGNDTRAVSASCHAFAVKEGRYQGLTSWTLDGEQLIGEISVPLALATVGGATKVLPKSQAAADLLAVTDAKELSRVVAAVGLAQNLAALRALVSEGIQKGHMALQARSLAMTVGATGKEVEAVAQQLKRQKTMNQDRALAILNDLRKQ",
+      "length": 430,
+      "resolved_length": 425,
+      "method": "x-ray diffraction",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/7m/7m1z.B.pdb"
+    },
+    {
+      "id": "7w6x_A",
+      "pdb_id": "7w6x",
+      "chain": "A",
+      "sequence": "MLSFLWDLASFIVALGVLITVHEFGHFWVARRCGVRVERFSIGFGKALWRRTDKLGTEYVIALIPLGGYVKMLDERAEPVVPELRHHAFNNKSVGQRAAIIAAGPVANFIFAIFAYWLVFIIGVPGVRPVVGEIAANSIAAEAQIAPGTELKAVDGIETPDWDAVRLQLVDKIGDESTTITVAPFGSDQRRDVKLDLRHWAFEPDKEDPVSSLGIRPRGPQIEPVLENVQPNSAASKAGLQAGDRIVKVDGQPLTQWVTFVMLVRDNPGKSLALEIERQGSPLSLTLIPESKPGNGKAIGFVGIEPKVIPLPDEYKVVRQYGPFNAIVEATDKTWQLMKLTVSMLGKLITGDVKLNNLSGPISIAKGAGMTAELGVVYYLPFLALISVNLGIINLFPLPVLDGGHLLFLAIEKIKGGPVSERVQDFCYRIGSILLVLLMGLALFNDFSRLGTENLYFQ",
+      "length": 458,
+      "resolved_length": 446,
+      "method": "x-ray diffraction",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/7w/7w6x.A.pdb"
+    },
+    {
+      "id": "7fgb_A",
+      "pdb_id": "7fgb",
+      "chain": "A",
+      "sequence": "MLLVNQSHQGFNKEHTSKMVSAIVLYVLLAAAAHSAFAADPHHHHHHSSSDYSDLQRVKQELLEEVKKELQKVKEEIIEAFVQELRKRGSLVPRGSPSRSEFPKYRMSRPTCRGQKWTVMSNVWTSRWVATGTNARNIRPPTAIFLKKGLRAVSLAHNTAGPNPLSGTGSDRSEFRDLITWSPSGYPGDESTETICKAWSFFACFDGKEDLIGCISGPDNNAVLTIMYGGKPTDLYNSYALDILRTMESQCVCNNGTCSAMITDGPDIGPSKARMLFIKEGKIEKVVIVDGPGSSMVEECSCINEDSNEFGCLCRDNTANSRRPFLKCFWDSRTCKADYTCSQTLLDCPRPNDSIQTCGTSFGSLAGGLKGAYIPLGKGRICATRTVDKIQRKGMELMCTNGNILLEQDAMKKIGDLVTPTAQTGYSSATTIPRATEECDTICVATELVFSGAKGTNADLVIHCLLGEARETESVVTAVVDRTTYSSLL",
+      "length": 489,
+      "resolved_length": 387,
+      "method": "x-ray diffraction",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/7f/7fgb.A.pdb"
+    },
+    {
+      "id": "7tol_A",
+      "pdb_id": "7tol",
+      "chain": "A",
+      "sequence": "MGSSHHHHHHSSGLVPRGSHMEKKTLSLCPICLKRIPATILEEDGKIIIKKTCPEHGEFKDIYWGDAELYKKFDKYEFIGKIEVTNTKVKNGCPYDCGLCPNHKSTTILANIDVTNRCNLNCPICFANANKSGKVYEPSFEDIKRMMENLRKEIPPTPAIQFAGGEPTVRSDLPELIKLARDMGFLHVQLATNGIKLKNINYLKKLKEAGLSTIYLQFDGISEKPYLVARGKNLLPIKQKVIENCKKVGFDSVVLVPTLVRGVNDNEVGGIIRYAAENVDVVRGINFQPVSFTGRVDEKTLLEGRITIPDFIKLVEEQTDGEITEEDFYPVPSVAPISVLVEKLTNDRKPTLSSHQHCGTSTYVFVDEDGKLIPITRFIDVEGFLEIVKEKIEEIGKSKMHDVKVLGEIALKLPSLIDLDKAPKSVNIKKIIDLILSVLKSDYSALAELHYHMLMISCMHFMDAYNFDVKRVMRCCIHYATPDDRIIPFCTYNTLHRQEVEEKFSIPLEEWKRMHKIGGEDDREDY",
+      "length": 526,
+      "resolved_length": 493,
+      "method": "x-ray diffraction",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/7t/7tol.A.pdb"
+    },
+    {
+      "id": "7zgm_A",
+      "pdb_id": "7zgm",
+      "chain": "A",
+      "sequence": "TDYTKYVNTFIGAADNGHTFPGACRPFGMIQTSPVTGAVGWRYCSEYVNSDSIIWGFTQTHLNGTGCMDLGDVLVMPVTGTRTRAWDAYRSRFSKKLEAATPGYYTVELTEPNVKAELTATPHAALHRYTYHNADSASVLIDLQHGPTWNENQYHSQVKECEVNWEDAQTLTGHVRNSVWVNQDYFFVMKFNRPVTDSLYLPMGETEKGKRIIASFDMQPGEELLMKVALSTTGIEGARKNMEAEVPAWDFEGVKKTAHDDWNSYLSRIDVTGTEDEKTNFYTCFYHALIQPNQISDVDGLYRNAADSVVKAGTGTFYSTFSLWDTYRAAHPFYTLMVPEKVDGFVNSLVEQSEVQGFLPIWGLWGKETYTMVGNHGVSVIAEAYRKGFRGFDAERAFNAIKQTQTVSHKQKSDWETYMKYGYFPTDLIKTESVSSSLESVYDDYAAADMAKRMGKTEDAAYFSKRADFYKNLFDTETQFMRPRNSNGTWKTPFNPSQVAHAESTGGDYTEGNAWQYTWHVQHDVPGLISLFGGEEPFLNKLDSLFTLKLETTQADVTGLIGQYAHGNEPSHHITYLYALAGRPERTQELVREIFDTQYHPEPDGLCGNDDCGQMSAWYMFSAMGFYPVDPVSGNYVFGAPQMPKIVLHLADGKTFTVIADGISKEHKYIDSITLNGEPYTKNYISHEDILKGGTLVYKMKLEHHHHHH",
+      "length": 709,
+      "resolved_length": 702,
+      "method": "x-ray diffraction",
+      "reference_url": "https://raw.githubusercontent.com/bjing2016/EigenFold/87911791549ae46c7d48b24108a5e0e9e758aa94/structures/7z/7zgm.A.pdb"
+    }
+  ],
+  "published_scores_scope": "Subset means are not the published full183-target means; compare checkpoints on the identical subset"
+}

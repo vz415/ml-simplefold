@@ -16,6 +16,11 @@ source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate "${SIMPLEFOLD_ENV_PREFIX:-/data/homezvol2/ynkim4/.conda/envs/simplefold}"
 export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-4}"
 export PYTHONUNBUFFERED=1
+if [[ "${1:-}" == --benchmark-cameo ]]; then
+    shift
+    module load apptainer/1.4.5
+    exec python scripts/run_cameo_benchmark.py "$@"
+fi
 # The approved project launcher also supports the explicitly requested training pilot.
 if [[ "${1:-}" == --train-multimers ]]; then
     shift
