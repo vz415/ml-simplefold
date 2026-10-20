@@ -163,8 +163,10 @@ def main(cfg):
         for row, result in zip(rows, pool.map(analyze_one, tasks)):
             record = dict(**row, metrics=metrics(result), diagnostics=result)
             results.append(record)
-            save(output / 'geometry-results.json', results)
+            save(output / 'progress.json', dict(completed=len(results), total=len(rows),
+                latest=dict(cohort=row['cohort'], arm=row['arm'], id=row['id']), backend=cfg.backend))
             print(f'Validated {len(results)}/{len(rows)}: {row["cohort"]}/{row["arm"]}/{row["id"]}', flush=True)
+    save(output / 'geometry-results.json', results)
     save(output / 'geometry-summary.json', summarize(results))
     flattened = [dict(cohort=r['cohort'], arm=r['arm'], id=r['id'], sample=r['sample'], **r['metrics']) for r in results]
     with (output / 'geometry-results.csv').open('w') as stream:
