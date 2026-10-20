@@ -101,7 +101,7 @@ scientific analysis cache key:
 The final run reused completed checks after moving all Hydra metadata to home
 logs. Earlier queued/stalled batches were cancelled; no new sampling or training.
 
-All 156 structures passed. The 54 complex predictions' previous overlap
+All 156 structures were processed successfully. The 54 complex predictions' previous overlap
 counts and every coordinate-only metric match exactly. Input hashes match;
 heavy atoms are unchanged (maximum hydrogenation displacement 1.72e-13 Å).
 Incidental crosslinks are disabled in every structure, with no `Misc. bond`
