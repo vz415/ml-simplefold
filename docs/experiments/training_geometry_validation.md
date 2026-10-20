@@ -90,3 +90,105 @@ Hydra's own logs and `.hydra` metadata stay under the home checkout's ignored
 `logs/training-geometry/JOB_ID`, so Hydra does not touch shared storage before
 the staging workaround can take effect. The resolved scientific configuration
 is also saved with the durable analysis outputs.
+
+
+## Completed geometry comparison — 2026-10-20
+
+Full run **58320484** completed successfully in **7m50s** (eight allocated CPU
+cores; 55m22s aggregate CPU; peak step RSS 12.5 GiB). Source: `dda1c2c`;
+scientific analysis cache key:
+`f60565ab95d96c8295824e3eab8e7d03f53f0a5cdcea7ccfeb31c2181a25e42c`.
+The final run reused completed checks after moving all Hydra metadata to home
+logs. Earlier queued/stalled batches were cancelled; no new sampling or training.
+
+All 156 structures passed. The 54 complex predictions' previous overlap
+counts and every coordinate-only metric match exactly. Input hashes match;
+heavy atoms are unchanged (maximum hydrogenation displacement 1.72e-13 Å).
+Incidental crosslinks are disabled in every structure, with no `Misc. bond`
+hydrogen omissions. Every native clashscore normalization was verified.
+
+Downloaded and verified via RCIC: `artifacts/remote-runs/58320484/`.
+Compressed output archive SHA256:
+`fa695da7ebeb54c76b69cee55fe6668f353084f7f1cfc75c03b436d5fc756242`.
+Remote durable outputs: `/pub/ynkim4/ml-simplefold/artifacts/runs/58320484/`.
+Setup receipts **58319626**, cache preparation **58319991**, and corrected smoke
+**58320294** were also downloaded and verified.
+
+### Means across the six training complexes
+
+18 predictions per checkpoint (three samples per target). The reference is our
+synthetic, Rosetta-refined training target, not an independent experimental
+complex or a held-out generalization test.
+
+| Metric | Original | Six-only | Mixed 90/10 |
+|---|---:|---:|---:|
+| MolProbity clashscore ↓ | 501.60 | 130.62 | 322.38 |
+| Heavy-atom overlaps ↓ | 3296.22 | 839.50 | 2123.56 |
+| Backbone–backbone overlaps ↓ | 647.28 | 128.33 | 442.44 |
+| Residues clashing (%) ↓ | 84.12 | 53.24 | 74.63 |
+| Bond-length outliers (%) ↓ | 27.69 | 19.24 | 32.10 |
+| Bond-angle outliers (%) ↓ | 8.88 | 7.75 | 10.78 |
+| Ramachandran outliers (%) ↓ | 1.08 | 0.43 | 0.84 |
+| Rotamer outliers (%) ↓ | 1.11 | 0.28 | 0.86 |
+| Maximum overlap (Å) ↓ | 3.05 | 2.94 | 3.06 |
+
+### Means across 24 CAMEO targets
+
+One matched-seed prediction per target/checkpoint; this fixed subset does not
+reproduce the full paper benchmark.
+
+| Metric | Original | Six-only | Mixed 90/10 |
+|---|---:|---:|---:|
+| MolProbity clashscore ↓ | 70.84 | 67.20 | 65.18 |
+| Bond-length outliers (%) ↓ | 2.73 | 5.61 | 9.35 |
+| Bond-angle outliers (%) ↓ | 0.51 | 1.65 | 1.94 |
+| Ramachandran outliers (%) ↓ | 0.06 | 0.22 | 0.09 |
+| Rotamer outliers (%) ↓ | 0.21 | 0.08 | 0.27 |
+| Maximum overlap (Å) ↓ | 1.91 | 1.87 | 1.76 |
+
+### Interpretation and independent audit
+
+Six-only tuning substantially improves packing and local geometry on its six
+training complexes, but substantial problems remain: refined training targets
+have mean clashscore **2.04** and bond-length outliers **0.145%**, versus
+**130.62** and **19.24%** in the six-only predictions. The worst remaining overlap
+barely changes (3.05 → 2.94 Å), despite far fewer overlaps.
+
+Mixed tuning reduces complex clashes, but worsens complex bond/angle geometry.
+On CAMEO, both tuned models worsen bond and angle geometry despite slightly
+lower mean clashscores. Bond outliers worsen on **23/24** targets after six-only
+tuning and **24/24** after mixed tuning; angle outliers worsen on every target
+in both arms. The apparent preservation of global fold scores does not imply
+preservation of local covalent geometry.
+
+The target-paired bootstrap 95% intervals for CAMEO bond-outlier increases are
+**+2.88 percentage points [2.01, 3.52]** for six-only and
+**+6.62 points [6.15, 7.15]** for mixed. CAMEO clashscore-change intervals include
+zero for both arms, so do not claim a confirmed general packing improvement.
+These intervals describe this small target set; metrics are correlated.
+
+Independent coordinate audit on matched target **7pl4_A** confirmed all bond
+outlier lengths and Z scores directly against the local input PDBs, with equal
+233-bond denominators: original **6/233**, six-only **9/233**, mixed **28/233**,
+experimental reference **0/233**. The deterioration is not a chain mapping,
+restraint denominator, or coordinate transformation artifact.
+
+Interpretation remains exposure-confounded: both training runs had 600 updates,
+but six-only saw 600 synthetic batches and mixed saw 60. No new training or
+refinement was launched from this geometry result.
+
+### Reports and validation
+
+- Canonical geometry report: `artifacts/analysis/training-geometry/index.html`
+  (`http://127.0.0.1:8767/training-geometry/index.html`). Includes all three
+  checkpoints, both reference cohorts, per-target/sample selection, CSV,
+  detailed residue locations, and paired confidence intervals.
+- Existing CAMEO pages now include the same three-checkpoint geometry tables:
+  `artifacts/analysis/cameo22-retention-24-v1/index.html` and
+  `artifacts/analysis/mixed-training/58313695/cameo22-retention/index.html`.
+- Browser QA passed: six complex selectors, 24 CAMEO selectors, complete metrics,
+  and both existing 3D viewers/toggles. No JavaScript errors.
+- Raw-output and coordinate-preservation audit:
+  `artifacts/remote-runs/58320484/analysis-verification.json`.
+- All numerical results use the audited protein-only linking settings, not the
+  superseded early smoke results.
