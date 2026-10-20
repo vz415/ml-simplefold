@@ -1,0 +1,118 @@
+{
+  "dataset": "multimer-refined-v1",
+  "purpose": "All-complex reconstruction/capacity experiment; no held-out accuracy claim.",
+  "excluded": [
+    "BMP2\u2013BMPR1A\u2013ACVR2A: no verified relaxation available",
+    "Activin A\u2013ACVR1\u2013ACVR2B: unguided exploratory ensemble, not a selected refined target"
+  ],
+  "records": [
+    {
+      "id": "bmp2_bmpr1a_acvr2b",
+      "complex": "BMP2\u2013BMPR1A\u2013ACVR2B",
+      "file": "bmp2-bmpr1a-acvr2b.pdb",
+      "sha256": "240c9cb7c6188cd5cb5cf20639cfd546f4ec8fb374e04b7d51e6d9608fa13839",
+      "source_local": "/Users/vincentzaballa/Development/ml-simplefold/artifacts/analysis/bmp2-bmpr1a-acvr2b/runs/58030763/11/raw.pdb",
+      "groups": {
+        "A": "BMP2",
+        "B": "BMP2",
+        "C": "BMPR1A",
+        "D": "BMPR1A",
+        "E": "ACVR2B",
+        "F": "ACVR2B"
+      },
+      "split": "train",
+      "target_kind": "synthetic_rosetta_refined",
+      "viewer_sample": 11
+    },
+    {
+      "id": "bmp4_bmpr1a_acvr2b",
+      "complex": "BMP4\u2013BMPR1A\u2013ACVR2B",
+      "file": "bmp4-bmpr1a-acvr2b.pdb",
+      "sha256": "ff4f699f4fe38033eafbb2c6ba8bb109e72529078642ddee8281d10a64064150",
+      "source_local": "/Users/vincentzaballa/Development/ml-simplefold/artifacts/analysis/bmp4-bmpr1a-acvr2b/runs/58134290/fk/refined-58139689-refined.pdb",
+      "groups": {
+        "A": "BMP4",
+        "B": "BMP4",
+        "C": "BMPR1A",
+        "D": "BMPR1A",
+        "E": "ACVR2B",
+        "F": "ACVR2B"
+      },
+      "split": "train",
+      "target_kind": "synthetic_rosetta_refined",
+      "viewer_sample": "refined-58139689"
+    },
+    {
+      "id": "bmp6_acvr1_acvr2b",
+      "complex": "BMP6\u2013ACVR1\u2013ACVR2B",
+      "file": "bmp6-acvr1-acvr2b.pdb",
+      "sha256": "6d3272242fc1de038cfd8321a6585cf84b0dd617d3346963f112849ce953fa15",
+      "source_local": "/Users/vincentzaballa/Development/ml-simplefold/artifacts/analysis/bmp6-acvr1-acvr2b/runs/58139638/refined.pdb",
+      "groups": {
+        "A": "BMP6",
+        "B": "BMP6",
+        "C": "ACVR1",
+        "D": "ACVR1",
+        "E": "ACVR2B",
+        "F": "ACVR2B"
+      },
+      "split": "train",
+      "target_kind": "synthetic_rosetta_refined",
+      "viewer_sample": "refined"
+    },
+    {
+      "id": "bmp7_bmpr1a_acvr2a",
+      "complex": "BMP7\u2013BMPR1A\u2013ACVR2A",
+      "file": "bmp7-bmpr1a-acvr2a.pdb",
+      "sha256": "d6f3c2270bcce11c6cd2e37ac6c21b583a11323696ad5ae77d0990ffcdd38dcb",
+      "source_local": "/Users/vincentzaballa/Development/ml-simplefold/artifacts/analysis/bmp7-bmpr1a-acvr2a/runs/58197170/refined.pdb",
+      "groups": {
+        "A": "BMP7",
+        "B": "BMP7",
+        "C": "BMPR1A",
+        "D": "BMPR1A",
+        "E": "ACVR2A",
+        "F": "ACVR2A"
+      },
+      "split": "train",
+      "target_kind": "synthetic_rosetta_refined",
+      "viewer_sample": "refined"
+    },
+    {
+      "id": "bmp7_acvr1_acvr2a",
+      "complex": "BMP7\u2013ACVR1\u2013ACVR2A",
+      "file": "bmp7-acvr1-acvr2a.pdb",
+      "sha256": "b2f0e9f0c54d791c1b091e890d48cd7d43bca24016dfc5915e1c2f4e44813e4b",
+      "source_local": "/Users/vincentzaballa/Development/ml-simplefold/artifacts/analysis/bmp7-acvr1-acvr2a/runs/58197169/refined.pdb",
+      "groups": {
+        "A": "BMP7",
+        "B": "BMP7",
+        "C": "ACVR1",
+        "D": "ACVR1",
+        "E": "ACVR2A",
+        "F": "ACVR2A"
+      },
+      "split": "train",
+      "target_kind": "synthetic_rosetta_refined",
+      "viewer_sample": "refined"
+    },
+    {
+      "id": "gdf5_bmpr1a_acvr2b",
+      "complex": "GDF5\u2013BMPR1A\u2013ACVR2B",
+      "file": "gdf5-bmpr1a-acvr2b.pdb",
+      "sha256": "6b99764b59d771b13e44f83eef0a15625552f12bb0a968e98d4c4ebbb9449c6d",
+      "source_local": "/Users/vincentzaballa/Development/ml-simplefold/artifacts/analysis/gdf5-bmpr1a-acvr2b/runs/58228478/refined.pdb",
+      "groups": {
+        "A": "GDF5",
+        "B": "GDF5",
+        "C": "BMPR1A",
+        "D": "BMPR1A",
+        "E": "ACVR2B",
+        "F": "ACVR2B"
+      },
+      "split": "train",
+      "target_kind": "synthetic_rosetta_refined",
+      "viewer_sample": "refined"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+_target_: datasets.train_datamodule.SimpleFoldTrainingDataModule
+datasets:
+  - _target_: datasets.train_datamodule.DatasetConfig
+    data_name: multimer-refined-v1
+    tokenized_dir: ${dataset_dir}
+    target_dir: ${dataset_dir}
+    manifest_path: ${dataset_dir}/manifest.json
+    record_list: ${dataset_dir}/train.txt
+    cropper: null
+filters: null
+tokenizer:
+  _target_: boltz_data_pipeline.tokenize.boltz_protein.BoltzTokenizer
+featurizer:
+  _target_: boltz_data_pipeline.feature.featurizer.BoltzFeaturizer
+symmetries: {}
+max_tokens: null
+max_atoms: null
+pad_to_max_tokens: false
+pad_to_max_atoms: false
+batch_size: 1
+num_workers: 0
+pin_memory: false
+return_train_symmetries: false
+min_dist: 2.0
+max_dist: 22.0
+num_bins: 64
+atoms_per_window_queries: 32
+rotation_augment_ref_pos: false
+rotation_augment_coords: true

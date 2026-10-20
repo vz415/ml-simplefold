@@ -1,0 +1,47 @@
+defaults:
+  - data: multimer_refined
+  - model/architecture: foldingdit_100M
+  - model/sampler: euler_maruyama
+  - model/processor: protein_processor
+  - model: simplefold
+  - _self_
+seed: 82301
+artifact_root: ${oc.env:SIMPLEFOLD_ARTIFACT_DIR,/pub/ynkim4/ml-simplefold/artifacts}
+job_id: ${oc.env:SLURM_JOB_ID}
+output_dir: ${artifact_root}/runs/${job_id}
+dataset_dir: ${artifact_root}/datasets/synthetic/multimer-refined-v1
+source_dir: ${dataset_dir}/source
+selection: configs/datasets/multimer_refined_v1.json
+pretrained_checkpoint: ${artifact_root}/checkpoints/simplefold_100M.ckpt
+trained_dir: ${artifact_root}/checkpoints/trained/${job_id}
+max_steps: 600
+checkpoint_every: 100
+evaluation:
+  samples: 3
+  steps: 500
+  tau: 0.3
+  seed: 82401
+model:
+  _target_: multimer_training.MultimerFineTune
+  esm_model: null
+  ema_decay: 0.95
+  processor:
+    _target_: multimer_training.CachedESMProcessor
+    _partial_: true
+    embedding_dir: ${dataset_dir}/esm
+    multiplicity: 1
+    inference_multiplicity: 1
+  architecture:
+    esm_model: esm2_3B
+  optimizer:
+    lr: 1.0e-5
+  scheduler:
+    warmup_steps: 30
+    min_lr: 1.0e-6
+    max_lr: ${model.optimizer.lr}
+  sample_dir: ${output_dir}/samples
+hydra:
+  run:
+    dir: ${output_dir}
+  job:
+    chdir: false

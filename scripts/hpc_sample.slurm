@@ -16,4 +16,10 @@ source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate "${SIMPLEFOLD_ENV_PREFIX:-/data/homezvol2/ynkim4/.conda/envs/simplefold}"
 export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-4}"
 export PYTHONUNBUFFERED=1
+# The approved project launcher also supports the explicitly requested training pilot.
+if [[ "${1:-}" == --train-multimers ]]; then
+    shift
+    python -m pip install --no-deps fairscale==0.4.13
+    exec python scripts/train_multimers.py "$@"
+fi
 exec python scripts/run_sampling.py "$@"
