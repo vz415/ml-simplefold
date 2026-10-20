@@ -14,6 +14,7 @@ source_dir: ${dataset_dir}/source
 selection: configs/datasets/multimer_refined_v1.json
 pretrained_checkpoint: ${artifact_root}/checkpoints/simplefold_100M.ckpt
 trained_dir: ${artifact_root}/checkpoints/trained/${job_id}
+prepare_only: false
 max_steps: 600
 checkpoint_every: 100
 evaluation:

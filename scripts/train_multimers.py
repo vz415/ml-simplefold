@@ -46,7 +46,8 @@ def main(cfg):
     from boltz_data_pipeline.types import Record, Structure
 
     torch.set_float32_matmul_precision('medium')
-    assert torch.cuda.is_available(), 'CUDA is required'
+    if not cfg.prepare_only:
+        assert torch.cuda.is_available(), 'CUDA is required'
     output, dataset, trained = map(Path, [cfg.output_dir, cfg.dataset_dir, cfg.trained_dir])
     output.mkdir(parents=True, exist_ok=True); trained.mkdir(parents=True, exist_ok=True)
     if (output/'experiment.json').exists():
@@ -58,7 +59,8 @@ def main(cfg):
     write_json(output/'experiment.json',dict(job_id=cfg.job_id,source_commit=commit,
         mode='100M all-training synthetic capacity pilot',encoder='fixed cached ESM2-3B',
         validation='No held-out set; before/after unguided reconstruction diagnostics only',
-        evaluation=OmegaConf.to_container(cfg.evaluation,resolve=True),device=torch.cuda.get_device_name(0)))
+        evaluation=OmegaConf.to_container(cfg.evaluation,resolve=True),
+        device='CPU preparation' if cfg.prepare_only else torch.cuda.get_device_name(0)))
     pl.seed_everything(cfg.seed, workers=True)
     receipts = prepare(ROOT/cfg.selection, Path(cfg.source_dir), dataset, Path(cfg.artifact_root)/'ccd/ccd.pkl')
     write_json(output/'dataset-receipt.json', json.loads((dataset/'dataset-receipt.json').read_text()))
@@ -71,6 +73,10 @@ def main(cfg):
         assert int(f['cropped_num_tokens']) == item['residues']
         features.append(f)
     print('Full-assembly dataset preflight passed:', [(r['id'],r['residues']) for r in receipts], flush=True)
+
+    if cfg.prepare_only:
+        write_json(output/'completion.json',dict(state='dataset_prepared',records=len(receipts)))
+        return
 
     encoder, alphabet = esm_registry['esm2_3B']()
     encoder = encoder.eval().requires_grad_(False).cuda()
