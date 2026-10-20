@@ -36,7 +36,7 @@ reference coordinates.
   sampling setting; common target-specific seeds and conditioning for both arms.
 - Fixed ESM2-3B; no Rosetta relaxation or pLDDT selection.
 
-Use official OpenStructure **2.9.1** `compare-structures`, matching the upstream
+Use official OpenStructure **2.12.0** `compare-structures`, using the upstream
 scoring family: TM-score, GDT-TS (`oligo_gdtts`), all-atom lDDT, backbone lDDT,
 and RMSD. Backbone lDDT is not labeled Cα-only lDDT. Run a reference-vs-itself
 control before inference. Report mean/median and paired per-target differences
@@ -53,7 +53,7 @@ All compute and remote downloads run through Slurm. Source changes are isolated
 in `ml-simplefold-cameo22-benchmark` / `experiments/cameo22-retention`.
 
 Dataset: `/pub/ynkim4/ml-simplefold/artifacts/datasets/benchmarks/cameo22-retention-24-v1`.
-Shared tool: `/pub/ynkim4/ml-simplefold/artifacts/tools/openstructure/openstructure-2.9.1.sif`.
+Shared tool: `/pub/ynkim4/ml-simplefold/artifacts/tools/openstructure/openstructure-2.12.0.sif`.
 Outputs: `/pub/ynkim4/ml-simplefold/artifacts/runs/JOB_ID`.
 Local downloads: `artifacts/remote-runs/JOB_ID` in the primary laptop checkout.
 Do not download or commit model weights, CCD caches, container images or
@@ -63,3 +63,12 @@ Primary sources:
 - https://arxiv.org/html/2509.18480v4#S9.SS4
 - https://github.com/bjing2016/EigenFold/tree/87911791549ae46c7d48b24108a5e0e9e758aa94
 - https://git.scicore.unibas.ch/schwede/openstructure/
+
+## Scoring runtime availability
+
+Initial preparation job58310975 failed because the paper's2.9.1 container tag
+is no longer in the official registry. The registry currently publishes2.12.0.
+Both arms use that pinned release, with a SIF digest and identity control. This
+is a matched retention comparison, not exact reproduction of paper-table scores.
+The A100 job58310979 is retained and its dependency updated to the preparation
+retry; no duplicate GPU experiment is launched.

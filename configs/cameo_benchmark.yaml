@@ -8,8 +8,8 @@ output_dir: ${artifact_root}/runs/${job_id}
 dataset_dir: ${artifact_root}/datasets/benchmarks/cameo22-retention-24-v1
 selection: configs/datasets/cameo22_retention_24_v1.json
 openstructure:
-  image: docker://registry.scicore.unibas.ch/schwede/openstructure:2.9.1
-  path: ${artifact_root}/tools/openstructure/openstructure-2.9.1.sif
+  image: docker://registry.scicore.unibas.ch/schwede/openstructure:2.12.0
+  path: ${artifact_root}/tools/openstructure/openstructure-2.12.0.sif
 sampling:
   steps: 500
   tau: 0.01

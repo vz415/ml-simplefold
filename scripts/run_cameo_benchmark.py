@@ -41,6 +41,7 @@ def ost_score(cfg, model, reference, output):
     output.with_suffix('.log').write_text(result.stdout+'\n'+result.stderr)
     result.check_returncode()
     scores=json.loads(output.read_text())
+    assert scores.get('status','SUCCESS')=='SUCCESS', scores.get('status')
     import math
     for key in METRICS:
         assert key in scores and math.isfinite(float(scores[key])), (key,output)
@@ -110,6 +111,8 @@ def infer(cfg,selection,output):
     for item in data['prepared_records']:
         assert digest(item['reference_file'])==item['reference_sha256']
     write_json(output/'dataset-receipt.json',data)
+    runtime=json.loads((dataset/'openstructure-receipt.json').read_text())
+    assert digest(cfg.openstructure.path)==runtime['sif_sha256'], 'Scoring runtime changed'
     shutil.copy2(dataset/'openstructure-receipt.json',output/'openstructure-receipt.json')
     for checkpoint in cfg.checkpoints.values():assert digest(checkpoint.path)==checkpoint.sha256
     fasta=[dataset/'fasta'/f'{r["id"]}.fasta' for r in selection['records']]
@@ -159,6 +162,7 @@ def score(cfg,selection,output):
     import numpy as np
     import gemmi
     predictions=json.loads((output/'prediction-receipt.json').read_text())
+    reference_dir=output/'references';reference_dir.mkdir(exist_ok=True)
     targets={r['id']:r for r in selection['records']}
     receipts=json.loads((output/'dataset-receipt.json').read_text())['prepared_records']
     refs={r['id']:r for r in receipts};rows=[]
@@ -172,6 +176,8 @@ def score(cfg,selection,output):
         coords=np.array([[a.pos.x,a.pos.y,a.pos.z] for c in structure[0] for r in c for a in r]);assert np.isfinite(coords).all()
         validations.append(dict(file=p['file'],sequence_matches=True,finite_coordinates=True,residues=len(seq)))
         reference=Path(refs[p['id']]['reference_file'])
+        copied=reference_dir/reference.name
+        if not copied.exists():shutil.copy2(reference,copied)
         values=ost_score(cfg,path,reference,folder/f'{p["condition"]}-{p["id"]}-{p["sample"]}.json')
         rows.append(dict(**p,**values))
         write_json(output/'benchmark-results.json',rows)
