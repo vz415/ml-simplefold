@@ -24,6 +24,6 @@ cameo_runs:
   mixed: '58313695/retention'
 hydra:
   run:
-    dir: ${output_dir}
+    dir: logs/training-geometry/${oc.env:SLURM_JOB_ID,local}
   job:
     chdir: false
