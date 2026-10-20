@@ -72,3 +72,16 @@ Both arms use that pinned release, with a SIF digest and identity control. This
 is a matched retention comparison, not exact reproduction of paper-table scores.
 The A100 job58310979 is retained and its dependency updated to the preparation
 retry; no duplicate GPU experiment is launched.
+
+## Local report after collection
+
+`build_cameo_benchmark_report.py` builds one persistent summary/example page
+from downloaded results. It shows dataset means, per-target before/after metrics,
+and a target selector with experimental/original/fine-tuned structure overlays.
+Structure alignment is for display only and does not replace the standard scores.
+
+```bash
+python scripts/build_cameo_benchmark_report.py --run DOWNLOADED_RUN \
+  --output artifacts/analysis/cameo22-retention-24-v1 \
+  --library PATH_TO_LOCAL_3Dmol-min.js
+```
