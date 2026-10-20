@@ -1,4 +1,4 @@
-# Complete candidate catalogs; only examples used by the frozen training plan are downloaded.
+# Complete candidate catalogs; download PDB examples on demand, cache SwissProt v4 archive.
 schema_version: 1
 pdb:
   search_url: https://search.rcsb.org/rcsbsearch/v2/query
@@ -9,8 +9,8 @@ pdb:
   biological_assembly: true
 swissprot:
   catalog_url: https://ml-site.cdn-apple.com/models/simplefold/swissprot_list.csv
-  structure_url: https://alphafold.ebi.ac.uk/files/{id}.cif
-  # Keep the authors' model_v4 filenames; unavailable versions are explicitly rejected.
+  archive_url: https://ftp.ebi.ac.uk/pub/databases/alphafold/v4/swissprot_cif_v4.tar
+  # Cache the official v4 archive once; extract only the plan's selected .cif.gz members.
 cameo:
   provenance: configs/datasets/cameo22_retention_24_v1.json
   targets: 183

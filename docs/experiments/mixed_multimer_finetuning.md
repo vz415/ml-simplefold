@@ -15,8 +15,11 @@ loader replays that schedule without shuffling. Expected counts are 540 general
 and 60 synthetic, with realized counts logged. These are update probabilities,
 not percentages of disk space, atom counts, or elapsed GPU time.
 
-Only general entries drawn for this finite run are downloaded/prepared. This
-is sampling from the full eligible catalog, not mirroring the complete corpus
+Only general entries drawn for this finite run are prepared. PDB files are
+downloaded on demand. The exact SwissProt version4 CIF archive (39.47 GB) is
+cached from the official EBI archive, because individual website v4 URLs have
+been retired; only the selected members are extracted and processed. This
+samples from the full eligible catalogs without preparing the complete corpus
 or choosing examples by prediction quality. Raw and processed structures stay
 in `/pub/ynkim4/ml-simplefold/artifacts/datasets/general-finetuning-v1/`.
 The plan-specific directory is `mixed-600-seed82301`. The existing synthetic
@@ -26,8 +29,8 @@ The PDB catalog uses a 2020-05-01 release cutoff and resolution no worse than
 5 Å. The numeric-resolution query excludes entries without a resolution,
 including most NMR entries; the upstream filter can admit these because its
 parser defaults missing resolution to zero. SwissProt candidates
-come from the authors' filtered list; their version4 predictions must be
-available without silently substituting a newer model. Current PDB files can
+come from the authors' filtered list and exact version4 archive, without
+substituting a newer model. Current PDB files can
 include revisions, so this is a documented reconstruction, not an assertion of
 byte-identical historical training data. Data preparation records source URLs,
 hashes, exclusions, and any candidate replacement. The held-out CAMEO22

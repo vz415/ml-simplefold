@@ -1,8 +1,9 @@
 """Prefetch a finite mixed-training plan from full PDB and authors' SwissProt catalogs.
 
 Downloads and preparation run in Slurm. The immutable plan is replayed by training;
-raw/processed examples are reusable across plans. This does not mirror the full
-corpus or reconstruct the byte-identical historical SimpleFold training dataset.
+raw/processed examples are reusable across plans. Exact AFDB v4 access requires
+caching its full official SwissProt archive; only selected members are processed.
+This does not reconstruct the byte-identical historical SimpleFold training dataset.
 """
 from __future__ import annotations
 
@@ -22,6 +23,7 @@ import random
 import re
 import shutil
 import sys
+import threading
 import time
 import urllib.error
 import urllib.parse
@@ -29,8 +31,10 @@ import urllib.request
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src/simplefold"))
-PREPARATION_VERSION = 2
+sys.path[:0] = [str(ROOT / "src/simplefold"), str(ROOT / "scripts")]
+PREPARATION_VERSION = 4
+ARCHIVE_ACCESSORS = {}
+ARCHIVE_LOCK = threading.Lock()
 
 
 def digest(path):
@@ -127,7 +131,9 @@ def build_catalog(cfg, cache):
                    counts=dict(pdb=len(pdb_ids), swissprot=len(swiss_ids)),
                    sources=dict(pdb=pdb_receipt, swissprot=swiss_receipt), rcsb_query=query,
                    scope="Complete metadata candidate catalogs; sequence/structure eligibility is checked on demand. "
-                         "Current PDB revisions and exact authors' AFDB v4 IDs; not a historical corpus mirror.")
+                         "PDB structures are downloaded on demand from current revisions. The full official SwissProt "
+                         "v4 archive is cached, and only selected authors' list members are processed. "
+                         "This does not reconstruct the historical PDB training pool or preprocessing.")
     write_json(metadata / "catalog.json", catalog)
     print(f"Catalog ready: {len(pdb_ids):,} PDB and {len(swiss_ids):,} SwissProt candidates", flush=True)
     return catalog
@@ -221,9 +227,49 @@ def raw_path(source, catalog_id, cache):
     return Path(cache) / "raw" / source / f"{catalog_id}.cif"
 
 
+def swissprot_archive(cache, cfg):
+    """Initialize/hash the shared official archive once, before parallel extraction."""
+    require_slurm()
+    key = (str(Path(cache).resolve()), cfg["swissprot"]["archive_url"])
+    with ARCHIVE_LOCK:
+        if key not in ARCHIVE_ACCESSORS:
+            from swissprot_archive import ensure_archive
+            print("Preparing official AFDB SwissProt v4 archive under the shared /pub data cache", flush=True)
+            ARCHIVE_ACCESSORS[key] = ensure_archive(Path(cache), key[1],
+                timeout=cfg["timeout_seconds"], attempts=cfg["download_attempts"])
+            print("SwissProt v4 archive ready for selected-member extraction", flush=True)
+        return ARCHIVE_ACCESSORS[key]
+
+
 def download_candidate(source, catalog_id, cache, cfg):
-    return download(cfg[source]["structure_url"].format(id=catalog_id),
-                    raw_path(source, catalog_id, cache), cfg)
+    if source == "swissprot":
+        accessor = swissprot_archive(cache, cfg)
+        destination = raw_path(source, catalog_id, cache)
+        receipt_path = destination.with_name(destination.name + ".download.json")
+        if destination.exists() and receipt_path.exists():
+            receipt = json.loads(receipt_path.read_text())
+            if (receipt.get("archive_sha256") != accessor.archive_sha256
+                    or not receipt["url"].startswith(cfg["swissprot"]["archive_url"] + "#")
+                    or Path(receipt["member"]).name != catalog_id + ".cif.gz"
+                    or digest(destination) != receipt["sha256"]):
+                raise RuntimeError(f"SwissProt raw cache integrity mismatch: {destination}")
+            return receipt
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            receipt = accessor.extract(catalog_id, destination)
+        except KeyError as error:
+            raise ExcludedCandidate(f"Exact v4 SwissProt member unavailable: {catalog_id}") from error
+        if digest(destination) != receipt["sha256"] or receipt["archive_sha256"] != accessor.archive_sha256:
+            raise RuntimeError(f"SwissProt extraction integrity mismatch: {destination}")
+        write_json(receipt_path, receipt)
+        return receipt
+    url = cfg[source]["structure_url"].format(id=catalog_id)
+    try:
+        return download(url, raw_path(source, catalog_id, cache), cfg)
+    except urllib.error.HTTPError as error:
+        if error.code in (404, 410):
+            raise ExcludedCandidate(f"Exact source structure unavailable (HTTP {error.code}): {url}") from error
+        raise
 
 
 def get_resolution(block):
@@ -248,10 +294,6 @@ def protein_cif(raw, destination, cfg):
     """Keep protein polymers and their full SEQRES while expanding the first assembly."""
     import gemmi
     structure = gemmi.read_structure(str(raw))
-    structure.merge_chain_parts()
-    structure.remove_hydrogens()
-    structure.remove_waters()
-    structure.remove_alternative_conformations()
     proteins = {entity.name: list(entity.full_sequence) for entity in structure.entities
                 if entity.entity_type == gemmi.EntityType.Polymer
                 and entity.polymer_type == gemmi.PolymerType.PeptideL}
@@ -260,7 +302,13 @@ def protein_cif(raw, destination, cfg):
     assembly = None
     if cfg["pdb"]["biological_assembly"] and structure.assemblies:
         assembly = structure.assemblies[0].name
+        # Assembly generators can reference waters and ligands. Expand while all
+        # original subchains still exist, then perform protein-only cleanup.
         structure.transform_to_assembly(assembly, gemmi.HowToNameCopiedChain.AddNumber)
+    structure.merge_chain_parts()
+    structure.remove_hydrogens()
+    structure.remove_waters()
+    structure.remove_alternative_conformations()
     # Retain only model 1 and protein polymer residues; ligands/NA cannot enter the
     # upstream parser, which otherwise unconditionally treats every subchain as protein.
     while len(structure) > 1:
@@ -282,6 +330,13 @@ def protein_cif(raw, destination, cfg):
                 residue.subchain = name
     if not metadata or len(metadata) > int(cfg["pdb"]["max_chains"]):
         raise ExcludedCandidate(f"Protein chain count outside 1..{cfg['pdb']['max_chains']}: {len(metadata)}")
+    for index in range(len(structure.entities) - 1, -1, -1):
+        entity = structure.entities[index]
+        subchains = [name for name, meta in metadata.items() if meta["entity"] == entity.name]
+        if subchains:
+            entity.subchains = subchains
+        else:
+            del structure.entities[index]
     for index in range(len(structure.connections) - 1, -1, -1):
         connection = structure.connections[index]
         if any((partner.chain_name, str(partner.res_id.seqid)) not in addresses
@@ -490,11 +545,13 @@ def prepare(config_path, dataset_dir, ccd_path, synthetic_selection, steps=600,
     exclusions = json.loads(exclusions_path.read_text()) if exclusions_path.exists() else {}
     replacements = []
     candidates = sorted({(row["source"], row["catalog_id"]) for row in plan["draws"] if row["source"] != "synthetic"})
+    if any(source == "swissprot" for source, _ in candidates):
+        swissprot_archive(cache, cfg)
 
     def prefetch(candidate):
         try:
             download_candidate(*candidate, cache, cfg)
-        except Exception as error:
+        except ExcludedCandidate as error:
             return candidate, f"{type(error).__name__}: {error}"
         return candidate, None
 
@@ -526,7 +583,7 @@ def prepare(config_path, dataset_dir, ccd_path, synthetic_selection, steps=600,
                     selected[source][row["record_id"]] = prepare_candidate(
                         source, catalog_id, cache, cfg, components, screen, screen_hash)
                     break
-                except (ExcludedCandidate, ValueError, KeyError, OSError, RuntimeError) as error:
+                except ExcludedCandidate as error:
                     exclusions[key] = dict(source=source, catalog_id=catalog_id,
                                            reason=f"{type(error).__name__}: {error}")
                     write_json(exclusions_path, exclusions)
