@@ -85,6 +85,8 @@ def metrics(result):
         backbone_backbone_overlaps=c['clashes_by_atom_class']['backbone_backbone'],
         backbone_sidechain_overlaps=c['clashes_by_atom_class']['backbone_sidechain'],
         sidechain_sidechain_overlaps=c['clashes_by_atom_class']['sidechain_sidechain'])
+    values.update(peptide_extreme_length_percent=c['peptide_links']['extreme_length_percent'],
+                  peptide_links_over_2_angstrom=c['peptide_links']['links_over_2_angstrom'])
     if 'molprobity' in result:
         m = result['molprobity']
         values.update(molprobity_clashscore=m['clashscore'],

@@ -31,6 +31,11 @@ workers, and cache paths. Remote artifacts remain under
   denominators, percentages, deviations and atom/residue locations.
 - Missing heavy atoms in observed residues, so incomplete inputs cannot
   silently acquire a perfect score. Entirely unresolved residues are not inferred.
+- Independent sequence-consecutive peptide C–N lengths catch broken links even
+  when cctbx distance-based topology omits them. Diagnostic extreme-length
+  bounds are1.1–1.6Å; links>2Å are counted separately. TER/numbering gaps are
+  respected. Native cctbx covalent counts do not represent all intended
+  disulfides or peptide links; retain the recorded topology limitations.
 
 The chemistry asset is pinned to cctbx2026.9 with SHA256
 `4d5f67a7e2ae1c411e976d023e413aeff3ec310985aebf05ba3a093e5ca1acf1`.

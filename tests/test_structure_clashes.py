@@ -129,6 +129,17 @@ class TestStructureClashes(unittest.TestCase):
         self.assertAlmostEqual(result['overlap_p95_angstrom'], 2.4)
         self.assertEqual(result['overlaps_at_least_1_angstrom'], 2)
 
+    def test_stretched_peptide_link_is_detected_without_inventing_links_across_gaps(self):
+        result = self.analyze([
+            atom(1, 'C', 'GLY', 'A', 1, (0, 0, 0)),
+            atom(2, 'N', 'GLY', 'A', 2, (5, 0, 0)),
+            atom(3, 'C', 'GLY', 'A', 2, (6, 0, 0)),
+            atom(4, 'N', 'GLY', 'A', 4, (10, 0, 0)),
+        ])
+        self.assertEqual(result['peptide_links']['evaluated'], 1)
+        self.assertEqual(result['peptide_links']['links_over_2_angstrom'], 1)
+        self.assertEqual(result['peptide_links']['extreme_length_percent'], 100)
+
 
 if __name__ == '__main__':
     unittest.main()

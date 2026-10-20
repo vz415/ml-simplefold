@@ -274,6 +274,16 @@ def analyze_clashes(path, chain_components=None, overlap_threshold=0.4, include_
         component_counts[component]['worst_clashes'] = [c for c in clashes if component in c['components']][:5]
     depths = np.array([c['overlap_angstrom'] for c in clashes])
     residues = {a.residue_key for a in atoms}
+    residue_atoms = defaultdict(dict)
+    for a in atoms:
+        residue_atoms[a.residue_key][a.name] = a.xyz
+    links = []
+    keys = sorted(residue_atoms)
+    for first, second in zip(keys, keys[1:]):
+        if _consecutive(first, second) and 'C' in residue_atoms[first] and 'N' in residue_atoms[second]:
+            distance = float(np.linalg.norm(np.asarray(residue_atoms[first]['C']) - residue_atoms[second]['N']))
+            links.append({'first': list(first), 'second': list(second), 'distance_angstrom': distance})
+    unusual_links = [link for link in links if not 1.1 <= link['distance_angstrom'] <= 1.6]
     return {
         'method': ('Nonbonded protein heavy-atom geometric vdW overlaps; excludes '
                    + ('1–2/1–3' if include_1_4 else '1–2/1–3/1–4')
@@ -295,6 +305,14 @@ def analyze_clashes(path, chain_components=None, overlap_threshold=0.4, include_
         'overlap_p95_angstrom': float(np.quantile(depths, .95)) if len(depths) else 0.0,
         'overlap_sum_squared_angstrom2': float(np.sum(depths ** 2)),
         'overlaps_at_least_1_angstrom': int(np.sum(depths >= 1.0)),
+        'peptide_links': {
+            'evaluated': len(links), 'extreme_length_count': len(unusual_links),
+            'extreme_length_percent': 100 * len(unusual_links) / len(links) if links else None,
+            'links_over_2_angstrom': sum(link['distance_angstrom'] > 2 for link in links),
+            'max_distance_angstrom': max((link['distance_angstrom'] for link in links), default=None),
+            'extreme_links': unusual_links,
+            'method': 'Independent C–N distances between sequence-consecutive observed residues; TER and residue-number gaps are respected; diagnostic bounds 1.1–1.6 Å, not a statistical sigma test.',
+        },
         'CA_nonadjacent_clash_count': ca_clashes, 'omitted_atoms': omitted,
         'assumptions': {'radii_angstrom': RADII, 'excluded_bond_orders': [1, 2] if include_1_4 else [1, 2, 3],
                         'protein_ATOM_only': True, 'first_model_only': True,

@@ -92,9 +92,28 @@ def _validation_summary(validation):
         "outliers": int(validation.n_outliers),
         "evaluated": int(validation.n_total),
         "outlier_percent": _percent(validation.n_outliers, validation.n_total),
-        "outlier_details": [json.loads(item.as_JSON()) for item in validation.results
+        "outlier_details": [_outlier_json(item) for item in validation.results
                             if item.is_outlier()],
     }
+
+
+def _outlier_json(item):
+    # Unlike bond/angle/chirality, cctbx2026.9 planarity inherits the empty
+    # entity.as_JSON implementation. Preserve its actual atom locations here.
+    details = json.loads(item.as_JSON())
+    if details or not hasattr(item, "atoms_info"):
+        return details
+    details = {
+        name: getattr(item, name) for name in
+        ("score", "outlier", "xyz", "rms_deltas", "delta_max", "residual")
+        if hasattr(item, name)
+    }
+    details["atoms_info"] = [{
+        name: getattr(atom, name) for name in
+        ("name", "element", "model_id", "chain_id", "resseq", "icode", "resname",
+         "altloc", "occupancy", "xyz") if hasattr(atom, name)
+    } for atom in item.atoms_info]
+    return details
 
 
 def _missing_atoms(hierarchy):
@@ -249,12 +268,34 @@ def _analyze(path, log):
             "translation_only_angstrom": shift,
             "zero_occupancy_atoms_excluded": True,
             "heavy_atom_max_displacement_during_hydrogenation": heavy_displacement,
+            "covalent_topology": {
+                "method": "cctbx monomer library plus distance-inferred inter-residue links",
+                "link_distance_cutoff_angstrom": params.pdb_interpretation.link_distance_cutoff,
+                "disulfide_distance_cutoff_angstrom": params.pdb_interpretation.disulfide_distance_cutoff,
+                "ssbond_header_consumed": False,
+                "limitations": [
+                    "Peptide links beyond the default 3 A cutoff and their associated angle/dihedral restraints are not represented.",
+                    "Disulfides are inferred from nearby sulfur atoms; intended stretched disulfides are not tested.",
+                    "Hierarchy-only input does not consume SSBOND/LINK headers as covalent topology.",
+                ],
+            },
+            "geometry_denominators": (
+                "Native cctbx evaluated restraint counts, not sequence-expected bonds or intended disulfide counts. "
+                "Bond/angle RMS and native denominators can include inferred links with covalent origin classes; "
+                "native outlier enumeration filters origin_id=0 ('covalent geometry'). "
+                "Consequently these outlier fractions do not test all inferred disulfide restraints."
+            ),
         },
         "atom_counts": {"input": input_atoms, "occupied_heavy": len(signature),
                         "added_hydrogens": h_atoms,
                         "hydrogenated_total": len(hmodel.get_hierarchy().atoms())},
         "clashscore": float(raw_score),
         "clash_count": int(clash_count),
+        "clashscore_normalization": {
+            "atoms_scored": int(clashes.probe_clashscore_manager.n_atoms),
+            "clashes_scored": int(clashes.probe_clashscore_manager.n_clashes),
+            "occupancy_cutoff_percent": float(clashes.probe_clashscore_manager.occupancy_frac),
+        },
         "clashes": native_clashes,
         "ramachandran": rama_summary,
         "rotamers": rota_summary,

@@ -25,6 +25,8 @@ LABELS = {
     'p95_overlap_angstrom': '95th-percentile overlap ↓ (Å)',
     'severe_overlaps': 'Overlaps ≥1 Å ↓',
     'incomplete_residue_percent': 'Incomplete observed residues (%)',
+    'peptide_extreme_length_percent': 'Extreme peptide C–N lengths ↓ (%)',
+    'peptide_links_over_2_angstrom': 'Peptide C–N links >2 Å ↓',
 }
 ARMS = {'original': 'Original 100M', 'six_only': 'Six-only fine-tuning',
         'mixed': '90% PDB / 10% complexes', 'refined_target': 'Refined training targets',
@@ -42,6 +44,8 @@ def summary_table(summary, cohort, references=True):
         for g in groups:
             v = g['metrics'].get(key)
             cell = '—' if v is None or v['mean'] is None else f'{v["mean"]:.2f} ± {v["std"]:.2f}'
+            if v and v['n'] != g['structures']:
+                cell += f' <small>(n={v["n"]})</small>'
             cells.append(f'<td>{cell}</td>')
         rows.append(f'<tr><th>{html.escape(LABELS[key])}</th>'+''.join(cells)+'</tr>')
     return '<div class="scroll"><table><thead><tr><th>Metric · mean ± SD</th>'+heads+'</tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
