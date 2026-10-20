@@ -167,6 +167,7 @@ def _analyze(path, log):
     import iotbx.pdb
     import iotbx.phil
     from mmtbx import model as model_module
+    from mmtbx.hydrogens import reduce_hydrogen
     from mmtbx.probe import Helpers
     from mmtbx.validation.clashscore2 import clashscore2
     from mmtbx.validation.ramalyze import ramalyze
@@ -222,11 +223,22 @@ def _analyze(path, log):
     dm = DataManager(datatypes=["model"], logger=log)
     dm.add_model(str(path), model.deep_copy())
     probe = iotbx.phil.parse(Helpers.probe_phil_parameters).extract().probe
-    clashes = clashscore2(probe_parameters=probe, data_manager=dm,
-                         keep_hydrogens=False, do_flips=False, nuclear=False,
-                         fast=False, condensed_probe=True, verbose=False,
-                         b_factor_cutoff=None, save_probe_output=False,
-                         ignore_missing_restraints=False, out=log)
+    # Reduce2 constructs fresh interpretation parameters. Its symmetric-name
+    # canonicalization is separate from the Asn/Gln/His do_flips option.
+    original_params = reduce_hydrogen.get_reduce_pdb_interpretation_params
+    def preserve_atom_names(use_neutron_distances):
+        params = original_params(use_neutron_distances)
+        params.pdb_interpretation.flip_symmetric_amino_acids = False
+        return params
+    reduce_hydrogen.get_reduce_pdb_interpretation_params = preserve_atom_names
+    try:
+        clashes = clashscore2(probe_parameters=probe, data_manager=dm,
+                             keep_hydrogens=False, do_flips=False, nuclear=False,
+                             fast=False, condensed_probe=True, verbose=False,
+                             b_factor_cutoff=None, save_probe_output=False,
+                             ignore_missing_restraints=False, out=log)
+    finally:
+        reduce_hydrogen.get_reduce_pdb_interpretation_params = original_params
     hmodel = clashes.hydrogenated_model
     heavy_displacement = _same_heavy_atoms(signature, _heavy_signature(hmodel.get_hierarchy()))
     native_clashes = json.loads(clashes.as_JSON())
