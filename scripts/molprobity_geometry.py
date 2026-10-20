@@ -168,6 +168,7 @@ def _analyze(path, log):
     import iotbx.phil
     from mmtbx import model as model_module
     from mmtbx.hydrogens import reduce_hydrogen
+    from mmtbx.programs import probe2
     from mmtbx.probe import Helpers
     from mmtbx.validation.clashscore2 import clashscore2
     from mmtbx.validation.ramalyze import ramalyze
@@ -208,6 +209,7 @@ def _analyze(path, log):
     params.pdb_interpretation.proceed_with_excessive_length_bonds = True
     params.pdb_interpretation.max_reasonable_bond_distance = None
     params.pdb_interpretation.flip_symmetric_amino_acids = False
+    params.pdb_interpretation.automatic_linking.link_none = True
     model.process(make_restraints=True, pdb_interpretation_params=params)
     _same_heavy_atoms(signature, _heavy_signature(model.get_hierarchy()))
     hierarchy = model.get_hierarchy()
@@ -226,11 +228,18 @@ def _analyze(path, log):
     # Reduce2 constructs fresh interpretation parameters. Its symmetric-name
     # canonicalization is separate from the Asn/Gln/His do_flips option.
     original_params = reduce_hydrogen.get_reduce_pdb_interpretation_params
+    original_probe_params = probe2.getPdbInterpretationParams
     def preserve_atom_names(use_neutron_distances):
         params = original_params(use_neutron_distances)
         params.pdb_interpretation.flip_symmetric_amino_acids = False
+        params.pdb_interpretation.automatic_linking.link_none = True
+        return params
+    def isolated_probe_params(useNeutronDistances=False):
+        params = original_probe_params(useNeutronDistances)
+        params.pdb_interpretation.automatic_linking.link_none = True
         return params
     reduce_hydrogen.get_reduce_pdb_interpretation_params = preserve_atom_names
+    probe2.getPdbInterpretationParams = isolated_probe_params
     try:
         clashes = clashscore2(probe_parameters=probe, data_manager=dm,
                              keep_hydrogens=False, do_flips=False, nuclear=False,
@@ -239,6 +248,7 @@ def _analyze(path, log):
                              ignore_missing_restraints=False, out=log)
     finally:
         reduce_hydrogen.get_reduce_pdb_interpretation_params = original_params
+        probe2.getPdbInterpretationParams = original_probe_params
     hmodel = clashes.hydrogenated_model
     heavy_displacement = _same_heavy_atoms(signature, _heavy_signature(hmodel.get_hierarchy()))
     native_clashes = json.loads(clashes.as_JSON())
@@ -281,7 +291,8 @@ def _analyze(path, log):
             "zero_occupancy_atoms_excluded": True,
             "heavy_atom_max_displacement_during_hydrogenation": heavy_displacement,
             "covalent_topology": {
-                "method": "cctbx monomer library plus distance-inferred inter-residue links",
+                "method": "cctbx monomer library, peptide links and distance-inferred disulfides; incidental automatic crosslinks disabled",
+                "incidental_automatic_crosslinks": False,
                 "link_distance_cutoff_angstrom": params.pdb_interpretation.link_distance_cutoff,
                 "disulfide_distance_cutoff_angstrom": params.pdb_interpretation.disulfide_distance_cutoff,
                 "ssbond_header_consumed": False,
@@ -306,7 +317,7 @@ def _analyze(path, log):
         "clashscore_normalization": {
             "atoms_scored": int(clashes.probe_clashscore_manager.n_atoms),
             "clashes_scored": int(clashes.probe_clashscore_manager.n_clashes),
-            "occupancy_cutoff_percent": float(clashes.probe_clashscore_manager.occupancy_frac),
+            "occupancy_cutoff_fraction": float(clashes.probe_clashscore_manager.occupancy_frac),
         },
         "clashes": native_clashes,
         "ramachandran": rama_summary,
