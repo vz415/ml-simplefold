@@ -30,8 +30,11 @@ def main(cfg):
         subprocess.run(['curl', '--fail', '--location', '--retry', '3', '--connect-timeout',
                         '30', '--continue-at', '-', '--output', str(partial), cfg.chem_data_url], check=True)
         partial.rename(asset)
-    digest = hashlib.file_digest(asset.open('rb'), 'sha256').hexdigest()
-    assert digest == cfg.chem_data_sha256, 'Chemistry data download checksum mismatch'
+    checksum = hashlib.sha256()
+    with asset.open('rb') as stream:
+        for block in iter(lambda: stream.read(8 * 1024 * 1024), b''):
+            checksum.update(block)
+    assert checksum.hexdigest() == cfg.chem_data_sha256, 'Chemistry data download checksum mismatch'
     subprocess.run(['conda', 'install', '--yes', '--prefix', cfg.geometry_env, str(asset)], check=True, env=env)
     python = str(Path(cfg.geometry_env) / 'bin/python')
     subprocess.run([python, '-c', 'import mmtbx.validation, iotbx.pdb, gemmi, hydra; print("Geometry imports passed", flush=True)'], check=True)
