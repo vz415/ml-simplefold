@@ -1,0 +1,10 @@
+# Matched 3B repeat: change only the six synthetic targets to approved receptor cores.
+defaults:
+  - mixed_train_3b
+  - _self_
+
+dataset_dir: ${artifact_root}/datasets/synthetic/multimer-receptor-core-v1
+selection: configs/datasets/multimer_receptor_core_v1.json
+general_replay_selection: configs/datasets/multimer_refined_v1.json
+# Released weights verified by the uncropped 3B preflight/run (58333273/58333275).
+pretrained_sha256: 88d4c7a240bf3815cb35342b4ddc1128ac243a2ea0256eb8a4df1209125868b5
