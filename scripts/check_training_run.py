@@ -356,7 +356,11 @@ print(json.dumps(rows))'''
         job = self.remote(f'cd {checkout} && ' + shlex.join(command)).strip().split(';')[0]
         assert job.isdigit(), job
         self.record(geometry_job=job, geometry_reused=False, geometry_command=command,
-                    remote_source_commit=commit, geometry_overrides=overrides)
+                    project=policy['project_name'], remote_checkout=self.cfg.hpc.checkout,
+                    remote_source_commit=commit, geometry_overrides=overrides,
+                    geometry_python_command=[
+                        '/data/homezvol2/ynkim4/.conda/envs/simplefold-geometry/bin/python',
+                        'scripts/run_training_geometry.py', *overrides])
         self.note(f'geometry-{job}', 'Submitted CPU geometry validation', self.state)
         return job
 
@@ -465,7 +469,11 @@ print(json.dumps(rows))'''
 
     def execute(self):
         self.state.pop('error', None)
-        self.record(status='collecting', run_id=str(self.cfg.run_id))
+        def git(*args):
+            return subprocess.check_output(['git', *args], cwd=ROOT, text=True).strip()
+        self.record(status='collecting', run_id=str(self.cfg.run_id), local_checkout=str(ROOT),
+                    workflow_commit=git('rev-parse', 'HEAD'), source_branch=git('branch', '--show-current'),
+                    local_git_state=git('status', '--porcelain') or 'clean')
         self.collect()
         selection, rows = self.inputs()
         self.record(status='scoring_interfaces')
