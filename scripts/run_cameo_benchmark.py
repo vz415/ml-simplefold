@@ -166,6 +166,10 @@ def score(cfg,selection,output):
     targets={r['id']:r for r in selection['records']}
     receipts=json.loads((output/'dataset-receipt.json').read_text())['prepared_records']
     refs={r['id']:r for r in receipts};rows=[]
+    runtime=json.loads((output/'openstructure-receipt.json').read_text())
+    assert digest(cfg.openstructure.path)==runtime['sif_sha256'], 'Scoring runtime changed'
+    for ref in receipts:
+        assert digest(ref['reference_file'])==ref['reference_sha256'], 'Scoring reference changed'
     folder=output/'scores';folder.mkdir(exist_ok=True)
     validations=[]
     for p in predictions:

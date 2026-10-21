@@ -4,6 +4,7 @@ artifact_dir: ${oc.env:SIMPLEFOLD_LOCAL_ARTIFACT_DIR,${hydra:runtime.cwd}/artifa
 output_dir: ${artifact_dir}/analysis/training-checks/${run_id}
 offline: false
 refresh_downloads: false  # Completed local predictions are immutable and verified from receipts.
+completion_job_id: null  # split pipeline: CPU scoring job; run_id stays the training job
 wait_for_training: false
 training_wait_seconds: 86400
 training_poll_seconds: 30

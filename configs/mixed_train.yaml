@@ -6,7 +6,9 @@ defaults:
   - model: simplefold
   - _self_
 seed: 82301
-phase: train
+phase: train  # train | sample | score | preflight | memory_probe | prepare
+source_run: null  # sample/score read the resolved config from this training directory
+expected_commit: null
 model_name: 100M
 artifact_root: ${oc.env:SIMPLEFOLD_ARTIFACT_DIR,/pub/ynkim4/ml-simplefold/artifacts}
 job_id: ${oc.env:SLURM_JOB_ID}
@@ -58,6 +60,6 @@ model:
   sample_dir: ${output_dir}/samples
 hydra:
   run:
-    dir: ${output_dir}
+    dir: logs/mixed-training/${job_id}
   job:
     chdir: false

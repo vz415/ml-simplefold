@@ -182,21 +182,22 @@ print(json.dumps(rows))'''
         return True
 
     def wait_for_training(self):
+        job = str(self.cfg.completion_job_id or self.cfg.run_id)
         started = time.monotonic()
         while True:
-            state = self.remote(shlex.join(['sacct', '-X', '-n', '-j', str(self.cfg.run_id),
+            state = self.remote(shlex.join(['sacct', '-X', '-n', '-j', job,
                                             '--format=State', '--parsable2'])).strip()
             if state.startswith('COMPLETED'):
                 return True
             if any(s in state for s in ['FAILED', 'CANCELLED', 'TIMEOUT', 'OUT_OF_MEMORY', 'NODE_FAIL']):
-                raise RuntimeError(f'Training job {self.cfg.run_id}: {state}')
-            queue = self.remote(shlex.join(['squeue', '-h', '-j', str(self.cfg.run_id), '-o', '%T|%r'])).strip()
+                raise RuntimeError(f'Completion job {job}: {state}')
+            queue = self.remote(shlex.join(['squeue', '-h', '-j', job, '-o', '%T|%r'])).strip()
             if 'DependencyNeverSatisfied' in queue:
-                raise RuntimeError(f'Training job {self.cfg.run_id}: {queue}')
+                raise RuntimeError(f'Completion job {job}: {queue}')
             if time.monotonic() - started >= self.cfg.training_wait_seconds:
                 self.record(status='waiting_for_training')
                 return False
-            print(f'Training {self.cfg.run_id}: {queue or state or "starting"}', flush=True)
+            print(f'Completion job {job}: {queue or state or "starting"}', flush=True)
             time.sleep(min(30, self.cfg.training_poll_seconds))
 
     def local_ready(self):

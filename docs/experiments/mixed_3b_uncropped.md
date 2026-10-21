@@ -41,3 +41,12 @@ or model download is planned.
 
 After training, run `check_training_run.py` on the new job to collect, score,
 validate and report, using the same automated pipeline as the 100M comparison.
+
+
+## Workflow update after the first 3B result
+
+The completed 58333275 run used the original combined allocation. Future mixed
+runs use [three separate stages](../mixed_training_pipeline.md): `phase=train`
+now exports weights and stops; `phase=sample` needs a GPU; `phase=score` runs
+OpenStructure on CPU. This replaces step 3 above for subsequent experiments.
+No new 3B training was submitted as part of the workflow change.
