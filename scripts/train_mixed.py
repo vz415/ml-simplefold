@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fine-tune original100M on a frozen random mixture; all compute is Slurm-only."""
+"""Fine-tune released folding weights on a frozen mixture; compute is Slurm-only."""
 import copy
 from collections import Counter
 import gc
@@ -9,6 +9,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
+import time
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / 'src/simplefold'), str(ROOT / 'scripts')]
@@ -38,6 +39,19 @@ def datasets(cfg):
     return data
 
 
+def retention_config(cfg, pretrained_hash):
+    """Carry the actual folding architecture and both weights into the benchmark."""
+    benchmark = hydra.compose(config_name='cameo_benchmark')
+    benchmark.artifact_root = cfg.artifact_root
+    benchmark.model_name = cfg.model_name
+    benchmark.model.architecture = copy.deepcopy(cfg.model.architecture)
+    benchmark.output_dir = str(Path(cfg.output_dir) / 'retention')
+    benchmark.checkpoints.pretrained.path = str(cfg.pretrained_checkpoint)
+    benchmark.checkpoints.pretrained.sha256 = pretrained_hash
+    benchmark.checkpoints.fine_tuned.path = str(Path(cfg.trained_dir) / f'simplefold_{cfg.model_name}_ema.ckpt')
+    return benchmark
+
+
 def evaluate_complexes(cfg, model, synthetic, output):
     """Matched seeds/settings against the same six synthetic training targets."""
     import numpy as np
@@ -47,7 +61,8 @@ def evaluate_complexes(cfg, model, synthetic, output):
     from lightning.fabric.utilities.apply_func import move_data_to_device
     from utils.datamodule_utils import collate
     from utils.boltz_utils import process_structure, save_structure
-    model.to('cuda').eval()
+    model.eval()
+    model.model.to('cuda')
     model.processor.device = torch.device('cuda')
     model.processor.encoder.to('cuda')
     model.processor.mapping = model.processor.mapping.to('cuda')
@@ -55,13 +70,13 @@ def evaluate_complexes(cfg, model, synthetic, output):
     sampler = hydra.utils.instantiate(cfg.model.sampler,
         num_timesteps=cfg.evaluation.steps, tau=cfg.evaluation.tau, log_timesteps=True)
     predictions = []
-    trained = Path(cfg.trained_dir) / 'simplefold_100M_ema.ckpt'
+    trained = Path(cfg.trained_dir) / f'simplefold_{cfg.model_name}_ema.ckpt'
     selection = json.loads((ROOT / cfg.selection).read_text())['records']
     lookup = {record_id: index for index, (_, record_id) in enumerate(synthetic.samples)}
     for condition, weights in [('pretrained', Path(cfg.pretrained_checkpoint)),
                                ('fine_tuned', trained)]:
         model.model.load_state_dict(torch.load(weights, map_location='cpu', weights_only=True), strict=True)
-        folder = output / condition / 'predictions_simplefold_100M'
+        folder = output / condition / f'predictions_simplefold_{cfg.model_name}'
         folder.mkdir(parents=True, exist_ok=True)
         for index, item in enumerate(selection):
             for sample in range(cfg.evaluation.samples):
@@ -103,7 +118,7 @@ def main(cfg):
         synthetic_selection=str(cfg.selection),
         synthetic_selection_sha256=digest(ROOT / cfg.selection),
         synthetic_dataset=str(cfg.dataset_dir),
-        checkpoint=str(cfg.pretrained_checkpoint), encoder='frozen ESM2-3B',
+        checkpoint=str(cfg.pretrained_checkpoint), model_name=cfg.model_name, encoder='frozen ESM2-3B',
         scope='Random general PDB/SwissProt replay mixed with six synthetic training complexes'))
     if cfg.phase == 'prepare':
         subprocess.run([sys.executable, str(ROOT / 'scripts/prepare_general_training.py'),
@@ -122,7 +137,14 @@ def main(cfg):
     from lightning.pytorch.loggers import CSVLogger
     from mixed_training import MixtureDataModule
     from utils.training_checkpoint import load_pretrained_folding_weights
-    assert digest(cfg.pretrained_checkpoint) == cfg.pretrained_sha256, 'Original released checkpoint required'
+    pretrained_hash = digest(cfg.pretrained_checkpoint)
+    expected_hash = cfg.pretrained_sha256
+    if cfg.preflight_receipt:
+        preflight = json.loads(Path(cfg.preflight_receipt).read_text())
+        assert preflight['model_name'] == cfg.model_name
+        expected_hash = preflight['pretrained_sha256']
+    if expected_hash:
+        assert pretrained_hash == expected_hash, 'Original released checkpoint required'
     os.environ['TORCH_HOME'] = str(Path(cfg.artifact_root) / 'torch')
     torch.set_float32_matmul_precision('medium')
     pl.seed_everything(cfg.seed, workers=True)
@@ -130,6 +152,8 @@ def main(cfg):
     plan = json.loads(plan_path.read_text())
     receipt = json.loads((Path(cfg.general_dataset_dir) / 'dataset-receipt.json').read_text())
     assert digest(plan_path) == receipt['training_plan_sha256']
+    if cfg.preflight_receipt:
+        assert preflight['training_plan_sha256'] == receipt['training_plan_sha256']
     prepared_selection = ROOT / cfg.get('general_replay_selection', cfg.selection)
     assert digest(prepared_selection) == receipt['inputs']['synthetic_selection_sha256']
     # Replay draws name complexes by ID. Cropped targets may reuse that frozen
@@ -165,16 +189,38 @@ def main(cfg):
     modules = datasets(cfg)
     data = MixtureDataModule({key: module._train_set for key, module in modules.items()}, draws)
     # Check data paths and sampled record identity before reserving model memory.
+    examples = []
     for index in range(len(data.dataset)):
         features = data.dataset[index]
+        examples.append(dict(index=index, source=draws[index]['source'],
+            record_id=draws[index]['record_id'], residues=int(features['cropped_num_tokens'])))
         if draws[index]['source'] == 'synthetic':
             assert features['cropped_num_tokens'] == features['max_num_tokens']
         else:
             assert int(features['cropped_num_tokens']) <= cfg.general.max_tokens
     print('Mixture preflight passed:', dict(Counter(draw['source'] for draw in draws)), flush=True)
     if cfg.phase == 'preflight':
+        write_json(output / 'preflight-summary.json', dict(model_name=cfg.model_name,
+            pretrained_checkpoint=str(cfg.pretrained_checkpoint), pretrained_sha256=pretrained_hash,
+            training_plan_sha256=digest(plan_path), draws=len(draws), examples=examples))
         write_json(output / 'completion.json', dict(state='preflight_passed', draws=len(draws)))
         return
+
+    probe = cfg.phase == 'memory_probe'
+    if probe:
+        # Include every full synthetic complex and the two largest general examples.
+        chosen = {}
+        for item in sorted(examples, key=lambda r: r['residues'], reverse=True):
+            if item['source'] == 'synthetic':
+                chosen.setdefault(item['record_id'], item)
+        general = sorted((r for r in examples if r['source'] != 'synthetic'),
+                         key=lambda r: r['residues'], reverse=True)[:2]
+        selected = list(chosen.values()) + general
+        write_json(output / 'probe-examples.json', selected)
+        active_draws = [draws[r['index']] for r in selected]
+        data = MixtureDataModule({key: module._train_set for key, module in modules.items()}, active_draws)
+    else:
+        active_draws = draws
 
     assert torch.cuda.is_available(), 'CUDA required'
     trained = Path(cfg.trained_dir)
@@ -182,30 +228,76 @@ def main(cfg):
     model = hydra.utils.instantiate(cfg.model)
     load_pretrained_folding_weights(model, cfg.pretrained_checkpoint)
     model.model_ema.requires_grad_(False)
-    checkpoints = ModelCheckpoint(dirpath=trained, filename='step-{step:06d}',
-        every_n_train_steps=cfg.checkpoint_every, save_top_k=-1, save_last=True,
-        save_on_train_epoch_end=False)
+    if cfg.activation_checkpointing:
+        from model.torch.blocks import HomogenTrunk
+        for module in model.model.modules():
+            if isinstance(module, HomogenTrunk):
+                module.activation_checkpointing = True
+
+    class Resources(pl.Callback):
+        def on_train_batch_start(self, trainer, module, batch, batch_idx):
+            torch.cuda.synchronize()
+            self.started = time.perf_counter()
+
+        def on_train_batch_end(self, trainer, module, outputs, batch, batch_idx):
+            torch.cuda.synchronize()
+            item = dict(step=batch_idx, seconds=time.perf_counter()-self.started,
+                        peak_allocated_bytes=torch.cuda.max_memory_allocated(),
+                        peak_reserved_bytes=torch.cuda.max_memory_reserved())
+            with (output / 'step-resources.jsonl').open('a') as stream:
+                stream.write(json.dumps(item)+'\n')
+
+    callbacks = [Resources()]
+    checkpointing = not probe and cfg.checkpoint_every > 0
+    if checkpointing:
+        callbacks.append(ModelCheckpoint(dirpath=trained, filename='step-{step:06d}',
+            every_n_train_steps=cfg.checkpoint_every, save_top_k=-1, save_last=cfg.checkpoint_save_last,
+            save_on_train_epoch_end=False))
     trainer = pl.Trainer(accelerator='gpu', devices=1, strategy='auto', precision='bf16-mixed',
-        max_steps=cfg.max_steps, max_epochs=1, limit_val_batches=0, num_sanity_val_steps=0,
-        logger=CSVLogger(output / 'logs', name='training'), callbacks=[checkpoints],
+        max_steps=len(active_draws), max_epochs=1, limit_val_batches=0, num_sanity_val_steps=0,
+        logger=CSVLogger(output / 'logs', name='training'), callbacks=callbacks, enable_checkpointing=checkpointing,
         log_every_n_steps=1, enable_model_summary=False)
+    torch.cuda.reset_peak_memory_stats()
+    started = time.perf_counter()
     trainer.fit(model, datamodule=data)
-    assert trainer.global_step == cfg.max_steps
-    assert dict(model.source_counts) == dict(Counter(draw['source'] for draw in draws))
-    trainer.save_checkpoint(trained / 'final.ckpt')
-    for label, weights in [('raw', model.model), ('ema', model.model_ema.module)]:
+    torch.cuda.synchronize()
+    assert trainer.global_step == len(active_draws)
+    assert dict(model.source_counts) == dict(Counter(draw['source'] for draw in active_draws))
+    device = torch.cuda.get_device_properties(0)
+    write_json(output / 'resource-summary.json', dict(model_name=cfg.model_name,
+        device=device.name, device_total_bytes=device.total_memory, updates=trainer.global_step,
+        fit_seconds=time.perf_counter()-started, peak_allocated_bytes=torch.cuda.max_memory_allocated(),
+        peak_reserved_bytes=torch.cuda.max_memory_reserved(), activation_checkpointing=cfg.activation_checkpointing,
+        pretrained_sha256=pretrained_hash, source_counts=dict(model.source_counts)))
+    if probe:
+        write_json(output / 'completion.json', dict(state='memory_probe_passed', steps=trainer.global_step))
+        return
+    if cfg.save_full_final:
+        trainer.save_checkpoint(trained / 'final.ckpt')
+    exports = [('ema', model.model_ema.module)]
+    if cfg.export_raw:
+        exports.insert(0, ('raw', model.model))
+    for label, weights in exports:
         torch.save({key: value.detach().cpu() for key, value in weights.state_dict().items()},
-                   trained / f'simplefold_100M_{label}.ckpt')
-    del weights
+                   trained / f'simplefold_{cfg.model_name}_{label}.ckpt')
+    del weights, exports
     write_json(output / 'training-summary.json', dict(global_step=trainer.global_step,
         source_counts=dict(model.source_counts), synthetic_probability=cfg.synthetic_probability,
         realized_synthetic_fraction=model.source_counts['synthetic'] / trainer.global_step,
-        training_plan_sha256=digest(plan_path), pretrained_sha256=digest(cfg.pretrained_checkpoint),
-        ema_checkpoint=str(trained / 'simplefold_100M_ema.ckpt'),
-        ema_sha256=digest(trained / 'simplefold_100M_ema.ckpt'),
+        training_plan_sha256=digest(plan_path), pretrained_sha256=pretrained_hash,
+        model_name=cfg.model_name,
+        ema_checkpoint=str(trained / f'simplefold_{cfg.model_name}_ema.ckpt'),
+        ema_sha256=digest(trained / f'simplefold_{cfg.model_name}_ema.ckpt'),
         ema_decay=cfg.model.ema_decay, encoder_trainable=False,
         validation='Complex reconstruction uses training targets; CAMEO retention is separate'))
     source_counts = dict(model.source_counts)
+    for optimizer in trainer.optimizers:
+        optimizer.state.clear()
+    del optimizer
+    model.model.zero_grad(set_to_none=True)
+    model.model_ema.cpu()
+    gc.collect()
+    torch.cuda.empty_cache()
     predictions = evaluate_complexes(cfg, model, modules['synthetic']._train_set, output)
     if cfg.retention.enabled:
         # Release the training model and its separate frozen encoder before the
@@ -215,11 +307,8 @@ def main(cfg):
         gc.collect()
         torch.cuda.empty_cache()
         from run_cameo_benchmark import infer, score
-        benchmark = hydra.compose(config_name='cameo_benchmark')
-        benchmark.artifact_root = cfg.artifact_root
-        benchmark.output_dir = str(output / 'retention')
-        benchmark.checkpoints.fine_tuned.path = str(trained / 'simplefold_100M_ema.ckpt')
-        benchmark.checkpoints.fine_tuned.sha256 = digest(trained / 'simplefold_100M_ema.ckpt')
+        benchmark = retention_config(cfg, pretrained_hash)
+        benchmark.checkpoints.fine_tuned.sha256 = digest(trained / f'simplefold_{cfg.model_name}_ema.ckpt')
         destination = Path(benchmark.output_dir)
         destination.mkdir(parents=True, exist_ok=True)
         (destination / 'resolved-config.yaml').write_text(OmegaConf.to_yaml(benchmark, resolve=True))

@@ -117,9 +117,14 @@ class HomogenTrunk(nn.Module):
     def __init__(self, block, depth):
         super().__init__()
         self.blocks = nn.ModuleList([block() for _ in range(depth)])
+        self.activation_checkpointing = False
 
     def forward(self, latents, c, **kwargs):
         for i, block in enumerate(self.blocks):
             kwargs["layer_idx"] = i
-            latents = block(latents=latents, c=c, **kwargs)
+            if self.activation_checkpointing and self.training and torch.is_grad_enabled():
+                from torch.utils.checkpoint import checkpoint
+                latents = checkpoint(block, latents, c, use_reentrant=False, **kwargs)
+            else:
+                latents = block(latents=latents, c=c, **kwargs)
         return latents

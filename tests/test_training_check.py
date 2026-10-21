@@ -117,6 +117,13 @@ class TrainingCheckTests(unittest.TestCase):
         remote.assert_not_called()
         self.assertEqual(self.check.state['downloaded_files'], 0)
 
+    def test_training_wait_detects_failed_dependencies(self):
+        with patch.object(self.check, 'remote', side_effect=['PENDING|', 'PENDING|DependencyNeverSatisfied']):
+            with self.assertRaisesRegex(RuntimeError, 'DependencyNeverSatisfied'):
+                self.check.wait_for_training()
+        with patch.object(self.check, 'remote', return_value='COMPLETED|'):
+            self.assertTrue(self.check.wait_for_training())
+
     def test_two_arm_report_counts_and_labels_are_not_hardcoded(self):
         report = self.root / 'report-input'
         rows = [dict(self.row, cohort=cohort, arm=arm,

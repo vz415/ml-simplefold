@@ -1,0 +1,20 @@
+defaults:
+  - mixed_train
+  - override model/architecture: foldingdit_3B
+  - _self_
+
+model_name: 3B
+pretrained_checkpoint: ${artifact_root}/checkpoints/simplefold_3B.ckpt
+# The CPU preflight hashes the existing released weights; subsequent jobs pin that receipt.
+pretrained_sha256: null
+activation_checkpointing: true
+checkpoint_every: 0
+checkpoint_save_last: false
+save_full_final: false
+export_raw: false
+model:
+  optimizer:
+    foreach: false
+hydra:
+  run:
+    dir: logs/mixed-3B/${job_id}

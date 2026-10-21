@@ -136,7 +136,7 @@ def infer(cfg,selection,output):
         assert batch['aa_seq']==[item['sequence']]
         for condition,checkpoint in cfg.checkpoints.items():
             model.load_state_dict(states[condition],strict=True)
-            folder=output/condition/'predictions_simplefold_100M';folder.mkdir(parents=True,exist_ok=True)
+            folder=output/condition/f'predictions_simplefold_{cfg.model_name}';folder.mkdir(parents=True,exist_ok=True)
             for sample in range(cfg.sampling.samples):
                 seed=cfg.sampling.seed+index*100+sample
                 pl.seed_everything(seed,workers=True)

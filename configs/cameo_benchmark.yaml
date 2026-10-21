@@ -2,6 +2,7 @@ defaults:
   - model/architecture: foldingdit_100M
   - _self_
 phase: all
+model_name: 100M
 artifact_root: ${oc.env:SIMPLEFOLD_ARTIFACT_DIR,/pub/ynkim4/ml-simplefold/artifacts}
 job_id: ${oc.env:SLURM_JOB_ID}
 output_dir: ${artifact_root}/runs/${job_id}

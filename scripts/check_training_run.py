@@ -141,11 +141,13 @@ class Check:
     def collect(self):
         if self.cfg.offline:
             assert (self.run / 'completion.json').exists(), 'Download the completed run before offline evaluation'
-            return
+            return True
         if not self.cfg.refresh_downloads and self.local_ready():
             self.record(downloaded_files=0, local_predictions_verified=True)
             print('Verified existing predictions; skipping remote collection.', flush=True)
-            return
+            return True
+        if self.cfg.wait_for_training and not self.wait_for_training():
+            return False
         remote = f'{self.cfg.hpc.artifact_dir}/runs/{self.cfg.run_id}'
         # File enumeration and checksums only; scientific computation uses Slurm.
         script = '''import hashlib,json,os,sys
@@ -177,6 +179,25 @@ print(json.dumps(rows))'''
         for row in manifest:
             checked_file(self.run, row['relative'], row['sha256'])
         self.record(downloaded_files=len(missing), verified_files=len(manifest))
+        return True
+
+    def wait_for_training(self):
+        started = time.monotonic()
+        while True:
+            state = self.remote(shlex.join(['sacct', '-X', '-n', '-j', str(self.cfg.run_id),
+                                            '--format=State', '--parsable2'])).strip()
+            if state.startswith('COMPLETED'):
+                return True
+            if any(s in state for s in ['FAILED', 'CANCELLED', 'TIMEOUT', 'OUT_OF_MEMORY', 'NODE_FAIL']):
+                raise RuntimeError(f'Training job {self.cfg.run_id}: {state}')
+            queue = self.remote(shlex.join(['squeue', '-h', '-j', str(self.cfg.run_id), '-o', '%T|%r'])).strip()
+            if 'DependencyNeverSatisfied' in queue:
+                raise RuntimeError(f'Training job {self.cfg.run_id}: {queue}')
+            if time.monotonic() - started >= self.cfg.training_wait_seconds:
+                self.record(status='waiting_for_training')
+                return False
+            print(f'Training {self.cfg.run_id}: {queue or state or "starting"}', flush=True)
+            time.sleep(min(30, self.cfg.training_poll_seconds))
 
     def local_ready(self):
         """Use completed local outputs; a missing/changed structure triggers collection."""
@@ -474,7 +495,8 @@ print(json.dumps(rows))'''
         self.record(status='collecting', run_id=str(self.cfg.run_id), local_checkout=str(ROOT),
                     workflow_commit=git('rev-parse', 'HEAD'), source_branch=git('branch', '--show-current'),
                     local_git_state=git('status', '--porcelain') or 'clean')
-        self.collect()
+        if not self.collect():
+            return
         selection, rows = self.inputs()
         self.record(status='scoring_interfaces')
         interfaces = self.docking(selection)

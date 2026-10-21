@@ -67,6 +67,10 @@ python ../ml-simplefold-receptor-core-train/scripts/check_training_run.py \
 # Do not write an Obsidian receipt.
 python ../ml-simplefold-receptor-core-train/scripts/check_training_run.py \
   run_id=58325408 notes.enabled=false
+
+# Wait for a queued/running training job, then collect and evaluate it.
+python ../ml-simplefold-receptor-core-train/scripts/check_training_run.py \
+  run_id=NEW_JOB wait_for_training=true geometry.wait_seconds=86400
 ```
 
 Local outputs: `artifacts/analysis/training-checks/RUN_ID/`:

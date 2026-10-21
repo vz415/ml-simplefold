@@ -7,6 +7,7 @@ defaults:
   - _self_
 seed: 82301
 phase: train
+model_name: 100M
 artifact_root: ${oc.env:SIMPLEFOLD_ARTIFACT_DIR,/pub/ynkim4/ml-simplefold/artifacts}
 job_id: ${oc.env:SLURM_JOB_ID}
 output_dir: ${artifact_root}/runs/${job_id}
@@ -20,6 +21,11 @@ trained_dir: ${artifact_root}/checkpoints/trained/${job_id}
 synthetic_probability: 0.1
 max_steps: 600
 checkpoint_every: 100
+checkpoint_save_last: true
+save_full_final: true
+export_raw: true
+activation_checkpointing: false
+preflight_receipt: null
 general:
   max_tokens: 512
   max_atoms: 4608
