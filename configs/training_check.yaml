@@ -1,0 +1,43 @@
+# Run from the main project directory, or set SIMPLEFOLD_LOCAL_ARTIFACT_DIR.
+run_id: ???
+artifact_dir: ${oc.env:SIMPLEFOLD_LOCAL_ARTIFACT_DIR,${hydra:runtime.cwd}/artifacts}
+output_dir: ${artifact_dir}/analysis/training-checks/${run_id}
+offline: false
+refresh_downloads: false  # Completed local predictions are immutable and verified from receipts.
+selection: null
+label: Fine-tuned
+dockq_path: ${artifact_dir}/tools/dockq
+
+hpc:
+  probe_host: hpc3
+  host: hpc3y
+  user: ynkim4
+  transfer_host: access-hpc3.rcic.uci.edu
+  artifact_dir: /pub/ynkim4/ml-simplefold/artifacts
+  checkout: /data/homezvol2/ynkim4/ml-simplefold-receptor-core-train
+  branch: experiments/receptor-core-finetune
+  script: scripts/hpc_sample.slurm
+  partition: free
+  account: eehui_lab
+  qos: low
+
+geometry:
+  job_id: null  # Otherwise discover matching completed outputs or resume the saved job.
+  cpus: 8
+  memory: 32G
+  time: '00:30:00'
+  cctbx_version: '2026.9'
+  cache_dir: ${hpc.checkout}/artifacts/geometry-cache
+  staging_dir: ${hpc.checkout}/artifacts/training-checks
+  poll_seconds: 20
+  wait_seconds: 1800
+
+notes:
+  enabled: true
+  directory: ~/Documents/Obsidian Vault/Computational Research/SimpleFold
+
+hydra:
+  run:
+    dir: logs/training-checks/${run_id}
+  job:
+    chdir: false
