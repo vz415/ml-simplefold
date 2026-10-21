@@ -54,6 +54,17 @@ class TrainingCheckTests(unittest.TestCase):
         with self.assertRaises(AssertionError):
             checked_file(self.root, '../outside', pinned)
 
+    def test_geometry_version_survives_hydra_override_round_trip(self):
+        import shlex
+        from hydra import compose, initialize_config_dir
+        overrides = self.check.geometry_overrides('/tmp/staged-inputs')
+        transmitted = shlex.split(shlex.join(overrides))
+        with initialize_config_dir(version_base='1.3', config_dir=str(ROOT / 'configs')):
+            remote = compose(config_name='training_geometry', overrides=transmitted)
+        self.assertIsInstance(remote.cctbx_version, str)
+        self.assertEqual(remote.cctbx_version, '2026.9')
+        self.assertEqual(native_method(remote.cctbx_version), native_method('2026.9'))
+
     def test_resume_does_not_submit_another_geometry_job(self):
         self.check.record(geometry_job='123')
         with patch.object(self.check, 'find_geometry', return_value=None), \

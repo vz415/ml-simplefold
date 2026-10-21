@@ -329,6 +329,11 @@ print(json.dumps(rows))'''
                 return base
         return None
 
+    def geometry_overrides(self, input_dir):
+        return [f'workers={self.cfg.geometry.cpus}', f'input_manifest={input_dir}/input-manifest.json',
+                f'staging_root={self.cfg.geometry.staging_dir}', f'cache_dir={self.cfg.geometry.cache_dir}',
+                f'cctbx_version={json.dumps(str(self.cfg.geometry.cctbx_version))}']
+
     def submit_geometry(self, rows):
         import yaml
         policy = yaml.safe_load((ROOT / '.agents/hpc-experiments.yaml').read_text())
@@ -366,9 +371,7 @@ print(json.dumps(rows))'''
         remote_hash = self.remote(shlex.join(['sha256sum', input_dir + '/inputs.tar.gz'])).split()[0]
         assert remote_hash == digest(archive)
         self.remote(shlex.join(['tar', '-xzf', input_dir + '/inputs.tar.gz', '-C', input_dir]))
-        overrides = [f'workers={self.cfg.geometry.cpus}', f'input_manifest={input_dir}/input-manifest.json',
-                     f'staging_root={self.cfg.geometry.staging_dir}', f'cache_dir={self.cfg.geometry.cache_dir}',
-                     f'cctbx_version={self.cfg.geometry.cctbx_version}']
+        overrides = self.geometry_overrides(input_dir)
         command = ['sbatch', '--parsable', '--job-name=training-check-' + str(self.cfg.run_id),
                    '--partition=' + self.cfg.hpc.partition, '--account=' + self.cfg.hpc.account,
                    '--qos=' + self.cfg.hpc.qos, '--gres=none', f'--cpus-per-task={self.cfg.geometry.cpus}',
