@@ -1,0 +1,132 @@
+{
+  "dataset": "multimer-receptor-core-v1",
+  "purpose": "All-complex reconstruction/capacity experiment; no held-out accuracy claim.",
+  "excluded": [
+    "BMP2\u2013BMPR1A\u2013ACVR2A: no verified relaxation available",
+    "Activin A\u2013ACVR1\u2013ACVR2B: unguided exploratory ensemble, not a selected refined target"
+  ],
+  "records": [
+    {
+      "id": "bmp2_bmpr1a_acvr2b",
+      "complex": "BMP2\u2013BMPR1A\u2013ACVR2B",
+      "file": "bmp2-bmpr1a-acvr2b.pdb",
+      "sha256": "cf239513a50fa57ae8b7493f29423c070cbf03575e3db16ddf1b25dadd15b81f",
+      "source_local": "/Users/vincentzaballa/Development/ml-simplefold/artifacts/datasets/multimer-receptor-core-v1/source/bmp2-bmpr1a-acvr2b.pdb",
+      "groups": {
+        "A": "BMP2",
+        "B": "BMP2",
+        "C": "BMPR1A",
+        "D": "BMPR1A",
+        "E": "ACVR2B",
+        "F": "ACVR2B"
+      },
+      "split": "train",
+      "target_kind": "synthetic_rosetta_refined_terminal_crop",
+      "viewer_sample": 11,
+      "uncropped_source": "artifacts/datasets/multimer-refined-v1/source/bmp2-bmpr1a-acvr2b.pdb",
+      "uncropped_sha256": "240c9cb7c6188cd5cb5cf20639cfd546f4ec8fb374e04b7d51e6d9608fa13839"
+    },
+    {
+      "id": "bmp4_bmpr1a_acvr2b",
+      "complex": "BMP4\u2013BMPR1A\u2013ACVR2B",
+      "file": "bmp4-bmpr1a-acvr2b.pdb",
+      "sha256": "6bfba4547168816f4d991093e4d9b453d1b16df26a947d2628c08e718c8fcd05",
+      "source_local": "/Users/vincentzaballa/Development/ml-simplefold/artifacts/datasets/multimer-receptor-core-v1/source/bmp4-bmpr1a-acvr2b.pdb",
+      "groups": {
+        "A": "BMP4",
+        "B": "BMP4",
+        "C": "BMPR1A",
+        "D": "BMPR1A",
+        "E": "ACVR2B",
+        "F": "ACVR2B"
+      },
+      "split": "train",
+      "target_kind": "synthetic_rosetta_refined_terminal_crop",
+      "viewer_sample": "refined-58139689",
+      "uncropped_source": "artifacts/datasets/multimer-refined-v1/source/bmp4-bmpr1a-acvr2b.pdb",
+      "uncropped_sha256": "ff4f699f4fe38033eafbb2c6ba8bb109e72529078642ddee8281d10a64064150"
+    },
+    {
+      "id": "bmp6_acvr1_acvr2b",
+      "complex": "BMP6\u2013ACVR1\u2013ACVR2B",
+      "file": "bmp6-acvr1-acvr2b.pdb",
+      "sha256": "f1e620f43548c0dc373cd1e3b042a55211961341c0aee52784c81edc080410e0",
+      "source_local": "/Users/vincentzaballa/Development/ml-simplefold/artifacts/datasets/multimer-receptor-core-v1/source/bmp6-acvr1-acvr2b.pdb",
+      "groups": {
+        "A": "BMP6",
+        "B": "BMP6",
+        "C": "ACVR1",
+        "D": "ACVR1",
+        "E": "ACVR2B",
+        "F": "ACVR2B"
+      },
+      "split": "train",
+      "target_kind": "synthetic_rosetta_refined_terminal_crop",
+      "viewer_sample": "refined",
+      "uncropped_source": "artifacts/datasets/multimer-refined-v1/source/bmp6-acvr1-acvr2b.pdb",
+      "uncropped_sha256": "6d3272242fc1de038cfd8321a6585cf84b0dd617d3346963f112849ce953fa15"
+    },
+    {
+      "id": "bmp7_bmpr1a_acvr2a",
+      "complex": "BMP7\u2013BMPR1A\u2013ACVR2A",
+      "file": "bmp7-bmpr1a-acvr2a.pdb",
+      "sha256": "38aa575c8c4be031f6ff2354011833f1b14f10cccb28b3b622e05c0b5db84956",
+      "source_local": "/Users/vincentzaballa/Development/ml-simplefold/artifacts/datasets/multimer-receptor-core-v1/source/bmp7-bmpr1a-acvr2a.pdb",
+      "groups": {
+        "A": "BMP7",
+        "B": "BMP7",
+        "C": "BMPR1A",
+        "D": "BMPR1A",
+        "E": "ACVR2A",
+        "F": "ACVR2A"
+      },
+      "split": "train",
+      "target_kind": "synthetic_rosetta_refined_terminal_crop",
+      "viewer_sample": "refined",
+      "uncropped_source": "artifacts/datasets/multimer-refined-v1/source/bmp7-bmpr1a-acvr2a.pdb",
+      "uncropped_sha256": "d6f3c2270bcce11c6cd2e37ac6c21b583a11323696ad5ae77d0990ffcdd38dcb"
+    },
+    {
+      "id": "bmp7_acvr1_acvr2a",
+      "complex": "BMP7\u2013ACVR1\u2013ACVR2A",
+      "file": "bmp7-acvr1-acvr2a.pdb",
+      "sha256": "468eccd49da75c1ee47ade9ea04b5d672462b142f0fd8dc32f94cc2914ef6356",
+      "source_local": "/Users/vincentzaballa/Development/ml-simplefold/artifacts/datasets/multimer-receptor-core-v1/source/bmp7-acvr1-acvr2a.pdb",
+      "groups": {
+        "A": "BMP7",
+        "B": "BMP7",
+        "C": "ACVR1",
+        "D": "ACVR1",
+        "E": "ACVR2A",
+        "F": "ACVR2A"
+      },
+      "split": "train",
+      "target_kind": "synthetic_rosetta_refined_terminal_crop",
+      "viewer_sample": "refined",
+      "uncropped_source": "artifacts/datasets/multimer-refined-v1/source/bmp7-acvr1-acvr2a.pdb",
+      "uncropped_sha256": "b2f0e9f0c54d791c1b091e890d48cd7d43bca24016dfc5915e1c2f4e44813e4b"
+    },
+    {
+      "id": "gdf5_bmpr1a_acvr2b",
+      "complex": "GDF5\u2013BMPR1A\u2013ACVR2B",
+      "file": "gdf5-bmpr1a-acvr2b.pdb",
+      "sha256": "1554efc6b4494f44e272286acf5c3657c7076cf4206721ce9666224c7a37dc18",
+      "source_local": "/Users/vincentzaballa/Development/ml-simplefold/artifacts/datasets/multimer-receptor-core-v1/source/gdf5-bmpr1a-acvr2b.pdb",
+      "groups": {
+        "A": "GDF5",
+        "B": "GDF5",
+        "C": "BMPR1A",
+        "D": "BMPR1A",
+        "E": "ACVR2B",
+        "F": "ACVR2B"
+      },
+      "split": "train",
+      "target_kind": "synthetic_rosetta_refined_terminal_crop",
+      "viewer_sample": "refined",
+      "uncropped_source": "artifacts/datasets/multimer-refined-v1/source/gdf5-bmpr1a-acvr2b.pdb",
+      "uncropped_sha256": "6b99764b59d771b13e44f83eef0a15625552f12bb0a968e98d4c4ebbb9449c6d"
+    }
+  ],
+  "parent_selection": "artifacts/datasets/multimer-refined-v1/source/selection.json",
+  "parent_selection_sha256": "d1943326175573c41135fa7f160dd2662cd833affc7ea0e6384e5be8f5c7bc50"
+}

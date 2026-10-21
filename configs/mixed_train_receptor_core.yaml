@@ -1,0 +1,10 @@
+# Repeat the prior mixed run with only the six synthetic targets shortened.
+defaults:
+  - mixed_train
+  - _self_
+
+dataset_dir: ${artifact_root}/datasets/synthetic/multimer-receptor-core-v1
+selection: configs/datasets/multimer_receptor_core_v1.json
+# The existing PDB cache and frozen draw plan were prepared with this selection.
+# Verify its original receipt without rewriting the previous dataset.
+general_replay_selection: configs/datasets/multimer_refined_v1.json

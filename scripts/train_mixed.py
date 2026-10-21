@@ -100,6 +100,9 @@ def main(cfg):
     write_json(output / 'experiment.json', dict(job_id=cfg.job_id, phase=cfg.phase,
         source_commit=commit, seed=cfg.seed, max_steps=cfg.max_steps,
         synthetic_probability=cfg.synthetic_probability,
+        synthetic_selection=str(cfg.selection),
+        synthetic_selection_sha256=digest(ROOT / cfg.selection),
+        synthetic_dataset=str(cfg.dataset_dir),
         checkpoint=str(cfg.pretrained_checkpoint), encoder='frozen ESM2-3B',
         scope='Random general PDB/SwissProt replay mixed with six synthetic training complexes'))
     if cfg.phase == 'prepare':
@@ -127,7 +130,24 @@ def main(cfg):
     plan = json.loads(plan_path.read_text())
     receipt = json.loads((Path(cfg.general_dataset_dir) / 'dataset-receipt.json').read_text())
     assert digest(plan_path) == receipt['training_plan_sha256']
-    assert digest(ROOT / cfg.selection) == receipt['inputs']['synthetic_selection_sha256']
+    prepared_selection = ROOT / cfg.get('general_replay_selection', cfg.selection)
+    assert digest(prepared_selection) == receipt['inputs']['synthetic_selection_sha256']
+    # Replay draws name complexes by ID. Cropped targets may reuse that frozen
+    # schedule only when the same complexes and chain identities are retained.
+    current_records = json.loads((ROOT / cfg.selection).read_text())['records']
+    prepared_records = json.loads(prepared_selection.read_text())['records']
+    assert [(r['id'], r['groups']) for r in current_records] == [
+        (r['id'], r['groups']) for r in prepared_records]
+    shutil.copy2(ROOT / cfg.selection, output / 'synthetic-selection.json')
+    shutil.copy2(Path(cfg.dataset_dir) / 'dataset-receipt.json',
+                 output / 'synthetic-dataset-receipt.json')
+    write_json(output / 'replay-provenance.json', dict(
+        prepared_selection=str(prepared_selection),
+        prepared_selection_sha256=digest(prepared_selection),
+        active_selection=str(cfg.selection), active_selection_sha256=digest(ROOT / cfg.selection),
+        training_plan_sha256=digest(plan_path),
+        general_dataset=str(cfg.general_dataset_dir),
+        reuse='Unchanged general structures and draw schedule; same complex IDs and chain groups'))
     assert digest(ROOT / cfg.general_data_config) == receipt['inputs']['config_sha256']
     locations = {'structure.npz': ('structures', '.npz'), 'record.json': ('records', '.json'),
                  'tokens.pkl': ('tokens', '.pkl'), 'sequence.fasta': ('fasta', '.fasta')}
