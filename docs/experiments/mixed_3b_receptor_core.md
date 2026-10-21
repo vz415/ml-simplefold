@@ -24,3 +24,11 @@ uncropped 3B; complex metrics compare reconstruction of each run's own synthetic
 training targets and must not be treated as equivalent cropped/full endpoints.
 No new memory probe is needed: the larger uncropped inputs already completed
 on A100 80GB. The training job still validates replay/dataset identity before fit.
+
+
+## Subsequent scheduling preference
+
+User requested one A100 allocation for training plus sampling, with CPU scoring
+separate. The pipeline now defaults to `combine_gpu_stages=true` and
+`phase=train_sample`. The already submitted cropped 3B chain remains unchanged;
+its pinned remote checkout must not be updated until its three jobs finish.

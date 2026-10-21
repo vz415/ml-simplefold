@@ -9,7 +9,7 @@ from unittest.mock import patch
 import hydra
 from omegaconf import OmegaConf
 
-from scripts.submit_mixed_pipeline import stage_command
+from scripts.submit_mixed_pipeline import stage_command, pipeline_phases
 from scripts import train_mixed
 from scripts.train_mixed import ROOT, digest
 from scripts.check_training_run import Check
@@ -32,6 +32,33 @@ class MixedPipelineTests(unittest.TestCase):
             self.assertNotIn('max_steps=42', command)
             self.assertIn('expected_commit=pinned', command)
         self.assertIn('max_steps=42', train)
+
+    def test_combined_default_has_one_gpu_job_then_cpu_dependency(self):
+        cfg = OmegaConf.load(ROOT / 'configs/mixed_pipeline.yaml')
+        cfg.training_overrides = ['max_steps=42']
+        self.assertEqual(pipeline_phases(cfg), ['train_sample', 'score'])
+        gpu = stage_command(cfg, 'train_sample', 'pinned')
+        cpu = stage_command(cfg, 'score', 'pinned', '123', '123')
+        self.assertIn('phase=train_sample', gpu)
+        self.assertIn('max_steps=42', gpu)
+        self.assertIn('--gres=gpu:A100:1', gpu)
+        self.assertIn('--dependency=afterok:123', cpu)
+        self.assertIn('--gres=none', cpu)
+        cfg.combine_gpu_stages = False
+        self.assertEqual(pipeline_phases(cfg), ['train', 'sample', 'score'])
+
+    def test_sampling_continuation_replaces_process_without_another_submission(self):
+        cfg = OmegaConf.create(dict(expected_commit='pinned'))
+        with patch.dict(os.environ, SLURM_JOB_ID='123'), \
+             patch.object(train_mixed.os, 'execv') as replace:
+            train_mixed.continue_sampling(cfg, Path('/pub/run/123'))
+        executable, command = replace.call_args.args
+        self.assertEqual(command[0], executable)
+        self.assertIn('phase=sample', command)
+        self.assertIn('source_run=/pub/run/123', command)
+        self.assertIn('expected_commit="pinned"', command)
+        self.assertIn('hydra.run.dir=logs/mixed-sampling/123', command)
+        self.assertNotIn('sbatch', command)
 
     def scoring_run(self, directory):
         selection = ROOT / 'configs/datasets/multimer_refined_v1.json'

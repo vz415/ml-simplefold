@@ -1,20 +1,32 @@
-# Separate training, sampling and CPU evaluation
+# GPU training and sampling, followed by CPU evaluation
 
-Mixed runs now use three Slurm jobs, with `afterok` dependencies:
+Mixed runs default to two Slurm jobs, with an `afterok` dependency:
 
 | Stage | Resource | Work |
 |---|---|---|
-| `phase=train` | A100 | Fit the folding model and export the final EMA weights |
-| `phase=sample` | A100 | Load inference-only weights; generate matched original/tuned complex and CAMEO predictions |
+| `phase=train_sample` | A100 | Train, export EMA weights, then sample both comparison arms in the same allocation |
 | `phase=score` | CPU | Score saved CAMEO predictions with OpenStructure; finalize the run |
+
+Training and sampling share one GPU job ID and require only one A100 queue
+wait. After saving training receipts, the process replaces itself with the
+existing `phase=sample` entry point. That releases training state before the
+inference-only model loads; no second `sbatch` is issued. Scientific settings
+still come from the saved training config. The combined GPU time limit defaults
+to three hours in the pipeline config.
+
+Set `combine_gpu_stages=false` to retain separate `phase=train`, `phase=sample`,
+and `phase=score` jobs. This remains supported for debugging. The already
+submitted cropped 3B jobs 58352732/58352733/58352734 retain their original split.
+Their remote checkout must stay at commit 342e0e1 until those jobs finish;
+pushing new source does not authorize changing their pinned checkout.
 
 The existing `check_training_run.py` then computes cached DockQ locally and
 submits MolProbity to CPU Slurm. Sampling still needs the GPU. Structure scores,
 clash counts, bond/angle validation and reports do not.
 
 All phases use the approved `scripts/hpc_sample.slurm --train-mixed` launcher.
-**Behavior change:** `phase=train` stops after exporting weights; it no longer
-samples or scores. Use the pipeline for the complete comparison. Existing
+`phase=train` alone stops after exporting weights. The pipeline defaults to
+`phase=train_sample`, followed by CPU scoring. Existing
 completed run files and reports are unaffected.
 
 ## Submit
@@ -33,7 +45,7 @@ cd /data/homezvol2/ynkim4/ml-simplefold-receptor-core-train
 ```
 
 `configs/mixed_pipeline.yaml` selects the training config and each stage's
-partition/account/GPU/time/memory. Defaults: 3B uncropped, A100 training and
+partition/account/GPU/time/memory. Defaults: 3B uncropped, one A100 allocation for training and
 sampling, CPU `free` scoring. For example, `training_config=mixed_train` selects
 100M. Change scientific settings with
 `'training_overrides=[max_steps=600,evaluation.tau=0.3]'`.
@@ -43,12 +55,12 @@ All stages pin the checkout commit and stop if it changes before execution.
 The launcher records every successfully submitted ID immediately in
 `logs/mixed-pipelines/TIMESTAMP/submission.json`. If submission fails halfway,
 inspect that receipt before retrying; do not resubmit the whole pipeline blindly.
-Record the three IDs/commands in the established Obsidian experiment directory.
+Record the submitted IDs/commands in the established Obsidian experiment directory.
 No new experiment is authorized merely by this documentation.
 
 ## Outputs and analysis
 
-One durable directory is keyed by the **training** job:
+One durable directory is keyed by the **GPU training/sampling** job:
 `/pub/ynkim4/ml-simplefold/artifacts/runs/TRAIN_JOB/`.
 The trained weights remain in `checkpoints/trained/TRAIN_JOB/`.
 

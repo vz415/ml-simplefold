@@ -6,7 +6,7 @@ defaults:
   - model: simplefold
   - _self_
 seed: 82301
-phase: train  # train | sample | score | preflight | memory_probe | prepare
+phase: train  # train | train_sample | sample | score | preflight | memory_probe | prepare
 source_run: null  # sample/score read the resolved config from this training directory
 expected_commit: null
 model_name: 100M

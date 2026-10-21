@@ -183,6 +183,19 @@ def score_run(cfg):
         predictions=len(predictions), source_counts=summary['source_counts']))
 
 
+def continue_sampling(cfg, output):
+    """Replace the training process; reuse its Slurm allocation, free all training state."""
+    command = [sys.executable, str(ROOT / 'scripts/train_mixed.py'),
+        '--config-name=mixed_train', 'phase=sample', 'source_run=' + str(output),
+        'hydra.run.dir=logs/mixed-sampling/' + os.environ['SLURM_JOB_ID']]
+    if cfg.expected_commit:
+        command.append('expected_commit=' + json.dumps(str(cfg.expected_commit)))
+    print('Training complete; continuing GPU sampling in the same Slurm allocation.', flush=True)
+    sys.stdout.flush()
+    sys.stderr.flush()
+    os.execv(sys.executable, command)
+
+
 @hydra.main(version_base='1.3', config_path='../configs', config_name='mixed_train')
 def main(cfg):
     assert os.environ.get('SLURM_JOB_ID'), 'Use Slurm for preparation, training and inference'
@@ -378,6 +391,8 @@ def main(cfg):
     stage_receipt(output, 'training', phase_started, training_steps=trainer.global_step)
     write_json(output / 'completion.json', dict(state='trained', training_steps=cfg.max_steps,
         source_counts=dict(model.source_counts)))
+    if cfg.phase == 'train_sample':
+        continue_sampling(cfg, output)
 
 
 if __name__ == '__main__':

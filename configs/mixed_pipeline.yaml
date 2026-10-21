@@ -1,11 +1,20 @@
 # Run on the HPC3 login node in a clean, pushed checkout. Dry-run by default.
 submit: false
+combine_gpu_stages: true  # one A100 queue wait for training + sampling
 training_config: mixed_train_3b
 training_overrides: []  # e.g. max_steps=600; scientific settings saved by the train job
 artifact_root: /pub/ynkim4/ml-simplefold/artifacts
 launcher: scripts/hpc_sample.slurm
 receipt_dir: logs/mixed-pipelines/${now:%Y%m%d-%H%M%S}
 stages:
+  train_sample:
+    partition: gpu
+    account: eehui_lab_gpu
+    qos: normal
+    gres: gpu:A100:1
+    cpus: 4
+    memory: 128G
+    time: '03:00:00'
   train:
     partition: gpu
     account: eehui_lab_gpu

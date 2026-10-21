@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Submit training -> GPU sampling -> CPU scoring, retaining one scientific run."""
+"""Submit GPU training/sampling -> CPU scoring, retaining one scientific run."""
 import json
 from pathlib import Path
 import shlex
@@ -22,11 +22,15 @@ def stage_command(cfg, phase, commit, training_job=None, dependency=None):
         command += ['--dependency=afterok:' + dependency, '--kill-on-invalid-dep=yes']
     command += [cfg.launcher, '--train-mixed', '--config-name=' + cfg.training_config,
                 'phase=' + phase, 'expected_commit=' + commit, 'artifact_root=' + cfg.artifact_root]
-    if phase == 'train':
+    if phase in ('train', 'train_sample'):
         command += list(cfg.training_overrides)
     else:
         command += ['source_run=' + f'{cfg.artifact_root}/runs/{training_job}']
     return command
+
+
+def pipeline_phases(cfg):
+    return ['train_sample', 'score'] if cfg.combine_gpu_stages else ['train', 'sample', 'score']
 
 
 @hydra.main(version_base='1.3', config_path='../configs', config_name='mixed_pipeline')
@@ -46,14 +50,14 @@ def main(cfg):
     destination.mkdir(parents=True, exist_ok=True)
     (destination / 'resolved-config.yaml').write_text(OmegaConf.to_yaml(cfg, resolve=True))
     previous, training_job = None, None
-    for phase in ['train', 'sample', 'score']:
+    for phase in pipeline_phases(cfg):
         command = stage_command(cfg, phase, commit, training_job, previous)
         print(shlex.join(command), flush=True)
         job = (subprocess.check_output(command, cwd=ROOT, text=True).strip().split(';')[0]
-               if cfg.submit else {'train': 'TRAIN_JOB', 'sample': 'SAMPLE_JOB', 'score': 'SCORE_JOB'}[phase])
+               if cfg.submit else {'train_sample': 'GPU_JOB', 'train': 'TRAIN_JOB', 'sample': 'SAMPLE_JOB', 'score': 'SCORE_JOB'}[phase])
         if cfg.submit:
             assert job.isdigit(), job
-        if phase == 'train':
+        if phase in ('train', 'train_sample'):
             training_job = job
         receipt['stages'].append(dict(phase=phase, job_id=job, command=command))
         # Persist after every submission so partial submission cannot lose job IDs.

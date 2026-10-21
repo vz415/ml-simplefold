@@ -50,3 +50,11 @@ runs use [three separate stages](../mixed_training_pipeline.md): `phase=train`
 now exports weights and stops; `phase=sample` needs a GPU; `phase=score` runs
 OpenStructure on CPU. This replaces step 3 above for subsequent experiments.
 No new 3B training was submitted as part of the workflow change.
+
+
+## Subsequent scheduling preference
+
+User requested one A100 allocation for training plus sampling, with CPU scoring
+separate. The pipeline now defaults to `combine_gpu_stages=true` and
+`phase=train_sample`. The already submitted cropped 3B chain remains unchanged;
+its pinned remote checkout must not be updated until its three jobs finish.

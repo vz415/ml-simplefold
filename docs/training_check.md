@@ -1,7 +1,7 @@
 # Check an existing fine-tuning run
 
-For new runs, use the [three-stage pipeline](mixed_training_pipeline.md): GPU training,
-GPU sampling, then CPU scoring. Supply `completion_job_id=SCORE_JOB` when waiting
+For new runs, use the [pipeline](mixed_training_pipeline.md): GPU training and sampling in one
+allocation, then CPU scoring. Supply `completion_job_id=SCORE_JOB` when waiting
 for its final stage; `run_id` remains the training job ID.
 
 `scripts/check_training_run.py` turns the existing collection, DockQ, MolProbity,
